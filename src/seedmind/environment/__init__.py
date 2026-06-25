@@ -6,6 +6,7 @@ from seedmind.environment.entities import (
     EntityState,
     ShapeCode,
 )
+from seedmind.environment.gymnasium_adapter import SeedMindNurseryEnv
 from seedmind.environment.observation import NurseryObservationAdapter
 from seedmind.environment.runtime import NurseryRuntime, NurseryRuntimeStep
 from seedmind.environment.state import NurseryState
@@ -25,6 +26,7 @@ __all__ = [
     "NurseryState",
     "NurseryTransition",
     "NurseryTransitionEngine",
+    "SeedMindNurseryEnv",
     "ShapeCode",
     "TransitionOutcome",
 ]
