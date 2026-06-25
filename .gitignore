@@ -1,0 +1,45 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+
+# Test and quality caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data
+checkpoints/
+artifacts/
+logs/
+reports/generated/
+
+# Temporary files
+*.tmp
+*.log
+.tmp.driveupload/
+
+# Operating systems
+Thumbs.db
+.DS_Store
