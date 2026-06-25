@@ -7,6 +7,7 @@ from seedmind.environment.entities import (
     ShapeCode,
 )
 from seedmind.environment.observation import NurseryObservationAdapter
+from seedmind.environment.runtime import NurseryRuntime, NurseryRuntimeStep
 from seedmind.environment.state import NurseryState
 from seedmind.environment.transition import (
     NurseryTransition,
@@ -19,6 +20,8 @@ __all__ = [
     "EntityRole",
     "EntityState",
     "NurseryObservationAdapter",
+    "NurseryRuntime",
+    "NurseryRuntimeStep",
     "NurseryState",
     "NurseryTransition",
     "NurseryTransitionEngine",
