@@ -22,10 +22,10 @@ def test_core_output_shapes_and_ranges() -> None:
     torch.manual_seed(4)
     core = PredictiveSeedCore(create_config())
     observation = torch.rand((3, 8))
-    previous_action = torch.tensor((-1, 0, 3))
+    action = torch.tensor((-1, 0, 3))
     state = core.initial_state(batch_size=3)
 
-    output = core(observation, previous_action, state)
+    output = core(observation, action, state)
 
     assert output.recurrent_state.shape == (3, 7)
     assert output.predicted_next_sensor.shape == (3, 6)
@@ -39,7 +39,7 @@ def test_core_output_shapes_and_ranges() -> None:
     assert torch.all((output.confidence <= 1.0))
 
 
-def test_core_accepts_single_observation_and_no_previous_action() -> None:
+def test_core_accepts_single_observation_and_no_action() -> None:
     core = PredictiveSeedCore(create_config())
 
     output = core(
@@ -100,7 +100,7 @@ def test_identical_seed_produces_identical_initial_predictions() -> None:
         (torch.tensor((0, 1)), "batch size"),
     ],
 )
-def test_core_rejects_invalid_previous_action(
+def test_core_rejects_invalid_action(
     action: torch.Tensor,
     message: str,
 ) -> None:

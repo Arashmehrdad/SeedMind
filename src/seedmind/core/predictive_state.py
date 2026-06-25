@@ -100,13 +100,13 @@ class PredictiveSeedCore(nn.Module):
     def forward(
         self,
         observation: Tensor,
-        previous_action: Tensor,
+        action: Tensor,
         recurrent_state: Tensor,
     ) -> PredictiveCoreOutput:
-        """Update predictive state for one timestep."""
+        """Predict the next sensors for an action applied after observation."""
         observation = self._as_batch(observation)
-        previous_action = self._validate_actions(
-            previous_action,
+        action = self._validate_actions(
+            action,
             batch_size=observation.shape[0],
             device=observation.device,
         )
@@ -116,7 +116,7 @@ class PredictiveSeedCore(nn.Module):
         )
 
         observation_embedding = self.observation_encoder(observation)
-        action_embedding = self.action_embedding(previous_action + 1)
+        action_embedding = self.action_embedding(action + 1)
         recurrent_input = torch.cat(
             (observation_embedding, action_embedding),
             dim=-1,
@@ -151,29 +151,29 @@ class PredictiveSeedCore(nn.Module):
 
     def _validate_actions(
         self,
-        previous_action: Tensor,
+        action: Tensor,
         *,
         batch_size: int,
         device: torch.device,
     ) -> Tensor:
-        """Validate action indices, where -1 means no previous action."""
-        if previous_action.ndim == 0:
-            previous_action = previous_action.unsqueeze(0)
+        """Validate action indices, where -1 means no action."""
+        if action.ndim == 0:
+            action = action.unsqueeze(0)
 
-        if previous_action.ndim != 1:
-            raise ValueError("previous_action must be a scalar or vector")
+        if action.ndim != 1:
+            raise ValueError("action must be a scalar or vector")
 
-        if previous_action.shape[0] != batch_size:
-            raise ValueError("previous_action batch size does not match observation")
+        if action.shape[0] != batch_size:
+            raise ValueError("action batch size does not match observation")
 
-        previous_action = previous_action.to(device=device, dtype=torch.long)
-        minimum_action = int(previous_action.min().item())
-        maximum_action = int(previous_action.max().item())
+        action = action.to(device=device, dtype=torch.long)
+        minimum_action = int(action.min().item())
+        maximum_action = int(action.max().item())
 
         if minimum_action < -1 or maximum_action >= self.config.action_count:
-            raise ValueError("previous_action contains an invalid action index")
+            raise ValueError("action contains an invalid action index")
 
-        return previous_action
+        return action
 
     def _validate_recurrent_state(
         self,

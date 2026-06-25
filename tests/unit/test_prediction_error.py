@@ -73,19 +73,22 @@ def test_prediction_objective_is_differentiable_without_task_reward() -> None:
         torch.tensor((-1, 2)),
         core.initial_state(batch_size=2),
     )
+    current_sensor = torch.rand((2, 6))
     actual_sensor = torch.rand((2, 6))
 
-    loss = prediction_objective(output, actual_sensor)
+    loss = prediction_objective(
+        output,
+        actual_sensor,
+        current_sensor=current_sensor,
+    )
     loss.total.backward()
 
     assert loss.total.ndim == 0
     assert loss.sensor_prediction.ndim == 0
+    assert loss.controllable_change.ndim == 0
     assert loss.confidence_calibration.ndim == 0
     assert torch.isfinite(loss.total)
-    assert any(
-        parameter.grad is not None
-        for parameter in core.parameters()
-    )
+    assert core.controllable_change_head.weight.grad is not None
 
 
 def test_prediction_objective_rejects_negative_confidence_weight() -> None:
@@ -101,6 +104,38 @@ def test_prediction_objective_rejects_negative_confidence_weight() -> None:
             output,
             torch.rand((1, 6)),
             confidence_weight=-0.1,
+        )
+
+
+def test_prediction_objective_rejects_negative_change_weight() -> None:
+    core = create_core()
+    output = core(
+        torch.rand((1, 8)),
+        torch.tensor((-1,)),
+        core.initial_state(batch_size=1),
+    )
+
+    with pytest.raises(ValueError, match="controllable_change_weight"):
+        prediction_objective(
+            output,
+            torch.rand((1, 6)),
+            controllable_change_weight=-0.1,
+        )
+
+
+def test_prediction_objective_rejects_current_sensor_shape_mismatch() -> None:
+    core = create_core()
+    output = core(
+        torch.rand((1, 8)),
+        torch.tensor((-1,)),
+        core.initial_state(batch_size=1),
+    )
+
+    with pytest.raises(ValueError, match="current and actual"):
+        prediction_objective(
+            output,
+            torch.rand((1, 6)),
+            current_sensor=torch.rand((1, 5)),
         )
 
 

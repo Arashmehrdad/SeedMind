@@ -22,10 +22,11 @@ class PredictionComparison:
 
 @dataclass(frozen=True, slots=True)
 class PredictionLoss:
-    """Differentiable prediction and confidence training objective."""
+    """Differentiable prediction, change, and confidence objective."""
 
     total: Tensor
     sensor_prediction: Tensor
+    controllable_change: Tensor
     confidence_calibration: Tensor
     comparison: PredictionComparison
 
@@ -65,9 +66,14 @@ def prediction_objective(
     output: PredictiveCoreOutput,
     actual_sensor: Tensor,
     *,
+    current_sensor: Tensor | None = None,
+    controllable_change_weight: float = 0.25,
     confidence_weight: float = 0.1,
 ) -> PredictionLoss:
     """Build the first prediction objective without task reward."""
+    if controllable_change_weight < 0.0:
+        raise ValueError("controllable_change_weight must not be negative")
+
     if confidence_weight < 0.0:
         raise ValueError("confidence_weight must not be negative")
 
@@ -76,15 +82,42 @@ def prediction_objective(
         actual_sensor,
     )
     sensor_prediction = comparison.mean_squared_error.mean()
+
+    if current_sensor is None:
+        controllable_change = torch.zeros(
+            (),
+            device=actual_sensor.device,
+            dtype=actual_sensor.dtype,
+        )
+    else:
+        if current_sensor.shape != actual_sensor.shape:
+            raise ValueError("current and actual sensor shapes must match")
+
+        if output.predicted_controllable_change.shape != actual_sensor.shape:
+            raise ValueError(
+                "predicted controllable change shape must match sensor shape"
+            )
+
+        actual_change = actual_sensor - current_sensor
+        controllable_change = functional.mse_loss(
+            output.predicted_controllable_change,
+            actual_change,
+        )
+
     confidence_calibration = functional.mse_loss(
         output.confidence,
         comparison.confidence_target,
     )
-    total = sensor_prediction + (confidence_weight * confidence_calibration)
+    total = (
+        sensor_prediction
+        + (controllable_change_weight * controllable_change)
+        + (confidence_weight * confidence_calibration)
+    )
 
     return PredictionLoss(
         total=total,
         sensor_prediction=sensor_prediction,
+        controllable_change=controllable_change,
         confidence_calibration=confidence_calibration,
         comparison=comparison,
     )
