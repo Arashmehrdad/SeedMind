@@ -176,3 +176,22 @@ def test_invalid_reset_episode_identifier_does_not_mutate_runtime() -> None:
 
     assert runtime.episode_id == "episode-1"
     assert runtime.state is state_before_reset
+
+
+def test_runtime_derives_resource_state_from_current_world_state() -> None:
+    def resource_state_provider(state: NurseryState) -> tuple[float, ...]:
+        return (1.0 - (state.step_count / 10.0),)
+
+    runtime = NurseryRuntime(
+        initial_state=create_initial_state(),
+        episode_id="episode-1",
+        resource_state_provider=resource_state_provider,
+    )
+
+    initial = runtime.observe()
+    advanced = runtime.step(PrimitiveAction.WAIT).observation
+    overridden = runtime.observe(resource_state=(0.25,))
+
+    assert initial.resource_state == (1.0,)
+    assert advanced.resource_state == (0.9,)
+    assert overridden.resource_state == (0.25,)

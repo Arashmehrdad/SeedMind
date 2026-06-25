@@ -5,7 +5,7 @@ import pytest
 from gymnasium.utils.env_checker import check_env
 
 from seedmind.contracts import Direction, GridPosition, PrimitiveAction
-from seedmind.environment import AgentState, NurseryState
+from seedmind.environment import AgentState, NurseryScenarioFactory, NurseryState
 from seedmind.environment.gymnasium_adapter import SeedMindNurseryEnv
 
 
@@ -134,3 +134,22 @@ def test_adapter_passes_gymnasium_environment_checks() -> None:
     env = create_env(max_episode_steps=10)
 
     check_env(env, skip_render_check=True)
+
+
+def test_environment_can_be_created_from_reproducible_scenario() -> None:
+    scenario = NurseryScenarioFactory(step_budget=4).create(seed=13)
+    env = SeedMindNurseryEnv.from_scenario(scenario)
+
+    _, reset_info = env.reset()
+    _, _, _, _, step_info = env.step(env.action_index(PrimitiveAction.WAIT))
+
+    assert env.runtime.initial_state == scenario.initial_state
+    assert reset_info["episode_id"] == scenario.scenario_id
+    assert np.array_equal(
+        reset_info["resource_state"],
+        np.asarray((1.0,), dtype=np.float32),
+    )
+    assert np.allclose(
+        step_info["resource_state"],
+        np.asarray((0.75,), dtype=np.float32),
+    )

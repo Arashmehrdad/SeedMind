@@ -8,7 +8,8 @@ from gymnasium import spaces
 from numpy.typing import NDArray
 
 from seedmind.contracts import ObservationPacket, PrimitiveAction
-from seedmind.environment.runtime import NurseryRuntime
+from seedmind.environment.runtime import NurseryRuntime, ResourceStateProvider
+from seedmind.environment.scenario import NurseryScenario
 from seedmind.environment.state import NurseryState
 
 ObservationArray = NDArray[np.float32]
@@ -31,6 +32,7 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
         *,
         episode_id: str = "episode-0",
         max_episode_steps: int | None = None,
+        resource_state_provider: ResourceStateProvider | None = None,
     ) -> None:
         """Create an adapter around a deterministic nursery baseline."""
         super().__init__()
@@ -41,6 +43,7 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
         self._runtime = NurseryRuntime(
             initial_state=initial_state,
             episode_id=episode_id,
+            resource_state_provider=resource_state_provider,
         )
         self._primitive_actions = tuple(PrimitiveAction)
         self._max_episode_steps = max_episode_steps
@@ -58,6 +61,21 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
                 shape=(self._runtime.sensor_size,),
                 dtype=np.float32,
             ),
+        )
+
+    @classmethod
+    def from_scenario(
+        cls,
+        scenario: NurseryScenario,
+        *,
+        episode_id: str | None = None,
+    ) -> "SeedMindNurseryEnv":
+        """Create an environment using a reproducible scenario baseline."""
+        return cls(
+            initial_state=scenario.initial_state,
+            episode_id=scenario.scenario_id if episode_id is None else episode_id,
+            max_episode_steps=scenario.step_budget,
+            resource_state_provider=scenario.resource_state,
         )
 
     @property
@@ -142,6 +160,7 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
         return {
             "action_mask": action_mask,
             "episode_id": packet.episode_id,
+            "resource_state": np.asarray(packet.resource_state, dtype=np.float32),
             "step_id": packet.step_id,
         }
 

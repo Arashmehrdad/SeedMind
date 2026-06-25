@@ -1,6 +1,6 @@
 """Runtime orchestration for SeedMind Nursery v0."""
 
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 
 from seedmind.contracts import ObservationPacket, PrimitiveAction
@@ -10,6 +10,8 @@ from seedmind.environment.transition import (
     NurseryTransition,
     NurseryTransitionEngine,
 )
+
+ResourceStateProvider = Callable[[NurseryState], Sequence[float]]
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,11 +29,18 @@ class NurseryRuntime:
         "_episode_id",
         "_initial_state",
         "_observation_adapter",
+        "_resource_state_provider",
         "_state",
         "_transition_engine",
     )
 
-    def __init__(self, initial_state: NurseryState, episode_id: str) -> None:
+    def __init__(
+        self,
+        initial_state: NurseryState,
+        episode_id: str,
+        *,
+        resource_state_provider: ResourceStateProvider | None = None,
+    ) -> None:
         """Validate the reset baseline and initialize the active episode."""
         if initial_state.step_count != 0:
             raise ValueError("initial_state step_count must be zero")
@@ -48,6 +57,7 @@ class NurseryRuntime:
             height=initial_state.height,
         )
         self._transition_engine = NurseryTransitionEngine()
+        self._resource_state_provider = resource_state_provider
 
     @property
     def initial_state(self) -> NurseryState:
@@ -73,14 +83,14 @@ class NurseryRuntime:
         self,
         *,
         human_signal: Sequence[float] = (),
-        resource_state: Sequence[float] = (),
+        resource_state: Sequence[float] | None = None,
     ) -> ObservationPacket:
         """Observe the current state without advancing time."""
         return self._observation_adapter.observe(
             self._state,
             episode_id=self._episode_id,
             human_signal=human_signal,
-            resource_state=resource_state,
+            resource_state=self._resolve_resource_state(resource_state),
         )
 
     def reset(
@@ -88,7 +98,7 @@ class NurseryRuntime:
         *,
         episode_id: str | None = None,
         human_signal: Sequence[float] = (),
-        resource_state: Sequence[float] = (),
+        resource_state: Sequence[float] | None = None,
     ) -> ObservationPacket:
         """Restore the exact initial state and return its first observation."""
         if episode_id is not None:
@@ -106,7 +116,7 @@ class NurseryRuntime:
         action: PrimitiveAction,
         *,
         human_signal: Sequence[float] = (),
-        resource_state: Sequence[float] = (),
+        resource_state: Sequence[float] | None = None,
     ) -> NurseryRuntimeStep:
         """Apply one available primitive action and observe the new state."""
         current_observation = self.observe()
@@ -127,6 +137,19 @@ class NurseryRuntime:
             transition=transition,
             observation=observation,
         )
+
+    def _resolve_resource_state(
+        self,
+        resource_state: Sequence[float] | None,
+    ) -> Sequence[float]:
+        """Resolve an explicit resource channel or derive it from current state."""
+        if resource_state is not None:
+            return resource_state
+
+        if self._resource_state_provider is None:
+            return ()
+
+        return self._resource_state_provider(self._state)
 
     @staticmethod
     def _validate_episode_id(episode_id: str) -> None:
