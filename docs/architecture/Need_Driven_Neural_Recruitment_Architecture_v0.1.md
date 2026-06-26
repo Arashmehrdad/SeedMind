@@ -747,6 +747,61 @@ SeedMind should not rely on unrestricted SQLite lookup to remember how to act.
 
 The neural network itself must become the primary memory and recall mechanism.
 
+### 17.7 Main-runtime shadow integration
+
+NDNRA must enter the main SeedMind runtime through a non-authoritative observation phase before it receives any control responsibility.
+
+During shadow mode:
+
+```text
+production policy
+    -> selects and executes the real primitive action
+
+NDNRA shadow adapter
+    -> observes the pre-action state
+    -> produces an optional suggestion
+    -> cannot modify the selected action
+    -> observes the resulting transition and developmental signals
+    -> updates only its local research graph
+```
+
+The adapter may consume typed evidence already produced by SeedMind:
+
+```text
+ObservationPacket
+PrimitiveAction
+prediction error
+curiosity value
+controllable sensor change
+external sensor change
+resource cost
+active ambition relevance
+human-signal magnitude
+termination evidence
+```
+
+These signals become sparse local effect dimensions. They must not be converted into a centralized task label or a stored complete plan.
+
+A shadow integration gate must compare two sessions initialized identically:
+
+```text
+baseline production session
+shadow-observed production session
+```
+
+The gate passes only when:
+
+1. The production action sequences are identical.
+2. The production prediction-error sequences are identical.
+3. NDNRA observes every executed transition.
+4. Every NDNRA suggestion is currently available and valid.
+5. NDNRA has zero action-authority violations.
+6. Suggestions become available only from previously observed local effects.
+7. SQLite is not used to produce shadow suggestions.
+8. Evidence exports preserve both actual and suggested decisions.
+
+Shadow-mode agreement is diagnostic rather than a promotion criterion. NDNRA may disagree with the production policy without failing the safety boundary. Any future advisory or control authority requires a separate comparison, fallback, and rollback gate.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
