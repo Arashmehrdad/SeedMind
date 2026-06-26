@@ -35,21 +35,23 @@ class CuriosityConfig:
 
     def __post_init__(self) -> None:
         """Validate finite weights, positive horizons, and safe actions."""
-        for name, value in (
+        for integer_name, integer_value in (
             ("play_budget", self.play_budget),
             ("progress_window", self.progress_window),
             ("repetition_horizon", self.repetition_horizon),
             ("stagnation_horizon", self.stagnation_horizon),
         ):
-            if value <= 0:
-                raise ValueError(f"{name} must be positive")
+            if integer_value <= 0:
+                raise ValueError(f"{integer_name} must be positive")
 
-        for name, value in (
+        for positive_float_name, positive_float_value in (
             ("novelty_decay", self.novelty_decay),
             ("error_scale", self.error_scale),
         ):
-            if not isfinite(value) or value <= 0.0:
-                raise ValueError(f"{name} must be finite and positive")
+            if not isfinite(positive_float_value) or positive_float_value <= 0.0:
+                raise ValueError(
+                    f"{positive_float_name} must be finite and positive"
+                )
 
         weights = (
             ("learning_progress_weight", self.learning_progress_weight),
@@ -58,9 +60,11 @@ class CuriosityConfig:
             ("repetition_penalty_weight", self.repetition_penalty_weight),
             ("stagnation_penalty_weight", self.stagnation_penalty_weight),
         )
-        for name, value in weights:
-            if not isfinite(value) or value < 0.0:
-                raise ValueError(f"{name} must be finite and non-negative")
+        for weight_name, weight_value in weights:
+            if not isfinite(weight_value) or weight_value < 0.0:
+                raise ValueError(
+                    f"{weight_name} must be finite and non-negative"
+                )
 
         if (
             self.learning_progress_weight
