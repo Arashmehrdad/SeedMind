@@ -1,0 +1,51 @@
+"""Symbolic human apprenticeship and calibrated help seeking."""
+
+from seedmind.human.apprenticeship import (
+    ApprenticeshipManager,
+    ApprenticeshipMetrics,
+    CaregiverEvent,
+    CaregiverEventType,
+    CaregiverMemory,
+    HelpContext,
+    HelpDecision,
+    HelpReason,
+    HelpSeekingConfig,
+    HelpSeekingPolicy,
+    TeacherResponse,
+    TeacherResponsePolicy,
+    export_apprenticeship_report_json,
+    export_apprenticeship_timeline_csv,
+)
+from seedmind.human.contracts import (
+    HumanRequest,
+    HumanSignalCode,
+    HumanSignalCodec,
+    HumanSignalFrame,
+    RequestIntentCode,
+    SupportLevel,
+    VerificationRule,
+)
+
+__all__ = [
+    "ApprenticeshipManager",
+    "ApprenticeshipMetrics",
+    "CaregiverEvent",
+    "CaregiverEventType",
+    "CaregiverMemory",
+    "HelpContext",
+    "HelpDecision",
+    "HelpReason",
+    "HelpSeekingConfig",
+    "HelpSeekingPolicy",
+    "HumanRequest",
+    "HumanSignalCode",
+    "HumanSignalCodec",
+    "HumanSignalFrame",
+    "RequestIntentCode",
+    "SupportLevel",
+    "TeacherResponse",
+    "TeacherResponsePolicy",
+    "VerificationRule",
+    "export_apprenticeship_report_json",
+    "export_apprenticeship_timeline_csv",
+]
