@@ -58,12 +58,55 @@ class ExperienceAssembly:
         }
 
 
+@dataclass(slots=True)
+class SpecialistInteraction:
+    """A grown neuron-like unit for a non-additive multi-memory effect."""
+
+    specialist_id: str
+    member_assembly_ids: tuple[str, ...]
+    origin_code: str
+    effect_memory: SparseEffectMemory = field(default_factory=SparseEffectMemory)
+    evidence_count: int = 0
+
+    def __post_init__(self) -> None:
+        _validate_code("specialist_id", self.specialist_id)
+        _validate_code("origin_code", self.origin_code)
+        if len(self.member_assembly_ids) < 2:
+            raise ValueError("a specialist interaction requires at least two members")
+        if len(self.member_assembly_ids) != len(set(self.member_assembly_ids)):
+            raise ValueError("specialist members must be unique")
+        for assembly_id in self.member_assembly_ids:
+            _validate_code("member_assembly_ids", assembly_id)
+        if self.evidence_count < 0:
+            raise ValueError("evidence_count must not be negative")
+
+    def observe_effects(self, observations: Iterable[EffectObservation]) -> int:
+        """Store only effects supported by this interaction's evidence."""
+        effects = tuple(observations)
+        if effects:
+            self.evidence_count += 1
+        return self.effect_memory.observe_many(effects)
+
+    def applies_to(self, assembly_ids: tuple[str, ...]) -> bool:
+        return set(self.member_assembly_ids).issubset(assembly_ids)
+
+    def snapshot(self) -> dict[str, object]:
+        return {
+            "specialist_id": self.specialist_id,
+            "member_assembly_ids": list(self.member_assembly_ids),
+            "origin_code": self.origin_code,
+            "evidence_count": self.evidence_count,
+            "effect_memory": self.effect_memory.snapshot(),
+        }
+
+
 class MultidimensionalExperienceGraph:
-    """Sparse graph of local one-action assemblies and effect-bearing links."""
+    """Sparse graph of local actions, links, and grown interaction specialists."""
 
     def __init__(self) -> None:
         self._assemblies: dict[str, ExperienceAssembly] = {}
         self._links: dict[tuple[str, str], LocalEffectLink] = {}
+        self._specialists: dict[str, SpecialistInteraction] = {}
 
     @property
     def assemblies(self) -> tuple[ExperienceAssembly, ...]:
@@ -82,12 +125,26 @@ class MultidimensionalExperienceGraph:
         return len(self._links)
 
     @property
+    def specialists(self) -> tuple[SpecialistInteraction, ...]:
+        return tuple(self._specialists[key] for key in sorted(self._specialists))
+
+    @property
+    def specialist_count(self) -> int:
+        return len(self._specialists)
+
+    @property
+    def structural_node_count(self) -> int:
+        return self.assembly_count + self.specialist_count
+
+    @property
     def effect_dimension_codes(self) -> tuple[str, ...]:
         dimensions: set[str] = set()
         for assembly in self._assemblies.values():
             dimensions.update(assembly.effect_memory.effect_codes)
         for link in self._links.values():
             dimensions.update(link.effect_memory.effect_codes)
+        for specialist in self._specialists.values():
+            dimensions.update(specialist.effect_memory.effect_codes)
         return tuple(sorted(dimensions))
 
     def assembly(self, assembly_id: str) -> ExperienceAssembly:
@@ -144,6 +201,46 @@ class MultidimensionalExperienceGraph:
             link.observe_effects(effects)
         return assembly
 
+    def grow_specialist_interaction(
+        self,
+        *,
+        specialist_id: str,
+        member_assembly_ids: Iterable[str],
+        origin_code: str,
+        observed_effects: Iterable[EffectObservation] = (),
+    ) -> SpecialistInteraction:
+        """Add one evidence-scoped structural node without changing old memories."""
+        if specialist_id in self._specialists:
+            raise ValueError(f"specialist already exists: {specialist_id}")
+        members = tuple(member_assembly_ids)
+        for assembly_id in members:
+            if assembly_id not in self._assemblies:
+                raise ValueError(f"unknown specialist member: {assembly_id}")
+        specialist = SpecialistInteraction(
+            specialist_id=specialist_id,
+            member_assembly_ids=members,
+            origin_code=origin_code,
+        )
+        specialist.observe_effects(observed_effects)
+        self._specialists[specialist_id] = specialist
+        return specialist
+
+    def project_effects(self, assembly_ids: tuple[str, ...]) -> dict[str, float]:
+        """Project action effects plus each applicable specialist exactly once."""
+        effects: dict[str, float] = {}
+        for assembly_id in assembly_ids:
+            effects = combine_projected_effects(
+                effects,
+                self.assembly(assembly_id).effect_memory.projected_values(),
+            )
+        for specialist in self.specialists:
+            if specialist.applies_to(assembly_ids):
+                effects = combine_projected_effects(
+                    effects,
+                    specialist.effect_memory.projected_values(),
+                )
+        return effects
+
     def has_stored_action_sequence(self, actions: tuple[str, ...]) -> bool:
         """Return true only for a directly stored single-action memory."""
         if len(actions) != 1:
@@ -154,6 +251,8 @@ class MultidimensionalExperienceGraph:
         return {
             "assembly_count": self.assembly_count,
             "link_count": self.link_count,
+            "specialist_count": self.specialist_count,
+            "structural_node_count": self.structural_node_count,
             "effect_dimension_count": len(self.effect_dimension_codes),
             "effect_dimensions": list(self.effect_dimension_codes),
             "assemblies": [assembly.snapshot() for assembly in self.assemblies],
@@ -167,6 +266,7 @@ class MultidimensionalExperienceGraph:
                 }
                 for link in self.links
             ],
+            "specialists": [specialist.snapshot() for specialist in self.specialists],
         }
 
 
@@ -257,13 +357,10 @@ class NeedDrivenComposer:
                     if assembly.assembly_id in used or not assembly.is_applicable(state.facts):
                         continue
                     explored += 1
-                    effects = combine_projected_effects(
-                        dict(state.effects),
-                        assembly.effect_memory.projected_values(),
-                    )
                     facts = state.facts | assembly.produced_facts
                     assembly_ids = (*state.assembly_ids, assembly.assembly_id)
                     actions = (*state.actions, assembly.action_code)
+                    effects = self.graph.project_effects(assembly_ids)
                     search_state = _SearchState(
                         assembly_ids=assembly_ids,
                         actions=actions,

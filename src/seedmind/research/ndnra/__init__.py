@@ -6,6 +6,7 @@ from seedmind.research.ndnra.composition import (
     ExperienceAssembly,
     MultidimensionalExperienceGraph,
     NeedDrivenComposer,
+    SpecialistInteraction,
 )
 from seedmind.research.ndnra.effects import (
     EffectEstimate,
@@ -24,6 +25,20 @@ from seedmind.research.ndnra.experiment import (
     export_ndnra_evidence,
     run_ndnra_heat_fan_experiment,
     train_teacher_demonstrations,
+)
+from seedmind.research.ndnra.growth import (
+    EvidenceDrivenGrowthController,
+    GrowthAttemptRecord,
+    GrowthOutcome,
+    StructuralGrowthConfig,
+    grow_random_specialist,
+)
+from seedmind.research.ndnra.growth_experiment import (
+    StructuralGrowthExperimentResult,
+    build_capacity_limited_graph,
+    export_structural_growth_evidence,
+    run_ndnra_structural_growth_experiment,
+    structural_cooling_need,
 )
 from seedmind.research.ndnra.heat_world import (
     HeatFanWorld,
@@ -61,7 +76,10 @@ __all__ = [
     "EffectEstimate",
     "EffectNeed",
     "EffectObservation",
+    "EvidenceDrivenGrowthController",
     "ExperienceAssembly",
+    "GrowthAttemptRecord",
+    "GrowthOutcome",
     "GrowthPressure",
     "HeatAction",
     "HeatContext",
@@ -85,7 +103,11 @@ __all__ = [
     "RecallResult",
     "RecallStepRecord",
     "SparseEffectMemory",
+    "SpecialistInteraction",
+    "StructuralGrowthConfig",
+    "StructuralGrowthExperimentResult",
     "TeacherTrainingResult",
+    "build_capacity_limited_graph",
     "build_intended_effect_only_baseline",
     "build_multieffect_graph",
     "cleanliness_need",
@@ -93,7 +115,11 @@ __all__ = [
     "evaluate_recall",
     "export_multieffect_evidence",
     "export_ndnra_evidence",
+    "export_structural_growth_evidence",
+    "grow_random_specialist",
     "run_ndnra_heat_fan_experiment",
     "run_ndnra_multieffect_experiment",
+    "run_ndnra_structural_growth_experiment",
+    "structural_cooling_need",
     "train_teacher_demonstrations",
 ]
