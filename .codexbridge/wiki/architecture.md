@@ -13,6 +13,7 @@ graph LR
 
 ## Architectural module summary
 
+- `scripts/run_ambition_formation.py` — functions: parse_args, main
 - `scripts/run_body_discovery.py` — functions: parse_args, main
 - `scripts/run_body_discovery_baseline.py` — functions: parse_args, main
 - `scripts/run_curiosity_comparison.py` — functions: parse_args, build_trainer, main
@@ -20,6 +21,9 @@ graph LR
 - `scripts/run_familiar_training.py` — functions: parse_args, build_trainer, main
 - `scripts/run_live_curiosity_training.py` — functions: parse_args, build_trainer, main
 - `src/seedmind/__init__.py` — SeedMind developmental intelligence runtime.
+- `src/seedmind/ambition/__init__.py` — Persistent developmental ambitions formed from grounded evidence.
+- `src/seedmind/ambition/demonstration.py` — classes: DemonstrationDetectorConfig, ObservedDemonstration, OutcomeSignature, DemonstrationEvidence, _EvidenceAccumulator, GoalDirectedOutcomeDetector; functions: export_demonstration_evidence
+- `src/seedmind/ambition/engine.py` — classes: AmbitionOrigin, AmbitionStatus, MilestoneStatus, MilestoneCode, AmbitionMilestone, AmbitionCandidate, AmbitionRecord, AmbitionManagerConfig; functions: save_ambition_manager, load_ambition_manager, export_ambition_dashboard, _config_payload, _record_payload, _record_from_payload, _required_mapping, _required_list, _required_str, _required_int
 - `src/seedmind/contracts/__init__.py` — Shared contracts between SeedMind, bodies, and environments.
 - `src/seedmind/contracts/action.py` — classes: PrimitiveAction
 - `src/seedmind/contracts/observation.py` — classes: ObservationPacket; functions: _validate_channel
@@ -40,6 +44,7 @@ graph LR
 - `src/seedmind/environment/runtime.py` — classes: NurseryRuntimeStep, NurseryRuntime
 - `src/seedmind/environment/scenario.py` — classes: TargetOccupancy, NurseryScenario, NurseryScenarioFactory; functions: detect_target_occupancy
 - `src/seedmind/environment/state.py` — classes: NurseryState
+- `src/seedmind/environment/teacher.py` — classes: TeacherPushDemonstrationProcess, TeacherDemonstrationScenarioFactory; functions: _entity_by_id
 - `src/seedmind/environment/transition.py` — classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
 - `src/seedmind/perception/__init__.py` — Body-independent perception components for SeedMind.
 - `src/seedmind/perception/symbolic_encoder.py` — classes: SymbolicInputSpec, SymbolicObservationEncoder
@@ -52,6 +57,7 @@ graph LR
 - `src/seedmind/training/online_trainer.py` — classes: OnlineTrainerConfig, OnlineTrainingMetrics, OnlinePredictiveTrainer
 - `src/seedmind/training/session.py` — classes: ScenarioFactory, FamiliarSequenceConfig, TrainingStepRecord, TrainingSessionResult, FamiliarSequenceTrainingSession; functions: save_training_checkpoint, load_training_checkpoint, export_training_history_csv, export_prediction_error_svg, _scenario_identity, _session_identity, _record_to_payload, _record_from_payload, _validate_checkpoint_progress, _required_int
 - `tests/unit/test_action_contract.py` — functions: test_primitive_action_values_are_stable, test_primitive_action_can_be_created_from_wire_value
+- `tests/unit/test_ambition_engine.py` — functions: observed_demo, adopted_manager, test_detector_requires_three_confirmed_repetitions, test_unconfirmed_repetition_does_not_form_candidate, test_ambition_persists_across_episodes, test_budget_and_milestone_progression, test_state_round_trip_and_dashboard, test_final_milestone_completes_ambition
 - `tests/unit/test_body_discovery_baseline.py` — functions: create_config, test_targeted_body_probes_beat_random_exploration, test_comparison_is_reproducible, test_all_strategies_use_the_same_transition_budget, test_targeted_schedule_allocates_equal_probe_evidence, test_oracle_channels_are_derived_from_active_held_out_effects, test_baseline_reports_are_ascii_and_inspectable, test_baseline_config_rejects_invalid_values
 - `tests/unit/test_curiosity_comparison.py` — classes: TinyComparisonScenarioFactory, ControlledPredictiveTrainer; functions: create_trainer, create_config, test_curiosity_discovers_controllable_effects_faster_than_random, test_curiosity_avoids_persistent_wait_loop, test_comparison_uses_paired_models_and_matched_budgets, test_comparison_is_reproducible, test_comparison_exports_are_ascii_and_inspectable, test_comparison_rejects_budget_above_scenario_limit, test_comparison_rejects_noise_action_with_direct_effect, test_comparison_config_rejects_invalid_values
 - `tests/unit/test_curiosity_policy.py` — functions: create_config, candidate_for, test_learning_progress_is_positive_only_when_recent_error_improves, test_novelty_decays_with_repeated_observations, test_repetition_penalty_rotates_equal_unseen_candidates, test_stagnation_penalty_discounts_persistent_unlearnable_error, test_recent_prediction_error_is_normalized_as_uncertainty, test_selection_consumes_bounded_play_budget, test_unavailable_or_unconfigured_actions_are_not_candidates, test_curiosity_timeline_exports_are_ascii_and_inspectable
@@ -71,6 +77,7 @@ graph LR
 - `tests/unit/test_self_model.py` — functions: create_packet, create_experience, test_registry_separates_repeatable_body_effect_from_external_change, test_wait_with_external_motion_does_not_create_body_sensor, test_support_prevents_single_effect_from_becoming_body_evidence, test_dynamic_world_body_candidates_remain_in_anonymous_body_channels, test_snapshot_reports_action_coverage, test_registry_rejects_different_sensor_width, test_self_model_exports_are_ascii_and_inspectable, test_self_model_config_rejects_invalid_values
 - `tests/unit/test_spatial_contract.py` — functions: test_turning_right_cycles_clockwise, test_turning_left_cycles_counterclockwise, test_position_moves_one_cell, test_position_is_immutable
 - `tests/unit/test_symbolic_encoder.py` — functions: create_packet, test_input_spec_vectorizes_raw_channels_in_contract_order, test_input_spec_rejects_channel_size_mismatch, test_input_spec_rejects_invalid_dimensions, test_encoder_accepts_single_vector_and_batch, test_encoder_parameters_receive_gradients, test_encoder_rejects_invalid_observation_shape
+- `tests/unit/test_teacher_demonstration.py` — functions: entity_position, test_teacher_demonstration_moves_object_to_target_in_two_steps, test_teacher_demonstration_is_repeatable_after_reset, test_teacher_process_rejects_misaligned_initial_geometry, test_teacher_process_rejects_empty_identifier, test_teacher_factory_rejects_small_budget
 - `tests/unit/test_training_session.py` — classes: TinyScenarioFactory; functions: create_trainer, test_familiar_sequence_prediction_error_decreases, test_checkpoint_resume_matches_uninterrupted_training, test_history_and_prediction_chart_exports, test_resume_rejects_different_action_sequence, test_resume_rejects_changed_scenario, test_familiar_sequence_config_rejects_invalid_values
 - `tests/unit/test_transition_engine.py` — functions: make_entity, make_state, test_turn_changes_orientation_and_advances_one_step, test_move_forward_changes_position, test_move_is_blocked_by_boundary, test_move_is_blocked_by_entity, test_push_moves_adjacent_movable_entity_without_moving_agent, test_push_can_move_object_onto_non_blocking_target_cell, test_push_failure_outcomes, test_non_physical_actions_advance_without_world_change
 - `tests/unit/test_world_processes.py` — functions: make_entity, make_state, test_wait_tick_can_contain_teacher_motion, test_flow_moves_object_without_agent_contact, test_processes_run_in_stable_order, test_world_process_pipeline_does_not_advance_time, test_periodic_mechanism_toggles_only_on_scheduled_ticks, test_same_state_and_processes_produce_identical_result, test_pipeline_rejects_duplicate_process_identifiers

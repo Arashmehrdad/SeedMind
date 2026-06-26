@@ -1,5 +1,12 @@
 # seedmind modules
 
+## `scripts/run_ambition_formation.py`
+
+Run the Week 5 teacher-demonstration ambition formation gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_body_discovery.py`
 
 Run initial action-effect and body-channel discovery evidence.
@@ -47,6 +54,28 @@ Run curiosity-guided predictive training in the dynamic nursery.
 SeedMind developmental intelligence runtime.
 
 - Kind: python
+
+## `src/seedmind/ambition/__init__.py`
+
+Persistent developmental ambitions formed from grounded evidence.
+
+- Kind: python
+
+## `src/seedmind/ambition/demonstration.py`
+
+Detect repeated goal-directed outcomes from raw teacher demonstrations.
+
+- Kind: python
+- Classes: DemonstrationDetectorConfig, ObservedDemonstration, OutcomeSignature, DemonstrationEvidence, _EvidenceAccumulator, GoalDirectedOutcomeDetector
+- Functions/symbols: export_demonstration_evidence
+
+## `src/seedmind/ambition/engine.py`
+
+Persistent ambition records, commitment, budgets, and milestones.
+
+- Kind: python
+- Classes: AmbitionOrigin, AmbitionStatus, MilestoneStatus, MilestoneCode, AmbitionMilestone, AmbitionCandidate, AmbitionRecord, AmbitionManagerConfig, AmbitionManager
+- Functions/symbols: save_ambition_manager, load_ambition_manager, export_ambition_dashboard, _config_payload, _record_payload, _record_from_payload, _required_mapping, _required_list, _required_str, _required_int, _required_float, _validate_identifier, _validate_score
 
 ## `src/seedmind/contracts/__init__.py`
 
@@ -191,6 +220,14 @@ Immutable deterministic world state for SeedMind Nursery v0.
 - Kind: python
 - Classes: NurseryState
 
+## `src/seedmind/environment/teacher.py`
+
+Deterministic teacher demonstrations for SeedMind Nursery v0.
+
+- Kind: python
+- Classes: TeacherPushDemonstrationProcess, TeacherDemonstrationScenarioFactory
+- Functions/symbols: _entity_by_id
+
 ## `src/seedmind/environment/transition.py`
 
 Deterministic primitive-action transitions for SeedMind Nursery v0.
@@ -274,6 +311,13 @@ Tests for primitive body actions.
 
 - Kind: python
 - Functions/symbols: test_primitive_action_values_are_stable, test_primitive_action_can_be_created_from_wire_value
+
+## `tests/unit/test_ambition_engine.py`
+
+Tests for demonstration-derived persistent ambitions.
+
+- Kind: python
+- Functions/symbols: observed_demo, adopted_manager, test_detector_requires_three_confirmed_repetitions, test_unconfirmed_repetition_does_not_form_candidate, test_ambition_persists_across_episodes, test_budget_and_milestone_progression, test_state_round_trip_and_dashboard, test_final_milestone_completes_ambition
 
 ## `tests/unit/test_body_discovery_baseline.py`
 
@@ -409,6 +453,13 @@ Tests for raw symbolic observation encoding.
 
 - Kind: python
 - Functions/symbols: create_packet, test_input_spec_vectorizes_raw_channels_in_contract_order, test_input_spec_rejects_channel_size_mismatch, test_input_spec_rejects_invalid_dimensions, test_encoder_accepts_single_vector_and_batch, test_encoder_parameters_receive_gradients, test_encoder_rejects_invalid_observation_shape
+
+## `tests/unit/test_teacher_demonstration.py`
+
+Tests for deterministic repeatable teacher demonstrations.
+
+- Kind: python
+- Functions/symbols: entity_position, test_teacher_demonstration_moves_object_to_target_in_two_steps, test_teacher_demonstration_is_repeatable_after_reset, test_teacher_process_rejects_misaligned_initial_geometry, test_teacher_process_rejects_empty_identifier, test_teacher_factory_rejects_small_budget
 
 ## `tests/unit/test_training_session.py`
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T04:11:57.632505+00:00",
+  "generated_at": "2026-06-26T14:18:59.716037+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 77,
+  "source_file_count": 85,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -34,6 +34,11 @@
       "path": "artifacts/body_discovery_baseline/baseline_report.json",
       "sha256": "bed2f2e1ec70ec24de8cbf2ca5eec9a11dcbacdd19e2bf4dacf920e8b3559726",
       "size_bytes": 11165
+    },
+    {
+      "path": "artifacts/curiosity_comparison/comparison_report.json",
+      "sha256": "4f45c86075a0f5e65c40337766d2fbdd5695268baf696abe07522828f0442598",
+      "size_bytes": 224653
     },
     {
       "path": "artifacts/curiosity_scoring/experiment_timeline.json",
@@ -71,6 +76,11 @@
       "size_bytes": 69
     },
     {
+      "path": "scripts/run_ambition_formation.py",
+      "sha256": "41f0c1123cde6ab6f20881a7ff5cb12d2b6c78d1aac52ce26efedec18abaf1b3",
+      "size_bytes": 5024
+    },
+    {
       "path": "scripts/run_body_discovery.py",
       "sha256": "3d1a9cd7b8a4b69bb6be8d4198664a79418c4fe531ddac5ed8516a6927437eb8",
       "size_bytes": 3123
@@ -104,6 +114,21 @@
       "path": "src/seedmind/__init__.py",
       "sha256": "762e911e668d4168bb113a5a08d45d37a1d4346eb6c12b7deefae3757e880736",
       "size_bytes": 74
+    },
+    {
+      "path": "src/seedmind/ambition/__init__.py",
+      "sha256": "11a3111c37edd78a849c3cd36578f4b255fdff8651a2f1061bb4b7c434ed1a98",
+      "size_bytes": 1125
+    },
+    {
+      "path": "src/seedmind/ambition/demonstration.py",
+      "sha256": "1c197a19507380f4c8a8d1a776bdd900f896c616c86b8b7ea028b4ed9c1373d3",
+      "size_bytes": 11404
+    },
+    {
+      "path": "src/seedmind/ambition/engine.py",
+      "sha256": "408ed39677cd56c0bd8b762cf69489c742750f0f4415a0a8780896a49118a20c",
+      "size_bytes": 23216
     },
     {
       "path": "src/seedmind/contracts/__init__.py",
@@ -162,8 +187,8 @@
     },
     {
       "path": "src/seedmind/environment/__init__.py",
-      "sha256": "ec7c86cf0bc613462871c508a653852f12fb6f43d81b0b48206d07273d511dbd",
-      "size_bytes": 1670
+      "sha256": "2a283adcb9d9b1b1cfdb4144d1b3e23381df01f406b83ccb8e981d8a17ad598b",
+      "size_bytes": 1875
     },
     {
       "path": "src/seedmind/environment/dynamic_scenario.py",
@@ -204,6 +229,11 @@
       "path": "src/seedmind/environment/state.py",
       "sha256": "e90011a88c3044d3573cc3ca1131fd9d6de598375075d710b6b8dc16e17bc1d1",
       "size_bytes": 3288
+    },
+    {
+      "path": "src/seedmind/environment/teacher.py",
+      "sha256": "643143ad417b078e9dff72fc5be78cf8eec5ac42dba081a8bdea12d66093347b",
+      "size_bytes": 8082
     },
     {
       "path": "src/seedmind/environment/transition.py",
@@ -284,6 +314,11 @@
       "path": "tests/unit/test_action_contract.py",
       "sha256": "0d6a1dac1ebcd19122789d97e8fe22688a86c1fb9bb9306c01f2506a3593eecc",
       "size_bytes": 538
+    },
+    {
+      "path": "tests/unit/test_ambition_engine.py",
+      "sha256": "df0c4202526143e6bae0ddd8524f79c098b4dc1d93fcd0aadde5c3729dbf7974",
+      "size_bytes": 4657
     },
     {
       "path": "tests/unit/test_body_discovery_baseline.py",
@@ -379,6 +414,11 @@
       "path": "tests/unit/test_symbolic_encoder.py",
       "sha256": "eb57e24b2af231ce9ce6bb393c71d3a525b181b7fda70565e9b74ba69378aabc",
       "size_bytes": 3335
+    },
+    {
+      "path": "tests/unit/test_teacher_demonstration.py",
+      "sha256": "54f4895004064abbbd0f46c46ac3d3f462609a436d15ed23e8a0f745f46c0d22",
+      "size_bytes": 3394
     },
     {
       "path": "tests/unit/test_training_session.py",
