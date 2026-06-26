@@ -85,9 +85,7 @@ def prediction_objective(
     sensor_prediction = comparison.mean_squared_error.mean()
 
     if (current_sensor is None) != (controllable_sensor is None):
-        raise ValueError(
-            "current_sensor and controllable_sensor must be provided together"
-        )
+        raise ValueError("current_sensor and controllable_sensor must be provided together")
 
     if current_sensor is None or controllable_sensor is None:
         controllable_change = torch.zeros(

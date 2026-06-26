@@ -37,8 +37,13 @@ def create_runtime(*, episode_id: str = "episode-1") -> NurseryRuntime:
 
 
 def create_trainer(runtime: NurseryRuntime) -> OnlinePredictiveTrainer:
-    sensor_size = len(runtime.observe().sensor_values)
-    input_spec = SymbolicInputSpec(sensor_size=sensor_size)
+    observation = runtime.observe()
+    sensor_size = len(observation.sensor_values)
+    input_spec = SymbolicInputSpec(
+        sensor_size=sensor_size,
+        human_signal_size=len(observation.human_signal),
+        resource_state_size=len(observation.resource_state),
+    )
     core = PredictiveSeedCore(
         PredictiveCoreConfig(
             observation_input_size=input_spec.input_size,
