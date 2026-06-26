@@ -70,6 +70,13 @@ Run the first NDNRA local-memory and need-recruitment acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_multieffect_gate.py`
+
+Run the NDNRA dynamic-effects and novel-composition acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -347,6 +354,22 @@ Need-Driven Neural Recruitment Architecture research prototype.
 
 - Kind: python
 
+## `src/seedmind/research/ndnra/composition.py`
+
+Need-driven composition over local multidimensional experience assemblies.
+
+- Kind: python
+- Classes: ExperienceAssembly, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
+- Functions/symbols: _validate_code, _validate_facts
+
+## `src/seedmind/research/ndnra/effects.py`
+
+Dynamically expanding sparse effect memory for NDNRA research.
+
+- Kind: python
+- Classes: EffectObservation, EffectEstimate, SparseEffectMemory, NeedDimension, EffectNeed, LocalEffectLink
+- Functions/symbols: combine_projected_effects, _validate_code, _validate_unit_interval, _validate_signed_unit
+
 ## `src/seedmind/research/ndnra/experiment.py`
 
 Training, evaluation, and evidence for the NDNRA heat-fan prototype.
@@ -369,6 +392,14 @@ Local neural state and experiment records for the NDNRA prototype.
 - Kind: python
 - Classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary, GrowthPressure
 - Functions/symbols: _validate_unit_interval, _validate_signed_unit
+
+## `src/seedmind/research/ndnra/multieffect_experiment.py`
+
+Second NDNRA experiment: dynamic effects and novel solution composition.
+
+- Kind: python
+- Classes: MultieffectExperimentResult
+- Functions/symbols: cooling_need, cleanliness_need, build_multieffect_graph, build_intended_effect_only_baseline, run_ndnra_multieffect_experiment, export_multieffect_evidence, _candidate_row, _write_ascii_json
 
 ## `src/seedmind/research/ndnra/network.py`
 
@@ -541,6 +572,13 @@ Tests for local eligibility traces and delayed modulatory credit.
 
 - Kind: python
 - Functions/symbols: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_multieffect.py`
+
+Tests for dynamic local dimensions and undemonstrated solution composition.
+
+- Kind: python
+- Functions/symbols: test_sparse_effect_memory_gains_dimensions_from_experience, test_shower_memory_keeps_all_observed_effects_on_neuron_and_link, test_shower_learned_for_cleaning_is_recruited_for_cooling, test_separate_window_memories_compose_an_unseen_cooling_solution, test_composition_respects_conditions_and_rejects_hot_shower_for_cooling, test_intended_effect_only_baseline_cannot_reuse_shower_for_cooling, test_complete_multieffect_gate_passes_without_sqlite, test_multieffect_prototype_has_no_sqlite_dependency
 
 ## `tests/unit/test_ndnra_recall.py`
 
