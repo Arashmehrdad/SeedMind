@@ -42,6 +42,13 @@ Run a reproducible SeedMind familiar-sequence training session.
 - Kind: python
 - Functions/symbols: parse_args, build_trainer, main
 
+## `scripts/run_human_apprenticeship.py`
+
+Run the Week 6 symbolic human-apprenticeship acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_live_curiosity_training.py`
 
 Run curiosity-guided predictive training in the dynamic nursery.
@@ -235,6 +242,28 @@ Deterministic primitive-action transitions for SeedMind Nursery v0.
 - Kind: python
 - Classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
 
+## `src/seedmind/human/__init__.py`
+
+Symbolic human apprenticeship and calibrated help seeking.
+
+- Kind: python
+
+## `src/seedmind/human/apprenticeship.py`
+
+Human apprenticeship, help seeking, caregiver memory, and metrics.
+
+- Kind: python
+- Classes: HelpReason, CaregiverEventType, HelpSeekingConfig, HelpContext, HelpDecision, TeacherResponse, CaregiverEvent, CaregiverMemory, ApprenticeshipMetrics, HelpSeekingPolicy, TeacherResponsePolicy, ApprenticeshipManager
+- Functions/symbols: export_apprenticeship_report_json, export_apprenticeship_timeline_csv, _event_payload, _validate_unit_interval
+
+## `src/seedmind/human/contracts.py`
+
+Symbolic human-apprenticeship contracts and numeric signal encoding.
+
+- Kind: python
+- Classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec
+- Functions/symbols: _validate_unit_interval
+
 ## `src/seedmind/perception/__init__.py`
 
 Body-independent perception components for SeedMind.
@@ -319,6 +348,13 @@ Tests for demonstration-derived persistent ambitions.
 - Kind: python
 - Functions/symbols: observed_demo, adopted_manager, test_detector_requires_three_confirmed_repetitions, test_unconfirmed_repetition_does_not_form_candidate, test_ambition_persists_across_episodes, test_budget_and_milestone_progression, test_state_round_trip_and_dashboard, test_final_milestone_completes_ambition
 
+## `tests/unit/test_apprenticeship.py`
+
+Tests for calibrated help seeking and caregiver apprenticeship memory.
+
+- Kind: python
+- Functions/symbols: make_request, make_context, blocked_context, familiar_context, test_blocked_high_uncertainty_requests_help, test_familiar_low_risk_avoids_unnecessary_help, test_safe_low_cost_experiment_is_preferred_over_help, test_guided_learner_requires_more_uncertainty_than_dependent_level, test_teacher_demonstrates_blockage_and_clarifies_ambiguity, test_verified_familiar_approvals_promote_support_level, test_metrics_and_timeline_exports_pass_gate
+
 ## `tests/unit/test_body_discovery_baseline.py`
 
 Tests for matched-budget body discovery against random exploration.
@@ -376,6 +412,13 @@ Tests for the Gymnasium-compatible SeedMind Nursery adapter.
 
 - Kind: python
 - Functions/symbols: create_initial_state, create_env, test_reset_returns_float32_observation_inside_declared_space, test_step_maps_action_index_to_primitive_transition, test_stop_terminates_without_external_reward, test_deterministic_step_limit_truncates_episode, test_reset_clears_completion_and_can_change_episode_identifier, test_invalid_action_index_is_rejected, test_invalid_reset_episode_identifier_type_is_rejected, test_max_episode_steps_must_be_positive, test_adapter_passes_gymnasium_environment_checks, test_environment_can_be_created_from_reproducible_scenario
+
+## `tests/unit/test_human_contracts.py`
+
+Tests for symbolic human request and signal contracts.
+
+- Kind: python
+- Functions/symbols: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
 
 ## `tests/unit/test_nursery_runtime.py`
 

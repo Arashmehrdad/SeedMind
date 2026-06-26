@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T14:18:59.716037+00:00",
+  "generated_at": "2026-06-26T15:03:17.429513+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 85,
+  "source_file_count": 94,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -24,6 +24,21 @@
       "path": "pyproject.toml",
       "sha256": "4b3e83cb56df87535e2cae3d54d3eb686b95bc131c9ecb1aecdd348baf6d317a",
       "size_bytes": 1416
+    },
+    {
+      "path": "artifacts/ambition_formation/ambition_dashboard.json",
+      "sha256": "c639b75ee87806314a9c01af3f0a450c8d08787fb061bb028ed86022a699c4b3",
+      "size_bytes": 1499
+    },
+    {
+      "path": "artifacts/ambition_formation/ambition_state.json",
+      "sha256": "c63d237c181fdbd9f77e81b8452bf16cc857c2f838ca368f247c5e3af5793d57",
+      "size_bytes": 1714
+    },
+    {
+      "path": "artifacts/ambition_formation/demonstration_evidence.json",
+      "sha256": "0c1971c98951036492b91a4d2eaf23f5b3fc0cac12239b68dea3aa6d95430c06",
+      "size_bytes": 1392
     },
     {
       "path": "artifacts/body_discovery/self_model.json",
@@ -104,6 +119,11 @@
       "path": "scripts/run_familiar_training.py",
       "sha256": "fb12e23d64be7a7022d60f618a86a059bb02347d68d4f3b0b9e6676a786c0b1a",
       "size_bytes": 3725
+    },
+    {
+      "path": "scripts/run_human_apprenticeship.py",
+      "sha256": "ca63ba3afdc85d150540734c8daf8719bf28b7adee2be755a8dee151bef22730",
+      "size_bytes": 7113
     },
     {
       "path": "scripts/run_live_curiosity_training.py",
@@ -241,6 +261,21 @@
       "size_bytes": 7274
     },
     {
+      "path": "src/seedmind/human/__init__.py",
+      "sha256": "0a1ad2191e41c273e49bd76243e6171e325dd7f7f038fd4e179bc8663ec12b60",
+      "size_bytes": 1188
+    },
+    {
+      "path": "src/seedmind/human/apprenticeship.py",
+      "sha256": "2a036e9e4cb9862ebbf49c495973f69922105bab1f707a85e032b2bac6c13f5e",
+      "size_bytes": 27352
+    },
+    {
+      "path": "src/seedmind/human/contracts.py",
+      "sha256": "7829a2d34531ac8def40f803c9f698aa89ad0aead17704f70f90cbfb2e6e3730",
+      "size_bytes": 5249
+    },
+    {
       "path": "src/seedmind/perception/__init__.py",
       "sha256": "2f142556fe394556fee9fb03f5174a71b63b4a04d589a1e38737a66c736ff805",
       "size_bytes": 242
@@ -321,6 +356,11 @@
       "size_bytes": 4657
     },
     {
+      "path": "tests/unit/test_apprenticeship.py",
+      "sha256": "7d5d6ad32df843614c85d6d039fe1d5ed010eabd66368f3de987be619d94c8f4",
+      "size_bytes": 7289
+    },
+    {
       "path": "tests/unit/test_body_discovery_baseline.py",
       "sha256": "d9453bf60ace24ef6777321d8dec89b214751fcef65e18052dfc6dd2480c6030",
       "size_bytes": 5912
@@ -359,6 +399,11 @@
       "path": "tests/unit/test_gymnasium_adapter.py",
       "sha256": "050912623fbd98b147ad3f5408c8b83e04cf9185be7f919f849d7147709e3c51",
       "size_bytes": 4631
+    },
+    {
+      "path": "tests/unit/test_human_contracts.py",
+      "sha256": "a7e70659eaa647eed746bca342f12636200d662b934f053f922f447f5da4b9c4",
+      "size_bytes": 2264
     },
     {
       "path": "tests/unit/test_nursery_runtime.py",
