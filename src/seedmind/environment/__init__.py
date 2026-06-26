@@ -26,6 +26,10 @@ from seedmind.environment.scenario import (
     detect_target_occupancy,
 )
 from seedmind.environment.state import NurseryState
+from seedmind.environment.teacher import (
+    TeacherDemonstrationScenarioFactory,
+    TeacherPushDemonstrationProcess,
+)
 from seedmind.environment.transition import (
     NurseryTransition,
     NurseryTransitionEngine,
@@ -51,6 +55,8 @@ __all__ = [
     "SeedMindNurseryEnv",
     "ShapeCode",
     "TargetOccupancy",
+    "TeacherDemonstrationScenarioFactory",
+    "TeacherPushDemonstrationProcess",
     "TransitionOutcome",
     "WorldProcessEvent",
     "WorldProcessOutcome",
