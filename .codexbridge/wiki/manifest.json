@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T03:44:41.136489+00:00",
+  "generated_at": "2026-06-26T04:11:57.632505+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 74,
+  "source_file_count": 77,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -81,6 +81,11 @@
       "size_bytes": 2859
     },
     {
+      "path": "scripts/run_curiosity_comparison.py",
+      "sha256": "900d9d45da25782c2a7f93fd9b967f605e4295cfc1e428a8bf45c52ce8db5b8b",
+      "size_bytes": 5206
+    },
+    {
       "path": "scripts/run_curiosity_scoring.py",
       "sha256": "84624236131fb5149034f060514fd1080195fb72698b14e8095f0d6d7a2ae415",
       "size_bytes": 3524
@@ -137,8 +142,13 @@
     },
     {
       "path": "src/seedmind/curiosity/__init__.py",
-      "sha256": "f4a3aa21e26fd07880f5395ad0618540283b292e6157326882c7e25905c3e46e",
-      "size_bytes": 915
+      "sha256": "c2ea0122443bd5510c457fbbd2aaccd267a41045298d9eb09229a3c002407f8a",
+      "size_bytes": 1503
+    },
+    {
+      "path": "src/seedmind/curiosity/comparison.py",
+      "sha256": "e32b69d55053b83c32643458d112d3e1e56edce1dcba16cdedd373e554c0b14c",
+      "size_bytes": 31686
     },
     {
       "path": "src/seedmind/curiosity/policy.py",
@@ -279,6 +289,11 @@
       "path": "tests/unit/test_body_discovery_baseline.py",
       "sha256": "d9453bf60ace24ef6777321d8dec89b214751fcef65e18052dfc6dd2480c6030",
       "size_bytes": 5912
+    },
+    {
+      "path": "tests/unit/test_curiosity_comparison.py",
+      "sha256": "07cc75052e7219ddda9b20a350f2df562e01c770e9f63acd8a83248910977fd5",
+      "size_bytes": 10763
     },
     {
       "path": "tests/unit/test_curiosity_policy.py",

@@ -14,6 +14,13 @@ Run the Week 3 targeted body-discovery comparison gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_curiosity_comparison.py`
+
+Run the Week 4 curiosity-versus-random discovery comparison.
+
+- Kind: python
+- Functions/symbols: parse_args, build_trainer, main
+
 ## `scripts/run_curiosity_scoring.py`
 
 Run a deterministic curiosity-scoring demonstration timeline.
@@ -95,6 +102,14 @@ Recurrent predictive state core for SeedMind v0.1.
 Learning-progress curiosity and bounded primitive experiment selection.
 
 - Kind: python
+
+## `src/seedmind/curiosity/comparison.py`
+
+Matched live comparison of curiosity and random nursery exploration.
+
+- Kind: python
+- Classes: ScenarioFactory, PredictiveTrainer, TrainerFactory, CuriosityComparisonConfig, ExplorationActionCount, DiscoveryTimelinePoint, ExplorationTrialMetrics, CuriosityComparisonResult, CuriosityRandomComparisonExperiment
+- Functions/symbols: export_curiosity_comparison_json, export_curiosity_comparison_csv, _trial_payload, _set_metrics
 
 ## `src/seedmind/curiosity/policy.py`
 
@@ -266,6 +281,14 @@ Tests for matched-budget body discovery against random exploration.
 
 - Kind: python
 - Functions/symbols: create_config, test_targeted_body_probes_beat_random_exploration, test_comparison_is_reproducible, test_all_strategies_use_the_same_transition_budget, test_targeted_schedule_allocates_equal_probe_evidence, test_oracle_channels_are_derived_from_active_held_out_effects, test_baseline_reports_are_ascii_and_inspectable, test_baseline_config_rejects_invalid_values
+
+## `tests/unit/test_curiosity_comparison.py`
+
+Tests for curiosity versus random causal-discovery comparison.
+
+- Kind: python
+- Classes: TinyComparisonScenarioFactory, ControlledPredictiveTrainer
+- Functions/symbols: create_trainer, create_config, test_curiosity_discovers_controllable_effects_faster_than_random, test_curiosity_avoids_persistent_wait_loop, test_comparison_uses_paired_models_and_matched_budgets, test_comparison_is_reproducible, test_comparison_exports_are_ascii_and_inspectable, test_comparison_rejects_budget_above_scenario_limit, test_comparison_rejects_noise_action_with_direct_effect, test_comparison_config_rejects_invalid_values
 
 ## `tests/unit/test_curiosity_policy.py`
 
