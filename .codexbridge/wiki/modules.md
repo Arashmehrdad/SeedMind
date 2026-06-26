@@ -77,6 +77,13 @@ Run the NDNRA dynamic-effects and novel-composition acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_shadow_integration_gate.py`
+
+Run the NDNRA non-authoritative shadow-integration acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_ndnra_structural_growth_gate.py`
 
 Run the NDNRA evidence-driven structural-growth acceptance gate.
@@ -291,6 +298,28 @@ Symbolic human-apprenticeship contracts and numeric signal encoding.
 - Kind: python
 - Classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec
 - Functions/symbols: _validate_unit_interval
+
+## `src/seedmind/integration/__init__.py`
+
+Typed integration boundaries between validated SeedMind subsystems.
+
+- Kind: python
+
+## `src/seedmind/integration/ndnra_shadow.py`
+
+Non-authoritative NDNRA observation of the live SeedMind nursery loop.
+
+- Kind: python
+- Classes: ShadowScenarioFactory, NDNRAShadowConfig, ShadowSuggestion, ShadowStepRecord, NDNRAShadowSessionConfig, NDNRAShadowSessionResult, NDNRAShadowAdapter, NDNRAShadowSession
+- Functions/symbols: _availability_fact, _assembly_id, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit
+
+## `src/seedmind/integration/shadow_experiment.py`
+
+End-to-end baseline comparison for NDNRA shadow-mode integration.
+
+- Kind: python
+- Classes: ShadowComparisonResult
+- Functions/symbols: run_shadow_comparison, export_shadow_comparison_evidence, _build_trainer, _write_ascii_json
 
 ## `src/seedmind/memory/__init__.py`
 
@@ -609,6 +638,13 @@ Tests for need-driven recruitment, dormancy, and effort-based recall.
 
 - Kind: python
 - Functions/symbols: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
+
+## `tests/unit/test_ndnra_shadow_integration.py`
+
+Tests for non-authoritative NDNRA integration with the live nursery loop.
+
+- Kind: python
+- Functions/symbols: test_shadow_comparison_preserves_production_actions_and_training, test_shadow_learns_effects_and_emits_only_valid_suggestions, test_shadow_gate_advances_integration_without_action_authority, test_shadow_suggestion_rejects_action_authority, test_shadow_config_rejects_multi_action_control_depth, test_shadow_exports_are_ascii_and_inspectable, test_shadow_integration_has_no_sqlite_decision_dependency
 
 ## `tests/unit/test_ndnra_structural_growth.py`
 

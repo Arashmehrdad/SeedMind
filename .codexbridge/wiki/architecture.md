@@ -24,6 +24,7 @@ graph LR
 - `scripts/run_memory_belief_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_heat_fan_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_multieffect_gate.py` — functions: parse_args, main
+- `scripts/run_ndnra_shadow_integration_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_structural_growth_gate.py` — functions: parse_args, main
 - `src/seedmind/__init__.py` — SeedMind developmental intelligence runtime.
 - `src/seedmind/ambition/__init__.py` — Persistent developmental ambitions formed from grounded evidence.
@@ -54,6 +55,9 @@ graph LR
 - `src/seedmind/human/__init__.py` — Symbolic human apprenticeship and calibrated help seeking.
 - `src/seedmind/human/apprenticeship.py` — classes: HelpReason, CaregiverEventType, HelpSeekingConfig, HelpContext, HelpDecision, TeacherResponse, CaregiverEvent, CaregiverMemory; functions: export_apprenticeship_report_json, export_apprenticeship_timeline_csv, _event_payload, _validate_unit_interval
 - `src/seedmind/human/contracts.py` — classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec; functions: _validate_unit_interval
+- `src/seedmind/integration/__init__.py` — Typed integration boundaries between validated SeedMind subsystems.
+- `src/seedmind/integration/ndnra_shadow.py` — classes: ShadowScenarioFactory, NDNRAShadowConfig, ShadowSuggestion, ShadowStepRecord, NDNRAShadowSessionConfig, NDNRAShadowSessionResult, NDNRAShadowAdapter, NDNRAShadowSession; functions: _availability_fact, _assembly_id, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit
+- `src/seedmind/integration/shadow_experiment.py` — classes: ShadowComparisonResult; functions: run_shadow_comparison, export_shadow_comparison_evidence, _build_trainer, _write_ascii_json
 - `src/seedmind/memory/__init__.py` — Episodic SQLite memory, significance, retrieval, and beliefs.
 - `src/seedmind/memory/beliefs.py` — classes: BeliefRegistryConfig, BeliefRegistry; functions: _belief_id, _belief_from_row, _evidence_from_row
 - `src/seedmind/memory/inspector.py` — functions: export_memory_inspector_json, export_belief_evidence_csv, _event_payload, _belief_payload, _evidence_payload
@@ -98,6 +102,7 @@ graph LR
 - `tests/unit/test_ndnra_local_learning.py` — functions: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
 - `tests/unit/test_ndnra_multieffect.py` — functions: test_sparse_effect_memory_gains_dimensions_from_experience, test_shower_memory_keeps_all_observed_effects_on_neuron_and_link, test_shower_learned_for_cleaning_is_recruited_for_cooling, test_separate_window_memories_compose_an_unseen_cooling_solution, test_composition_respects_conditions_and_rejects_hot_shower_for_cooling, test_intended_effect_only_baseline_cannot_reuse_shower_for_cooling, test_complete_multieffect_gate_passes_without_sqlite, test_multieffect_prototype_has_no_sqlite_dependency
 - `tests/unit/test_ndnra_recall.py` — functions: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
+- `tests/unit/test_ndnra_shadow_integration.py` — functions: test_shadow_comparison_preserves_production_actions_and_training, test_shadow_learns_effects_and_emits_only_valid_suggestions, test_shadow_gate_advances_integration_without_action_authority, test_shadow_suggestion_rejects_action_authority, test_shadow_config_rejects_multi_action_control_depth, test_shadow_exports_are_ascii_and_inspectable, test_shadow_integration_has_no_sqlite_decision_dependency
 - `tests/unit/test_ndnra_structural_growth.py` — functions: test_interaction_specialist_adds_non_additive_effect_once, test_growth_does_not_trigger_from_one_failure, test_targeted_growth_uses_high_eligibility_members, test_targeted_growth_solves_blockage_and_random_capacity_does_not, test_old_assemblies_are_preserved_without_pruning, test_complete_structural_growth_gate_passes, test_structural_growth_prototype_has_no_sqlite_dependency, test_base_graph_still_fails_without_specialist
 - `tests/unit/test_nursery_runtime.py` — functions: create_initial_state, test_runtime_step_connects_state_transition_and_observation, test_reset_restores_identical_initial_observation, test_reset_can_start_a_new_named_episode, test_runtime_passes_auxiliary_channels_to_new_observation, test_stop_terminates_and_restricts_next_available_action, test_repeated_stop_after_termination_is_stable, test_runtime_rejects_invalid_reset_baseline, test_runtime_rejects_empty_episode_identifier, test_invalid_reset_episode_identifier_does_not_mutate_runtime
 - `tests/unit/test_nursery_state.py` — functions: create_state, test_state_finds_entities_in_stable_order, test_state_finds_blocking_entity, test_state_replaces_entity_deterministically, test_state_advances_one_step, test_state_rejects_duplicate_entity_ids, test_state_rejects_out_of_bounds_agent, test_replacement_must_preserve_identity
