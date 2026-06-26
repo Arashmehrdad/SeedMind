@@ -33,9 +33,7 @@ class PredictiveCoreConfig:
                 raise ValueError(f"{name} must be positive")
 
         if self.sensor_size > self.observation_input_size:
-            raise ValueError(
-                "sensor_size must not exceed observation_input_size"
-            )
+            raise ValueError("sensor_size must not exceed observation_input_size")
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,10 +62,7 @@ class PredictiveSeedCore(nn.Module):
             embedding_dim=config.action_embedding_size,
         )
         self.recurrent = nn.GRUCell(
-            input_size=(
-                config.observation_embedding_size
-                + config.action_embedding_size
-            ),
+            input_size=(config.observation_embedding_size + config.action_embedding_size),
             hidden_size=config.hidden_size,
         )
         self.next_sensor_head = nn.Linear(config.hidden_size, config.sensor_size)
@@ -125,12 +120,8 @@ class PredictiveSeedCore(nn.Module):
 
         return PredictiveCoreOutput(
             recurrent_state=updated_state,
-            predicted_next_sensor=torch.sigmoid(
-                self.next_sensor_head(updated_state)
-            ),
-            predicted_controllable_change=torch.tanh(
-                self.controllable_change_head(updated_state)
-            ),
+            predicted_next_sensor=torch.sigmoid(self.next_sensor_head(updated_state)),
+            predicted_controllable_change=torch.tanh(self.controllable_change_head(updated_state)),
             confidence=torch.sigmoid(self.confidence_head(updated_state)),
         )
 
@@ -143,9 +134,7 @@ class PredictiveSeedCore(nn.Module):
             raise ValueError("observation must be a vector or batch of vectors")
 
         if observation.shape[-1] != self.config.observation_input_size:
-            raise ValueError(
-                "observation width does not match observation_input_size"
-            )
+            raise ValueError("observation width does not match observation_input_size")
 
         return observation
 
@@ -185,6 +174,4 @@ class PredictiveSeedCore(nn.Module):
         expected_shape = (batch_size, self.config.hidden_size)
 
         if tuple(recurrent_state.shape) != expected_shape:
-            raise ValueError(
-                "recurrent_state shape does not match batch and hidden size"
-            )
+            raise ValueError("recurrent_state shape does not match batch and hidden size")

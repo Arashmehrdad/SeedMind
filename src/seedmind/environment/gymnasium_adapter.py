@@ -1,6 +1,6 @@
 """Gymnasium adapter for the deterministic SeedMind Nursery runtime."""
 
-from typing import Any, ClassVar, cast
+from typing import Any, cast
 
 import gymnasium as gym
 import numpy as np
@@ -8,6 +8,7 @@ from gymnasium import spaces
 from numpy.typing import NDArray
 
 from seedmind.contracts import ObservationPacket, PrimitiveAction
+from seedmind.environment.processes import WorldProcess
 from seedmind.environment.runtime import NurseryRuntime, ResourceStateProvider
 from seedmind.environment.scenario import NurseryScenario
 from seedmind.environment.state import NurseryState
@@ -24,8 +25,6 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
     zero reward while developmental motivation remains outside this wrapper.
     """
 
-    metadata: ClassVar[dict[str, Any]] = {"render_modes": []}
-
     def __init__(
         self,
         initial_state: NurseryState,
@@ -33,9 +32,11 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
         episode_id: str = "episode-0",
         max_episode_steps: int | None = None,
         resource_state_provider: ResourceStateProvider | None = None,
+        world_processes: tuple[WorldProcess, ...] = (),
     ) -> None:
         """Create an adapter around a deterministic nursery baseline."""
         super().__init__()
+        self.metadata = {"render_modes": []}
 
         if max_episode_steps is not None and max_episode_steps <= 0:
             raise ValueError("max_episode_steps must be positive")
@@ -44,6 +45,7 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
             initial_state=initial_state,
             episode_id=episode_id,
             resource_state_provider=resource_state_provider,
+            world_processes=world_processes,
         )
         self._primitive_actions = tuple(PrimitiveAction)
         self._max_episode_steps = max_episode_steps
@@ -76,6 +78,7 @@ class SeedMindNurseryEnv(gym.Env[ObservationArray, int]):
             episode_id=scenario.scenario_id if episode_id is None else episode_id,
             max_episode_steps=scenario.step_budget,
             resource_state_provider=scenario.resource_state,
+            world_processes=scenario.world_processes,
         )
 
     @property

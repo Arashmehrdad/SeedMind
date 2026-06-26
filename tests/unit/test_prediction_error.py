@@ -81,7 +81,7 @@ def test_prediction_objective_is_differentiable_without_task_reward() -> None:
         actual_sensor,
         current_sensor=current_sensor,
     )
-    loss.total.backward()
+    loss.total.backward()  # type: ignore[no-untyped-call]
 
     assert loss.total.ndim == 0
     assert loss.sensor_prediction.ndim == 0

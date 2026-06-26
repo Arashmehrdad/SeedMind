@@ -10,6 +10,7 @@ from seedmind.environment.entities import (
     EntityState,
     ShapeCode,
 )
+from seedmind.environment.processes import WorldProcess, WorldProcessPipeline
 from seedmind.environment.state import NurseryState
 
 
@@ -34,25 +35,17 @@ class TargetOccupancy:
 
 def detect_target_occupancy(state: NurseryState) -> TargetOccupancy:
     """Evaluate target occupancy using internal roles only."""
-    targets = tuple(
-        entity for entity in state.entities if entity.role is EntityRole.TARGET
-    )
-    objects = tuple(
-        entity for entity in state.entities if entity.role is EntityRole.OBJECT
-    )
+    targets = tuple(entity for entity in state.entities if entity.role is EntityRole.TARGET)
+    objects = tuple(entity for entity in state.entities if entity.role is EntityRole.OBJECT)
     occupied_target_ids: list[str] = []
     object_target_pairs: list[tuple[str, str]] = []
 
     for target in targets:
-        colocated = tuple(
-            entity for entity in objects if entity.position == target.position
-        )
+        colocated = tuple(entity for entity in objects if entity.position == target.position)
 
         if colocated:
             occupied_target_ids.append(target.entity_id)
-            object_target_pairs.extend(
-                (entity.entity_id, target.entity_id) for entity in colocated
-            )
+            object_target_pairs.extend((entity.entity_id, target.entity_id) for entity in colocated)
 
     return TargetOccupancy(
         target_count=len(targets),
@@ -69,6 +62,7 @@ class NurseryScenario:
     seed: int
     initial_state: NurseryState
     step_budget: int
+    world_processes: tuple[WorldProcess, ...] = ()
 
     def __post_init__(self) -> None:
         """Validate scenario identity, baseline state, and resource budget."""
@@ -86,6 +80,8 @@ class NurseryScenario:
 
         if self.initial_state.terminated:
             raise ValueError("initial_state must not be terminated")
+
+        WorldProcessPipeline(self.world_processes).validate(self.initial_state)
 
     def remaining_steps(self, state: NurseryState) -> int:
         """Return the non-negative number of steps left in this scenario."""

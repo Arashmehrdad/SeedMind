@@ -56,9 +56,7 @@ def test_train_transition_updates_parameters_and_returns_metrics() -> None:
     runtime = create_runtime()
     trainer = create_trainer(runtime)
     experience = collect_experience(runtime, PrimitiveAction.MOVE_FORWARD)
-    before = tuple(
-        parameter.detach().clone() for parameter in trainer.core.parameters()
-    )
+    before = tuple(parameter.detach().clone() for parameter in trainer.core.parameters())
 
     metrics = trainer.train_transition(experience)
     after = tuple(parameter.detach() for parameter in trainer.core.parameters())
@@ -74,8 +72,7 @@ def test_train_transition_updates_parameters_and_returns_metrics() -> None:
     assert isfinite(metrics.mean_confidence)
     assert isfinite(metrics.gradient_norm)
     assert any(
-        not torch.equal(previous, current)
-        for previous, current in zip(before, after, strict=True)
+        not torch.equal(previous, current) for previous, current in zip(before, after, strict=True)
     )
     assert trainer.active_episode_id == "episode-1"
     assert trainer.recurrent_state.grad_fn is None
@@ -188,9 +185,7 @@ def test_reset_allows_training_a_new_episode() -> None:
     trainer.reset_episode()
     next_runtime = create_runtime(episode_id="episode-2")
 
-    metrics = trainer.train_transition(
-        collect_experience(next_runtime, PrimitiveAction.WAIT)
-    )
+    metrics = trainer.train_transition(collect_experience(next_runtime, PrimitiveAction.WAIT))
 
     assert metrics.episode_id == "episode-2"
 

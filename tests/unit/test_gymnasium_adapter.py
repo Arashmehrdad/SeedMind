@@ -65,9 +65,7 @@ def test_stop_terminates_without_external_reward() -> None:
     env = create_env()
     env.reset()
 
-    _, reward, terminated, truncated, info = env.step(
-        env.action_index(PrimitiveAction.STOP)
-    )
+    _, reward, terminated, truncated, info = env.step(env.action_index(PrimitiveAction.STOP))
 
     assert reward == 0.0
     assert terminated is True

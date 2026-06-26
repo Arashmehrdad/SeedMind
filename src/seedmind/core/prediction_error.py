@@ -94,9 +94,7 @@ def prediction_objective(
             raise ValueError("current and actual sensor shapes must match")
 
         if output.predicted_controllable_change.shape != actual_sensor.shape:
-            raise ValueError(
-                "predicted controllable change shape must match sensor shape"
-            )
+            raise ValueError("predicted controllable change shape must match sensor shape")
 
         actual_change = actual_sensor - current_sensor
         controllable_change = functional.mse_loss(

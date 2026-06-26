@@ -46,9 +46,7 @@ def test_factory_does_not_mutate_global_random_state() -> None:
 def test_factory_builds_valid_perimeter_and_distinct_interior_layout() -> None:
     scenario = NurseryScenarioFactory(width=7, height=7).create(seed=5)
     state = scenario.initial_state
-    walls = tuple(
-        entity for entity in state.entities if entity.role is EntityRole.WALL
-    )
+    walls = tuple(entity for entity in state.entities if entity.role is EntityRole.WALL)
     blocking_positions = tuple(
         entity.position for entity in state.entities if entity.blocks_movement
     )
@@ -57,20 +55,15 @@ def test_factory_builds_valid_perimeter_and_distinct_interior_layout() -> None:
     assert len(blocking_positions) == len(set(blocking_positions))
     assert state.agent.position not in blocking_positions
     assert all(
-        wall.position.x in (0, state.width - 1)
-        or wall.position.y in (0, state.height - 1)
+        wall.position.x in (0, state.width - 1) or wall.position.y in (0, state.height - 1)
         for wall in walls
     )
 
 
 def test_scenario_contains_two_raw_shape_objects_and_two_targets() -> None:
     state = NurseryScenarioFactory().create(seed=11).initial_state
-    objects = tuple(
-        entity for entity in state.entities if entity.role is EntityRole.OBJECT
-    )
-    targets = tuple(
-        entity for entity in state.entities if entity.role is EntityRole.TARGET
-    )
+    objects = tuple(entity for entity in state.entities if entity.role is EntityRole.OBJECT)
+    targets = tuple(entity for entity in state.entities if entity.role is EntityRole.TARGET)
 
     assert len(objects) == 2
     assert len(targets) == 2
@@ -82,26 +75,16 @@ def test_resource_state_tracks_normalized_remaining_budget() -> None:
     scenario = NurseryScenarioFactory(step_budget=10).create(seed=3)
 
     assert scenario.resource_state(scenario.initial_state) == (1.0,)
-    assert scenario.resource_state(replace(scenario.initial_state, step_count=5)) == (
-        0.5,
-    )
-    assert scenario.resource_state(replace(scenario.initial_state, step_count=10)) == (
-        0.0,
-    )
-    assert scenario.resource_state(replace(scenario.initial_state, step_count=12)) == (
-        0.0,
-    )
+    assert scenario.resource_state(replace(scenario.initial_state, step_count=5)) == (0.5,)
+    assert scenario.resource_state(replace(scenario.initial_state, step_count=10)) == (0.0,)
+    assert scenario.resource_state(replace(scenario.initial_state, step_count=12)) == (0.0,)
 
 
 def test_target_occupancy_detects_object_on_target() -> None:
     scenario = NurseryScenarioFactory().create(seed=7)
     state = scenario.initial_state
-    object_entity = next(
-        entity for entity in state.entities if entity.role is EntityRole.OBJECT
-    )
-    target_entity = next(
-        entity for entity in state.entities if entity.role is EntityRole.TARGET
-    )
+    object_entity = next(entity for entity in state.entities if entity.role is EntityRole.OBJECT)
+    target_entity = next(entity for entity in state.entities if entity.role is EntityRole.TARGET)
     moved_object = object_entity.moved_to(target_entity.position)
     updated = state.replace_entity(object_entity.entity_id, moved_object)
 
@@ -110,9 +93,7 @@ def test_target_occupancy_detects_object_on_target() -> None:
     assert occupancy.target_count == 2
     assert occupancy.occupied_count == 1
     assert occupancy.occupied_target_ids == (target_entity.entity_id,)
-    assert occupancy.object_target_pairs == (
-        (object_entity.entity_id, target_entity.entity_id),
-    )
+    assert occupancy.object_target_pairs == ((object_entity.entity_id, target_entity.entity_id),)
     assert occupancy.all_targets_occupied is False
 
 
@@ -188,6 +169,4 @@ def test_scenario_resource_evaluation_is_state_based() -> None:
     unrelated_state = replace(scenario.initial_state, step_count=7)
 
     assert scenario.remaining_steps(unrelated_state) == 13
-    assert scenario.target_occupancy(unrelated_state) == detect_target_occupancy(
-        unrelated_state
-    )
+    assert scenario.target_occupancy(unrelated_state) == detect_target_occupancy(unrelated_state)

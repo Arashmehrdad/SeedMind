@@ -26,24 +26,14 @@ class ExperienceTransition:
         if self.action not in self.observation.available_actions:
             raise ValueError("action was not available in the source observation")
 
-        if len(self.observation.sensor_values) != len(
-            self.next_observation.sensor_values
-        ):
+        if len(self.observation.sensor_values) != len(self.next_observation.sensor_values):
             raise ValueError("sensor width must remain stable across a transition")
 
-        if len(self.observation.human_signal) != len(
-            self.next_observation.human_signal
-        ):
-            raise ValueError(
-                "human signal width must remain stable across a transition"
-            )
+        if len(self.observation.human_signal) != len(self.next_observation.human_signal):
+            raise ValueError("human signal width must remain stable across a transition")
 
-        if len(self.observation.resource_state) != len(
-            self.next_observation.resource_state
-        ):
-            raise ValueError(
-                "resource state width must remain stable across a transition"
-            )
+        if len(self.observation.resource_state) != len(self.next_observation.resource_state):
+            raise ValueError("resource state width must remain stable across a transition")
 
     @property
     def sensor_change(self) -> tuple[float, ...]:

@@ -1,5 +1,6 @@
 """Symbolic environment surrounding the SeedMind core."""
 
+from seedmind.environment.dynamic_scenario import DynamicNurseryScenarioFactory
 from seedmind.environment.entities import (
     AgentState,
     EntityRole,
@@ -8,6 +9,15 @@ from seedmind.environment.entities import (
 )
 from seedmind.environment.gymnasium_adapter import SeedMindNurseryEnv
 from seedmind.environment.observation import NurseryObservationAdapter
+from seedmind.environment.processes import (
+    CyclicEntityPatrolProcess,
+    DirectionalFlowProcess,
+    PeriodicBlockingToggleProcess,
+    WorldProcessEvent,
+    WorldProcessOutcome,
+    WorldProcessPipeline,
+    WorldProcessResult,
+)
 from seedmind.environment.runtime import NurseryRuntime, NurseryRuntimeStep
 from seedmind.environment.scenario import (
     NurseryScenario,
@@ -24,6 +34,9 @@ from seedmind.environment.transition import (
 
 __all__ = [
     "AgentState",
+    "CyclicEntityPatrolProcess",
+    "DirectionalFlowProcess",
+    "DynamicNurseryScenarioFactory",
     "EntityRole",
     "EntityState",
     "NurseryObservationAdapter",
@@ -34,9 +47,14 @@ __all__ = [
     "NurseryState",
     "NurseryTransition",
     "NurseryTransitionEngine",
+    "PeriodicBlockingToggleProcess",
     "SeedMindNurseryEnv",
     "ShapeCode",
     "TargetOccupancy",
     "TransitionOutcome",
+    "WorldProcessEvent",
+    "WorldProcessOutcome",
+    "WorldProcessPipeline",
+    "WorldProcessResult",
     "detect_target_occupancy",
 ]

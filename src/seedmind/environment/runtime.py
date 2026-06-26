@@ -1,10 +1,15 @@
 """Runtime orchestration for SeedMind Nursery v0."""
 
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from seedmind.contracts import ObservationPacket, PrimitiveAction
 from seedmind.environment.observation import NurseryObservationAdapter
+from seedmind.environment.processes import (
+    WorldProcess,
+    WorldProcessEvent,
+    WorldProcessPipeline,
+)
 from seedmind.environment.state import NurseryState
 from seedmind.environment.transition import (
     NurseryTransition,
@@ -16,14 +21,20 @@ ResourceStateProvider = Callable[[NurseryState], Sequence[float]]
 
 @dataclass(frozen=True, slots=True)
 class NurseryRuntimeStep:
-    """One applied transition and the observation produced from its new state."""
+    """One complete tick containing agent and independent world updates."""
 
     transition: NurseryTransition
     observation: ObservationPacket
+    process_events: tuple[WorldProcessEvent, ...] = ()
+
+    @property
+    def external_world_changed(self) -> bool:
+        """Return whether an independent process changed this tick."""
+        return any(event.changed for event in self.process_events)
 
 
 class NurseryRuntime:
-    """Connect immutable state, observation, and transition components."""
+    """Connect immutable state, agent transitions, and world processes."""
 
     __slots__ = (
         "_episode_id",
@@ -32,6 +43,7 @@ class NurseryRuntime:
         "_resource_state_provider",
         "_state",
         "_transition_engine",
+        "_world_process_pipeline",
     )
 
     def __init__(
@@ -40,6 +52,7 @@ class NurseryRuntime:
         episode_id: str,
         *,
         resource_state_provider: ResourceStateProvider | None = None,
+        world_processes: Sequence[WorldProcess] = (),
     ) -> None:
         """Validate the reset baseline and initialize the active episode."""
         if initial_state.step_count != 0:
@@ -58,6 +71,8 @@ class NurseryRuntime:
         )
         self._transition_engine = NurseryTransitionEngine()
         self._resource_state_provider = resource_state_provider
+        self._world_process_pipeline = WorldProcessPipeline.from_sequence(world_processes)
+        self._world_process_pipeline.validate(initial_state)
 
     @property
     def initial_state(self) -> NurseryState:
@@ -78,6 +93,11 @@ class NurseryRuntime:
     def sensor_size(self) -> int:
         """Return the fixed sensor width for this runtime."""
         return self._observation_adapter.sensor_size
+
+    @property
+    def world_processes(self) -> tuple[WorldProcess, ...]:
+        """Return independent processes in deterministic run order."""
+        return self._world_process_pipeline.processes
 
     def observe(
         self,
@@ -118,16 +138,29 @@ class NurseryRuntime:
         human_signal: Sequence[float] = (),
         resource_state: Sequence[float] | None = None,
     ) -> NurseryRuntimeStep:
-        """Apply one available primitive action and observe the new state."""
+        """Advance one tick through the agent action and world processes."""
         current_observation = self.observe()
 
         if action not in current_observation.available_actions:
-            raise ValueError(
-                f"Action {action.value!r} is not available in the current state"
-            )
+            raise ValueError(f"Action {action.value!r} is not available in the current state")
 
-        transition = self._transition_engine.apply(self._state, action)
-        self._state = transition.state
+        agent_transition = self._transition_engine.apply(self._state, action)
+        final_state = agent_transition.state
+        process_events: tuple[WorldProcessEvent, ...] = ()
+        external_world_changed = False
+
+        if not final_state.terminated:
+            process_result = self._world_process_pipeline.advance(final_state)
+            final_state = process_result.state
+            process_events = process_result.events
+            external_world_changed = process_result.world_changed
+
+        transition = replace(
+            agent_transition,
+            state=final_state,
+            world_changed=(agent_transition.world_changed or external_world_changed),
+        )
+        self._state = final_state
         observation = self.observe(
             human_signal=human_signal,
             resource_state=resource_state,
@@ -136,6 +169,7 @@ class NurseryRuntime:
         return NurseryRuntimeStep(
             transition=transition,
             observation=observation,
+            process_events=process_events,
         )
 
     def _resolve_resource_state(

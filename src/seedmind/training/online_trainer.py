@@ -93,9 +93,7 @@ class OnlinePredictiveTrainer:
             if optimizer is None
             else optimizer
         )
-        self._action_indices = {
-            action: index for index, action in enumerate(PrimitiveAction)
-        }
+        self._action_indices = {action: index for index, action in enumerate(PrimitiveAction)}
         self._recurrent_state = self.core.initial_state(batch_size=1)
         self._active_episode_id: str | None = None
         self._expected_step_id: int | None = None
@@ -167,7 +165,7 @@ class OnlinePredictiveTrainer:
             controllable_change_weight=self.config.controllable_change_weight,
             confidence_weight=self.config.confidence_weight,
         )
-        loss.total.backward()
+        loss.total.backward()  # type: ignore[no-untyped-call]
         gradient_norm_tensor = clip_grad_norm_(
             self.core.parameters(),
             max_norm=self.config.max_gradient_norm,
@@ -183,15 +181,9 @@ class OnlinePredictiveTrainer:
             episode_id=experience.observation.episode_id,
             source_step_id=experience.observation.step_id,
             total_loss=float(loss.total.detach().cpu().item()),
-            sensor_prediction_loss=float(
-                loss.sensor_prediction.detach().cpu().item()
-            ),
-            controllable_change_loss=float(
-                loss.controllable_change.detach().cpu().item()
-            ),
-            confidence_calibration_loss=float(
-                loss.confidence_calibration.detach().cpu().item()
-            ),
+            sensor_prediction_loss=float(loss.sensor_prediction.detach().cpu().item()),
+            controllable_change_loss=float(loss.controllable_change.detach().cpu().item()),
+            confidence_calibration_loss=float(loss.confidence_calibration.detach().cpu().item()),
             mean_absolute_error=float(
                 loss.comparison.mean_absolute_error.mean().detach().cpu().item()
             ),
@@ -203,9 +195,7 @@ class OnlinePredictiveTrainer:
     def _validate_interface(self) -> None:
         """Ensure model, action, and observation dimensions agree."""
         if self.input_spec.input_size != self.core.config.observation_input_size:
-            raise ValueError(
-                "input specification does not match core observation input size"
-            )
+            raise ValueError("input specification does not match core observation input size")
 
         if self.input_spec.sensor_size != self.core.config.sensor_size:
             raise ValueError("input specification does not match core sensor size")

@@ -35,27 +35,18 @@ class NurseryState:
 
         for entity in self.entities:
             if not self.is_in_bounds(entity.position):
-                raise ValueError(
-                    f"Entity {entity.entity_id!r} is outside the nursery"
-                )
+                raise ValueError(f"Entity {entity.entity_id!r} is outside the nursery")
 
     def is_in_bounds(self, position: GridPosition) -> bool:
         """Return whether a position is inside the nursery grid."""
-        return (
-            0 <= position.x < self.width
-            and 0 <= position.y < self.height
-        )
+        return 0 <= position.x < self.width and 0 <= position.y < self.height
 
     def entities_at(
         self,
         position: GridPosition,
     ) -> tuple[EntityState, ...]:
         """Return all entities occupying a position in stable order."""
-        return tuple(
-            entity
-            for entity in self.entities
-            if entity.position == position
-        )
+        return tuple(entity for entity in self.entities if entity.position == position)
 
     def blocking_entity_at(
         self,

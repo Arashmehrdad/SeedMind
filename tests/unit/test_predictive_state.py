@@ -31,12 +31,12 @@ def test_core_output_shapes_and_ranges() -> None:
     assert output.predicted_next_sensor.shape == (3, 6)
     assert output.predicted_controllable_change.shape == (3, 6)
     assert output.confidence.shape == (3, 1)
-    assert torch.all((0.0 <= output.predicted_next_sensor))
-    assert torch.all((output.predicted_next_sensor <= 1.0))
-    assert torch.all((-1.0 <= output.predicted_controllable_change))
-    assert torch.all((output.predicted_controllable_change <= 1.0))
-    assert torch.all((0.0 <= output.confidence))
-    assert torch.all((output.confidence <= 1.0))
+    assert torch.all(output.predicted_next_sensor >= 0.0)
+    assert torch.all(output.predicted_next_sensor <= 1.0)
+    assert torch.all(output.predicted_controllable_change >= -1.0)
+    assert torch.all(output.predicted_controllable_change <= 1.0)
+    assert torch.all(output.confidence >= 0.0)
+    assert torch.all(output.confidence <= 1.0)
 
 
 def test_core_accepts_single_observation_and_no_action() -> None:

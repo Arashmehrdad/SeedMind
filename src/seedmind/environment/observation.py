@@ -36,9 +36,7 @@ class NurseryObservationAdapter:
     @property
     def sensor_size(self) -> int:
         """Return the fixed number of numeric sensor channels."""
-        return self.BODY_CHANNEL_COUNT + (
-            self.width * self.height * self.CELL_CHANNEL_COUNT
-        )
+        return self.BODY_CHANNEL_COUNT + (self.width * self.height * self.CELL_CHANNEL_COUNT)
 
     def observe(
         self,
@@ -55,9 +53,7 @@ class NurseryObservationAdapter:
         sensor_values = self._encode_body(state)
         sensor_values.extend(self._encode_grid(state))
 
-        available_actions = (
-            _TERMINATED_ACTIONS if state.terminated else _ACTIVE_ACTIONS
-        )
+        available_actions = _TERMINATED_ACTIONS if state.terminated else _ACTIVE_ACTIONS
 
         return ObservationPacket(
             timestamp=state.step_count if timestamp is None else timestamp,
@@ -72,17 +68,12 @@ class NurseryObservationAdapter:
     def _validate_state_dimensions(self, state: NurseryState) -> None:
         """Reject states that do not match the fixed adapter shape."""
         if state.width != self.width or state.height != self.height:
-            raise ValueError(
-                "Nursery state dimensions do not match observation adapter"
-            )
+            raise ValueError("Nursery state dimensions do not match observation adapter")
 
     def _encode_body(self, state: NurseryState) -> list[float]:
         """Encode normalized body position and orientation one-hot channels."""
         orientation = int(state.agent.orientation)
-        orientation_channels = [
-            1.0 if index == orientation else 0.0
-            for index in range(4)
-        ]
+        orientation_channels = [1.0 if index == orientation else 0.0 for index in range(4)]
 
         return [
             state.agent.position.x / (self.width - 1),

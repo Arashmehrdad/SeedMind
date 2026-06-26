@@ -1,6 +1,7 @@
 """Learned encoding for raw symbolic SeedMind observations."""
 
 from dataclasses import dataclass
+from typing import cast
 
 import torch
 from torch import Tensor, nn
@@ -30,11 +31,7 @@ class SymbolicInputSpec:
     @property
     def input_size(self) -> int:
         """Return the total width of the raw numeric input vector."""
-        return (
-            self.sensor_size
-            + self.human_signal_size
-            + self.resource_state_size
-        )
+        return self.sensor_size + self.human_signal_size + self.resource_state_size
 
     def vectorize(
         self,
@@ -58,14 +55,10 @@ class SymbolicInputSpec:
             raise ValueError("sensor_values length does not match sensor_size")
 
         if len(packet.human_signal) != self.human_signal_size:
-            raise ValueError(
-                "human_signal length does not match human_signal_size"
-            )
+            raise ValueError("human_signal length does not match human_signal_size")
 
         if len(packet.resource_state) != self.resource_state_size:
-            raise ValueError(
-                "resource_state length does not match resource_state_size"
-            )
+            raise ValueError("resource_state length does not match resource_state_size")
 
 
 class SymbolicObservationEncoder(nn.Module):
@@ -100,4 +93,4 @@ class SymbolicObservationEncoder(nn.Module):
         if observation.shape[-1] != self.input_size:
             raise ValueError("observation width does not match input_size")
 
-        return self.network(observation)
+        return cast(Tensor, self.network(observation))
