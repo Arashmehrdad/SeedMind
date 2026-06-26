@@ -223,6 +223,75 @@ retrieval_cost
 
 The exact representation is an implementation question. The architectural requirement is that this state remains local and bounded.
 
+### 5.1 Dynamically expanding sparse effect dimensions
+
+A neuron or assembly must not be restricted to one fixed purpose or one scalar need compatibility value.
+
+Its local effect memory should begin empty and gain a new sparse dimension only when its own experience reveals a distinct consequence.
+
+Example:
+
+```text
+cold shower experience
+    -> cleanliness increases
+    -> temperature decreases
+    -> wetness increases
+    -> water cost increases
+    -> time cost increases
+```
+
+The resulting local memory may contain:
+
+```text
+cleanliness: +0.90
+temperature: -0.90
+wetness: +1.00
+water_cost: +0.80
+time_cost: +0.60
+```
+
+A later experience may add another dimension without reallocating or rewriting unrelated dimensions.
+
+```text
+new observed consequence
+    -> create one new local effect dimension
+
+existing observed consequence
+    -> revise only that local estimate and confidence
+```
+
+The representation is therefore not limited to a two-dimensional physical grid or a fixed dense vector. Graph topology and local memory dimensionality are separate:
+
+```text
+graph topology
+    = which neurons and synapses connect
+
+local effect dimensions
+    = which consequences each structure has learned
+```
+
+Dimensional growth must remain sparse, evidence-based, inspectable, and subject to resource controls. A new episode must not automatically create a new dimension unless it exposes a distinguishable consequence.
+
+### 5.2 One memory can serve multiple needs
+
+An experience must be indexed by all observed consequences, not only by the intention that originally caused the action.
+
+A shower first experienced while resolving a cleanliness need can later be recruited by a temperature-reduction need because the same local assembly also learned a cooling effect.
+
+```text
+cleanliness need
+    -> recruits shower through cleanliness effect
+
+heat need
+    -> recruits the same shower assembly through temperature effect
+```
+
+No single permanent purpose tag owns the memory.
+
+Current needs are also sparse multidimensional signals. Recruitment compares the desired effect directions with locally remembered effect directions, confidence, conditions, costs, and side effects.
+
+This permits cross-purpose reuse and novel solution composition from separately learned fragments.
+
 ## 6. Local synaptic state
 
 Each connection may carry bounded local state such as:
