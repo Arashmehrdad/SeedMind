@@ -8,7 +8,12 @@ import torch
 
 from seedmind.contracts import Direction, GridPosition, PrimitiveAction
 from seedmind.core import PredictiveCoreConfig, PredictiveSeedCore
-from seedmind.environment import AgentState, NurseryRuntime, NurseryState
+from seedmind.environment import (
+    AgentState,
+    DynamicNurseryScenarioFactory,
+    NurseryRuntime,
+    NurseryState,
+)
 from seedmind.environment.scenario import NurseryScenarioFactory
 from seedmind.perception import SymbolicInputSpec
 from seedmind.training import (
@@ -69,6 +74,7 @@ def test_train_transition_updates_parameters_and_returns_metrics() -> None:
     assert isfinite(metrics.controllable_change_loss)
     assert isfinite(metrics.confidence_calibration_loss)
     assert isfinite(metrics.mean_absolute_error)
+    assert isfinite(metrics.external_change_mean_absolute)
     assert isfinite(metrics.mean_confidence)
     assert isfinite(metrics.gradient_norm)
     assert any(
@@ -76,6 +82,24 @@ def test_train_transition_updates_parameters_and_returns_metrics() -> None:
     )
     assert trainer.active_episode_id == "episode-1"
     assert trainer.recurrent_state.grad_fn is None
+
+
+def test_trainer_reports_external_change_for_dynamic_wait() -> None:
+    scenario = DynamicNurseryScenarioFactory().create(seed=4)
+    runtime = NurseryRuntime(
+        initial_state=scenario.initial_state,
+        episode_id=scenario.scenario_id,
+        resource_state_provider=scenario.resource_state,
+        world_processes=scenario.world_processes,
+    )
+    trainer = create_trainer(runtime)
+    experience = collect_experience(runtime, PrimitiveAction.WAIT)
+
+    metrics = trainer.train_transition(experience)
+
+    assert all(change == 0.0 for change in experience.controllable_sensor_change)
+    assert metrics.external_change_mean_absolute > 0.0
+    assert isfinite(metrics.external_change_mean_absolute)
 
 
 def test_trainer_consumes_scenario_resource_channel() -> None:

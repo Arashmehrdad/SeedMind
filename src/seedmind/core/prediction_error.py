@@ -67,6 +67,7 @@ def prediction_objective(
     actual_sensor: Tensor,
     *,
     current_sensor: Tensor | None = None,
+    controllable_sensor: Tensor | None = None,
     controllable_change_weight: float = 0.25,
     confidence_weight: float = 0.1,
 ) -> PredictionLoss:
@@ -83,7 +84,12 @@ def prediction_objective(
     )
     sensor_prediction = comparison.mean_squared_error.mean()
 
-    if current_sensor is None:
+    if (current_sensor is None) != (controllable_sensor is None):
+        raise ValueError(
+            "current_sensor and controllable_sensor must be provided together"
+        )
+
+    if current_sensor is None or controllable_sensor is None:
         controllable_change = torch.zeros(
             (),
             device=actual_sensor.device,
@@ -93,10 +99,13 @@ def prediction_objective(
         if current_sensor.shape != actual_sensor.shape:
             raise ValueError("current and actual sensor shapes must match")
 
+        if controllable_sensor.shape != actual_sensor.shape:
+            raise ValueError("controllable and actual sensor shapes must match")
+
         if output.predicted_controllable_change.shape != actual_sensor.shape:
             raise ValueError("predicted controllable change shape must match sensor shape")
 
-        actual_change = actual_sensor - current_sensor
+        actual_change = controllable_sensor - current_sensor
         controllable_change = functional.mse_loss(
             output.predicted_controllable_change,
             actual_change,

@@ -6,6 +6,7 @@ import torch
 from seedmind.contracts import PrimitiveAction
 from seedmind.core import (
     PredictiveCoreConfig,
+    PredictiveCoreOutput,
     PredictiveSeedCore,
     compare_prediction,
     prediction_objective,
@@ -74,12 +75,14 @@ def test_prediction_objective_is_differentiable_without_task_reward() -> None:
         core.initial_state(batch_size=2),
     )
     current_sensor = torch.rand((2, 6))
+    controllable_sensor = torch.rand((2, 6))
     actual_sensor = torch.rand((2, 6))
 
     loss = prediction_objective(
         output,
         actual_sensor,
         current_sensor=current_sensor,
+        controllable_sensor=controllable_sensor,
     )
     loss.total.backward()  # type: ignore[no-untyped-call]
 
@@ -136,6 +139,45 @@ def test_prediction_objective_rejects_current_sensor_shape_mismatch() -> None:
             output,
             torch.rand((1, 6)),
             current_sensor=torch.rand((1, 5)),
+            controllable_sensor=torch.rand((1, 6)),
+        )
+
+
+def test_controllable_loss_excludes_external_world_change() -> None:
+    output = PredictiveCoreOutput(
+        recurrent_state=torch.zeros((1, 2)),
+        predicted_next_sensor=torch.ones((1, 2)),
+        predicted_controllable_change=torch.zeros((1, 2)),
+        confidence=torch.ones((1, 1)),
+    )
+    current_sensor = torch.zeros((1, 2))
+    agent_sensor = torch.zeros((1, 2))
+    final_sensor = torch.ones((1, 2))
+
+    loss = prediction_objective(
+        output,
+        final_sensor,
+        current_sensor=current_sensor,
+        controllable_sensor=agent_sensor,
+    )
+
+    torch.testing.assert_close(loss.sensor_prediction, torch.tensor(0.0))
+    torch.testing.assert_close(loss.controllable_change, torch.tensor(0.0))
+
+
+def test_prediction_objective_requires_both_causal_sensors() -> None:
+    core = create_core()
+    output = core(
+        torch.rand((1, 8)),
+        torch.tensor((-1,)),
+        core.initial_state(batch_size=1),
+    )
+
+    with pytest.raises(ValueError, match="provided together"):
+        prediction_objective(
+            output,
+            torch.rand((1, 6)),
+            current_sensor=torch.rand((1, 6)),
         )
 
 

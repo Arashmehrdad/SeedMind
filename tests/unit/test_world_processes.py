@@ -73,9 +73,14 @@ def test_wait_tick_can_contain_teacher_motion() -> None:
         world_processes=(patrol,),
     )
 
+    source_observation = runtime.observe()
     result = runtime.step(PrimitiveAction.WAIT)
 
     assert result.transition.outcome is TransitionOutcome.WAITED
+    assert result.agent_observation.step_id == 1
+    assert result.observation.step_id == 1
+    assert result.agent_observation.sensor_values == source_observation.sensor_values
+    assert result.observation.sensor_values != result.agent_observation.sensor_values
     assert result.transition.world_changed is True
     assert result.external_world_changed is True
     assert runtime.state.agent.position == GridPosition(0, 0)

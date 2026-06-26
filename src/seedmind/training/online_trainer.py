@@ -63,6 +63,7 @@ class OnlineTrainingMetrics:
     controllable_change_loss: float
     confidence_calibration_loss: float
     mean_absolute_error: float
+    external_change_mean_absolute: float
     mean_confidence: float
     gradient_norm: float
     terminated: bool
@@ -136,6 +137,11 @@ class OnlinePredictiveTrainer:
             device=device,
             dtype=dtype,
         ).unsqueeze(0)
+        agent_sensor = torch.tensor(
+            experience.agent_observation.sensor_values,
+            device=device,
+            dtype=dtype,
+        ).unsqueeze(0)
         current_sensor = torch.tensor(
             experience.observation.sensor_values,
             device=device,
@@ -162,6 +168,7 @@ class OnlinePredictiveTrainer:
             output,
             next_sensor,
             current_sensor=current_sensor,
+            controllable_sensor=agent_sensor,
             controllable_change_weight=self.config.controllable_change_weight,
             confidence_weight=self.config.confidence_weight,
         )
@@ -176,6 +183,7 @@ class OnlinePredictiveTrainer:
         self._active_episode_id = experience.observation.episode_id
         self._expected_step_id = experience.next_observation.step_id
         self._episode_complete = experience.terminated
+        external_change_mean_absolute = (next_sensor - agent_sensor).abs().mean()
 
         return OnlineTrainingMetrics(
             episode_id=experience.observation.episode_id,
@@ -186,6 +194,9 @@ class OnlinePredictiveTrainer:
             confidence_calibration_loss=float(loss.confidence_calibration.detach().cpu().item()),
             mean_absolute_error=float(
                 loss.comparison.mean_absolute_error.mean().detach().cpu().item()
+            ),
+            external_change_mean_absolute=float(
+                external_change_mean_absolute.detach().cpu().item()
             ),
             mean_confidence=float(output.confidence.mean().detach().cpu().item()),
             gradient_norm=float(gradient_norm_tensor.detach().cpu().item()),

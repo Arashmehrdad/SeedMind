@@ -34,7 +34,9 @@ def test_runtime_step_connects_state_transition_and_observation() -> None:
     assert result.transition.outcome is TransitionOutcome.MOVED
     assert runtime.state == result.transition.state
     assert runtime.state.agent.position == GridPosition(2, 1)
+    assert result.agent_observation.step_id == 1
     assert result.observation.step_id == 1
+    assert result.agent_observation.sensor_values == result.observation.sensor_values
     assert result.observation.episode_id == "episode-1"
     assert result.observation.sensor_values == runtime.observe().sensor_values
 
