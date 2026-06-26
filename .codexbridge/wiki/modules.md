@@ -56,6 +56,13 @@ Run curiosity-guided predictive training in the dynamic nursery.
 - Kind: python
 - Functions/symbols: parse_args, build_trainer, main
 
+## `scripts/run_memory_belief_gate.py`
+
+Run the Week 7 episodic-memory and belief-revision acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -264,6 +271,50 @@ Symbolic human-apprenticeship contracts and numeric signal encoding.
 - Classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec
 - Functions/symbols: _validate_unit_interval
 
+## `src/seedmind/memory/__init__.py`
+
+Episodic SQLite memory, significance, retrieval, and beliefs.
+
+- Kind: python
+
+## `src/seedmind/memory/beliefs.py`
+
+Evidence-linked belief formation and contradiction detection.
+
+- Kind: python
+- Classes: BeliefRegistryConfig, BeliefRegistry
+- Functions/symbols: _belief_id, _belief_from_row, _evidence_from_row
+
+## `src/seedmind/memory/inspector.py`
+
+Inspectable JSON and CSV views for episodic memory and beliefs.
+
+- Kind: python
+- Functions/symbols: export_memory_inspector_json, export_belief_evidence_csv, _event_payload, _belief_payload, _evidence_payload
+
+## `src/seedmind/memory/models.py`
+
+Typed episodic-memory and belief records for SeedMind.
+
+- Kind: python
+- Classes: EpisodicEventType, BeliefEvidencePolarity, BeliefStatus, SignificanceFeatures, EpisodicEventDraft, EpisodicEvent, MemoryQuery, BeliefProposition, BeliefRecord, BeliefEvidence, ContradictionRecord
+- Functions/symbols: _validate_identifier, _validate_unit_interval
+
+## `src/seedmind/memory/significance.py`
+
+Transparent significance scoring for episodic memory.
+
+- Kind: python
+- Classes: SignificanceConfig, SignificanceScorer
+
+## `src/seedmind/memory/store.py`
+
+Versioned SQLite episodic store and contextual retrieval.
+
+- Kind: python
+- Classes: EpisodicSQLiteStore
+- Functions/symbols: _event_from_row, _payload_from_json, _optional_bool_to_database, _optional_bool_from_database
+
 ## `src/seedmind/perception/__init__.py`
 
 Body-independent perception components for SeedMind.
@@ -355,6 +406,13 @@ Tests for calibrated help seeking and caregiver apprenticeship memory.
 - Kind: python
 - Functions/symbols: make_request, make_context, blocked_context, familiar_context, test_blocked_high_uncertainty_requests_help, test_familiar_low_risk_avoids_unnecessary_help, test_safe_low_cost_experiment_is_preferred_over_help, test_guided_learner_requires_more_uncertainty_than_dependent_level, test_teacher_demonstrates_blockage_and_clarifies_ambiguity, test_verified_familiar_approvals_promote_support_level, test_metrics_and_timeline_exports_pass_gate
 
+## `tests/unit/test_belief_registry.py`
+
+Tests for evidence-linked beliefs, contradictions, and inspection.
+
+- Kind: python
+- Functions/symbols: memory_event, proposition, test_supporting_evidence_raises_belief_confidence, test_counterexample_lowers_confidence_and_creates_contradiction, test_belief_and_evidence_persist_across_database_reopen, test_belief_rejects_missing_or_duplicate_evidence, test_memory_inspector_and_evidence_viewer_are_ascii
+
 ## `tests/unit/test_body_discovery_baseline.py`
 
 Tests for matched-budget body discovery against random exploration.
@@ -398,6 +456,13 @@ Tests for nursery entities and agent body state.
 
 - Kind: python
 - Functions/symbols: test_agent_turns_without_changing_position, test_agent_moves_in_current_orientation, test_movable_entity_returns_updated_copy, test_non_movable_entity_rejects_movement, test_entity_requires_identifier
+
+## `tests/unit/test_episodic_memory.py`
+
+Tests for SQLite episodic storage, significance, and retrieval.
+
+- Kind: python
+- Functions/symbols: features, event_draft, test_significance_prioritizes_developmentally_relevant_event, test_store_persists_and_retrieves_by_ambition_and_context, test_retrieval_orders_significance_before_recency, test_duplicate_event_id_is_rejected, test_memory_query_can_filter_event_type, test_significance_config_rejects_invalid_weights
 
 ## `tests/unit/test_experience.py`
 

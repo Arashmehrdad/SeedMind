@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T15:03:17.429513+00:00",
+  "generated_at": "2026-06-26T17:49:39.095494+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 94,
+  "source_file_count": 104,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -59,6 +59,11 @@
       "path": "artifacts/curiosity_scoring/experiment_timeline.json",
       "sha256": "ce02188980a7e828f285536b1a31d8fab53e609459e53ef4c84f348c18b0101c",
       "size_bytes": 22125
+    },
+    {
+      "path": "artifacts/human_apprenticeship/apprenticeship_report.json",
+      "sha256": "d022217d08274a8352e4c68501db77a8f4bb76f63c3f62dbbe4d149e92d068c0",
+      "size_bytes": 8669
     },
     {
       "path": "artifacts/live_curiosity_training/live_experiment_timeline.json",
@@ -129,6 +134,11 @@
       "path": "scripts/run_live_curiosity_training.py",
       "sha256": "fa5398b45cbcd79d1385a8af7aea705d2eadb72cdf371aca620534d2c344a343",
       "size_bytes": 3848
+    },
+    {
+      "path": "scripts/run_memory_belief_gate.py",
+      "sha256": "c2fe1b7b338564870ae88bb0e280c2bbed4d648010067bf30b0745ef71356ac4",
+      "size_bytes": 8451
     },
     {
       "path": "src/seedmind/__init__.py",
@@ -276,6 +286,36 @@
       "size_bytes": 5249
     },
     {
+      "path": "src/seedmind/memory/__init__.py",
+      "sha256": "6827395991b96ee9d7e013c44169d727ecb669240de19cb86bd353fee48e19c9",
+      "size_bytes": 1189
+    },
+    {
+      "path": "src/seedmind/memory/beliefs.py",
+      "sha256": "5ef723f8376c668b8a289e365786ce231bc3707bcb08f24da8a7b5ea34888e6e",
+      "size_bytes": 12208
+    },
+    {
+      "path": "src/seedmind/memory/inspector.py",
+      "sha256": "94db435763ac5e1f93e7b64edac7e9f6c19c4b1e27c47d1b52ab2d34045175f6",
+      "size_bytes": 6081
+    },
+    {
+      "path": "src/seedmind/memory/models.py",
+      "sha256": "f29d5863b97067baf29371bc2c8f72b456d2082a122377a449f86d6ca83ddf31",
+      "size_bytes": 7828
+    },
+    {
+      "path": "src/seedmind/memory/significance.py",
+      "sha256": "5ecf7e970d0f71a65a805d191784bbe92937bbe09705a1799328c82e50392dfc",
+      "size_bytes": 2184
+    },
+    {
+      "path": "src/seedmind/memory/store.py",
+      "sha256": "0c5cde19e01c8d12b8a8ed5ea337492e38ad92d42545c77f41050bef90489bb5",
+      "size_bytes": 12758
+    },
+    {
       "path": "src/seedmind/perception/__init__.py",
       "sha256": "2f142556fe394556fee9fb03f5174a71b63b4a04d589a1e38737a66c736ff805",
       "size_bytes": 242
@@ -361,6 +401,11 @@
       "size_bytes": 7289
     },
     {
+      "path": "tests/unit/test_belief_registry.py",
+      "sha256": "853dcc3572ab0ebc711a5a91a7ee0dffd79b9e88e3620323a499572469e4eb4c",
+      "size_bytes": 6808
+    },
+    {
       "path": "tests/unit/test_body_discovery_baseline.py",
       "sha256": "d9453bf60ace24ef6777321d8dec89b214751fcef65e18052dfc6dd2480c6030",
       "size_bytes": 5912
@@ -389,6 +434,11 @@
       "path": "tests/unit/test_entities.py",
       "sha256": "6d757c2d84a57423ffe0d11ab20ed61f0fe67b0aaef24f2ffbacc9107291e138",
       "size_bytes": 1880
+    },
+    {
+      "path": "tests/unit/test_episodic_memory.py",
+      "sha256": "0418dadf2ea6c437f10f9c24fdbb89df6bafcaeee3d8398031cdfaf69f9862ab",
+      "size_bytes": 5955
     },
     {
       "path": "tests/unit/test_experience.py",
