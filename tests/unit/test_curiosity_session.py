@@ -125,8 +125,7 @@ def test_live_session_consumes_budget_and_trains_predictive_core() -> None:
     assert all(record.action is not PrimitiveAction.STOP for record in result.records)
     assert all(record.prediction_error >= 0.0 for record in result.records)
     assert any(
-        not torch.equal(previous, current)
-        for previous, current in zip(before, after, strict=True)
+        not torch.equal(previous, current) for previous, current in zip(before, after, strict=True)
     )
     assert trainer.active_episode_id is None
 

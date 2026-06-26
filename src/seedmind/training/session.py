@@ -211,9 +211,7 @@ class FamiliarSequenceTrainingSession:
 
         remaining_episodes = self.config.episode_count - completed_episodes
         episodes_to_run = (
-            remaining_episodes
-            if max_episodes is None
-            else min(max_episodes, remaining_episodes)
+            remaining_episodes if max_episodes is None else min(max_episodes, remaining_episodes)
         )
         if episodes_to_run == 0:
             return TrainingSessionResult(
@@ -457,8 +455,7 @@ def export_prediction_error_svg(
         return margin_top + plot_height * (1.0 - error / y_maximum)
 
     points = " ".join(
-        f"{x_position(index):.2f},{y_position(error):.2f}"
-        for index, error in enumerate(errors)
+        f"{x_position(index):.2f},{y_position(error):.2f}" for index, error in enumerate(errors)
     )
     circles = "\n".join(
         (

@@ -26,8 +26,7 @@ def parse_args() -> argparse.Namespace:
     """Parse bounded synthetic curiosity demonstration settings."""
     parser = argparse.ArgumentParser(
         description=(
-            "Demonstrate learning-progress curiosity, novelty decay, and "
-            "stagnation avoidance."
+            "Demonstrate learning-progress curiosity, novelty decay, and stagnation avoidance."
         ),
     )
     parser.add_argument("--budget", type=int, default=18)
@@ -76,14 +75,8 @@ def main() -> int:
         print(f"selected_{action.value}={action_counts[action]}")
     for candidate in final_candidates:
         print(f"final_score_{candidate.action.value}={candidate.score:.8f}")
-        print(
-            f"final_progress_{candidate.action.value}="
-            f"{candidate.learning_progress:.8f}"
-        )
-        print(
-            f"final_stagnation_{candidate.action.value}="
-            f"{candidate.stagnation_penalty:.8f}"
-        )
+        print(f"final_progress_{candidate.action.value}={candidate.learning_progress:.8f}")
+        print(f"final_stagnation_{candidate.action.value}={candidate.stagnation_penalty:.8f}")
     print(f"timeline_json={timeline_json}")
     print(f"timeline_csv={timeline_csv}")
     return 0

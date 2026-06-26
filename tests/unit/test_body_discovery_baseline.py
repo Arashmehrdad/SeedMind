@@ -39,9 +39,7 @@ def test_targeted_body_probes_beat_random_exploration() -> None:
     assert result.targeted.body_precision == pytest.approx(1.0)
     assert result.targeted.body_recall == pytest.approx(1.0)
     assert result.targeted.body_f1 == pytest.approx(1.0)
-    assert result.targeted.body_effect_mean_absolute_error < (
-        result.random_mean_body_effect_error
-    )
+    assert result.targeted.body_effect_mean_absolute_error < (result.random_mean_body_effect_error)
     assert result.targeted.body_effect_recall > result.random_mean_body_effect_recall
     assert result.targeted.body_f1 > result.random_mean_body_f1
 
@@ -64,10 +62,7 @@ def test_all_strategies_use_the_same_transition_budget() -> None:
     ).run()
 
     assert result.targeted.transition_count == config.transition_budget
-    assert all(
-        trial.transition_count == config.transition_budget
-        for trial in result.random_trials
-    )
+    assert all(trial.transition_count == config.transition_budget for trial in result.random_trials)
     assert all(
         sum(item.count for item in trial.action_counts) == config.transition_budget
         for trial in result.random_trials
@@ -106,8 +101,7 @@ def test_oracle_channels_are_derived_from_active_held_out_effects() -> None:
         index
         for index in range(experiment.sensor_size)
         if any(
-            abs(experience.controllable_sensor_change[index])
-            > experiment.config.effect_threshold
+            abs(experience.controllable_sensor_change[index]) > experiment.config.effect_threshold
             for experience in experiment.evaluation_experiences
         )
     )

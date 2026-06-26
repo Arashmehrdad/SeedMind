@@ -37,10 +37,7 @@ class SelfModelConfig:
         if not isfinite(self.effect_threshold) or self.effect_threshold < 0.0:
             raise ValueError("effect_threshold must be finite and non-negative")
 
-        if (
-            not isfinite(self.body_score_threshold)
-            or not 0.0 <= self.body_score_threshold <= 1.0
-        ):
+        if not isfinite(self.body_score_threshold) or not 0.0 <= self.body_score_threshold <= 1.0:
             raise ValueError("body_score_threshold must be between zero and one")
 
         if not self.body_probe_actions:
@@ -259,32 +256,22 @@ class SelfModelRegistry:
             for action in PrimitiveAction
             if (accumulator := self._accumulators.get(action)) is not None
         )
-        action_effect_by_action = {
-            estimate.action: estimate for estimate in action_effects
-        }
+        action_effect_by_action = {estimate.action: estimate for estimate in action_effects}
         sensor_estimates = tuple(
             self._sensor_estimate(index, action_effect_by_action)
             for index in range(self.config.sensor_size)
         )
         body_sensor_indices = tuple(
-            estimate.sensor_index
-            for estimate in sensor_estimates
-            if estimate.is_body_candidate
+            estimate.sensor_index for estimate in sensor_estimates if estimate.is_body_candidate
         )
         mean_body_controllability = (
-            sum(
-                sensor_estimates[index].controllability_score
-                for index in body_sensor_indices
-            )
+            sum(sensor_estimates[index].controllability_score for index in body_sensor_indices)
             / len(body_sensor_indices)
             if body_sensor_indices
             else 0.0
         )
         mean_external_effect_frequency = (
-            sum(
-                count / self._experience_count
-                for count in self._external_effect_count
-            )
+            sum(count / self._experience_count for count in self._external_effect_count)
             / self.config.sensor_size
             if self._experience_count > 0
             else 0.0
@@ -312,9 +299,7 @@ class SelfModelRegistry:
         controllable_frequency = tuple(
             value / count for value in accumulator.controllable_effect_count
         )
-        external_frequency = tuple(
-            value / count for value in accumulator.external_effect_count
-        )
+        external_frequency = tuple(value / count for value in accumulator.external_effect_count)
         scores = tuple(
             self._controllability_score(
                 support=support,
@@ -350,9 +335,7 @@ class SelfModelRegistry:
             for action in self.config.body_probe_actions
             if action in action_effects
         )
-        evidence_actions = tuple(
-            action for action, score in probe_evidence if score > 0.0
-        )
+        evidence_actions = tuple(action for action, score in probe_evidence if score > 0.0)
         best_action: PrimitiveAction | None = None
         best_score = 0.0
         for action, score in probe_evidence:
@@ -392,11 +375,7 @@ class SelfModelRegistry:
         occurrence_total = controllable_count + external_count
         occurrence_purity = controllable_count / occurrence_total
         magnitude_total = controllable_absolute + external_absolute
-        magnitude_purity = (
-            controllable_absolute / magnitude_total
-            if magnitude_total > 0.0
-            else 0.0
-        )
+        magnitude_purity = controllable_absolute / magnitude_total if magnitude_total > 0.0 else 0.0
         return support * effect_frequency * (occurrence_purity + magnitude_purity) / 2.0
 
 
@@ -413,18 +392,10 @@ def export_self_model_json(snapshot: SelfModelSnapshot, path: Path) -> None:
             {
                 "action": estimate.action.value,
                 "sample_count": estimate.sample_count,
-                "mean_controllable_change": list(
-                    estimate.mean_controllable_change
-                ),
-                "controllable_change_variance": list(
-                    estimate.controllable_change_variance
-                ),
-                "controllable_effect_frequency": list(
-                    estimate.controllable_effect_frequency
-                ),
-                "external_effect_frequency": list(
-                    estimate.external_effect_frequency
-                ),
+                "mean_controllable_change": list(estimate.mean_controllable_change),
+                "controllable_change_variance": list(estimate.controllable_change_variance),
+                "controllable_effect_frequency": list(estimate.controllable_effect_frequency),
+                "external_effect_frequency": list(estimate.external_effect_frequency),
                 "controllability_score": list(estimate.controllability_score),
             }
             for estimate in snapshot.action_effects
@@ -434,13 +405,9 @@ def export_self_model_json(snapshot: SelfModelSnapshot, path: Path) -> None:
                 "sensor_index": estimate.sensor_index,
                 "controllability_score": estimate.controllability_score,
                 "external_effect_frequency": estimate.external_effect_frequency,
-                "evidence_actions": [
-                    action.value for action in estimate.evidence_actions
-                ],
+                "evidence_actions": [action.value for action in estimate.evidence_actions],
                 "best_action": (
-                    estimate.best_action.value
-                    if estimate.best_action is not None
-                    else None
+                    estimate.best_action.value if estimate.best_action is not None else None
                 ),
                 "is_body_candidate": estimate.is_body_candidate,
             }

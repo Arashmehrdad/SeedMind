@@ -49,9 +49,7 @@ class CuriosityConfig:
             ("error_scale", self.error_scale),
         ):
             if not isfinite(positive_float_value) or positive_float_value <= 0.0:
-                raise ValueError(
-                    f"{positive_float_name} must be finite and positive"
-                )
+                raise ValueError(f"{positive_float_name} must be finite and positive")
 
         weights = (
             ("learning_progress_weight", self.learning_progress_weight),
@@ -62,16 +60,9 @@ class CuriosityConfig:
         )
         for weight_name, weight_value in weights:
             if not isfinite(weight_value) or weight_value < 0.0:
-                raise ValueError(
-                    f"{weight_name} must be finite and non-negative"
-                )
+                raise ValueError(f"{weight_name} must be finite and non-negative")
 
-        if (
-            self.learning_progress_weight
-            + self.novelty_weight
-            + self.uncertainty_weight
-            <= 0.0
-        ):
+        if self.learning_progress_weight + self.novelty_weight + self.uncertainty_weight <= 0.0:
             raise ValueError("at least one information-gain weight must be positive")
 
         if not self.experiment_actions:
@@ -140,18 +131,14 @@ class CuriositySelection:
         if not self.candidates:
             raise ValueError("candidates must not be empty")
 
-        if self.selected_action not in {
-            candidate.action for candidate in self.candidates
-        }:
+        if self.selected_action not in {candidate.action for candidate in self.candidates}:
             raise ValueError("selected_action must appear in candidates")
 
     @property
     def selected_candidate(self) -> CuriosityCandidate:
         """Return the score record associated with the chosen action."""
         return next(
-            candidate
-            for candidate in self.candidates
-            if candidate.action is self.selected_action
+            candidate for candidate in self.candidates if candidate.action is self.selected_action
         )
 
 
@@ -222,9 +209,7 @@ class CuriositySubsystem:
             raise RuntimeError("curiosity play budget is exhausted")
 
         candidates = self.generate_candidates(available_actions)
-        action_rank = {
-            action: index for index, action in enumerate(self.config.experiment_actions)
-        }
+        action_rank = {action: index for index, action in enumerate(self.config.experiment_actions)}
         selected = max(
             candidates,
             key=lambda candidate: (
@@ -341,10 +326,7 @@ def export_curiosity_timeline_json(
                 "step_index": selection.step_index,
                 "selected_action": selection.selected_action.value,
                 "remaining_budget": selection.remaining_budget,
-                "candidates": [
-                    _candidate_payload(candidate)
-                    for candidate in selection.candidates
-                ],
+                "candidates": [_candidate_payload(candidate) for candidate in selection.candidates],
             }
             for selection in selections
         ],

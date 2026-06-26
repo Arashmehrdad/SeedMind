@@ -17,9 +17,7 @@ from seedmind.self_model import (
 def parse_args() -> argparse.Namespace:
     """Parse deterministic matched-budget comparison settings."""
     parser = argparse.ArgumentParser(
-        description=(
-            "Compare targeted primitive body probes with random safe actions."
-        ),
+        description=("Compare targeted primitive body probes with random safe actions."),
     )
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--random-seed", type=int, default=29)
@@ -53,29 +51,15 @@ def main() -> int:
     export_body_discovery_baseline_json(result, json_path)
     export_body_discovery_baseline_csv(result, csv_path)
 
-    oracle_indices = ",".join(
-        str(index) for index in result.oracle_body_sensor_indices
-    )
+    oracle_indices = ",".join(str(index) for index in result.oracle_body_sensor_indices)
     print(f"transition_budget={config.transition_budget}")
     print(f"random_trials={config.random_trials}")
     print(f"oracle_body_sensor_indices={oracle_indices}")
     print(f"active_effect_count={result.active_effect_count}")
-    print(
-        "targeted_body_effect_mae="
-        f"{result.targeted.body_effect_mean_absolute_error:.8f}"
-    )
-    print(
-        "random_mean_body_effect_mae="
-        f"{result.random_mean_body_effect_error:.8f}"
-    )
-    print(
-        "targeted_body_effect_recall="
-        f"{result.targeted.body_effect_recall:.8f}"
-    )
-    print(
-        "random_mean_body_effect_recall="
-        f"{result.random_mean_body_effect_recall:.8f}"
-    )
+    print(f"targeted_body_effect_mae={result.targeted.body_effect_mean_absolute_error:.8f}")
+    print(f"random_mean_body_effect_mae={result.random_mean_body_effect_error:.8f}")
+    print(f"targeted_body_effect_recall={result.targeted.body_effect_recall:.8f}")
+    print(f"random_mean_body_effect_recall={result.random_mean_body_effect_recall:.8f}")
     print(f"targeted_body_f1={result.targeted.body_f1:.8f}")
     print(f"random_mean_body_f1={result.random_mean_body_f1:.8f}")
     print(f"pass_gate={str(result.pass_gate).lower()}")

@@ -127,13 +127,9 @@ def test_selection_consumes_bounded_play_budget() -> None:
 def test_unavailable_or_unconfigured_actions_are_not_candidates() -> None:
     subsystem = CuriositySubsystem(create_config())
 
-    candidates = subsystem.generate_candidates(
-        (PrimitiveAction.TURN_RIGHT, PrimitiveAction.STOP)
-    )
+    candidates = subsystem.generate_candidates((PrimitiveAction.TURN_RIGHT, PrimitiveAction.STOP))
 
-    assert tuple(candidate.action for candidate in candidates) == (
-        PrimitiveAction.TURN_RIGHT,
-    )
+    assert tuple(candidate.action for candidate in candidates) == (PrimitiveAction.TURN_RIGHT,)
     with pytest.raises(ValueError, match="no configured"):
         subsystem.generate_candidates((PrimitiveAction.STOP,))
     with pytest.raises(ValueError, match="not a curiosity experiment"):

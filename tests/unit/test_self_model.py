@@ -178,12 +178,9 @@ def test_dynamic_world_body_candidates_remain_in_anonymous_body_channels() -> No
     assert snapshot.body_sensor_indices
     assert all(sensor_index < 6 for sensor_index in snapshot.body_sensor_indices)
     assert any(
-        estimate.external_effect_frequency > 0.0
-        for estimate in snapshot.sensor_estimates[6:]
+        estimate.external_effect_frequency > 0.0 for estimate in snapshot.sensor_estimates[6:]
     )
-    assert not any(
-        estimate.is_body_candidate for estimate in snapshot.sensor_estimates[6:]
-    )
+    assert not any(estimate.is_body_candidate for estimate in snapshot.sensor_estimates[6:])
 
 
 def test_snapshot_reports_action_coverage() -> None:

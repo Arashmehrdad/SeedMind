@@ -76,10 +76,7 @@ class BodyDiscoveryBaselineConfig:
             if not isfinite(value) or value < 0.0:
                 raise ValueError(f"{name} must be finite and non-negative")
 
-        if (
-            not isfinite(self.body_score_threshold)
-            or not 0.0 <= self.body_score_threshold <= 1.0
-        ):
+        if not isfinite(self.body_score_threshold) or not 0.0 <= self.body_score_threshold <= 1.0:
             raise ValueError("body_score_threshold must be between zero and one")
 
         self._validate_action_pool("targeted_actions", self.targeted_actions)
@@ -194,10 +191,7 @@ class BodyDiscoveryComparisonResult:
             raise ValueError("random trial count does not match config")
 
         metrics = (self.targeted, *self.random_trials)
-        if any(
-            metric.transition_count != self.config.transition_budget
-            for metric in metrics
-        ):
+        if any(metric.transition_count != self.config.transition_budget for metric in metrics):
             raise ValueError("all strategies must use the matched transition budget")
 
         if not isfinite(self.random_mean_body_effect_error):
@@ -257,15 +251,12 @@ class BodyDiscoveryBaselineExperiment:
             actions=targeted_actions,
         )
         random_trials = tuple(
-            self._run_random_trial(trial_index)
-            for trial_index in range(self.config.random_trials)
+            self._run_random_trial(trial_index) for trial_index in range(self.config.random_trials)
         )
         random_mean_error = fmean(
             metric.body_effect_mean_absolute_error for metric in random_trials
         )
-        random_mean_recall = fmean(
-            metric.body_effect_recall for metric in random_trials
-        )
+        random_mean_recall = fmean(metric.body_effect_recall for metric in random_trials)
         random_mean_f1 = fmean(metric.body_f1 for metric in random_trials)
         pass_gate = (
             targeted.body_effect_mean_absolute_error < random_mean_error
@@ -288,8 +279,7 @@ class BodyDiscoveryBaselineExperiment:
         """Run one independently seeded uniform safe-action baseline."""
         rng = Random(self.config.random_seed + trial_index)
         actions = tuple(
-            rng.choice(self.config.random_actions)
-            for _ in range(self.config.transition_budget)
+            rng.choice(self.config.random_actions) for _ in range(self.config.transition_budget)
         )
         return self._run_strategy(
             strategy="random",
@@ -438,26 +428,18 @@ def export_body_discovery_baseline_json(
             "effect_threshold": result.config.effect_threshold,
             "prediction_tolerance": result.config.prediction_tolerance,
             "body_score_threshold": result.config.body_score_threshold,
-            "targeted_actions": [
-                action.value for action in result.config.targeted_actions
-            ],
-            "random_actions": [
-                action.value for action in result.config.random_actions
-            ],
+            "targeted_actions": [action.value for action in result.config.targeted_actions],
+            "random_actions": [action.value for action in result.config.random_actions],
         },
         "oracle_body_sensor_indices": list(result.oracle_body_sensor_indices),
         "active_effect_count": result.active_effect_count,
         "targeted": _strategy_payload(result.targeted),
         "random_summary": {
-            "mean_body_effect_mean_absolute_error": (
-                result.random_mean_body_effect_error
-            ),
+            "mean_body_effect_mean_absolute_error": (result.random_mean_body_effect_error),
             "mean_body_effect_recall": result.random_mean_body_effect_recall,
             "mean_body_f1": result.random_mean_body_f1,
         },
-        "random_trials": [
-            _strategy_payload(metric) for metric in result.random_trials
-        ],
+        "random_trials": [_strategy_payload(metric) for metric in result.random_trials],
         "pass_gate": result.pass_gate,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -508,10 +490,7 @@ def export_body_discovery_baseline_csv(
                     metric.body_effect_mean_absolute_error,
                     metric.body_effect_recall,
                     metric.mean_body_controllability,
-                    ";".join(
-                        f"{item.action.value}:{item.count}"
-                        for item in metric.action_counts
-                    ),
+                    ";".join(f"{item.action.value}:{item.count}" for item in metric.action_counts),
                 )
             )
     temporary_path.replace(path)
@@ -523,17 +502,13 @@ def _strategy_payload(metric: BodyDiscoveryStrategyMetrics) -> dict[str, object]
         "strategy": metric.strategy,
         "trial_index": metric.trial_index,
         "transition_count": metric.transition_count,
-        "action_counts": {
-            item.action.value: item.count for item in metric.action_counts
-        },
+        "action_counts": {item.action.value: item.count for item in metric.action_counts},
         "trusted_action_count": metric.trusted_action_count,
         "body_sensor_indices": list(metric.body_sensor_indices),
         "body_precision": metric.body_precision,
         "body_recall": metric.body_recall,
         "body_f1": metric.body_f1,
-        "body_effect_mean_absolute_error": (
-            metric.body_effect_mean_absolute_error
-        ),
+        "body_effect_mean_absolute_error": (metric.body_effect_mean_absolute_error),
         "body_effect_recall": metric.body_effect_recall,
         "mean_body_controllability": metric.mean_body_controllability,
     }
@@ -548,15 +523,7 @@ def _set_metrics(
     predicted_set = set(predicted)
     expected_set = set(expected)
     true_positive_count = len(predicted_set & expected_set)
-    precision = (
-        true_positive_count / len(predicted_set)
-        if predicted_set
-        else 0.0
-    )
+    precision = true_positive_count / len(predicted_set) if predicted_set else 0.0
     recall = true_positive_count / len(expected_set) if expected_set else 0.0
-    f1 = (
-        2.0 * precision * recall / (precision + recall)
-        if precision + recall > 0.0
-        else 0.0
-    )
+    f1 = 2.0 * precision * recall / (precision + recall) if precision + recall > 0.0 else 0.0
     return precision, recall, f1

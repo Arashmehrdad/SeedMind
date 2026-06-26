@@ -231,9 +231,7 @@ def export_curiosity_training_json(
         "mean_prediction_error": result.mean_prediction_error,
         "initial_prediction_error": result.initial_prediction_error,
         "final_prediction_error": result.final_prediction_error,
-        "action_counts": {
-            action.value: count for action, count in result.action_counts
-        },
+        "action_counts": {action.value: count for action, count in result.action_counts},
         "timeline": [
             {
                 "step_index": record.step_index,
@@ -251,9 +249,7 @@ def export_curiosity_training_json(
                 "total_loss": record.total_loss,
                 "sensor_prediction_loss": record.sensor_prediction_loss,
                 "controllable_change_loss": record.controllable_change_loss,
-                "external_change_mean_absolute": (
-                    record.external_change_mean_absolute
-                ),
+                "external_change_mean_absolute": (record.external_change_mean_absolute),
                 "mean_confidence": record.mean_confidence,
                 "gradient_norm": record.gradient_norm,
                 "terminated": record.terminated,
