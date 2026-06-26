@@ -646,6 +646,50 @@ increase local representational dimensions
 
 New structures should initially connect most strongly to neurons and synapses with high eligibility during the unresolved experiences.
 
+### 15.1 Specialist interaction growth
+
+A capacity failure may be caused by a relationship between existing memories that cannot be represented as the simple sum of their individual effects.
+
+Example:
+
+```text
+wet body alone
+    -> weak cooling
+
+airflow alone
+    -> weak cooling
+
+wet body + airflow
+    -> stronger evaporative cooling than either memory predicts additively
+```
+
+Repeated experience may show that the real combined outcome remains substantially different from the projected outcome. The participating assemblies retain local eligibility traces while curiosity and ambition maintain growth pressure.
+
+When the evidence gate passes, SeedMind may add one specialist interaction neuron:
+
+```text
+eligible wetness assembly
+        +
+eligible airflow assembly
+        -> specialist interaction neuron
+        -> stores only the unexplained residual cooling effect
+```
+
+The specialist does not replace, rewrite, or delete its parent memories. It activates only when all of its member assemblies participate in the current candidate solution.
+
+Growth must satisfy all of the following:
+
+1. The prediction error is repeated rather than a single anomaly.
+2. The unresolved effect is relevant to an active curiosity or ambition.
+3. Existing capacity remains saturated after ordinary local updates.
+4. The proposed members have strong recent eligibility traces.
+5. A resource cap permits another specialist.
+6. Equivalent random added capacity does not provide the same improvement.
+7. Existing assemblies remain unchanged and available.
+8. Duplicate structural growth is rejected.
+
+The specialist stores the residual relationship, not a complete action sequence. Existing one-action memories remain responsible for constructing the behaviour.
+
 ## 16. Capacity saturation
 
 The network needs a local way to detect that existing neurons cannot safely represent a new pattern.
