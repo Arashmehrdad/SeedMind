@@ -77,6 +77,13 @@ Run the NDNRA dynamic-effects and novel-composition acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_structural_growth_gate.py`
+
+Run the NDNRA evidence-driven structural-growth acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -359,7 +366,7 @@ Need-Driven Neural Recruitment Architecture research prototype.
 Need-driven composition over local multidimensional experience assemblies.
 
 - Kind: python
-- Classes: ExperienceAssembly, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
+- Classes: ExperienceAssembly, SpecialistInteraction, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
 - Functions/symbols: _validate_code, _validate_facts
 
 ## `src/seedmind/research/ndnra/effects.py`
@@ -377,6 +384,22 @@ Training, evaluation, and evidence for the NDNRA heat-fan prototype.
 - Kind: python
 - Classes: RecallStepRecord, RecallEpisodeResult, TeacherTrainingResult, NDNRAExperimentResult
 - Functions/symbols: train_teacher_demonstrations, evaluate_recall, run_ndnra_heat_fan_experiment, export_ndnra_evidence, _need_persisted_until_cooling, _failed_recall_cost, _write_ascii_json
+
+## `src/seedmind/research/ndnra/growth.py`
+
+Evidence-driven structural growth for the isolated NDNRA prototype.
+
+- Kind: python
+- Classes: StructuralGrowthConfig, GrowthAttemptRecord, GrowthOutcome, EvidenceDrivenGrowthController
+- Functions/symbols: grow_random_specialist, _validate_unit, _validate_signed
+
+## `src/seedmind/research/ndnra/growth_experiment.py`
+
+Third NDNRA experiment: evidence-driven specialist neuron growth.
+
+- Kind: python
+- Classes: StructuralGrowthExperimentResult
+- Functions/symbols: structural_cooling_need, build_capacity_limited_graph, run_ndnra_structural_growth_experiment, export_structural_growth_evidence, _duplicate_growth_is_blocked, _write_ascii_json
 
 ## `src/seedmind/research/ndnra/heat_world.py`
 
@@ -586,6 +609,13 @@ Tests for need-driven recruitment, dormancy, and effort-based recall.
 
 - Kind: python
 - Functions/symbols: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
+
+## `tests/unit/test_ndnra_structural_growth.py`
+
+Tests for evidence-driven NDNRA specialist-neuron growth.
+
+- Kind: python
+- Functions/symbols: test_interaction_specialist_adds_non_additive_effect_once, test_growth_does_not_trigger_from_one_failure, test_targeted_growth_uses_high_eligibility_members, test_targeted_growth_solves_blockage_and_random_capacity_does_not, test_old_assemblies_are_preserved_without_pruning, test_complete_structural_growth_gate_passes, test_structural_growth_prototype_has_no_sqlite_dependency, test_base_graph_still_fails_without_specialist
 
 ## `tests/unit/test_nursery_runtime.py`
 

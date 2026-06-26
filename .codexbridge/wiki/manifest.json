@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T19:41:10.462269+00:00",
+  "generated_at": "2026-06-26T22:47:56.192621+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 122,
+  "source_file_count": 128,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -86,14 +86,24 @@
       "size_bytes": 2035
     },
     {
+      "path": "artifacts/ndnra_multieffect/multidimensional_graph.json",
+      "sha256": "3f742db11c3fac379169114ab5941f902454e6c047812de94091172dd56933be",
+      "size_bytes": 11135
+    },
+    {
+      "path": "artifacts/ndnra_multieffect/multieffect_report.json",
+      "sha256": "43a119e6f143045a3bf2ffb7767cf8194e649916a6e3ea997822450585b1e34b",
+      "size_bytes": 803
+    },
+    {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
       "sha256": "ba08132881dbef7a9e66d17c7d602c04de484a06075debec15477acc01c473bd",
       "size_bytes": 74210
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "c0092bbff9cb8d0d920f9df3b4b23e3da032e3e638cc111e645e6770236f8678",
-      "size_bytes": 21768
+      "sha256": "d567d60c875ee1fa41cefc0edd7bdd68f03d5b624fd5dd24590b234e396328c3",
+      "size_bytes": 23518
     },
     {
       "path": "requirements/base.txt",
@@ -169,6 +179,11 @@
       "path": "scripts/run_ndnra_multieffect_gate.py",
       "sha256": "d3fc894df5d8093c2b2f6d02c14baaaf611b72de3376300a5379263521b03843",
       "size_bytes": 3018
+    },
+    {
+      "path": "scripts/run_ndnra_structural_growth_gate.py",
+      "sha256": "b667b7869f478f9b4d7a32897413e9f7fd048ddb4142ccf511cec073244b97d1",
+      "size_bytes": 3686
     },
     {
       "path": "src/seedmind/__init__.py",
@@ -362,13 +377,13 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "e63a412abda2b5e3e63289860d5ba607fd8be8986a63cf018857f53d931b1e10",
-      "size_bytes": 2440
+      "sha256": "efbd2b943a96b59fc695cac0b6b5fc6cd12829ae78fa36ac80091dcb3add1db4",
+      "size_bytes": 3261
     },
     {
       "path": "src/seedmind/research/ndnra/composition.py",
-      "sha256": "633e19c4d4265b74c28ab577d26cb60741bc4da7ffe1d1428dbd05159b49d1d9",
-      "size_bytes": 11356
+      "sha256": "cca3b0d8ede653e6078b0e50455d88bab468b0612063890986f327819e9caed4",
+      "size_bytes": 15443
     },
     {
       "path": "src/seedmind/research/ndnra/effects.py",
@@ -379,6 +394,16 @@
       "path": "src/seedmind/research/ndnra/experiment.py",
       "sha256": "a39083dd4e28f70affad56566baa7d0fc7046f1b323dccf794f7a4c7259edbdf",
       "size_bytes": 13412
+    },
+    {
+      "path": "src/seedmind/research/ndnra/growth.py",
+      "sha256": "4b3f82881f837ae408f981f1f7e68cbb170ca93cddf5f67df62b81f34faa794a",
+      "size_bytes": 8956
+    },
+    {
+      "path": "src/seedmind/research/ndnra/growth_experiment.py",
+      "sha256": "0a1a9dcd0b9170d56b507585ede465f60295ac8ca309dd8ce10c50d1e107fb34",
+      "size_bytes": 12985
     },
     {
       "path": "src/seedmind/research/ndnra/heat_world.py",
@@ -544,6 +569,11 @@
       "path": "tests/unit/test_ndnra_recall.py",
       "sha256": "083f0dd725e93cebd70994d304ba59903e039c8faac1e74adb825bf33cf34a73",
       "size_bytes": 2879
+    },
+    {
+      "path": "tests/unit/test_ndnra_structural_growth.py",
+      "sha256": "de05b566237f97be96d231640c90783bbdca7043b4ce19bd9a17b9991cd5dab9",
+      "size_bytes": 4481
     },
     {
       "path": "tests/unit/test_nursery_runtime.py",
