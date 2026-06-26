@@ -63,6 +63,13 @@ Run the Week 7 episodic-memory and belief-revision acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_heat_fan_gate.py`
+
+Run the first NDNRA local-memory and need-recruitment acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -328,6 +335,49 @@ Learned encoding for raw symbolic SeedMind observations.
 - Kind: python
 - Classes: SymbolicInputSpec, SymbolicObservationEncoder
 
+## `src/seedmind/research/__init__.py`
+
+Isolated research prototypes that do not alter the production runtime.
+
+- Kind: python
+
+## `src/seedmind/research/ndnra/__init__.py`
+
+Need-Driven Neural Recruitment Architecture research prototype.
+
+- Kind: python
+
+## `src/seedmind/research/ndnra/experiment.py`
+
+Training, evaluation, and evidence for the NDNRA heat-fan prototype.
+
+- Kind: python
+- Classes: RecallStepRecord, RecallEpisodeResult, TeacherTrainingResult, NDNRAExperimentResult
+- Functions/symbols: train_teacher_demonstrations, evaluate_recall, run_ndnra_heat_fan_experiment, export_ndnra_evidence, _need_persisted_until_cooling, _failed_recall_cost, _write_ascii_json
+
+## `src/seedmind/research/ndnra/heat_world.py`
+
+Deterministic heat-and-fan world for the NDNRA research prototype.
+
+- Kind: python
+- Classes: HeatWorldState, HeatTransition, HeatFanWorld
+
+## `src/seedmind/research/ndnra/models.py`
+
+Local neural state and experiment records for the NDNRA prototype.
+
+- Kind: python
+- Classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary, GrowthPressure
+- Functions/symbols: _validate_unit_interval, _validate_signed_unit
+
+## `src/seedmind/research/ndnra/network.py`
+
+Sparse local neural graph for the isolated NDNRA heat-fan prototype.
+
+- Kind: python
+- Classes: LocalNeuralGraphConfig, LocalNeuralGraph
+- Functions/symbols: _context_neuron_id, _action_neuron_id
+
 ## `src/seedmind/safety/__init__.py`
 
 SeedMind safety package.
@@ -484,6 +534,20 @@ Tests for symbolic human request and signal contracts.
 
 - Kind: python
 - Functions/symbols: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
+
+## `tests/unit/test_ndnra_local_learning.py`
+
+Tests for local eligibility traces and delayed modulatory credit.
+
+- Kind: python
+- Functions/symbols: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_recall.py`
+
+Tests for need-driven recruitment, dormancy, and effort-based recall.
+
+- Kind: python
+- Functions/symbols: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
 
 ## `tests/unit/test_nursery_runtime.py`
 

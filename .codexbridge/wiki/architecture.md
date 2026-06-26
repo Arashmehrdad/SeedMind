@@ -22,6 +22,7 @@ graph LR
 - `scripts/run_human_apprenticeship.py` — functions: parse_args, main
 - `scripts/run_live_curiosity_training.py` — functions: parse_args, build_trainer, main
 - `scripts/run_memory_belief_gate.py` — functions: parse_args, main
+- `scripts/run_ndnra_heat_fan_gate.py` — functions: parse_args, main
 - `src/seedmind/__init__.py` — SeedMind developmental intelligence runtime.
 - `src/seedmind/ambition/__init__.py` — Persistent developmental ambitions formed from grounded evidence.
 - `src/seedmind/ambition/demonstration.py` — classes: DemonstrationDetectorConfig, ObservedDemonstration, OutcomeSignature, DemonstrationEvidence, _EvidenceAccumulator, GoalDirectedOutcomeDetector; functions: export_demonstration_evidence
@@ -59,6 +60,12 @@ graph LR
 - `src/seedmind/memory/store.py` — classes: EpisodicSQLiteStore; functions: _event_from_row, _payload_from_json, _optional_bool_to_database, _optional_bool_from_database
 - `src/seedmind/perception/__init__.py` — Body-independent perception components for SeedMind.
 - `src/seedmind/perception/symbolic_encoder.py` — classes: SymbolicInputSpec, SymbolicObservationEncoder
+- `src/seedmind/research/__init__.py` — Isolated research prototypes that do not alter the production runtime.
+- `src/seedmind/research/ndnra/__init__.py` — Need-Driven Neural Recruitment Architecture research prototype.
+- `src/seedmind/research/ndnra/experiment.py` — classes: RecallStepRecord, RecallEpisodeResult, TeacherTrainingResult, NDNRAExperimentResult; functions: train_teacher_demonstrations, evaluate_recall, run_ndnra_heat_fan_experiment, export_ndnra_evidence, _need_persisted_until_cooling, _failed_recall_cost, _write_ascii_json
+- `src/seedmind/research/ndnra/heat_world.py` — classes: HeatWorldState, HeatTransition, HeatFanWorld
+- `src/seedmind/research/ndnra/models.py` — classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary; functions: _validate_unit_interval, _validate_signed_unit
+- `src/seedmind/research/ndnra/network.py` — classes: LocalNeuralGraphConfig, LocalNeuralGraph; functions: _context_neuron_id, _action_neuron_id
 - `src/seedmind/safety/__init__.py` — SeedMind safety package.
 - `src/seedmind/self_model/__init__.py` — Online action-effect evidence and initial SeedMind self-model.
 - `src/seedmind/self_model/action_effects.py` — classes: SelfModelConfig, ActionEffectEstimate, BodySensorEstimate, SelfModelSnapshot, _ActionAccumulator, SelfModelRegistry; functions: export_self_model_json, export_action_effects_csv
@@ -81,6 +88,8 @@ graph LR
 - `tests/unit/test_experience.py` — functions: create_runtime, create_dynamic_runtime, create_packet, test_collect_experience_connects_two_observations_with_one_action, test_collect_stop_records_episode_termination, test_sensor_change_is_next_minus_current, test_wait_separates_external_motion_from_controllable_change, test_move_separates_agent_and_external_changes, test_experience_rejects_invalid_transition_contract, test_experience_rejects_invalid_agent_snapshot
 - `tests/unit/test_gymnasium_adapter.py` — functions: create_initial_state, create_env, test_reset_returns_float32_observation_inside_declared_space, test_step_maps_action_index_to_primitive_transition, test_stop_terminates_without_external_reward, test_deterministic_step_limit_truncates_episode, test_reset_clears_completion_and_can_change_episode_identifier, test_invalid_action_index_is_rejected, test_invalid_reset_episode_identifier_type_is_rejected, test_max_episode_steps_must_be_positive
 - `tests/unit/test_human_contracts.py` — functions: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
+- `tests/unit/test_ndnra_local_learning.py` — functions: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
+- `tests/unit/test_ndnra_recall.py` — functions: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
 - `tests/unit/test_nursery_runtime.py` — functions: create_initial_state, test_runtime_step_connects_state_transition_and_observation, test_reset_restores_identical_initial_observation, test_reset_can_start_a_new_named_episode, test_runtime_passes_auxiliary_channels_to_new_observation, test_stop_terminates_and_restricts_next_available_action, test_repeated_stop_after_termination_is_stable, test_runtime_rejects_invalid_reset_baseline, test_runtime_rejects_empty_episode_identifier, test_invalid_reset_episode_identifier_does_not_mutate_runtime
 - `tests/unit/test_nursery_state.py` — functions: create_state, test_state_finds_entities_in_stable_order, test_state_finds_blocking_entity, test_state_replaces_entity_deterministically, test_state_advances_one_step, test_state_rejects_duplicate_entity_ids, test_state_rejects_out_of_bounds_agent, test_replacement_must_preserve_identity
 - `tests/unit/test_observation_adapter.py` — functions: create_state, test_adapter_emits_fixed_deterministic_layout, test_adapter_passes_through_raw_auxiliary_channels, test_active_state_exposes_all_primitive_actions_in_enum_order, test_terminated_state_exposes_only_stop, test_adapter_rejects_state_with_different_dimensions, test_sensor_values_do_not_expose_entity_identity_or_role
