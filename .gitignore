@@ -40,6 +40,11 @@ reports/generated/
 *.log
 .tmp.driveupload/
 
+# CodexBridge local cache
+.codexbridge/*
+!.codexbridge/wiki/
+!.codexbridge/wiki/**
+
 # Operating systems
 Thumbs.db
 .DS_Store
