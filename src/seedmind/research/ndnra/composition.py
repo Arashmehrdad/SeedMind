@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 
 from seedmind.research.ndnra.effects import (
@@ -258,19 +258,39 @@ class MultidimensionalExperienceGraph:
         self._specialists[specialist_id] = specialist
         return specialist
 
-    def project_effects(self, assembly_ids: tuple[str, ...]) -> dict[str, float]:
-        """Project action effects plus each applicable specialist exactly once."""
+    def project_effects(
+        self,
+        assembly_ids: tuple[str, ...],
+        *,
+        accessibility: Mapping[str, float] | None = None,
+    ) -> dict[str, float]:
+        """Project effects after reversible structure-access attenuation."""
+        access = {} if accessibility is None else accessibility
         effects: dict[str, float] = {}
         for assembly_id in assembly_ids:
             effects = combine_projected_effects(
                 effects,
-                self.assembly(assembly_id).effect_memory.projected_values(),
+                _scale_effects(
+                    self.assembly(assembly_id).effect_memory.projected_values(),
+                    access.get(assembly_id, 1.0),
+                ),
             )
         for specialist in self.specialists:
             if specialist.applies_to(assembly_ids):
+                member_access = min(
+                    (
+                        access.get(assembly_id, 1.0)
+                        for assembly_id in specialist.member_assembly_ids
+                    ),
+                    default=1.0,
+                )
+                specialist_access = access.get(specialist.specialist_id, 1.0)
                 effects = combine_projected_effects(
                     effects,
-                    specialist.effect_memory.projected_values(),
+                    _scale_effects(
+                        specialist.effect_memory.projected_values(),
+                        min(member_access, specialist_access),
+                    ),
                 )
         return effects
 
@@ -353,14 +373,21 @@ class NeedDrivenComposer:
         *,
         maximum_depth: int = 3,
         step_cost: float = 0.01,
+        accessibility: Mapping[str, float] | None = None,
     ) -> None:
         if maximum_depth <= 0:
             raise ValueError("maximum_depth must be positive")
         if not 0.0 <= step_cost <= 1.0:
             raise ValueError("step_cost must be between zero and one")
+        if accessibility is not None:
+            for structure_id, value in accessibility.items():
+                _validate_code("accessibility structure_id", structure_id)
+                if not 0.0 <= value <= 1.0:
+                    raise ValueError("accessibility values must be between zero and one")
         self.graph = graph
         self.maximum_depth = maximum_depth
         self.step_cost = step_cost
+        self.accessibility = {} if accessibility is None else dict(accessibility)
 
     def compose(
         self,
@@ -387,13 +414,20 @@ class NeedDrivenComposer:
             for state in frontier:
                 used = set(state.assembly_ids)
                 for assembly in self.graph.assemblies:
-                    if assembly.assembly_id in used or not assembly.is_applicable(state.facts):
+                    if (
+                        assembly.assembly_id in used
+                        or not assembly.is_applicable(state.facts)
+                        or self.accessibility.get(assembly.assembly_id, 1.0) <= 0.0
+                    ):
                         continue
                     explored += 1
                     facts = state.facts | assembly.produced_facts
                     assembly_ids = (*state.assembly_ids, assembly.assembly_id)
                     actions = (*state.actions, assembly.action_code)
-                    effects = self.graph.project_effects(assembly_ids)
+                    effects = self.graph.project_effects(
+                        assembly_ids,
+                        accessibility=self.accessibility,
+                    )
                     search_state = _SearchState(
                         assembly_ids=assembly_ids,
                         actions=actions,
@@ -435,6 +469,12 @@ class NeedDrivenComposer:
             explored_state_count=explored,
             maximum_depth=self.maximum_depth,
         )
+
+
+def _scale_effects(effects: dict[str, float], accessibility: float) -> dict[str, float]:
+    if not 0.0 <= accessibility <= 1.0:
+        raise ValueError("accessibility must be between zero and one")
+    return {effect_code: value * accessibility for effect_code, value in effects.items()}
 
 
 def _validate_code(name: str, value: str) -> None:

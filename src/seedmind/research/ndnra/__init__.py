@@ -1,5 +1,10 @@
 """Need-Driven Neural Recruitment Architecture research prototype."""
 
+from seedmind.research.ndnra.adaptive import (
+    AdaptiveRuntimeConfig,
+    AdaptiveUpdate,
+    NDNRARuntimeAdaptiveState,
+)
 from seedmind.research.ndnra.composition import (
     CompositionCandidate,
     CompositionResult,
@@ -82,6 +87,8 @@ from seedmind.research.ndnra.persistence import (
 __all__ = [
     "BRAIN_SCHEMA",
     "BRAIN_SCHEMA_VERSION",
+    "AdaptiveRuntimeConfig",
+    "AdaptiveUpdate",
     "BrainLoadResult",
     "BrainLoadStatus",
     "BrainSaveResult",
@@ -111,6 +118,7 @@ __all__ = [
     "NDNRABrainStore",
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
+    "NDNRARuntimeAdaptiveState",
     "NeedDimension",
     "NeedDrivenComposer",
     "NeedPulse",
