@@ -919,6 +919,105 @@ The unified shadow gate passes only when:
 
 This stage does not authorize automatic specialist creation. It proves that live developmental modulation and restored adaptive state operate together safely before bounded advisory arbitration.
 
+### 17.11 Bounded advisory arbitration
+
+NDNRA may compare its locally recruited candidate with the production curiosity policy, but the production policy remains the only action authority in this stage.
+
+```text
+production policy fixes its candidate
+NDNRA fixes its candidate
+        -> evidence and safety arbitration
+        -> advise, agree, abstain, hold, veto, fallback, or disabled
+        -> production candidate remains the retained action
+```
+
+The advisory boundary evaluates:
+
+```text
+local evidence count
+restored memory accessibility
+raw and calibrated confidence
+predicted developmental score
+predicted resource cost
+predicted risk
+human correction, help, and clarification constraints
+candidate availability
+```
+
+Weak or inaccessible memories must abstain. A human correction may veto advice. A pending help or clarification state may hold advice. Excess predicted risk or resource cost must veto advice. An unavailable candidate falls back to production. A kill switch disables the advisory path immediately.
+
+Confidence is calibrated from observed counterfactual correctness. Initial reliability is deliberately conservative. When NDNRA and production disagree, the environment may evaluate both actions from cloned state only after both candidates are fixed. This comparison oracle is scientific evidence and must never select or replace the production action.
+
+The advisory acceptance gate requires:
+
+1. Production action sequences remain identical to an unobserved production baseline.
+2. Prediction-error sequences remain identical to the same baseline.
+3. Every disagreement receives one cloned counterfactual comparison.
+4. At least one bounded advisory result is produced.
+5. Confidence calibration receives real comparison outcomes.
+6. Weak-evidence abstention, unavailable-action fallback, risk veto, human veto, and kill switch all pass explicit probes.
+7. NDNRA has zero action-authority violations.
+8. Advice precision reports only disagreements where advice was actually emitted; agreements do not inflate it.
+9. SQLite remains outside advice generation, comparison, and calibration.
+
+Passing this gate does not grant even low-risk action authority. It only measures whether NDNRA advice is safe, calibrated, and potentially useful enough to justify later experiments.
+
+### 17.12 Goal-gated multi-step growth and pressure discharge
+
+Structural growth must not release developmental pressure merely because a neuron, connection, or specialist was created. Each growth step must be followed by a goal-resolution check.
+
+```text
+unresolved important goal
+    -> bounded growth step
+    -> measure goal satisfaction
+    -> measure causal improvement from the new structure
+
+if goal remains unresolved:
+    retain pressure
+    allow another distinct bounded growth step
+
+if goal is achieved but improvement is not attributable to growth:
+    retain pressure or hold for more evidence
+
+if goal is achieved and causal improvement is verified:
+    discharge relevant pressure
+    stop the growth cycle
+
+if the growth budget is exhausted while unresolved:
+    stop safely
+    retain pressure and evidence
+    collect more experience or request help
+```
+
+The growth cycle is bounded by:
+
+```text
+maximum growth steps
+minimum continuation pressure
+minimum causal improvement
+bounded discharge amount
+maximum specialist count
+duplicate specialist-membership protection
+new unresolved evidence after each accepted growth
+```
+
+Complex problems may therefore require several different specialist interactions. The validated synthetic gate uses three one-action assemblies. The first specialist joins preparation and force application, improves progress, but does not satisfy the goal. Pressure remains unchanged and another growth step is permitted. A second distinct specialist joins force application and stabilization, crosses the satisfaction threshold, and only then discharges pressure.
+
+Duplicate protection is tested before final discharge while growth pressure is still sufficient. The gate passes only when the attempted duplicate fails specifically because its member set already exists, rather than because pressure later became too low.
+
+The multi-growth acceptance gate requires:
+
+1. Base capacity remains below the goal threshold.
+2. The first growth causally improves progress but does not resolve the goal.
+3. No pressure is discharged after the unresolved first growth.
+4. Continued growth remains permitted within the configured budget.
+5. A second distinct specialist is created from new unresolved evidence.
+6. The second growth resolves the goal and passes the causal-improvement threshold.
+7. Pressure decreases only after that verified resolution.
+8. Duplicate membership is blocked for the correct reason.
+9. Budget exhaustion without resolution stops further growth without erasing pressure.
+10. SQLite remains outside growth selection and pressure discharge.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
