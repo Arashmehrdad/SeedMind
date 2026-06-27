@@ -72,6 +72,12 @@ from seedmind.research.ndnra.consolidation_proposal_persistence import (
     PROPOSAL_LIFECYCLE_SCHEMA_VERSION,
     NDNRAProposalLifecycleCheckpoint,
 )
+from seedmind.research.ndnra.consolidation_proposal_revalidation import (
+    ConsolidationProposalRevalidationDecision,
+    ConsolidationProposalRevalidationPolicy,
+    ConsolidationProposalRevalidationReport,
+    ConsolidationProposalRevalidationStatus,
+)
 from seedmind.research.ndnra.consolidation_reopening import (
     ConsolidationReopeningDecision,
     ConsolidationReopeningPolicy,
@@ -228,6 +234,10 @@ __all__ = [
     "ConsolidationProposalManagementAction",
     "ConsolidationProposalManagementDecision",
     "ConsolidationProposalManagementRequest",
+    "ConsolidationProposalRevalidationDecision",
+    "ConsolidationProposalRevalidationPolicy",
+    "ConsolidationProposalRevalidationReport",
+    "ConsolidationProposalRevalidationStatus",
     "ConsolidationProposalReviewAction",
     "ConsolidationProposalReviewDecision",
     "ConsolidationProposalReviewPolicy",
