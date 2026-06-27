@@ -63,6 +63,13 @@ Run the Week 7 episodic-memory and belief-revision acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_advice_gate.py`
+
+Run bounded NDNRA advice and goal-gated repeated-growth acceptance.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_ndnra_heat_fan_gate.py`
 
 Run the first NDNRA local-memory and need-recruitment acceptance gate.
@@ -319,6 +326,45 @@ Typed integration boundaries between validated SeedMind subsystems.
 
 - Kind: python
 
+## `src/seedmind/integration/advice_acceptance.py`
+
+Acceptance gate for bounded NDNRA advice and goal-gated repeated growth.
+
+- Kind: python
+- Classes: AdviceTimelineRecord, AdviceAcceptanceResult, AdviceAcceptanceEvidence, _SafetyProbes
+- Functions/symbols: run_advice_acceptance, export_advice_acceptance, _aggregate, _timeline_record, _growth_budget_exhaustion_probe_passed, _run_safety_probes, _write_json
+
+## `src/seedmind/integration/advice_evidence.py`
+
+Local evidence extraction for bounded NDNRA advice.
+
+- Kind: python
+- Functions/symbols: collect_local_evidence, _assemble_evidence, _positive
+
+## `src/seedmind/integration/bounded_advice.py`
+
+Bounded comparison of production and NDNRA candidates.
+
+- Kind: python
+- Classes: AdviceCode, AdviceConfig, AdviceEvidence, AdviceDecision, ConfidenceCalibration, BoundedAdvicePolicy
+- Functions/symbols: _unit
+
+## `src/seedmind/integration/candidate_session.py`
+
+Live non-authoritative candidate comparison session.
+
+- Kind: python
+- Classes: CandidateStep, CandidateSessionResult
+- Functions/symbols: run_candidate_session
+
+## `src/seedmind/integration/comparison_oracle.py`
+
+One-step outcome comparison that does not select production actions.
+
+- Kind: python
+- Classes: CandidateOutcome, CandidateComparison, NurseryOutcomeOracle
+- Functions/symbols: _mean_change, _resource_cost, _transition_risk, _unit
+
 ## `src/seedmind/integration/developmental_signals.py`
 
 Typed live developmental signals for non-authoritative NDNRA integration.
@@ -441,7 +487,7 @@ Need-Driven Neural Recruitment Architecture research prototype.
 Operational adaptive state restored alongside an NDNRA local graph.
 
 - Kind: python
-- Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, NDNRARuntimeAdaptiveState
+- Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, PressureDischarge, NDNRARuntimeAdaptiveState
 - Functions/symbols: _validate_unit, _validate_signed
 
 ## `src/seedmind/research/ndnra/composition.py`
@@ -476,6 +522,14 @@ Evidence-driven structural growth for the isolated NDNRA prototype.
 - Classes: StructuralGrowthConfig, GrowthAttemptRecord, GrowthOutcome, EvidenceDrivenGrowthController
 - Functions/symbols: grow_random_specialist, _validate_unit, _validate_signed
 
+## `src/seedmind/research/ndnra/growth_cycle.py`
+
+Goal-gated multi-step structural growth and pressure discharge.
+
+- Kind: python
+- Classes: GrowthCycleConfig, GrowthResolution, GoalGatedGrowthCycle
+- Functions/symbols: _validate_unit
+
 ## `src/seedmind/research/ndnra/growth_experiment.py`
 
 Third NDNRA experiment: evidence-driven specialist neuron growth.
@@ -498,6 +552,14 @@ Local neural state and experiment records for the NDNRA prototype.
 - Kind: python
 - Classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary, GrowthPressure
 - Functions/symbols: _validate_unit_interval, _validate_signed_unit
+
+## `src/seedmind/research/ndnra/multi_growth_experiment.py`
+
+Goal-gated multi-step structural growth experiment.
+
+- Kind: python
+- Classes: MultiGrowthExperimentResult
+- Functions/symbols: run_multi_growth_experiment, evaluate_unresolved_budget_exhaustion, _build_graph, _complex_need, _satisfaction, _duplicate_membership_is_blocked
 
 ## `src/seedmind/research/ndnra/multieffect_experiment.py`
 
@@ -727,7 +789,7 @@ Tests for evidence-driven NDNRA specialist-neuron growth.
 Tests for live developmental signals and operational restored NDNRA state.
 
 - Kind: python
-- Functions/symbols: _signals, _shadow_graph, test_restored_dormancy_changes_live_action_accessibility_and_score, test_restored_eligibility_and_pressure_continue_instead_of_resetting, test_unified_live_signal_gate_passes_without_changing_production, test_unified_live_signal_exports_are_ascii_and_inspectable, test_unified_integration_has_no_sqlite_cognitive_dependency
+- Functions/symbols: _signals, _shadow_graph, test_restored_dormancy_changes_live_action_accessibility_and_score, test_restored_eligibility_and_pressure_continue_instead_of_resetting, test_unified_live_signal_gate_passes_without_changing_production, test_unified_live_signal_exports_are_ascii_and_inspectable, test_complex_goal_retains_pressure_until_second_growth, test_bounded_advice_gate_retains_production, test_unified_integration_has_no_sqlite_cognitive_dependency
 
 ## `tests/unit/test_nursery_runtime.py`
 
