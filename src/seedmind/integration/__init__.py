@@ -20,6 +20,12 @@ from seedmind.integration.comparison_oracle import (
     CandidateOutcome,
     NurseryOutcomeOracle,
 )
+from seedmind.integration.contextual_mastery_acceptance import (
+    ContextualMasteryAcceptanceEvidence,
+    ContextualMasteryAcceptanceResult,
+    export_contextual_mastery_acceptance,
+    run_contextual_mastery_acceptance,
+)
 from seedmind.integration.developmental_signals import (
     LiveDevelopmentalSignalProvider,
     LiveDevelopmentalSignals,
@@ -70,6 +76,8 @@ __all__ = [
     "CandidateComparison",
     "CandidateOutcome",
     "ConfidenceCalibration",
+    "ContextualMasteryAcceptanceEvidence",
+    "ContextualMasteryAcceptanceResult",
     "LiveDevelopmentalSignalProvider",
     "LiveDevelopmentalSignals",
     "NDNRALiveShadowAdapter",
@@ -91,10 +99,12 @@ __all__ = [
     "UnifiedSignalEvidence",
     "UnifiedSignalExperimentResult",
     "export_advice_acceptance",
+    "export_contextual_mastery_acceptance",
     "export_persistent_shadow_evidence",
     "export_shadow_comparison_evidence",
     "export_unified_signal_evidence",
     "run_advice_acceptance",
+    "run_contextual_mastery_acceptance",
     "run_persistent_shadow_experiment",
     "run_shadow_comparison",
     "run_unified_signal_experiment",

@@ -5,6 +5,14 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 
+from seedmind.research.ndnra.contextual_memory import (
+    ContextSignature,
+    ContextualExperienceLedger,
+    ContextualExperienceTrace,
+    ContextualLearningResult,
+    ContextualRecordCode,
+    EventIdentity,
+)
 from seedmind.research.ndnra.effects import (
     EffectNeed,
     EffectObservation,
@@ -107,6 +115,7 @@ class MultidimensionalExperienceGraph:
         self._assemblies: dict[str, ExperienceAssembly] = {}
         self._links: dict[tuple[str, str], LocalEffectLink] = {}
         self._specialists: dict[str, SpecialistInteraction] = {}
+        self._contextual_memory = ContextualExperienceLedger()
 
     @classmethod
     def from_components(
@@ -115,6 +124,7 @@ class MultidimensionalExperienceGraph:
         assemblies: Iterable[ExperienceAssembly],
         links: Iterable[LocalEffectLink],
         specialists: Iterable[SpecialistInteraction],
+        contextual_memory: ContextualExperienceLedger | None = None,
     ) -> MultidimensionalExperienceGraph:
         """Restore validated local structures without replaying experience."""
         graph = cls()
@@ -139,6 +149,11 @@ class MultidimensionalExperienceGraph:
             if missing:
                 raise ValueError("specialist contains unknown parent assemblies")
             graph._specialists[specialist.specialist_id] = specialist
+        if contextual_memory is not None:
+            for trace in contextual_memory.traces:
+                if trace.assembly_id not in graph._assemblies:
+                    raise ValueError("contextual trace contains an unknown assembly")
+            graph._contextual_memory = contextual_memory
         return graph
 
     @property
@@ -170,6 +185,10 @@ class MultidimensionalExperienceGraph:
         return self.assembly_count + self.specialist_count
 
     @property
+    def contextual_memory(self) -> ContextualExperienceLedger:
+        return self._contextual_memory
+
+    @property
     def effect_dimension_codes(self) -> tuple[str, ...]:
         dimensions: set[str] = set()
         for assembly in self._assemblies.values():
@@ -185,6 +204,69 @@ class MultidimensionalExperienceGraph:
             return self._assemblies[assembly_id]
         except KeyError as error:
             raise ValueError(f"unknown assembly_id: {assembly_id}") from error
+
+    def learn_contextual_experience(
+        self,
+        *,
+        identity: EventIdentity,
+        correlation_group_id: str,
+        assembly_id: str,
+        route_id: str,
+        action_code: str,
+        origin_need_code: str,
+        required_facts: Iterable[str],
+        produced_facts: Iterable[str],
+        context_signature: ContextSignature,
+        observed_effects: Iterable[EffectObservation],
+        transfer_attempted: bool = False,
+        transfer_succeeded: bool = False,
+    ) -> ContextualLearningResult:
+        """Preserve one contextual trace and advance aggregates once per source group."""
+        required = frozenset(required_facts)
+        produced = frozenset(produced_facts)
+        effects = tuple(observed_effects)
+        trace = ContextualExperienceTrace(
+            identity=identity,
+            correlation_group_id=correlation_group_id,
+            assembly_id=assembly_id,
+            route_id=route_id,
+            action_code=action_code,
+            context=context_signature,
+            observed_effects=effects,
+            transfer_attempted=transfer_attempted,
+            transfer_succeeded=transfer_succeeded,
+        )
+        existing = self._assemblies.get(assembly_id)
+        if existing is not None:
+            expected = (
+                existing.action_code,
+                existing.origin_need_code,
+                existing.required_facts,
+                existing.produced_facts,
+            )
+            supplied = (action_code, origin_need_code, required, produced)
+            if supplied != expected:
+                raise ValueError("an existing assembly cannot change its identity")
+
+        result = self._contextual_memory.classify(trace)
+        if result.code is ContextualRecordCode.EXACT_DUPLICATE_IGNORED:
+            return result
+        if result.evidence_applied:
+            self.learn_experience(
+                assembly_id=assembly_id,
+                action_code=action_code,
+                origin_need_code=origin_need_code,
+                required_facts=required,
+                produced_facts=produced,
+                observed_effects=effects,
+            )
+        elif existing is None:
+            raise ValueError("correlated trace requires an existing assembly")
+
+        recorded = self._contextual_memory.record(trace)
+        if recorded != result:
+            raise RuntimeError("contextual trace classification changed during recording")
+        return recorded
 
     def learn_experience(
         self,
@@ -308,6 +390,7 @@ class MultidimensionalExperienceGraph:
             "structural_node_count": self.structural_node_count,
             "effect_dimension_count": len(self.effect_dimension_codes),
             "effect_dimensions": list(self.effect_dimension_codes),
+            "contextual_memory": self._contextual_memory.snapshot(),
             "assemblies": [assembly.snapshot() for assembly in self.assemblies],
             "links": [
                 {

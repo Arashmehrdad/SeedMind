@@ -15,8 +15,10 @@ from seedmind.integration.developmental_signals import (
 from seedmind.integration.ndnra_shadow import ShadowScenarioFactory, ShadowSuggestion
 from seedmind.research.ndnra import (
     AdaptiveUpdate,
+    ContextSignature,
     EffectNeed,
     EffectObservation,
+    EventIdentity,
     MultidimensionalExperienceGraph,
     NDNRAGrowthState,
     NDNRARuntimeAdaptiveState,
@@ -170,6 +172,7 @@ class NDNRALiveShadowAdapter:
         graph: MultidimensionalExperienceGraph | None = None,
         growth_state: NDNRAGrowthState | None = None,
         satisfaction_threshold: float = 0.01,
+        record_contextual_memory: bool = True,
     ) -> None:
         if not 0.0 <= satisfaction_threshold <= 1.0:
             raise ValueError("satisfaction_threshold must be between zero and one")
@@ -179,6 +182,7 @@ class NDNRALiveShadowAdapter:
             growth_state,
         )
         self.satisfaction_threshold = satisfaction_threshold
+        self.record_contextual_memory = record_contextual_memory
 
     @property
     def growth_state(self) -> NDNRAGrowthState:
@@ -260,17 +264,45 @@ class NDNRALiveShadowAdapter:
             assembly_id,
             "need_resolution",
         )
-        self.graph.learn_experience(
-            assembly_id=assembly_id,
-            action_code=experience.action.value,
-            origin_need_code="live_developmental_shadow",
-            required_facts=(_availability_fact(experience.action),),
-            produced_facts=(f"experienced:{experience.action.value}",),
-            observed_effects=tuple(
-                EffectObservation(effect_code, value, 1.0)
-                for effect_code, value in signals.values().items()
-            ),
+        observed_effects = tuple(
+            EffectObservation(effect_code, value, 1.0)
+            for effect_code, value in signals.values().items()
         )
+        if self.record_contextual_memory:
+            identity = EventIdentity(
+                source_code="nursery_runtime",
+                episode_id=experience.observation.episode_id,
+                step_id=experience.observation.step_id,
+            )
+            self.graph.learn_contextual_experience(
+                identity=identity,
+                correlation_group_id=identity.key,
+                assembly_id=assembly_id,
+                route_id=assembly_id,
+                action_code=experience.action.value,
+                origin_need_code="live_developmental_shadow",
+                required_facts=(_availability_fact(experience.action),),
+                produced_facts=(f"experienced:{experience.action.value}",),
+                context_signature=ContextSignature.from_values(
+                    active_need_code="live_developmental_growth",
+                    sensor_values=experience.observation.sensor_values,
+                    available_action_codes=(
+                        action.value for action in experience.observation.available_actions
+                    ),
+                    human_values=experience.observation.human_signal,
+                    resource_values=experience.observation.resource_state,
+                ),
+                observed_effects=observed_effects,
+            )
+        else:
+            self.graph.learn_experience(
+                assembly_id=assembly_id,
+                action_code=experience.action.value,
+                origin_need_code="live_developmental_shadow",
+                required_facts=(_availability_fact(experience.action),),
+                produced_facts=(f"experienced:{experience.action.value}",),
+                observed_effects=observed_effects,
+            )
         available_count = sum(
             action is not PrimitiveAction.STOP
             for action in experience.observation.available_actions

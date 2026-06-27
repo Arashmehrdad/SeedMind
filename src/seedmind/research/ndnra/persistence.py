@@ -16,10 +16,12 @@ from seedmind.research.ndnra.composition import (
     MultidimensionalExperienceGraph,
     SpecialistInteraction,
 )
+from seedmind.research.ndnra.contextual_memory import ContextualExperienceLedger
 from seedmind.research.ndnra.effects import LocalEffectLink, SparseEffectMemory
 
 BRAIN_SCHEMA = "seedmind.ndnra.brain"
-BRAIN_SCHEMA_VERSION = 1
+BRAIN_SCHEMA_VERSION = 2
+_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, BRAIN_SCHEMA_VERSION})
 
 
 class BrainLoadStatus(StrEnum):
@@ -137,6 +139,7 @@ class BrainLoadResult:
     growth_state: NDNRAGrowthState
     checksum_verified: bool
     used_fallback: bool
+    migrated_from_version: int | None = None
     error: str | None = None
 
 
@@ -209,7 +212,7 @@ class NDNRABrainStore:
             envelope = _require_mapping("brain envelope", raw)
             schema = _require_string(envelope, "schema")
             version = _require_int(envelope, "schema_version")
-            if schema != BRAIN_SCHEMA or version != BRAIN_SCHEMA_VERSION:
+            if schema != BRAIN_SCHEMA or version not in _SUPPORTED_SCHEMA_VERSIONS:
                 return self._fallback(
                     BrainLoadStatus.INCOMPATIBLE_FALLBACK,
                     "brain-state schema is incompatible",
@@ -223,7 +226,7 @@ class NDNRABrainStore:
             if not hashlib.sha256(_canonical_bytes(body)).hexdigest() == stored_checksum:
                 raise ValueError("brain-state checksum does not match")
             payload = _require_mapping("brain payload", envelope.get("payload"))
-            graph = _restore_graph(payload.get("graph"))
+            graph = _restore_graph(payload.get("graph"), schema_version=version)
             growth_state = NDNRAGrowthState.from_snapshot(payload.get("growth_state"))
             return BrainLoadResult(
                 status=BrainLoadStatus.LOADED,
@@ -231,6 +234,7 @@ class NDNRABrainStore:
                 growth_state=growth_state,
                 checksum_verified=True,
                 used_fallback=False,
+                migrated_from_version=(version if version < BRAIN_SCHEMA_VERSION else None),
             )
         except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
             return self._fallback(BrainLoadStatus.CORRUPT_FALLBACK, str(error))
@@ -243,21 +247,35 @@ class NDNRABrainStore:
             growth_state=NDNRAGrowthState(),
             checksum_verified=False,
             used_fallback=True,
+            migrated_from_version=None,
             error=error,
         )
 
 
-def _restore_graph(snapshot: object) -> MultidimensionalExperienceGraph:
+def _restore_graph(
+    snapshot: object,
+    *,
+    schema_version: int,
+) -> MultidimensionalExperienceGraph:
     values = _require_mapping("graph snapshot", snapshot)
     assemblies = tuple(_restore_assembly(item) for item in _require_list(values, "assemblies"))
     links = tuple(LocalEffectLink.from_snapshot(item) for item in _require_list(values, "links"))
     specialists = tuple(_restore_specialist(item) for item in _require_list(values, "specialists"))
+    contextual_memory = (
+        ContextualExperienceLedger()
+        if schema_version == 1
+        else ContextualExperienceLedger.from_snapshot(values.get("contextual_memory"))
+    )
     graph = MultidimensionalExperienceGraph.from_components(
         assemblies=assemblies,
         links=links,
         specialists=specialists,
+        contextual_memory=contextual_memory,
     )
-    if graph.snapshot() != dict(values):
+    restored = graph.snapshot()
+    if schema_version == 1:
+        restored.pop("contextual_memory")
+    if restored != dict(values):
         raise ValueError("restored graph does not exactly match persisted state")
     return graph
 
