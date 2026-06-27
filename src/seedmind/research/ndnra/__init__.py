@@ -14,6 +14,12 @@ from seedmind.research.ndnra.composition import (
     NeedDrivenComposer,
     SpecialistInteraction,
 )
+from seedmind.research.ndnra.consolidation import (
+    ConsolidationCandidate,
+    ConsolidationEligibility,
+    ConsolidationEligibilityPolicy,
+    ConsolidationRejectionReason,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -116,6 +122,10 @@ __all__ = [
     "BrainSaveResult",
     "CompositionCandidate",
     "CompositionResult",
+    "ConsolidationCandidate",
+    "ConsolidationEligibility",
+    "ConsolidationEligibilityPolicy",
+    "ConsolidationRejectionReason",
     "ContextSignature",
     "ContextualExperienceLedger",
     "ContextualExperienceTrace",
