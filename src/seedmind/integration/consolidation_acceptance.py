@@ -21,6 +21,7 @@ from seedmind.integration.unified_signal_experiment import (
     _build_trainer,
 )
 from seedmind.research.ndnra import (
+    BRAIN_SCHEMA_VERSION,
     BrainLoadStatus,
     ConsolidationApplicationResult,
     ConsolidationApplicationState,
@@ -230,7 +231,7 @@ def run_consolidation_acceptance(
     pass_gate = bool(
         synthetic.result.pass_gate
         and eligibility.eligible
-        and active_save.schema_version == 3
+        and active_save.schema_version == BRAIN_SCHEMA_VERSION
         and baseline_load.status is BrainLoadStatus.LOADED
         and active_load.status is BrainLoadStatus.LOADED
         and active_checkpoint_exact

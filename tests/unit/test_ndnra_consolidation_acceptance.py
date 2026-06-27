@@ -8,6 +8,7 @@ from seedmind.integration import (
     export_consolidation_acceptance,
     run_consolidation_acceptance,
 )
+from seedmind.research.ndnra import BRAIN_SCHEMA_VERSION
 
 
 def test_consolidation_acceptance_preserves_production_behavior(tmp_path: Path) -> None:
@@ -30,7 +31,7 @@ def test_consolidation_acceptance_round_trips_live_checkpoint(tmp_path: Path) ->
     assert result.live_mastery_eligible
     assert result.live_mastery_source_count == 3
     assert result.live_mastery_route_count == 2
-    assert result.saved_schema_version == 3
+    assert result.saved_schema_version == BRAIN_SCHEMA_VERSION
     assert result.active_checkpoint_round_trip_exact
     assert result.baseline_checkpoint_empty
     assert result.loaded_graphs_equal
