@@ -35,6 +35,13 @@ from seedmind.research.ndnra.consolidation_interference_experiment import (
     OverlappingLessonMemorySnapshot,
     run_consolidation_interference_experiment,
 )
+from seedmind.research.ndnra.consolidation_reopening import (
+    ConsolidationReopeningDecision,
+    ConsolidationReopeningPolicy,
+    ConsolidationReopeningTrigger,
+    ConsolidationRollbackResult,
+    rollback_consolidation,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -148,6 +155,10 @@ __all__ = [
     "ConsolidationInterferenceExperimentEvidence",
     "ConsolidationInterferenceExperimentResult",
     "ConsolidationRejectionReason",
+    "ConsolidationReopeningDecision",
+    "ConsolidationReopeningPolicy",
+    "ConsolidationReopeningTrigger",
+    "ConsolidationRollbackResult",
     "ConsolidationStateSnapshot",
     "ConsolidationStructureState",
     "ContextSignature",
@@ -213,6 +224,7 @@ __all__ = [
     "export_ndnra_evidence",
     "export_structural_growth_evidence",
     "grow_random_specialist",
+    "rollback_consolidation",
     "run_consolidation_interference_experiment",
     "run_contextual_mastery_experiment",
     "run_ndnra_heat_fan_experiment",

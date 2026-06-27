@@ -153,6 +153,30 @@ class ConsolidationApplicationState:
             applied_candidate_ids=tuple(sorted(self._applied_candidate_ids)),
         )
 
+    def restore_snapshot(
+        self,
+        *,
+        expected_current: ConsolidationStateSnapshot,
+        replacement: ConsolidationStateSnapshot,
+    ) -> None:
+        """Atomically restore validated state when the current snapshot still matches."""
+        current = self.snapshot()
+        if current != expected_current:
+            raise RuntimeError("consolidation state changed before snapshot restoration")
+        if _snapshot_ids(current.assembly_states) != _snapshot_ids(replacement.assembly_states):
+            raise ValueError("replacement must preserve all assembly identities")
+        if _snapshot_ids(current.route_states) != _snapshot_ids(replacement.route_states):
+            raise ValueError("replacement must preserve all route identities")
+
+        replacement_assemblies = {
+            state.structure_id: state for state in replacement.assembly_states
+        }
+        replacement_routes = {state.structure_id: state for state in replacement.route_states}
+        replacement_candidate_ids = set(replacement.applied_candidate_ids)
+        self._assembly_states = replacement_assemblies
+        self._route_states = replacement_routes
+        self._applied_candidate_ids = replacement_candidate_ids
+
     def apply(
         self,
         eligibility: ConsolidationEligibility,
