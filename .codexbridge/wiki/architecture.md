@@ -24,6 +24,7 @@ graph LR
 - `scripts/run_memory_belief_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_heat_fan_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_multieffect_gate.py` — functions: parse_args, main
+- `scripts/run_ndnra_persistent_shadow_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_shadow_integration_gate.py` — functions: parse_args, main
 - `scripts/run_ndnra_structural_growth_gate.py` — functions: parse_args, main
 - `src/seedmind/__init__.py` — SeedMind developmental intelligence runtime.
@@ -57,6 +58,7 @@ graph LR
 - `src/seedmind/human/contracts.py` — classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec; functions: _validate_unit_interval
 - `src/seedmind/integration/__init__.py` — Typed integration boundaries between validated SeedMind subsystems.
 - `src/seedmind/integration/ndnra_shadow.py` — classes: ShadowScenarioFactory, NDNRAShadowConfig, ShadowSuggestion, ShadowStepRecord, NDNRAShadowSessionConfig, NDNRAShadowSessionResult, NDNRAShadowAdapter, NDNRAShadowSession; functions: _availability_fact, _assembly_id, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit
+- `src/seedmind/integration/persistent_shadow_experiment.py` — classes: PersistentShadowResult, PersistentShadowEvidence; functions: run_persistent_shadow_experiment, export_persistent_shadow_evidence, _derive_growth_state, _total_assembly_evidence, _build_trainer, _write_ascii_json
 - `src/seedmind/integration/shadow_experiment.py` — classes: ShadowComparisonResult; functions: run_shadow_comparison, export_shadow_comparison_evidence, _build_trainer, _write_ascii_json
 - `src/seedmind/memory/__init__.py` — Episodic SQLite memory, significance, retrieval, and beliefs.
 - `src/seedmind/memory/beliefs.py` — classes: BeliefRegistryConfig, BeliefRegistry; functions: _belief_id, _belief_from_row, _evidence_from_row
@@ -69,7 +71,7 @@ graph LR
 - `src/seedmind/research/__init__.py` — Isolated research prototypes that do not alter the production runtime.
 - `src/seedmind/research/ndnra/__init__.py` — Need-Driven Neural Recruitment Architecture research prototype.
 - `src/seedmind/research/ndnra/composition.py` — classes: ExperienceAssembly, SpecialistInteraction, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer; functions: _validate_code, _validate_facts
-- `src/seedmind/research/ndnra/effects.py` — classes: EffectObservation, EffectEstimate, SparseEffectMemory, NeedDimension, EffectNeed, LocalEffectLink; functions: combine_projected_effects, _validate_code, _validate_unit_interval, _validate_signed_unit
+- `src/seedmind/research/ndnra/effects.py` — classes: EffectObservation, EffectEstimate, SparseEffectMemory, NeedDimension, EffectNeed, LocalEffectLink; functions: combine_projected_effects, _require_mapping, _require_string, _require_int, _require_float, _validate_code, _validate_unit_interval, _validate_signed_unit
 - `src/seedmind/research/ndnra/experiment.py` — classes: RecallStepRecord, RecallEpisodeResult, TeacherTrainingResult, NDNRAExperimentResult; functions: train_teacher_demonstrations, evaluate_recall, run_ndnra_heat_fan_experiment, export_ndnra_evidence, _need_persisted_until_cooling, _failed_recall_cost, _write_ascii_json
 - `src/seedmind/research/ndnra/growth.py` — classes: StructuralGrowthConfig, GrowthAttemptRecord, GrowthOutcome, EvidenceDrivenGrowthController; functions: grow_random_specialist, _validate_unit, _validate_signed
 - `src/seedmind/research/ndnra/growth_experiment.py` — classes: StructuralGrowthExperimentResult; functions: structural_cooling_need, build_capacity_limited_graph, run_ndnra_structural_growth_experiment, export_structural_growth_evidence, _duplicate_growth_is_blocked, _write_ascii_json
@@ -77,6 +79,7 @@ graph LR
 - `src/seedmind/research/ndnra/models.py` — classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary; functions: _validate_unit_interval, _validate_signed_unit
 - `src/seedmind/research/ndnra/multieffect_experiment.py` — classes: MultieffectExperimentResult; functions: cooling_need, cleanliness_need, build_multieffect_graph, build_intended_effect_only_baseline, run_ndnra_multieffect_experiment, export_multieffect_evidence, _candidate_row, _write_ascii_json
 - `src/seedmind/research/ndnra/network.py` — classes: LocalNeuralGraphConfig, LocalNeuralGraph; functions: _context_neuron_id, _action_neuron_id
+- `src/seedmind/research/ndnra/persistence.py` — classes: BrainLoadStatus, NDNRAGrowthState, BrainSaveResult, BrainLoadResult, NDNRABrainStore; functions: _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int, _require_float
 - `src/seedmind/safety/__init__.py` — SeedMind safety package.
 - `src/seedmind/self_model/__init__.py` — Online action-effect evidence and initial SeedMind self-model.
 - `src/seedmind/self_model/action_effects.py` — classes: SelfModelConfig, ActionEffectEstimate, BodySensorEstimate, SelfModelSnapshot, _ActionAccumulator, SelfModelRegistry; functions: export_self_model_json, export_action_effects_csv
@@ -101,6 +104,7 @@ graph LR
 - `tests/unit/test_human_contracts.py` — functions: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
 - `tests/unit/test_ndnra_local_learning.py` — functions: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
 - `tests/unit/test_ndnra_multieffect.py` — functions: test_sparse_effect_memory_gains_dimensions_from_experience, test_shower_memory_keeps_all_observed_effects_on_neuron_and_link, test_shower_learned_for_cleaning_is_recruited_for_cooling, test_separate_window_memories_compose_an_unseen_cooling_solution, test_composition_respects_conditions_and_rejects_hot_shower_for_cooling, test_intended_effect_only_baseline_cannot_reuse_shower_for_cooling, test_complete_multieffect_gate_passes_without_sqlite, test_multieffect_prototype_has_no_sqlite_dependency
+- `tests/unit/test_ndnra_persistence.py` — functions: test_brain_store_round_trips_graph_specialist_and_adaptive_state, test_missing_corrupt_and_incompatible_states_fall_back_fresh, test_checksum_tampering_falls_back_without_partial_graph, test_cross_session_shadow_uses_prior_local_memory_at_step_zero, test_persistence_path_has_no_sqlite_cognitive_dependency
 - `tests/unit/test_ndnra_recall.py` — functions: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
 - `tests/unit/test_ndnra_shadow_integration.py` — functions: test_shadow_comparison_preserves_production_actions_and_training, test_shadow_learns_effects_and_emits_only_valid_suggestions, test_shadow_gate_advances_integration_without_action_authority, test_shadow_suggestion_rejects_action_authority, test_shadow_config_rejects_multi_action_control_depth, test_shadow_exports_are_ascii_and_inspectable, test_shadow_integration_has_no_sqlite_decision_dependency
 - `tests/unit/test_ndnra_structural_growth.py` — functions: test_interaction_specialist_adds_non_additive_effect_once, test_growth_does_not_trigger_from_one_failure, test_targeted_growth_uses_high_eligibility_members, test_targeted_growth_solves_blockage_and_random_capacity_does_not, test_old_assemblies_are_preserved_without_pruning, test_complete_structural_growth_gate_passes, test_structural_growth_prototype_has_no_sqlite_dependency, test_base_graph_still_fails_without_specialist

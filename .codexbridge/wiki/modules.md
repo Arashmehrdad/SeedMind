@@ -77,6 +77,13 @@ Run the NDNRA dynamic-effects and novel-composition acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_persistent_shadow_gate.py`
+
+Run the NDNRA non-SQL cross-session persistence acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_ndnra_shadow_integration_gate.py`
 
 Run the NDNRA non-authoritative shadow-integration acceptance gate.
@@ -313,6 +320,14 @@ Non-authoritative NDNRA observation of the live SeedMind nursery loop.
 - Classes: ShadowScenarioFactory, NDNRAShadowConfig, ShadowSuggestion, ShadowStepRecord, NDNRAShadowSessionConfig, NDNRAShadowSessionResult, NDNRAShadowAdapter, NDNRAShadowSession
 - Functions/symbols: _availability_fact, _assembly_id, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit
 
+## `src/seedmind/integration/persistent_shadow_experiment.py`
+
+Cross-session NDNRA shadow-memory persistence acceptance experiment.
+
+- Kind: python
+- Classes: PersistentShadowResult, PersistentShadowEvidence
+- Functions/symbols: run_persistent_shadow_experiment, export_persistent_shadow_evidence, _derive_growth_state, _total_assembly_evidence, _build_trainer, _write_ascii_json
+
 ## `src/seedmind/integration/shadow_experiment.py`
 
 End-to-end baseline comparison for NDNRA shadow-mode integration.
@@ -404,7 +419,7 @@ Dynamically expanding sparse effect memory for NDNRA research.
 
 - Kind: python
 - Classes: EffectObservation, EffectEstimate, SparseEffectMemory, NeedDimension, EffectNeed, LocalEffectLink
-- Functions/symbols: combine_projected_effects, _validate_code, _validate_unit_interval, _validate_signed_unit
+- Functions/symbols: combine_projected_effects, _require_mapping, _require_string, _require_int, _require_float, _validate_code, _validate_unit_interval, _validate_signed_unit
 
 ## `src/seedmind/research/ndnra/experiment.py`
 
@@ -460,6 +475,14 @@ Sparse local neural graph for the isolated NDNRA heat-fan prototype.
 - Kind: python
 - Classes: LocalNeuralGraphConfig, LocalNeuralGraph
 - Functions/symbols: _context_neuron_id, _action_neuron_id
+
+## `src/seedmind/research/ndnra/persistence.py`
+
+Versioned non-SQL persistence for reconstructing an NDNRA brain graph.
+
+- Kind: python
+- Classes: BrainLoadStatus, NDNRAGrowthState, BrainSaveResult, BrainLoadResult, NDNRABrainStore
+- Functions/symbols: _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_string_list, _require_numeric_list, _validate_code, _validate_unit, _validate_signed
 
 ## `src/seedmind/safety/__init__.py`
 
@@ -631,6 +654,13 @@ Tests for dynamic local dimensions and undemonstrated solution composition.
 
 - Kind: python
 - Functions/symbols: test_sparse_effect_memory_gains_dimensions_from_experience, test_shower_memory_keeps_all_observed_effects_on_neuron_and_link, test_shower_learned_for_cleaning_is_recruited_for_cooling, test_separate_window_memories_compose_an_unseen_cooling_solution, test_composition_respects_conditions_and_rejects_hot_shower_for_cooling, test_intended_effect_only_baseline_cannot_reuse_shower_for_cooling, test_complete_multieffect_gate_passes_without_sqlite, test_multieffect_prototype_has_no_sqlite_dependency
+
+## `tests/unit/test_ndnra_persistence.py`
+
+Tests for versioned non-SQL NDNRA brain-state persistence.
+
+- Kind: python
+- Functions/symbols: test_brain_store_round_trips_graph_specialist_and_adaptive_state, test_missing_corrupt_and_incompatible_states_fall_back_fresh, test_checksum_tampering_falls_back_without_partial_graph, test_cross_session_shadow_uses_prior_local_memory_at_step_zero, test_persistence_path_has_no_sqlite_cognitive_dependency
 
 ## `tests/unit/test_ndnra_recall.py`
 

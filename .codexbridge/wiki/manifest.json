@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T23:19:09.277548+00:00",
+  "generated_at": "2026-06-27T00:00:54.486296+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 136,
+  "source_file_count": 142,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -96,6 +96,16 @@
       "size_bytes": 803
     },
     {
+      "path": "artifacts/ndnra_shadow_integration/shadow_comparison_report.json",
+      "sha256": "63b2d342b84e44c516619a0e3c93725b0411210c0c66642c1bd72a157228ac79",
+      "size_bytes": 742
+    },
+    {
+      "path": "artifacts/ndnra_shadow_integration/shadow_graph.json",
+      "sha256": "90e8c746a2e0b06fd2dd5cae7fafa2b4a85af2ad8a518f7cc7602088a05dffd6",
+      "size_bytes": 19648
+    },
+    {
       "path": "artifacts/ndnra_structural_growth/random_growth_graph.json",
       "sha256": "c19ee867c70f03eddc01a77bc7aa600e4a50426b8ea71fd9ee5b134ab20239b6",
       "size_bytes": 5073
@@ -117,8 +127,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "e27cb0833773117e64f7532643fb5e5968d32b656052f5f91ae80ba2b7e4c8a2",
-      "size_bytes": 25374
+      "sha256": "a9e6f2891d98949b9c58275b7e43fbe756b04c98b2d6bf28278a186148013def",
+      "size_bytes": 27303
     },
     {
       "path": "requirements/base.txt",
@@ -194,6 +204,11 @@
       "path": "scripts/run_ndnra_multieffect_gate.py",
       "sha256": "d3fc894df5d8093c2b2f6d02c14baaaf611b72de3376300a5379263521b03843",
       "size_bytes": 3018
+    },
+    {
+      "path": "scripts/run_ndnra_persistent_shadow_gate.py",
+      "sha256": "79914356cd7a5b70ff04803e7baa976b7aad8c6af7663f28db1f87fbfe37b204",
+      "size_bytes": 4262
     },
     {
       "path": "scripts/run_ndnra_shadow_integration_gate.py",
@@ -352,13 +367,18 @@
     },
     {
       "path": "src/seedmind/integration/__init__.py",
-      "sha256": "b0534139f31bf8df7862c0ff5bd9a95789f169142bd275116e7e2d00241d6c79",
-      "size_bytes": 753
+      "sha256": "286ed6647ab43e248f708338057ac70a6533a9b10a3545c744617ad6ab6c8af8",
+      "size_bytes": 1097
     },
     {
       "path": "src/seedmind/integration/ndnra_shadow.py",
       "sha256": "a68bb437eee9baffdeb696d982008e223f88307b2ff981be4204145fd5e97d83",
       "size_bytes": 19674
+    },
+    {
+      "path": "src/seedmind/integration/persistent_shadow_experiment.py",
+      "sha256": "61c95312e4524936ed7dc3410eac354f7221a1b830c3fba8afca126483aec164",
+      "size_bytes": 14264
     },
     {
       "path": "src/seedmind/integration/shadow_experiment.py",
@@ -412,18 +432,18 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "efbd2b943a96b59fc695cac0b6b5fc6cd12829ae78fa36ac80091dcb3add1db4",
-      "size_bytes": 3261
+      "sha256": "8875002c5b547247f0ca8c0972ad9dc724ba294be9b1bd75eb7cfcaf1696da11",
+      "size_bytes": 3627
     },
     {
       "path": "src/seedmind/research/ndnra/composition.py",
-      "sha256": "cca3b0d8ede653e6078b0e50455d88bab468b0612063890986f327819e9caed4",
-      "size_bytes": 15443
+      "sha256": "a5ccc1eadc15a3d00f9b1b17a13f140c6a3445702b832fe5b125c805a7d47de0",
+      "size_bytes": 17081
     },
     {
       "path": "src/seedmind/research/ndnra/effects.py",
-      "sha256": "687b7c86e1c95dede2f1f688f70d37dec57436106476a55a9df137df30f5a820",
-      "size_bytes": 8701
+      "sha256": "11869c425d3da9494eed41bf20f48b69154040d1e7974823b3e751d230616e6d",
+      "size_bytes": 11582
     },
     {
       "path": "src/seedmind/research/ndnra/experiment.py",
@@ -459,6 +479,11 @@
       "path": "src/seedmind/research/ndnra/network.py",
       "sha256": "435ab3382dedeafbbeda05a42739a9970a1a14722412a7add7e059b3b015b1bd",
       "size_bytes": 15360
+    },
+    {
+      "path": "src/seedmind/research/ndnra/persistence.py",
+      "sha256": "1dd67fe0ba1f1c22fdf4580d4e2aa91a82f6e605a5ec4f50c713dd1f9ddfa440",
+      "size_bytes": 13928
     },
     {
       "path": "src/seedmind/safety/__init__.py",
@@ -599,6 +624,11 @@
       "path": "tests/unit/test_ndnra_multieffect.py",
       "sha256": "b4dbf1b1bf24105b4abc465093b2da83f4f8fe349a37b2e329d8004b16f7f98b",
       "size_bytes": 4478
+    },
+    {
+      "path": "tests/unit/test_ndnra_persistence.py",
+      "sha256": "2107cfe76162e99b57da2808f8b1ced9d3e23b4616ed705544e2f2acbe878256",
+      "size_bytes": 5380
     },
     {
       "path": "tests/unit/test_ndnra_recall.py",
