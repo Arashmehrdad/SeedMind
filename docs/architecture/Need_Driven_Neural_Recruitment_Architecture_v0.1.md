@@ -850,6 +850,75 @@ The persistence boundary must provide:
 
 A file, object store, or later binary format may preserve the graph bytes. That storage mechanism remains infrastructure, not cognition. Rollback means restoring an earlier code version or graph snapshot, not asking SQL to supply the missing memory.
 
+### 17.9 Unified live developmental signals
+
+NDNRA should not receive a permanently fixed importance value from the integration layer. Its modulatory evidence must be derived from the live state of validated SeedMind subsystems through one typed signal frame.
+
+```text
+active ambition
+curiosity selection and learning progress
+self-model controllability evidence
+human help, approval, correction, demonstration, and clarification
+predictive error
+resource pressure
+observed need resolution
+        -> LiveDevelopmentalSignals
+        -> local effect learning and need recruitment
+```
+
+The signal frame is a boundary contract, not a central cognitive memory. It carries current bounded measurements while action memories retain only the consequences they locally observed.
+
+The initial live frame contains:
+
+```text
+ambition relevance, commitment, and learning progress
+curiosity value, learning progress, and uncertainty
+self controllability and provisional body confidence
+help requested
+human approval, correction, demonstration, and clarification
+human-signal magnitude
+prediction error
+resource pressure
+need resolution
+```
+
+Ambition relevance must be calculated from the active ambition record and should vary as competence and learning progress change. Self-model evidence must come from the online action-effect registry. Human dimensions must come from the apprenticeship manager and its symbolic caregiver events. Resource and need-resolution dimensions must be derived from the actual transition.
+
+### 17.10 Operational restored adaptive state
+
+Persisted adaptive metadata must affect live cognition after restart rather than remaining archival evidence.
+
+```text
+restored dormancy
+    -> attenuates local effect accessibility during recruitment
+
+restored eligibility
+    -> decays from its previous value and receives new local participation
+
+restored growth pressure
+    -> resumes from its previous value and attempt count
+
+restored residual history
+    -> continues bounded accumulation
+```
+
+Dormancy attenuation changes accessibility without modifying stored effect estimates. Reusing an assembly reduces its dormancy, while unused structures accumulate bounded access resistance. A reset-adaptive control using the same graph must produce different accessibility or candidate scores when persisted dormancy is nonzero.
+
+The unified shadow gate passes only when:
+
+1. Live ambition relevance varies instead of remaining a fixed session constant.
+2. The self-model produces nonzero controllability evidence from real transitions.
+3. The apprenticeship subsystem emits at least one real help or caregiver response.
+4. Persisted dormancy changes accessibility and need-aligned scoring.
+5. Eligibility continues from a nonzero restored trace.
+6. Growth pressure and attempt count continue from their persisted values.
+7. The complete signal frame is learned as sparse local effects.
+8. Production actions and predictive errors remain identical to an unobserved baseline.
+9. NDNRA has zero action-authority violations.
+10. SQLite remains outside signal generation, adaptive state, recall, and action selection.
+
+This stage does not authorize automatic specialist creation. It proves that live developmental modulation and restored adaptive state operate together safely before bounded advisory arbitration.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
