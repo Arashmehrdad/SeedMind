@@ -51,6 +51,14 @@ from seedmind.research.ndnra.consolidation_proposal_lifecycle import (
     ConsolidationProposalReviewPolicy,
     ConsolidationProposalReviewRequest,
 )
+from seedmind.research.ndnra.consolidation_proposal_management import (
+    ConsolidationProposalDisposition,
+    ConsolidationProposalLifecycleRegistry,
+    ConsolidationProposalManagedRecord,
+    ConsolidationProposalManagementAction,
+    ConsolidationProposalManagementDecision,
+    ConsolidationProposalManagementRequest,
+)
 from seedmind.research.ndnra.consolidation_reopening import (
     ConsolidationReopeningDecision,
     ConsolidationReopeningPolicy,
@@ -193,8 +201,14 @@ __all__ = [
     "ConsolidationPortfolioItem",
     "ConsolidationPortfolioItemDecision",
     "ConsolidationPortfolioPolicy",
+    "ConsolidationProposalDisposition",
     "ConsolidationProposalLifecycleRecord",
+    "ConsolidationProposalLifecycleRegistry",
     "ConsolidationProposalLifecycleStatus",
+    "ConsolidationProposalManagedRecord",
+    "ConsolidationProposalManagementAction",
+    "ConsolidationProposalManagementDecision",
+    "ConsolidationProposalManagementRequest",
     "ConsolidationProposalReviewAction",
     "ConsolidationProposalReviewDecision",
     "ConsolidationProposalReviewPolicy",
