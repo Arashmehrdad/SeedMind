@@ -20,6 +20,12 @@ from seedmind.integration.comparison_oracle import (
     CandidateOutcome,
     NurseryOutcomeOracle,
 )
+from seedmind.integration.consolidation_acceptance import (
+    ConsolidationAcceptanceEvidence,
+    ConsolidationAcceptanceResult,
+    export_consolidation_acceptance,
+    run_consolidation_acceptance,
+)
 from seedmind.integration.contextual_mastery_acceptance import (
     ContextualMasteryAcceptanceEvidence,
     ContextualMasteryAcceptanceResult,
@@ -76,6 +82,8 @@ __all__ = [
     "CandidateComparison",
     "CandidateOutcome",
     "ConfidenceCalibration",
+    "ConsolidationAcceptanceEvidence",
+    "ConsolidationAcceptanceResult",
     "ContextualMasteryAcceptanceEvidence",
     "ContextualMasteryAcceptanceResult",
     "LiveDevelopmentalSignalProvider",
@@ -99,11 +107,13 @@ __all__ = [
     "UnifiedSignalEvidence",
     "UnifiedSignalExperimentResult",
     "export_advice_acceptance",
+    "export_consolidation_acceptance",
     "export_contextual_mastery_acceptance",
     "export_persistent_shadow_evidence",
     "export_shadow_comparison_evidence",
     "export_unified_signal_evidence",
     "run_advice_acceptance",
+    "run_consolidation_acceptance",
     "run_contextual_mastery_acceptance",
     "run_persistent_shadow_experiment",
     "run_shadow_comparison",
