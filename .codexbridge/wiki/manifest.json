@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T02:37:07.706825+00:00",
+  "generated_at": "2026-06-27T04:15:21.721711+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 165,
+  "source_file_count": 172,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -74,6 +74,16 @@
       "path": "artifacts/memory_belief_gate/memory_inspector.json",
       "sha256": "225cdb5d8797eaa57c510986ee68e5f088766c394ecded7602b43591ba563960",
       "size_bytes": 5105
+    },
+    {
+      "path": "artifacts/ndnra_advice/advice_acceptance_report.json",
+      "sha256": "de0f9e3fd7b2edfcd93ff7104e681dfb925c1db7860a189068b9e16c70c68caf",
+      "size_bytes": 1342
+    },
+    {
+      "path": "artifacts/ndnra_advice/multi_growth_report.json",
+      "sha256": "72cb62da15c0ec11d3bad38de65569802c64fa37f7a3d0045a909c0b6e87a0a4",
+      "size_bytes": 893
     },
     {
       "path": "artifacts/ndnra_heat_fan/local_graph_state.json",
@@ -172,8 +182,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "f9a17d8abfbec2eed641bc95e5006f717293a1d14d24a21e8fc20d88ad22fbbf",
-      "size_bytes": 35521
+      "sha256": "b0f531a2dcd4561092bc61c92640a1222956f049fb88e1b818ee79c25ca8fbf9",
+      "size_bytes": 40774
     },
     {
       "path": "requirements/base.txt",
@@ -244,6 +254,11 @@
       "path": "scripts/run_ndnra_advice_gate.py",
       "sha256": "7d94f1765cd6c01d761fe29f42bb97e047a7d4247322f247661c69daca20b0be",
       "size_bytes": 4518
+    },
+    {
+      "path": "scripts/run_ndnra_contextual_mastery_gate.py",
+      "sha256": "3cfed6f8d4889eef01123993e71430af6c7c8fa1255757821fc6ca3a7635d069",
+      "size_bytes": 4711
     },
     {
       "path": "scripts/run_ndnra_heat_fan_gate.py",
@@ -422,8 +437,8 @@
     },
     {
       "path": "src/seedmind/integration/__init__.py",
-      "sha256": "28510336fa925c1af2b26d3331ac4c38fc707475192141a4a12bdc06bce8ec66",
-      "size_bytes": 2855
+      "sha256": "51c6c2108dacd80d05befa37d69ed826dd6402d93390dc52b5d995c3e667eeb1",
+      "size_bytes": 3252
     },
     {
       "path": "src/seedmind/integration/advice_acceptance.py",
@@ -451,6 +466,11 @@
       "size_bytes": 5682
     },
     {
+      "path": "src/seedmind/integration/contextual_mastery_acceptance.py",
+      "sha256": "a4dd6f055a7c42fbe8f4d3305ad4c62d96c10d4c06c3d72eefa85098a77ae5f1",
+      "size_bytes": 11273
+    },
+    {
       "path": "src/seedmind/integration/developmental_signals.py",
       "sha256": "0aaa963ddded17195f3c32f8668ea2143029a6286f20b54e9df3c9bd53553f00",
       "size_bytes": 12039
@@ -472,8 +492,8 @@
     },
     {
       "path": "src/seedmind/integration/unified_shadow.py",
-      "sha256": "62e52067ed14c5373f4c45b2445da1d29c1d41d8f6f8de11a21e23af9f7f3192",
-      "size_bytes": 19674
+      "sha256": "da8d1226bf4c7984f988271b2ed25cd8b0834df203e95ed47e2134af03be659e",
+      "size_bytes": 21236
     },
     {
       "path": "src/seedmind/integration/unified_signal_experiment.py",
@@ -527,8 +547,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "b9f09f98555e60f0f32b28ba33344b2ec120595c52f34dd8fa4ea45cb3def7c6",
-      "size_bytes": 4087
+      "sha256": "3f8ad5eafbc08a54a55627b95adf59e16d703962908fde2be0d1f2ee2105a1d4",
+      "size_bytes": 4913
     },
     {
       "path": "src/seedmind/research/ndnra/adaptive.py",
@@ -537,8 +557,18 @@
     },
     {
       "path": "src/seedmind/research/ndnra/composition.py",
-      "sha256": "e180f1ccdf7445e47d960262d940e6a10890635075e1ec0c8620eb602e4c5e09",
-      "size_bytes": 18811
+      "sha256": "73b8d3f083df77302e9c1abccf5c895b6da0a512afc9d0139a46ea5d2f07e807",
+      "size_bytes": 22121
+    },
+    {
+      "path": "src/seedmind/research/ndnra/contextual_mastery_experiment.py",
+      "sha256": "2bff6e0dbd8b3852c0b3a7ea8c4797c54d0dc3c16f02a709f9c6fd379c3af47a",
+      "size_bytes": 13038
+    },
+    {
+      "path": "src/seedmind/research/ndnra/contextual_memory.py",
+      "sha256": "5c5090f336653cdef72ce05c19208a7fb4b3faaf24568e5feca186f4095dbafd",
+      "size_bytes": 25081
     },
     {
       "path": "src/seedmind/research/ndnra/effects.py",
@@ -592,8 +622,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/persistence.py",
-      "sha256": "1dd67fe0ba1f1c22fdf4580d4e2aa91a82f6e605a5ec4f50c713dd1f9ddfa440",
-      "size_bytes": 13928
+      "sha256": "4b8ad111ca922a68acb62e47238f4762f87f43c05feb45c06c0b08d5deb386fa",
+      "size_bytes": 14652
     },
     {
       "path": "src/seedmind/safety/__init__.py",
@@ -724,6 +754,11 @@
       "path": "tests/unit/test_human_contracts.py",
       "sha256": "a7e70659eaa647eed746bca342f12636200d662b934f053f922f447f5da4b9c4",
       "size_bytes": 2264
+    },
+    {
+      "path": "tests/unit/test_ndnra_contextual_mastery.py",
+      "sha256": "0519fee88553a074b87950ada7d47de1cbf2cf6684038dfe53f8965c52555092",
+      "size_bytes": 7210
     },
     {
       "path": "tests/unit/test_ndnra_local_learning.py",

@@ -70,6 +70,13 @@ Run bounded NDNRA advice and goal-gated repeated-growth acceptance.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_contextual_mastery_gate.py`
+
+Run contextual NDNRA redundancy and mastery acceptance.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_ndnra_heat_fan_gate.py`
 
 Run the first NDNRA local-memory and need-recruitment acceptance gate.
@@ -365,6 +372,14 @@ One-step outcome comparison that does not select production actions.
 - Classes: CandidateOutcome, CandidateComparison, NurseryOutcomeOracle
 - Functions/symbols: _mean_change, _resource_cost, _transition_risk, _unit
 
+## `src/seedmind/integration/contextual_mastery_acceptance.py`
+
+Acceptance gate for contextual NDNRA traces and bounded mastery evidence.
+
+- Kind: python
+- Classes: ContextualMasteryAcceptanceResult, ContextualMasteryAcceptanceEvidence
+- Functions/symbols: run_contextual_mastery_acceptance, export_contextual_mastery_acceptance, _persistence_probes, _write_legacy_v1, _write_trace_timeline, _write_json, _canonical_bytes
+
 ## `src/seedmind/integration/developmental_signals.py`
 
 Typed live developmental signals for non-authoritative NDNRA integration.
@@ -497,6 +512,22 @@ Need-driven composition over local multidimensional experience assemblies.
 - Kind: python
 - Classes: ExperienceAssembly, SpecialistInteraction, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
 - Functions/symbols: _scale_effects, _validate_code, _validate_facts
+
+## `src/seedmind/research/ndnra/contextual_mastery_experiment.py`
+
+Bounded experiment for contextual redundancy, transfer, and mastery.
+
+- Kind: python
+- Classes: ContextualMasteryExperimentResult, ContextualMasteryExperimentEvidence
+- Functions/symbols: run_contextual_mastery_experiment, _learn, _identity_conflict_is_blocked, _context, _route_switches, _route_snapshots
+
+## `src/seedmind/research/ndnra/contextual_memory.py`
+
+Contextual experience traces and bounded mastery evidence for NDNRA.
+
+- Kind: python
+- Classes: ContextualRecordCode, EventIdentity, ContextSignature, ContextualExperienceTrace, ContextualLearningResult, LessonIdentity, MasteryProfile, RouteSupport, _GroupEvidence, ContextualExperienceLedger
+- Functions/symbols: _jaccard, _quantize, _validate_code, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_float, _require_string_list, _require_int_list
 
 ## `src/seedmind/research/ndnra/effects.py`
 
@@ -741,6 +772,13 @@ Tests for symbolic human request and signal contracts.
 
 - Kind: python
 - Functions/symbols: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
+
+## `tests/unit/test_ndnra_contextual_mastery.py`
+
+Tests for contextual NDNRA redundancy and bounded mastery evidence.
+
+- Kind: python
+- Functions/symbols: test_contextual_mastery_experiment_distinguishes_replay_from_breadth, test_one_shot_protection_and_varied_mastery_remain_distinct, test_contradiction_reduces_mastery_without_erasing_sources, test_event_identity_key_is_collision_safe, test_contradictory_effect_does_not_create_protective_strength, test_contextual_recording_is_atomic_when_identity_validation_fails, test_contextual_mastery_gate_preserves_shadow_and_persistence, test_contextual_mastery_has_no_sqlite_cognitive_dependency
 
 ## `tests/unit/test_ndnra_local_learning.py`
 
