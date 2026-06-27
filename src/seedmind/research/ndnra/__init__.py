@@ -69,8 +69,22 @@ from seedmind.research.ndnra.network import (
     LocalNeuralGraph,
     LocalNeuralGraphConfig,
 )
+from seedmind.research.ndnra.persistence import (
+    BRAIN_SCHEMA,
+    BRAIN_SCHEMA_VERSION,
+    BrainLoadResult,
+    BrainLoadStatus,
+    BrainSaveResult,
+    NDNRABrainStore,
+    NDNRAGrowthState,
+)
 
 __all__ = [
+    "BRAIN_SCHEMA",
+    "BRAIN_SCHEMA_VERSION",
+    "BrainLoadResult",
+    "BrainLoadStatus",
+    "BrainSaveResult",
     "CompositionCandidate",
     "CompositionResult",
     "EffectEstimate",
@@ -94,7 +108,9 @@ __all__ = [
     "ModulationSummary",
     "MultidimensionalExperienceGraph",
     "MultieffectExperimentResult",
+    "NDNRABrainStore",
     "NDNRAExperimentResult",
+    "NDNRAGrowthState",
     "NeedDimension",
     "NeedDrivenComposer",
     "NeedPulse",

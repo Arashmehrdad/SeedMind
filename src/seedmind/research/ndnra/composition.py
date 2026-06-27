@@ -108,6 +108,39 @@ class MultidimensionalExperienceGraph:
         self._links: dict[tuple[str, str], LocalEffectLink] = {}
         self._specialists: dict[str, SpecialistInteraction] = {}
 
+    @classmethod
+    def from_components(
+        cls,
+        *,
+        assemblies: Iterable[ExperienceAssembly],
+        links: Iterable[LocalEffectLink],
+        specialists: Iterable[SpecialistInteraction],
+    ) -> MultidimensionalExperienceGraph:
+        """Restore validated local structures without replaying experience."""
+        graph = cls()
+        for assembly in assemblies:
+            if assembly.assembly_id in graph._assemblies:
+                raise ValueError(f"duplicate assembly: {assembly.assembly_id}")
+            graph._assemblies[assembly.assembly_id] = assembly
+        for link in links:
+            if link.source_id not in graph._assemblies:
+                raise ValueError(f"link source is not an assembly: {link.source_id}")
+            if not link.target_id.startswith("fact:") or len(link.target_id) <= 5:
+                raise ValueError("restored link target must identify a produced fact")
+            fact = link.target_id.removeprefix("fact:")
+            key = (link.source_id, fact)
+            if key in graph._links:
+                raise ValueError(f"duplicate link: {link.link_id}")
+            graph._links[key] = link
+        for specialist in specialists:
+            if specialist.specialist_id in graph._specialists:
+                raise ValueError(f"duplicate specialist: {specialist.specialist_id}")
+            missing = set(specialist.member_assembly_ids) - set(graph._assemblies)
+            if missing:
+                raise ValueError("specialist contains unknown parent assemblies")
+            graph._specialists[specialist.specialist_id] = specialist
+        return graph
+
     @property
     def assemblies(self) -> tuple[ExperienceAssembly, ...]:
         return tuple(self._assemblies[key] for key in sorted(self._assemblies))

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from math import isfinite
 
@@ -35,6 +35,16 @@ class EffectEstimate:
         if self.evidence_count <= 0:
             raise ValueError("evidence_count must be positive")
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> EffectEstimate:
+        """Restore one validated local estimate from inspectable state."""
+        values = _require_mapping("effect estimate", snapshot)
+        return cls(
+            value=_require_float(values, "value"),
+            confidence=_require_float(values, "confidence"),
+            evidence_count=_require_int(values, "evidence_count"),
+        )
+
     def observe(self, observation: EffectObservation) -> None:
         """Update this dimension without changing unrelated dimensions."""
         old_weight = self.confidence * self.evidence_count
@@ -66,6 +76,20 @@ class SparseEffectMemory:
         """Return one learned dimension without manufacturing missing effects."""
         _validate_code("effect_code", effect_code)
         return self._dimensions.get(effect_code)
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> SparseEffectMemory:
+        """Restore sparse dimensions without creating unobserved effects."""
+        values = _require_mapping("effect memory", snapshot)
+        raw_dimensions = _require_mapping("effect dimensions", values.get("dimensions"))
+        dimensions: dict[str, EffectEstimate] = {}
+        for effect_code, raw_estimate in raw_dimensions.items():
+            _validate_code("effect_code", effect_code)
+            dimensions[effect_code] = EffectEstimate.from_snapshot(raw_estimate)
+        expected_count = _require_int(values, "dimension_count")
+        if expected_count != len(dimensions):
+            raise ValueError("effect memory dimension count does not match contents")
+        return cls(_dimensions=dimensions)
 
     def observe(self, observation: EffectObservation) -> bool:
         """Learn one effect and report whether a new dimension was created."""
@@ -202,6 +226,21 @@ class LocalEffectLink:
     def link_id(self) -> str:
         return f"{self.source_id}->{self.target_id}"
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> LocalEffectLink:
+        """Restore one synapse-like local association."""
+        values = _require_mapping("effect link", snapshot)
+        link = cls(
+            source_id=_require_string(values, "source_id"),
+            target_id=_require_string(values, "target_id"),
+            effect_memory=SparseEffectMemory.from_snapshot(values.get("effect_memory")),
+            usage_count=_require_int(values, "usage_count"),
+        )
+        stored_link_id = values.get("link_id")
+        if stored_link_id is not None and stored_link_id != link.link_id:
+            raise ValueError("effect link identifier does not match endpoints")
+        return link
+
     def observe_effects(self, observations: Iterable[EffectObservation]) -> int:
         self.usage_count += 1
         return self.effect_memory.observe_many(observations)
@@ -219,6 +258,33 @@ def combine_projected_effects(
             min(1.0, combined.get(effect_code, 0.0) + value),
         )
     return combined
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_string(values: Mapping[str, object], key: str) -> str:
+    value = values.get(key)
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string")
+    return value
+
+
+def _require_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    return value
+
+
+def _require_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise ValueError(f"{key} must be numeric")
+    return float(value)
 
 
 def _validate_code(name: str, value: str) -> None:

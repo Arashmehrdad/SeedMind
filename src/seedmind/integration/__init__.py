@@ -9,6 +9,12 @@ from seedmind.integration.ndnra_shadow import (
     ShadowStepRecord,
     ShadowSuggestion,
 )
+from seedmind.integration.persistent_shadow_experiment import (
+    PersistentShadowEvidence,
+    PersistentShadowResult,
+    export_persistent_shadow_evidence,
+    run_persistent_shadow_experiment,
+)
 from seedmind.integration.shadow_experiment import (
     ShadowComparisonResult,
     export_shadow_comparison_evidence,
@@ -21,9 +27,13 @@ __all__ = [
     "NDNRAShadowSession",
     "NDNRAShadowSessionConfig",
     "NDNRAShadowSessionResult",
+    "PersistentShadowEvidence",
+    "PersistentShadowResult",
     "ShadowComparisonResult",
     "ShadowStepRecord",
     "ShadowSuggestion",
+    "export_persistent_shadow_evidence",
     "export_shadow_comparison_evidence",
+    "run_persistent_shadow_experiment",
     "run_shadow_comparison",
 ]
