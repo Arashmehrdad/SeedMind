@@ -25,6 +25,14 @@ class ConsolidationStructureState:
         _validate_unit("stability", self.stability)
         _validate_unit("plasticity", self.plasticity)
 
+    def snapshot(self) -> dict[str, object]:
+        """Return deterministic bounded structure state."""
+        return {
+            "structure_id": self.structure_id,
+            "stability": self.stability,
+            "plasticity": self.plasticity,
+        }
+
 
 @dataclass(frozen=True, slots=True)
 class ConsolidationStateSnapshot:
@@ -53,6 +61,14 @@ class ConsolidationStateSnapshot:
     def route_state(self, route_id: str) -> ConsolidationStructureState:
         """Return one captured route state by exact identity."""
         return _find_state("route", route_id, self.route_states)
+
+    def snapshot(self) -> dict[str, object]:
+        """Return deterministic complete consolidation state."""
+        return {
+            "assembly_states": [state.snapshot() for state in self.assembly_states],
+            "route_states": [state.snapshot() for state in self.route_states],
+            "applied_candidate_ids": list(self.applied_candidate_ids),
+        }
 
 
 @dataclass(frozen=True, slots=True)
@@ -126,6 +142,18 @@ class ConsolidationApplicationState:
                 )
                 for structure_id in routes
             },
+        )
+
+    @classmethod
+    def from_snapshot(
+        cls,
+        snapshot: ConsolidationStateSnapshot,
+    ) -> ConsolidationApplicationState:
+        """Reconstruct mutable application state from one validated snapshot."""
+        return cls(
+            _assembly_states={state.structure_id: state for state in snapshot.assembly_states},
+            _route_states={state.structure_id: state for state in snapshot.route_states},
+            _applied_candidate_ids=set(snapshot.applied_candidate_ids),
         )
 
     @classmethod

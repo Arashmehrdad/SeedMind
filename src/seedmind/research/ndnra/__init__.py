@@ -130,7 +130,9 @@ from seedmind.research.ndnra.persistence import (
     BrainLoadResult,
     BrainLoadStatus,
     BrainSaveResult,
+    ConsolidationRollbackAuditRecord,
     NDNRABrainStore,
+    NDNRAConsolidationCheckpoint,
     NDNRAGrowthState,
 )
 
@@ -158,6 +160,7 @@ __all__ = [
     "ConsolidationReopeningDecision",
     "ConsolidationReopeningPolicy",
     "ConsolidationReopeningTrigger",
+    "ConsolidationRollbackAuditRecord",
     "ConsolidationRollbackResult",
     "ConsolidationStateSnapshot",
     "ConsolidationStructureState",
@@ -196,6 +199,7 @@ __all__ = [
     "MultidimensionalExperienceGraph",
     "MultieffectExperimentResult",
     "NDNRABrainStore",
+    "NDNRAConsolidationCheckpoint",
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
     "NDNRARuntimeAdaptiveState",

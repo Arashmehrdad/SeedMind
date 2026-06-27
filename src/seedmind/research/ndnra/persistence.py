@@ -16,12 +16,28 @@ from seedmind.research.ndnra.composition import (
     MultidimensionalExperienceGraph,
     SpecialistInteraction,
 )
+from seedmind.research.ndnra.consolidation_persistence import (
+    ConsolidationRollbackAuditRecord,
+    NDNRAConsolidationCheckpoint,
+)
 from seedmind.research.ndnra.contextual_memory import ContextualExperienceLedger
 from seedmind.research.ndnra.effects import LocalEffectLink, SparseEffectMemory
 
 BRAIN_SCHEMA = "seedmind.ndnra.brain"
-BRAIN_SCHEMA_VERSION = 2
-_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, BRAIN_SCHEMA_VERSION})
+BRAIN_SCHEMA_VERSION = 3
+_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, BRAIN_SCHEMA_VERSION})
+
+__all__ = [
+    "BRAIN_SCHEMA",
+    "BRAIN_SCHEMA_VERSION",
+    "BrainLoadResult",
+    "BrainLoadStatus",
+    "BrainSaveResult",
+    "ConsolidationRollbackAuditRecord",
+    "NDNRABrainStore",
+    "NDNRAConsolidationCheckpoint",
+    "NDNRAGrowthState",
+]
 
 
 class BrainLoadStatus(StrEnum):
@@ -137,6 +153,7 @@ class BrainLoadResult:
     status: BrainLoadStatus
     graph: MultidimensionalExperienceGraph
     growth_state: NDNRAGrowthState
+    consolidation_checkpoint: NDNRAConsolidationCheckpoint
     checksum_verified: bool
     used_fallback: bool
     migrated_from_version: int | None = None
@@ -160,15 +177,22 @@ class NDNRABrainStore:
         graph: MultidimensionalExperienceGraph,
         *,
         growth_state: NDNRAGrowthState | None = None,
+        consolidation_checkpoint: NDNRAConsolidationCheckpoint | None = None,
     ) -> BrainSaveResult:
         """Atomically save a checksum-protected reconstruction snapshot."""
         growth = NDNRAGrowthState() if growth_state is None else growth_state
+        consolidation = (
+            NDNRAConsolidationCheckpoint.empty()
+            if consolidation_checkpoint is None
+            else consolidation_checkpoint
+        )
         body: dict[str, object] = {
             "schema": BRAIN_SCHEMA,
             "schema_version": BRAIN_SCHEMA_VERSION,
             "payload": {
                 "graph": graph.snapshot(),
                 "growth_state": growth.snapshot(),
+                "consolidation_checkpoint": consolidation.snapshot(),
             },
         }
         checksum = _checksum(body)
@@ -228,10 +252,18 @@ class NDNRABrainStore:
             payload = _require_mapping("brain payload", envelope.get("payload"))
             graph = _restore_graph(payload.get("graph"), schema_version=version)
             growth_state = NDNRAGrowthState.from_snapshot(payload.get("growth_state"))
+            consolidation_checkpoint = (
+                NDNRAConsolidationCheckpoint.empty()
+                if version < 3
+                else NDNRAConsolidationCheckpoint.from_snapshot(
+                    payload.get("consolidation_checkpoint")
+                )
+            )
             return BrainLoadResult(
                 status=BrainLoadStatus.LOADED,
                 graph=graph,
                 growth_state=growth_state,
+                consolidation_checkpoint=consolidation_checkpoint,
                 checksum_verified=True,
                 used_fallback=False,
                 migrated_from_version=(version if version < BRAIN_SCHEMA_VERSION else None),
@@ -245,6 +277,7 @@ class NDNRABrainStore:
             status=status,
             graph=MultidimensionalExperienceGraph(),
             growth_state=NDNRAGrowthState(),
+            consolidation_checkpoint=NDNRAConsolidationCheckpoint.empty(),
             checksum_verified=False,
             used_fallback=True,
             migrated_from_version=None,
