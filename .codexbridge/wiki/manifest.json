@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T17:34:27.374058+00:00",
+  "generated_at": "2026-06-27T18:54:06.959601+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 185,
+  "source_file_count": 195,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "ebaa04d7f39b107688af763dedff18935a13a299a2e2683c34135ce3c37f784c",
-      "size_bytes": 1122
+      "sha256": "e3a5ee7f75e379b30680d6f3fa8e68c0b07b18e62642e3a56f73bff9dbda797b",
+      "size_bytes": 1385
     },
     {
       "path": "pyproject.toml",
@@ -176,19 +176,29 @@
       "size_bytes": 1561
     },
     {
+      "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
+      "sha256": "ca7223b3fed62668d1e70dd3dbb393879dbba635f2f338110974aed92f25a924",
+      "size_bytes": 7101
+    },
+    {
+      "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Plan_2026-06-27.md",
+      "sha256": "0057720ade81589818b7d7b171738986eaadafbcaede671388044885e393c379",
+      "size_bytes": 5442
+    },
+    {
       "path": "docs/SeedMind_Consolidation_Stage_Handover_2026-06-27.md",
-      "sha256": "95560567d41fc966bd5e880a832c02494eb38f9d7f0d44596f626fa361219e5f",
-      "size_bytes": 7679
+      "sha256": "8d7bf67b1710c0fd30cf61b3663b4581c35cd80ad9fb10999c0d891935632b05",
+      "size_bytes": 7860
     },
     {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "b24ae4486e9efb02a46a0b084caaa70c08ae5abbd246b187195b9b5da646ff64",
-      "size_bytes": 77504
+      "sha256": "8b52e3f69f3ac942b90197a1d36c00e52c8e2b2ea45c4d2319f1d1f58fe07328",
+      "size_bytes": 80756
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "ec4a2d15ac0e0229ffd1c7eb415efd53c739b1e22e44a849e23b3ed05953f489",
-      "size_bytes": 45942
+      "sha256": "968da45e6031a0da0619f76e2e08e05bded6a876650af5b4e6e61554bc200a25",
+      "size_bytes": 49532
     },
     {
       "path": "requirements/base.txt",
@@ -442,8 +452,8 @@
     },
     {
       "path": "src/seedmind/integration/__init__.py",
-      "sha256": "9f4436065d296e40ae9243a3a78725d868b5a2d6a2543b2e6c1ffad91d65ae26",
-      "size_bytes": 3608
+      "sha256": "42d1d6ddba40ded815288bb8d67a85b53f1c146c1726d3dc321942806a638252",
+      "size_bytes": 4153
     },
     {
       "path": "src/seedmind/integration/advice_acceptance.py",
@@ -474,6 +484,11 @@
       "path": "src/seedmind/integration/consolidation_acceptance.py",
       "sha256": "8bd4a6f341151d5e8e862d9f2aabaf76e8aac2bcc8e5ad79308a8e81af5f5742",
       "size_bytes": 17939
+    },
+    {
+      "path": "src/seedmind/integration/consolidation_scheduling_acceptance.py",
+      "sha256": "812d59a182503e76214c11b9f392b4b648541f63a67c1f7f4a7aa4a7e3b5b528",
+      "size_bytes": 18408
     },
     {
       "path": "src/seedmind/integration/contextual_mastery_acceptance.py",
@@ -557,8 +572,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "fe46178689ffe36ff90edaada52d5914df78cf71a06f5874abe8f8ab3dcf90df",
-      "size_bytes": 6829
+      "sha256": "ae00dfb43ff36798c462e974123ab5e3a848867a08ea4066143ba25f809bbe51",
+      "size_bytes": 8380
     },
     {
       "path": "src/seedmind/research/ndnra/adaptive.py",
@@ -591,9 +606,24 @@
       "size_bytes": 18965
     },
     {
+      "path": "src/seedmind/research/ndnra/consolidation_portfolio.py",
+      "sha256": "0667f156639b585fe925689afcf8356e22cf3d00d2c0077399c534598b448693",
+      "size_bytes": 8153
+    },
+    {
       "path": "src/seedmind/research/ndnra/consolidation_reopening.py",
       "sha256": "b28f5bf807463b85b8dcec92706aced966af369b746dcd5dbb7adba0a6432e05",
       "size_bytes": 14237
+    },
+    {
+      "path": "src/seedmind/research/ndnra/consolidation_scheduling.py",
+      "sha256": "11c4563ec0da1c2ee53aa94f64d8d369dcf429e8f3e9516eabffbfc014760c87",
+      "size_bytes": 11630
+    },
+    {
+      "path": "src/seedmind/research/ndnra/consolidation_scheduling_experiment.py",
+      "sha256": "870d8b27d1ed071e3e357a29ac8938acb997c0172e2e9f7a20aec86ccc00aa74",
+      "size_bytes": 19646
     },
     {
       "path": "src/seedmind/research/ndnra/contextual_mastery_experiment.py",
@@ -816,9 +846,29 @@
       "size_bytes": 10145
     },
     {
+      "path": "tests/unit/test_ndnra_consolidation_portfolio.py",
+      "sha256": "44d1888325bb7b1b76d3cfc2c95c35ed1d3a37e66aa1f8d8c0624de966432a24",
+      "size_bytes": 10490
+    },
+    {
       "path": "tests/unit/test_ndnra_consolidation_reopening.py",
       "sha256": "82e6eaccc85273ef08e48bf1e5afd0d9d72e694f05e704428cda4a0bea1a1b46",
       "size_bytes": 12577
+    },
+    {
+      "path": "tests/unit/test_ndnra_consolidation_scheduling.py",
+      "sha256": "f187d810578d8580c5928b104c8fe0d8eb12f5934bd9ae8f93726e3029413040",
+      "size_bytes": 7704
+    },
+    {
+      "path": "tests/unit/test_ndnra_consolidation_scheduling_acceptance.py",
+      "sha256": "3de9a8095de26f756c9a901733915105df5b3c8d346c6b08bdaa9a27f36040d4",
+      "size_bytes": 3682
+    },
+    {
+      "path": "tests/unit/test_ndnra_consolidation_scheduling_experiment.py",
+      "sha256": "85112e9bcb8b235bd59aed9e9000f8dc34fae993c7850ad4f57590aa94007c09",
+      "size_bytes": 5349
     },
     {
       "path": "tests/unit/test_ndnra_contextual_mastery.py",

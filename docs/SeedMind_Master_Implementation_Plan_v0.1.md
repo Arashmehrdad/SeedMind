@@ -1696,8 +1696,9 @@ Current falsifiable evidence includes:
 
 The following remain explicitly deferred and require new acceptance gates rather than extension by assumption:
 
-- Automatic episode-based consolidation scheduling.
+- Automatic execution of consolidation proposals.
 - Production replay scheduling.
+- Persistent or autonomous scheduling queues.
 - Consolidation values affecting live suggestion ranking.
 - Consolidation values affecting bounded advice.
 - Consolidation values affecting growth selection or pressure discharge.
@@ -1706,6 +1707,67 @@ The following remain explicitly deferred and require new acceptance gates rather
 - Permanent pruning or deletion of memory-bearing structures.
 
 The heuristic theory-to-integration readiness indicator remains 94%. It is not a probability, safety certification, or production-readiness claim.
+
+## 13.6 Implemented proposal-only consolidation scheduling stage
+
+Status recorded on 27 June 2026.
+
+This stage is complete as a research-only, shadow-only proposal layer. It can identify and rank consolidation candidates for review, but it cannot execute consolidation or replay.
+
+The five completed batches are:
+
+1. `1c2b3e9` — deterministic single-lesson scheduling proposals with explicit cadence, cooldown, duplicate-active, and capacity checks.
+2. `3940dc9` — multi-lesson prioritisation that preserves every lesson decision and limits selected proposals.
+3. `0b52a82` — controlled comparison of fixed-interval, eligibility-only, and evidence-aware bounded scheduling.
+4. `e7a5570` — live-shadow acceptance proving that scheduling observation does not change SeedMind behaviour or learning.
+5. Documentation and closure — architecture, implementation plan, stage handover, wiki refresh, and final validation.
+
+The implemented proposal flow is:
+
+```text
+caller-supplied episode context
++ contextual mastery and exact source evidence
++ explicit lesson requests
++ active proposal capacity
+        -> pure per-lesson schedule decisions
+        -> deterministic portfolio ranking
+        -> bounded non-authoritative review proposals
+```
+
+The scheduler has no internal clock or background worker. It receives episode numbers from its caller and returns immutable decisions. It does not maintain a persistent queue.
+
+The portfolio ranks proposal-ready candidates by overdue duration, mastery score, effective independent support, and stable identity. Candidates that are not selected remain visible with their complete decision evidence.
+
+The default synthetic experiment produced:
+
+| Strategy | Proposals | False | Redundant | Missed eligible episodes | Capacity pressure | Precision |
+|---|---:|---:|---:|---:|---:|---:|
+| Fixed interval | 12 | 7 | 3 | 4 | 8 | 0.4167 |
+| Eligibility only | 15 | 0 | 13 | 0 | 6 | 1.0000 |
+| Evidence-aware bounded | 2 | 0 | 0 | 0 | 0 | 1.0000 |
+
+The evidence-aware bounded method proposed both genuinely mastered lessons once, never proposed the weak lesson, introduced no delay, and stayed within capacity.
+
+Live-shadow acceptance evaluated scheduling after each of eight ordinary learning steps. The scheduling-observed and control sessions had exactly equal:
+
+- Production actions.
+- Prediction errors.
+- NDNRA suggestions.
+- Live developmental signals.
+- Learned graph state.
+- Growth state.
+
+The observer produced one proposal for one eligible candidate and suppressed all repeats while that candidate remained active. It mutated no contextual evidence, applied no consolidation, used no SQLite cognition, and had zero action-authority violations.
+
+The following remain deferred:
+
+- Automatically accepting or applying a proposal.
+- Triggering retention replay from a proposal.
+- Persisting or autonomously resuming proposal queues.
+- Using proposals in advice, growth selection, pressure discharge, route ranking, or production actions.
+- Automatically restoring or rolling back checkpoints.
+
+Completing this stage does not raise the 94% heuristic readiness indicator. It adds scheduling evidence and clearer authority boundaries, not production readiness.
 
 ---
 

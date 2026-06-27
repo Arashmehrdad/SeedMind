@@ -380,6 +380,14 @@ Live-shadow acceptance gate for persisted reversible NDNRA consolidation.
 - Classes: ConsolidationAcceptanceResult, ConsolidationAcceptanceEvidence
 - Functions/symbols: run_consolidation_acceptance, export_consolidation_acceptance, _build_live_checkpoint, _record_later_contradiction, _action_value, _write_ascii_json
 
+## `src/seedmind/integration/consolidation_scheduling_acceptance.py`
+
+Live-shadow acceptance for proposal-only NDNRA consolidation scheduling.
+
+- Kind: python
+- Classes: ConsolidationSchedulingShadowObservation, ConsolidationSchedulingAcceptanceResult, ConsolidationSchedulingAcceptanceEvidence, _SchedulingObservedShadowAdapter
+- Functions/symbols: run_consolidation_scheduling_acceptance, export_consolidation_scheduling_acceptance, _build_live_schedule_request, _action_value, _write_ascii_json
+
 ## `src/seedmind/integration/contextual_mastery_acceptance.py`
 
 Acceptance gate for contextual NDNRA traces and bounded mastery evidence.
@@ -553,6 +561,14 @@ Versioned persistence contracts for bounded NDNRA consolidation state.
 - Classes: ConsolidationRollbackAuditRecord, NDNRAConsolidationCheckpoint
 - Functions/symbols: _application_snapshot, _restore_application, _restore_candidate, _restore_mastery_profile, _restore_state_snapshot, _restore_structure_state, _state_identity_sets, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes, _validate_code, _validate_unit
 
+## `src/seedmind/research/ndnra/consolidation_portfolio.py`
+
+Pure multi-lesson prioritisation for NDNRA consolidation proposals.
+
+- Kind: python
+- Classes: ConsolidationPortfolioItem, ConsolidationPortfolioItemDecision, ConsolidationPortfolioDecision, ConsolidationPortfolioPolicy
+- Functions/symbols: _validated_items, _lesson_key, _priority_key
+
 ## `src/seedmind/research/ndnra/consolidation_reopening.py`
 
 Pure contradiction-driven reopening and atomic consolidation rollback.
@@ -560,6 +576,22 @@ Pure contradiction-driven reopening and atomic consolidation rollback.
 - Kind: python
 - Classes: ConsolidationReopeningTrigger, ConsolidationReopeningPolicy, ConsolidationReopeningDecision, ConsolidationRollbackResult
 - Functions/symbols: rollback_consolidation, _validate_trace_matches_candidate, _trace_is_contradictory, _rollback_id, _snapshot_payload, _state_payload, _snapshot_ids, _validate_sorted_unique_codes, _validate_code, _validate_unit
+
+## `src/seedmind/research/ndnra/consolidation_scheduling.py`
+
+Pure proposal-only scheduling policy for bounded NDNRA consolidation.
+
+- Kind: python
+- Classes: ConsolidationScheduleStatus, ConsolidationScheduleRequest, ConsolidationSchedulingContext, ConsolidationScheduleProposal, ConsolidationScheduleDecision, ConsolidationSchedulingPolicy
+- Functions/symbols: _proposal_id, _validate_sorted_unique_codes, _validate_code, _validate_nonnegative_int, _validate_positive_int, _validate_positive_unit
+
+## `src/seedmind/research/ndnra/consolidation_scheduling_experiment.py`
+
+Deterministic proposal-only experiment for NDNRA consolidation scheduling.
+
+- Kind: python
+- Classes: ConsolidationSchedulingStrategy, ConsolidationSchedulingExperimentConfig, ConsolidationSchedulingProposalRecord, ConsolidationSchedulingStrategyResult, ConsolidationSchedulingExperimentResult
+- Functions/symbols: run_consolidation_scheduling_experiment, export_consolidation_scheduling_experiment, _strategy_result, _candidate_for, _is_fixed_window, _lesson_key, _requests, _evidence_arrivals, _trace
 
 ## `src/seedmind/research/ndnra/contextual_mastery_experiment.py`
 
@@ -856,12 +888,40 @@ Tests for schema-v3 NDNRA consolidation checkpoint persistence.
 - Kind: python
 - Functions/symbols: _trace, _ledger, _application, _active_checkpoint, _rewrite_version, _rewrite_checksum, test_schema_v3_round_trips_active_consolidation_checkpoint, test_loaded_active_application_can_be_reopened_and_rolled_back, test_schema_v3_round_trips_compact_rollback_audit, test_schema_v2_migrates_to_explicit_empty_consolidation_checkpoint, test_default_schema_v3_save_uses_empty_checkpoint, test_inconsistent_checkpoint_falls_back_without_partial_state, test_schema_v3_checkpoint_encoding_is_deterministic, test_consolidation_persistence_has_no_sqlite_cognitive_dependency
 
+## `tests/unit/test_ndnra_consolidation_portfolio.py`
+
+Tests for pure multi-lesson consolidation proposal prioritisation.
+
+- Kind: python
+- Functions/symbols: _record_mastery, _request, _portfolio_fixture, test_portfolio_selects_most_overdue_ready_lesson, test_portfolio_preserves_ineligible_lesson_decision, test_equivalent_input_order_produces_identical_portfolio, test_proposal_limit_keeps_unselected_candidates_visible, test_remaining_active_capacity_bounds_portfolio_selection, test_portfolio_does_not_mutate_contextual_evidence, test_duplicate_lesson_requests_are_rejected, test_portfolio_requires_shared_evaluation_episode_and_active_candidates, test_portfolio_module_has_no_execution_or_integration_dependency
+
 ## `tests/unit/test_ndnra_consolidation_reopening.py`
 
 Tests for contradiction-driven reopening and atomic consolidation rollback.
 
 - Kind: python
 - Functions/symbols: _trace, _mastered_ledger, _eligibility, _application, _add_contradiction, test_new_independent_contradiction_reopens_without_mutation, test_positive_new_evidence_does_not_reopen, test_small_contradiction_is_visible_but_below_reopening_threshold, test_correlated_contradiction_copies_do_not_inflate_independent_count, test_reopening_requires_original_candidate_sources_to_remain_resolvable, test_rollback_restores_candidate_state_and_preserves_unrelated_state, test_rollback_is_deterministic_for_identical_evidence, test_rollback_is_blocked_when_reopening_gate_does_not_pass, test_duplicate_rollback_is_blocked_without_further_mutation, test_stale_target_state_blocks_rollback_atomically, test_mismatched_decision_and_application_are_rejected, test_reopening_and_rollback_have_no_sql_or_integration_dependency
+
+## `tests/unit/test_ndnra_consolidation_scheduling.py`
+
+Tests for pure proposal-only NDNRA consolidation scheduling.
+
+- Kind: python
+- Functions/symbols: _trace, _mastered_ledger, _request, test_due_mastery_produces_deterministic_non_authoritative_proposal, test_before_first_window_exposes_eligibility_without_proposing, test_completed_episode_enforces_explicit_cooldown, test_due_but_unmastered_lesson_returns_eligibility_reasons, test_active_candidate_is_not_proposed_twice, test_active_capacity_blocks_unrelated_candidate_without_mutation, test_context_rejects_future_completion_episode, test_schedule_proposal_rejects_execution_authority, test_scheduling_module_has_no_timer_executor_sql_or_integration_dependency
+
+## `tests/unit/test_ndnra_consolidation_scheduling_acceptance.py`
+
+Tests for live-shadow consolidation scheduling acceptance.
+
+- Kind: python
+- Functions/symbols: test_live_scheduler_does_not_change_seedmind_behavior, test_live_scheduler_proposes_once_without_repetition, test_live_scheduler_remains_read_only_and_non_authoritative, test_scheduling_acceptance_exports_are_ascii_and_inspectable, test_scheduling_acceptance_has_no_application_or_sqlite_path
+
+## `tests/unit/test_ndnra_consolidation_scheduling_experiment.py`
+
+Tests for the proposal-only consolidation scheduling experiment.
+
+- Kind: python
+- Functions/symbols: _by_strategy, test_fixed_interval_creates_false_and_late_proposals, test_eligibility_only_is_precise_but_highly_repetitive, test_evidence_aware_scheduling_is_precise_bounded_and_non_redundant, test_controlled_evidence_arrival_has_two_mastered_lessons, test_experiment_is_exactly_deterministic, test_experiment_never_applies_or_authorizes_consolidation, test_experiment_export_is_ascii_and_inspectable, test_experiment_config_rejects_invalid_values, test_experiment_module_has_no_application_persistence_or_integration_dependency
 
 ## `tests/unit/test_ndnra_contextual_mastery.py`
 

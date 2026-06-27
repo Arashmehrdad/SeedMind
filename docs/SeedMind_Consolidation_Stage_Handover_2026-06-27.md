@@ -120,10 +120,13 @@ The following constraints are mandatory:
 
 ## 7. Explicitly deferred work
 
-These items were not implemented and require separate architecture and acceptance gates:
+At the time of this handover, proposal-only scheduling had not yet been implemented. It was later completed in the separate consolidation scheduling stage recorded in `docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md`.
 
-- Automatic episode-based consolidation scheduling.
+The following still require separate architecture and acceptance gates:
+
+- Automatic acceptance or execution of consolidation proposals.
 - Production replay scheduling.
+- Persistent or autonomous scheduling queues.
 - Consolidation-aware live suggestion ranking.
 - Consolidation-aware bounded advice.
 - Consolidation-aware growth selection or pressure discharge.
@@ -131,29 +134,29 @@ These items were not implemented and require separate architecture and acceptanc
 - Autonomous checkpoint restoration.
 - Permanent pruning, merging, or deletion.
 
-Do not infer authority or scheduling from the existence of schema-v3 checkpoints.
+Do not infer execution authority from schema-v3 checkpoints or proposal-only scheduling.
 
 ## 8. Documentation updated in closure
 
-- `README.md` now identifies the current research phase.
+- `README.md` identifies the research phase.
 - `docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md` uses ordered sections:
   - `17.12` goal-gated multi-step growth
   - `17.13` contextual experiential redundancy and mastery
   - `17.14` retention-gated consolidation and reversible checkpoints
 - `docs/SeedMind_Master_Implementation_Plan_v0.1.md` records the completed stage, evidence, commits, and deferred work.
-- Repository wiki is refreshed during closure.
+- Repository wiki was refreshed during closure.
 
 ## 9. Repository workflow
 
 Use CodexBridge for repository inspection, patching, validation, and commits. Commit only explicitly selected files. Never push automatically.
 
-After the closure commit, the user pushes manually with:
+After a closure commit, the user pushes manually with:
 
 ```powershell
 Set-Location "D:\Github\SeedMind"
 git push
 ```
 
-## 10. Recommended next decision
+## 10. Historical next decision
 
-The next stage should not begin automatically. Select one bounded direction and define its acceptance gate first. The safest likely choice is a pure scheduling-policy experiment that produces consolidation proposals without executing them. Any move toward live ranking, advice, growth influence, restoration automation, or action authority requires a separate explicit decision and stronger comparison, fallback, and rollback evidence.
+This handover recommended a pure scheduling-policy experiment that could produce consolidation proposals without executing them. That bounded stage was subsequently implemented and accepted. Automatic execution, replay, ranking influence, advice, growth influence, restoration automation, and action authority remain separate future decisions.

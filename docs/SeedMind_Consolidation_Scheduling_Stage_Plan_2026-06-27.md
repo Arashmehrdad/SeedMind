@@ -1,29 +1,30 @@
 # SeedMind Consolidation Scheduling Stage Plan
 
-Date: 27 June 2026  
-Repository: `D:\Github\SeedMind`  
-Branch: `main`  
-Stage status: active  
+Date: 27 June 2026
+Repository: `D:\Github\SeedMind`
+Branch: `main`
+Stage status: complete
 Authority: proposal-only, research-only, shadow-only
 
 ## 1. Stage objective
 
-This stage evaluates whether SeedMind can decide **when a consolidation candidate is worth proposing** without executing consolidation or changing any cognitive, advisory, growth, replay, restoration, or production state.
+This stage evaluated whether SeedMind can decide **when a consolidation candidate is worth proposing** without executing consolidation or changing any cognitive, advisory, growth, replay, restoration, or production state.
 
-The stage begins from the completed retention-gated consolidation subsystem and adds only pure scheduling evidence.
+The completed flow is:
 
 ```text
 caller-supplied episode context
 + contextual mastery evidence
-+ explicit lesson request
++ explicit lesson requests
 + active-candidate capacity
-        -> pure scheduling decision
-        -> no proposal, or immutable non-authoritative proposal
+        -> pure scheduling decisions
+        -> deterministic portfolio ranking
+        -> bounded non-authoritative proposals
 ```
 
-No internal clock, background task, episode hook, timer, scheduler loop, or automatic executor is permitted.
+There is no internal clock, background task, timer, persistent queue, or automatic executor.
 
-## 2. Mandatory invariants
+## 2. Preserved invariants
 
 - Production curiosity remains the sole action authority.
 - Scheduling proposals never execute consolidation.
@@ -33,73 +34,71 @@ No internal clock, background task, episode hook, timer, scheduler loop, or auto
 - Scheduling values never affect bounded advice.
 - Scheduling values never affect growth selection or pressure discharge.
 - SQLite remains outside scheduling decisions.
-- The brain persistence schema is not changed during the first scheduling batches.
+- The brain persistence schema remains version 3.
 - All episode indices and completion records are caller-supplied deterministic inputs.
-- Every decision retains the underlying consolidation eligibility result and rejection evidence.
-- Active-candidate capacity is explicit and bounded.
+- Every lesson decision retains its eligibility and rejection evidence.
+- Active-candidate and per-evaluation proposal capacity remain explicit and bounded.
+- Non-selected candidates remain visible and are not deleted or merged.
 
-## 3. Planned batches
+## 3. Completed batches
 
 ### Batch 1 — single-lesson proposal contract
 
-Implement:
+Commit: `1c2b3e9`
 
-- Explicit schedule request.
-- Caller-owned episode context.
-- First eligible episode.
-- Minimum interval after a completed consolidation.
-- Active-candidate identity and capacity checks.
-- Immutable proposal identifiers.
-- Explicitly absent execution authority.
-
-Acceptance requires deterministic decisions, no ledger mutation, no timer or executor dependencies, and full eligibility evidence retention.
+Added deterministic first-window, cooldown, active-candidate, and capacity decisions. Proposals are immutable and explicitly reject execution authority.
 
 ### Batch 2 — multi-lesson prioritisation
 
-Add a pure portfolio policy that:
+Commit: `3940dc9`
 
-- Evaluates several explicitly supplied lesson requests.
-- Preserves every per-lesson decision.
-- Ranks only proposal-ready candidates.
-- Applies a bounded proposal count.
-- Uses stable deterministic tie-breaking.
-- Prevents one lesson from silently erasing another.
+Added deterministic ranking across several lesson requests. Every per-lesson result remains visible, while only a bounded number of ready proposals are selected for review.
 
-No proposal may execute.
+Priority is based on overdue duration, mastery score, effective independent support, and stable candidate identity.
 
 ### Batch 3 — synthetic scheduling experiment
 
-Compare at least:
+Commit: `0b52a82`
 
-1. Fixed interval proposal windows.
-2. Eligibility-only proposal checks.
-3. Evidence-aware bounded proposal scheduling.
+Compared fixed-interval, eligibility-only, and evidence-aware bounded scheduling under identical evidence arrival.
 
-Measure proposal precision, redundant proposals, missed eligible windows, active-capacity pressure, and determinism under controlled evidence arrival. The experiment must not apply candidates.
+| Strategy | Proposals | False | Redundant | Missed eligible episodes | Capacity pressure | Precision |
+|---|---:|---:|---:|---:|---:|---:|
+| Fixed interval | 12 | 7 | 3 | 4 | 8 | 0.4167 |
+| Eligibility only | 15 | 0 | 13 | 0 | 6 | 1.0000 |
+| Evidence-aware bounded | 2 | 0 | 0 | 0 | 0 | 1.0000 |
+
+The balanced method proposed both mastered lessons exactly once, never proposed the weak lesson, caused no delay, and stayed within capacity.
 
 ### Batch 4 — live-shadow proposal acceptance
 
-Run identical live-shadow sessions with scheduling observation enabled and disabled. Passing requires identical:
+Commit: `e7a5570`
+
+Ran identical SeedMind sessions with and without scheduling observation. The sessions produced exactly equal:
 
 - Production actions.
 - Prediction errors.
 - NDNRA suggestions.
+- Live developmental signals.
 - Learned graph state.
 - Growth state.
 
-Export inspectable proposal-only evidence. No checkpoint application or autonomous scheduling is permitted.
+Across eight scheduling evaluations, the observer produced one proposal for one eligible candidate, then suppressed repeats while it remained active. It changed no contextual evidence, applied no consolidation, used no SQLite cognition, and had zero authority violations.
 
 ### Batch 5 — documentation and closure
 
-- Update architecture and master plan.
-- Record all commits and evidence.
-- Refresh repository wiki.
-- Run final quality gates.
-- Produce the scheduling-stage handover.
+Completed in the closure commit containing this updated record.
 
-## 4. Batch 1 contract
+- Architecture updated with proposal-only scheduling.
+- Master implementation plan updated with commits and evidence.
+- README current phase updated.
+- Final scheduling-stage handover added.
+- Repository wiki refreshed.
+- Full quality gates rerun.
 
-The first implementation uses:
+## 4. Public contracts
+
+The stage added:
 
 - `ConsolidationScheduleRequest`
 - `ConsolidationSchedulingContext`
@@ -107,8 +106,13 @@ The first implementation uses:
 - `ConsolidationScheduleDecision`
 - `ConsolidationScheduleProposal`
 - `ConsolidationScheduleStatus`
+- `ConsolidationPortfolioItem`
+- `ConsolidationPortfolioPolicy`
+- `ConsolidationPortfolioDecision`
+- Scheduling experiment result and export contracts.
+- Live-shadow scheduling acceptance result and export contracts.
 
-Default proposal cadence mirrors the current research plan:
+Default single-lesson policy values are:
 
 ```text
 first eligible episode: 100
@@ -116,7 +120,7 @@ minimum interval after completion: 100 episodes
 maximum simultaneous active candidates: 1
 ```
 
-These defaults are policy inputs only. They do not create an episode hook or automatic schedule.
+These remain policy inputs, not an autonomous schedule.
 
 ## 5. Explicitly out of scope
 
@@ -132,6 +136,10 @@ These defaults are policy inputs only. They do not create an episode hook or aut
 - Production action authority.
 - Permanent pruning or deletion.
 
-## 6. Stage completion rule
+## 6. Completion decision
 
-The stage is complete only when proposal-only scheduling has deterministic synthetic and live-shadow acceptance evidence while preserving all authority and cognition boundaries. A successful scheduling stage still does not authorize automatic consolidation execution.
+The stage passed deterministic synthetic comparison and live-shadow invariance acceptance while preserving all authority and cognition boundaries.
+
+The completed scheduler may identify, rank, and export review proposals. It may not accept or execute them. Moving from proposal generation to automatic action requires a separately approved stage with new fallback, persistence, restart, rejection, and rollback evidence.
+
+The heuristic readiness indicator remains 94%. This stage improves scheduling evidence and inspectability; it is not a production-readiness claim.

@@ -1173,7 +1173,68 @@ The live-shadow acceptance gate creates qualifying mastery evidence on assemblie
 13. The completed restoration audit round-trips exactly.
 14. SQLite remains outside consolidation eligibility, replay selection, reopening, restoration, persistence reconstruction, and shadow comparison.
 
-This stage remains research-only and shadow-only. It does not schedule consolidation, grant advisory or action authority, alter production curiosity, or permit automatic structural growth. The heuristic readiness remains 94%; this value is an engineering progress indicator, not a probability or a production-readiness claim.
+This stage remains research-only and shadow-only. It does not grant advisory or action authority, alter production curiosity, or permit automatic structural growth. The heuristic readiness remains 94%; this value is an engineering progress indicator, not a probability or a production-readiness claim.
+
+### 17.15 Proposal-only consolidation scheduling
+
+The scheduling stage asks only whether an already eligible consolidation candidate is worth presenting for review. It does not apply consolidation, trigger replay, restore checkpoints, or change cognition.
+
+```text
+caller-supplied episode context
++ contextual mastery evidence
++ explicit lesson requests
++ active proposal capacity
+        -> pure scheduling decisions
+        -> bounded non-authoritative proposals
+```
+
+The single-lesson policy supports an explicit first review point, a minimum interval after a previously completed consolidation, duplicate-active-candidate suppression, and a maximum number of active candidates. All timing information is supplied by the caller as deterministic episode numbers. There is no internal clock, timer, background worker, persistent scheduling queue, or autonomous executor.
+
+The multi-lesson portfolio policy preserves every lesson decision, ranks only proposal-ready candidates, and limits how many proposals may be selected for review. Priority uses:
+
+1. How long a proposal has been due.
+2. Mastery strength.
+3. Effective independent support.
+4. Stable candidate identity as the final tie-breaker.
+
+Unselected candidates remain fully inspectable and may be reconsidered later. They are not deleted, merged, or treated as rejected evidence.
+
+A controlled scheduling experiment compares three strategies under identical evidence arrival:
+
+1. Fixed calendar windows.
+2. Eligibility-only checking.
+3. Evidence-aware bounded scheduling.
+
+The default experiment produced:
+
+| Strategy | Proposals | False | Redundant | Missed eligible episodes | Capacity pressure |
+|---|---:|---:|---:|---:|---:|
+| Fixed interval | 12 | 7 | 3 | 4 | 8 |
+| Eligibility only | 15 | 0 | 13 | 0 | 6 |
+| Evidence-aware bounded | 2 | 0 | 0 | 0 | 0 |
+
+The evidence-aware bounded strategy proposed each genuinely mastered lesson once, ignored the weak lesson, and avoided both delay and overload. This is synthetic proposal-quality evidence only.
+
+The live-shadow acceptance gate attaches the scheduler as a read-only observer after ordinary learning updates. Passing requires:
+
+1. The synthetic scheduling comparison passes.
+2. Live graph assemblies support an eligible contextual lesson.
+3. Production actions remain identical to the unscheduled control.
+4. Prediction-error sequences remain identical.
+5. NDNRA suggestion sequences remain identical.
+6. Live developmental signals remain identical.
+7. Learned graph states remain identical.
+8. Growth states remain identical.
+9. Scheduling evaluates every configured step.
+10. One eligible candidate produces one proposal and no duplicate proposals while active.
+11. Scheduling does not mutate the contextual ledger.
+12. Consolidation application count remains zero.
+13. Action-authority violations remain zero.
+14. SQLite remains outside scheduling cognition.
+
+The validated scheduler is therefore an inspectable proposal generator only. It does not automatically execute consolidation, replay, restoration, advice, growth, or production actions. It also does not persist or autonomously resume a scheduling queue. Any move from proposal generation to execution requires a new explicit architecture decision and acceptance gate.
+
+The heuristic readiness remains 94%; proposal scheduling adds evidence and control boundaries but does not justify a higher production-readiness claim.
 
 ## 18. Architectural invariants
 
@@ -1196,6 +1257,8 @@ The following rules must remain true:
 15. Repetition strength, context diversity, route diversity, causality, transfer, and protection remain distinct measures.
 16. Generalized lessons retain inspectable references to their episodic source traces.
 17. Contextual mastery remains non-authoritative until a later explicit integration gate.
+18. Consolidation scheduling may propose review candidates but cannot execute consolidation or replay.
+19. Unselected and active scheduling candidates remain inspectable and cannot silently erase one another.
 
 ## 19. First prototype boundary
 

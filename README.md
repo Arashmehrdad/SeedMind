@@ -8,9 +8,11 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-Retention-gated NDNRA consolidation research closure.
+Proposal-only NDNRA consolidation scheduling research closure.
 
-The current consolidation stage is research-only and shadow-only. It includes contextual mastery eligibility, bounded application, interference testing, retention-gated replay, contradiction-driven reopening, atomic restoration, schema-v3 checkpoints, and live-shadow acceptance. Production curiosity retains action authority.
+SeedMind can now identify and rank consolidation candidates for review using contextual mastery, timing, and bounded proposal capacity. Synthetic and live-shadow tests show that the scheduler avoids weak or repeated suggestions without changing SeedMind's actions, predictions, suggestions, learning, memory graph, or growth state.
+
+The scheduler remains research-only, shadow-only, and non-authoritative. It cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
 
 ## Development order
 
