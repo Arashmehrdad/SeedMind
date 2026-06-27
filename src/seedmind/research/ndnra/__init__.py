@@ -4,6 +4,7 @@ from seedmind.research.ndnra.adaptive import (
     AdaptiveRuntimeConfig,
     AdaptiveUpdate,
     NDNRARuntimeAdaptiveState,
+    PressureDischarge,
 )
 from seedmind.research.ndnra.composition import (
     CompositionCandidate,
@@ -37,6 +38,11 @@ from seedmind.research.ndnra.growth import (
     GrowthOutcome,
     StructuralGrowthConfig,
     grow_random_specialist,
+)
+from seedmind.research.ndnra.growth_cycle import (
+    GoalGatedGrowthCycle,
+    GrowthCycleConfig,
+    GrowthResolution,
 )
 from seedmind.research.ndnra.growth_experiment import (
     StructuralGrowthExperimentResult,
@@ -99,9 +105,12 @@ __all__ = [
     "EffectObservation",
     "EvidenceDrivenGrowthController",
     "ExperienceAssembly",
+    "GoalGatedGrowthCycle",
     "GrowthAttemptRecord",
+    "GrowthCycleConfig",
     "GrowthOutcome",
     "GrowthPressure",
+    "GrowthResolution",
     "HeatAction",
     "HeatContext",
     "HeatFanWorld",
@@ -123,6 +132,7 @@ __all__ = [
     "NeedDrivenComposer",
     "NeedPulse",
     "NeuronKind",
+    "PressureDischarge",
     "RecallEpisodeResult",
     "RecallResult",
     "RecallStepRecord",

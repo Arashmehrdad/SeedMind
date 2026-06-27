@@ -79,6 +79,7 @@ class EvidenceDrivenGrowthController:
     _residuals: list[float] = field(default_factory=list)
     _attempts: list[GrowthAttemptRecord] = field(default_factory=list)
     _last_active_members: tuple[str, ...] = ()
+    _growth_cursor: int = 0
 
     @property
     def attempt_count(self) -> int:
@@ -184,7 +185,12 @@ class EvidenceDrivenGrowthController:
         )
         if len(members) < 2:
             raise RuntimeError("insufficient eligible members for specialist growth")
-        residual = sum(self._residuals) / len(self._residuals)
+        if any(specialist.member_assembly_ids == members for specialist in self.graph.specialists):
+            raise RuntimeError("duplicate specialist membership is blocked")
+        recent_residuals = self._residuals[self._growth_cursor :]
+        if not recent_residuals:
+            raise RuntimeError("no new unresolved evidence since the previous growth")
+        residual = sum(recent_residuals) / len(recent_residuals)
         before_nodes = self.graph.structural_node_count
         before_assemblies = self.graph.assembly_count
         specialist = self.graph.grow_specialist_interaction(
@@ -199,6 +205,7 @@ class EvidenceDrivenGrowthController:
                 ),
             ),
         )
+        self._growth_cursor = len(self._residuals)
         return GrowthOutcome(
             specialist_id=specialist.specialist_id,
             member_assembly_ids=specialist.member_assembly_ids,

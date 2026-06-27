@@ -66,6 +66,28 @@ class AdaptiveUpdate:
             raise ValueError("attempt count must advance by exactly one")
 
 
+@dataclass(frozen=True, slots=True)
+class PressureDischarge:
+    """Inspectable pressure release after resolved learning or accurate advice."""
+
+    requested_amount: float
+    pressure_before: float
+    pressure_after: float
+    reason_code: str
+
+    def __post_init__(self) -> None:
+        for name, value in (
+            ("requested_amount", self.requested_amount),
+            ("pressure_before", self.pressure_before),
+            ("pressure_after", self.pressure_after),
+        ):
+            _validate_unit(name, value)
+        if not self.reason_code.strip() or not self.reason_code.isascii():
+            raise ValueError("reason_code must be non-empty ASCII")
+        if self.pressure_after > self.pressure_before:
+            raise ValueError("pressure discharge must not increase pressure")
+
+
 @dataclass(slots=True)
 class NDNRARuntimeAdaptiveState:
     """Apply persisted eligibility, dormancy, and pressure during live use."""

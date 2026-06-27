@@ -1,5 +1,25 @@
 """Typed integration boundaries between validated SeedMind subsystems."""
 
+from seedmind.integration.advice_acceptance import (
+    AdviceAcceptanceEvidence,
+    AdviceAcceptanceResult,
+    AdviceTimelineRecord,
+    export_advice_acceptance,
+    run_advice_acceptance,
+)
+from seedmind.integration.bounded_advice import (
+    AdviceCode,
+    AdviceConfig,
+    AdviceDecision,
+    AdviceEvidence,
+    BoundedAdvicePolicy,
+    ConfidenceCalibration,
+)
+from seedmind.integration.comparison_oracle import (
+    CandidateComparison,
+    CandidateOutcome,
+    NurseryOutcomeOracle,
+)
 from seedmind.integration.developmental_signals import (
     LiveDevelopmentalSignalProvider,
     LiveDevelopmentalSignals,
@@ -39,6 +59,17 @@ from seedmind.integration.unified_signal_experiment import (
 )
 
 __all__ = [
+    "AdviceAcceptanceEvidence",
+    "AdviceAcceptanceResult",
+    "AdviceCode",
+    "AdviceConfig",
+    "AdviceDecision",
+    "AdviceEvidence",
+    "AdviceTimelineRecord",
+    "BoundedAdvicePolicy",
+    "CandidateComparison",
+    "CandidateOutcome",
+    "ConfidenceCalibration",
     "LiveDevelopmentalSignalProvider",
     "LiveDevelopmentalSignals",
     "NDNRALiveShadowAdapter",
@@ -47,6 +78,7 @@ __all__ = [
     "NDNRAShadowSession",
     "NDNRAShadowSessionConfig",
     "NDNRAShadowSessionResult",
+    "NurseryOutcomeOracle",
     "PersistentShadowEvidence",
     "PersistentShadowResult",
     "ShadowComparisonResult",
@@ -58,9 +90,11 @@ __all__ = [
     "UnifiedShadowStepRecord",
     "UnifiedSignalEvidence",
     "UnifiedSignalExperimentResult",
+    "export_advice_acceptance",
     "export_persistent_shadow_evidence",
     "export_shadow_comparison_evidence",
     "export_unified_signal_evidence",
+    "run_advice_acceptance",
     "run_persistent_shadow_experiment",
     "run_shadow_comparison",
     "run_unified_signal_experiment",

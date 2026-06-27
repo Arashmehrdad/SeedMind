@@ -11,11 +11,15 @@ from seedmind.integration import (
     export_unified_signal_evidence,
     run_unified_signal_experiment,
 )
+from seedmind.integration.advice_acceptance import run_advice_acceptance
 from seedmind.research.ndnra import (
     EffectObservation,
     MultidimensionalExperienceGraph,
     NDNRAGrowthState,
     NDNRARuntimeAdaptiveState,
+)
+from seedmind.research.ndnra.multi_growth_experiment import (
+    run_multi_growth_experiment,
 )
 
 
@@ -153,6 +157,45 @@ def test_unified_live_signal_exports_are_ascii_and_inspectable(
     assert '"ambition_relevance_varied": true' in report
     assert timeline.startswith("step_index,actual_action,suggested_action")
     assert '"dormancy_levels"' in adaptive
+
+
+def test_complex_goal_retains_pressure_until_second_growth() -> None:
+    result = run_multi_growth_experiment()
+
+    assert not result.first_growth_goal_achieved
+    assert not result.first_growth_pressure_discharged
+    assert result.first_growth_continue_growth
+    assert result.second_growth_goal_achieved
+    assert result.second_growth_pressure_discharged
+    assert not result.second_growth_continue_growth
+    assert result.pressure_after_final_discharge < result.pressure_before_final_discharge
+    assert result.growth_step_count == 2
+    assert result.specialist_count == 2
+    assert result.duplicate_membership_blocked
+    assert result.pass_gate
+
+
+def test_bounded_advice_gate_retains_production(tmp_path: Path) -> None:
+    evidence = run_advice_acceptance(tmp_path, play_budget=18)
+    result = evidence.result
+
+    assert result.production_actions_unchanged
+    assert result.prediction_errors_unchanged
+    assert result.authority_violation_count == 0
+    assert result.disagreement_count > 0
+    assert result.comparison_count == result.disagreement_count
+    assert result.advice_count > 0
+    assert result.calibration_observation_count > 0
+    assert result.kill_switch_probe_passed
+    assert result.fallback_probe_passed
+    assert result.risk_veto_probe_passed
+    assert result.human_veto_probe_passed
+    assert result.weak_evidence_probe_passed
+    assert result.first_growth_continue_growth
+    assert result.second_growth_pressure_discharged
+    assert result.growth_budget_exhaustion_probe_passed
+    assert not result.sqlite_used_for_advice_or_growth
+    assert result.pass_gate
 
 
 def test_unified_integration_has_no_sqlite_cognitive_dependency() -> None:
