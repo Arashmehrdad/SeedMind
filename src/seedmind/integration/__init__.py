@@ -65,6 +65,13 @@ from seedmind.integration.persistent_shadow_experiment import (
     export_persistent_shadow_evidence,
     run_persistent_shadow_experiment,
 )
+from seedmind.integration.restart_safe_proposal_memory_acceptance import (
+    RestartSafeProposalMemoryAcceptanceEvidence,
+    RestartSafeProposalMemoryAcceptanceResult,
+    RestartSafeProposalMemoryObservation,
+    export_restart_safe_proposal_memory_acceptance,
+    run_restart_safe_proposal_memory_acceptance,
+)
 from seedmind.integration.shadow_experiment import (
     ShadowComparisonResult,
     export_shadow_comparison_evidence,
@@ -117,6 +124,9 @@ __all__ = [
     "NurseryOutcomeOracle",
     "PersistentShadowEvidence",
     "PersistentShadowResult",
+    "RestartSafeProposalMemoryAcceptanceEvidence",
+    "RestartSafeProposalMemoryAcceptanceResult",
+    "RestartSafeProposalMemoryObservation",
     "ShadowComparisonResult",
     "ShadowStepRecord",
     "ShadowSuggestion",
@@ -132,6 +142,7 @@ __all__ = [
     "export_consolidation_scheduling_acceptance",
     "export_contextual_mastery_acceptance",
     "export_persistent_shadow_evidence",
+    "export_restart_safe_proposal_memory_acceptance",
     "export_shadow_comparison_evidence",
     "export_unified_signal_evidence",
     "run_advice_acceptance",
@@ -140,6 +151,7 @@ __all__ = [
     "run_consolidation_scheduling_acceptance",
     "run_contextual_mastery_acceptance",
     "run_persistent_shadow_experiment",
+    "run_restart_safe_proposal_memory_acceptance",
     "run_shadow_comparison",
     "run_unified_signal_experiment",
 ]
