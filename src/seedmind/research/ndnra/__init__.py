@@ -42,6 +42,14 @@ from seedmind.research.ndnra.consolidation_reopening import (
     ConsolidationRollbackResult,
     rollback_consolidation,
 )
+from seedmind.research.ndnra.consolidation_scheduling import (
+    ConsolidationScheduleDecision,
+    ConsolidationScheduleProposal,
+    ConsolidationScheduleRequest,
+    ConsolidationScheduleStatus,
+    ConsolidationSchedulingContext,
+    ConsolidationSchedulingPolicy,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -162,6 +170,12 @@ __all__ = [
     "ConsolidationReopeningTrigger",
     "ConsolidationRollbackAuditRecord",
     "ConsolidationRollbackResult",
+    "ConsolidationScheduleDecision",
+    "ConsolidationScheduleProposal",
+    "ConsolidationScheduleRequest",
+    "ConsolidationScheduleStatus",
+    "ConsolidationSchedulingContext",
+    "ConsolidationSchedulingPolicy",
     "ConsolidationStateSnapshot",
     "ConsolidationStructureState",
     "ContextSignature",
