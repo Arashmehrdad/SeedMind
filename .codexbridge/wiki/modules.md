@@ -98,6 +98,13 @@ Run the NDNRA evidence-driven structural-growth acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_ndnra_unified_signals_gate.py`
+
+Run the unified live-signal and restored-adaptive-state acceptance gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -312,6 +319,14 @@ Typed integration boundaries between validated SeedMind subsystems.
 
 - Kind: python
 
+## `src/seedmind/integration/developmental_signals.py`
+
+Typed live developmental signals for non-authoritative NDNRA integration.
+
+- Kind: python
+- Classes: LiveDevelopmentalSignals, LiveDevelopmentalSignalProvider
+- Functions/symbols: _ambition_relevance, _action_controllability, _resource_pressure, _mean_absolute, _clamp_unit, _validate_unit
+
 ## `src/seedmind/integration/ndnra_shadow.py`
 
 Non-authoritative NDNRA observation of the live SeedMind nursery loop.
@@ -335,6 +350,22 @@ End-to-end baseline comparison for NDNRA shadow-mode integration.
 - Kind: python
 - Classes: ShadowComparisonResult
 - Functions/symbols: run_shadow_comparison, export_shadow_comparison_evidence, _build_trainer, _write_ascii_json
+
+## `src/seedmind/integration/unified_shadow.py`
+
+Unified non-authoritative NDNRA shadow session with live developmental signals.
+
+- Kind: python
+- Classes: UnifiedShadowConfig, UnifiedShadowStepRecord, UnifiedShadowResult, NDNRALiveShadowAdapter, UnifiedDevelopmentalShadowSession
+- Functions/symbols: _assembly_id, _availability_fact, _positive_intensity, _validate_unit
+
+## `src/seedmind/integration/unified_signal_experiment.py`
+
+End-to-end gate for live developmental signals and restored adaptive state.
+
+- Kind: python
+- Classes: UnifiedSignalExperimentResult, UnifiedSignalEvidence
+- Functions/symbols: run_unified_signal_experiment, export_unified_signal_evidence, _build_signal_provider, _adopted_ambition_manager, _most_dormant_assembly, _build_trainer, _write_ascii_json
 
 ## `src/seedmind/memory/__init__.py`
 
@@ -405,13 +436,21 @@ Need-Driven Neural Recruitment Architecture research prototype.
 
 - Kind: python
 
+## `src/seedmind/research/ndnra/adaptive.py`
+
+Operational adaptive state restored alongside an NDNRA local graph.
+
+- Kind: python
+- Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, NDNRARuntimeAdaptiveState
+- Functions/symbols: _validate_unit, _validate_signed
+
 ## `src/seedmind/research/ndnra/composition.py`
 
 Need-driven composition over local multidimensional experience assemblies.
 
 - Kind: python
 - Classes: ExperienceAssembly, SpecialistInteraction, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
-- Functions/symbols: _validate_code, _validate_facts
+- Functions/symbols: _scale_effects, _validate_code, _validate_facts
 
 ## `src/seedmind/research/ndnra/effects.py`
 
@@ -682,6 +721,13 @@ Tests for evidence-driven NDNRA specialist-neuron growth.
 
 - Kind: python
 - Functions/symbols: test_interaction_specialist_adds_non_additive_effect_once, test_growth_does_not_trigger_from_one_failure, test_targeted_growth_uses_high_eligibility_members, test_targeted_growth_solves_blockage_and_random_capacity_does_not, test_old_assemblies_are_preserved_without_pruning, test_complete_structural_growth_gate_passes, test_structural_growth_prototype_has_no_sqlite_dependency, test_base_graph_still_fails_without_specialist
+
+## `tests/unit/test_ndnra_unified_signals.py`
+
+Tests for live developmental signals and operational restored NDNRA state.
+
+- Kind: python
+- Functions/symbols: _signals, _shadow_graph, test_restored_dormancy_changes_live_action_accessibility_and_score, test_restored_eligibility_and_pressure_continue_instead_of_resetting, test_unified_live_signal_gate_passes_without_changing_production, test_unified_live_signal_exports_are_ascii_and_inspectable, test_unified_integration_has_no_sqlite_cognitive_dependency
 
 ## `tests/unit/test_nursery_runtime.py`
 
