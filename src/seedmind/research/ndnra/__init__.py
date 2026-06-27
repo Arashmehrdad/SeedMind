@@ -41,6 +41,9 @@ from seedmind.research.ndnra.consolidation_portfolio import (
     ConsolidationPortfolioItemDecision,
     ConsolidationPortfolioPolicy,
 )
+from seedmind.research.ndnra.consolidation_proposal_history import (
+    ConsolidationProposalLifecycleRecord,
+)
 from seedmind.research.ndnra.consolidation_proposal_lifecycle import (
     ConsolidationProposalLifecycleStatus,
     ConsolidationProposalReviewAction,
@@ -190,6 +193,7 @@ __all__ = [
     "ConsolidationPortfolioItem",
     "ConsolidationPortfolioItemDecision",
     "ConsolidationPortfolioPolicy",
+    "ConsolidationProposalLifecycleRecord",
     "ConsolidationProposalLifecycleStatus",
     "ConsolidationProposalReviewAction",
     "ConsolidationProposalReviewDecision",
