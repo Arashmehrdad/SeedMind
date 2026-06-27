@@ -20,6 +20,12 @@ from seedmind.research.ndnra.consolidation import (
     ConsolidationEligibilityPolicy,
     ConsolidationRejectionReason,
 )
+from seedmind.research.ndnra.consolidation_application import (
+    ConsolidationApplicationResult,
+    ConsolidationApplicationState,
+    ConsolidationStateSnapshot,
+    ConsolidationStructureState,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -122,10 +128,14 @@ __all__ = [
     "BrainSaveResult",
     "CompositionCandidate",
     "CompositionResult",
+    "ConsolidationApplicationResult",
+    "ConsolidationApplicationState",
     "ConsolidationCandidate",
     "ConsolidationEligibility",
     "ConsolidationEligibilityPolicy",
     "ConsolidationRejectionReason",
+    "ConsolidationStateSnapshot",
+    "ConsolidationStructureState",
     "ContextSignature",
     "ContextualExperienceLedger",
     "ContextualExperienceTrace",
