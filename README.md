@@ -8,13 +8,13 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-NDNRA consolidation proposal lifecycle research closure.
+NDNRA restart-safe proposal memory closure for the main SeedMind system.
 
-SeedMind can now identify consolidation candidates, manage explicit review decisions, preserve immutable lifecycle history, defer review, expire stale proposals, and replace an older proposal with a newer proposal for the same lesson. Synthetic and live-shadow tests show that evidence-aware lifecycle management avoids stale acceptance and preserves behaviour, learning, memory, and growth invariants.
+SeedMind can now persist complete consolidation proposal lifecycles inside the checksum-protected schema-4 brain envelope, migrate older schemas safely, reconstruct exact review history after restart, and revalidate restored proposals as current, stale, superseded, or invalid for review. Corruption tests produce complete fallback, and live-shadow tests show that persistence and revalidation leave behaviour, learning, memory, and growth unchanged.
 
-The lifecycle remains research-only, shadow-only, in-memory, and non-authoritative. An accepted proposal is approved only for possible future consideration. It cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
+Persistence remains research-only, shadow-only, and non-authoritative. An accepted proposal is approved only for possible future consideration. Persistence and revalidation cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
 
-The NDNRA heuristic theory-to-integration readiness indicator is 95%. This is an engineering progress measure, not a production-readiness or safety claim.
+The NDNRA heuristic theory-to-integration readiness indicator is 96%. This is an engineering progress measure for one SeedMind subsystem, not a production-readiness or safety claim.
 
 ## Development order
 

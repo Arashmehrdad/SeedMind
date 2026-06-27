@@ -1833,6 +1833,79 @@ The following remain deferred:
 
 Completing this stage raises the heuristic theory-to-integration readiness indicator from 94% to 95%. This reflects a newly validated lifecycle capability, not production readiness, execution safety, or general intelligence.
 
+## 13.8 Implemented restart-safe proposal memory stage
+
+Status recorded on 28 June 2026.
+
+This stage is complete as a persistence-only, review-only, research-only, shadow-only layer. It preserves complete consolidation proposal lifecycles across restart without turning persistence into cognition or execution authority.
+
+The five completed batches are:
+
+1. `555efe7` — exact versioned lifecycle checkpoint codec.
+2. `2b0fb0a` — schema-4 brain persistence and migrations from schemas 1–3.
+3. `b1ec4a3` — pure restart-time proposal revalidation.
+4. `7280954` — complete restart, corruption, stale-proposal, and live-shadow acceptance.
+5. Documentation and closure — architecture, implementation plan, handover, wiki refresh, and final validation.
+
+The implemented restart-safe flow is:
+
+```text
+immutable proposal lifecycle registry
++ versioned lifecycle checkpoint
++ checksum-protected schema-4 brain envelope
++ current contextual evidence after restart
+        -> exact proposal and review-history reconstruction
+        -> current, stale, superseded, or invalid-for-review evidence
+        -> complete fallback on corruption
+        -> no consolidation execution
+```
+
+Brain schema version 4 atomically stores graph, growth, consolidation-checkpoint, and proposal-lifecycle state. Schemas 1 and 2 migrate to empty consolidation and lifecycle checkpoints. Schema 3 preserves its consolidation checkpoint and receives an explicit empty lifecycle checkpoint. No lifecycle state is inferred from unrelated graph evidence.
+
+The lifecycle codec verifies proposal, candidate, lesson, source-event, mastery, reviewer, reason, review-decision, management-decision, capacity, and replacement identities. Internally inconsistent or authority-bearing snapshots fail reconstruction.
+
+Restart-time revalidation evaluates active restored proposals only:
+
+- `current` requires all original sources, broad mastery, contradiction-free evidence, available structures, and exact candidate equality.
+- `stale` means the evidence remains valid but additional evidence changes the candidate identity.
+- `superseded` requires a supplied newer same-lesson proposal containing the exact current candidate.
+- `invalid_for_review` means source availability, mastery, contradiction, assembly, route, or eligibility checks no longer pass.
+
+Revalidation never changes lifecycle status, review history, the registry, or the contextual ledger.
+
+Acceptance evidence confirmed:
+
+- Exact schema-4 restoration of graph, growth, accepted lifecycle, and review history.
+- Safe empty lifecycle migration from schemas 1–3.
+- Complete fresh-state fallback after outer-checksum corruption.
+- Complete fresh-state fallback after relational lifecycle corruption with a recomputed valid checksum.
+- A clean restarted accepted proposal classified as current.
+- The same proposal classified as stale after one additional independent supporting experience changed the candidate identity.
+- Stale detection preserved the accepted proposal and review history unchanged.
+
+Live-shadow acceptance compared two identical schema-4 restarts over eight ordinary learning steps. One had an empty lifecycle checkpoint; the other had one persisted accepted proposal and post-transition revalidation. Both sessions had exactly equal:
+
+- Production actions.
+- Prediction errors.
+- NDNRA suggestions.
+- Live developmental signals.
+- Final learned graph state.
+- Final growth state.
+
+The observed session produced eight current revalidation results and caused zero registry mutations, revalidation-caused ledger mutations, consolidation applications, replay triggers, restoration triggers, SQLite cognitive operations, and authority violations.
+
+The following remain deferred:
+
+- Human-approved consolidation execution.
+- Immediate final revalidation tied to an execution request.
+- Atomic application, cancellation, and failure-safe fallback.
+- Retention replay after approved application.
+- Exact interruption, restart, rollback, and restoration semantics around execution.
+- Advice, route-ranking, growth, or production-action influence.
+- Autonomous review or execution.
+
+Completing this stage raises the heuristic theory-to-integration readiness indicator from 95% to 96%. This reflects validated restart-safe proposal memory for one SeedMind subsystem, not production readiness, execution approval, or general intelligence.
+
 ---
 
 # 14. Protected safety supervisor

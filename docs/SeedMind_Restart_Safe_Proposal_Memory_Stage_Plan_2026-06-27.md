@@ -3,9 +3,9 @@
 Date: 27 June 2026
 Repository: `D:\Github\SeedMind`
 Branch: `main`
-Stage status: active
+Stage status: complete
 Authority: persistence-only, review-only, research-only, shadow-only
-Target heuristic theory-to-integration readiness after full acceptance: 96%
+Accepted heuristic theory-to-integration readiness: 96%
 
 ## 1. Stage objective
 
@@ -132,4 +132,29 @@ complete validation failure on malformed state
 
 The stage is complete only when lifecycle persistence, migration, restart revalidation, corruption fallback, and live-shadow invariance all pass while preserving every authority and cognition boundary.
 
-Completing Batch 1 alone does not raise readiness above 95%.
+All five batches passed. The accepted heuristic theory-to-integration readiness is 96%.
+
+## 7. Closure record
+
+Completed implementation commits:
+
+1. `555efe7` — exact lifecycle checkpoint codec.
+2. `2b0fb0a` — schema-4 brain persistence and migrations from schemas 1–3.
+3. `b1ec4a3` — pure restart-time revalidation.
+4. `7280954` — complete restart, corruption, stale-proposal, and live-shadow acceptance.
+5. Documentation and closure — the commit containing the stage handover.
+
+Accepted evidence:
+
+- Schema 4 exactly restored graph, growth, lifecycle, and review-history state.
+- Schema 1, 2, and 3 migration produced an explicit empty lifecycle checkpoint.
+- Schema 3 retained its existing consolidation checkpoint.
+- Outer-checksum corruption produced complete fresh-state fallback.
+- Relational lifecycle corruption with a valid recomputed outer checksum also produced complete fresh-state fallback.
+- A clean restart classified the persisted accepted proposal as current.
+- One additional independent supporting event changed the candidate identity and classified the persisted acceptance as stale.
+- Stale detection preserved the accepted lifecycle and review history unchanged.
+- Eight live post-transition revalidations left production actions, prediction errors, suggestions, developmental signals, graph learning, and growth exactly equal to the control.
+- Registry mutations, revalidation-caused ledger mutations, consolidation applications, replay triggers, restoration triggers, SQLite cognition, and authority violations remained zero.
+
+Completing the stage justifies 96% heuristic theory-to-integration readiness. It does not authorize consolidation execution, automatic replay, checkpoint restoration, advice or growth influence, or production action authority.

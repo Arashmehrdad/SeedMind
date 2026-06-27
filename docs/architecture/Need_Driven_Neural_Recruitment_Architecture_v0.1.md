@@ -1293,9 +1293,80 @@ The live-shadow acceptance gate attaches scheduling and lifecycle review after o
 14. Action-authority violations remain zero.
 15. SQLite remains outside lifecycle cognition.
 
-Accepted means approved only for possible future consideration. It does not authorize application, replay, restoration, route ranking, advice, growth, or production actions. Lifecycle state remains in memory and brain persistence remains schema version 3.
+Accepted means approved only for possible future consideration. It does not authorize application, replay, restoration, route ranking, advice, growth, or production actions. During this lifecycle stage, state remained in memory and brain persistence remained schema version 3.
 
 The validated lifecycle gate raises heuristic theory-to-integration readiness from 94% to 95%. This is an engineering progress indicator, not a probability, safety certification, execution approval, or production-readiness claim.
+
+### 17.17 Restart-safe proposal memory
+
+Restart-safe proposal memory preserves immutable lifecycle evidence across process restart while keeping persistence and revalidation outside cognition and action authority.
+
+```text
+immutable lifecycle registry
++ versioned lifecycle checkpoint
++ checksum-protected schema-4 brain envelope
++ current contextual evidence after restart
+        -> exact reconstruction
+        -> current, stale, superseded, or invalid-for-review evidence
+        -> complete corruption fallback
+        -> no consolidation execution
+```
+
+The lifecycle checkpoint schema is independent from the outer brain schema. The checkpoint codec reconstructs proposals, candidates, mastery snapshots, source-event identities, review decisions, ordered history, management decisions, archived records, active records, capacity, and replacement links. It recalculates deterministic review and management decision identities rather than trusting stored hashes.
+
+The codec rejects:
+
+1. Incompatible checkpoint schema or version.
+2. Authority-bearing checkpoint, registry, record, review, or management state.
+3. Altered review or management decision identities.
+4. Invalid lifecycle transitions or derived deferral state.
+5. Incorrect active-record counts.
+6. Candidate and mastery-source mismatches.
+7. Replaced proposals whose exact replacement record is absent.
+8. Invalid same-lesson or proposal-time relationships.
+
+Brain schema version 4 atomically stores graph, growth, consolidation-checkpoint, and proposal-lifecycle state in one checksum-protected envelope. The existing deterministic ASCII encoding, temporary-file write, flush, file sync, atomic replacement, and cleanup rules remain unchanged.
+
+Migration is explicit:
+
+- Schema 1 restores its supported graph form and creates empty consolidation and lifecycle checkpoints.
+- Schema 2 restores contextual graph memory and creates empty consolidation and lifecycle checkpoints.
+- Schema 3 preserves its consolidation checkpoint and creates an empty lifecycle checkpoint.
+- Schema 4 restores and validates every persisted subsystem together.
+
+A missing, malformed, checksum-invalid, incompatible, or relationally inconsistent schema-4 lifecycle payload causes complete fresh-state fallback. Partial graph, growth, consolidation, or lifecycle restoration is forbidden.
+
+Restart revalidation is a pure evidence policy. It evaluates active lifecycle records only and returns:
+
+- `current` when original sources, broad mastery, contradiction state, structures, and exact candidate identity all remain valid.
+- `stale` when the proposal remains review-eligible but additional evidence changes the candidate identity.
+- `superseded` when a supplied newer same-lesson proposal exactly represents the current candidate.
+- `invalid_for_review` when source events, mastery, contradictions, assemblies, routes, or other eligibility conditions fail.
+
+Revalidation cannot create, accept, reject, defer, expire, replace, or delete proposals. It cannot change lifecycle status, ordered review history, contextual evidence, graph state, growth state, or persisted state.
+
+The restart-safe acceptance gate requires:
+
+1. Schema 4 exactly restores graph, growth, lifecycle, and review history.
+2. The outer checksum verifies and no temporary file remains.
+3. Schemas 1, 2, and 3 migrate to an explicit empty lifecycle checkpoint.
+4. Schema 3 preserves its existing consolidation checkpoint.
+5. Outer-checksum corruption produces complete fresh-state fallback.
+6. Relational lifecycle corruption with a recomputed valid outer checksum also produces complete fresh-state fallback.
+7. A clean restored accepted proposal revalidates as current.
+8. Additional independent supporting evidence changes the candidate identity and revalidates the stored acceptance as stale.
+9. Stale detection preserves the registry and review history unchanged.
+10. Persisted-revalidation and empty-lifecycle control sessions produce identical production actions.
+11. Prediction errors remain identical.
+12. NDNRA suggestions remain identical.
+13. Live developmental signals remain identical.
+14. Final learned graph state remains identical.
+15. Final growth state remains identical.
+16. Registry and contextual-ledger mutations caused by revalidation remain zero.
+17. Consolidation applications, replay triggers, and restoration triggers remain zero.
+18. SQLite cognitive operations and action-authority violations remain zero.
+
+Passing this gate raises heuristic theory-to-integration readiness from 95% to 96%. This is an engineering progress indicator for restart-safe proposal evidence, not execution approval, production readiness, or a general-intelligence claim.
 
 ## 18. Architectural invariants
 
@@ -1323,7 +1394,12 @@ The following rules must remain true:
 20. Proposal lifecycle decisions preserve immutable proposal evidence and complete ordered review history.
 21. Accepted lifecycle status never implies consolidation, replay, restoration, advice, growth, or action authority.
 22. Expired and replaced proposals remain inspectable; replacement cannot silently overwrite an earlier proposal.
-23. Lifecycle state remains bounded, caller-driven, and outside persistent cognition until a separate restart-safety gate passes.
+23. Persisted lifecycle state remains bounded, caller-driven, and reconstruction-only; storage never becomes cognitive lookup or an execution queue.
+24. Brain schema migration must create explicit empty lifecycle state rather than infer missing review history.
+25. Corrupt lifecycle state must invalidate the complete load; partial graph or proposal restoration is forbidden.
+26. Restart revalidation must compare persisted proposals with current evidence before any future execution stage may use them.
+27. Revalidation classifications never mutate lifecycle status, review history, contextual evidence, graph state, or growth state.
+28. Stale, superseded, and invalid-for-review results remain inspectable and cannot trigger silent deletion or automatic application.
 
 ## 19. First prototype boundary
 
