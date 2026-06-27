@@ -35,6 +35,12 @@ from seedmind.research.ndnra.consolidation_interference_experiment import (
     OverlappingLessonMemorySnapshot,
     run_consolidation_interference_experiment,
 )
+from seedmind.research.ndnra.consolidation_portfolio import (
+    ConsolidationPortfolioDecision,
+    ConsolidationPortfolioItem,
+    ConsolidationPortfolioItemDecision,
+    ConsolidationPortfolioPolicy,
+)
 from seedmind.research.ndnra.consolidation_reopening import (
     ConsolidationReopeningDecision,
     ConsolidationReopeningPolicy,
@@ -164,6 +170,10 @@ __all__ = [
     "ConsolidationInterferenceConfig",
     "ConsolidationInterferenceExperimentEvidence",
     "ConsolidationInterferenceExperimentResult",
+    "ConsolidationPortfolioDecision",
+    "ConsolidationPortfolioItem",
+    "ConsolidationPortfolioItemDecision",
+    "ConsolidationPortfolioPolicy",
     "ConsolidationRejectionReason",
     "ConsolidationReopeningDecision",
     "ConsolidationReopeningPolicy",
