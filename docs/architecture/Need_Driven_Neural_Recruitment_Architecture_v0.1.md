@@ -1018,6 +1018,92 @@ The multi-growth acceptance gate requires:
 9. Budget exhaustion without resolution stops further growth without erasing pressure.
 10. SQLite remains outside growth selection and pressure discharge.
 
+## 17.12 Contextual experiential redundancy and mastery
+
+The bounded advice and growth stages originally accumulated evidence at the action-assembly level. That was sufficient for local consequence learning, but raw occurrence counts could not distinguish an exact duplicate, a copied replay, an independent contextual experience, or a broadly transferred lesson.
+
+The contextual-memory stage adds an inspectable ledger beside the existing local assemblies. It does not replace those assemblies and it does not gain action authority.
+
+Each contextual trace contains:
+
+```text
+event identity
+correlation group
+assembly and route identity
+action code
+grounded pre-action context
+observed effects
+optional transfer result
+```
+
+Event identity is limited to source, episode, and step. Only the same event identity with the same payload is deduplicated. Reusing an identity with a different payload is an explicit conflict. Different event identities remain separate even when their content is similar.
+
+Correlation groups preserve copied or replayed traces for inspection while allowing the action assembly and mastery estimator to count the source group only once. Independent correlation groups may each advance local aggregate evidence.
+
+Context signatures contain only grounded pre-action information:
+
+```text
+active need code
+quantized sensor channels
+available action codes
+quantized human channels
+quantized resource channels
+```
+
+Retrospective semantic labels are not inserted into the context signature.
+
+Mastery remains multidimensional rather than becoming another raw count:
+
+```text
+repetition strength
+context diversity
+route diversity
+causal consistency
+transfer success
+protective strength
+```
+
+The bounded mastery score is:
+
+```text
+0.20 * repetition strength
++ 0.25 * context diversity
++ 0.20 * route diversity
++ 0.20 * causal consistency
++ 0.15 * transfer success
+```
+
+Broad mastery additionally requires at least three effective independent supports, three grounded contexts, two surviving routes, causal consistency of at least 0.75, transfer success of at least 0.50, and a mastery score of at least 0.75.
+
+Protective strength is evaluated separately. A single severe experience may create a strong context-bounded protective memory without being mislabeled as broad mastery.
+
+Generalized lesson profiles retain the event identities of every contributing trace. Contradictory evidence remains visible, increases the contradiction count, and lowers causal consistency and mastery rather than being deleted.
+
+Multiple valid routes remain available. Their shadow-only ranking combines correlation-discounted support, present-context similarity, and causal consistency. A different current context may therefore prefer a different route without erasing the alternatives.
+
+The live shadow adapter records one independent contextual trace for each production transition. Contextual recording can be disabled only as an experimental control. In both conditions, production curiosity retains action authority and the NDNRA suggestion remains non-authoritative.
+
+Brain persistence advances to schema version 2 and stores the contextual ledger with the graph. Version 1 states migrate deterministically by preserving their existing assemblies, links, specialists, and adaptive state while starting with an empty contextual ledger. SQLite remains outside contextual learning, route ranking, mastery evaluation, and persistence reconstruction.
+
+The contextual-mastery acceptance gate requires:
+
+1. Exact duplicate ingestion leaves one trace and one aggregate evidence update.
+2. Conflicting reuse of an event identity fails explicitly.
+3. Legitimate repeated experiences remain separate.
+4. Six replay traces from one correlation group contribute no more than one independent support unit.
+5. Independent varied experiences produce greater effective support and mastery than replay copies.
+6. A severe one-shot experience creates strong protection without broad mastery.
+7. Varied contexts, multiple routes, and successful transfer can establish broad mastery.
+8. Route preference may change with grounded context while all valid routes remain inspectable.
+9. Contradictory evidence lowers consistency and mastery without erasing sources.
+10. Every generalized lesson can resolve its source event identities.
+11. Schema version 2 round-trips exactly and version 1 migrates safely.
+12. Production actions and prediction errors remain identical to the untracked shadow control.
+13. Action-authority violations remain zero.
+14. SQLite remains outside the cognitive path.
+
+The validated gate raises heuristic theory-to-integration readiness from 91% to 94%. This does not authorize production actions or make mastery scores inputs to bounded advice or structural growth selection.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1034,6 +1120,11 @@ The following rules must remain true:
 10. Curiosity and ambition provide growth pressure, not uncontrolled neuron creation.
 11. SQLite remains outside the future cognitive decision loop.
 12. Every implementation step must remain inspectable and experimentally falsifiable.
+13. Only exact event identity is deduplicated; legitimate contextual repetitions remain separate.
+14. Copied or correlated evidence cannot multiply independent support.
+15. Repetition strength, context diversity, route diversity, causality, transfer, and protection remain distinct measures.
+16. Generalized lessons retain inspectable references to their episodic source traces.
+17. Contextual mastery remains non-authoritative until a later explicit integration gate.
 
 ## 19. First prototype boundary
 
