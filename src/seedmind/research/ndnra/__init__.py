@@ -67,6 +67,11 @@ from seedmind.research.ndnra.consolidation_proposal_management import (
     ConsolidationProposalManagementDecision,
     ConsolidationProposalManagementRequest,
 )
+from seedmind.research.ndnra.consolidation_proposal_persistence import (
+    PROPOSAL_LIFECYCLE_SCHEMA,
+    PROPOSAL_LIFECYCLE_SCHEMA_VERSION,
+    NDNRAProposalLifecycleCheckpoint,
+)
 from seedmind.research.ndnra.consolidation_reopening import (
     ConsolidationReopeningDecision,
     ConsolidationReopeningPolicy,
@@ -188,6 +193,8 @@ from seedmind.research.ndnra.persistence import (
 __all__ = [
     "BRAIN_SCHEMA",
     "BRAIN_SCHEMA_VERSION",
+    "PROPOSAL_LIFECYCLE_SCHEMA",
+    "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
     "AdaptiveRuntimeConfig",
     "AdaptiveUpdate",
     "BrainLoadResult",
@@ -282,6 +289,7 @@ __all__ = [
     "NDNRAConsolidationCheckpoint",
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
+    "NDNRAProposalLifecycleCheckpoint",
     "NDNRARuntimeAdaptiveState",
     "NeedDimension",
     "NeedDrivenComposer",
