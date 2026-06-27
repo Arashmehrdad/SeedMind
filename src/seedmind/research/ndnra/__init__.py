@@ -26,6 +26,15 @@ from seedmind.research.ndnra.consolidation_application import (
     ConsolidationStateSnapshot,
     ConsolidationStructureState,
 )
+from seedmind.research.ndnra.consolidation_interference_experiment import (
+    ConsolidationInterferenceCondition,
+    ConsolidationInterferenceConditionResult,
+    ConsolidationInterferenceConfig,
+    ConsolidationInterferenceExperimentEvidence,
+    ConsolidationInterferenceExperimentResult,
+    OverlappingLessonMemorySnapshot,
+    run_consolidation_interference_experiment,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -133,6 +142,11 @@ __all__ = [
     "ConsolidationCandidate",
     "ConsolidationEligibility",
     "ConsolidationEligibilityPolicy",
+    "ConsolidationInterferenceCondition",
+    "ConsolidationInterferenceConditionResult",
+    "ConsolidationInterferenceConfig",
+    "ConsolidationInterferenceExperimentEvidence",
+    "ConsolidationInterferenceExperimentResult",
     "ConsolidationRejectionReason",
     "ConsolidationStateSnapshot",
     "ConsolidationStructureState",
@@ -178,6 +192,7 @@ __all__ = [
     "NeedDrivenComposer",
     "NeedPulse",
     "NeuronKind",
+    "OverlappingLessonMemorySnapshot",
     "PressureDischarge",
     "RecallEpisodeResult",
     "RecallResult",
@@ -198,6 +213,7 @@ __all__ = [
     "export_ndnra_evidence",
     "export_structural_growth_evidence",
     "grow_random_specialist",
+    "run_consolidation_interference_experiment",
     "run_contextual_mastery_experiment",
     "run_ndnra_heat_fan_experiment",
     "run_ndnra_multieffect_experiment",
