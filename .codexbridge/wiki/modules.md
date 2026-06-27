@@ -380,6 +380,14 @@ Live-shadow acceptance gate for persisted reversible NDNRA consolidation.
 - Classes: ConsolidationAcceptanceResult, ConsolidationAcceptanceEvidence
 - Functions/symbols: run_consolidation_acceptance, export_consolidation_acceptance, _build_live_checkpoint, _record_later_contradiction, _action_value, _write_ascii_json
 
+## `src/seedmind/integration/consolidation_proposal_lifecycle_acceptance.py`
+
+Live-shadow acceptance for non-authoritative NDNRA proposal lifecycles.
+
+- Kind: python
+- Classes: ConsolidationProposalLifecycleShadowObservation, ConsolidationProposalLifecycleAcceptanceResult, ConsolidationProposalLifecycleAcceptanceEvidence, _LifecycleObservedShadowAdapter
+- Functions/symbols: run_consolidation_proposal_lifecycle_acceptance, export_consolidation_proposal_lifecycle_acceptance, _build_live_lifecycle_request, _action_value, _write_ascii_json, _validate_code
+
 ## `src/seedmind/integration/consolidation_scheduling_acceptance.py`
 
 Live-shadow acceptance for proposal-only NDNRA consolidation scheduling.
@@ -568,6 +576,38 @@ Pure multi-lesson prioritisation for NDNRA consolidation proposals.
 - Kind: python
 - Classes: ConsolidationPortfolioItem, ConsolidationPortfolioItemDecision, ConsolidationPortfolioDecision, ConsolidationPortfolioPolicy
 - Functions/symbols: _validated_items, _lesson_key, _priority_key
+
+## `src/seedmind/research/ndnra/consolidation_proposal_history.py`
+
+Immutable in-memory history for NDNRA consolidation proposal review.
+
+- Kind: python
+- Classes: ConsolidationProposalLifecycleRecord
+- Functions/symbols: _validate_history
+
+## `src/seedmind/research/ndnra/consolidation_proposal_lifecycle.py`
+
+Pure review-only lifecycle decisions for NDNRA consolidation proposals.
+
+- Kind: python
+- Classes: ConsolidationProposalReviewAction, ConsolidationProposalLifecycleStatus, ConsolidationProposalReviewRequest, ConsolidationProposalReviewDecision, ConsolidationProposalReviewPolicy
+- Functions/symbols: _status_for, _decision_id, _validate_code, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/consolidation_proposal_lifecycle_experiment.py`
+
+Deterministic strategy comparison for NDNRA proposal lifecycle management.
+
+- Kind: python
+- Classes: ConsolidationProposalLifecycleStrategy, ConsolidationProposalLifecycleEvent, ConsolidationProposalLifecycleStrategyResult, ConsolidationProposalLifecycleExperimentResult
+- Functions/symbols: run_consolidation_proposal_lifecycle_experiment, export_consolidation_proposal_lifecycle_experiment, _run_strategy, _strategy_result, _event, _review_request, _evolving_proposals, _trace, _validate_code, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/consolidation_proposal_management.py`
+
+Bounded in-memory management for NDNRA consolidation proposal lifecycles.
+
+- Kind: python
+- Classes: ConsolidationProposalManagementAction, ConsolidationProposalDisposition, ConsolidationProposalManagementRequest, ConsolidationProposalManagementDecision, ConsolidationProposalManagedRecord, ConsolidationProposalLifecycleRegistry
+- Functions/symbols: _validate_replacement, _management_decision, _disposition_for, _latest_lifecycle_episode, _validate_code, _validate_nonnegative_int, _validate_positive_int
 
 ## `src/seedmind/research/ndnra/consolidation_reopening.py`
 
@@ -894,6 +934,41 @@ Tests for pure multi-lesson consolidation proposal prioritisation.
 
 - Kind: python
 - Functions/symbols: _record_mastery, _request, _portfolio_fixture, test_portfolio_selects_most_overdue_ready_lesson, test_portfolio_preserves_ineligible_lesson_decision, test_equivalent_input_order_produces_identical_portfolio, test_proposal_limit_keeps_unselected_candidates_visible, test_remaining_active_capacity_bounds_portfolio_selection, test_portfolio_does_not_mutate_contextual_evidence, test_duplicate_lesson_requests_are_rejected, test_portfolio_requires_shared_evaluation_episode_and_active_candidates, test_portfolio_module_has_no_execution_or_integration_dependency
+
+## `tests/unit/test_ndnra_consolidation_proposal_history.py`
+
+Tests for immutable NDNRA consolidation proposal lifecycle history.
+
+- Kind: python
+- Functions/symbols: _proposal, _request, test_pending_record_preserves_original_proposal_without_authority, test_accept_returns_new_record_and_preserves_pending_record, test_rejected_and_accepted_records_are_terminal, test_deferred_record_can_be_reviewed_at_due_episode, test_deferred_record_rejects_early_or_non_increasing_review, test_record_rejects_review_for_different_proposal, test_constructor_rejects_duplicate_or_terminal_successor_history, test_constructor_rejects_status_mismatch_and_early_reconstruction, test_lifecycle_snapshot_preserves_complete_ascii_history, test_history_module_has_no_execution_persistence_timer_or_sql_dependency
+
+## `tests/unit/test_ndnra_consolidation_proposal_lifecycle.py`
+
+Tests for pure review-only consolidation proposal lifecycle decisions.
+
+- Kind: python
+- Functions/symbols: _proposal, test_accept_is_deterministic_and_non_authoritative, test_reject_preserves_proposal_and_reason, test_defer_requires_future_review_episode, test_non_deferred_review_rejects_defer_episode, test_review_cannot_precede_proposal, test_review_decision_rejects_execution_authority_and_status_mismatch, test_review_snapshot_is_ascii_inspectable, test_review_module_has_no_execution_timer_persistence_or_sql_dependency
+
+## `tests/unit/test_ndnra_consolidation_proposal_lifecycle_acceptance.py`
+
+Tests for live-shadow consolidation proposal lifecycle acceptance.
+
+- Kind: python
+- Functions/symbols: test_live_lifecycle_does_not_change_seedmind_behavior, test_live_lifecycle_defers_then_accepts_one_proposal, test_live_lifecycle_retains_history_without_execution, test_lifecycle_acceptance_exports_are_ascii_and_inspectable, test_lifecycle_acceptance_has_no_application_or_sqlite_path
+
+## `tests/unit/test_ndnra_consolidation_proposal_lifecycle_experiment.py`
+
+Tests for the NDNRA consolidation proposal lifecycle experiment.
+
+- Kind: python
+- Functions/symbols: _by_strategy, test_automatic_acceptance_keeps_a_stale_candidate, test_permanent_deferral_avoids_acceptance_but_delays_current_review, test_evidence_aware_strategy_replaces_then_accepts_current_proposal, test_experiment_is_exactly_deterministic, test_experiment_preserves_history_without_execution_or_sqlite, test_lifecycle_experiment_export_is_ascii_and_inspectable, test_lifecycle_experiment_has_no_application_persistence_or_integration_dependency
+
+## `tests/unit/test_ndnra_consolidation_proposal_management.py`
+
+Tests for bounded NDNRA consolidation proposal lifecycle management.
+
+- Kind: python
+- Functions/symbols: _proposal, _review_request, _management_request, test_registry_adds_pending_record_with_bounded_capacity, test_rejection_releases_capacity_but_preserves_record, test_accepted_record_continues_to_consume_capacity, test_deferred_record_can_be_reviewed_when_due_through_registry, test_expiry_is_deterministic_preserves_history_and_releases_capacity, test_replacement_preserves_old_and_new_proposals_with_one_active_record, test_replacement_rejects_wrong_lesson_old_or_future_proposal, test_registry_rejects_stale_target_and_candidate_mismatch, test_registry_rejects_management_of_closed_record, test_management_must_follow_latest_review_episode, test_registry_rejects_duplicate_proposal_and_active_lesson, test_management_request_and_decision_validate_replacement_contract, test_registry_snapshot_is_ascii_and_preserves_archived_records, test_managed_record_rejects_execution_authority, test_management_module_has_no_execution_persistence_timer_or_sql_dependency
 
 ## `tests/unit/test_ndnra_consolidation_reopening.py`
 

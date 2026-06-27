@@ -1769,6 +1769,70 @@ The following remain deferred:
 
 Completing this stage does not raise the 94% heuristic readiness indicator. It adds scheduling evidence and clearer authority boundaries, not production readiness.
 
+## 13.7 Implemented consolidation proposal lifecycle stage
+
+Status recorded on 27 June 2026.
+
+This stage is complete as a review-only, research-only, shadow-only lifecycle layer. It manages immutable consolidation proposals without applying them.
+
+The five completed batches are:
+
+1. `00ac54c` — explicit accept, reject, and defer review decisions with deterministic identities and no execution authority.
+2. `ab5167e` — immutable lifecycle records with ordered history and strict transition validation.
+3. `2d5f3c8` — bounded in-memory registry with expiry, same-lesson replacement, stale-input checks, and active-capacity limits.
+4. `a46b662` — controlled strategy comparison and live-shadow invariance acceptance.
+5. Documentation and closure — architecture, implementation plan, stage handover, wiki refresh, and final validation.
+
+The implemented lifecycle flow is:
+
+```text
+immutable scheduling proposal
++ explicit caller review action
++ bounded active capacity
++ newer evidence when available
+        -> pending, accepted, rejected, or deferred review state
+        -> explicit expiry or same-lesson replacement
+        -> complete immutable history
+        -> no consolidation execution
+```
+
+Accepted means approved only for possible future consideration. It does not change stability, plasticity, contextual evidence, replay state, checkpoint state, advice, growth, or production actions.
+
+The immutable registry permits at most one active proposal per lesson. Pending, deferred, and accepted proposals consume active capacity. Rejected, expired, and replaced proposals remain archived and release capacity. Replacement requires a different newer proposal for the same lesson and preserves both proposal and candidate identities.
+
+The synthetic lifecycle experiment uses additional independent evidence to create an older proposal and a newer current proposal for the same lesson.
+
+| Strategy | Stale acceptances | Current proposal blocked | Current review delay | Retained records | History events | Current accepted |
+|---|---:|---:|---:|---:|---:|---:|
+| Automatic acceptance | 1 | 1 | 4 episodes | 1 | 1 | No |
+| Permanent deferral | 0 | 1 | 4 episodes | 1 | 1 | No |
+| Evidence-aware explicit | 0 | 0 | 1 episode | 2 | 3 | Yes |
+
+The evidence-aware strategy deferred the old proposal, replaced it when the newer same-lesson candidate appeared, preserved both versions, and accepted only the current proposal. It produced no stale acceptance, unnecessary rejection, duplicate decision, consolidation application, SQLite cognition, or action-authority violation.
+
+Live-shadow acceptance evaluated lifecycle observation over eight ordinary learning steps. It created one proposal, recorded one defer and one accept decision, and retained both decisions. The lifecycle-observed and control sessions had exactly equal:
+
+- Production actions.
+- Prediction errors.
+- NDNRA suggestions.
+- Live developmental signals.
+- Learned graph state.
+- Growth state.
+
+The observer caused zero contextual-ledger mutations, consolidation applications, SQLite cognitive operations, and authority violations.
+
+The following remain deferred:
+
+- Restart-safe lifecycle persistence.
+- Revalidation of accepted proposals before execution.
+- Human-approved or policy-approved consolidation application.
+- Retention replay triggered by an approved application.
+- Cancellation, failure fallback, restart safety, and exact rollback around execution.
+- Advice, growth, route-ranking, or production-action influence.
+- Autonomous review or execution.
+
+Completing this stage raises the heuristic theory-to-integration readiness indicator from 94% to 95%. This reflects a newly validated lifecycle capability, not production readiness, execution safety, or general intelligence.
+
 ---
 
 # 14. Protected safety supervisor

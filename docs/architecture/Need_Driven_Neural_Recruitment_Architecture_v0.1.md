@@ -1236,6 +1236,67 @@ The validated scheduler is therefore an inspectable proposal generator only. It 
 
 The heuristic readiness remains 94%; proposal scheduling adds evidence and control boundaries but does not justify a higher production-readiness claim.
 
+### 17.16 Consolidation proposal lifecycle management
+
+The lifecycle stage manages the review state of immutable scheduling proposals while remaining separate from consolidation application.
+
+```text
+immutable scheduling proposal
++ explicit caller review action
++ bounded active lifecycle capacity
++ newer same-lesson proposal when available
+        -> immutable lifecycle record
+        -> accepted, rejected, deferred, expired, or replaced state
+        -> no consolidation execution
+```
+
+Review actions are explicit caller inputs. Accept, reject, and defer requests include the proposal, decision episode, reviewer identity, and reason. Deferral also includes a future review episode. Every decision receives a deterministic identity and preserves the original scheduling proposal unchanged.
+
+Lifecycle records begin pending and preserve their complete ordered review history. Decision episodes must increase strictly. Deferred proposals cannot be reviewed before their declared review episode. Accepted and rejected review states are terminal during this stage. Proposal substitution, duplicate decisions, conflicting history reconstruction, and altered state relationships fail explicitly.
+
+The bounded in-memory registry permits at most one active proposal per lesson and applies a caller-configured active-capacity limit. Pending, deferred, and accepted records consume capacity. Rejected, expired, and replaced records remain inspectable but release capacity.
+
+Expiry is an explicit terminal management decision. Replacement requires:
+
+1. The exact target proposal identity.
+2. The expected current candidate identity.
+3. A different replacement proposal.
+4. The same lesson identity.
+5. A newer proposal episode.
+6. A replacement that already exists by the management decision episode.
+
+Replacement closes the older record, preserves its entire lifecycle, and opens the newer proposal as pending. Both versions remain inspectable. Stale proposal identities, candidate mismatches, duplicate identities, wrong-lesson replacements, older replacements, future-dated replacements, and management of closed records fail before registry replacement.
+
+A deterministic lifecycle experiment compares:
+
+1. Automatic acceptance of the first valid proposal.
+2. Permanent deferral.
+3. Evidence-aware explicit management.
+
+Additional independent evidence changes the candidate identity for the same lesson. Automatic acceptance therefore leaves one stale accepted candidate and blocks the current proposal. Permanent deferral avoids stale acceptance but still blocks the current proposal. Evidence-aware management defers the old proposal, replaces it when the newer candidate appears, and accepts the current proposal after one episode while preserving both records.
+
+The live-shadow acceptance gate attaches scheduling and lifecycle review after ordinary learning. It creates one proposal, defers it for a bounded interval, and later accepts it for future consideration. Passing requires:
+
+1. The synthetic lifecycle comparison passes.
+2. Live graph assemblies support an eligible contextual lesson.
+3. Production actions remain identical to the control.
+4. Prediction-error sequences remain identical.
+5. NDNRA suggestion sequences remain identical.
+6. Live developmental signals remain identical.
+7. Learned graph state remains identical.
+8. Growth state remains identical.
+9. Exactly one proposal is scheduled.
+10. Exactly one defer and one accept review are recorded.
+11. Complete lifecycle history remains inspectable.
+12. Contextual evidence remains unchanged by lifecycle operations.
+13. Consolidation application count remains zero.
+14. Action-authority violations remain zero.
+15. SQLite remains outside lifecycle cognition.
+
+Accepted means approved only for possible future consideration. It does not authorize application, replay, restoration, route ranking, advice, growth, or production actions. Lifecycle state remains in memory and brain persistence remains schema version 3.
+
+The validated lifecycle gate raises heuristic theory-to-integration readiness from 94% to 95%. This is an engineering progress indicator, not a probability, safety certification, execution approval, or production-readiness claim.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1259,6 +1320,10 @@ The following rules must remain true:
 17. Contextual mastery remains non-authoritative until a later explicit integration gate.
 18. Consolidation scheduling may propose review candidates but cannot execute consolidation or replay.
 19. Unselected and active scheduling candidates remain inspectable and cannot silently erase one another.
+20. Proposal lifecycle decisions preserve immutable proposal evidence and complete ordered review history.
+21. Accepted lifecycle status never implies consolidation, replay, restoration, advice, growth, or action authority.
+22. Expired and replaced proposals remain inspectable; replacement cannot silently overwrite an earlier proposal.
+23. Lifecycle state remains bounded, caller-driven, and outside persistent cognition until a separate restart-safety gate passes.
 
 ## 19. First prototype boundary
 

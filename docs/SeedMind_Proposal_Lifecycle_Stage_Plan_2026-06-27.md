@@ -3,9 +3,9 @@
 Date: 27 June 2026
 Repository: `D:\Github\SeedMind`
 Branch: `main`
-Stage status: active
+Stage status: complete
 Authority: review-only, research-only, shadow-only
-Target heuristic readiness after full acceptance: 95%
+Accepted heuristic theory-to-integration readiness: 95%
 
 ## 1. Stage objective
 
@@ -151,4 +151,25 @@ Expiry and replacement are reserved for Batch 3.
 
 The stage is complete only when proposal review, history, deferral, expiry, and replacement have deterministic synthetic and live-shadow acceptance evidence while preserving all authority and cognition boundaries.
 
-Completing the lifecycle stage may justify 95% heuristic theory-to-integration readiness. It does not authorize proposal execution and is not a production-readiness claim.
+Completing the lifecycle stage justifies 95% heuristic theory-to-integration readiness because all five batches, including synthetic and live-shadow acceptance, passed while preserving every authority boundary. It does not authorize proposal execution and is not a production-readiness claim.
+
+## 7. Closure record
+
+Completed implementation commits:
+
+1. `00ac54c` — single-proposal review contract.
+2. `ab5167e` — immutable lifecycle history.
+3. `2d5f3c8` — expiry, replacement, stale-input protection, and bounded capacity.
+4. `a46b662` — synthetic comparison and live-shadow acceptance.
+5. Documentation and closure — the commit containing the stage handover.
+
+Accepted evidence:
+
+- Automatic acceptance produced one stale accepted candidate and blocked the newer proposal.
+- Permanent deferral avoided stale acceptance but blocked the newer proposal with four episodes of delay.
+- Evidence-aware management deferred the old proposal, replaced it with a newer same-lesson proposal, accepted the current proposal after one episode, preserved two records and three lifecycle events, and produced no stale acceptance, unnecessary rejection, or duplicate decision.
+- Live-shadow observation scheduled one proposal, recorded one defer and one accept decision, and preserved two review decisions.
+- Production actions, prediction errors, suggestions, developmental signals, graph state, and growth state remained exactly equal to the control.
+- Contextual-ledger mutations, consolidation applications, SQLite cognition, and authority violations remained zero.
+
+The next stage requires a new plan and must not connect accepted proposals to execution by assumption.

@@ -8,11 +8,13 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-Proposal-only NDNRA consolidation scheduling research closure.
+NDNRA consolidation proposal lifecycle research closure.
 
-SeedMind can now identify and rank consolidation candidates for review using contextual mastery, timing, and bounded proposal capacity. Synthetic and live-shadow tests show that the scheduler avoids weak or repeated suggestions without changing SeedMind's actions, predictions, suggestions, learning, memory graph, or growth state.
+SeedMind can now identify consolidation candidates, manage explicit review decisions, preserve immutable lifecycle history, defer review, expire stale proposals, and replace an older proposal with a newer proposal for the same lesson. Synthetic and live-shadow tests show that evidence-aware lifecycle management avoids stale acceptance and preserves behaviour, learning, memory, and growth invariants.
 
-The scheduler remains research-only, shadow-only, and non-authoritative. It cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
+The lifecycle remains research-only, shadow-only, in-memory, and non-authoritative. An accepted proposal is approved only for possible future consideration. It cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
+
+The NDNRA heuristic theory-to-integration readiness indicator is 95%. This is an engineering progress measure, not a production-readiness or safety claim.
 
 ## Development order
 
