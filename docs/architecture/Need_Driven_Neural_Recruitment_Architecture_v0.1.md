@@ -802,6 +802,54 @@ The gate passes only when:
 
 Shadow-mode agreement is diagnostic rather than a promotion criterion. NDNRA may disagree with the production policy without failing the safety boundary. Any future advisory or control authority requires a separate comparison, fallback, and rollback gate.
 
+### 17.8 Persistent local brain state
+
+NDNRA must survive process restarts without turning a database into its cognitive memory.
+
+Persistence stores a reconstruction snapshot of the local neural state:
+
+```text
+experience assemblies
+local sparse effect dimensions
+signed effect estimates
+confidence and evidence counts
+synapse-like links and usage counts
+specialist interaction neurons
+growth pressure and eligibility metadata
+dormancy levels
+```
+
+The persisted file is not searched for an answer. Loading reconstructs the in-memory graph, after which normal need-driven recruitment produces recall and suggestions.
+
+```text
+save:
+    local graph state
+    -> versioned checksum envelope
+    -> temporary file
+    -> flush and atomic replacement
+
+load:
+    validate schema and checksum
+    -> reconstruct assemblies, links, effects, and specialists
+    -> resume ordinary local recruitment
+```
+
+The persistence boundary must provide:
+
+1. A named schema and explicit schema version.
+2. Deterministic ASCII evidence for the initial implementation.
+3. A checksum over the canonical payload.
+4. Temporary-file writing followed by atomic replacement.
+5. Exact graph-state round-trip validation before new learning.
+6. Preservation of confidence, evidence counts, usage, specialists, growth metadata, and dormancy metadata.
+7. A fresh-graph fallback for missing, corrupt, or incompatible state.
+8. No partially reconstructed graph after a failed load.
+9. A valid prior-memory suggestion at the first step after restart.
+10. Unchanged production decisions while persistence remains in shadow mode.
+11. No SQLite query or other external retrieval system in recall or action selection.
+
+A file, object store, or later binary format may preserve the graph bytes. That storage mechanism remains infrastructure, not cognition. Rollback means restoring an earlier code version or graph snapshot, not asking SQL to supply the missing memory.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
