@@ -26,6 +26,13 @@ from seedmind.integration.consolidation_acceptance import (
     export_consolidation_acceptance,
     run_consolidation_acceptance,
 )
+from seedmind.integration.consolidation_proposal_lifecycle_acceptance import (
+    ConsolidationProposalLifecycleAcceptanceEvidence,
+    ConsolidationProposalLifecycleAcceptanceResult,
+    ConsolidationProposalLifecycleShadowObservation,
+    export_consolidation_proposal_lifecycle_acceptance,
+    run_consolidation_proposal_lifecycle_acceptance,
+)
 from seedmind.integration.consolidation_scheduling_acceptance import (
     ConsolidationSchedulingAcceptanceEvidence,
     ConsolidationSchedulingAcceptanceResult,
@@ -91,6 +98,9 @@ __all__ = [
     "ConfidenceCalibration",
     "ConsolidationAcceptanceEvidence",
     "ConsolidationAcceptanceResult",
+    "ConsolidationProposalLifecycleAcceptanceEvidence",
+    "ConsolidationProposalLifecycleAcceptanceResult",
+    "ConsolidationProposalLifecycleShadowObservation",
     "ConsolidationSchedulingAcceptanceEvidence",
     "ConsolidationSchedulingAcceptanceResult",
     "ConsolidationSchedulingShadowObservation",
@@ -118,6 +128,7 @@ __all__ = [
     "UnifiedSignalExperimentResult",
     "export_advice_acceptance",
     "export_consolidation_acceptance",
+    "export_consolidation_proposal_lifecycle_acceptance",
     "export_consolidation_scheduling_acceptance",
     "export_contextual_mastery_acceptance",
     "export_persistent_shadow_evidence",
@@ -125,6 +136,7 @@ __all__ = [
     "export_unified_signal_evidence",
     "run_advice_acceptance",
     "run_consolidation_acceptance",
+    "run_consolidation_proposal_lifecycle_acceptance",
     "run_consolidation_scheduling_acceptance",
     "run_contextual_mastery_acceptance",
     "run_persistent_shadow_experiment",
