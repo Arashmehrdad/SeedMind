@@ -1018,7 +1018,7 @@ The multi-growth acceptance gate requires:
 9. Budget exhaustion without resolution stops further growth without erasing pressure.
 10. SQLite remains outside growth selection and pressure discharge.
 
-## 17.12 Contextual experiential redundancy and mastery
+### 17.13 Contextual experiential redundancy and mastery
 
 The bounded advice and growth stages originally accumulated evidence at the action-assembly level. That was sufficient for local consequence learning, but raw occurrence counts could not distinguish an exact duplicate, a copied replay, an independent contextual experience, or a broadly transferred lesson.
 
@@ -1103,6 +1103,77 @@ The contextual-mastery acceptance gate requires:
 14. SQLite remains outside the cognitive path.
 
 The validated gate raises heuristic theory-to-integration readiness from 91% to 94%. This does not authorize production actions or make mastery scores inputs to bounded advice or structural growth selection.
+
+### 17.14 Retention-gated consolidation and reversible checkpoints
+
+Consolidation is permitted only after contextual mastery has passed a pure eligibility gate. The gate receives a lesson identity, its current mastery profile, exact source-event identities, available assembly and route identities, and bounded requested changes. It does not mutate graph state.
+
+Eligibility requires broad mastery, contradiction-free source evidence, resolvable source events, multiple assemblies and routes, and requested stability and plasticity changes within policy limits. Severe one-shot protective evidence does not qualify as broad consolidation.
+
+```text
+contextual mastery profile
++ exact source traces
++ bounded requested change
+        -> pure eligibility decision
+        -> immutable consolidation candidate or explicit rejection reasons
+```
+
+An eligible candidate may be applied only to isolated consolidation state. Contextual assemblies and routes retain their existing identities and evidence. The application changes only bounded, non-persisted-at-first values:
+
+```text
+stability  = min(1.0, stability + approved increment)
+plasticity = max(0.0, plasticity - approved reduction)
+```
+
+Application is atomic. Unknown structures, altered candidates, duplicate application, and policy violations fail before state replacement. Consolidation does not trigger replay, select actions, rank routes, alter advice, or authorize growth.
+
+The interference experiment uses one shared representation and overlapping old and new routes to compare:
+
+1. No consolidation.
+2. Naive consolidation.
+3. Retention-gated replay.
+
+The no-consolidation condition learns the new lesson quickly but forgets the old lesson. Naive consolidation protects more old knowledge but slows new learning. Retention-gated replay checks old retention after each new-learning step and replays only exact candidate source events when retention falls below the configured threshold. Replay is bounded to one source event per new-learning step, does not create new contextual traces, and does not inflate mastery support.
+
+A consolidated lesson may reopen only when later evidence contains at least one new independent contradiction plus measurable degradation in causal consistency, mastery score, or broad-mastery status. Correlated contradiction copies remain inspectable but count as one independent support group.
+
+```text
+original mastery snapshot
++ current contextual ledger
+        -> pure reopening decision
+        -> no change, or targeted restoration eligibility
+```
+
+Restoration is atomic and candidate-scoped. It verifies that the candidate remains applied and that its affected structures still match the expected post-application state. It then restores only those assembly and route consolidation values, removes the candidate from the applied set, preserves unrelated state, and preserves every contextual source and contradiction. Stale, mismatched, ineligible, or repeated restoration attempts fail without partial mutation.
+
+Brain persistence advances to schema version 3. The checksum-protected envelope may contain an `NDNRAConsolidationCheckpoint` with:
+
+```text
+current bounded consolidation state
+active application records required for safe later restoration
+compact completed-restoration audit records
+```
+
+Schema versions 1 and 2 migrate to an explicit empty consolidation checkpoint. Invalid relationships, such as an applied candidate without its matching application record, cause the existing complete fresh-state fallback. The persisted file reconstructs in-memory state only; it is never searched during learning, replay, reopening, suggestion generation, advice, growth, or action selection.
+
+The live-shadow acceptance gate creates qualifying mastery evidence on assemblies that exist in the live graph, persists the matching checkpoint, and restarts two identical sessions with and without checkpoint carriage. Passing requires:
+
+1. The synthetic interference gate passes.
+2. Live mastery produces an eligible candidate with exact source references.
+3. Schema version 3 round-trips the active checkpoint exactly.
+4. Production actions remain identical between checkpoint and control sessions.
+5. Prediction-error sequences remain identical.
+6. NDNRA suggestion sequences remain identical.
+7. Learned graph states remain identical.
+8. Consolidation state remains unchanged during the shadow session.
+9. Action-authority violations remain zero.
+10. Later contradictory evidence reopens the loaded candidate.
+11. Restoration returns the exact pre-consolidation state.
+12. Original source traces and the new contradiction remain preserved.
+13. The completed restoration audit round-trips exactly.
+14. SQLite remains outside consolidation eligibility, replay selection, reopening, restoration, persistence reconstruction, and shadow comparison.
+
+This stage remains research-only and shadow-only. It does not schedule consolidation, grant advisory or action authority, alter production curiosity, or permit automatic structural growth. The heuristic readiness remains 94%; this value is an engineering progress indicator, not a probability or a production-readiness claim.
 
 ## 18. Architectural invariants
 

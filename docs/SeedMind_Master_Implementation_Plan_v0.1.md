@@ -1651,6 +1651,62 @@ MVP starting schedule:
 - Evaluation metrics
 - Growth audit records
 
+## 13.5 Implemented retention-gated consolidation research stage
+
+Status recorded on 27 June 2026.
+
+The first bounded consolidation stage is complete as a research-only, shadow-only subsystem. The implementation was intentionally split into independently testable batches:
+
+1. `15e02be` — pure consolidation eligibility from contextual mastery and exact source evidence.
+2. `2ca0efe` — atomic bounded application to isolated stability and plasticity state.
+3. `a404b32` — interference experiment comparing no consolidation, naive consolidation, and retention-gated replay.
+4. `af539ca` — contradiction-driven reopening and candidate-scoped atomic restoration.
+5. `d1fbafb` — schema version 3 persistence for active checkpoints and completed-restoration audits.
+6. `8ec6637` — live-shadow acceptance proving checkpoint carriage does not alter production behavior.
+7. Documentation and acceptance closure — architecture renumbering, plan status, wiki refresh, final validation, and handover.
+
+The implemented flow is:
+
+```text
+contextual mastery
+-> pure eligibility
+-> bounded isolated application
+-> overlapping-learning interference test
+-> retention-gated source replay
+-> later contradiction evaluation
+-> targeted atomic restoration
+-> schema-v3 checkpoint and audit persistence
+-> live-shadow invariance acceptance
+```
+
+Current falsifiable evidence includes:
+
+- Consolidation requires broad, contradiction-free mastery with resolvable source events, multiple assemblies, and multiple routes.
+- Severe one-shot protection remains separate from broad mastery.
+- No-consolidation, naive-consolidation, and retention-gated replay conditions are deterministic and directly comparable.
+- Replay uses only exact candidate source events, occurs only below the retention threshold, and does not create traces or inflate mastery.
+- Reopening requires a new independent contradiction plus measurable degradation.
+- Restoration rejects stale, mismatched, ineligible, and repeated attempts without partial mutation.
+- Schema versions 1 and 2 migrate to an explicit empty consolidation checkpoint.
+- Invalid schema-v3 checkpoint relationships cause complete safe fallback.
+- Active checkpoints and completed-restoration audits round-trip exactly.
+- Identical live-shadow sessions with and without checkpoint carriage produce identical production actions, prediction errors, NDNRA suggestions, and learned graph states.
+- Action-authority violations remain zero.
+- SQLite is not used for eligibility, replay selection, route ranking, reopening, restoration, persistence reconstruction, advice, growth, or action selection.
+
+The following remain explicitly deferred and require new acceptance gates rather than extension by assumption:
+
+- Automatic episode-based consolidation scheduling.
+- Production replay scheduling.
+- Consolidation values affecting live suggestion ranking.
+- Consolidation values affecting bounded advice.
+- Consolidation values affecting growth selection or pressure discharge.
+- Advisory or production action authority.
+- Autonomous checkpoint restoration.
+- Permanent pruning or deletion of memory-bearing structures.
+
+The heuristic theory-to-integration readiness indicator remains 94%. It is not a probability, safety certification, or production-readiness claim.
+
 ---
 
 # 14. Protected safety supervisor

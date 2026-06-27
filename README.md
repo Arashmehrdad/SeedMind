@@ -8,7 +8,9 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-Week 1: repository foundation and SeedMind Nursery v0.
+Retention-gated NDNRA consolidation research closure.
+
+The current consolidation stage is research-only and shadow-only. It includes contextual mastery eligibility, bounded application, interference testing, retention-gated replay, contradiction-driven reopening, atomic restoration, schema-v3 checkpoints, and live-shadow acceptance. Production curiosity retains action authority.
 
 ## Development order
 

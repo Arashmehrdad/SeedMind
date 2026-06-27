@@ -372,6 +372,14 @@ One-step outcome comparison that does not select production actions.
 - Classes: CandidateOutcome, CandidateComparison, NurseryOutcomeOracle
 - Functions/symbols: _mean_change, _resource_cost, _transition_risk, _unit
 
+## `src/seedmind/integration/consolidation_acceptance.py`
+
+Live-shadow acceptance gate for persisted reversible NDNRA consolidation.
+
+- Kind: python
+- Classes: ConsolidationAcceptanceResult, ConsolidationAcceptanceEvidence
+- Functions/symbols: run_consolidation_acceptance, export_consolidation_acceptance, _build_live_checkpoint, _record_later_contradiction, _action_value, _write_ascii_json
+
 ## `src/seedmind/integration/contextual_mastery_acceptance.py`
 
 Acceptance gate for contextual NDNRA traces and bounded mastery evidence.
@@ -512,6 +520,46 @@ Need-driven composition over local multidimensional experience assemblies.
 - Kind: python
 - Classes: ExperienceAssembly, SpecialistInteraction, MultidimensionalExperienceGraph, CompositionCandidate, CompositionResult, _SearchState, NeedDrivenComposer
 - Functions/symbols: _scale_effects, _validate_code, _validate_facts
+
+## `src/seedmind/research/ndnra/consolidation.py`
+
+Pure retention-gated consolidation eligibility contracts for NDNRA.
+
+- Kind: python
+- Classes: ConsolidationRejectionReason, ConsolidationCandidate, ConsolidationEligibilityPolicy, ConsolidationEligibility
+- Functions/symbols: _append_profile_rejections, _validated_source_ids, _resolve_supporting_traces, _available_codes, _candidate_id, _add_reason, _valid_requested_change, _meets_minimum, _unit_meets_minimum, _count_meets_minimum, _is_finite_number, _validate_unit, _validate_positive_unit, _validate_sorted_unique_codes, _validate_code, _is_valid_code
+
+## `src/seedmind/research/ndnra/consolidation_application.py`
+
+Atomic bounded application of eligible NDNRA consolidation proposals.
+
+- Kind: python
+- Classes: ConsolidationStructureState, ConsolidationStateSnapshot, ConsolidationApplicationResult, ConsolidationApplicationState
+- Functions/symbols: _validated_candidate, _updated_state, _validated_identifiers, _validated_states, _validate_state_collection, _validate_state_mapping, _validate_sorted_unique_codes, _find_state, _snapshot_ids, _validate_code, _validate_unit
+
+## `src/seedmind/research/ndnra/consolidation_interference_experiment.py`
+
+Bounded experiment for consolidation, interference, and source-gated replay.
+
+- Kind: python
+- Classes: ConsolidationInterferenceCondition, ConsolidationInterferenceConfig, OverlappingLessonMemorySnapshot, ConsolidationInterferenceConditionResult, ConsolidationInterferenceExperimentResult, ConsolidationInterferenceExperimentEvidence, _OverlappingLessonMemory
+- Functions/symbols: run_consolidation_interference_experiment, _build_old_lesson_ledger, _train_old_lesson, _run_condition, _aligned_lesson_target, _effective_learning_rate, _clamp_signed, _validate_code, _validate_unit, _validate_signed
+
+## `src/seedmind/research/ndnra/consolidation_persistence.py`
+
+Versioned persistence contracts for bounded NDNRA consolidation state.
+
+- Kind: python
+- Classes: ConsolidationRollbackAuditRecord, NDNRAConsolidationCheckpoint
+- Functions/symbols: _application_snapshot, _restore_application, _restore_candidate, _restore_mastery_profile, _restore_state_snapshot, _restore_structure_state, _state_identity_sets, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes, _validate_code, _validate_unit
+
+## `src/seedmind/research/ndnra/consolidation_reopening.py`
+
+Pure contradiction-driven reopening and atomic consolidation rollback.
+
+- Kind: python
+- Classes: ConsolidationReopeningTrigger, ConsolidationReopeningPolicy, ConsolidationReopeningDecision, ConsolidationRollbackResult
+- Functions/symbols: rollback_consolidation, _validate_trace_matches_candidate, _trace_is_contradictory, _rollback_id, _snapshot_payload, _state_payload, _snapshot_ids, _validate_sorted_unique_codes, _validate_code, _validate_unit
 
 ## `src/seedmind/research/ndnra/contextual_mastery_experiment.py`
 
@@ -772,6 +820,48 @@ Tests for symbolic human request and signal contracts.
 
 - Kind: python
 - Functions/symbols: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
+
+## `tests/unit/test_ndnra_consolidation.py`
+
+Tests for pure retention-gated NDNRA consolidation eligibility.
+
+- Kind: python
+- Functions/symbols: _trace, _ledger, _valid_ledger, _evaluate, test_broad_mastery_is_eligible_deterministic_and_pure, test_copied_replay_volume_does_not_qualify_as_independent_support, test_one_shot_protection_is_not_broad_consolidation_mastery, test_single_context_repetition_is_rejected, test_single_route_learning_is_rejected, test_low_causal_consistency_and_contradictions_are_rejected, test_failed_transfer_is_rejected, test_supplied_mastery_fields_are_revalidated, test_missing_and_duplicate_source_events_are_rejected, test_unknown_or_unrelated_source_event_is_rejected, test_missing_assembly_and_route_registrations_are_rejected, test_invalid_stability_requests_are_rejected, test_invalid_plasticity_requests_are_rejected, test_non_finite_mastery_fields_cannot_bypass_the_gate, test_consolidation_eligibility_has_no_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_consolidation_acceptance.py`
+
+Tests for live-shadow acceptance of reversible consolidation checkpoints.
+
+- Kind: python
+- Functions/symbols: test_consolidation_acceptance_preserves_production_behavior, test_consolidation_acceptance_round_trips_live_checkpoint, test_loaded_checkpoint_reopens_and_restores_after_new_contradiction, test_consolidation_acceptance_exports_are_ascii_and_inspectable, test_consolidation_acceptance_has_no_sqlite_or_action_authority_dependency
+
+## `tests/unit/test_ndnra_consolidation_application.py`
+
+Tests for bounded atomic NDNRA consolidation proposal application.
+
+- Kind: python
+- Functions/symbols: _trace, _ledger, _eligibility, _state, test_eligible_candidate_applies_bounded_changes_and_preserves_evidence, test_non_target_structures_remain_unchanged, test_application_clamps_stability_and_plasticity_to_unit_bounds, test_missing_structure_fails_before_any_mutation, test_ineligible_result_fails_before_any_mutation, test_duplicate_candidate_application_is_blocked_atomically, test_tampered_request_above_policy_cap_is_rejected_atomically, test_tampered_lesson_or_mastery_snapshot_is_rejected, test_registration_rejects_duplicate_or_overlapping_identities, test_snapshot_is_immutable_and_deterministically_ordered, test_consolidation_application_has_no_sqlite_or_replay_dependency
+
+## `tests/unit/test_ndnra_consolidation_interference.py`
+
+Tests for bounded consolidation interference and source-gated replay.
+
+- Kind: python
+- Functions/symbols: test_old_lesson_is_mastered_and_eligible_before_interference, test_no_consolidation_learns_new_lesson_but_forgets_old_lesson, test_naive_consolidation_trades_new_learning_for_better_retention, test_retention_gated_replay_uses_only_candidate_sources_when_needed, test_replay_preserves_sources_without_inflating_mastery, test_retention_gated_replay_balances_retention_and_new_learning, test_experiment_is_exactly_deterministic, test_experiment_remains_non_authoritative_and_non_sql
+
+## `tests/unit/test_ndnra_consolidation_persistence.py`
+
+Tests for schema-v3 NDNRA consolidation checkpoint persistence.
+
+- Kind: python
+- Functions/symbols: _trace, _ledger, _application, _active_checkpoint, _rewrite_version, _rewrite_checksum, test_schema_v3_round_trips_active_consolidation_checkpoint, test_loaded_active_application_can_be_reopened_and_rolled_back, test_schema_v3_round_trips_compact_rollback_audit, test_schema_v2_migrates_to_explicit_empty_consolidation_checkpoint, test_default_schema_v3_save_uses_empty_checkpoint, test_inconsistent_checkpoint_falls_back_without_partial_state, test_schema_v3_checkpoint_encoding_is_deterministic, test_consolidation_persistence_has_no_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_consolidation_reopening.py`
+
+Tests for contradiction-driven reopening and atomic consolidation rollback.
+
+- Kind: python
+- Functions/symbols: _trace, _mastered_ledger, _eligibility, _application, _add_contradiction, test_new_independent_contradiction_reopens_without_mutation, test_positive_new_evidence_does_not_reopen, test_small_contradiction_is_visible_but_below_reopening_threshold, test_correlated_contradiction_copies_do_not_inflate_independent_count, test_reopening_requires_original_candidate_sources_to_remain_resolvable, test_rollback_restores_candidate_state_and_preserves_unrelated_state, test_rollback_is_deterministic_for_identical_evidence, test_rollback_is_blocked_when_reopening_gate_does_not_pass, test_duplicate_rollback_is_blocked_without_further_mutation, test_stale_target_state_blocks_rollback_atomically, test_mismatched_decision_and_application_are_rejected, test_reopening_and_rollback_have_no_sql_or_integration_dependency
 
 ## `tests/unit/test_ndnra_contextual_mastery.py`
 
