@@ -78,14 +78,24 @@ Deliverables:
 
 ### Batch 2 - activity source and dormancy maintenance
 
-Planned:
+Status: implemented in the commit containing this update.
+
+Deliverables:
 
 - Separate real, replay, and imagined activity counters.
-- Strong real activation, medium replay activation, weak imagined activation.
-- Activity may preserve accessibility without increasing factual confidence.
-- Safety-critical and rare-use memory protection.
-- Repeatedly inaccurate, harmful, irrelevant, or redundant pathways remain eligible for dormancy.
-- Strict bounded maintenance budgets.
+- Strong real activation, medium replay activation, and weak imagined activation.
+- Replay and imagination require named supporting real events.
+- Replay and imagination require minimum real-evidence strength.
+- Activity may reduce dormancy without increasing factual confidence or mastery.
+- Safety-critical and rare-use memories receive bounded maintenance floors.
+- Harmful, irrelevant, or redundant pathways remain eligible for dormancy even when marked rare or safety-related.
+- Low prediction accuracy and low helpfulness reduce maintenance strength.
+- Exact duplicate activity cannot reduce dormancy twice.
+- Per-event structure limits, per-cycle event limits, and total reactivation budgets.
+- Dormancy maintenance leaves eligibility, growth pressure, residuals, and real last-active state unchanged.
+- No action-selection or production-action authority.
+
+Batch 2 is in-memory only. Persistence and restart reconstruction remain part of Batch 7.
 
 ### Batch 3 - controlled replay completion
 
@@ -170,9 +180,9 @@ A wrong outcome lowers local helpfulness and competence. It does not create emot
 
 The expanded marker started at 68% before Batch 1.
 
-After Batch 1, the heuristic marker is **71%**. The increase reflects real consequence comparison, context-specific competence, duplicate-event protection, and strict separation of real evidence from replay and imagination.
+After Batch 1, the heuristic marker reached **71%**. Batch 2 raises it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains.
 
-The marker remains limited because SeedMind still does not provide replay execution, weighted activity-based memory maintenance, a learned consequence model, dreaming, safe experiment promotion, or complete live integration.
+The marker remains limited because SeedMind still does not provide replay execution, persistence of activity history, a learned consequence model, dreaming, safe experiment promotion, or complete live integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 

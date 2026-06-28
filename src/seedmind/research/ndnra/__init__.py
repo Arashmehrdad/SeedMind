@@ -1,6 +1,13 @@
 """Need-Driven Neural Recruitment Architecture research prototype."""
 
+from seedmind.research.ndnra.activity_maintenance import (
+    ActivityMaintenanceConfig,
+    ActivityMaintenanceDecision,
+    ActivityMaintenanceLedger,
+    ActivityMaintenanceRequest,
+)
 from seedmind.research.ndnra.adaptive import (
+    ActivityMaintenanceApplication,
     AdaptiveRuntimeConfig,
     AdaptiveUpdate,
     NDNRARuntimeAdaptiveState,
@@ -258,6 +265,11 @@ __all__ = [
     "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
     "ActionCompetenceUpdate",
     "ActionConsequenceAssessment",
+    "ActivityMaintenanceApplication",
+    "ActivityMaintenanceConfig",
+    "ActivityMaintenanceDecision",
+    "ActivityMaintenanceLedger",
+    "ActivityMaintenanceRequest",
     "AdaptiveRuntimeConfig",
     "AdaptiveUpdate",
     "BrainLoadResult",

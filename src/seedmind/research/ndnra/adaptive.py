@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from math import isfinite
 
+from seedmind.research.ndnra.activity_maintenance import ActivityMaintenanceDecision
 from seedmind.research.ndnra.composition import MultidimensionalExperienceGraph
 from seedmind.research.ndnra.models import GrowthPressure
 from seedmind.research.ndnra.persistence import NDNRAGrowthState
@@ -64,6 +65,43 @@ class AdaptiveUpdate:
             raise ValueError("attempt_count_before must not be negative")
         if self.attempt_count_after != self.attempt_count_before + 1:
             raise ValueError("attempt count must advance by exactly one")
+
+
+@dataclass(frozen=True, slots=True)
+class ActivityMaintenanceApplication:
+    """Before-and-after dormancy evidence for one maintenance decision."""
+
+    decision_id: str
+    changes: tuple[tuple[str, float, float], ...]
+    eligibility_unchanged: bool
+    pressure_unchanged: bool
+    residuals_unchanged: bool
+    last_active_members_unchanged: bool
+
+    def __post_init__(self) -> None:
+        if not self.decision_id.strip() or not self.decision_id.isascii():
+            raise ValueError("decision_id must be non-empty ASCII")
+        structure_ids = tuple(item[0] for item in self.changes)
+        if structure_ids != tuple(sorted(structure_ids)):
+            raise ValueError("maintenance changes must use stable sorted ordering")
+        if len(structure_ids) != len(set(structure_ids)):
+            raise ValueError("maintenance changes must contain unique structures")
+        for structure_id, before, after in self.changes:
+            if not structure_id.strip() or not structure_id.isascii():
+                raise ValueError("maintenance structure_id must be non-empty ASCII")
+            _validate_unit("dormancy_before", before)
+            _validate_unit("dormancy_after", after)
+            if after > before:
+                raise ValueError("maintenance cannot increase dormancy")
+        if not all(
+            (
+                self.eligibility_unchanged,
+                self.pressure_unchanged,
+                self.residuals_unchanged,
+                self.last_active_members_unchanged,
+            )
+        ):
+            raise ValueError("maintenance must not change learning or live activity state")
 
 
 @dataclass(frozen=True, slots=True)
@@ -232,6 +270,41 @@ class NDNRARuntimeAdaptiveState:
             dormancy_before=dormancy_before,
             dormancy_after=self._dormancy[assembly_id],
             residual_effect=residual_effect,
+        )
+
+    def apply_activity_maintenance(
+        self,
+        decision: ActivityMaintenanceDecision,
+    ) -> ActivityMaintenanceApplication:
+        """Reduce dormancy only, without creating evidence or live learning state."""
+        known_structures = set(self.accessibility_map())
+        unknown = set(decision.request.structure_ids) - known_structures
+        if unknown:
+            raise ValueError("maintenance decision references unknown structures")
+
+        eligibility_before = self.eligibility
+        pressure_before = (self.pressure.value, self.pressure.update_count)
+        residuals_before = self.residuals
+        last_active_before = self.last_active_members
+        changes: list[tuple[str, float, float]] = []
+        for structure_id in decision.request.structure_ids:
+            before = self._dormancy.get(structure_id, 0.0)
+            after = (
+                max(0.0, before - decision.per_structure_reactivation)
+                if decision.maintenance_applied
+                else before
+            )
+            if decision.maintenance_applied:
+                self._dormancy[structure_id] = after
+            changes.append((structure_id, before, after))
+
+        return ActivityMaintenanceApplication(
+            decision_id=decision.decision_id,
+            changes=tuple(changes),
+            eligibility_unchanged=self.eligibility == eligibility_before,
+            pressure_unchanged=(self.pressure.value, self.pressure.update_count) == pressure_before,
+            residuals_unchanged=self.residuals == residuals_before,
+            last_active_members_unchanged=self.last_active_members == last_active_before,
         )
 
     def to_growth_state(self) -> NDNRAGrowthState:
