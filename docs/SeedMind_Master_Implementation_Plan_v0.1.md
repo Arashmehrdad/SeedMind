@@ -2044,7 +2044,19 @@ Batch 1 is deliberately non-authoritative. It provides no sequence generation, d
 
 Batch 2 adds bounded contextual transfer as a separate stateless policy. Exact evidence always wins. Transfer requires the same need identity, action availability, compatible grounded context shapes, an explicit similarity threshold, and sufficient source confidence. Every transferred effect preserves source record and real event identities. Confidence is attenuated and capped; opposing sources create contradiction evidence that may reduce confidence to zero. Transfer never creates an exact target-context record and never transfers an exact next context.
 
-The expanded developmental architecture marker remains 79% until ordered short sequences, restart-safe persistence, live integration, and full stage acceptance are completed.
+Batch 3 adds bounded observed ordered consequence chains. It stores complete real chain
+examples, enforces exact continuity between adjacent transitions, preserves ordered
+source event identities, and treats reversed action order as a separate identity.
+Overlapping chains remain visible through correlation groups and cannot count as fully
+independent support. Predictions accept only an exact start context plus an exact ordered
+action sequence, may report an exact final context only from exact observed chain evidence,
+and report requested effects per step without summing arbitrary dimensions across time.
+The chain model remains in-memory, prediction-only, non-authoritative, and separate from
+persistence, dreaming, optimisation, route search, action ranking, recommendation, SQLite,
+workers, timers, replay, restoration, and production integration.
+
+The expanded developmental architecture marker remains 79% until restart-safe persistence,
+live integration, and full stage acceptance are completed.
 
 ---
 

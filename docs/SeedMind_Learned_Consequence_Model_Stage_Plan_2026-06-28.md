@@ -113,14 +113,66 @@ Tests:
 
 ### Batch 3 - ordered actions and short consequence chains
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Represent action order explicitly.
-- Learn short observed action transitions and combinations.
-- Limit chain depth, branch count, and effect dimensions.
-- Preserve every real source transition used by a chain.
-- Prevent repeated reuse of one event from multiplying support.
-- Produce predictions only; no action ranking or execution.
+Deliverables:
+
+- Stored complete observed chain examples rather than deriving chains on demand.
+- Exact `REAL` source transition steps preserving event ID, pre-action context, action,
+  exact observed next context, and observed effects.
+- Mandatory exact continuity:
+
+```text
+step[i].next_context == step[i + 1].context
+```
+
+- Deterministic ordered action identity keyed by start context, ordered action codes,
+  ordered source event IDs, and final observed context.
+- Explicit rejection of disconnected chains, repeated event IDs within one chain,
+  conflicting chain identity reuse, and conflicting source-event reuse.
+- Conservative default bounds:
+
+```text
+maximum_chain_depth = 3
+maximum_chains = 256
+maximum_effect_dimensions = 16
+maximum_candidates_per_request = 16
+```
+
+- Prediction by exact start context plus exact ordered action sequence only.
+- Exact final-context prediction only when exact observed ordered-chain evidence exists.
+- Per-step effect estimates for requested dimensions only; no blind cumulative summation.
+- Missing step-effect dimensions remain unknown.
+- Correlation groups expose overlapping source events and prevent overlaps from counting
+  as fully independent support.
+- Contradictory directional effects remain inspectable and reduce confidence.
+- Chain prediction is pure and does not mutate the single-step model or transfer policy.
+- No persistence, dreaming, optimisation, action ranking, recommendation, search,
+  execution, SQLite dependency, timer, worker, or production integration.
+
+Resolved design questions:
+
+1. Batch 3 stores complete observed chain examples. This preserves exact event order,
+   continuity, and final-context evidence without reconstructing chains from frequent
+   one-step predictions.
+2. Overlapping event sets form deterministic correlation groups. Each connected
+   overlap group counts once for independent support.
+3. Effects are reported per step. The batch does not report cumulative effects because
+   effect dimensions may be cumulative, final-state, maximum, minimum, or non-additive.
+4. Non-additive effects remain bounded by avoiding cross-step summation.
+5. Final exact context is predicted only for exact previously observed ordered chains.
+6. Contradiction is measured from directional disagreement for the same requested
+   effect at the same chain position, plus final-context dispersion.
+7. Chain calibration is deferred until persistence/live integration. Batch 3 supplies
+   pure in-memory prediction evidence only.
+
+Implementation:
+
+- `src/seedmind/research/ndnra/observed_consequence_chains.py`
+
+Tests:
+
+- `tests/unit/test_ndnra_observed_consequence_chains.py`
 
 ### Batch 4 - persistence and restart reconstruction
 
@@ -171,6 +223,18 @@ Batch 2:
 - `ContextualTransferPrediction`
 - `BoundedContextualTransferPolicy`
 
+Batch 3:
+
+- `ObservedConsequenceChainConfig`
+- `ObservedConsequenceChainStep`
+- `ObservedConsequenceChain`
+- `ConsequenceChainPredictionRequest`
+- `ConsequenceChainStepPrediction`
+- `ConsequenceChainCorrelationGroup`
+- `ConsequenceChainPrediction`
+- `ObservedConsequenceChainUpdate`
+- `ObservedConsequenceChainModel`
+
 ## 5. Confidence and uncertainty design
 
 For one requested effect dimension, Batch 1 tracks:
@@ -203,13 +267,13 @@ Therefore:
 
 ## 6. Explicit current exclusions
 
-Batches 1 and 2 do not provide:
+Batches 1 through 3 do not provide:
 
 - semantic abstraction beyond explicit grounded component similarity;
 - learned similarity weights;
 - transfer of an exact next context;
-- multi-action sequences;
-- action combinations;
+- generated multi-action sequences;
+- unobserved action combinations;
 - imagined rollouts;
 - dreaming;
 - optimiser-driven search;
@@ -224,7 +288,7 @@ Batches 1 and 2 do not provide:
 
 ## 7. Progress rule
 
-The expanded developmental architecture marker remains **79%** through Batch 2. The new contracts and behavioural tests are necessary but do not complete persistence, sequence modelling, live integration, or end-to-end acceptance.
+The expanded developmental architecture marker remains **79%** through Batch 3. The new contracts and behavioural tests are necessary but do not complete persistence, live integration, or end-to-end acceptance.
 
 No percentage should increase merely because a prediction object exists. Later progress requires behavioural evidence, failure-path tests, restart safety where applicable, live invariance, and complete repository quality gates.
 

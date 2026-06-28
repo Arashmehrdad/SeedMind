@@ -1481,7 +1481,53 @@ Transferred confidence is attenuated by source confidence, context similarity, a
 
 Missing dimensions remain unknown. An exact next context is never transferred because a source context's next state is not an exact prediction for a different target context. The policy remains prediction-only and cannot rank, recommend, schedule, or execute actions.
 
-The expanded developmental architecture marker remains 79% through Batch 2. Ordered action chains, persistence, live integration, and complete stage acceptance remain required before reassessment.
+### 17.22 Observed ordered consequence chains
+
+The first ordered-chain boundary stores complete observed chain examples rather than
+deriving them from single-step records. Each chain step must come from exact real
+transition evidence and preserve:
+
+- exact event ID;
+- exact pre-action context;
+- exact action code;
+- exact observed next context;
+- exact observed effects;
+- real origin.
+
+Observed chains require exact continuity:
+
+```text
+step[i].next_context == step[i + 1].context
+```
+
+Disconnected chains are rejected instead of bridged by contextual similarity. A chain
+identity includes the exact start context, ordered action codes, ordered source event
+IDs, and exact final observed context. Reversing action order creates a different
+identity and does not share support.
+
+One event may appear at most once inside one chain. Re-registering an identical chain
+does not increase support. Reusing one event with a different transition is rejected.
+Overlapping chains remain inspectable through deterministic correlation groups, and
+each connected overlap group counts only once for independent support.
+
+Predictions are request-driven by exact start context and exact ordered action sequence.
+The chain model reports an exact final context only when exact observed ordered-chain
+evidence supports it. It reports per-step requested effect estimates only and deliberately
+does not sum arbitrary effects across steps. Missing dimensions remain unknown.
+
+Directional contradiction for the same effect at the same chain position, along with
+final-context dispersion, remains visible and reduces confidence. Confidence derives
+from independent real support and consistency, not from chain depth, raw chain count,
+transfer, replay, or imagined outcomes.
+
+The chain model is in-memory, prediction-only, and non-authoritative. It cannot select,
+rank, recommend, schedule, search, optimise, or execute actions. It has no persistence,
+SQLite, timer, worker, replay, restoration, advice, growth, or production integration
+dependency in this batch.
+
+The expanded developmental architecture marker remains 79% through Batch 3. Restart-safe
+persistence, live integration, complete failure-path acceptance, and stage closure remain
+required before reassessment.
 
 ## 18. Architectural invariants
 
@@ -1537,6 +1583,11 @@ The following rules must remain true:
 48. Transferred confidence must be attenuated and globally capped; one source cannot establish broad certainty.
 49. Directionally opposing transfer sources must remain inspectable and reduce confidence through explicit contradiction evidence.
 50. Exact next-context claims cannot be transferred across contexts.
+51. Observed consequence chains require exact real transition continuity; contextual similarity cannot bridge a disconnected chain.
+52. Ordered chain identity preserves ordered actions and ordered source event IDs; reversed order is distinct.
+53. Reused or overlapping chain source events remain inspectable and cannot multiply independent support.
+54. Chain effects are reported per observed step unless a later stage defines a safe effect-specific aggregation rule.
+55. Observed chain predictions cannot select, rank, recommend, search, optimise, schedule, or execute actions.
 
 ## 19. First prototype boundary
 
