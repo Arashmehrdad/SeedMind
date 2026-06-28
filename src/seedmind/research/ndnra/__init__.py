@@ -31,6 +31,14 @@ from seedmind.research.ndnra.consolidation_execution_approval import (
     ConsolidationExecutionApprovalRequest,
     ConsolidationExecutionPermit,
 )
+from seedmind.research.ndnra.consolidation_execution_permit_lifecycle import (
+    ConsolidationExecutionPermitLifecycleAction,
+    ConsolidationExecutionPermitLifecycleRecord,
+    ConsolidationExecutionPermitLifecycleRegistry,
+    ConsolidationExecutionPermitLifecycleStatus,
+    ConsolidationExecutionPermitTransitionDecision,
+    ConsolidationExecutionPermitTransitionRequest,
+)
 from seedmind.research.ndnra.consolidation_interference_experiment import (
     ConsolidationInterferenceCondition,
     ConsolidationInterferenceConditionResult,
@@ -221,6 +229,12 @@ __all__ = [
     "ConsolidationExecutionApprovalPolicy",
     "ConsolidationExecutionApprovalRequest",
     "ConsolidationExecutionPermit",
+    "ConsolidationExecutionPermitLifecycleAction",
+    "ConsolidationExecutionPermitLifecycleRecord",
+    "ConsolidationExecutionPermitLifecycleRegistry",
+    "ConsolidationExecutionPermitLifecycleStatus",
+    "ConsolidationExecutionPermitTransitionDecision",
+    "ConsolidationExecutionPermitTransitionRequest",
     "ConsolidationInterferenceCondition",
     "ConsolidationInterferenceConditionResult",
     "ConsolidationInterferenceConfig",
