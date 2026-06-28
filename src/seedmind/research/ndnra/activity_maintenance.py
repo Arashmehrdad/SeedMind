@@ -286,6 +286,14 @@ class ActivityMaintenanceLedger:
         )
         return decision
 
+    def request_for(self, event_id: str) -> ActivityMaintenanceRequest:
+        """Return one exact recorded activity request by stable event identity."""
+        _validate_code("event_id", event_id)
+        try:
+            return self._requests[event_id]
+        except KeyError as error:
+            raise ValueError("unknown activity event identity") from error
+
     def decision_for(self, event_id: str) -> ActivityMaintenanceDecision:
         """Return the original decision for one unique activity event."""
         _validate_code("event_id", event_id)

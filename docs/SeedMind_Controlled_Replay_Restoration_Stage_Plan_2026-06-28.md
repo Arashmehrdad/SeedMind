@@ -5,8 +5,9 @@ Repository: `D:\Github\SeedMind`
 Branch: `main`
 Stage status: active
 Authority: explicit-human-approval only, research-only, bounded replay and restoration
-Current heuristic theory-to-integration readiness: 97%
-Target after complete stage acceptance: 98%
+Legacy narrow-scope theory-to-integration marker: 97%
+Expanded developmental architecture progress after bounded replay: 75%
+Legacy target after complete stage acceptance: 98%
 
 ## 1. Stage objective
 
@@ -92,17 +93,31 @@ Batch 2 performs no replay, restoration, receipt creation, persistence mutation,
 
 ### Batch 3 - bounded retention replay
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Immediate preoperation revalidation.
-- Exact replay target and source evidence reconstruction.
-- Strict work-item bound.
-- Explicit output contract.
-- No production action, advice, route-ranking, growth, or pressure-discharge influence.
-- Exact in-memory rollback on failure.
+Deliverables:
+
+- Immediate preoperation revalidation in the same operation episode.
+- Exact current and source checkpoint identity and checksum checks.
+- Exact approval-time and operation-time checkpoint/evidence-set comparison.
+- Rejection of checksum-unverified and fallback evidence.
+- Explicit caller-supplied work items only; no autonomous replay selection.
+- Stable unique work-item and source-evidence identities.
+- Replay only from named real activity already present in the activity ledger.
+- Exact source-structure reconstruction for every work item.
+- Strict approved work-item bound.
+- Replay quality copied from real evidence rather than caller-supplied inflation.
+- Dormancy/accessibility maintenance only, with zero confidence and mastery change.
+- No production action, advice, route ranking, growth, pressure discharge, or learning update.
+- Copy-first all-or-nothing execution; any failure leaves the original permit, activity ledger, graph, and adaptive state unchanged.
+- Deterministic receipt containing exact achieved dormancy changes.
+- Permit consumption only after all replay items succeed.
 - One receipt tied to one consumed replay permit.
+- Cancelled, expired, consumed, stale, drifted, restoration-scoped, and oversized operations rejected.
 
-Any learning-update authority must be separately explicit and bounded. It must not be inferred from the existence of replay evidence or a replay permit.
+Batch 3 is in-memory only. Durable permit, receipt, activity-history, and replay-result persistence remains for later batches.
+
+Any learning-update authority must be separately explicit and bounded. It is not inferred from replay evidence, activity maintenance, a replay permit, or a replay receipt.
 
 ### Batch 4 - exact checkpoint restoration and durable persistence
 
@@ -206,11 +221,11 @@ Batch 1 does not provide:
 
 ## 8. Readiness rule
 
-Readiness remains 97% during Batches 1 through 4.
+The legacy narrow-scope marker remains 97% during Batches 1 through 4. The expanded developmental architecture marker is 75% after in-memory controlled replay.
 
-The stage may increase the heuristic marker to 98% only after controlled replay, exact restoration, permit lifecycle, durable persistence, restart safety, corruption fallback, live invariance, documentation, and all repository quality gates pass together.
+The legacy stage marker may increase to 98% only after exact restoration, durable replay/restoration persistence, restart safety, corruption fallback, live invariance, documentation, and all repository quality gates pass together.
 
-The marker is an internal engineering progress measure. It is not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
+These markers are internal engineering progress measures. They are not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
 
 ## 9. Repository workflow
 
