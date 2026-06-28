@@ -3,11 +3,11 @@
 Date: 28 June 2026
 Repository: `D:\Github\SeedMind`
 Branch: `main`
-Stage status: active
+Stage status: complete
 Authority: explicit-human-approval only, research-only, bounded replay and restoration
-Legacy narrow-scope theory-to-integration marker: 97%
-Expanded developmental architecture progress after durable replay and restoration: 78%
-Legacy target after complete stage acceptance: 98%
+Legacy narrow-scope theory-to-integration marker: 98%
+Expanded developmental architecture progress after live stage acceptance: 79%
+Legacy target after complete stage acceptance: achieved at 98%
 
 ## 1. Stage objective
 
@@ -160,15 +160,19 @@ Deliverables:
 
 ### Batch 6 - live acceptance, documentation, and closure
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Controlled and approved comparison paths.
-- Restart, stale-evidence, duplicate, replayed-permit, cancellation, expiry, interruption, and corruption evidence.
-- Production-action and cognition invariance.
-- Observatory-compatible audit exports if justified.
-- Full quality gates.
-- Stage handover and wiki refresh.
-- Readiness reassessment from 97% to 98% only if every gate passes.
+Deliverables:
+
+- Live control-versus-replayed comparison under identical production curiosity and developmental signals.
+- Replay may alter only bounded accessibility and non-authoritative shadow suggestions; production actions, prediction errors, developmental signals, graph learning, and non-dormancy growth remain equal.
+- Live source-versus-restored comparison proving exact subsequent actions, suggestions, prediction errors, signals, graph learning, and growth.
+- Restart-safe single-use evidence for one replay permit and one restoration permit.
+- Explicit stale-evidence, duplicate-use, cancellation, expiry, interruption, corruption, and terminal-lifecycle evidence.
+- ASCII JSON and CSV audit exports suitable for observatory ingestion without introducing SQLite cognition.
+- Zero automatic replay, automatic restoration, production-action authority violations, background workers, or SQLite operation paths.
+- Complete repository quality gates and a dedicated stage handover.
+- Legacy narrow-scope readiness raised from 97% to 98% only after all acceptance evidence passed.
 
 ## 4. Batch 1 public contracts
 
@@ -247,9 +251,9 @@ Batch 1 does not provide:
 
 ## 8. Readiness rule
 
-The legacy narrow-scope marker remains 97% until final live acceptance and stage closure. The expanded developmental architecture marker is 78% after restart-safe durable replay and exact complete-state restoration.
+The legacy narrow-scope marker is 98% after controlled replay and restoration passed live invariance, failure-path, restart, export, and repository-wide quality gates. The expanded developmental architecture marker is 79% after this stage closure.
 
-The legacy stage marker may increase to 98% only after live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
+The next work must not reuse the legacy 98% marker as overall SeedMind completion. The expanded architecture still requires the learned consequence model, bounded imagination, safe experiment promotion, and later end-to-end integration.
 
 These markers are internal engineering progress measures. They are not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
 

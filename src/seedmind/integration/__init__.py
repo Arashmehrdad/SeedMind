@@ -46,6 +46,12 @@ from seedmind.integration.contextual_mastery_acceptance import (
     export_contextual_mastery_acceptance,
     run_contextual_mastery_acceptance,
 )
+from seedmind.integration.controlled_replay_restoration_acceptance import (
+    ControlledReplayRestorationAcceptanceEvidence,
+    ControlledReplayRestorationAcceptanceResult,
+    export_controlled_replay_restoration_acceptance,
+    run_controlled_replay_restoration_acceptance,
+)
 from seedmind.integration.developmental_signals import (
     LiveDevelopmentalSignalProvider,
     LiveDevelopmentalSignals,
@@ -119,6 +125,8 @@ __all__ = [
     "ConsolidationSchedulingShadowObservation",
     "ContextualMasteryAcceptanceEvidence",
     "ContextualMasteryAcceptanceResult",
+    "ControlledReplayRestorationAcceptanceEvidence",
+    "ControlledReplayRestorationAcceptanceResult",
     "HumanApprovedConsolidationExecutionAcceptanceEvidence",
     "HumanApprovedConsolidationExecutionAcceptanceResult",
     "LiveDevelopmentalSignalProvider",
@@ -149,6 +157,7 @@ __all__ = [
     "export_consolidation_proposal_lifecycle_acceptance",
     "export_consolidation_scheduling_acceptance",
     "export_contextual_mastery_acceptance",
+    "export_controlled_replay_restoration_acceptance",
     "export_human_approved_consolidation_execution_acceptance",
     "export_persistent_shadow_evidence",
     "export_restart_safe_proposal_memory_acceptance",
@@ -159,6 +168,7 @@ __all__ = [
     "run_consolidation_proposal_lifecycle_acceptance",
     "run_consolidation_scheduling_acceptance",
     "run_contextual_mastery_acceptance",
+    "run_controlled_replay_restoration_acceptance",
     "run_human_approved_consolidation_execution_acceptance",
     "run_persistent_shadow_experiment",
     "run_restart_safe_proposal_memory_acceptance",

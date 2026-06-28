@@ -1977,6 +1977,52 @@ The following remain deferred:
 
 Completing this stage raises the heuristic theory-to-integration readiness indicator from 96% to 97%. This is an internal engineering progress marker for one research subsystem, not production readiness, safety certification, autonomous authority, an AGI percentage, or proof that the full SeedMind MVP is complete.
 
+## 13.10 Implemented controlled replay and restoration stage
+
+Status recorded on 28 June 2026.
+
+This stage is complete as an explicit-human-approval-only, research-only capability for bounded memory accessibility replay and exact complete-state checkpoint restoration.
+
+The implemented flow is:
+
+```text
+exact current evidence
++ exact named real activity or source checkpoint
++ explicit human approval
++ bounded immutable single-use permit
++ immediate preoperation revalidation
+        -> one replay or restoration operation
+        -> consumed permit plus exact receipt
+        -> durable exact old or exact new envelope
+        -> no autonomous trigger
+```
+
+Replay may reduce dormancy for exact caller-selected structures backed by named real activity. It cannot create independent evidence, confidence, mastery, competence, growth pressure, action-selection authority, or production actions.
+
+Restoration accepts only a separate checksum-verified native schema-6 source and replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory together. The destination retains its current monotonic permit and receipt audit, so an older checkpoint cannot revive a terminal approval.
+
+Live acceptance confirmed:
+
+```text
+2 explicit human approvals
+1 consumed replay permit
+1 consumed restoration permit
+1 replay receipt
+1 restoration receipt
+1 separately tested cancelled permit
+1 separately tested expired permit
+0 automatic replay
+0 automatic restoration
+0 production-action authority violations
+0 SQLite cognition
+```
+
+The replay control and replayed paths preserved equal production actions, prediction errors, developmental signals, learned graph state, and non-dormancy growth. Accessibility-driven shadow suggestions were allowed to differ but remained non-authoritative. The restoration source and restored paths produced exactly equal later actions, suggestions, prediction errors, signals, graph learning, and growth.
+
+Stale evidence, duplicate use after restart, cancellation, expiry, interruption, corruption, same-path sources, migrated sources, and audit divergence are rejected without partial authority recovery. ASCII JSON and CSV exports provide inspectable observatory-ready evidence without adding a database-driven cognitive path.
+
+Completing this stage raises the legacy narrow-scope theory-to-integration marker from 97% to 98%. The expanded developmental architecture marker is 79%, because learned consequence modelling, bounded imagination, imagined route optimisation, and safe experiment promotion remain separate future stages.
+
 ---
 
 # 14. Protected safety supervisor

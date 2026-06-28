@@ -404,6 +404,14 @@ Acceptance gate for contextual NDNRA traces and bounded mastery evidence.
 - Classes: ContextualMasteryAcceptanceResult, ContextualMasteryAcceptanceEvidence
 - Functions/symbols: run_contextual_mastery_acceptance, export_contextual_mastery_acceptance, _persistence_probes, _write_legacy_v1, _write_trace_timeline, _write_json, _canonical_bytes
 
+## `src/seedmind/integration/controlled_replay_restoration_acceptance.py`
+
+Live acceptance for controlled replay and exact checkpoint restoration.
+
+- Kind: python
+- Classes: ControlledReplayRestorationAcceptanceResult, ControlledReplayRestorationAcceptanceEvidence
+- Functions/symbols: run_controlled_replay_restoration_acceptance, export_controlled_replay_restoration_acceptance, _run_live_shadow, _approved_permit, _fresh_evidence, _stale_replay_is_rejected, _duplicate_replay_is_rejected, _replay_interruption_preserves_old, _terminal_lifecycle_evidence, _transition_request, _terminal_reuse_rejected, _corrupt_source_is_rejected, _restoration_interruption_recovers_new, _restoration_reuse_is_rejected, _active_state_equal, _with_dormancy, _growth_without_dormancy, _prediction_errors, _write_comparison_csv, _write_ascii_json, _raise_at
+
 ## `src/seedmind/integration/developmental_signals.py`
 
 Typed live developmental signals for non-authoritative NDNRA integration.
@@ -537,12 +545,20 @@ Need-Driven Neural Recruitment Architecture research prototype.
 
 - Kind: python
 
+## `src/seedmind/research/ndnra/activity_maintenance.py`
+
+Bounded memory accessibility maintenance from real, replayed, or imagined activity.
+
+- Kind: python
+- Classes: ActivityMaintenanceConfig, ActivityMaintenanceRequest, ActivityMaintenanceDecision, ActivityMaintenanceLedger
+- Functions/symbols: _decision_id, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_bool, _require_string_list, _validate_sorted_unique_codes, _validate_code, _validate_unit
+
 ## `src/seedmind/research/ndnra/adaptive.py`
 
 Operational adaptive state restored alongside an NDNRA local graph.
 
 - Kind: python
-- Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, PressureDischarge, NDNRARuntimeAdaptiveState
+- Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, ActivityMaintenanceApplication, PressureDischarge, NDNRARuntimeAdaptiveState
 - Functions/symbols: _validate_unit, _validate_signed
 
 ## `src/seedmind/research/ndnra/composition.py`
@@ -705,6 +721,14 @@ Deterministic proposal-only experiment for NDNRA consolidation scheduling.
 - Classes: ConsolidationSchedulingStrategy, ConsolidationSchedulingExperimentConfig, ConsolidationSchedulingProposalRecord, ConsolidationSchedulingStrategyResult, ConsolidationSchedulingExperimentResult
 - Functions/symbols: run_consolidation_scheduling_experiment, export_consolidation_scheduling_experiment, _strategy_result, _candidate_for, _is_fixed_window, _lesson_key, _requests, _evidence_arrivals, _trace
 
+## `src/seedmind/research/ndnra/contextual_consequence.py`
+
+Real consequence comparison and context-specific action competence.
+
+- Kind: python
+- Classes: ExperienceOrigin, ConsequenceDirection, ActionConsequenceAssessment, ActionCompetenceUpdate, ContextualActionCompetenceRecord, ContextualActionCompetenceLedger
+- Functions/symbols: _need_alignment, _record_id, _identity, _effect_snapshot, _validate_effects, _validate_code, _validate_unit
+
 ## `src/seedmind/research/ndnra/contextual_mastery_experiment.py`
 
 Bounded experiment for contextual redundancy, transfer, and mastery.
@@ -720,6 +744,54 @@ Contextual experience traces and bounded mastery evidence for NDNRA.
 - Kind: python
 - Classes: ContextualRecordCode, EventIdentity, ContextSignature, ContextualExperienceTrace, ContextualLearningResult, LessonIdentity, MasteryProfile, RouteSupport, _GroupEvidence, ContextualExperienceLedger
 - Functions/symbols: _jaccard, _quantize, _validate_code, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_float, _require_string_list, _require_int_list
+
+## `src/seedmind/research/ndnra/controlled_checkpoint_restoration.py`
+
+Exact durable restoration of one checksum-verified complete brain envelope.
+
+- Kind: python
+- Classes: ControlledCheckpointRestorationRequest, ControlledCheckpointRestorationDurableResult, ControlledCheckpointRestorationPolicy
+- Functions/symbols: _validate_complete_loaded, _validate_request_against_target, _validate_fresh_evidence, _matches_restored_state, _same_complete_state, _interrupt, _validate_code, _validate_checksum, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/controlled_replay_restoration_approval.py`
+
+Human approval contracts for bounded controlled replay and restoration.
+
+- Kind: python
+- Classes: ControlledReplayRestorationOperation, ControlledReplayRestorationTarget, ControlledReplayRestorationEvidence, ControlledReplayRestorationApprovalRequest, ControlledReplayRestorationPermit, ControlledReplayRestorationApprovalPolicy
+- Functions/symbols: _validate_target_against_evidence, _identity, _validate_code, _validate_checksum, _validate_nonnegative_int, _validate_sorted_unique_codes
+
+## `src/seedmind/research/ndnra/controlled_replay_restoration_permit_lifecycle.py`
+
+Immutable lifecycle state for controlled replay and restoration permits.
+
+- Kind: python
+- Classes: ControlledReplayRestorationPermitLifecycleAction, ControlledReplayRestorationPermitLifecycleStatus, ControlledReplayRestorationPermitTransitionRequest, ControlledReplayRestorationPermitTransitionDecision, ControlledReplayRestorationPermitLifecycleRecord, ControlledReplayRestorationPermitLifecycleRegistry
+- Functions/symbols: _validate_request_matches_permit, _status_for, _validate_transition_episode, _transition_decision_id, _reject_authority, _validate_code, _validate_checksum, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/controlled_replay_restoration_persistence.py`
+
+Restart-safe persistence for controlled replay and restoration evidence.
+
+- Kind: python
+- Classes: ControlledCheckpointRestorationReceipt, NDNRAReplayRestorationCheckpoint
+- Functions/symbols: _canonical_registry, _restore_registry, _restore_record, _restore_transition, _restore_permit, _restore_target, _restore_evidence, _restore_replay_receipt, _restore_replay_item_receipt, _restore_restoration_receipt, _identity, _reject_authority, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_bool, _require_string_list, _validate_code, _validate_checksum, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/controlled_retention_replay.py`
+
+Single-use bounded replay of exact real activity for dormancy maintenance.
+
+- Kind: python
+- Classes: ControlledRetentionReplayWorkItem, ControlledRetentionReplayRequest, ControlledRetentionReplayItemReceipt, ControlledRetentionReplayReceipt, ControlledRetentionReplayResult, ControlledRetentionReplayOperation
+- Functions/symbols: _item_receipt, _validate_request_against_target, _validate_fresh_evidence, _replay_activity_event_id, _receipt_id, _identity, _reject_authority, _validate_sorted_unique_codes, _validate_code, _validate_checksum, _validate_nonnegative_int, _validate_unit
+
+## `src/seedmind/research/ndnra/controlled_retention_replay_durable.py`
+
+Durable restart-safe commit of one controlled retention replay.
+
+- Kind: python
+- Classes: ControlledRetentionReplayDurableResult, ControlledRetentionReplayDurablePolicy
+- Functions/symbols: _matches_persisted_boundaries, _matches_loaded_result, _matches_expected, _interrupt
 
 ## `src/seedmind/research/ndnra/effects.py`
 
@@ -865,6 +937,14 @@ Reproducible familiar-sequence training sessions for SeedMind.
 - Classes: ScenarioFactory, FamiliarSequenceConfig, TrainingStepRecord, TrainingSessionResult, FamiliarSequenceTrainingSession
 - Functions/symbols: save_training_checkpoint, load_training_checkpoint, export_training_history_csv, export_prediction_error_svg, _scenario_identity, _session_identity, _record_to_payload, _record_from_payload, _validate_checkpoint_progress, _required_int, _required_sequence, _required_mapping, _mapping_int, _mapping_float, _mapping_str, _mapping_bool
 
+## `tests/unit/ndnra_controlled_replay_test_support.py`
+
+Shared deterministic fixtures for durable controlled replay tests.
+
+- Kind: python
+- Classes: ReplayScenario
+- Functions/symbols: build_replay_scenario, raise_at
+
 ## `tests/unit/ndnra_execution_test_support.py`
 
 Shared deterministic fixtures for NDNRA execution persistence tests.
@@ -972,6 +1052,13 @@ Tests for symbolic human request and signal contracts.
 
 - Kind: python
 - Functions/symbols: make_request, test_request_signal_has_fixed_width_and_one_hot_code, test_caregiver_frame_encodes_demonstration, test_caregiver_frame_rejects_request_code, test_request_rejects_invalid_metadata
+
+## `tests/unit/test_ndnra_activity_maintenance.py`
+
+Tests for source-separated activity and bounded dormancy maintenance.
+
+- Kind: python
+- Functions/symbols: _graph, _runtime, _request, _ledger_with_real_support, test_real_replay_and_imagined_activity_have_ordered_strengths, test_replay_and_imagination_require_real_support, test_real_activity_requires_real_evidence_and_cannot_cite_other_events, test_harmful_redundant_and_irrelevant_pathways_remain_dormant, test_safety_critical_and_rare_use_memory_receive_bounded_floors, test_cycle_budget_limits_total_reactivation, test_event_budget_and_structure_budget_are_enforced, test_duplicate_activity_cannot_reduce_dormancy_twice, test_source_counters_remain_separate_and_inspectable, test_runtime_maintenance_only_reduces_dormancy, test_runtime_applies_real_more_than_replay_more_than_imagination, test_denied_or_duplicate_decision_does_not_change_runtime, test_unknown_structure_is_rejected_before_any_dormancy_change, test_activity_contract_rejects_confidence_mastery_and_authority_changes, test_activity_maintenance_has_no_execution_persistence_timer_or_sql_dependency
 
 ## `tests/unit/test_ndnra_consolidation.py`
 
@@ -1128,12 +1215,69 @@ Tests for the proposal-only consolidation scheduling experiment.
 - Kind: python
 - Functions/symbols: _by_strategy, test_fixed_interval_creates_false_and_late_proposals, test_eligibility_only_is_precise_but_highly_repetitive, test_evidence_aware_scheduling_is_precise_bounded_and_non_redundant, test_controlled_evidence_arrival_has_two_mastered_lessons, test_experiment_is_exactly_deterministic, test_experiment_never_applies_or_authorizes_consolidation, test_experiment_export_is_ascii_and_inspectable, test_experiment_config_rejects_invalid_values, test_experiment_module_has_no_application_persistence_or_integration_dependency
 
+## `tests/unit/test_ndnra_contextual_consequence.py`
+
+Tests for real consequences and context-specific action competence.
+
+- Kind: python
+- Functions/symbols: _cooling_need, _context, _assessment, test_opening_window_into_hotter_air_is_a_real_worsened_consequence, test_wrong_action_creates_a_low_local_competence_record, test_same_action_remains_separate_across_different_contexts, test_later_failure_reduces_helpfulness_after_successes, test_prediction_accuracy_does_not_make_a_harmful_action_helpful, test_replay_and_imagination_cannot_become_new_competence_evidence, test_exact_duplicate_is_ignored_but_identity_conflict_is_rejected, test_missing_prediction_is_unknown_not_false_accuracy, test_effect_order_and_authority_contracts_are_enforced, test_snapshots_are_deterministic_ascii_and_non_executing, test_consequence_module_has_no_action_execution_persistence_or_timer_dependency
+
 ## `tests/unit/test_ndnra_contextual_mastery.py`
 
 Tests for contextual NDNRA redundancy and bounded mastery evidence.
 
 - Kind: python
 - Functions/symbols: test_contextual_mastery_experiment_distinguishes_replay_from_breadth, test_one_shot_protection_and_varied_mastery_remain_distinct, test_contradiction_reduces_mastery_without_erasing_sources, test_event_identity_key_is_collision_safe, test_contradictory_effect_does_not_create_protective_strength, test_contextual_recording_is_atomic_when_identity_validation_fails, test_contextual_mastery_gate_preserves_shadow_and_persistence, test_contextual_mastery_has_no_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_controlled_checkpoint_restoration.py`
+
+Tests for exact restart-safe complete checkpoint restoration.
+
+- Kind: python
+- Classes: _Scenario
+- Functions/symbols: _graph, _activity, _growth, _scenario, _raise_at, _restore, test_restoration_replaces_complete_active_brain_and_preserves_audit, test_restoration_audit_survives_restart_and_blocks_permit_reuse, test_interruption_before_save_preserves_exact_current_envelope, test_interruption_after_replace_recovers_complete_restored_envelope, test_restoration_rejects_same_path_or_corrupt_source_without_mutation, test_restoration_replaces_every_persisted_active_component, test_restoration_rejects_migrated_source_without_mutation, test_restoration_rejects_fresh_evidence_drift_and_expired_permit, test_restoration_rejects_source_audit_not_contained_by_current, _rewrite_as_schema_5
+
+## `tests/unit/test_ndnra_controlled_replay_persistence.py`
+
+Tests for schema-6 durable controlled replay persistence.
+
+- Kind: python
+- Functions/symbols: _canonical_checksum, test_schema_6_round_trips_issued_permit_and_activity_history, test_audit_only_permit_save_does_not_change_active_state_checksum, test_activity_ledger_and_replay_checkpoint_reconstruct_exactly, test_active_state_checksum_detects_tampering_even_with_valid_outer_checksum, test_schema_5_migrates_to_empty_replay_checkpoint
+
+## `tests/unit/test_ndnra_controlled_replay_restoration_acceptance.py`
+
+Tests for live controlled replay and restoration stage acceptance.
+
+- Kind: python
+- Functions/symbols: evidence, test_acceptance_consumes_exactly_one_replay_and_restoration_permit, test_replay_changes_only_bounded_non_authoritative_accessibility, test_restoration_reproduces_source_state_and_live_behaviour, test_acceptance_exercises_all_failure_and_restart_paths, test_acceptance_exports_ascii_inspectable_evidence, test_acceptance_has_no_autonomous_or_sqlite_operation_path
+
+## `tests/unit/test_ndnra_controlled_replay_restoration_approval.py`
+
+Tests for human-approved controlled replay and restoration permits.
+
+- Kind: python
+- Functions/symbols: _evidence, _replay_target, _restoration_target, _request, _permit, test_replay_permit_is_deterministic_bounded_and_non_executable, test_restoration_permit_binds_exact_complete_checkpoint_envelope, test_permit_validity_window_is_short_and_inspectable, test_approval_requires_immediate_current_evidence, test_approval_window_cannot_exceed_policy_limit, test_approval_requires_explicit_human_identity, test_unverified_or_fallback_checkpoint_evidence_is_rejected, test_target_requires_exact_current_and_source_checkpoint_identities, test_target_requires_all_exact_source_evidence, test_operation_specific_target_bounds_are_enforced, test_target_and_permit_reject_all_authority_bearing_state, test_distinct_human_reason_produces_distinct_permit_identity, test_approval_module_has_no_execution_persistence_timer_or_sql_dependency
+
+## `tests/unit/test_ndnra_controlled_replay_restoration_permit_lifecycle.py`
+
+Tests for immutable controlled replay/restoration permit lifecycles.
+
+- Kind: python
+- Functions/symbols: _evidence, _target, _permit, _request, test_issued_record_is_immutable_and_non_authoritative, test_cancel_transition_is_terminal_and_preserves_issued_record, test_consume_transition_requires_operation_actor_and_receipt_reference, test_expiry_requires_episode_after_validity_window, test_cancel_or_consume_after_expiry_window_is_rejected, test_transition_must_follow_permit_issuance, test_nonconsume_transitions_reject_consumption_reference, test_transition_requires_every_exact_authority_identity, test_terminal_records_reject_all_conflicting_transitions, test_transition_identity_is_deterministic_and_tampering_is_rejected, test_registry_enforces_unique_permits_and_tracks_operation_counts, test_reconstructed_record_rejects_mismatched_status_or_permit, test_lifecycle_objects_reject_all_authority_bearing_state, test_lifecycle_has_no_operation_persistence_timer_or_sql_dependency
+
+## `tests/unit/test_ndnra_controlled_retention_replay.py`
+
+Tests for single-use bounded replay of exact real activity.
+
+- Kind: python
+- Functions/symbols: _graph, _activity_ledger, _runtime, _evidence, _target, _permit, _registry, _items, _request, _execute, test_success_replays_exact_real_activity_and_consumes_one_permit, test_success_is_deterministic_from_identical_inputs, test_restoration_permit_cannot_execute_retention_replay, test_replay_requires_fresh_same_episode_verified_nonfallback_evidence, test_checkpoint_and_source_evidence_drift_are_rejected, test_request_must_match_every_permit_and_fresh_evidence_identity, test_cancelled_consumed_and_expired_permits_cannot_run, test_work_items_are_explicit_unique_sorted_and_bounded, test_work_items_must_use_approved_exact_real_activity, test_midoperation_failure_preserves_exact_original_state, test_denied_replay_preserves_exact_original_state, test_receipt_identity_and_authority_contracts_are_enforced, test_replay_module_has_no_persistence_timer_sql_integration_or_action_execution
+
+## `tests/unit/test_ndnra_controlled_retention_replay_durable.py`
+
+Tests for restart-safe durable controlled retention replay.
+
+- Kind: python
+- Functions/symbols: _execute, test_durable_replay_round_trips_consumed_permit_receipt_and_activity, test_restart_retains_single_use_and_blocks_replay_again, test_interruption_before_save_preserves_exact_old_envelope, test_interruption_after_atomic_replace_recovers_complete_new_envelope, test_durable_replay_rejects_state_or_caller_boundary_drift
 
 ## `tests/unit/test_ndnra_human_approved_consolidation_execution_acceptance.py`
 

@@ -1436,6 +1436,16 @@ Production curiosity remains the sole production action authority. NDNRA and con
 
 Passing this gate raises heuristic theory-to-integration readiness from 96% to 97%. This is an internal engineering progress indicator for bounded human-approved execution, not a production-readiness score, safety certification, autonomous authority, AGI percentage, or claim that controlled replay and restoration are implemented.
 
+### 17.19 Controlled replay and exact checkpoint restoration
+
+Controlled replay and restoration are explicit human-governed operations. Replay revisits only named real activity and may reduce dormancy without creating evidence, confidence, mastery, growth pressure, or production-action authority. Restoration accepts only a separate checksum-verified native schema-6 source and replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory together.
+
+The destination preserves its current monotonic permit and receipt audit. That audit must contain all source audit history, so restoring an older active state cannot revive a consumed approval. Partial restoration and automatic replay or restoration are forbidden.
+
+Live acceptance compares an unreplayed control with an otherwise identical replayed state, and an exact source checkpoint with its restored destination. Replay must preserve production actions, prediction errors, developmental signals, graph learning, and non-dormancy growth. Restoration must reproduce subsequent actions, suggestions, prediction errors, signals, graph learning, and growth exactly.
+
+Passing this gate raises the legacy narrow-scope theory-to-integration marker from 97% to 98%. The expanded developmental architecture marker is 79% because learned consequence modelling, bounded imagination, and safe experiment promotion remain future stages.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1473,9 +1483,13 @@ The following rules must remain true:
 31. Execution permits remain bounded, immutable, deterministic, and single-use.
 32. A successful application requires one consumed permit, one matching receipt, and one matching persisted application.
 33. Failed operations restore the exact prior state or use complete safe fallback; partial authority state is forbidden.
-34. No autonomous workers, timers, queues, permit creation, permit consumption, replay, restoration, advice, growth, or route-ranking authority is permitted.
-35. Production curiosity remains the sole production action authority; NDNRA and consolidation cannot select production actions.
-36. SQLite remains storage and audit evidence and cannot become approval, revalidation, execution selection, or action authority.
+34. No autonomous workers, timers, queues, permit creation, permit consumption, replay, restoration, advice, growth, or route-ranking authority is permitted; replay and restoration require explicit bounded human-approved single-use operations.
+35. Production curiosity remains the sole production action authority; NDNRA, consolidation, replay, and restoration cannot select production actions.
+36. SQLite remains storage and audit evidence and cannot become approval, revalidation, replay selection, restoration selection, execution selection, or action authority.
+37. Replay may revisit only exact named real activity and may change dormancy only; it cannot create evidence, confidence, mastery, competence, or non-dormancy growth.
+38. Restoration must replace one complete checksum-verified native schema-6 active state; partial authority-bearing restoration is forbidden.
+39. The current operation audit must contain source audit history, and restoration cannot revive cancelled, expired, or consumed approvals.
+40. Replay/restoration acceptance must preserve production actions and expose exact receipts, failure paths, restart state, and zero automatic-operation counts.
 
 ## 19. First prototype boundary
 

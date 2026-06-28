@@ -1,29 +1,29 @@
 # SeedMind Session Handover — 28 June 2026
 
-Repository: `D:\Github\SeedMind`  
-CodexBridge repository alias: `seedmind`  
-Branch: `main`  
-Working tree at handover: clean  
-Git relationship at handover: `main...origin/main [ahead 1]` before this handover document is committed  
-Current implementation commit: `8f83f0d0edcbd2135e68798b70db40bae4482dbc`  
-Current stage: Human-Approved Consolidation Execution  
-Stage progress: 3 of 5 batches complete  
-Current NDNRA heuristic theory-to-integration readiness: 96%  
-Target after complete stage acceptance: 97%
+Repository: `D:\Github\SeedMind`
+CodexBridge repository alias: `seedmind`
+Branch: `main`
+Working tree at handover: expected clean after the closure commit
+Git relationship at handover: `main...origin/main [ahead 5]` after the closure commit
+Latest implementation commit before closure: `f0d5ba2d968eed444d2047cea62b54c129f03ec0`
+Current stage: Controlled Replay and Restoration
+Stage progress: 6 of 6 batches complete
+Legacy narrow-scope theory-to-integration readiness: 98%
+Expanded developmental architecture progress: 79%
 
 ---
 
 ## 1. Continuation instruction for the next session
 
-Use this handover as the source of truth, then inspect the repository before editing.
+Use this handover and `docs/SeedMind_Controlled_Replay_Restoration_Stage_Handover_2026-06-28.md` as the source of truth, then inspect the repository before editing.
 
 Recommended opening instruction:
 
-> Continue SeedMind from `docs/SeedMind_Session_Handover_2026-06-28.md`. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin Human-Approved Consolidation Execution Batch 4. Do not push. Preserve every authority and cognition boundary documented in the handover.
+> Continue SeedMind from the latest controlled replay/restoration handover. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin the learned consequence-model stage. Do not push. Preserve production curiosity as the sole production action authority and keep predicted or imagined consequences separate from real evidence.
 
 The immediate next task is:
 
-> Implement Batch 4: restart-safe permit and execution persistence, interruption safety, duplicate/replayed-permit protection after restart, stale-between-approval-and-commit acceptance, corruption fallback, and live acceptance. Keep readiness at 96% until Batch 5 formally closes the stage.
+> Plan and implement the first bounded learned consequence-model batch: predict relevant next effects from context plus action, report uncertainty and evidence coverage, and compare predictions with later real outcomes. Do not begin dreaming, route optimisation, or safe experiment promotion until the consequence model has its own falsifiable contracts and tests.
 
 ---
 
@@ -197,7 +197,9 @@ Meaning of 100%:
 - It does not mean unrestricted autonomy.
 - It does not mean all safety concerns are solved.
 
-The current indicator remains 96% because the execution stage is not complete.
+The legacy narrow-scope indicator is now 98% because controlled replay and restoration passed live acceptance and closure gates. Do not advance directly to the historical 99% line by label alone.
+
+The expanded developmental architecture marker is 79%. Learned consequence modelling, bounded imagination, safe experiment promotion, and later end-to-end integration must each earn separate evidence before that marker increases.
 
 ---
 

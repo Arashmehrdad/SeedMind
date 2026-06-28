@@ -99,7 +99,7 @@ Batch 2 is in-memory only. Persistence and restart reconstruction remain part of
 
 ### Batch 3 - controlled replay completion
 
-Status: implemented with restart-safe durable replay and exact complete-state restoration.
+Status: complete with restart-safe durable replay, exact complete-state restoration, and live stage acceptance.
 
 Completed:
 
@@ -117,6 +117,9 @@ Completed:
 - Atomic restoration of graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory.
 - Monotonic audit preservation that prevents restoration from reviving used approvals.
 - Rejection of corrupt, fallback, migrated, stale, expired, mismatched, same-path, and audit-divergent restoration sources.
+- Live control-versus-replayed evidence showing unchanged production actions, prediction errors, developmental signals, graph learning, and non-dormancy growth.
+- Live source-versus-restored evidence showing exact subsequent actions, suggestions, errors, signals, graph learning, and growth.
+- ASCII audit exports with zero automatic replay, automatic restoration, production-action authority, background workers, or SQLite cognition.
 
 ### Batch 4 - learned consequence model
 
@@ -152,14 +155,14 @@ Planned:
 
 ### Batch 7 - persistence, live integration, and acceptance
 
-Planned:
+Partially complete: real consequence, activity-source, replay, restoration, restart, and live-invariance evidence are persisted and accepted. Imagination-specific persistence and acceptance remain planned.
 
-- Persist consequence, competence, activity-source, replay, and imagination evidence.
-- Restart without losing source distinctions or single-use guarantees.
+Remaining:
+
+- Persist later learned consequence-model and imagination evidence.
 - Demonstrate that imagined evidence cannot become real evidence after restart.
-- Demonstrate memory maintenance without false mastery inflation.
-- Demonstrate context-specific failure consequences.
-- Preserve production-action authority boundaries until separately accepted.
+- Demonstrate context-specific model correction and safe experiment promotion.
+- Preserve production-action authority boundaries through later imagination integration.
 - Recalculate progress only after complete repository gates and live evidence pass.
 
 ## 5. Batch 1 design
@@ -190,9 +193,9 @@ A wrong outcome lowers local helpfulness and competence. It does not create emot
 
 The expanded marker started at 68% before Batch 1.
 
-After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raise the expanded marker to **78%**.
+After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raised it to **78%**. Live replay/restoration invariance, restart, failure-path, and export acceptance raise the expanded marker to **79%**.
 
-The marker remains limited because SeedMind still does not provide a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, persistence for every later imagination contract, or complete live integration.
+The marker remains limited because SeedMind still does not provide a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, imagination-specific persistence, or complete end-to-end integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 
