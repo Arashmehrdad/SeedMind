@@ -388,7 +388,7 @@ def run_restart_safe_proposal_memory_acceptance(
         and stale_report.decisions[0].status is ConsolidationProposalRevalidationStatus.STALE
     )
     pass_gate = bool(
-        BRAIN_SCHEMA_VERSION == 5
+        BRAIN_SCHEMA_VERSION == 6
         and saved.schema_version == BRAIN_SCHEMA_VERSION
         and not saved.temporary_file_remaining
         and clean_load.status is BrainLoadStatus.LOADED

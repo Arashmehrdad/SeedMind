@@ -178,6 +178,12 @@ from seedmind.research.ndnra.controlled_replay_restoration_permit_lifecycle impo
     ControlledReplayRestorationPermitTransitionDecision,
     ControlledReplayRestorationPermitTransitionRequest,
 )
+from seedmind.research.ndnra.controlled_replay_restoration_persistence import (
+    REPLAY_RESTORATION_SCHEMA,
+    REPLAY_RESTORATION_SCHEMA_VERSION,
+    ControlledCheckpointRestorationReceipt,
+    NDNRAReplayRestorationCheckpoint,
+)
 from seedmind.research.ndnra.controlled_retention_replay import (
     ControlledRetentionReplayItemReceipt,
     ControlledRetentionReplayOperation,
@@ -185,6 +191,10 @@ from seedmind.research.ndnra.controlled_retention_replay import (
     ControlledRetentionReplayRequest,
     ControlledRetentionReplayResult,
     ControlledRetentionReplayWorkItem,
+)
+from seedmind.research.ndnra.controlled_retention_replay_durable import (
+    ControlledRetentionReplayDurablePolicy,
+    ControlledRetentionReplayDurableResult,
 )
 from seedmind.research.ndnra.effects import (
     EffectEstimate,
@@ -271,6 +281,8 @@ __all__ = [
     "EXECUTION_SCHEMA_VERSION",
     "PROPOSAL_LIFECYCLE_SCHEMA",
     "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
+    "REPLAY_RESTORATION_SCHEMA",
+    "REPLAY_RESTORATION_SCHEMA_VERSION",
     "ActionCompetenceUpdate",
     "ActionConsequenceAssessment",
     "ActivityMaintenanceApplication",
@@ -364,6 +376,10 @@ __all__ = [
     "ContextualMasteryExperimentEvidence",
     "ContextualMasteryExperimentResult",
     "ContextualRecordCode",
+    "ControlledCheckpointRestorationDurableResult",
+    "ControlledCheckpointRestorationPolicy",
+    "ControlledCheckpointRestorationReceipt",
+    "ControlledCheckpointRestorationRequest",
     "ControlledReplayRestorationApprovalPolicy",
     "ControlledReplayRestorationApprovalRequest",
     "ControlledReplayRestorationEvidence",
@@ -376,6 +392,8 @@ __all__ = [
     "ControlledReplayRestorationPermitTransitionDecision",
     "ControlledReplayRestorationPermitTransitionRequest",
     "ControlledReplayRestorationTarget",
+    "ControlledRetentionReplayDurablePolicy",
+    "ControlledRetentionReplayDurableResult",
     "ControlledRetentionReplayItemReceipt",
     "ControlledRetentionReplayOperation",
     "ControlledRetentionReplayReceipt",
@@ -416,6 +434,7 @@ __all__ = [
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
     "NDNRAProposalLifecycleCheckpoint",
+    "NDNRAReplayRestorationCheckpoint",
     "NDNRARuntimeAdaptiveState",
     "NeedDimension",
     "NeedDrivenComposer",

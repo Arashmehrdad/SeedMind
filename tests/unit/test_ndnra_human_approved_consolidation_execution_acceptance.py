@@ -19,7 +19,7 @@ def test_one_human_approval_produces_one_durable_application(tmp_path: Path) -> 
     )
     result = evidence.result
 
-    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 5
+    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 6
     assert result.explicit_human_approval_count == 1
     assert result.current_precommit_revalidation_count == 1
     assert result.control_application_count == 0

@@ -6,7 +6,7 @@ Branch: `main`
 Stage status: active
 Authority: explicit-human-approval only, research-only, bounded replay and restoration
 Legacy narrow-scope theory-to-integration marker: 97%
-Expanded developmental architecture progress after bounded replay: 75%
+Expanded developmental architecture progress after durable replay and restoration: 78%
 Legacy target after complete stage acceptance: 98%
 
 ## 1. Stage objective
@@ -115,22 +115,32 @@ Deliverables:
 - One receipt tied to one consumed replay permit.
 - Cancelled, expired, consumed, stale, drifted, restoration-scoped, and oversized operations rejected.
 
-Batch 3 is in-memory only. Durable permit, receipt, activity-history, and replay-result persistence remains for later batches.
+Batch 3 execution remains isolated from production action and learning authority. Its permit, receipt, activity history, and resulting active state are now persisted atomically by Batch 4.
 
 Any learning-update authority must be separately explicit and bounded. It is not inferred from replay evidence, activity maintenance, a replay permit, or a replay receipt.
 
 ### Batch 4 - exact checkpoint restoration and durable persistence
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Restore only one exact checksum-verified complete brain envelope.
-- Immediate current-state and target revalidation.
-- Atomic replacement with exact old-or-new resolution.
-- Schema migration for permit, operation, and receipt evidence if required.
-- Restart-safe single-use enforcement.
-- Interruption handling before and after durable replacement.
-- Complete corruption fallback.
-- No partial graph, growth, consolidation, proposal, execution, replay, or restoration recovery.
+Deliverables:
+
+- Brain schema 6 stores replay/restoration permits, active activity history, replay receipts, and restoration receipts inside the complete checksum-protected envelope.
+- Older schema-5 files migrate to an explicit empty replay/restoration checkpoint.
+- Separate outer-envelope and active-state SHA-256 checksums.
+- Audit-only permit persistence changes the envelope checksum without invalidating the approved active-state identity.
+- Exact active-ledger reconstruction preserves event order, source distinctions, cycle budgets, and deterministic maintenance decisions.
+- Durable replay atomically persists the consumed permit, exact receipt, replay activity history, reduced dormancy, and all unrelated brain components.
+- Restarted replay retains single-use enforcement and cannot reuse a consumed permit.
+- Restoration accepts only a checksum-verified, non-fallback, non-migrated schema-6 source envelope.
+- Restoration replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity history together.
+- Current monotonic permit and receipt audit history survives restoration of an older active brain state.
+- Restoration cannot revive a previously used approval.
+- Immediate current-state, source-state, target, permit, and fresh-evidence revalidation.
+- Atomic replacement with exact old-or-new resolution before and after the filesystem replace point.
+- Corrupt source or current envelopes are rejected without changing the current store.
+- No partial graph, growth, consolidation, proposal, execution, activity, replay, or restoration recovery.
+- No replay, restoration, cognition, learning, route-ranking, growth, pressure, or production-action authority is granted to persistence evidence.
 
 ### Batch 5 - live acceptance, documentation, and closure
 
@@ -221,9 +231,9 @@ Batch 1 does not provide:
 
 ## 8. Readiness rule
 
-The legacy narrow-scope marker remains 97% during Batches 1 through 4. The expanded developmental architecture marker is 75% after in-memory controlled replay.
+The legacy narrow-scope marker remains 97% until Batch 5 closure. The expanded developmental architecture marker is 78% after restart-safe replay persistence and exact complete-envelope restoration.
 
-The legacy stage marker may increase to 98% only after exact restoration, durable replay/restoration persistence, restart safety, corruption fallback, live invariance, documentation, and all repository quality gates pass together.
+The legacy stage marker may increase to 98% only after live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
 
 These markers are internal engineering progress measures. They are not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
 

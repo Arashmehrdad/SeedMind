@@ -27,11 +27,14 @@ from seedmind.research.ndnra.consolidation_proposal_persistence import (
     NDNRAProposalLifecycleCheckpoint,
 )
 from seedmind.research.ndnra.contextual_memory import ContextualExperienceLedger
+from seedmind.research.ndnra.controlled_replay_restoration_persistence import (
+    NDNRAReplayRestorationCheckpoint,
+)
 from seedmind.research.ndnra.effects import LocalEffectLink, SparseEffectMemory
 
 BRAIN_SCHEMA = "seedmind.ndnra.brain"
-BRAIN_SCHEMA_VERSION = 5
-_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, 3, 4, BRAIN_SCHEMA_VERSION})
+BRAIN_SCHEMA_VERSION = 6
+_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, 3, 4, 5, BRAIN_SCHEMA_VERSION})
 
 __all__ = [
     "BRAIN_SCHEMA",
@@ -45,6 +48,7 @@ __all__ = [
     "NDNRAExecutionCheckpoint",
     "NDNRAGrowthState",
     "NDNRAProposalLifecycleCheckpoint",
+    "NDNRAReplayRestorationCheckpoint",
 ]
 
 
@@ -148,6 +152,7 @@ class BrainSaveResult:
 
     path: Path
     checksum: str
+    state_checksum: str
     schema: str
     schema_version: int
     byte_count: int
@@ -164,8 +169,12 @@ class BrainLoadResult:
     consolidation_checkpoint: NDNRAConsolidationCheckpoint
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint
     execution_checkpoint: NDNRAExecutionCheckpoint
+    replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint
     checksum_verified: bool
     used_fallback: bool
+    checksum: str | None = None
+    state_checksum: str | None = None
+    schema_version: int | None = None
     migrated_from_version: int | None = None
     error: str | None = None
 
@@ -190,6 +199,7 @@ class NDNRABrainStore:
         consolidation_checkpoint: NDNRAConsolidationCheckpoint | None = None,
         proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint | None = None,
         execution_checkpoint: NDNRAExecutionCheckpoint | None = None,
+        replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint | None = None,
         interruption_hook: Callable[[str], None] | None = None,
     ) -> BrainSaveResult:
         """Atomically save a checksum-protected reconstruction snapshot."""
@@ -209,17 +219,34 @@ class NDNRABrainStore:
             if execution_checkpoint is None
             else execution_checkpoint
         )
+        replay_restoration = (
+            NDNRAReplayRestorationCheckpoint.empty()
+            if replay_restoration_checkpoint is None
+            else replay_restoration_checkpoint
+        )
         execution.validate_consolidation_checkpoint(consolidation)
+        state_payload: dict[str, object] = {
+            "graph": graph.snapshot(),
+            "growth_state": growth.snapshot(),
+            "consolidation_checkpoint": consolidation.snapshot(),
+            "proposal_lifecycle_checkpoint": proposal_lifecycle.snapshot(),
+            "execution_checkpoint": execution.snapshot(),
+            "replay_restoration_active_state": (replay_restoration.active_state_snapshot()),
+        }
+        state_checksum = _checksum(state_payload)
+        payload: dict[str, object] = {
+            "graph": state_payload["graph"],
+            "growth_state": state_payload["growth_state"],
+            "consolidation_checkpoint": state_payload["consolidation_checkpoint"],
+            "proposal_lifecycle_checkpoint": state_payload["proposal_lifecycle_checkpoint"],
+            "execution_checkpoint": state_payload["execution_checkpoint"],
+            "replay_restoration_checkpoint": replay_restoration.snapshot(),
+        }
         body: dict[str, object] = {
             "schema": BRAIN_SCHEMA,
             "schema_version": BRAIN_SCHEMA_VERSION,
-            "payload": {
-                "graph": graph.snapshot(),
-                "growth_state": growth.snapshot(),
-                "consolidation_checkpoint": consolidation.snapshot(),
-                "proposal_lifecycle_checkpoint": proposal_lifecycle.snapshot(),
-                "execution_checkpoint": execution.snapshot(),
-            },
+            "state_checksum": state_checksum,
+            "payload": payload,
         }
         checksum = _checksum(body)
         envelope = {**body, "checksum": checksum}
@@ -254,6 +281,7 @@ class NDNRABrainStore:
         return BrainSaveResult(
             path=self.path,
             checksum=checksum,
+            state_checksum=state_checksum,
             schema=BRAIN_SCHEMA,
             schema_version=BRAIN_SCHEMA_VERSION,
             byte_count=len(encoded),
@@ -275,11 +303,16 @@ class NDNRABrainStore:
                     "brain-state schema is incompatible",
                 )
             stored_checksum = _require_string(envelope, "checksum")
+            stored_state_checksum = (
+                None if version < 6 else _require_string(envelope, "state_checksum")
+            )
             body: dict[str, object] = {
                 "schema": schema,
                 "schema_version": version,
                 "payload": envelope.get("payload"),
             }
+            if stored_state_checksum is not None:
+                body["state_checksum"] = stored_state_checksum
             if not hashlib.sha256(_canonical_bytes(body)).hexdigest() == stored_checksum:
                 raise ValueError("brain-state checksum does not match")
             payload = _require_mapping("brain payload", envelope.get("payload"))
@@ -304,7 +337,29 @@ class NDNRABrainStore:
                 if version < 5
                 else NDNRAExecutionCheckpoint.from_snapshot(payload.get("execution_checkpoint"))
             )
+            replay_restoration_checkpoint = (
+                NDNRAReplayRestorationCheckpoint.empty()
+                if version < 6
+                else NDNRAReplayRestorationCheckpoint.from_snapshot(
+                    payload.get("replay_restoration_checkpoint")
+                )
+            )
             execution_checkpoint.validate_consolidation_checkpoint(consolidation_checkpoint)
+            if stored_state_checksum is not None:
+                restored_state_checksum = _checksum(
+                    {
+                        "graph": graph.snapshot(),
+                        "growth_state": growth_state.snapshot(),
+                        "consolidation_checkpoint": consolidation_checkpoint.snapshot(),
+                        "proposal_lifecycle_checkpoint": (proposal_lifecycle_checkpoint.snapshot()),
+                        "execution_checkpoint": execution_checkpoint.snapshot(),
+                        "replay_restoration_active_state": (
+                            replay_restoration_checkpoint.active_state_snapshot()
+                        ),
+                    }
+                )
+                if restored_state_checksum != stored_state_checksum:
+                    raise ValueError("brain active-state checksum does not match")
             return BrainLoadResult(
                 status=BrainLoadStatus.LOADED,
                 graph=graph,
@@ -312,8 +367,12 @@ class NDNRABrainStore:
                 consolidation_checkpoint=consolidation_checkpoint,
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=execution_checkpoint,
+                replay_restoration_checkpoint=replay_restoration_checkpoint,
                 checksum_verified=True,
                 used_fallback=False,
+                checksum=stored_checksum,
+                state_checksum=stored_state_checksum,
+                schema_version=version,
                 migrated_from_version=(version if version < BRAIN_SCHEMA_VERSION else None),
             )
         except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
@@ -328,8 +387,12 @@ class NDNRABrainStore:
             consolidation_checkpoint=NDNRAConsolidationCheckpoint.empty(),
             proposal_lifecycle_checkpoint=NDNRAProposalLifecycleCheckpoint.empty(),
             execution_checkpoint=NDNRAExecutionCheckpoint.empty(),
+            replay_restoration_checkpoint=NDNRAReplayRestorationCheckpoint.empty(),
             checksum_verified=False,
             used_fallback=True,
+            checksum=None,
+            state_checksum=None,
+            schema_version=None,
             migrated_from_version=None,
             error=error,
         )

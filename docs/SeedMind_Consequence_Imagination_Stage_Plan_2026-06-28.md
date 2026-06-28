@@ -99,24 +99,22 @@ Batch 2 is in-memory only. Persistence and restart reconstruction remain part of
 
 ### Batch 3 - controlled replay completion
 
-Status: in-memory controlled replay implemented; durable restart-safe persistence remains pending.
+Status: implemented with restart-safe durable replay and exact complete-envelope restoration.
 
 Completed:
 
 - Replay only exact named real activity.
-- Immediate source, checkpoint, fresh-evidence, and permit revalidation.
+- Immediate source, active-state, fresh-evidence, and permit revalidation.
 - Explicit caller-supplied work items with strict bounds.
 - No duplicate mastery, confidence, or independent-evidence inflation.
 - Bounded accessibility maintenance using the existing replay strength.
 - Exact deterministic receipts.
 - Single-use permit consumption only after complete success.
-- Copy-first rollback that preserves every original input on failure.
-
-Still pending in this batch family:
-
-- Durable replay receipt and activity-history persistence.
-- Restart-safe single-use enforcement after process restart.
-- Exact checkpoint restoration.
+- Atomic durable replay with exact old-or-new interruption resolution.
+- Schema-6 persistence of active activity history, permits, and receipts.
+- Exact full-state restoration of graph, growth, consolidation, proposal, execution, and active activity memory.
+- Monotonic operation audit that prevents restoration from reviving used approvals.
+- Separate active-state and complete-envelope checksums.
 
 ### Batch 4 - learned consequence model
 
@@ -190,9 +188,9 @@ A wrong outcome lowers local helpfulness and competence. It does not create emot
 
 The expanded marker started at 68% before Batch 1.
 
-After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raises the expanded marker to **75%**.
+After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-envelope restoration raise the expanded marker to **78%**.
 
-The marker remains limited because SeedMind still does not provide durable replay persistence, restart-safe replay history, exact restoration, a learned consequence model, dreaming, safe experiment promotion, or complete live integration.
+The marker remains limited because SeedMind still does not provide a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, persistence for every later imagination contract, or complete live integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 

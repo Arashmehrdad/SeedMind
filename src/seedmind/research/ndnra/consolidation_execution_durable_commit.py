@@ -26,6 +26,9 @@ from seedmind.research.ndnra.consolidation_proposal_persistence import (
     NDNRAProposalLifecycleCheckpoint,
 )
 from seedmind.research.ndnra.contextual_memory import ContextualExperienceLedger
+from seedmind.research.ndnra.controlled_replay_restoration_persistence import (
+    NDNRAReplayRestorationCheckpoint,
+)
 from seedmind.research.ndnra.persistence import (
     BrainLoadResult,
     BrainLoadStatus,
@@ -78,6 +81,7 @@ class ConsolidationExecutionDurableCommitPolicy:
         growth_state: NDNRAGrowthState,
         consolidation_checkpoint: NDNRAConsolidationCheckpoint,
         proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint,
+        replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint | None = None,
         commit_interruption_hook: Callable[[str], None] | None = None,
         durable_interruption_hook: Callable[[str], None] | None = None,
         persistence_interruption_hook: Callable[[str], None] | None = None,
@@ -86,12 +90,18 @@ class ConsolidationExecutionDurableCommitPolicy:
         state_before = application_state.snapshot()
         if consolidation_checkpoint.state != state_before:
             raise ValueError("application state must match the persisted consolidation state")
+        replay_restoration = (
+            NDNRAReplayRestorationCheckpoint.empty()
+            if replay_restoration_checkpoint is None
+            else replay_restoration_checkpoint
+        )
         baseline = store.load()
         if not _matches_persisted_boundaries(
             baseline,
             consolidation_checkpoint=consolidation_checkpoint,
             proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
             execution_checkpoint=execution_checkpoint,
+            replay_restoration_checkpoint=replay_restoration,
         ):
             raise ValueError("durable execution requires exact persisted authority boundaries")
 
@@ -137,6 +147,7 @@ class ConsolidationExecutionDurableCommitPolicy:
                 consolidation_checkpoint=new_consolidation,
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=new_execution,
+                replay_restoration_checkpoint=replay_restoration,
                 interruption_hook=persistence_interruption_hook,
             )
         except Exception as error:
@@ -148,6 +159,7 @@ class ConsolidationExecutionDurableCommitPolicy:
                 consolidation_checkpoint=new_consolidation,
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=new_execution,
+                replay_restoration_checkpoint=replay_restoration,
             ):
                 return ConsolidationExecutionDurableCommitResult(
                     commit_result=commit,
@@ -177,6 +189,7 @@ def _matches_persisted_boundaries(
     consolidation_checkpoint: NDNRAConsolidationCheckpoint,
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint,
     execution_checkpoint: NDNRAExecutionCheckpoint,
+    replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint,
 ) -> bool:
     return bool(
         loaded.status is BrainLoadStatus.LOADED
@@ -185,6 +198,7 @@ def _matches_persisted_boundaries(
         and loaded.consolidation_checkpoint == consolidation_checkpoint
         and loaded.proposal_lifecycle_checkpoint == proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == execution_checkpoint
+        and loaded.replay_restoration_checkpoint == replay_restoration_checkpoint
     )
 
 
@@ -196,11 +210,14 @@ def _matches_loaded_result(
         loaded.status is expected.status is BrainLoadStatus.LOADED
         and loaded.checksum_verified == expected.checksum_verified
         and loaded.used_fallback == expected.used_fallback
+        and loaded.checksum == expected.checksum
+        and loaded.schema_version == expected.schema_version
         and loaded.graph.snapshot() == expected.graph.snapshot()
         and loaded.growth_state == expected.growth_state
         and loaded.consolidation_checkpoint == expected.consolidation_checkpoint
         and loaded.proposal_lifecycle_checkpoint == expected.proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == expected.execution_checkpoint
+        and loaded.replay_restoration_checkpoint == expected.replay_restoration_checkpoint
     )
 
 
@@ -212,6 +229,7 @@ def _matches_expected(
     consolidation_checkpoint: NDNRAConsolidationCheckpoint,
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint,
     execution_checkpoint: NDNRAExecutionCheckpoint,
+    replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint,
 ) -> bool:
     return bool(
         loaded.status is BrainLoadStatus.LOADED
@@ -222,6 +240,7 @@ def _matches_expected(
         and loaded.consolidation_checkpoint == consolidation_checkpoint
         and loaded.proposal_lifecycle_checkpoint == proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == execution_checkpoint
+        and loaded.replay_restoration_checkpoint == replay_restoration_checkpoint
     )
 
 

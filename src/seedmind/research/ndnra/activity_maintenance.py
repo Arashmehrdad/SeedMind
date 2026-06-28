@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from math import isfinite
 
@@ -49,6 +50,43 @@ class ActivityMaintenanceConfig:
             or self.maximum_total_reactivation_per_cycle <= 0.0
         ):
             raise ValueError("maximum_total_reactivation_per_cycle must be finite and positive")
+
+    def snapshot(self) -> dict[str, object]:
+        """Return deterministic maintenance policy evidence."""
+        return {
+            "real_strength": self.real_strength,
+            "replay_strength": self.replay_strength,
+            "imagined_strength": self.imagined_strength,
+            "safety_critical_floor": self.safety_critical_floor,
+            "rare_use_floor": self.rare_use_floor,
+            "minimum_replay_real_evidence": self.minimum_replay_real_evidence,
+            "minimum_imagined_real_evidence": self.minimum_imagined_real_evidence,
+            "maximum_structures_per_event": self.maximum_structures_per_event,
+            "maximum_events_per_cycle": self.maximum_events_per_cycle,
+            "maximum_total_reactivation_per_cycle": (self.maximum_total_reactivation_per_cycle),
+        }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ActivityMaintenanceConfig:
+        """Restore exact policy values without applying maintenance."""
+        values = _require_mapping("activity maintenance config", snapshot)
+        config = cls(
+            real_strength=_require_float(values, "real_strength"),
+            replay_strength=_require_float(values, "replay_strength"),
+            imagined_strength=_require_float(values, "imagined_strength"),
+            safety_critical_floor=_require_float(values, "safety_critical_floor"),
+            rare_use_floor=_require_float(values, "rare_use_floor"),
+            minimum_replay_real_evidence=_require_float(values, "minimum_replay_real_evidence"),
+            minimum_imagined_real_evidence=_require_float(values, "minimum_imagined_real_evidence"),
+            maximum_structures_per_event=_require_int(values, "maximum_structures_per_event"),
+            maximum_events_per_cycle=_require_int(values, "maximum_events_per_cycle"),
+            maximum_total_reactivation_per_cycle=_require_float(
+                values, "maximum_total_reactivation_per_cycle"
+            ),
+        )
+        if config.snapshot() != dict(values):
+            raise ValueError("activity maintenance config did not round-trip exactly")
+        return config
 
 
 @dataclass(frozen=True, slots=True)
@@ -129,6 +167,37 @@ class ActivityMaintenanceRequest:
             "has_production_action_authority": self.has_production_action_authority,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ActivityMaintenanceRequest:
+        """Restore one exact source-labelled activity occurrence."""
+        values = _require_mapping("activity maintenance request", snapshot)
+        request = cls(
+            event_id=_require_string(values, "event_id"),
+            cycle=_require_int(values, "cycle"),
+            origin=ExperienceOrigin(_require_string(values, "origin")),
+            structure_ids=tuple(_require_string_list(values, "structure_ids")),
+            supporting_real_event_ids=tuple(
+                _require_string_list(values, "supporting_real_event_ids")
+            ),
+            relevance=_require_float(values, "relevance"),
+            helpfulness=_require_float(values, "helpfulness"),
+            prediction_accuracy=_require_float(values, "prediction_accuracy"),
+            real_evidence_strength=_require_float(values, "real_evidence_strength"),
+            safety_critical=_require_bool(values, "safety_critical"),
+            rare_use=_require_bool(values, "rare_use"),
+            harmful=_require_bool(values, "harmful"),
+            redundant=_require_bool(values, "redundant"),
+            factual_confidence_delta=_require_float(values, "factual_confidence_delta"),
+            mastery_delta=_require_float(values, "mastery_delta"),
+            has_action_selection_authority=_require_bool(values, "has_action_selection_authority"),
+            has_production_action_authority=_require_bool(
+                values, "has_production_action_authority"
+            ),
+        )
+        if request.snapshot() != dict(values):
+            raise ValueError("activity maintenance request did not round-trip exactly")
+        return request
+
 
 @dataclass(frozen=True, slots=True)
 class ActivityMaintenanceDecision:
@@ -200,6 +269,33 @@ class ActivityMaintenanceDecision:
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ActivityMaintenanceDecision:
+        """Restore exact non-authoritative maintenance evidence."""
+        values = _require_mapping("activity maintenance decision", snapshot)
+        decision = cls(
+            decision_id=_require_string(values, "decision_id"),
+            request=ActivityMaintenanceRequest.from_snapshot(values.get("request")),
+            requested_strength=_require_float(values, "requested_strength"),
+            granted_strength=_require_float(values, "granted_strength"),
+            per_structure_reactivation=_require_float(values, "per_structure_reactivation"),
+            reason_code=_require_string(values, "reason_code"),
+            evidence_applied=_require_bool(values, "evidence_applied"),
+            factual_confidence_delta=_require_float(values, "factual_confidence_delta"),
+            mastery_delta=_require_float(values, "mastery_delta"),
+            has_action_selection_authority=_require_bool(values, "has_action_selection_authority"),
+            has_production_action_authority=_require_bool(
+                values, "has_production_action_authority"
+            ),
+        )
+        if _require_float(values, "total_reactivation") != decision.total_reactivation:
+            raise ValueError("persisted total reactivation is inconsistent")
+        if _require_bool(values, "maintenance_applied") is not decision.maintenance_applied:
+            raise ValueError("persisted maintenance-applied state is inconsistent")
+        if decision.snapshot() != dict(values):
+            raise ValueError("activity maintenance decision did not round-trip exactly")
+        return decision
 
 
 @dataclass(slots=True)
@@ -305,6 +401,8 @@ class ActivityMaintenanceLedger:
     def snapshot(self) -> dict[str, object]:
         """Return deterministic source-separated activity evidence."""
         return {
+            "config": self.config.snapshot(),
+            "event_order": list(self._requests),
             "event_count": self.event_count,
             "real_activity_count": self.real_activity_count,
             "replay_activity_count": self.replay_activity_count,
@@ -321,6 +419,42 @@ class ActivityMaintenanceLedger:
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ActivityMaintenanceLedger:
+        """Restore exact activity history by replaying persisted event order."""
+        values = _require_mapping("activity maintenance ledger", snapshot)
+        config = ActivityMaintenanceConfig.from_snapshot(values.get("config"))
+        event_order = tuple(_require_string_list(values, "event_order"))
+        if len(event_order) != len(set(event_order)):
+            raise ValueError("persisted activity event order must be unique")
+        stored_decisions = tuple(
+            ActivityMaintenanceDecision.from_snapshot(item)
+            for item in _require_list(values, "decisions")
+        )
+        decision_by_event = {decision.request.event_id: decision for decision in stored_decisions}
+        if len(decision_by_event) != len(stored_decisions):
+            raise ValueError("persisted activity decisions must have unique events")
+        if set(event_order) != set(decision_by_event):
+            raise ValueError("persisted event order and decisions must match")
+
+        ledger = cls(config=config)
+        for event_id in event_order:
+            stored = decision_by_event[event_id]
+            restored = ledger.consider(stored.request)
+            if restored != stored:
+                raise ValueError("persisted activity decision is not reproducible")
+        if _require_int(values, "event_count") != ledger.event_count:
+            raise ValueError("persisted activity event count is inconsistent")
+        if _require_int(values, "real_activity_count") != ledger.real_activity_count:
+            raise ValueError("persisted real activity count is inconsistent")
+        if _require_int(values, "replay_activity_count") != ledger.replay_activity_count:
+            raise ValueError("persisted replay activity count is inconsistent")
+        if _require_int(values, "imagined_activity_count") != ledger.imagined_activity_count:
+            raise ValueError("persisted imagined activity count is inconsistent")
+        if ledger.snapshot() != dict(values):
+            raise ValueError("activity maintenance ledger did not round-trip exactly")
+        return ledger
 
     def _requested_strength(
         self,
@@ -418,6 +552,56 @@ def _decision_id(
         separators=(",", ":"),
     ).encode("ascii")
     return f"activity-maintenance-decision:{hashlib.sha256(canonical).hexdigest()}"
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_list(values: Mapping[str, object], key: str) -> list[object]:
+    value = values.get(key)
+    if not isinstance(value, list):
+        raise ValueError(f"{key} must be a list")
+    return value
+
+
+def _require_string(values: Mapping[str, object], key: str) -> str:
+    value = values.get(key)
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string")
+    return value
+
+
+def _require_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    return value
+
+
+def _require_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise ValueError(f"{key} must be numeric")
+    return float(value)
+
+
+def _require_bool(values: Mapping[str, object], key: str) -> bool:
+    value = values.get(key)
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be boolean")
+    return value
+
+
+def _require_string_list(values: Mapping[str, object], key: str) -> list[str]:
+    result: list[str] = []
+    for item in _require_list(values, key):
+        if not isinstance(item, str):
+            raise ValueError(f"{key} must contain strings")
+        result.append(item)
+    return result
 
 
 def _validate_sorted_unique_codes(name: str, values: tuple[str, ...]) -> None:
