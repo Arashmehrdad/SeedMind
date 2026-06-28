@@ -1906,6 +1906,77 @@ The following remain deferred:
 
 Completing this stage raises the heuristic theory-to-integration readiness indicator from 95% to 96%. This reflects validated restart-safe proposal memory for one SeedMind subsystem, not production readiness, execution approval, or general intelligence.
 
+## 13.9 Implemented human-approved consolidation execution stage
+
+Status recorded on 28 June 2026.
+
+This stage is complete as an explicit-human-approval-only, research-only, bounded execution layer. It connects one exact accepted proposal to one possible consolidation application without granting autonomous execution or production-action authority.
+
+The five completed batches are:
+
+1. `f163793` — explicit approval and bounded execution-permit contract.
+2. `663a4df` — cancellation, expiry, and single-use permit lifecycle.
+3. `8f83f0d` — immediate precommit revalidation and atomic in-memory application.
+4. `42e0b18` — schema-5 persistence, durable commit, restart and interruption safety, corruption fallback, replay protection, and live acceptance.
+5. Documentation and closure — architecture, implementation plan, handover, wiki refresh, and final validation.
+
+The implemented execution flow is:
+
+```text
+accepted lifecycle proposal
++ explicit human approval
++ immediate permit-issuance revalidation
++ bounded single-use permit
++ immediate precommit revalidation
+        -> one atomic consolidation application
+        -> consumed permit plus matching receipt
+        -> durable exact old or exact new envelope
+        -> no autonomous execution
+```
+
+Brain schema version 5 atomically stores graph, growth, consolidation checkpoint, proposal-lifecycle checkpoint, complete permit lifecycle records, and successful execution receipts. Schemas 1 through 4 migrate to an explicit empty execution checkpoint. No authorization or receipt is inferred from earlier consolidation history.
+
+The execution checkpoint preserves deterministic permit and receipt ordering and validates the exact relationships among consumed permit transitions, consumption references, receipts, applied candidates, application history, and the current consolidation state. Duplicate, orphaned, mismatched, authority-bearing, or automatic-execution evidence invalidates the complete load.
+
+Durable execution accepts only two complete envelopes:
+
+```text
+OLD: old consolidation state + issued permit + no receipt
+NEW: new consolidation state + consumed permit + matching receipt and application
+```
+
+Pre-replacement interruption preserves the exact old durable state. Post-replacement interruption recovers the complete new durable state. A durable state matching neither envelope causes a hard error. Failed in-memory application restores the exact prior state, and corrupt schema-5 execution relationships cause complete fresh-state fallback rather than partial authority recovery.
+
+Restart and replay evidence confirms that consumed permits cannot execute again, recreated identical permits cannot bypass retained lifecycle identity, duplicate applications are rejected, cancelled and expired permits remain blocked, and stale evidence blocks commit without mutation.
+
+Live acceptance recorded:
+
+```text
+1 explicit human approval
+1 current immediate precommit revalidation
+0 control applications
+1 approved application
+1 consumed permit
+1 execution receipt
+0 automatic executions
+0 replay triggers
+0 restoration triggers
+0 production-action authority violations
+0 SQLite cognition
+```
+
+The controlled comparison preserved production actions, prediction errors, developmental signals, advice, route ranking, unrelated graph learning, growth state, and human-dependence accounting. Production curiosity remains the sole production action authority. NDNRA, consolidation, persistence, permits, and receipts cannot choose production actions.
+
+The following remain deferred:
+
+- Controlled retention replay and restoration.
+- Replay or restoration authority.
+- Advice, route-ranking, growth, or production-action influence.
+- Autonomous approval, workers, timers, queues, or execution.
+- Cross-system shadow integration beyond this bounded gate.
+
+Completing this stage raises the heuristic theory-to-integration readiness indicator from 96% to 97%. This is an internal engineering progress marker for one research subsystem, not production readiness, safety certification, autonomous authority, an AGI percentage, or proof that the full SeedMind MVP is complete.
+
 ---
 
 # 14. Protected safety supervisor

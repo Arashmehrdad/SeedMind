@@ -412,6 +412,14 @@ Typed live developmental signals for non-authoritative NDNRA integration.
 - Classes: LiveDevelopmentalSignals, LiveDevelopmentalSignalProvider
 - Functions/symbols: _ambition_relevance, _action_controllability, _resource_pressure, _mean_absolute, _clamp_unit, _validate_unit
 
+## `src/seedmind/integration/human_approved_consolidation_execution_acceptance.py`
+
+Live acceptance for restart-safe human-approved NDNRA consolidation execution.
+
+- Kind: python
+- Classes: HumanApprovedConsolidationExecutionAcceptanceResult, HumanApprovedConsolidationExecutionAcceptanceEvidence
+- Functions/symbols: run_human_approved_consolidation_execution_acceptance, export_human_approved_consolidation_execution_acceptance, _write_ascii_json
+
 ## `src/seedmind/integration/ndnra_shadow.py`
 
 Non-authoritative NDNRA observation of the live SeedMind nursery loop.
@@ -561,6 +569,46 @@ Atomic bounded application of eligible NDNRA consolidation proposals.
 - Classes: ConsolidationStructureState, ConsolidationStateSnapshot, ConsolidationApplicationResult, ConsolidationApplicationState
 - Functions/symbols: _validated_candidate, _updated_state, _validated_identifiers, _validated_states, _validate_state_collection, _validate_state_mapping, _validate_sorted_unique_codes, _find_state, _snapshot_ids, _validate_code, _validate_unit
 
+## `src/seedmind/research/ndnra/consolidation_execution_approval.py`
+
+Explicit human approval contracts for bounded NDNRA consolidation execution.
+
+- Kind: python
+- Classes: ConsolidationExecutionApprovalRequest, ConsolidationExecutionPermit, ConsolidationExecutionApprovalPolicy
+- Functions/symbols: _permit_id, _validate_code, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/consolidation_execution_commit.py`
+
+Atomic human-approved application of one current NDNRA consolidation permit.
+
+- Kind: python
+- Classes: ConsolidationApplicationTarget, ConsolidationExecutionCommitRequest, ConsolidationExecutionCommitReceipt, ConsolidationExecutionCommitResult, ConsolidationExecutionCommitPolicy
+- Functions/symbols: _interrupt, _restore_failed_application, _execution_id, _normalized_codes, _validate_code, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/consolidation_execution_durable_commit.py`
+
+Durable restart-safe commit of one explicitly approved consolidation execution.
+
+- Kind: python
+- Classes: ConsolidationExecutionDurableCommitResult, ConsolidationExecutionDurableCommitPolicy
+- Functions/symbols: _matches_persisted_boundaries, _matches_loaded_result, _matches_expected, _restore_application_state, _interrupt
+
+## `src/seedmind/research/ndnra/consolidation_execution_permit_lifecycle.py`
+
+Immutable lifecycle state for human-approved NDNRA execution permits.
+
+- Kind: python
+- Classes: ConsolidationExecutionPermitLifecycleAction, ConsolidationExecutionPermitLifecycleStatus, ConsolidationExecutionPermitTransitionRequest, ConsolidationExecutionPermitTransitionDecision, ConsolidationExecutionPermitLifecycleRecord, ConsolidationExecutionPermitLifecycleRegistry
+- Functions/symbols: _status_for, _validate_transition_episode, _transition_decision_id, _validate_code, _validate_nonnegative_int
+
+## `src/seedmind/research/ndnra/consolidation_execution_persistence.py`
+
+Versioned restart-safe persistence for bounded NDNRA execution evidence.
+
+- Kind: python
+- Classes: NDNRAExecutionCheckpoint
+- Functions/symbols: _canonical_registry, _restore_registry, _restore_record, _restore_transition, _restore_permit, _restore_revalidation, _restore_receipt, _identity, _require_mapping, _require_list, _require_string, _require_int, _require_bool, _require_string_list
+
 ## `src/seedmind/research/ndnra/consolidation_interference_experiment.py`
 
 Bounded experiment for consolidation, interference, and source-gated replay.
@@ -575,7 +623,7 @@ Versioned persistence contracts for bounded NDNRA consolidation state.
 
 - Kind: python
 - Classes: ConsolidationRollbackAuditRecord, NDNRAConsolidationCheckpoint
-- Functions/symbols: _application_snapshot, _restore_application, _restore_candidate, _restore_mastery_profile, _restore_state_snapshot, _restore_structure_state, _state_identity_sets, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes, _validate_code, _validate_unit
+- Functions/symbols: restore_consolidation_application, restore_consolidation_state_snapshot, _application_snapshot, _restore_application, _restore_candidate, _restore_mastery_profile, _restore_state_snapshot, _restore_structure_state, _state_identity_sets, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes, _validate_code, _validate_unit
 
 ## `src/seedmind/research/ndnra/consolidation_portfolio.py`
 
@@ -623,7 +671,7 @@ Versioned checkpoint codec for restart-safe NDNRA proposal lifecycles.
 
 - Kind: python
 - Classes: NDNRAProposalLifecycleCheckpoint
-- Functions/symbols: _restore_registry, _restore_managed_record, _restore_lifecycle_record, _restore_review_decision, _restore_management_decision, _restore_proposal, _restore_candidate, _restore_mastery_profile, _management_decision_id, _validate_replacement_links, _json_ready, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_positive_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes
+- Functions/symbols: restore_consolidation_schedule_proposal, restore_consolidation_candidate, restore_mastery_profile, _restore_registry, _restore_managed_record, _restore_lifecycle_record, _restore_review_decision, _restore_management_decision, _restore_proposal, _restore_candidate, _restore_mastery_profile, _management_decision_id, _validate_replacement_links, _json_ready, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_nonnegative_int, _require_positive_int, _require_float, _require_nonnegative_float, _require_unit, _require_string_list, _validate_sorted_unique_codes
 
 ## `src/seedmind/research/ndnra/consolidation_proposal_revalidation.py`
 
@@ -758,7 +806,7 @@ Versioned non-SQL persistence for reconstructing an NDNRA brain graph.
 
 - Kind: python
 - Classes: BrainLoadStatus, NDNRAGrowthState, BrainSaveResult, BrainLoadResult, NDNRABrainStore
-- Functions/symbols: _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_string_list, _require_numeric_list, _validate_code, _validate_unit, _validate_signed
+- Functions/symbols: _interrupt, _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_string_list, _require_numeric_list, _validate_code, _validate_unit, _validate_signed
 
 ## `src/seedmind/safety/__init__.py`
 
@@ -816,6 +864,14 @@ Reproducible familiar-sequence training sessions for SeedMind.
 - Kind: python
 - Classes: ScenarioFactory, FamiliarSequenceConfig, TrainingStepRecord, TrainingSessionResult, FamiliarSequenceTrainingSession
 - Functions/symbols: save_training_checkpoint, load_training_checkpoint, export_training_history_csv, export_prediction_error_svg, _scenario_identity, _session_identity, _record_to_payload, _record_from_payload, _validate_checkpoint_progress, _required_int, _required_sequence, _required_mapping, _mapping_int, _mapping_float, _mapping_str, _mapping_bool
+
+## `tests/unit/ndnra_execution_test_support.py`
+
+Shared deterministic fixtures for NDNRA execution persistence tests.
+
+- Kind: python
+- Classes: ExecutionSetup
+- Functions/symbols: record_trace, build_proposal, build_setup, commit_request, save_initial, execute_loaded, raise_at, read_object, object_value, list_value, rewrite_checksum
 
 ## `tests/unit/test_action_contract.py`
 
@@ -938,6 +994,42 @@ Tests for bounded atomic NDNRA consolidation proposal application.
 - Kind: python
 - Functions/symbols: _trace, _ledger, _eligibility, _state, test_eligible_candidate_applies_bounded_changes_and_preserves_evidence, test_non_target_structures_remain_unchanged, test_application_clamps_stability_and_plasticity_to_unit_bounds, test_missing_structure_fails_before_any_mutation, test_ineligible_result_fails_before_any_mutation, test_duplicate_candidate_application_is_blocked_atomically, test_tampered_request_above_policy_cap_is_rejected_atomically, test_tampered_lesson_or_mastery_snapshot_is_rejected, test_registration_rejects_duplicate_or_overlapping_identities, test_snapshot_is_immutable_and_deterministically_ordered, test_consolidation_application_has_no_sqlite_or_replay_dependency
 
+## `tests/unit/test_ndnra_consolidation_execution_approval.py`
+
+Tests for explicit human-approved NDNRA consolidation execution permits.
+
+- Kind: python
+- Functions/symbols: _trace, _ledger, _proposal, _accepted_registry, _request, _permit, test_current_accepted_proposal_receives_deterministic_human_permit, test_permit_validity_window_is_bounded_and_inspectable, test_approval_requires_explicit_human_identity, test_pending_deferred_and_rejected_records_cannot_receive_permits, test_stale_proposal_fails_immediate_revalidation, test_invalid_structure_or_contradiction_blocks_approval, test_mismatched_proposal_candidate_or_review_identity_is_rejected, test_approval_must_follow_review_and_use_short_validity, test_distinct_human_reason_produces_distinct_permit_identity, test_new_permit_rejects_preconsumed_or_direct_execution_state, test_approval_module_has_no_application_persistence_timer_or_sql_dependency
+
+## `tests/unit/test_ndnra_consolidation_execution_commit.py`
+
+Tests for atomic human-approved NDNRA consolidation execution.
+
+- Kind: python
+- Classes: _PostApplyFailureTarget
+- Functions/symbols: _trace, _ledger, _proposal, _proposal_registry, _permit, _state, _setup, _request, _execute, test_successful_commit_applies_once_and_consumes_permit_atomically, test_commit_changes_only_candidate_structures_within_bounds, test_identical_fresh_commits_have_deterministic_execution_identity, test_cancelled_permit_blocks_commit_before_state_mutation, test_expired_or_out_of_window_permit_blocks_commit, test_consumed_permit_cannot_apply_twice, test_new_evidence_between_approval_and_commit_blocks_stale_permit, test_missing_application_structure_fails_without_consumption_or_mutation, test_mismatched_commit_identities_fail_before_application, test_commit_requires_bounded_execution_gate_identity, test_post_apply_failure_restores_exact_state_and_leaves_permit_issued, test_receipt_rejects_tampered_execution_or_transition_identity, test_execution_commit_has_no_replay_growth_advice_sql_or_action_path
+
+## `tests/unit/test_ndnra_consolidation_execution_durable_commit.py`
+
+Tests for durable single-use NDNRA consolidation execution.
+
+- Kind: python
+- Functions/symbols: test_successful_restart_blocks_replay_and_duplicate_reissued_permit, test_commit_interruption_restores_exact_old_state, test_after_application_before_save_restores_old_state, test_pre_replace_persistence_interruption_resolves_to_complete_old_state, test_after_replace_interruption_recovers_complete_new_state, test_new_evidence_after_restart_blocks_stale_permit_without_mutation, test_terminal_permit_status_blocks_execution_after_restart
+
+## `tests/unit/test_ndnra_consolidation_execution_permit_lifecycle.py`
+
+Tests for immutable NDNRA execution-permit lifecycle state.
+
+- Kind: python
+- Functions/symbols: _trace, _ledger, _proposal, _accepted_registry, _permit, _request, test_issued_record_is_immutable_and_non_authoritative, test_cancel_transition_is_terminal_and_preserves_issued_record, test_consume_transition_is_single_use_and_requires_reference, test_expiry_requires_episode_after_validity_window, test_cancel_or_consume_after_expiry_window_is_rejected, test_transition_must_follow_permit_issuance, test_nonconsume_transitions_reject_consumption_reference, test_mismatched_permit_proposal_or_candidate_is_rejected, test_terminal_records_reject_every_conflicting_transition, test_transition_identity_is_deterministic_and_tampering_is_rejected, test_reconstructed_record_rejects_mismatched_status_or_permit, test_registry_enforces_unique_permit_identity_and_preserves_other_records, test_permit_lifecycle_is_separate_from_proposal_lifecycle, test_permit_lifecycle_has_no_application_persistence_timer_or_sql_dependency
+
+## `tests/unit/test_ndnra_consolidation_execution_persistence.py`
+
+Tests for exact restart-safe NDNRA execution checkpoint persistence.
+
+- Kind: python
+- Functions/symbols: test_issued_checkpoint_round_trips_exactly_and_has_no_authority, test_schema_v5_round_trips_consumed_permit_receipt_and_application, test_schema_v4_migrates_to_empty_execution_without_inference, _corrupt_transition_identity, _corrupt_receipt_identity, _corrupt_consumption_reference, _remove_receipt, _make_receipt_without_consumed_permit, _duplicate_permit, _duplicate_receipt, _remove_applied_candidate, _execution, test_relational_corruption_causes_complete_fallback, test_outer_checksum_corruption_causes_complete_fallback, test_execution_checkpoint_rejects_authority_and_automatic_execution, test_execution_persistence_has_no_sqlite_replay_or_action_authority_path
+
 ## `tests/unit/test_ndnra_consolidation_interference.py`
 
 Tests for bounded consolidation interference and source-gated replay.
@@ -1042,6 +1134,13 @@ Tests for contextual NDNRA redundancy and bounded mastery evidence.
 
 - Kind: python
 - Functions/symbols: test_contextual_mastery_experiment_distinguishes_replay_from_breadth, test_one_shot_protection_and_varied_mastery_remain_distinct, test_contradiction_reduces_mastery_without_erasing_sources, test_event_identity_key_is_collision_safe, test_contradictory_effect_does_not_create_protective_strength, test_contextual_recording_is_atomic_when_identity_validation_fails, test_contextual_mastery_gate_preserves_shadow_and_persistence, test_contextual_mastery_has_no_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_human_approved_consolidation_execution_acceptance.py`
+
+Tests for live acceptance of restart-safe human-approved execution.
+
+- Kind: python
+- Functions/symbols: test_one_human_approval_produces_one_durable_application, test_approved_execution_preserves_live_seedmind_cognition, test_live_acceptance_receipt_and_persisted_state_are_exact, test_live_acceptance_exports_ascii_inspectable_evidence, test_live_acceptance_has_no_autonomous_or_sqlite_execution_path
 
 ## `tests/unit/test_ndnra_local_learning.py`
 

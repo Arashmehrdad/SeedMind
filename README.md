@@ -8,13 +8,15 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-NDNRA restart-safe proposal memory closure for the main SeedMind system.
+Human-approved NDNRA consolidation execution is complete as a bounded, research-only integration stage.
 
-SeedMind can now persist complete consolidation proposal lifecycles inside the checksum-protected schema-4 brain envelope, migrate older schemas safely, reconstruct exact review history after restart, and revalidate restored proposals as current, stale, superseded, or invalid for review. Corruption tests produce complete fallback, and live-shadow tests show that persistence and revalidation leave behaviour, learning, memory, and growth unchanged.
+SeedMind now preserves issued, cancelled, expired, and consumed execution permits plus successful execution receipts inside the checksum-protected schema-5 brain envelope. One explicit human approval still requires immediate current-evidence revalidation when the permit is issued and again immediately before commit. A permit is bounded, immutable, and single-use.
 
-Persistence remains research-only, shadow-only, and non-authoritative. An accepted proposal is approved only for possible future consideration. Persistence and revalidation cannot execute consolidation, trigger replay, restore checkpoints, influence advice or growth, or select production actions. Production curiosity retains action authority.
+Durable execution accepts only one of two complete envelopes: the exact old consolidation state with an issued permit and no receipt, or the exact new consolidation state with a consumed permit and its matching receipt and application. Pre-replacement interruption preserves the old durable state; post-replacement interruption recovers the complete new state. Invalid execution relationships cause complete safe fallback rather than partial recovery.
 
-The NDNRA heuristic theory-to-integration readiness indicator is 96%. This is an engineering progress measure for one SeedMind subsystem, not a production-readiness or safety claim.
+The live acceptance path recorded one explicit human approval, one current precommit revalidation, zero control applications, one approved application, one consumed permit, one execution receipt, zero automatic executions, zero replay triggers, zero restoration triggers, zero production-action authority violations, and no SQLite cognition. Production curiosity remains the sole production action authority; NDNRA and consolidation cannot choose production actions.
+
+The NDNRA heuristic theory-to-integration readiness indicator is 97%. This is an internal engineering progress measure for one research subsystem, not a production-readiness score, safety certification, AGI percentage, or claim that controlled replay and restoration are implemented.
 
 ## Development order
 

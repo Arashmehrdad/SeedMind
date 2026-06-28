@@ -3,146 +3,225 @@
 Date: 28 June 2026
 Repository: `D:\Github\SeedMind`
 Branch: `main`
-Stage status: active
+Stage status: complete
 Authority: explicit-human-approval only, research-only, bounded execution
-Target heuristic theory-to-integration readiness after full acceptance: 97%
+Accepted heuristic theory-to-integration readiness: 97%
 
 ## 1. Stage objective
 
-This stage evaluates whether one exact, current consolidation proposal can be applied only after explicit human approval, immediate evidence revalidation, and bounded single-use authorization.
+This stage validates whether one exact current consolidation proposal can be applied only after explicit human approval, immediate evidence revalidation, bounded single-use authorization, and an atomic durable commit.
 
 ```text
 accepted lifecycle proposal
 + explicit human approval
-+ immediate current-evidence revalidation
-+ single-use execution identity
-        -> bounded execution permit
-        -> later atomic application gate
++ immediate permit-issuance revalidation
++ bounded single-use permit
++ immediate precommit revalidation
+        -> one atomic consolidation application
+        -> consumed permit plus matching receipt
         -> no autonomous execution
 ```
 
-Human approval is necessary but not sufficient. The proposal must still be current at the approval boundary and again immediately before any future application.
+Human approval is necessary but not sufficient. The proposal must be current both when the permit is issued and immediately before application.
 
 ## 2. Mandatory invariants
 
 - Production curiosity remains the sole production action authority.
-- Only an active lifecycle record with accepted review status may be considered.
-- Human approval must name one exact proposal and candidate.
-- Approval must identify the exact accepted review decision.
-- Approval must include an explicit approver identity and reason.
-- Immediate revalidation must classify the proposal as `current`.
-- Stale, superseded, or invalid-for-review proposals cannot receive an execution permit.
-- Every permit must have a deterministic identity, bounded validity window, and single-use semantics.
-- Permit issuance must not apply consolidation or mutate neural state.
-- Permit issuance must not mutate lifecycle history, contextual evidence, graph state, growth state, or persistence.
-- No autonomous approval, timer, background worker, or execution queue is permitted.
-- No replay, restoration, advice, route-ranking, growth, or production-action influence is permitted without separate gates.
-- SQLite remains outside approval, revalidation, execution selection, and authority.
-- Failure at any validation boundary must leave all state unchanged.
+- NDNRA and consolidation cannot select production actions.
+- Only an active accepted lifecycle record may be considered.
+- Human approval names the exact proposal, candidate, accepted review decision, approver, and reason.
+- Permit issuance and commit each require immediate current-evidence revalidation.
+- Stale, superseded, invalid-for-review, cancelled, expired, or consumed authorization cannot apply.
+- Every permit has deterministic identity, bounded validity, immutable evidence, and single-use semantics.
+- Permit issuance does not apply consolidation or mutate lifecycle, contextual, graph, growth, or persistent state.
+- One successful application consumes exactly one issued permit and creates exactly one matching receipt.
+- Persistence reconstructs validated state; it never performs cognition, scheduling, selection, or authority.
+- SQLite remains audit and scientific storage, not cognitive recall or execution control.
+- No autonomous approval, workers, timers, queues, replay, restoration, advice, growth, route ranking, or production-action influence is permitted.
+- Failed operations restore the exact prior state or use complete safe fallback.
 
-## 3. Planned batches
+## 3. Completed batches
 
-### Batch 1 — explicit approval and execution-permit contract
+1. `f163793` — explicit human approval and deterministic bounded execution-permit contract.
+2. `663a4df` — immutable issued, cancelled, expired, and consumed permit lifecycle with single-use enforcement.
+3. `8f83f0d` — immediate precommit revalidation and atomic human-approved consolidation application with exact in-memory restoration on failure.
+4. `42e0b18` — schema-5 restart-safe execution persistence, durable commit evidence, interruption and corruption handling, replay protection, and live acceptance.
+5. Documentation and closure — the commit containing this plan, the stage handover, architecture updates, wiki refresh, and final validation.
 
-Implement a pure approval policy that:
+## 4. Public contracts
 
-- Accepts one explicit human approval request.
-- Requires one active accepted lifecycle record.
-- Verifies the exact proposal, candidate, and accepted review decision.
-- Performs immediate revalidation against current contextual evidence and available structures.
-- Issues a deterministic, bounded, single-use execution permit only when the proposal is current.
-- Rejects stale, superseded, invalid, unaccepted, expired, mismatched, or malformed requests.
-- Does not consume the permit or apply consolidation.
-
-### Batch 2 — cancellation and single-use permit state
-
-Implement immutable permit lifecycle state:
-
-- Issued.
-- Cancelled.
-- Consumed.
-- Expired.
-
-Prove:
-
-- One permit identity can be consumed at most once.
-- Cancellation before commit blocks application.
-- Expiry blocks application.
-- Conflicting state transitions fail without mutation.
-- Permit state is separate from proposal lifecycle state.
-
-### Batch 3 — atomic human-approved application
-
-Connect one current, issued, unexpired, unconsumed permit to bounded consolidation application:
-
-- Immediate revalidation immediately before commit.
-- Exact candidate and structure identity checks.
-- Atomic before/after state capture.
-- Single-use permit consumption tied to successful commit.
-- Cancellation before commit.
-- Complete restoration of pre-application state on failure.
-- No replay, advice, growth, route-ranking, or action influence.
-
-### Batch 4 — persistence, interruption, and live acceptance
-
-Prove:
-
-- Approval and permit state survive restart exactly.
-- Interrupted pre-commit execution performs no application.
-- Failed application restores exact prior state.
-- Duplicate or replayed permits cannot apply twice.
-- Stale evidence between approval and commit blocks application.
-- Live-shadow execution tests preserve production action authority and unrelated learning.
-- No SQLite cognition or autonomous execution occurs.
-
-### Batch 5 — documentation and closure
-
-- Update README, master plan, and NDNRA architecture.
-- Produce the human-approved execution handover.
-- Refresh the repository wiki.
-- Run final quality gates.
-- Reassess whether the complete stage justifies increasing heuristic readiness from 96% to 97%.
-
-## 4. Batch 1 public contract
-
-The first implementation should provide:
+The completed stage exposes:
 
 - `ConsolidationExecutionApprovalRequest`
 - `ConsolidationExecutionPermit`
 - `ConsolidationExecutionApprovalPolicy`
+- `ConsolidationExecutionPermitLifecycleRegistry`
+- `ConsolidationExecutionCommitPolicy`
+- `ConsolidationExecutionCommitReceipt`
+- `ConsolidationExecutionDurableCommitPolicy`
+- `EXECUTION_SCHEMA`
+- `EXECUTION_SCHEMA_VERSION`
+- `NDNRAExecutionCheckpoint`
+- `run_human_approved_consolidation_execution_acceptance`
+- `export_human_approved_consolidation_execution_acceptance`
 
-The approval policy must receive the current ledger and structure identities directly so that permit issuance includes immediate revalidation rather than trusting a prior classification.
+A permit remains authorization evidence for one possible bounded application. It is not an autonomous executor and has no production-action authority.
 
-## 5. Batch 1 non-authority rule
+## 5. Schema-5 persistence evidence
 
-A permit is authorization evidence for one possible future application. It is not an executor.
+Brain schema version 5 atomically stores:
 
-The permit may state that it authorizes one bounded application, while still having:
+- Learned graph state.
+- Growth state.
+- Consolidation checkpoint state.
+- Proposal-lifecycle checkpoint state.
+- Complete permit lifecycle records.
+- Successful execution receipts.
+- Exact consumed transition to receipt relationships.
+- Exact receipt to consolidation-application relationships.
+
+Schemas 1 through 4 migrate to an explicit empty execution checkpoint. No permit, transition, or receipt is inferred from older consolidation history.
+
+The execution checkpoint requires deterministic permit and receipt ordering and rejects:
+
+- Duplicate permit or receipt identities.
+- Duplicate candidate receipts.
+- Consumed permits without receipts.
+- Receipts for non-consumed or missing permits.
+- Transition, consumption-reference, receipt, or application mismatches.
+- Applied candidates absent from persisted consolidation state.
+- Nonzero automatic execution state.
+- Any execution-authority-bearing checkpoint.
+
+## 6. Durable commit rule
+
+Durable execution validates the exact persisted authority boundaries before application. Only two complete envelopes are acceptable:
 
 ```text
-has_direct_execution_authority = false
-application_count = 0
-state_mutation_count = 0
+OLD
+old consolidation state
++ issued permit
++ no receipt
+
+NEW
+new consolidation state
++ consumed permit
++ matching receipt and application
 ```
 
-Consumption and application belong to later batches.
+Forbidden hybrids include old state with a consumed permit, new state with an issued permit, application without receipt, and receipt without matching application.
 
-## 6. Explicitly out of scope for Batch 1
+Interruptions before atomic replacement resolve to the exact old durable state. Interruption after replacement resolves to the complete new durable state. If the durable file matches neither exact envelope, execution raises a hard error rather than guessing.
 
-- Consolidation application.
-- Permit consumption.
-- Permit cancellation state.
-- Permit persistence.
-- Retention replay.
-- Consolidation rollback or restoration.
-- Advice or growth influence.
+## 7. Restart, replay, stale-evidence, and corruption evidence
+
+The stage proves:
+
+- Issued, cancelled, expired, and consumed lifecycle state survives restart.
+- Successful receipts survive restart with their exact permit transition and application.
+- A consumed permit cannot execute again after restart.
+- Recreating an identical permit cannot bypass retained lifecycle identity.
+- Duplicate candidate application is rejected.
+- Cancelled and expired permits remain blocked after restart.
+- Stale evidence introduced after restart blocks commit without mutating state or lifecycle history.
+- Pre-replacement interruption preserves the old durable envelope.
+- Post-replacement interruption recovers the complete new durable envelope.
+- Failed in-memory application restores the exact prior state.
+- Temporary files are cleaned.
+
+Any invalid schema-5 execution relationship causes complete fallback to:
+
+```text
+fresh graph
+empty growth state
+empty consolidation checkpoint
+empty proposal lifecycle checkpoint
+empty execution checkpoint
+checksum_verified = false
+used_fallback = true
+```
+
+Partial recovery of authority-bearing execution evidence is forbidden.
+
+## 8. Live acceptance evidence
+
+The controlled live acceptance path recorded:
+
+```text
+1 explicit human approval
+1 current immediate precommit revalidation
+0 control applications
+1 approved application
+1 consumed permit
+1 execution receipt
+0 automatic executions
+0 replay triggers
+0 restoration triggers
+0 production-action authority violations
+0 SQLite cognition
+```
+
+The approved and control paths preserved equality for production actions, prediction errors, developmental signals, advice, route ranking, unrelated graph learning, growth state, and human-dependence accounting. Proposal history, graph state at the execution boundary, and growth state at the execution boundary remained unchanged by execution.
+
+ASCII evidence exports are:
+
+- `human_approved_execution_report.json`
+- `human_approved_execution_timeline.csv`
+- `human_approved_execution_receipt.json`
+
+## 9. Validation evidence
+
+Batch 4 implementation validation at commit `42e0b18`:
+
+```text
+Ruff format: 179 files already formatted
+Ruff lint: passed
+Mypy: success, no issues in 179 source files
+Pytest: 596 passed
+Pip check: no broken requirements
+Git diff check: passed
+```
+
+Batch 5 closure validation after documentation and wiki refresh:
+
+```text
+Ruff format: 179 files left unchanged
+Ruff format check: 179 files already formatted
+Ruff lint: all checks passed
+Mypy: success, no issues in 179 source files
+Pytest: 596 passed
+Pip check: no broken requirements
+Git diff check: passed; line-ending normalization notices only
+```
+
+## 10. Readiness reassessment
+
+The completed stage justifies increasing heuristic theory-to-integration readiness from 96% to 97% because explicit human approval, immediate dual revalidation, bounded single-use permits, atomic application, exact durable old/new resolution, restart safety, corruption fallback, and live invariance are all validated together.
+
+This indicator is not:
+
+- A probability of success.
+- A production-readiness or commercial-readiness score.
+- A safety certification.
+- A percentage of AGI.
+- Approval for autonomous consolidation.
+- Evidence that controlled retention replay or checkpoint restoration is implemented.
+
+## 11. Explicitly deferred work
+
+The following require separate future gates:
+
+- Controlled retention replay and restoration.
+- Replay-triggered learning or checkpoint restoration authority.
+- Advice influence.
+- Growth influence or pressure discharge.
 - Route-ranking influence.
-- Production action authority.
-- Autonomous review or approval.
-- Background execution.
+- Production-action influence.
+- Autonomous approval, workers, timers, queues, or execution.
+- Cross-system shadow integration beyond this bounded acceptance path.
 
-## 7. Stage completion rule
+## 12. Stage completion rule
 
-The stage is complete only when explicit approval, single-use permit state, atomic application, cancellation, failure fallback, restart safety, and live acceptance all pass while preserving every authority boundary.
+The stage is complete because explicit approval, permit lifecycle, atomic application, cancellation and expiry, exact failure restoration, schema-5 restart safety, interruption resolution, corruption fallback, live acceptance, documentation, wiki refresh, and final quality gates are all included in one bounded closure.
 
-Completing Batch 1 alone does not raise readiness above 96%.
+No automatic push is permitted.

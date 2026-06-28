@@ -1368,6 +1368,74 @@ The restart-safe acceptance gate requires:
 
 Passing this gate raises heuristic theory-to-integration readiness from 95% to 96%. This is an engineering progress indicator for restart-safe proposal evidence, not execution approval, production readiness, or a general-intelligence claim.
 
+### 17.18 Human-approved consolidation execution
+
+Human-approved consolidation execution connects one exact current accepted proposal to one bounded application while keeping approval, persistence, and execution subordinate to production curiosity and protected human authority.
+
+```text
+accepted lifecycle proposal
++ explicit human approval
++ immediate permit-issuance revalidation
++ deterministic bounded single-use permit
++ immediate precommit revalidation
+        -> one atomic application
+        -> consumed permit plus matching receipt
+        -> durable exact old or exact new envelope
+        -> no autonomous execution
+```
+
+Approval must identify the exact proposal, candidate, accepted review decision, approver, and reason. Issuance and commit independently reconstruct current eligibility. Stale, superseded, invalid-for-review, cancelled, expired, consumed, mismatched, or malformed authorization cannot apply.
+
+The permit is immutable authorization evidence, not an executor. Its lifecycle is one of `issued`, `cancelled`, `expired`, or `consumed`. One permit identity can authorize at most one successful application, and recreating identical permit content cannot bypass the retained lifecycle record.
+
+Brain schema version 5 extends the checksum-protected brain envelope with a versioned execution checkpoint containing complete permit lifecycle records and successful execution receipts. Schemas 1 through 4 migrate to an explicit empty execution checkpoint. No permit or receipt is inferred from earlier consolidation history.
+
+The checkpoint validates deterministic ordering and exact relational consistency:
+
+1. Every consumed permit has exactly one receipt.
+2. Only a consumed permit may have a receipt.
+3. The consumed transition exactly matches the receipt transition.
+4. The transition consumption reference equals the execution identity.
+5. Every receipt retains its exact permit lifecycle.
+6. Every receipt application matches persisted application history.
+7. Every applied candidate exists in the consolidation state.
+8. Sequential receipts form one exact before-to-after state chain.
+9. Automatic execution count remains zero.
+10. The checkpoint carries no execution or application authority.
+
+Durable execution first verifies the exact persisted graph-adjacent authority boundaries. It then accepts only:
+
+```text
+OLD: old consolidation state + issued permit + no receipt
+NEW: new consolidation state + consumed permit + matching receipt and application
+```
+
+Old state with a consumed permit, new state with an issued permit, application without receipt, receipt without application, and any other hybrid are invalid. Interruption before atomic replacement resolves to the exact old state. Interruption after replacement resolves to the complete new state. If neither exact envelope exists, the operation fails hard rather than inferring intent.
+
+Invalid outer checksum, corrupted transition or receipt identity, incorrect consumption reference, consumed permit without receipt, receipt with an issued permit, duplicate permits or receipts, or missing receipt application causes complete fresh-state fallback. Partial recovery of graph, growth, consolidation, lifecycle, or execution evidence is forbidden when authority-bearing relationships are invalid.
+
+The live acceptance gate records:
+
+```text
+1 explicit human approval
+1 current immediate precommit revalidation
+0 control applications
+1 approved application
+1 consumed permit
+1 execution receipt
+0 automatic executions
+0 replay triggers
+0 restoration triggers
+0 production-action authority violations
+0 SQLite cognition
+```
+
+Control and approved paths preserve equal production actions, prediction errors, developmental signals, advice, route ranking, unrelated graph learning, growth state, and human-dependence accounting. Proposal history and graph and growth state at the execution boundary remain unchanged by the application gate.
+
+Production curiosity remains the sole production action authority. NDNRA and consolidation cannot choose production actions. SQLite remains scientific and audit storage, not cognition. Controlled retention replay, restoration, advice influence, growth influence, route ranking, autonomous workers, timers, queues, and execution remain outside this stage.
+
+Passing this gate raises heuristic theory-to-integration readiness from 96% to 97%. This is an internal engineering progress indicator for bounded human-approved execution, not a production-readiness score, safety certification, autonomous authority, AGI percentage, or claim that controlled replay and restoration are implemented.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1395,11 +1463,19 @@ The following rules must remain true:
 21. Accepted lifecycle status never implies consolidation, replay, restoration, advice, growth, or action authority.
 22. Expired and replaced proposals remain inspectable; replacement cannot silently overwrite an earlier proposal.
 23. Persisted lifecycle state remains bounded, caller-driven, and reconstruction-only; storage never becomes cognitive lookup or an execution queue.
-24. Brain schema migration must create explicit empty lifecycle state rather than infer missing review history.
-25. Corrupt lifecycle state must invalidate the complete load; partial graph or proposal restoration is forbidden.
-26. Restart revalidation must compare persisted proposals with current evidence before any future execution stage may use them.
+24. Brain schema migration must create explicit empty lifecycle and execution state rather than infer missing review or authorization history.
+25. Corrupt lifecycle or execution state must invalidate the complete load; partial graph, proposal, permit, or receipt restoration is forbidden.
+26. Restart revalidation must compare persisted proposals with current evidence before execution may use them.
 27. Revalidation classifications never mutate lifecycle status, review history, contextual evidence, graph state, or growth state.
 28. Stale, superseded, and invalid-for-review results remain inspectable and cannot trigger silent deletion or automatic application.
+29. Consolidation application requires explicit human approval tied to one exact proposal, candidate, and accepted review decision.
+30. Permit issuance and commit each require immediate current-evidence revalidation.
+31. Execution permits remain bounded, immutable, deterministic, and single-use.
+32. A successful application requires one consumed permit, one matching receipt, and one matching persisted application.
+33. Failed operations restore the exact prior state or use complete safe fallback; partial authority state is forbidden.
+34. No autonomous workers, timers, queues, permit creation, permit consumption, replay, restoration, advice, growth, or route-ranking authority is permitted.
+35. Production curiosity remains the sole production action authority; NDNRA and consolidation cannot select production actions.
+36. SQLite remains storage and audit evidence and cannot become approval, revalidation, execution selection, or action authority.
 
 ## 19. First prototype boundary
 
