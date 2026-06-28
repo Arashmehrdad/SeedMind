@@ -31,6 +31,13 @@ from seedmind.research.ndnra.consolidation_execution_approval import (
     ConsolidationExecutionApprovalRequest,
     ConsolidationExecutionPermit,
 )
+from seedmind.research.ndnra.consolidation_execution_commit import (
+    ConsolidationApplicationTarget,
+    ConsolidationExecutionCommitPolicy,
+    ConsolidationExecutionCommitReceipt,
+    ConsolidationExecutionCommitRequest,
+    ConsolidationExecutionCommitResult,
+)
 from seedmind.research.ndnra.consolidation_execution_permit_lifecycle import (
     ConsolidationExecutionPermitLifecycleAction,
     ConsolidationExecutionPermitLifecycleRecord,
@@ -223,11 +230,16 @@ __all__ = [
     "CompositionResult",
     "ConsolidationApplicationResult",
     "ConsolidationApplicationState",
+    "ConsolidationApplicationTarget",
     "ConsolidationCandidate",
     "ConsolidationEligibility",
     "ConsolidationEligibilityPolicy",
     "ConsolidationExecutionApprovalPolicy",
     "ConsolidationExecutionApprovalRequest",
+    "ConsolidationExecutionCommitPolicy",
+    "ConsolidationExecutionCommitReceipt",
+    "ConsolidationExecutionCommitRequest",
+    "ConsolidationExecutionCommitResult",
     "ConsolidationExecutionPermit",
     "ConsolidationExecutionPermitLifecycleAction",
     "ConsolidationExecutionPermitLifecycleRecord",
