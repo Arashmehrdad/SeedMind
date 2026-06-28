@@ -162,6 +162,11 @@ from seedmind.research.ndnra.contextual_memory import (
     MasteryProfile,
     RouteSupport,
 )
+from seedmind.research.ndnra.controlled_checkpoint_restoration import (
+    ControlledCheckpointRestorationDurableResult,
+    ControlledCheckpointRestorationPolicy,
+    ControlledCheckpointRestorationRequest,
+)
 from seedmind.research.ndnra.controlled_replay_restoration_approval import (
     ControlledReplayRestorationApprovalPolicy,
     ControlledReplayRestorationApprovalRequest,
@@ -375,6 +380,9 @@ __all__ = [
     "ContextualMasteryExperimentEvidence",
     "ContextualMasteryExperimentResult",
     "ContextualRecordCode",
+    "ControlledCheckpointRestorationDurableResult",
+    "ControlledCheckpointRestorationPolicy",
+    "ControlledCheckpointRestorationRequest",
     "ControlledReplayRestorationApprovalPolicy",
     "ControlledReplayRestorationApprovalRequest",
     "ControlledReplayRestorationEvidence",

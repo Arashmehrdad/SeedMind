@@ -6,7 +6,7 @@ Branch: `main`
 Stage status: active
 Authority: explicit-human-approval only, research-only, bounded replay and restoration
 Legacy narrow-scope theory-to-integration marker: 97%
-Expanded developmental architecture progress after durable replay persistence: 77%
+Expanded developmental architecture progress after durable replay and restoration: 78%
 Legacy target after complete stage acceptance: 98%
 
 ## 1. Stage objective
@@ -142,15 +142,21 @@ Explicit exclusion: Batch 4 does not implement checkpoint restoration. Restorati
 
 ### Batch 5 - exact checkpoint restoration
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Restore only one exact checksum-verified complete schema-6 brain envelope.
-- Revalidate the current state, source state, target, permit, and fresh evidence immediately before replacement.
-- Replace graph, growth, consolidation, proposal lifecycle, execution state, and active activity history together.
-- Preserve monotonic operation audit history so restoration cannot revive used approvals.
-- Resolve interruption to either the complete old envelope or complete new envelope.
-- Reject corrupt, fallback, migrated-partial, stale, or mismatched sources.
-- Forbid partial authority-bearing restoration.
+Deliverables:
+
+- Restore only one checksum-verified native schema-6 active-state checkpoint from a separate source store.
+- Revalidate the current state, source state, target, permit, validity window, and fresh evidence immediately before replacement.
+- Replace graph, growth, consolidation, proposal lifecycle, execution state, and active activity history together in one atomic save.
+- Preserve the current monotonic permit and receipt audit history instead of copying an older audit backward.
+- Require the current audit to contain all source audit history before restoration.
+- Consume the exact single-use restoration permit only with its deterministic receipt.
+- Retain restart-safe restoration evidence and reject permit reuse after restart.
+- Resolve interruption to either the complete old envelope or complete restored envelope.
+- Reject same-path, corrupt, fallback, migrated, expired, stale, mismatched, or audit-divergent sources without mutating the current store.
+- Keep persistence, permits, receipts, and the restoration policy free of cognition, learning, replay selection, growth, advice, and production-action authority.
+- Prove full component replacement and failure behavior in the repository-wide test suite.
 
 ### Batch 6 - live acceptance, documentation, and closure
 
@@ -241,9 +247,9 @@ Batch 1 does not provide:
 
 ## 8. Readiness rule
 
-The legacy narrow-scope marker remains 97% until exact restoration and final stage closure. The expanded developmental architecture marker is 77% after restart-safe durable replay persistence.
+The legacy narrow-scope marker remains 97% until final live acceptance and stage closure. The expanded developmental architecture marker is 78% after restart-safe durable replay and exact complete-state restoration.
 
-The legacy stage marker may increase to 98% only after exact complete-envelope restoration, live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
+The legacy stage marker may increase to 98% only after live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
 
 These markers are internal engineering progress measures. They are not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
 

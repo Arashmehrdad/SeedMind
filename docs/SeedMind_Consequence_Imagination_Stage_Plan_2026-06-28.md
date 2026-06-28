@@ -99,7 +99,7 @@ Batch 2 is in-memory only. Persistence and restart reconstruction remain part of
 
 ### Batch 3 - controlled replay completion
 
-Status: implemented with restart-safe durable replay; exact checkpoint restoration remains pending.
+Status: implemented with restart-safe durable replay and exact complete-state restoration.
 
 Completed:
 
@@ -111,14 +111,12 @@ Completed:
 - Exact deterministic receipts.
 - Single-use permit consumption only after complete success.
 - Atomic durable replay with exact old-or-new interruption resolution.
-- Schema-6 persistence of active activity history, permits, and replay receipts.
+- Schema-6 persistence of active activity history, permits, replay receipts, and restoration receipts.
 - Separate active-state and complete-envelope checksums.
 - Schema-5 migration to an explicit empty replay/restoration checkpoint.
-
-Still pending:
-
-- Exact complete-envelope checkpoint restoration.
-- Restoration interruption, corruption, and audit-preservation acceptance.
+- Atomic restoration of graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory.
+- Monotonic audit preservation that prevents restoration from reviving used approvals.
+- Rejection of corrupt, fallback, migrated, stale, expired, mismatched, same-path, and audit-divergent restoration sources.
 
 ### Batch 4 - learned consequence model
 
@@ -192,9 +190,9 @@ A wrong outcome lowers local helpfulness and competence. It does not create emot
 
 The expanded marker started at 68% before Batch 1.
 
-After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay persistence raises the expanded marker to **77%**.
+After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raise the expanded marker to **78%**.
 
-The marker remains limited because SeedMind still does not provide exact complete-envelope restoration, a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, persistence for every later imagination contract, or complete live integration.
+The marker remains limited because SeedMind still does not provide a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, persistence for every later imagination contract, or complete live integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 
