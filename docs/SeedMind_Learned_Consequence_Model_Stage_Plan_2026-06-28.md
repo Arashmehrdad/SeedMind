@@ -84,14 +84,32 @@ Tests:
 
 ### Batch 2 - bounded contextual transfer
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Compare exact contexts with explicit similarity evidence.
-- Keep exact evidence and transferred estimates distinguishable.
-- Apply conservative confidence attenuation to transferred predictions.
-- Prevent one successful context from creating broad competence or certainty.
-- Record transfer coverage and contradiction evidence.
-- Preserve exact-context prediction as the primary source where available.
+Deliverables:
+
+- Separate stateless transfer policy over exact learned consequence records.
+- Exact-context evidence always wins, including partial or low-confidence exact records.
+- Structured similarity evidence for active need, sensor bins, available actions, human state, and resource state.
+- Required active-need, action-availability, and positional-shape compatibility before transfer.
+- Explicit minimum similarity threshold, source-confidence threshold, source limit, candidate limit, and confidence cap.
+- Conservative confidence attenuation by context similarity and transfer scale.
+- Transferred effects retain exact source record IDs and real event IDs.
+- Missing source effect dimensions remain unknown.
+- Exact next context is never transferred across contexts.
+- Per-effect directional contradiction evidence reduces transferred confidence and can reduce it to zero.
+- One source cannot create broad certainty, while multiple consistent sources may add bounded support.
+- Candidate selection is deterministic and inspectable.
+- Transfer prediction is pure and cannot create an exact target-context record.
+- No sequence modelling, persistence, dreaming, optimisation, ranking, recommendation, or action authority.
+
+Implementation:
+
+- `src/seedmind/research/ndnra/contextual_consequence_transfer.py`
+
+Tests:
+
+- `tests/unit/test_ndnra_contextual_consequence_transfer.py`
 
 ### Batch 3 - ordered actions and short consequence chains
 
@@ -129,7 +147,9 @@ Planned:
 - Run complete repository quality gates.
 - Reassess the expanded progress marker only after all gates pass.
 
-## 4. Batch 1 public contracts
+## 4. Public contracts
+
+Batch 1:
 
 - `CalibrationDirection`
 - `LearnedConsequenceModelConfig`
@@ -140,6 +160,16 @@ Planned:
 - `ConsequenceModelUpdate`
 - `ContextActionConsequenceRecord`
 - `LearnedConsequenceModel`
+
+Batch 2:
+
+- `ConsequencePredictionMode`
+- `ContextualTransferConfig`
+- `ContextSimilarityEvidence`
+- `ContextTransferSourceEvidence`
+- `TransferredEffectEvidence`
+- `ContextualTransferPrediction`
+- `BoundedContextualTransferPolicy`
 
 ## 5. Confidence and uncertainty design
 
@@ -171,12 +201,13 @@ Therefore:
 - prior overconfidence can be corrected downward;
 - unknown predictions remain explicitly uncertain.
 
-## 6. Explicit Batch 1 exclusions
+## 6. Explicit current exclusions
 
-Batch 1 does not provide:
+Batches 1 and 2 do not provide:
 
-- context generalisation;
-- semantic similarity;
+- semantic abstraction beyond explicit grounded component similarity;
+- learned similarity weights;
+- transfer of an exact next context;
 - multi-action sequences;
 - action combinations;
 - imagined rollouts;
@@ -193,7 +224,7 @@ Batch 1 does not provide:
 
 ## 7. Progress rule
 
-The expanded developmental architecture marker remains **79%** during Batch 1. The new contracts and behavioural tests are necessary but do not complete persistence, sequence modelling, live integration, or end-to-end acceptance.
+The expanded developmental architecture marker remains **79%** through Batch 2. The new contracts and behavioural tests are necessary but do not complete persistence, sequence modelling, live integration, or end-to-end acceptance.
 
 No percentage should increase merely because a prediction object exists. Later progress requires behavioural evidence, failure-path tests, restart safety where applicable, live invariance, and complete repository quality gates.
 

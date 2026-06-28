@@ -1461,9 +1461,27 @@ Each prediction exposes:
 
 Effect confidence combines bounded support with observed consistency. Contradictory real outcomes increase dispersion and reduce confidence. A later real outcome may classify an earlier prediction as overconfident, calibrated, underconfident, or unknown, but calibration cannot raise confidence above current evidence coverage.
 
-Evaluation is pure. Replay and imagined activity cannot update the model. Batch 1 performs no context generalisation, action chaining, rollout, optimisation, persistence, advice, route ranking, or action selection. Production curiosity remains the sole production action authority.
+Evaluation is pure. Replay and imagined activity cannot update the model. Batch 1 performs no action chaining, rollout, optimisation, persistence, advice, route ranking, or action selection. Production curiosity remains the sole production action authority.
 
-The expanded developmental architecture marker remains 79% during this contract-only batch. Sequence modelling, restart-safe persistence, live integration, and stage acceptance remain required before reassessment.
+### 17.21 Bounded contextual consequence transfer
+
+Contextual transfer is a separate stateless policy over exact learned consequence records. It never writes a target-context record and never replaces exact evidence. Any existing exact record remains primary, including partial or low-confidence exact evidence.
+
+Transfer eligibility requires:
+
+- the same active need identity;
+- the requested action to be available in both contexts;
+- compatible positional sensor, human, and resource shapes;
+- an explicit minimum combined similarity;
+- a source prediction above the configured confidence floor.
+
+Similarity evidence reports sensor-bin similarity, available-action overlap, human-state similarity, resource-state similarity, structural compatibility, and the final weighted score. The weights and thresholds are fixed configuration in this batch rather than learned semantics.
+
+Transferred confidence is attenuated by source confidence, context similarity, and a transfer scale, then capped globally. Every transferred effect retains exact source record and real event identities. Multiple consistent sources may add bounded support. Opposing directional sources produce explicit contradiction evidence that reduces confidence and may reduce it to zero.
+
+Missing dimensions remain unknown. An exact next context is never transferred because a source context's next state is not an exact prediction for a different target context. The policy remains prediction-only and cannot rank, recommend, schedule, or execute actions.
+
+The expanded developmental architecture marker remains 79% through Batch 2. Ordered action chains, persistence, live integration, and complete stage acceptance remain required before reassessment.
 
 ## 18. Architectural invariants
 
@@ -1509,11 +1527,16 @@ The following rules must remain true:
 38. Restoration must replace one complete checksum-verified native schema-6 active state; partial authority-bearing restoration is forbidden.
 39. The current operation audit must contain source audit history, and restoration cannot revive cancelled, expired, or consumed approvals.
 40. Replay/restoration acceptance must preserve production actions and expose exact receipts, failure paths, restart state, and zero automatic-operation counts.
-41. Learned consequence evidence must remain local to one exact context and action until a separately accepted transfer mechanism exists.
-42. Only unique real transitions may update the learned consequence model; replay and imagination remain non-evidentiary.
-43. Missing effect dimensions must remain unknown, and calibrated confidence cannot exceed current evidence coverage.
-44. Consequence prediction evaluation must be pure and cannot mutate model state or select actions.
-45. Batch 1 consequence predictions cannot rank, recommend, schedule, or execute production actions.
+41. Learned consequence records remain local to one exact context and action; contextual transfer is a separate derived prediction and cannot create a target-context record.
+42. Only unique real transitions may update the learned consequence model; replay, imagination, and transferred predictions remain non-evidentiary.
+43. Missing effect dimensions must remain unknown, and calibrated or transferred confidence cannot exceed its explicit evidence or transfer coverage.
+44. Consequence prediction and contextual-transfer evaluation must be pure and cannot mutate model state or select actions.
+45. Consequence predictions and transferred estimates cannot rank, recommend, schedule, or execute production actions.
+46. Existing exact context-action evidence always takes precedence over transfer, including partial and low-confidence exact records.
+47. Transfer requires explicit structural compatibility, similarity evidence, source-confidence evidence, and deterministic finite source bounds.
+48. Transferred confidence must be attenuated and globally capped; one source cannot establish broad certainty.
+49. Directionally opposing transfer sources must remain inspectable and reduce confidence through explicit contradiction evidence.
+50. Exact next-context claims cannot be transferred across contexts.
 
 ## 19. First prototype boundary
 

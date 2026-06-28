@@ -123,9 +123,9 @@ Completed:
 
 ### Batch 4 - learned consequence model
 
-Status: active. Exact-context single-step Batch 1 is implemented in the commit containing `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`.
+Status: active. Exact-context single-step Batch 1 and bounded contextual-transfer Batch 2 are implemented in the commits referencing `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`.
 
-Completed in Batch 1:
+Completed in Batches 1 and 2:
 
 - Predict requested one-step effects from exact context plus action.
 - Predict the most frequent exact next context.
@@ -135,11 +135,14 @@ Completed in Batch 1:
 - Keep calibration bounded by actual evidence coverage.
 - Reject replay and imagination as model evidence.
 - Enforce finite record, observation, effect-dimension, and next-context bounds.
+- Preserve exact evidence priority over transferred estimates.
+- Compare grounded contexts with explicit component-level similarity evidence.
+- Attenuate and cap transferred confidence while preserving exact source provenance.
+- Surface directional source contradiction and prohibit transferred exact-next-context claims.
 - Preserve zero action-selection and production-action authority.
 
 Remaining:
 
-- Bounded contextual transfer.
 - Represent action order and short combinations.
 - Persist and reconstruct the model across restart.
 - Complete live integration and acceptance.

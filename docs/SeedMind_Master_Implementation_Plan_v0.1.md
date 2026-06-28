@@ -2040,9 +2040,11 @@ Each prediction reports:
 
 Repeated consistent evidence increases bounded support. Contradiction increases dispersion and can lower confidence. A prior prediction can be compared with a later real outcome to classify overconfidence, calibrated confidence, underconfidence, or unknown coverage. Calibration remains capped by current evidence coverage and therefore cannot manufacture certainty for missing dimensions.
 
-Batch 1 is deliberately non-authoritative. It provides no context transfer, sequence generation, dreaming, optimisation, persistence, action recommendation, action ranking, advice, growth influence, or production-action control. Replay and imagined activity cannot update the model.
+Batch 1 is deliberately non-authoritative. It provides no sequence generation, dreaming, optimisation, persistence, action recommendation, action ranking, advice, growth influence, or production-action control. Replay and imagined activity cannot update the model.
 
-The expanded developmental architecture marker remains 79% until contextual transfer, ordered short sequences, restart-safe persistence, live integration, and full stage acceptance are completed.
+Batch 2 adds bounded contextual transfer as a separate stateless policy. Exact evidence always wins. Transfer requires the same need identity, action availability, compatible grounded context shapes, an explicit similarity threshold, and sufficient source confidence. Every transferred effect preserves source record and real event identities. Confidence is attenuated and capped; opposing sources create contradiction evidence that may reduce confidence to zero. Transfer never creates an exact target-context record and never transfers an exact next context.
+
+The expanded developmental architecture marker remains 79% until ordered short sequences, restart-safe persistence, live integration, and full stage acceptance are completed.
 
 ---
 

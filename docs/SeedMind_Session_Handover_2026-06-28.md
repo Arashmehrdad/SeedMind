@@ -3,11 +3,11 @@
 Repository: `D:\Github\SeedMind`
 CodexBridge repository alias: `seedmind`
 Branch: `main`
-Working tree at handover: expected clean after the Batch 1 commit
-Git relationship at handover: `main...origin/main [ahead 6]` after the Batch 1 commit
-Latest completed stage commit: `a83f4ba081d7e64335c89e4e3a8093cbaef60b15`
+Working tree at handover: expected clean after the Batch 2 commit
+Git relationship at handover: `main...origin/main [ahead 7]` after the Batch 2 commit
+Latest completed implementation commit before Batch 2: `08e39ace826d42dc33416505ef13630965eecbba`
 Current stage: Learned Consequence Model
-Stage progress: Batch 1 of 5 complete
+Stage progress: Batch 2 of 5 complete
 Legacy narrow-scope theory-to-integration readiness: 98%
 Expanded developmental architecture progress: 79%
 
@@ -19,11 +19,11 @@ Use this handover and `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-0
 
 Recommended opening instruction:
 
-> Continue SeedMind from the learned consequence-model stage plan. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin Batch 2 bounded contextual transfer. Do not push. Preserve exact evidence provenance, cap transferred confidence, and keep the model outside action selection.
+> Continue SeedMind from the learned consequence-model stage plan. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin Batch 3 ordered actions and short consequence chains. Do not push. Preserve exact source transitions, finite depth and branching, and zero action-selection authority.
 
 The immediate next task is:
 
-> Plan and implement Batch 2: explicit context-similarity evidence and conservative transferred predictions. Keep exact-context evidence primary, keep transferred estimates distinguishable, and do not begin action sequences, persistence, dreaming, optimisation, or production integration.
+> Plan and implement Batch 3: represent observed action order and bounded short consequence chains. Preserve every real source transition, prevent duplicate support multiplication, and do not begin persistence, dreaming, optimisation, experiment promotion, or production integration.
 
 ---
 
@@ -307,16 +307,18 @@ Status:
 
 ```text
 Batch 1 exact-context single-step model complete
-Batch 2 bounded contextual transfer next
-Batch 3 ordered short consequence chains pending
+Batch 2 bounded contextual transfer complete
+Batch 3 ordered short consequence chains next
 Batch 4 persistence and restart pending
 Batch 5 live acceptance and closure pending
 ```
 
-Batch 1 implementation:
+Batch 1 and 2 implementation:
 
 - `src/seedmind/research/ndnra/learned_consequence_model.py`
+- `src/seedmind/research/ndnra/contextual_consequence_transfer.py`
 - `tests/unit/test_ndnra_learned_consequence_model.py`
+- `tests/unit/test_ndnra_contextual_consequence_transfer.py`
 
 Expanded developmental architecture marker:
 

@@ -571,6 +571,11 @@ class LearnedConsequenceModel:
     def record_count(self) -> int:
         return len(self._records)
 
+    @property
+    def records(self) -> tuple[ContextActionConsequenceRecord, ...]:
+        """Return deterministic read-only access to exact learned records."""
+        return tuple(self._records[key] for key in sorted(self._records))
+
     def predict(self, request: ConsequencePredictionRequest) -> ConsequencePrediction:
         """Return an exact-context prediction or explicit complete uncertainty."""
         self._validate_prediction_request(request)
