@@ -1,7 +1,5 @@
 """Tests for schema-6 durable controlled replay persistence."""
 
-# ruff: noqa: I001 -- pytest exposes the adjacent support module as top-level.
-
 from __future__ import annotations
 
 import hashlib

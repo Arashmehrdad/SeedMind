@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from ndnra_replay_restoration_test_support import (
+from ndnra_controlled_replay_test_support import (
     WINDOW_ASSEMBLY,
     ReplayScenario,
     build_replay_scenario,

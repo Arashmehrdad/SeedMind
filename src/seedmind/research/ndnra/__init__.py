@@ -181,7 +181,6 @@ from seedmind.research.ndnra.controlled_replay_restoration_permit_lifecycle impo
 from seedmind.research.ndnra.controlled_replay_restoration_persistence import (
     REPLAY_RESTORATION_SCHEMA,
     REPLAY_RESTORATION_SCHEMA_VERSION,
-    ControlledCheckpointRestorationReceipt,
     NDNRAReplayRestorationCheckpoint,
 )
 from seedmind.research.ndnra.controlled_retention_replay import (
@@ -376,10 +375,6 @@ __all__ = [
     "ContextualMasteryExperimentEvidence",
     "ContextualMasteryExperimentResult",
     "ContextualRecordCode",
-    "ControlledCheckpointRestorationDurableResult",
-    "ControlledCheckpointRestorationPolicy",
-    "ControlledCheckpointRestorationReceipt",
-    "ControlledCheckpointRestorationRequest",
     "ControlledReplayRestorationApprovalPolicy",
     "ControlledReplayRestorationApprovalRequest",
     "ControlledReplayRestorationEvidence",

@@ -6,7 +6,7 @@ Branch: `main`
 Stage status: active
 Authority: explicit-human-approval only, research-only, bounded replay and restoration
 Legacy narrow-scope theory-to-integration marker: 97%
-Expanded developmental architecture progress after durable replay and restoration: 78%
+Expanded developmental architecture progress after durable replay persistence: 77%
 Legacy target after complete stage acceptance: 98%
 
 ## 1. Stage objective
@@ -119,30 +119,40 @@ Batch 3 execution remains isolated from production action and learning authority
 
 Any learning-update authority must be separately explicit and bounded. It is not inferred from replay evidence, activity maintenance, a replay permit, or a replay receipt.
 
-### Batch 4 - exact checkpoint restoration and durable persistence
+### Batch 4 - durable replay persistence
 
 Status: implemented in the commit containing this update.
 
 Deliverables:
 
-- Brain schema 6 stores replay/restoration permits, active activity history, replay receipts, and restoration receipts inside the complete checksum-protected envelope.
+- Brain schema 6 stores controlled-operation permits, active activity history, and replay receipts inside the checksum-protected envelope.
 - Older schema-5 files migrate to an explicit empty replay/restoration checkpoint.
 - Separate outer-envelope and active-state SHA-256 checksums.
 - Audit-only permit persistence changes the envelope checksum without invalidating the approved active-state identity.
-- Exact active-ledger reconstruction preserves event order, source distinctions, cycle budgets, and deterministic maintenance decisions.
+- Exact activity-ledger reconstruction preserves event order, source distinctions, cycle budgets, and deterministic maintenance decisions.
 - Durable replay atomically persists the consumed permit, exact receipt, replay activity history, reduced dormancy, and all unrelated brain components.
 - Restarted replay retains single-use enforcement and cannot reuse a consumed permit.
-- Restoration accepts only a checksum-verified, non-fallback, non-migrated schema-6 source envelope.
-- Restoration replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity history together.
-- Current monotonic permit and receipt audit history survives restoration of an older active brain state.
-- Restoration cannot revive a previously used approval.
-- Immediate current-state, source-state, target, permit, and fresh-evidence revalidation.
-- Atomic replacement with exact old-or-new resolution before and after the filesystem replace point.
-- Corrupt source or current envelopes are rejected without changing the current store.
-- No partial graph, growth, consolidation, proposal, execution, activity, replay, or restoration recovery.
-- No replay, restoration, cognition, learning, route-ranking, growth, pressure, or production-action authority is granted to persistence evidence.
+- Interruption before persistence preserves the complete old envelope.
+- Interruption after atomic replacement is accepted only when the complete new envelope is present.
+- Active-state checksum tampering produces safe corruption fallback.
+- Unrelated durable consolidation saves preserve the replay checkpoint instead of erasing its audit history.
+- Persistence evidence grants no replay, restoration, cognition, learning, route-ranking, growth, pressure, or production-action authority.
 
-### Batch 5 - live acceptance, documentation, and closure
+Explicit exclusion: Batch 4 does not implement checkpoint restoration. Restoration-scoped approval and audit contracts may remain representable, but they cannot execute or replace a brain envelope.
+
+### Batch 5 - exact checkpoint restoration
+
+Planned:
+
+- Restore only one exact checksum-verified complete schema-6 brain envelope.
+- Revalidate the current state, source state, target, permit, and fresh evidence immediately before replacement.
+- Replace graph, growth, consolidation, proposal lifecycle, execution state, and active activity history together.
+- Preserve monotonic operation audit history so restoration cannot revive used approvals.
+- Resolve interruption to either the complete old envelope or complete new envelope.
+- Reject corrupt, fallback, migrated-partial, stale, or mismatched sources.
+- Forbid partial authority-bearing restoration.
+
+### Batch 6 - live acceptance, documentation, and closure
 
 Planned:
 
@@ -231,9 +241,9 @@ Batch 1 does not provide:
 
 ## 8. Readiness rule
 
-The legacy narrow-scope marker remains 97% until Batch 5 closure. The expanded developmental architecture marker is 78% after restart-safe replay persistence and exact complete-envelope restoration.
+The legacy narrow-scope marker remains 97% until exact restoration and final stage closure. The expanded developmental architecture marker is 77% after restart-safe durable replay persistence.
 
-The legacy stage marker may increase to 98% only after live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
+The legacy stage marker may increase to 98% only after exact complete-envelope restoration, live invariance evidence, final documentation, stage handover, and all repository quality gates pass together.
 
 These markers are internal engineering progress measures. They are not production readiness, commercial readiness, safety certification, AGI progress, or approval for autonomous replay or restoration.
 
