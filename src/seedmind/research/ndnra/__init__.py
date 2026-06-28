@@ -155,6 +155,14 @@ from seedmind.research.ndnra.controlled_replay_restoration_approval import (
     ControlledReplayRestorationPermit,
     ControlledReplayRestorationTarget,
 )
+from seedmind.research.ndnra.controlled_replay_restoration_permit_lifecycle import (
+    ControlledReplayRestorationPermitLifecycleAction,
+    ControlledReplayRestorationPermitLifecycleRecord,
+    ControlledReplayRestorationPermitLifecycleRegistry,
+    ControlledReplayRestorationPermitLifecycleStatus,
+    ControlledReplayRestorationPermitTransitionDecision,
+    ControlledReplayRestorationPermitTransitionRequest,
+)
 from seedmind.research.ndnra.effects import (
     EffectEstimate,
     EffectNeed,
@@ -328,6 +336,12 @@ __all__ = [
     "ControlledReplayRestorationEvidence",
     "ControlledReplayRestorationOperation",
     "ControlledReplayRestorationPermit",
+    "ControlledReplayRestorationPermitLifecycleAction",
+    "ControlledReplayRestorationPermitLifecycleRecord",
+    "ControlledReplayRestorationPermitLifecycleRegistry",
+    "ControlledReplayRestorationPermitLifecycleStatus",
+    "ControlledReplayRestorationPermitTransitionDecision",
+    "ControlledReplayRestorationPermitTransitionRequest",
     "ControlledReplayRestorationTarget",
     "EffectEstimate",
     "EffectNeed",

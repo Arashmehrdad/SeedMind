@@ -72,14 +72,23 @@ Batch 1 performs no replay, restoration, persistence mutation, lifecycle transit
 
 ### Batch 2 - immutable permit lifecycle
 
-Planned:
+Status: implemented in the commit containing this update.
+
+Deliverables:
 
 - Issued, cancelled, expired, and consumed states.
 - One terminal transition per permit identity.
-- Exact operation, target, checkpoint, and evidence identity matching.
-- Consumption reference tied to one future operation receipt.
-- Duplicate and conflicting transition rejection.
-- No replay or restoration authority in lifecycle state.
+- Exact operation, target, source checkpoint, current checkpoint, checksum, and approval-evidence identity matching.
+- Consumption restricted to an explicit `operation:` actor.
+- Consumption reference reserved for one future operation receipt.
+- Cancellation and consumption restricted to the unexpired validity window.
+- Expiry recorded only after the validity window.
+- Deterministic immutable transition identities.
+- Duplicate permit, duplicate consumption, and conflicting terminal transition rejection.
+- Separate replay and restoration consumption counts for audit evidence.
+- Explicit no-replay, no-restoration, no-cognition, and no-production-action authority flags on decisions, records, and registries.
+
+Batch 2 performs no replay, restoration, receipt creation, persistence mutation, scheduling, or integration action.
 
 ### Batch 3 - bounded retention replay
 
