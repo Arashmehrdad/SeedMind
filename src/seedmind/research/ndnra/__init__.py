@@ -131,6 +131,14 @@ from seedmind.research.ndnra.consolidation_scheduling_experiment import (
     export_consolidation_scheduling_experiment,
     run_consolidation_scheduling_experiment,
 )
+from seedmind.research.ndnra.contextual_consequence import (
+    ActionCompetenceUpdate,
+    ActionConsequenceAssessment,
+    ConsequenceDirection,
+    ContextualActionCompetenceLedger,
+    ContextualActionCompetenceRecord,
+    ExperienceOrigin,
+)
 from seedmind.research.ndnra.contextual_mastery_experiment import (
     ContextualMasteryExperimentEvidence,
     ContextualMasteryExperimentResult,
@@ -248,6 +256,8 @@ __all__ = [
     "EXECUTION_SCHEMA_VERSION",
     "PROPOSAL_LIFECYCLE_SCHEMA",
     "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
+    "ActionCompetenceUpdate",
+    "ActionConsequenceAssessment",
     "AdaptiveRuntimeConfig",
     "AdaptiveUpdate",
     "BrainLoadResult",
@@ -255,6 +265,7 @@ __all__ = [
     "BrainSaveResult",
     "CompositionCandidate",
     "CompositionResult",
+    "ConsequenceDirection",
     "ConsolidationApplicationResult",
     "ConsolidationApplicationState",
     "ConsolidationApplicationTarget",
@@ -325,6 +336,8 @@ __all__ = [
     "ConsolidationStateSnapshot",
     "ConsolidationStructureState",
     "ContextSignature",
+    "ContextualActionCompetenceLedger",
+    "ContextualActionCompetenceRecord",
     "ContextualExperienceLedger",
     "ContextualExperienceTrace",
     "ContextualLearningResult",
@@ -349,6 +362,7 @@ __all__ = [
     "EventIdentity",
     "EvidenceDrivenGrowthController",
     "ExperienceAssembly",
+    "ExperienceOrigin",
     "GoalGatedGrowthCycle",
     "GrowthAttemptRecord",
     "GrowthCycleConfig",
