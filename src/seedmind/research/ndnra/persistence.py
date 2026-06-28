@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from enum import StrEnum
 from math import isfinite
@@ -15,6 +15,9 @@ from seedmind.research.ndnra.composition import (
     ExperienceAssembly,
     MultidimensionalExperienceGraph,
     SpecialistInteraction,
+)
+from seedmind.research.ndnra.consolidation_execution_persistence import (
+    NDNRAExecutionCheckpoint,
 )
 from seedmind.research.ndnra.consolidation_persistence import (
     ConsolidationRollbackAuditRecord,
@@ -27,8 +30,8 @@ from seedmind.research.ndnra.contextual_memory import ContextualExperienceLedger
 from seedmind.research.ndnra.effects import LocalEffectLink, SparseEffectMemory
 
 BRAIN_SCHEMA = "seedmind.ndnra.brain"
-BRAIN_SCHEMA_VERSION = 4
-_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, 3, BRAIN_SCHEMA_VERSION})
+BRAIN_SCHEMA_VERSION = 5
+_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, 3, 4, BRAIN_SCHEMA_VERSION})
 
 __all__ = [
     "BRAIN_SCHEMA",
@@ -39,6 +42,7 @@ __all__ = [
     "ConsolidationRollbackAuditRecord",
     "NDNRABrainStore",
     "NDNRAConsolidationCheckpoint",
+    "NDNRAExecutionCheckpoint",
     "NDNRAGrowthState",
     "NDNRAProposalLifecycleCheckpoint",
 ]
@@ -159,6 +163,7 @@ class BrainLoadResult:
     growth_state: NDNRAGrowthState
     consolidation_checkpoint: NDNRAConsolidationCheckpoint
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint
+    execution_checkpoint: NDNRAExecutionCheckpoint
     checksum_verified: bool
     used_fallback: bool
     migrated_from_version: int | None = None
@@ -184,6 +189,8 @@ class NDNRABrainStore:
         growth_state: NDNRAGrowthState | None = None,
         consolidation_checkpoint: NDNRAConsolidationCheckpoint | None = None,
         proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint | None = None,
+        execution_checkpoint: NDNRAExecutionCheckpoint | None = None,
+        interruption_hook: Callable[[str], None] | None = None,
     ) -> BrainSaveResult:
         """Atomically save a checksum-protected reconstruction snapshot."""
         growth = NDNRAGrowthState() if growth_state is None else growth_state
@@ -197,6 +204,12 @@ class NDNRABrainStore:
             if proposal_lifecycle_checkpoint is None
             else proposal_lifecycle_checkpoint
         )
+        execution = (
+            NDNRAExecutionCheckpoint.empty()
+            if execution_checkpoint is None
+            else execution_checkpoint
+        )
+        execution.validate_consolidation_checkpoint(consolidation)
         body: dict[str, object] = {
             "schema": BRAIN_SCHEMA,
             "schema_version": BRAIN_SCHEMA_VERSION,
@@ -205,6 +218,7 @@ class NDNRABrainStore:
                 "growth_state": growth.snapshot(),
                 "consolidation_checkpoint": consolidation.snapshot(),
                 "proposal_lifecycle_checkpoint": proposal_lifecycle.snapshot(),
+                "execution_checkpoint": execution.snapshot(),
             },
         }
         checksum = _checksum(body)
@@ -221,11 +235,18 @@ class NDNRABrainStore:
 
         self.path.parent.mkdir(parents=True, exist_ok=True)
         try:
+            _interrupt(interruption_hook, "before_temporary_write")
             with self.temporary_path.open("wb") as handle:
-                handle.write(encoded)
+                midpoint = len(encoded) // 2
+                handle.write(encoded[:midpoint])
+                _interrupt(interruption_hook, "during_temporary_write")
+                handle.write(encoded[midpoint:])
                 handle.flush()
                 os.fsync(handle.fileno())
+            _interrupt(interruption_hook, "after_temporary_write")
+            _interrupt(interruption_hook, "before_atomic_replace")
             self.temporary_path.replace(self.path)
+            _interrupt(interruption_hook, "after_atomic_replace")
         finally:
             if self.temporary_path.exists():
                 self.temporary_path.unlink()
@@ -278,12 +299,19 @@ class NDNRABrainStore:
                     payload.get("proposal_lifecycle_checkpoint")
                 )
             )
+            execution_checkpoint = (
+                NDNRAExecutionCheckpoint.empty()
+                if version < 5
+                else NDNRAExecutionCheckpoint.from_snapshot(payload.get("execution_checkpoint"))
+            )
+            execution_checkpoint.validate_consolidation_checkpoint(consolidation_checkpoint)
             return BrainLoadResult(
                 status=BrainLoadStatus.LOADED,
                 graph=graph,
                 growth_state=growth_state,
                 consolidation_checkpoint=consolidation_checkpoint,
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
+                execution_checkpoint=execution_checkpoint,
                 checksum_verified=True,
                 used_fallback=False,
                 migrated_from_version=(version if version < BRAIN_SCHEMA_VERSION else None),
@@ -299,11 +327,20 @@ class NDNRABrainStore:
             growth_state=NDNRAGrowthState(),
             consolidation_checkpoint=NDNRAConsolidationCheckpoint.empty(),
             proposal_lifecycle_checkpoint=NDNRAProposalLifecycleCheckpoint.empty(),
+            execution_checkpoint=NDNRAExecutionCheckpoint.empty(),
             checksum_verified=False,
             used_fallback=True,
             migrated_from_version=None,
             error=error,
         )
+
+
+def _interrupt(
+    hook: Callable[[str], None] | None,
+    point: str,
+) -> None:
+    if hook is not None:
+        hook(point)
 
 
 def _restore_graph(

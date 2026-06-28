@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from typing import Protocol
 
@@ -203,6 +203,7 @@ class ConsolidationExecutionCommitPolicy:
         application_state: ConsolidationApplicationTarget,
         available_assembly_ids: Iterable[str],
         available_route_ids: Iterable[str],
+        interruption_hook: Callable[[str], None] | None = None,
     ) -> ConsolidationExecutionCommitResult:
         """Atomically apply and consume one permit after immediate revalidation."""
         assemblies = _normalized_codes("available_assembly_ids", available_assembly_ids)
@@ -245,6 +246,7 @@ class ConsolidationExecutionCommitPolicy:
         proposal_before = lifecycle.snapshot()
         permit_registry_before = permit_registry.snapshot()
         state_before = application_state.snapshot()
+        _interrupt(interruption_hook, "before_revalidation")
 
         revalidation = self.revalidation_policy.evaluate(
             record=proposal_record,
@@ -261,6 +263,7 @@ class ConsolidationExecutionCommitPolicy:
             raise ValueError("pre-commit revalidation returned a different proposal")
         if revalidation.current_candidate != proposal.candidate:
             raise ValueError("pre-commit revalidation returned a different candidate")
+        _interrupt(interruption_hook, "after_revalidation")
 
         eligibility = self.revalidation_policy.eligibility_policy.evaluate(
             ledger=ledger,
@@ -296,9 +299,11 @@ class ConsolidationExecutionCommitPolicy:
         )
         consumed_record = consumed_registry.record_for(permit.permit_id)
         permit_transition = consumed_record.decisions[0]
+        _interrupt(interruption_hook, "after_consumed_registry_preparation")
 
         try:
             application = application_state.apply(eligibility)
+            _interrupt(interruption_hook, "after_application")
             if application.before != state_before:
                 raise RuntimeError("application before-state differs from commit snapshot")
             if application.after != application_state.snapshot():
@@ -334,6 +339,14 @@ class ConsolidationExecutionCommitPolicy:
             if application_state.snapshot() != state_before:
                 raise RuntimeError("failed execution could not restore prior state") from error
             raise
+
+
+def _interrupt(
+    hook: Callable[[str], None] | None,
+    point: str,
+) -> None:
+    if hook is not None:
+        hook(point)
 
 
 def _restore_failed_application(

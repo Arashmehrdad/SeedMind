@@ -223,6 +223,20 @@ class NDNRAConsolidationCheckpoint:
         return checkpoint
 
 
+def restore_consolidation_application(
+    snapshot: object,
+) -> ConsolidationApplicationResult:
+    """Restore one exact application result for another versioned codec."""
+    return _restore_application(snapshot)
+
+
+def restore_consolidation_state_snapshot(
+    snapshot: object,
+) -> ConsolidationStateSnapshot:
+    """Restore one exact consolidation state snapshot for another versioned codec."""
+    return _restore_state_snapshot(snapshot)
+
+
 def _application_snapshot(
     application: ConsolidationApplicationResult,
 ) -> dict[str, object]:

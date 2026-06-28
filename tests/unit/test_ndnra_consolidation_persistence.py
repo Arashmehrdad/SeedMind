@@ -151,8 +151,8 @@ def test_schema_v4_round_trips_active_consolidation_checkpoint(tmp_path: Path) -
     saved = store.save(graph, consolidation_checkpoint=checkpoint)
     loaded = store.load()
 
-    assert BRAIN_SCHEMA_VERSION == 4
-    assert saved.schema_version == 4
+    assert BRAIN_SCHEMA_VERSION == 5
+    assert saved.schema_version == 5
     assert loaded.status is BrainLoadStatus.LOADED
     assert loaded.checksum_verified
     assert loaded.consolidation_checkpoint == checkpoint

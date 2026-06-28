@@ -38,6 +38,10 @@ from seedmind.research.ndnra.consolidation_execution_commit import (
     ConsolidationExecutionCommitRequest,
     ConsolidationExecutionCommitResult,
 )
+from seedmind.research.ndnra.consolidation_execution_durable_commit import (
+    ConsolidationExecutionDurableCommitPolicy,
+    ConsolidationExecutionDurableCommitResult,
+)
 from seedmind.research.ndnra.consolidation_execution_permit_lifecycle import (
     ConsolidationExecutionPermitLifecycleAction,
     ConsolidationExecutionPermitLifecycleRecord,
@@ -45,6 +49,11 @@ from seedmind.research.ndnra.consolidation_execution_permit_lifecycle import (
     ConsolidationExecutionPermitLifecycleStatus,
     ConsolidationExecutionPermitTransitionDecision,
     ConsolidationExecutionPermitTransitionRequest,
+)
+from seedmind.research.ndnra.consolidation_execution_persistence import (
+    EXECUTION_SCHEMA,
+    EXECUTION_SCHEMA_VERSION,
+    NDNRAExecutionCheckpoint,
 )
 from seedmind.research.ndnra.consolidation_interference_experiment import (
     ConsolidationInterferenceCondition,
@@ -219,6 +228,8 @@ from seedmind.research.ndnra.persistence import (
 __all__ = [
     "BRAIN_SCHEMA",
     "BRAIN_SCHEMA_VERSION",
+    "EXECUTION_SCHEMA",
+    "EXECUTION_SCHEMA_VERSION",
     "PROPOSAL_LIFECYCLE_SCHEMA",
     "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
     "AdaptiveRuntimeConfig",
@@ -240,6 +251,8 @@ __all__ = [
     "ConsolidationExecutionCommitReceipt",
     "ConsolidationExecutionCommitRequest",
     "ConsolidationExecutionCommitResult",
+    "ConsolidationExecutionDurableCommitPolicy",
+    "ConsolidationExecutionDurableCommitResult",
     "ConsolidationExecutionPermit",
     "ConsolidationExecutionPermitLifecycleAction",
     "ConsolidationExecutionPermitLifecycleRecord",
@@ -331,6 +344,7 @@ __all__ = [
     "MultieffectExperimentResult",
     "NDNRABrainStore",
     "NDNRAConsolidationCheckpoint",
+    "NDNRAExecutionCheckpoint",
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
     "NDNRAProposalLifecycleCheckpoint",

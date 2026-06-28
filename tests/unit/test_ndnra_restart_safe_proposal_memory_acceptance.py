@@ -35,7 +35,7 @@ def test_restart_acceptance_round_trips_exact_state(
     result = evidence.result
     record = evidence.accepted_checkpoint.registry.records[0]
 
-    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 4
+    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 5
     assert result.exact_graph_round_trip
     assert result.exact_growth_round_trip
     assert result.exact_lifecycle_round_trip
@@ -54,6 +54,7 @@ def test_restart_acceptance_migrates_and_falls_back_safely(
     assert result.legacy_v1_migrated_empty
     assert result.legacy_v2_migrated_empty
     assert result.legacy_v3_migrated_empty
+    assert result.legacy_v4_migrated_empty
     assert result.checksum_corruption_fallback_complete
     assert result.relational_corruption_fallback_complete
 

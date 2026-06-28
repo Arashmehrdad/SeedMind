@@ -43,6 +43,7 @@ from seedmind.research.ndnra import (
     EventIdentity,
     NDNRABrainStore,
     NDNRAConsolidationCheckpoint,
+    NDNRAExecutionCheckpoint,
     NDNRAGrowthState,
     NDNRAProposalLifecycleCheckpoint,
 )
@@ -104,6 +105,7 @@ class RestartSafeProposalMemoryAcceptanceResult:
     legacy_v1_migrated_empty: bool
     legacy_v2_migrated_empty: bool
     legacy_v3_migrated_empty: bool
+    legacy_v4_migrated_empty: bool
     checksum_corruption_fallback_complete: bool
     relational_corruption_fallback_complete: bool
     current_after_clean_restart: bool
@@ -313,7 +315,8 @@ def run_restart_safe_proposal_memory_acceptance(
     )
 
     migration_results = tuple(
-        _legacy_migration_is_empty(brain_path, output_directory, version) for version in (1, 2, 3)
+        _legacy_migration_is_empty(brain_path, output_directory, version)
+        for version in (1, 2, 3, 4)
     )
     checksum_fallback = _checksum_corruption_falls_back(
         brain_path,
@@ -385,7 +388,7 @@ def run_restart_safe_proposal_memory_acceptance(
         and stale_report.decisions[0].status is ConsolidationProposalRevalidationStatus.STALE
     )
     pass_gate = bool(
-        BRAIN_SCHEMA_VERSION == 4
+        BRAIN_SCHEMA_VERSION == 5
         and saved.schema_version == BRAIN_SCHEMA_VERSION
         and not saved.temporary_file_remaining
         and clean_load.status is BrainLoadStatus.LOADED
@@ -424,6 +427,7 @@ def run_restart_safe_proposal_memory_acceptance(
         legacy_v1_migrated_empty=migration_results[0],
         legacy_v2_migrated_empty=migration_results[1],
         legacy_v3_migrated_empty=migration_results[2],
+        legacy_v4_migrated_empty=migration_results[3],
         checksum_corruption_fallback_complete=checksum_fallback,
         relational_corruption_fallback_complete=relational_fallback,
         current_after_clean_restart=clean_current,
@@ -561,7 +565,9 @@ def _legacy_migration_is_empty(
     target = output_directory / f"restart_safe_legacy_v{version}.json"
     raw = _read_json_object(source_path)
     payload = _require_object(raw, "payload")
-    payload.pop("proposal_lifecycle_checkpoint", None)
+    payload.pop("execution_checkpoint", None)
+    if version < 4:
+        payload.pop("proposal_lifecycle_checkpoint", None)
     if version < 3:
         payload.pop("consolidation_checkpoint", None)
     if version == 1:
@@ -570,12 +576,18 @@ def _legacy_migration_is_empty(
     raw["schema_version"] = version
     _write_envelope(target, raw)
     loaded = NDNRABrainStore(target).load()
+    proposal_migration_valid = (
+        loaded.proposal_lifecycle_checkpoint == NDNRAProposalLifecycleCheckpoint.empty()
+        if version < 4
+        else bool(loaded.proposal_lifecycle_checkpoint.registry.records)
+    )
     return bool(
         loaded.status is BrainLoadStatus.LOADED
         and loaded.migrated_from_version == version
         and loaded.checksum_verified
         and not loaded.used_fallback
-        and loaded.proposal_lifecycle_checkpoint == NDNRAProposalLifecycleCheckpoint.empty()
+        and proposal_migration_valid
+        and loaded.execution_checkpoint == NDNRAExecutionCheckpoint.empty()
     )
 
 
@@ -608,6 +620,7 @@ def _complete_fallback(loaded: BrainLoadResult) -> bool:
         and loaded.growth_state == NDNRAGrowthState()
         and loaded.consolidation_checkpoint == NDNRAConsolidationCheckpoint.empty()
         and loaded.proposal_lifecycle_checkpoint == NDNRAProposalLifecycleCheckpoint.empty()
+        and loaded.execution_checkpoint == NDNRAExecutionCheckpoint.empty()
     )
 
 

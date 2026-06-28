@@ -83,6 +83,23 @@ class NDNRAProposalLifecycleCheckpoint:
         return checkpoint
 
 
+def restore_consolidation_schedule_proposal(
+    snapshot: object,
+) -> ConsolidationScheduleProposal:
+    """Restore one exact schedule proposal for another versioned codec."""
+    return _restore_proposal(snapshot)
+
+
+def restore_consolidation_candidate(snapshot: object) -> ConsolidationCandidate:
+    """Restore one exact consolidation candidate for another versioned codec."""
+    return _restore_candidate(snapshot)
+
+
+def restore_mastery_profile(snapshot: object) -> MasteryProfile:
+    """Restore one exact mastery profile for another versioned codec."""
+    return _restore_mastery_profile(snapshot)
+
+
 def _restore_registry(snapshot: object) -> ConsolidationProposalLifecycleRegistry:
     values = _require_mapping("proposal lifecycle registry", snapshot)
     registry = ConsolidationProposalLifecycleRegistry(

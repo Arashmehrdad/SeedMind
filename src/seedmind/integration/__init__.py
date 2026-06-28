@@ -50,6 +50,12 @@ from seedmind.integration.developmental_signals import (
     LiveDevelopmentalSignalProvider,
     LiveDevelopmentalSignals,
 )
+from seedmind.integration.human_approved_consolidation_execution_acceptance import (
+    HumanApprovedConsolidationExecutionAcceptanceEvidence,
+    HumanApprovedConsolidationExecutionAcceptanceResult,
+    export_human_approved_consolidation_execution_acceptance,
+    run_human_approved_consolidation_execution_acceptance,
+)
 from seedmind.integration.ndnra_shadow import (
     NDNRAShadowAdapter,
     NDNRAShadowConfig,
@@ -113,6 +119,8 @@ __all__ = [
     "ConsolidationSchedulingShadowObservation",
     "ContextualMasteryAcceptanceEvidence",
     "ContextualMasteryAcceptanceResult",
+    "HumanApprovedConsolidationExecutionAcceptanceEvidence",
+    "HumanApprovedConsolidationExecutionAcceptanceResult",
     "LiveDevelopmentalSignalProvider",
     "LiveDevelopmentalSignals",
     "NDNRALiveShadowAdapter",
@@ -141,6 +149,7 @@ __all__ = [
     "export_consolidation_proposal_lifecycle_acceptance",
     "export_consolidation_scheduling_acceptance",
     "export_contextual_mastery_acceptance",
+    "export_human_approved_consolidation_execution_acceptance",
     "export_persistent_shadow_evidence",
     "export_restart_safe_proposal_memory_acceptance",
     "export_shadow_comparison_evidence",
@@ -150,6 +159,7 @@ __all__ = [
     "run_consolidation_proposal_lifecycle_acceptance",
     "run_consolidation_scheduling_acceptance",
     "run_contextual_mastery_acceptance",
+    "run_human_approved_consolidation_execution_acceptance",
     "run_persistent_shadow_experiment",
     "run_restart_safe_proposal_memory_acceptance",
     "run_shadow_comparison",
