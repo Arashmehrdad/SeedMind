@@ -26,6 +26,11 @@ from seedmind.research.ndnra.consolidation_application import (
     ConsolidationStateSnapshot,
     ConsolidationStructureState,
 )
+from seedmind.research.ndnra.consolidation_execution_approval import (
+    ConsolidationExecutionApprovalPolicy,
+    ConsolidationExecutionApprovalRequest,
+    ConsolidationExecutionPermit,
+)
 from seedmind.research.ndnra.consolidation_interference_experiment import (
     ConsolidationInterferenceCondition,
     ConsolidationInterferenceConditionResult,
@@ -213,6 +218,9 @@ __all__ = [
     "ConsolidationCandidate",
     "ConsolidationEligibility",
     "ConsolidationEligibilityPolicy",
+    "ConsolidationExecutionApprovalPolicy",
+    "ConsolidationExecutionApprovalRequest",
+    "ConsolidationExecutionPermit",
     "ConsolidationInterferenceCondition",
     "ConsolidationInterferenceConditionResult",
     "ConsolidationInterferenceConfig",
