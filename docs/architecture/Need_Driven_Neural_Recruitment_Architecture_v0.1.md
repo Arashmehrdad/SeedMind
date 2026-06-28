@@ -1446,6 +1446,25 @@ Live acceptance compares an unreplayed control with an otherwise identical repla
 
 Passing this gate raises the legacy narrow-scope theory-to-integration marker from 97% to 98%. The expanded developmental architecture marker is 79% because learned consequence modelling, bounded imagination, and safe experiment promotion remain future stages.
 
+### 17.20 Exact-context learned consequence model
+
+The first learned consequence-model boundary is an isolated one-step predictor keyed by one exact grounded context and one exact action. It learns only from unique real transitions and predicts only explicitly requested effects plus the most frequent exact next context.
+
+Each prediction exposes:
+
+- requested effect coverage;
+- bounded real-evidence coverage;
+- raw structural confidence;
+- empirically calibrated confidence;
+- explicit uncertainty;
+- exact supporting real event identities.
+
+Effect confidence combines bounded support with observed consistency. Contradictory real outcomes increase dispersion and reduce confidence. A later real outcome may classify an earlier prediction as overconfident, calibrated, underconfident, or unknown, but calibration cannot raise confidence above current evidence coverage.
+
+Evaluation is pure. Replay and imagined activity cannot update the model. Batch 1 performs no context generalisation, action chaining, rollout, optimisation, persistence, advice, route ranking, or action selection. Production curiosity remains the sole production action authority.
+
+The expanded developmental architecture marker remains 79% during this contract-only batch. Sequence modelling, restart-safe persistence, live integration, and stage acceptance remain required before reassessment.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1490,6 +1509,11 @@ The following rules must remain true:
 38. Restoration must replace one complete checksum-verified native schema-6 active state; partial authority-bearing restoration is forbidden.
 39. The current operation audit must contain source audit history, and restoration cannot revive cancelled, expired, or consumed approvals.
 40. Replay/restoration acceptance must preserve production actions and expose exact receipts, failure paths, restart state, and zero automatic-operation counts.
+41. Learned consequence evidence must remain local to one exact context and action until a separately accepted transfer mechanism exists.
+42. Only unique real transitions may update the learned consequence model; replay and imagination remain non-evidentiary.
+43. Missing effect dimensions must remain unknown, and calibrated confidence cannot exceed current evidence coverage.
+44. Consequence prediction evaluation must be pure and cannot mutate model state or select actions.
+45. Batch 1 consequence predictions cannot rank, recommend, schedule, or execute production actions.
 
 ## 19. First prototype boundary
 

@@ -123,14 +123,26 @@ Completed:
 
 ### Batch 4 - learned consequence model
 
-Planned:
+Status: active. Exact-context single-step Batch 1 is implemented in the commit containing `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`.
 
-- Predict next relevant state and effects from context plus action.
-- Represent action order and combinations.
-- Report uncertainty and evidence coverage.
-- Compare predictions with real outcomes.
-- Correct overconfident and underconfident predictions.
-- Keep the model inspectable and bounded for the MVP environment.
+Completed in Batch 1:
+
+- Predict requested one-step effects from exact context plus action.
+- Predict the most frequent exact next context.
+- Report effect coverage, evidence coverage, raw confidence, calibrated confidence, and uncertainty.
+- Compare a prior prediction with a later unique real outcome.
+- Classify overconfidence, calibrated confidence, underconfidence, and unknown predictions.
+- Keep calibration bounded by actual evidence coverage.
+- Reject replay and imagination as model evidence.
+- Enforce finite record, observation, effect-dimension, and next-context bounds.
+- Preserve zero action-selection and production-action authority.
+
+Remaining:
+
+- Bounded contextual transfer.
+- Represent action order and short combinations.
+- Persist and reconstruct the model across restart.
+- Complete live integration and acceptance.
 
 ### Batch 5 - bounded imagination
 

@@ -3,11 +3,11 @@
 Repository: `D:\Github\SeedMind`
 CodexBridge repository alias: `seedmind`
 Branch: `main`
-Working tree at handover: expected clean after the closure commit
-Git relationship at handover: `main...origin/main [ahead 5]` after the closure commit
-Latest implementation commit before closure: `f0d5ba2d968eed444d2047cea62b54c129f03ec0`
-Current stage: Controlled Replay and Restoration
-Stage progress: 6 of 6 batches complete
+Working tree at handover: expected clean after the Batch 1 commit
+Git relationship at handover: `main...origin/main [ahead 6]` after the Batch 1 commit
+Latest completed stage commit: `a83f4ba081d7e64335c89e4e3a8093cbaef60b15`
+Current stage: Learned Consequence Model
+Stage progress: Batch 1 of 5 complete
 Legacy narrow-scope theory-to-integration readiness: 98%
 Expanded developmental architecture progress: 79%
 
@@ -15,15 +15,15 @@ Expanded developmental architecture progress: 79%
 
 ## 1. Continuation instruction for the next session
 
-Use this handover and `docs/SeedMind_Controlled_Replay_Restoration_Stage_Handover_2026-06-28.md` as the source of truth, then inspect the repository before editing.
+Use this handover and `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md` as the source of truth, then inspect the repository before editing.
 
 Recommended opening instruction:
 
-> Continue SeedMind from the latest controlled replay/restoration handover. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin the learned consequence-model stage. Do not push. Preserve production curiosity as the sole production action authority and keep predicted or imagined consequences separate from real evidence.
+> Continue SeedMind from the learned consequence-model stage plan. Attach CodexBridge to repository alias `seedmind`, inspect repository status, and begin Batch 2 bounded contextual transfer. Do not push. Preserve exact evidence provenance, cap transferred confidence, and keep the model outside action selection.
 
 The immediate next task is:
 
-> Plan and implement the first bounded learned consequence-model batch: predict relevant next effects from context plus action, report uncertainty and evidence coverage, and compare predictions with later real outcomes. Do not begin dreaming, route optimisation, or safe experiment promotion until the consequence model has its own falsifiable contracts and tests.
+> Plan and implement Batch 2: explicit context-similarity evidence and conservative transferred predictions. Keep exact-context evidence primary, keep transferred estimates distinguishable, and do not begin action sequences, persistence, dreaming, optimisation, or production integration.
 
 ---
 
@@ -297,29 +297,36 @@ Execution permits and execution receipts are not yet persisted.
 
 ---
 
-## 9. Current stage: Human-Approved Consolidation Execution
+## 9. Current stage: Learned Consequence Model
 
 Stage plan:
 
-- `docs/SeedMind_Human_Approved_Consolidation_Execution_Stage_Plan_2026-06-28.md`
+- `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`
 
 Status:
 
 ```text
-Batch 1 complete
-Batch 2 complete
-Batch 3 complete
-Batch 4 next
-Batch 5 pending
+Batch 1 exact-context single-step model complete
+Batch 2 bounded contextual transfer next
+Batch 3 ordered short consequence chains pending
+Batch 4 persistence and restart pending
+Batch 5 live acceptance and closure pending
 ```
 
-Target after complete stage acceptance:
+Batch 1 implementation:
+
+- `src/seedmind/research/ndnra/learned_consequence_model.py`
+- `tests/unit/test_ndnra_learned_consequence_model.py`
+
+Expanded developmental architecture marker:
 
 ```text
-NDNRA heuristic readiness = 97%
+79%
 ```
 
-Do not increase readiness during Batch 4. Reassess only during Batch 5 closure.
+Do not increase the marker during this contract-only batch. Reassess only after persistence, live invariance, and full stage acceptance.
+
+Sections below retain historical execution-stage details for traceability.
 
 ---
 

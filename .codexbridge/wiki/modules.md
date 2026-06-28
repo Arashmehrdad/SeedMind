@@ -840,6 +840,14 @@ Deterministic heat-and-fan world for the NDNRA research prototype.
 - Kind: python
 - Classes: HeatWorldState, HeatTransition, HeatFanWorld
 
+## `src/seedmind/research/ndnra/learned_consequence_model.py`
+
+Bounded single-step consequence learning from exact real context-action evidence.
+
+- Kind: python
+- Classes: CalibrationDirection, LearnedConsequenceModelConfig, ConsequenceModelObservation, ConsequencePredictionRequest, ConsequencePrediction, ConsequencePredictionEvaluation, ConsequenceModelUpdate, _EffectStatistics, ContextActionConsequenceRecord, LearnedConsequenceModel
+- Functions/symbols: _record_id, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit
+
 ## `src/seedmind/research/ndnra/models.py`
 
 Local neural state and experiment records for the NDNRA prototype.
@@ -1285,6 +1293,13 @@ Tests for live acceptance of restart-safe human-approved execution.
 
 - Kind: python
 - Functions/symbols: test_one_human_approval_produces_one_durable_application, test_approved_execution_preserves_live_seedmind_cognition, test_live_acceptance_receipt_and_persisted_state_are_exact, test_live_acceptance_exports_ascii_inspectable_evidence, test_live_acceptance_has_no_autonomous_or_sqlite_execution_path
+
+## `tests/unit/test_ndnra_learned_consequence_model.py`
+
+Tests for the bounded exact-context learned consequence model.
+
+- Kind: python
+- Functions/symbols: _context, _observation, _request, test_unknown_context_action_reports_complete_uncertainty, test_one_real_transition_creates_a_single_step_prediction, test_consistent_real_outcomes_increase_support_and_correct_underconfidence, test_contradiction_reduces_confidence_and_marks_prior_overconfidence, test_most_frequent_exact_next_context_is_predicted_deterministically, test_contexts_and_actions_never_share_model_evidence, test_missing_requested_dimension_stays_unknown_and_limits_coverage, test_zero_confidence_effect_does_not_increase_effect_support, test_unobserved_outcome_dimension_remains_unknown_during_evaluation, test_prediction_request_respects_effect_dimension_bound, test_prediction_evaluation_is_pure_and_requires_exact_real_transition, test_replay_and_imagination_cannot_update_the_model, test_exact_duplicate_is_ignored_and_identity_conflict_is_rejected, test_record_and_observation_bounds_fail_before_model_insertion, test_effect_dimension_and_next_context_bounds_are_atomic, test_stable_ordering_and_authority_contracts_are_enforced, test_snapshots_are_deterministic_ascii_and_non_authoritative, test_model_has_no_execution_persistence_timer_or_imagination_dependency
 
 ## `tests/unit/test_ndnra_local_learning.py`
 

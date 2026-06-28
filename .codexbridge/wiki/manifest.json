@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T21:08:23.310523+00:00",
+  "generated_at": "2026-06-28T21:54:47.035997+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 254,
+  "source_file_count": 257,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -177,8 +177,8 @@
     },
     {
       "path": "docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
-      "sha256": "a0b0edce48570fee77cda5247f885bce70f9755b9f3e56fe4189ed46cdc6a5a5",
-      "size_bytes": 10616
+      "sha256": "971563b866e97ae08a429fe1f569bef064aa88a7690d8b010da45abfec3c0c5f",
+      "size_bytes": 11285
     },
     {
       "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
@@ -216,9 +216,14 @@
       "size_bytes": 9495
     },
     {
+      "path": "docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md",
+      "sha256": "4ec65d6606ed38a6ca3dfa8081ab86d4d32873b1da158967d6ac2df5b492ecd4",
+      "size_bytes": 8052
+    },
+    {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "83a907b378d617ff7981a01221bce161aef4296a99a968ced74a65f37b96376d",
-      "size_bytes": 95648
+      "sha256": "e4dac2a1651bd1e15d8689e7daa664d0defc047077996d443d5f02c02018b0df",
+      "size_bytes": 96994
     },
     {
       "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
@@ -242,13 +247,13 @@
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-28.md",
-      "sha256": "c08ab425de0bf71aed72c89569f3144542f282d9fcbec3fdff3ab8cb4cf484c5",
-      "size_bytes": 38121
+      "sha256": "d62625f35f3d4eae07a46ce1148e81591fea00da77e728c8cf88e2fbbb4ad1bd",
+      "size_bytes": 38338
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "206aba386da3b257a0b5be88ab4e6c403dc6ef6904036cd4f009eada8b98a8b2",
-      "size_bytes": 67374
+      "sha256": "866138192a0841cf4d3d627c08a6c914a37aa2a5fcb8bfc3a3ec8ab2bedb09bc",
+      "size_bytes": 69325
     },
     {
       "path": "requirements/base.txt",
@@ -642,8 +647,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "c060928b70cb0cfc44d659c0876cbcafcbb9474aa123ed4a48a7dafbe43bccf0",
-      "size_bytes": 16723
+      "sha256": "4bc9f86b03c8dd109075f068a71f6ed993e264c76742a9485a20063b1796d586",
+      "size_bytes": 17377
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -829,6 +834,11 @@
       "path": "src/seedmind/research/ndnra/heat_world.py",
       "sha256": "a2fd2a0aeb7c26ddca87acc24bfd59a3601092b601b33826b949dee9d4ae1736",
       "size_bytes": 5759
+    },
+    {
+      "path": "src/seedmind/research/ndnra/learned_consequence_model.py",
+      "sha256": "17061867877ef9a20b49afb16531c8c7f5b25c8b2579a71a8d09d0b643fa60b0",
+      "size_bytes": 37355
     },
     {
       "path": "src/seedmind/research/ndnra/models.py",
@@ -1159,6 +1169,11 @@
       "path": "tests/unit/test_ndnra_human_approved_consolidation_execution_acceptance.py",
       "sha256": "c796e48d4a59e2871008fc3dc06ecb8fc710462911e87069a1d7b06127e8d741",
       "size_bytes": 4327
+    },
+    {
+      "path": "tests/unit/test_ndnra_learned_consequence_model.py",
+      "sha256": "2f730bb041040bd7e7f9f45fac375086795c3f73de42ce507f0c5b90ef4ba9a2",
+      "size_bytes": 22610
     },
     {
       "path": "tests/unit/test_ndnra_local_learning.py",

@@ -2023,6 +2023,27 @@ Stale evidence, duplicate use after restart, cancellation, expiry, interruption,
 
 Completing this stage raises the legacy narrow-scope theory-to-integration marker from 97% to 98%. The expanded developmental architecture marker is 79%, because learned consequence modelling, bounded imagination, imagined route optimisation, and safe experiment promotion remain separate future stages.
 
+## 13.11 In-progress learned consequence model stage
+
+Status recorded on 28 June 2026.
+
+Batch 1 introduces an isolated exact-context, single-action, one-step consequence model. It learns only from unique real transitions and predicts explicitly requested effects plus the most frequent exact next context.
+
+Each prediction reports:
+
+- effect coverage;
+- evidence coverage;
+- raw confidence;
+- calibrated confidence;
+- uncertainty;
+- exact supporting real event identities.
+
+Repeated consistent evidence increases bounded support. Contradiction increases dispersion and can lower confidence. A prior prediction can be compared with a later real outcome to classify overconfidence, calibrated confidence, underconfidence, or unknown coverage. Calibration remains capped by current evidence coverage and therefore cannot manufacture certainty for missing dimensions.
+
+Batch 1 is deliberately non-authoritative. It provides no context transfer, sequence generation, dreaming, optimisation, persistence, action recommendation, action ranking, advice, growth influence, or production-action control. Replay and imagined activity cannot update the model.
+
+The expanded developmental architecture marker remains 79% until contextual transfer, ordered short sequences, restart-safe persistence, live integration, and full stage acceptance are completed.
+
 ---
 
 # 14. Protected safety supervisor

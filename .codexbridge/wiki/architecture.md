@@ -125,6 +125,7 @@ graph LR
 - `src/seedmind/research/ndnra/growth_cycle.py` — classes: GrowthCycleConfig, GrowthResolution, GoalGatedGrowthCycle; functions: _validate_unit
 - `src/seedmind/research/ndnra/growth_experiment.py` — classes: StructuralGrowthExperimentResult; functions: structural_cooling_need, build_capacity_limited_graph, run_ndnra_structural_growth_experiment, export_structural_growth_evidence, _duplicate_growth_is_blocked, _write_ascii_json
 - `src/seedmind/research/ndnra/heat_world.py` — classes: HeatWorldState, HeatTransition, HeatFanWorld
+- `src/seedmind/research/ndnra/learned_consequence_model.py` — classes: CalibrationDirection, LearnedConsequenceModelConfig, ConsequenceModelObservation, ConsequencePredictionRequest, ConsequencePrediction, ConsequencePredictionEvaluation, ConsequenceModelUpdate, _EffectStatistics; functions: _record_id, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit
 - `src/seedmind/research/ndnra/models.py` — classes: HeatAction, HeatContext, NeuronKind, LocalNeuron, LocalSynapse, NeedPulse, RecallResult, ModulationSummary; functions: _validate_unit_interval, _validate_signed_unit
 - `src/seedmind/research/ndnra/multi_growth_experiment.py` — classes: MultiGrowthExperimentResult; functions: run_multi_growth_experiment, evaluate_unresolved_budget_exhaustion, _build_graph, _complex_need, _satisfaction, _duplicate_membership_is_blocked
 - `src/seedmind/research/ndnra/multieffect_experiment.py` — classes: MultieffectExperimentResult; functions: cooling_need, cleanliness_need, build_multieffect_graph, build_intended_effect_only_baseline, run_ndnra_multieffect_experiment, export_multieffect_evidence, _candidate_row, _write_ascii_json
@@ -132,4 +133,3 @@ graph LR
 - `src/seedmind/research/ndnra/persistence.py` — classes: BrainLoadStatus, NDNRAGrowthState, BrainSaveResult, BrainLoadResult, NDNRABrainStore; functions: _interrupt, _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int
 - `src/seedmind/safety/__init__.py` — SeedMind safety package.
 - `src/seedmind/self_model/__init__.py` — Online action-effect evidence and initial SeedMind self-model.
-- `src/seedmind/self_model/action_effects.py` — classes: SelfModelConfig, ActionEffectEstimate, BodySensorEstimate, SelfModelSnapshot, _ActionAccumulator, SelfModelRegistry; functions: export_self_model_json, export_action_effects_csv
