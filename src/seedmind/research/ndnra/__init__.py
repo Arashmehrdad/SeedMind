@@ -147,6 +147,14 @@ from seedmind.research.ndnra.contextual_memory import (
     MasteryProfile,
     RouteSupport,
 )
+from seedmind.research.ndnra.controlled_replay_restoration_approval import (
+    ControlledReplayRestorationApprovalPolicy,
+    ControlledReplayRestorationApprovalRequest,
+    ControlledReplayRestorationEvidence,
+    ControlledReplayRestorationOperation,
+    ControlledReplayRestorationPermit,
+    ControlledReplayRestorationTarget,
+)
 from seedmind.research.ndnra.effects import (
     EffectEstimate,
     EffectNeed,
@@ -315,6 +323,12 @@ __all__ = [
     "ContextualMasteryExperimentEvidence",
     "ContextualMasteryExperimentResult",
     "ContextualRecordCode",
+    "ControlledReplayRestorationApprovalPolicy",
+    "ControlledReplayRestorationApprovalRequest",
+    "ControlledReplayRestorationEvidence",
+    "ControlledReplayRestorationOperation",
+    "ControlledReplayRestorationPermit",
+    "ControlledReplayRestorationTarget",
     "EffectEstimate",
     "EffectNeed",
     "EffectObservation",
