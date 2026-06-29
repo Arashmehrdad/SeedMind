@@ -301,6 +301,7 @@ from seedmind.research.ndnra.growth import (
     EvidenceDrivenGrowthController,
     GrowthAttemptRecord,
     GrowthOutcome,
+    LocalSaturationReport,
     StructuralGrowthConfig,
     grow_random_specialist,
 )
@@ -634,6 +635,7 @@ __all__ = [  # noqa: RUF022
     "LocalEffectLink",
     "LocalNeuralGraph",
     "LocalNeuralGraphConfig",
+    "LocalSaturationReport",
     "LocalNeuron",
     "LocalSynapse",
     "MasteryProfile",

@@ -167,7 +167,6 @@ def run_ndnra_structural_growth_experiment() -> tuple[
                 actual_effect=actual_temperature,
                 curiosity=0.95,
                 ambition_relevance=1.00,
-                capacity_saturation=1.00,
             )
         )
 

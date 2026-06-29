@@ -48,10 +48,10 @@ def test_growth_does_not_trigger_from_one_failure() -> None:
         actual_effect=-0.90,
         curiosity=0.95,
         ambition_relevance=1.0,
-        capacity_saturation=1.0,
     )
 
     assert not attempt.growth_ready
+    assert attempt.local_saturation.saturation == 0.0
     assert not controller.growth_ready
     with pytest.raises(RuntimeError, match="evidence gate"):
         controller.grow_targeted_specialist(
@@ -69,6 +69,9 @@ def test_targeted_growth_uses_high_eligibility_members() -> None:
         "assembly:apply_wet_cloth",
         "assembly:activate_fan",
     )
+    assert attempts[0].local_saturation.saturation == 0.0
+    assert attempts[1].local_saturation.locally_saturated
+    assert attempts[2].local_saturation.locally_saturated
     assert all(
         dict(attempt.eligibility_traces).get("assembly:inspect_wall", 0.0) == 0.0
         for attempt in attempts

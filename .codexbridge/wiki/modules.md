@@ -894,7 +894,7 @@ Training, evaluation, and evidence for the NDNRA heat-fan prototype.
 Evidence-driven structural growth for the isolated NDNRA prototype.
 
 - Kind: python
-- Classes: StructuralGrowthConfig, GrowthAttemptRecord, GrowthOutcome, EvidenceDrivenGrowthController
+- Classes: StructuralGrowthConfig, LocalSaturationReport, GrowthAttemptRecord, GrowthOutcome, EvidenceDrivenGrowthController
 - Functions/symbols: grow_random_specialist, _validate_unit, _validate_signed
 
 ## `src/seedmind/research/ndnra/growth_cycle.py`
@@ -1518,6 +1518,13 @@ Tests for local eligibility traces and delayed modulatory credit.
 
 - Kind: python
 - Functions/symbols: test_delayed_cooling_updates_only_eligible_local_structures, test_earlier_steps_receive_less_credit_from_trace_decay, test_prototype_has_no_torch_or_sqlite_cognitive_dependency
+
+## `tests/unit/test_ndnra_local_saturation.py`
+
+Tests for graph-locally derived structural-growth saturation.
+
+- Kind: python
+- Functions/symbols: test_first_unresolved_event_has_zero_local_saturation_and_no_pressure, test_repeated_identical_local_interaction_builds_deterministic_saturation, test_low_current_saturation_blocks_growth_even_with_preloaded_pressure, test_zero_residual_high_local_saturation_does_not_increase_pressure, test_duplicate_membership_and_full_capacity_force_zero_saturation, test_local_saturation_report_is_sorted_bounded_and_self_validating, test_local_saturation_path_has_no_forbidden_runtime_dependencies
 
 ## `tests/unit/test_ndnra_multieffect.py`
 

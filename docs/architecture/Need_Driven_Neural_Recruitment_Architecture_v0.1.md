@@ -707,6 +707,21 @@ no existing assembly reaching sufficient activation
 
 Saturation should create growth pressure, not immediate uncontrolled growth.
 
+For the v0.1 specialist-interaction prototype, representational saturation must be derived
+graph-locally before the current interaction mutates eligibility. The report must use only:
+
+- the exact active assembly identities, deterministically ordered;
+- the active members' eligibility values before the current event;
+- current graph assembly and specialist counts;
+- configured maximum specialist capacity;
+- exact duplicate specialist membership;
+- and remaining specialist slots.
+
+One event must not self-certify saturation. Local saturation therefore requires at least two
+unique existing active assemblies, no exact duplicate specialist membership, remaining specialist
+capacity, and every active member already meeting the configured minimum eligibility threshold.
+When those conditions fail, saturation is exactly `0.0`.
+
 ## 17. Relationship to existing SeedMind systems
 
 ### 17.1 Predictive core
@@ -1775,6 +1790,9 @@ The following rules must remain true:
 84. Existing short bounded interference evidence does not satisfy final closure; a longer deterministic mixed-task interference and adaptability experiment is required.
 85. Batch 1 normalized competing recruitment may use only graph-local incoming contributions, sum only positive incoming support, divide by positive contributor count with a safe zero floor when none contribute, and expose separate deterministic immutable evidence without changing persisted recall, standalone acceptance, or checkpoint schemas.
 86. Batch 1 normalization evidence is inspectable only; it cannot introduce SQLite lookup, worker, timer, scheduler, recommendation, execution, integration, or production authority.
+87. Batch 2 local saturation must be derived only from stable sorted current graph-local membership, eligibility-before traces, canonical duplicate specialist membership, and remaining specialist slots before the current event mutates eligibility; old accumulated pressure cannot bypass a low-saturation current interaction.
+88. Local saturation is true only when specialist capacity remains, no canonical duplicate membership exists, and every active member's prior eligibility meets the configured threshold; saturation equals the minimum prior eligibility in that case and zero otherwise.
+89. Local saturation reports remain inspectable recomputed evidence only; they are not persisted and cannot grant recommendation, scheduling, execution, integration, promotion, or production action authority.
 
 ## 19. First prototype boundary
 

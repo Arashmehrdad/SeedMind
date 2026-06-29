@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Normalized Recruitment and Local Saturation Batch 1
+- Latest completed milestone: Normalized Recruitment and Local Saturation Batch 2
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Bounded Imagination at Batch 8
-- Current stage: Normalized Recruitment and Local Saturation
-- Current status: Batch 1 complete; Batch 2 graph-locally derived saturation next
+- Last closed stage: Normalized Recruitment and Local Saturation at Batch 2
+- Current stage: Long-Horizon Mixed-Task Interference and Adaptability
+- Current status: planned; implementation not yet started
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -61,13 +61,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Normalized Recruitment Batch 1:
+After Normalized Recruitment Batch 2:
 
 ```text
-ruff format --check .: 232 files already formatted
+ruff format --check .: 233 files already formatted
 ruff check .: passed
-mypy: no issues in 232 source files
-pytest -q: 935 passed
+mypy: no issues in 233 source files
+pytest -q: 942 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -89,6 +89,7 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Retain_Or_Descope_Audit_2026-06-29.md`
 - `docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md`
 - `docs/architecture/decisions/ADR-2026-06-29-normalized-competing-recruitment.md`
+- `docs/architecture/decisions/ADR-2026-06-29-locally-derived-representational-saturation.md`
 
 ## Next planning target
 
@@ -96,9 +97,7 @@ Finish and prove NDNRA as a standalone research architecture before comparing it
 
 The gap audit is complete. It confirms that the Section 20 prototype criteria are evidenced in isolation, while complete NDNRA proof remains fragmented across experiments and checkpoint boundaries.
 
-The next stage is `Standalone NDNRA Acceptance and Restart Proof`. Batch 1 is complete as a deterministic in-memory acceptance aggregator over the existing heat-fan recall, multi-effect composition, and structural-growth experiment gates. It preserves complete component evidence, derives one canonical ASCII snapshot and SHA-256 identity, records explicit zero-authority and zero-delta invariants, and does not add restart persistence, execution, recommendation, scheduling, promotion, or live integration authority.
-
-Batch 2 is complete as a separate standalone acceptance persistence store and restart-proof evidence boundary. It keeps the main brain schema unchanged, persists exactly one validated Batch 1 `StandaloneAcceptanceResult` as versioned canonical ASCII JSON with SHA-256 payload checksum and atomic temp-file replacement, restores only exact validated nested data, reports explicit loaded, missing-fallback, corrupt-fallback, and incompatible-fallback statuses, proves exact reload and deterministic rerun equivalence through a separate zero-authority result, and never synthesizes passing or partial evidence from missing or damaged storage.
+`Standalone NDNRA Acceptance and Restart Proof` is complete through Batch 2. Its deterministic aggregate, isolated checkpoint store, exact reload, deterministic rerun, and safe non-proof fallbacks remain accepted without adding execution, recommendation, scheduling, promotion, or live integration authority.
 
 The retain-or-descope audit is complete.
 
@@ -118,14 +117,17 @@ Deferred post-v0.1 research:
 - semantic abstraction above grounded context signatures;
 - coordination of multiple simultaneous needs.
 
-The next stage is `Normalized Recruitment and Local Saturation`:
+`Normalized Recruitment and Local Saturation` is complete:
 
-1. Batch 1 — normalized competing recruitment while preserving deterministic heat-fan recall and dormancy behaviour. Complete: local incoming support now uses deterministic positive-only contributor averaging with separate immutable evidence and no persistence-schema or standalone-payload change.
-2. Batch 2 — graph-locally derived saturation and saturation-gated growth pressure.
-3. Then complete long-horizon mixed-task interference and adaptability.
-4. Run the final standalone NDNRA closure audit.
-5. Compare the completed NDNRA architecture with the original SeedMind plan.
-6. Decide explicitly whether, where, and how integration should occur.
+1. Batch 1 normalized competing recruitment preserves deterministic heat-fan recall and dormancy behaviour using positive-only contributor averaging with separate immutable evidence.
+2. Batch 2 derives stable sorted local saturation from eligibility-before traces, canonical duplicate membership, and remaining specialist capacity; one event cannot self-certify saturation and stale pressure cannot bypass a weak current interaction.
+
+Required sequence:
+
+1. Complete Long-Horizon Mixed-Task Interference and Adaptability.
+2. Run the final standalone NDNRA closure audit.
+3. Compare the completed NDNRA architecture with the original SeedMind plan.
+4. Decide explicitly whether, where, and how integration should occur.
 
 Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless a later NDNRA-only audit independently requires an equivalent capability.
 

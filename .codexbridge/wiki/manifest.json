@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T19:51:06.384412+00:00",
+  "generated_at": "2026-06-29T20:39:11.474893+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 315,
+  "source_file_count": 317,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "5a70c7e1c808a25dd18359bb1b5f2b07f0b187bd81e6e3b57821189bfab70af5",
-      "size_bytes": 7975
+      "sha256": "4753e949c21b0ff3aa7f96bcb4cd0dc32edd0fffc1072c28d77c7bf3cd70504e",
+      "size_bytes": 7287
     },
     {
       "path": "pyproject.toml",
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "bb404dba1fd4523f6aaf576ca6aad9f576bec293a2f5e78783b7fd6af7abaf65",
-      "size_bytes": 90124
+      "sha256": "4a32f4f82ae53463046563be3991a19e946663768811cbe17184964e71d67b5f",
+      "size_bytes": 91754
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -219,6 +219,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
       "sha256": "774fd17084c96418f877e36eb9dff8d28e02e1d4a525fbb2d3611c0bd6bc4a8e",
       "size_bytes": 2000
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-locally-derived-representational-saturation.md",
+      "sha256": "a2db3e0dc8f8d07e574caacd7645aecb3ca0368ebcea1daf5392d3c3bdedd2ee",
+      "size_bytes": 2855
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md",
@@ -782,8 +787,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "abbb00973c47414adec289086cff43dc09c8421478b9cca5ad936b7a90033fcb",
-      "size_bytes": 25745
+      "sha256": "e15f81480b08430a979527c625d2c5bbe693026f0a27b05528891c9ad7aa104e",
+      "size_bytes": 25801
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -997,8 +1002,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/growth.py",
-      "sha256": "5608480cea3e7ac9b12df9f07ec7bfb5bdf69255f0e0939d7275077f0e7ff612",
-      "size_bytes": 9400
+      "sha256": "e8266d316e9d9cae7836025816fdb1b6f4ced49351dbf94de18543c359b1ff99",
+      "size_bytes": 16562
     },
     {
       "path": "src/seedmind/research/ndnra/growth_cycle.py",
@@ -1007,8 +1012,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/growth_experiment.py",
-      "sha256": "0a1a9dcd0b9170d56b507585ede465f60295ac8ca309dd8ce10c50d1e107fb34",
-      "size_bytes": 12985
+      "sha256": "38330f5307fe9e0bca639421de1023bfcecd37e5ad629b420942a52a691c3b6a",
+      "size_bytes": 12943
     },
     {
       "path": "src/seedmind/research/ndnra/heat_world.py",
@@ -1032,8 +1037,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/multi_growth_experiment.py",
-      "sha256": "dff6a9591a28023b78ae816dc95115b62e1dabb4e0d07bff69f3fd9e6e6d77a6",
-      "size_bytes": 8741
+      "sha256": "7f06572feed9bea53ce6e3be8d76629d13ccb7d9617c8c5824699c35300d85e6",
+      "size_bytes": 8667
     },
     {
       "path": "src/seedmind/research/ndnra/multieffect_experiment.py",
@@ -1451,6 +1456,11 @@
       "size_bytes": 3012
     },
     {
+      "path": "tests/unit/test_ndnra_local_saturation.py",
+      "sha256": "0d539410f7c5feb4d9b6a0c140ae444165894417ab1a4adf66751fa68465292d",
+      "size_bytes": 10185
+    },
+    {
       "path": "tests/unit/test_ndnra_multieffect.py",
       "sha256": "b4dbf1b1bf24105b4abc465093b2da83f4f8fe349a37b2e329d8004b16f7f98b",
       "size_bytes": 4478
@@ -1502,8 +1512,8 @@
     },
     {
       "path": "tests/unit/test_ndnra_structural_growth.py",
-      "sha256": "de05b566237f97be96d231640c90783bbdca7043b4ce19bd9a17b9991cd5dab9",
-      "size_bytes": 4481
+      "sha256": "d1f19c22d5446829a6de927e41aa0433cd915ee5ffe7cb6662f17e927e1a269c",
+      "size_bytes": 4676
     },
     {
       "path": "tests/unit/test_ndnra_unified_signals.py",

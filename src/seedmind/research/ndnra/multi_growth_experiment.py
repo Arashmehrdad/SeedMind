@@ -85,10 +85,9 @@ def run_multi_growth_experiment() -> MultiGrowthExperimentResult:
         controller.observe_unresolved_interaction(
             active_assembly_ids=(_A, _B),
             predicted_effect=predicted_ab,
-            actual_effect=0.45,
+            actual_effect=0.50,
             curiosity=1.0,
             ambition_relevance=1.0,
-            capacity_saturation=1.0,
         )
     controller.grow_targeted_specialist(
         specialist_id="specialist:surface_force",
@@ -110,7 +109,6 @@ def run_multi_growth_experiment() -> MultiGrowthExperimentResult:
             actual_effect=0.70,
             curiosity=1.0,
             ambition_relevance=1.0,
-            capacity_saturation=1.0,
         )
     pressure_before_final = controller.pressure.value
     controller.grow_targeted_specialist(
