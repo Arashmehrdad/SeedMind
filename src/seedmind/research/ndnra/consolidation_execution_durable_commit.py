@@ -148,6 +148,7 @@ class ConsolidationExecutionDurableCommitPolicy:
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=new_execution,
                 replay_restoration_checkpoint=replay_restoration,
+                learned_consequence_checkpoint=baseline.learned_consequence_checkpoint,
                 interruption_hook=persistence_interruption_hook,
             )
         except Exception as error:
@@ -160,6 +161,7 @@ class ConsolidationExecutionDurableCommitPolicy:
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=new_execution,
                 replay_restoration_checkpoint=replay_restoration,
+                learned_consequence_checkpoint=baseline.learned_consequence_checkpoint,
             ):
                 return ConsolidationExecutionDurableCommitResult(
                     commit_result=commit,
@@ -218,6 +220,7 @@ def _matches_loaded_result(
         and loaded.proposal_lifecycle_checkpoint == expected.proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == expected.execution_checkpoint
         and loaded.replay_restoration_checkpoint == expected.replay_restoration_checkpoint
+        and loaded.learned_consequence_checkpoint == expected.learned_consequence_checkpoint
     )
 
 
@@ -230,6 +233,7 @@ def _matches_expected(
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint,
     execution_checkpoint: NDNRAExecutionCheckpoint,
     replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint,
+    learned_consequence_checkpoint: object,
 ) -> bool:
     return bool(
         loaded.status is BrainLoadStatus.LOADED
@@ -241,6 +245,7 @@ def _matches_expected(
         and loaded.proposal_lifecycle_checkpoint == proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == execution_checkpoint
         and loaded.replay_restoration_checkpoint == replay_restoration_checkpoint
+        and loaded.learned_consequence_checkpoint == learned_consequence_checkpoint
     )
 
 

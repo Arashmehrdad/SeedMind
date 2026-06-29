@@ -472,7 +472,7 @@ def run_controlled_replay_restoration_acceptance(
         for store in (control_store, approved_store, source_store, current_store)
     )
     pass_gate = bool(
-        BRAIN_SCHEMA_VERSION == 6
+        BRAIN_SCHEMA_VERSION == 7
         and replay_consumed == 1
         and restoration_consumed == 1
         and len(final_checkpoint.replay_receipts) == 1

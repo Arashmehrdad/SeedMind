@@ -31,10 +31,13 @@ from seedmind.research.ndnra.controlled_replay_restoration_persistence import (
     NDNRAReplayRestorationCheckpoint,
 )
 from seedmind.research.ndnra.effects import LocalEffectLink, SparseEffectMemory
+from seedmind.research.ndnra.learned_consequence_persistence import (
+    NDNRALearnedConsequenceCheckpoint,
+)
 
 BRAIN_SCHEMA = "seedmind.ndnra.brain"
-BRAIN_SCHEMA_VERSION = 6
-_SUPPORTED_SCHEMA_VERSIONS = frozenset({1, 2, 3, 4, 5, BRAIN_SCHEMA_VERSION})
+BRAIN_SCHEMA_VERSION = 7
+_SUPPORTED_SCHEMA_VERSIONS = frozenset(range(1, BRAIN_SCHEMA_VERSION + 1))
 
 __all__ = [
     "BRAIN_SCHEMA",
@@ -47,6 +50,7 @@ __all__ = [
     "NDNRAConsolidationCheckpoint",
     "NDNRAExecutionCheckpoint",
     "NDNRAGrowthState",
+    "NDNRALearnedConsequenceCheckpoint",
     "NDNRAProposalLifecycleCheckpoint",
     "NDNRAReplayRestorationCheckpoint",
 ]
@@ -170,6 +174,7 @@ class BrainLoadResult:
     proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint
     execution_checkpoint: NDNRAExecutionCheckpoint
     replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint
+    learned_consequence_checkpoint: NDNRALearnedConsequenceCheckpoint
     checksum_verified: bool
     used_fallback: bool
     checksum: str | None = None
@@ -200,6 +205,7 @@ class NDNRABrainStore:
         proposal_lifecycle_checkpoint: NDNRAProposalLifecycleCheckpoint | None = None,
         execution_checkpoint: NDNRAExecutionCheckpoint | None = None,
         replay_restoration_checkpoint: NDNRAReplayRestorationCheckpoint | None = None,
+        learned_consequence_checkpoint: NDNRALearnedConsequenceCheckpoint | None = None,
         interruption_hook: Callable[[str], None] | None = None,
     ) -> BrainSaveResult:
         """Atomically save a checksum-protected reconstruction snapshot."""
@@ -224,6 +230,11 @@ class NDNRABrainStore:
             if replay_restoration_checkpoint is None
             else replay_restoration_checkpoint
         )
+        learned_consequence = (
+            NDNRALearnedConsequenceCheckpoint.empty()
+            if learned_consequence_checkpoint is None
+            else learned_consequence_checkpoint
+        )
         execution.validate_consolidation_checkpoint(consolidation)
         state_payload: dict[str, object] = {
             "graph": graph.snapshot(),
@@ -232,6 +243,7 @@ class NDNRABrainStore:
             "proposal_lifecycle_checkpoint": proposal_lifecycle.snapshot(),
             "execution_checkpoint": execution.snapshot(),
             "replay_restoration_active_state": (replay_restoration.active_state_snapshot()),
+            "learned_consequence_checkpoint": learned_consequence.snapshot(),
         }
         state_checksum = _checksum(state_payload)
         payload: dict[str, object] = {
@@ -241,6 +253,7 @@ class NDNRABrainStore:
             "proposal_lifecycle_checkpoint": state_payload["proposal_lifecycle_checkpoint"],
             "execution_checkpoint": state_payload["execution_checkpoint"],
             "replay_restoration_checkpoint": replay_restoration.snapshot(),
+            "learned_consequence_checkpoint": state_payload["learned_consequence_checkpoint"],
         }
         body: dict[str, object] = {
             "schema": BRAIN_SCHEMA,
@@ -344,20 +357,30 @@ class NDNRABrainStore:
                     payload.get("replay_restoration_checkpoint")
                 )
             )
+            learned_consequence_checkpoint = (
+                NDNRALearnedConsequenceCheckpoint.empty()
+                if version < 7
+                else NDNRALearnedConsequenceCheckpoint.from_snapshot(
+                    payload.get("learned_consequence_checkpoint")
+                )
+            )
             execution_checkpoint.validate_consolidation_checkpoint(consolidation_checkpoint)
             if stored_state_checksum is not None:
-                restored_state_checksum = _checksum(
-                    {
-                        "graph": graph.snapshot(),
-                        "growth_state": growth_state.snapshot(),
-                        "consolidation_checkpoint": consolidation_checkpoint.snapshot(),
-                        "proposal_lifecycle_checkpoint": (proposal_lifecycle_checkpoint.snapshot()),
-                        "execution_checkpoint": execution_checkpoint.snapshot(),
-                        "replay_restoration_active_state": (
-                            replay_restoration_checkpoint.active_state_snapshot()
-                        ),
-                    }
-                )
+                restored_state_payload: dict[str, object] = {
+                    "graph": graph.snapshot(),
+                    "growth_state": growth_state.snapshot(),
+                    "consolidation_checkpoint": consolidation_checkpoint.snapshot(),
+                    "proposal_lifecycle_checkpoint": (proposal_lifecycle_checkpoint.snapshot()),
+                    "execution_checkpoint": execution_checkpoint.snapshot(),
+                    "replay_restoration_active_state": (
+                        replay_restoration_checkpoint.active_state_snapshot()
+                    ),
+                }
+                if version >= 7:
+                    restored_state_payload["learned_consequence_checkpoint"] = (
+                        learned_consequence_checkpoint.snapshot()
+                    )
+                restored_state_checksum = _checksum(restored_state_payload)
                 if restored_state_checksum != stored_state_checksum:
                     raise ValueError("brain active-state checksum does not match")
             return BrainLoadResult(
@@ -368,6 +391,7 @@ class NDNRABrainStore:
                 proposal_lifecycle_checkpoint=proposal_lifecycle_checkpoint,
                 execution_checkpoint=execution_checkpoint,
                 replay_restoration_checkpoint=replay_restoration_checkpoint,
+                learned_consequence_checkpoint=learned_consequence_checkpoint,
                 checksum_verified=True,
                 used_fallback=False,
                 checksum=stored_checksum,
@@ -388,6 +412,7 @@ class NDNRABrainStore:
             proposal_lifecycle_checkpoint=NDNRAProposalLifecycleCheckpoint.empty(),
             execution_checkpoint=NDNRAExecutionCheckpoint.empty(),
             replay_restoration_checkpoint=NDNRAReplayRestorationCheckpoint.empty(),
+            learned_consequence_checkpoint=NDNRALearnedConsequenceCheckpoint.empty(),
             checksum_verified=False,
             used_fallback=True,
             checksum=None,

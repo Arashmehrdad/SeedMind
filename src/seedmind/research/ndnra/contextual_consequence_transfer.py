@@ -90,6 +90,31 @@ class ContextualTransferConfig:
             "neutral_effect_tolerance": self.neutral_effect_tolerance,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ContextualTransferConfig:
+        """Restore validated transfer limits from inspectable state."""
+        values = _require_mapping("contextual transfer config", snapshot)
+        config = cls(
+            minimum_context_similarity=_require_float(values, "minimum_context_similarity"),
+            transfer_confidence_scale=_require_float(values, "transfer_confidence_scale"),
+            maximum_transferred_confidence=_require_float(
+                values,
+                "maximum_transferred_confidence",
+            ),
+            minimum_source_confidence=_require_float(values, "minimum_source_confidence"),
+            maximum_transfer_sources=_require_int(values, "maximum_transfer_sources"),
+            maximum_contexts_considered=_require_int(values, "maximum_contexts_considered"),
+            context_bin_distance_scale=_require_float(values, "context_bin_distance_scale"),
+            sensor_weight=_require_float(values, "sensor_weight"),
+            action_weight=_require_float(values, "action_weight"),
+            human_weight=_require_float(values, "human_weight"),
+            resource_weight=_require_float(values, "resource_weight"),
+            neutral_effect_tolerance=_require_float(values, "neutral_effect_tolerance"),
+        )
+        if config.snapshot() != dict(values):
+            raise ValueError("contextual transfer config snapshot is not canonical")
+        return config
+
 
 @dataclass(frozen=True, slots=True)
 class ContextSimilarityEvidence:
@@ -888,6 +913,26 @@ def _validate_unit(name: str, value: float) -> None:
 def _validate_signed_unit(name: str, value: float) -> None:
     if not isfinite(value) or not -1.0 <= value <= 1.0:
         raise ValueError(f"{name} must be between negative one and one")
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    return value
+
+
+def _require_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise ValueError(f"{key} must be numeric")
+    return float(value)
 
 
 __all__ = [

@@ -1,4 +1,4 @@
-"""Tests for schema-6 durable controlled replay persistence."""
+"""Tests for current-schema durable controlled replay persistence."""
 
 from __future__ import annotations
 
@@ -28,15 +28,17 @@ def _canonical_checksum(payload: object) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def test_schema_6_round_trips_issued_permit_and_activity_history(tmp_path: Path) -> None:
+def test_current_schema_round_trips_issued_permit_and_activity_history(
+    tmp_path: Path,
+) -> None:
     scenario = build_replay_scenario(tmp_path)
     loaded = scenario.store.load()
 
-    assert BRAIN_SCHEMA_VERSION == 6
+    assert BRAIN_SCHEMA_VERSION == 7
     assert loaded.status is BrainLoadStatus.LOADED
     assert loaded.checksum_verified
     assert not loaded.used_fallback
-    assert loaded.schema_version == 6
+    assert loaded.schema_version == 7
     assert loaded.migrated_from_version is None
     assert loaded.replay_restoration_checkpoint == scenario.issued_checkpoint
     assert loaded.replay_restoration_checkpoint.activity_ledger.real_activity_count == 1

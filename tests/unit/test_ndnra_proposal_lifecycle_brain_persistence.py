@@ -215,9 +215,9 @@ def test_schema_v4_round_trips_lifecycle_with_other_brain_state(
     )
     loaded = store.load()
 
-    assert BRAIN_SCHEMA_VERSION == 6
+    assert BRAIN_SCHEMA_VERSION == 7
     assert saved.schema == BRAIN_SCHEMA
-    assert saved.schema_version == 6
+    assert saved.schema_version == 7
     assert not saved.temporary_file_remaining
     assert loaded.status is BrainLoadStatus.LOADED
     assert loaded.checksum_verified

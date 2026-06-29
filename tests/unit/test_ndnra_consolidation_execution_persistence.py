@@ -61,7 +61,7 @@ def test_schema_v5_round_trips_consumed_permit_receipt_and_application(
     durable, state = execute_loaded(store)
     restarted = store.load()
 
-    assert BRAIN_SCHEMA_VERSION == 6
+    assert BRAIN_SCHEMA_VERSION == 7
     assert durable.save_result is not None
     assert not durable.save_result.temporary_file_remaining
     assert restarted.status is BrainLoadStatus.LOADED

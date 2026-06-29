@@ -50,6 +50,25 @@ class ObservedConsequenceChainConfig:
             "neutral_effect_tolerance": self.neutral_effect_tolerance,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ObservedConsequenceChainConfig:
+        """Restore validated chain limits from inspectable state."""
+        values = _require_mapping("observed consequence chain config", snapshot)
+        config = cls(
+            evidence_target=_require_int(values, "evidence_target"),
+            maximum_chain_depth=_require_int(values, "maximum_chain_depth"),
+            maximum_chains=_require_int(values, "maximum_chains"),
+            maximum_effect_dimensions=_require_int(values, "maximum_effect_dimensions"),
+            maximum_candidates_per_request=_require_int(
+                values,
+                "maximum_candidates_per_request",
+            ),
+            neutral_effect_tolerance=_require_float(values, "neutral_effect_tolerance"),
+        )
+        if config.snapshot() != dict(values):
+            raise ValueError("observed consequence chain config snapshot is not canonical")
+        return config
+
 
 @dataclass(frozen=True, slots=True)
 class ObservedConsequenceChainStep:
@@ -104,6 +123,32 @@ class ObservedConsequenceChainStep:
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ObservedConsequenceChainStep:
+        """Restore one exact real chain step."""
+        values = _require_mapping("observed consequence chain step", snapshot)
+        step = cls(
+            event_id=_require_string(values, "event_id"),
+            origin=ExperienceOrigin(_require_string(values, "origin")),
+            context=ContextSignature.from_snapshot(values.get("context")),
+            action_code=_require_string(values, "action_code"),
+            next_context=ContextSignature.from_snapshot(values.get("next_context")),
+            observed_effects=tuple(
+                _effect_from_snapshot(item) for item in _require_list(values, "observed_effects")
+            ),
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        if step.snapshot() != dict(values):
+            raise ValueError("observed consequence chain step snapshot is not canonical")
+        return step
 
 
 @dataclass(frozen=True, slots=True)
@@ -177,6 +222,30 @@ class ObservedConsequenceChain:
             **self._identity_payload(),
             "steps": [step.snapshot() for step in self.steps],
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ObservedConsequenceChain:
+        """Restore one complete exact observed ordered chain."""
+        values = _require_mapping("observed consequence chain", snapshot)
+        chain = cls(
+            steps=tuple(
+                ObservedConsequenceChainStep.from_snapshot(item)
+                for item in _require_list(values, "steps")
+            ),
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        if _require_string(values, "chain_id") != chain.chain_id:
+            raise ValueError("observed consequence chain identity is inconsistent")
+        if chain.snapshot() != dict(values):
+            raise ValueError("observed consequence chain snapshot is not canonical")
+        return chain
 
     def _identity_payload(self) -> dict[str, object]:
         return {
@@ -561,6 +630,34 @@ class ObservedConsequenceChainModel:
             "has_production_action_authority": self.has_production_action_authority,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ObservedConsequenceChainModel:
+        """Restore exact observed chain state and derived indexes."""
+        values = _require_mapping("observed consequence chain model", snapshot)
+        config = ObservedConsequenceChainConfig.from_snapshot(values.get("config"))
+        model = cls(
+            config=config,
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        for raw_chain in _require_list(values, "chains"):
+            model.observe(ObservedConsequenceChain.from_snapshot(raw_chain))
+        if _require_int(values, "chain_count") != model.chain_count:
+            raise ValueError("observed chain count does not match contents")
+        if _require_int(values, "record_count") != model.record_count:
+            raise ValueError("observed chain record count does not match contents")
+        if _require_string_list(values, "source_event_ids") != sorted(model._steps_by_event_id):
+            raise ValueError("observed chain source event identities do not match contents")
+        if model.snapshot() != dict(values):
+            raise ValueError("observed consequence chain model snapshot is not canonical")
+        return model
+
     def _validate_chain(self, chain: ObservedConsequenceChain) -> None:
         if len(chain.steps) > self.config.maximum_chain_depth:
             raise ValueError("observed consequence chain depth bound exceeded")
@@ -848,6 +945,18 @@ def _effect_snapshot(effect: EffectObservation) -> dict[str, object]:
     }
 
 
+def _effect_from_snapshot(snapshot: object) -> EffectObservation:
+    values = _require_mapping("effect observation", snapshot)
+    effect = EffectObservation(
+        effect_code=_require_string(values, "effect_code"),
+        value=_require_float(values, "value"),
+        confidence=_require_float(values, "confidence"),
+    )
+    if _effect_snapshot(effect) != dict(values):
+        raise ValueError("effect observation snapshot is not canonical")
+    return effect
+
+
 def _validate_effects(
     name: str,
     effects: tuple[EffectObservation, ...],
@@ -888,6 +997,56 @@ def _validate_code(name: str, value: str) -> None:
 def _validate_unit(name: str, value: float) -> None:
     if not isfinite(value) or not 0.0 <= value <= 1.0:
         raise ValueError(f"{name} must be between zero and one")
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_list(values: Mapping[str, object], key: str) -> list[object]:
+    value = values.get(key)
+    if not isinstance(value, list):
+        raise ValueError(f"{key} must be a list")
+    return value
+
+
+def _require_string(values: Mapping[str, object], key: str) -> str:
+    value = values.get(key)
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string")
+    return value
+
+
+def _require_bool(values: Mapping[str, object], key: str) -> bool:
+    value = values.get(key)
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be a boolean")
+    return value
+
+
+def _require_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    return value
+
+
+def _require_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise ValueError(f"{key} must be numeric")
+    return float(value)
+
+
+def _require_string_list(values: Mapping[str, object], key: str) -> list[str]:
+    result: list[str] = []
+    for item in _require_list(values, key):
+        if not isinstance(item, str):
+            raise ValueError(f"{key} must contain strings")
+        result.append(item)
+    return result
 
 
 __all__ = [

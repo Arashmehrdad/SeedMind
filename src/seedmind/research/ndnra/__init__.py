@@ -262,6 +262,11 @@ from seedmind.research.ndnra.learned_consequence_model import (
     LearnedConsequenceModel,
     LearnedConsequenceModelConfig,
 )
+from seedmind.research.ndnra.learned_consequence_persistence import (
+    LEARNED_CONSEQUENCE_SCHEMA,
+    LEARNED_CONSEQUENCE_SCHEMA_VERSION,
+    NDNRALearnedConsequenceCheckpoint,
+)
 from seedmind.research.ndnra.models import (
     GrowthPressure,
     HeatAction,
@@ -314,6 +319,8 @@ __all__ = [
     "BRAIN_SCHEMA_VERSION",
     "EXECUTION_SCHEMA",
     "EXECUTION_SCHEMA_VERSION",
+    "LEARNED_CONSEQUENCE_SCHEMA",
+    "LEARNED_CONSEQUENCE_SCHEMA_VERSION",
     "PROPOSAL_LIFECYCLE_SCHEMA",
     "PROPOSAL_LIFECYCLE_SCHEMA_VERSION",
     "REPLAY_RESTORATION_SCHEMA",
@@ -486,6 +493,7 @@ __all__ = [
     "NDNRAExecutionCheckpoint",
     "NDNRAExperimentResult",
     "NDNRAGrowthState",
+    "NDNRALearnedConsequenceCheckpoint",
     "NDNRAProposalLifecycleCheckpoint",
     "NDNRAReplayRestorationCheckpoint",
     "NDNRARuntimeAdaptiveState",

@@ -36,7 +36,7 @@ def test_acceptance_consumes_exactly_one_replay_and_restoration_permit(
     loaded = NDNRABrainStore(evidence.restoration_current_brain_path).load()
     records = loaded.replay_restoration_checkpoint.permit_registry.records
 
-    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 6
+    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 7
     assert result.explicit_human_approval_count == 2
     assert result.replay_consumed_permit_count == 1
     assert result.restoration_consumed_permit_count == 1

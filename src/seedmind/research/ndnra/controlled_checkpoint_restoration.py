@@ -194,6 +194,7 @@ class ControlledCheckpointRestorationPolicy:
                 proposal_lifecycle_checkpoint=source.proposal_lifecycle_checkpoint,
                 execution_checkpoint=source.execution_checkpoint,
                 replay_restoration_checkpoint=new_checkpoint,
+                learned_consequence_checkpoint=source.learned_consequence_checkpoint,
                 interruption_hook=persistence_interruption_hook,
             )
         except Exception as error:
@@ -316,6 +317,7 @@ def _matches_restored_state(
         and loaded.proposal_lifecycle_checkpoint == source.proposal_lifecycle_checkpoint
         and loaded.execution_checkpoint == source.execution_checkpoint
         and loaded.replay_restoration_checkpoint == replay_restoration_checkpoint
+        and loaded.learned_consequence_checkpoint == source.learned_consequence_checkpoint
     )
 
 
@@ -333,6 +335,7 @@ def _same_complete_state(first: BrainLoadResult, second: BrainLoadResult) -> boo
         and first.proposal_lifecycle_checkpoint == second.proposal_lifecycle_checkpoint
         and first.execution_checkpoint == second.execution_checkpoint
         and first.replay_restoration_checkpoint == second.replay_restoration_checkpoint
+        and first.learned_consequence_checkpoint == second.learned_consequence_checkpoint
     )
 
 

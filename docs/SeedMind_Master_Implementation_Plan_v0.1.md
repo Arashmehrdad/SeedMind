@@ -1999,7 +1999,7 @@ exact current evidence
 
 Replay may reduce dormancy for exact caller-selected structures backed by named real activity. It cannot create independent evidence, confidence, mastery, competence, growth pressure, action-selection authority, or production actions.
 
-Restoration accepts only a separate checksum-verified native schema-6 source and replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory together. The destination retains its current monotonic permit and receipt audit, so an older checkpoint cannot revive a terminal approval.
+Restoration accepts only a separate checksum-verified complete current-schema source and replaces graph, growth, consolidation, proposal lifecycle, execution state, learned-consequence checkpoint state, and active activity memory together. The destination retains its current monotonic permit and receipt audit, so an older checkpoint cannot revive a terminal approval.
 
 Live acceptance confirmed:
 
@@ -2055,8 +2055,23 @@ The chain model remains in-memory, prediction-only, non-authoritative, and separ
 persistence, dreaming, optimisation, route search, action ranking, recommendation, SQLite,
 workers, timers, replay, restoration, and production integration.
 
-The expanded developmental architecture marker remains 79% until restart-safe persistence,
-live integration, and full stage acceptance are completed.
+Batch 4 adds restart-safe learned-consequence persistence. Brain persistence advances to
+schema version 7 and carries an explicit `NDNRALearnedConsequenceCheckpoint` containing
+only validated exact consequence records, contextual-transfer configuration, observed
+chain records, duplicate-protection identities, source-event provenance, contradiction
+state, and deterministic reconstruction configuration.
+
+Schemas 1 through 6 migrate to an explicit empty learned-consequence checkpoint. Valid
+schema-7 loads reconstruct the in-memory model, transfer configuration, and observed
+chain indexes exactly. Corrupt, truncated, oversized, conflicting, unsupported, or
+authority-bearing state causes complete safe fallback rather than partial restoration.
+Failed saves leave the previous checkpoint intact. Persistence remains caller-driven
+and reconstruction-only; it does not create predictions, evidence, confidence, events,
+chains, replay, restoration, timers, workers, SQLite lookup, or action authority.
+
+The expanded developmental architecture marker advances from 79% to 80% after Batch 4.
+Live integration, full acceptance, bounded imagination, imagined route optimisation,
+safe experiment promotion, and stage closure remain incomplete.
 
 ---
 

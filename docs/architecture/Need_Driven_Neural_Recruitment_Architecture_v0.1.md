@@ -1438,7 +1438,7 @@ Passing this gate raises heuristic theory-to-integration readiness from 96% to 9
 
 ### 17.19 Controlled replay and exact checkpoint restoration
 
-Controlled replay and restoration are explicit human-governed operations. Replay revisits only named real activity and may reduce dormancy without creating evidence, confidence, mastery, growth pressure, or production-action authority. Restoration accepts only a separate checksum-verified native schema-6 source and replaces graph, growth, consolidation, proposal lifecycle, execution state, and active activity memory together.
+Controlled replay and restoration are explicit human-governed operations. Replay revisits only named real activity and may reduce dormancy without creating evidence, confidence, mastery, growth pressure, or production-action authority. Restoration accepts only a separate checksum-verified complete current-schema source and replaces graph, growth, consolidation, proposal lifecycle, execution state, learned-consequence checkpoint state, and active activity memory together.
 
 The destination preserves its current monotonic permit and receipt audit. That audit must contain all source audit history, so restoring an older active state cannot revive a consumed approval. Partial restoration and automatic replay or restoration are forbidden.
 
@@ -1529,6 +1529,39 @@ The expanded developmental architecture marker remains 79% through Batch 3. Rest
 persistence, live integration, complete failure-path acceptance, and stage closure remain
 required before reassessment.
 
+### 17.23 Learned consequence checkpoint persistence
+
+The restart boundary advances brain persistence to schema version 7. A schema-7 brain
+envelope may carry an explicit `NDNRALearnedConsequenceCheckpoint` containing:
+
+- exact-context learned consequence observations and records;
+- raw weighted effect statistics plus calibration evaluation provenance and totals
+  needed for exact confidence reconstruction;
+- exact next-context counts and source event identities;
+- bounded contextual-transfer configuration;
+- complete observed consequence chains and derived duplicate-protection indexes;
+- deterministic limits required to reconstruct the same in-memory state.
+
+Older brain schemas migrate to an explicit empty learned-consequence checkpoint. The
+loader does not infer missing evidence or create predictions during migration. A valid
+schema-7 restart reconstructs the single-step model, transfer configuration, observed
+chain model, duplicate protection, source-event conflict protection, contradiction
+state, and confidence behaviour exactly.
+
+Corrupt, truncated, oversized, conflicting, unsupported, non-canonical, or authority
+bearing learned-consequence state invalidates the whole brain load and returns a fresh
+safe fallback. Failed saves are atomic and leave the prior checkpoint intact. Loading the
+same valid checkpoint repeatedly is idempotent.
+
+This checkpoint remains reconstruction-only. It has no SQLite dependency, cognitive
+lookup path, automatic prediction loop, timer, worker, replay trigger, restoration
+trigger, recommendation, ranking, search, optimisation, execution, or production-action
+authority.
+
+Passing this boundary raises the expanded developmental architecture marker from 79% to
+80%. This is a restart-safety milestone, not stage closure, production readiness,
+autonomous authority, or a claim that the expanded architecture has reached 100%.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1570,7 +1603,7 @@ The following rules must remain true:
 35. Production curiosity remains the sole production action authority; NDNRA, consolidation, replay, and restoration cannot select production actions.
 36. SQLite remains storage and audit evidence and cannot become approval, revalidation, replay selection, restoration selection, execution selection, or action authority.
 37. Replay may revisit only exact named real activity and may change dormancy only; it cannot create evidence, confidence, mastery, competence, or non-dormancy growth.
-38. Restoration must replace one complete checksum-verified native schema-6 active state; partial authority-bearing restoration is forbidden.
+38. Restoration must replace one complete checksum-verified current-schema active state; partial authority-bearing restoration is forbidden.
 39. The current operation audit must contain source audit history, and restoration cannot revive cancelled, expired, or consumed approvals.
 40. Replay/restoration acceptance must preserve production actions and expose exact receipts, failure paths, restart state, and zero automatic-operation counts.
 41. Learned consequence records remain local to one exact context and action; contextual transfer is a separate derived prediction and cannot create a target-context record.

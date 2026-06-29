@@ -35,7 +35,7 @@ def test_restart_acceptance_round_trips_exact_state(
     result = evidence.result
     record = evidence.accepted_checkpoint.registry.records[0]
 
-    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 6
+    assert result.brain_schema_version == BRAIN_SCHEMA_VERSION == 7
     assert result.exact_graph_round_trip
     assert result.exact_growth_round_trip
     assert result.exact_lifecycle_round_trip

@@ -63,6 +63,29 @@ class LearnedConsequenceModelConfig:
             "maximum_next_contexts_per_record": self.maximum_next_contexts_per_record,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> LearnedConsequenceModelConfig:
+        """Restore validated model limits from inspectable state."""
+        values = _require_mapping("learned consequence model config", snapshot)
+        config = cls(
+            evidence_target=_require_int(values, "evidence_target"),
+            calibration_target=_require_int(values, "calibration_target"),
+            calibration_tolerance=_require_float(values, "calibration_tolerance"),
+            maximum_records=_require_int(values, "maximum_records"),
+            maximum_real_observations=_require_int(values, "maximum_real_observations"),
+            maximum_effect_dimensions_per_record=_require_int(
+                values,
+                "maximum_effect_dimensions_per_record",
+            ),
+            maximum_next_contexts_per_record=_require_int(
+                values,
+                "maximum_next_contexts_per_record",
+            ),
+        )
+        if config.snapshot() != dict(values):
+            raise ValueError("learned consequence model config snapshot is not canonical")
+        return config
+
 
 @dataclass(frozen=True, slots=True)
 class ConsequenceModelObservation:
@@ -98,6 +121,31 @@ class ConsequenceModelObservation:
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ConsequenceModelObservation:
+        """Restore one exact source-labelled transition."""
+        values = _require_mapping("consequence model observation", snapshot)
+        raw_effects = _require_list(values, "observed_effects")
+        observation = cls(
+            event_id=_require_string(values, "event_id"),
+            origin=ExperienceOrigin(_require_string(values, "origin")),
+            context=ContextSignature.from_snapshot(values.get("context")),
+            action_code=_require_string(values, "action_code"),
+            next_context=ContextSignature.from_snapshot(values.get("next_context")),
+            observed_effects=tuple(_effect_from_snapshot(item) for item in raw_effects),
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        if observation.snapshot() != dict(values):
+            raise ValueError("consequence model observation snapshot is not canonical")
+        return observation
 
 
 @dataclass(frozen=True, slots=True)
@@ -252,6 +300,27 @@ class ConsequencePredictionEvaluation:
             "calibration_eligible": self.calibration_eligible,
         }
 
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> ConsequencePredictionEvaluation:
+        """Restore one pure prior-prediction evaluation."""
+        values = _require_mapping("consequence prediction evaluation", snapshot)
+        evaluation = cls(
+            prediction_id=_require_string(values, "prediction_id"),
+            event_id=_require_string(values, "event_id"),
+            effect_accuracy=_require_float(values, "effect_accuracy"),
+            next_context_accuracy=_require_float(values, "next_context_accuracy"),
+            combined_accuracy=_require_float(values, "combined_accuracy"),
+            prior_confidence=_require_float(values, "prior_confidence"),
+            calibration_error=_require_float(values, "calibration_error"),
+            calibration_direction=CalibrationDirection(
+                _require_string(values, "calibration_direction")
+            ),
+            calibration_eligible=_require_bool(values, "calibration_eligible"),
+        )
+        if evaluation.snapshot() != dict(values):
+            raise ValueError("consequence prediction evaluation snapshot is not canonical")
+        return evaluation
+
 
 @dataclass(frozen=True, slots=True)
 class ConsequenceModelUpdate:
@@ -324,12 +393,42 @@ class _EffectStatistics:
     def snapshot(self, config: LearnedConsequenceModelConfig) -> dict[str, object]:
         return {
             "observation_count": self.observation_count,
+            "weight_sum": self.weight_sum,
+            "weighted_value_sum": self.weighted_value_sum,
+            "weighted_square_sum": self.weighted_square_sum,
             "mean": self.mean,
             "variance": self.variance,
             "consistency": self.consistency,
             "support": self.support(config),
             "confidence": self.confidence(config),
         }
+
+    @classmethod
+    def from_snapshot(
+        cls,
+        snapshot: object,
+        config: LearnedConsequenceModelConfig,
+    ) -> _EffectStatistics:
+        """Restore weighted evidence for one effect dimension."""
+        values = _require_mapping("effect statistics", snapshot)
+        statistics = cls(
+            observation_count=_require_int(values, "observation_count"),
+            weight_sum=_require_float(values, "weight_sum"),
+            weighted_value_sum=_require_float(values, "weighted_value_sum"),
+            weighted_square_sum=_require_float(values, "weighted_square_sum"),
+        )
+        if statistics.observation_count < 0:
+            raise ValueError("effect statistics observation_count must not be negative")
+        for name, value in (
+            ("weight_sum", statistics.weight_sum),
+            ("weighted_value_sum", statistics.weighted_value_sum),
+            ("weighted_square_sum", statistics.weighted_square_sum),
+        ):
+            if not isfinite(value):
+                raise ValueError(f"{name} must be finite")
+        if statistics.snapshot(config) != dict(values):
+            raise ValueError("effect statistics snapshot is not canonical")
+        return statistics
 
 
 @dataclass(slots=True)
@@ -342,6 +441,9 @@ class ContextActionConsequenceRecord:
     _effects: dict[str, _EffectStatistics] = field(default_factory=dict)
     _next_contexts: dict[str, ContextSignature] = field(default_factory=dict)
     _next_context_counts: dict[str, int] = field(default_factory=dict)
+    _calibration_evaluations: dict[str, ConsequencePredictionEvaluation] = field(
+        default_factory=dict
+    )
     calibration_count: int = 0
     cumulative_prediction_accuracy: float = 0.0
     cumulative_prediction_confidence: float = 0.0
@@ -363,6 +465,37 @@ class ContextActionConsequenceRecord:
             raise ValueError("consequence records cannot select actions")
         if self.has_production_action_authority:
             raise ValueError("consequence records cannot control production actions")
+        if self.calibration_count > len(self._real_event_ids):
+            raise ValueError("calibration_count cannot exceed real observations")
+        if self.calibration_count == 0 and (
+            self.cumulative_prediction_accuracy != 0.0
+            or self.cumulative_prediction_confidence != 0.0
+        ):
+            raise ValueError("zero calibration count requires zero cumulative calibration totals")
+        if self.cumulative_prediction_accuracy > self.calibration_count:
+            raise ValueError("cumulative_prediction_accuracy exceeds calibration count")
+        if self.cumulative_prediction_confidence > self.calibration_count:
+            raise ValueError("cumulative_prediction_confidence exceeds calibration count")
+        if len(self._calibration_evaluations) != self.calibration_count:
+            raise ValueError("calibration evaluations must match calibration_count")
+        for event_id, evaluation in self._calibration_evaluations.items():
+            _validate_code("calibration evaluation event_id", event_id)
+            if event_id != evaluation.event_id:
+                raise ValueError("calibration evaluation key must match event identity")
+            if event_id not in self._real_event_ids:
+                raise ValueError("calibration evaluation must reference a real observation")
+            if not evaluation.calibration_eligible:
+                raise ValueError("stored calibration evaluations must be eligible")
+        accuracy_sum = sum(
+            evaluation.combined_accuracy for evaluation in self._calibration_evaluations.values()
+        )
+        confidence_sum = sum(
+            evaluation.prior_confidence for evaluation in self._calibration_evaluations.values()
+        )
+        if abs(accuracy_sum - self.cumulative_prediction_accuracy) > 1e-12:
+            raise ValueError("cumulative_prediction_accuracy does not match evaluations")
+        if abs(confidence_sum - self.cumulative_prediction_confidence) > 1e-12:
+            raise ValueError("cumulative_prediction_confidence does not match evaluations")
 
     @property
     def record_id(self) -> str:
@@ -482,6 +615,11 @@ class ContextActionConsequenceRecord:
         self._real_event_ids.append(observation.event_id)
         self._real_event_ids.sort()
         if evaluation is not None and evaluation.calibration_eligible:
+            if evaluation.event_id != observation.event_id:
+                raise ValueError("calibration evaluation event does not match observation")
+            if evaluation.event_id in self._calibration_evaluations:
+                raise ValueError("calibration evaluation identity conflict")
+            self._calibration_evaluations[evaluation.event_id] = evaluation
             self.calibration_count += 1
             self.cumulative_prediction_accuracy += evaluation.combined_accuracy
             self.cumulative_prediction_confidence += evaluation.prior_confidence
@@ -507,11 +645,95 @@ class ContextActionConsequenceRecord:
                 for context_id in sorted(self._next_contexts)
             ],
             "calibration_count": self.calibration_count,
+            "calibration_evaluations": [
+                self._calibration_evaluations[event_id].snapshot()
+                for event_id in sorted(self._calibration_evaluations)
+            ],
+            "cumulative_prediction_accuracy": self.cumulative_prediction_accuracy,
+            "cumulative_prediction_confidence": self.cumulative_prediction_confidence,
             "mean_calibration_accuracy": self.mean_calibration_accuracy,
             "mean_prior_confidence": self.mean_prior_confidence,
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(
+        cls,
+        snapshot: object,
+        config: LearnedConsequenceModelConfig,
+    ) -> ContextActionConsequenceRecord:
+        """Restore one exact context-action record without adding evidence."""
+        values = _require_mapping("context-action consequence record", snapshot)
+        raw_effects = _require_mapping("record effects", values.get("effects"))
+        effects: dict[str, _EffectStatistics] = {}
+        for effect_code, raw_statistics in raw_effects.items():
+            _validate_code("effect_code", effect_code)
+            effects[effect_code] = _EffectStatistics.from_snapshot(raw_statistics, config)
+
+        raw_contexts = _require_list(values, "next_contexts")
+        next_contexts: dict[str, ContextSignature] = {}
+        next_context_counts: dict[str, int] = {}
+        for raw_context in raw_contexts:
+            context_values = _require_mapping("next context entry", raw_context)
+            context = ContextSignature.from_snapshot(context_values.get("context"))
+            context_id = _require_string(context_values, "context_id")
+            if context_id != _context_id(context):
+                raise ValueError("next context identity does not match context")
+            if context_id in next_contexts:
+                raise ValueError("next contexts must be unique")
+            count = _require_int(context_values, "count")
+            if count <= 0:
+                raise ValueError("next context count must be positive")
+            next_contexts[context_id] = context
+            next_context_counts[context_id] = count
+
+        real_event_ids = tuple(_require_string_list(values, "real_event_ids"))
+        calibration_evaluations: dict[str, ConsequencePredictionEvaluation] = {}
+        for raw_evaluation in _require_list(values, "calibration_evaluations"):
+            evaluation = ConsequencePredictionEvaluation.from_snapshot(raw_evaluation)
+            if evaluation.event_id in calibration_evaluations:
+                raise ValueError("calibration evaluations must be unique")
+            calibration_evaluations[evaluation.event_id] = evaluation
+        record = cls(
+            context=ContextSignature.from_snapshot(values.get("context")),
+            action_code=_require_string(values, "action_code"),
+            _real_event_ids=list(real_event_ids),
+            _effects=effects,
+            _next_contexts=next_contexts,
+            _next_context_counts=next_context_counts,
+            _calibration_evaluations=calibration_evaluations,
+            calibration_count=_require_int(values, "calibration_count"),
+            cumulative_prediction_accuracy=_require_float(
+                values,
+                "cumulative_prediction_accuracy",
+            ),
+            cumulative_prediction_confidence=_require_float(
+                values,
+                "cumulative_prediction_confidence",
+            ),
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        if _require_string(values, "record_id") != record.record_id:
+            raise ValueError("consequence record identity is inconsistent")
+        if _require_int(values, "real_observation_count") != record.real_observation_count:
+            raise ValueError("consequence record observation count does not match contents")
+        if sum(record._next_context_counts.values()) != record.real_observation_count:
+            raise ValueError("next context counts do not match real observations")
+        if len(record._effects) > config.maximum_effect_dimensions_per_record:
+            raise ValueError("consequence record effect-dimension bound exceeded")
+        if len(record._next_contexts) > config.maximum_next_contexts_per_record:
+            raise ValueError("consequence record next-context bound exceeded")
+        if record.snapshot(config) != dict(values):
+            raise ValueError("consequence record snapshot is not canonical")
+        return record
 
     def _next_context_prediction(
         self,
@@ -792,10 +1014,100 @@ class LearnedConsequenceModel:
             "real_observation_count": self.real_observation_count,
             "record_count": self.record_count,
             "real_event_ids": sorted(self._observations),
+            "observations": [
+                self._observations[event_id].snapshot() for event_id in sorted(self._observations)
+            ],
             "records": [self._records[key].snapshot(self.config) for key in sorted(self._records)],
             "has_action_selection_authority": self.has_action_selection_authority,
             "has_production_action_authority": self.has_production_action_authority,
         }
+
+    @classmethod
+    def from_snapshot(cls, snapshot: object) -> LearnedConsequenceModel:
+        """Restore an exact learned model state from a canonical snapshot."""
+        values = _require_mapping("learned consequence model", snapshot)
+        config = LearnedConsequenceModelConfig.from_snapshot(values.get("config"))
+        raw_observations = _require_list(values, "observations")
+        observations: dict[str, ConsequenceModelObservation] = {}
+        for raw_observation in raw_observations:
+            observation = ConsequenceModelObservation.from_snapshot(raw_observation)
+            if observation.origin is not ExperienceOrigin.REAL:
+                raise ValueError("only real observations may be restored")
+            if observation.event_id in observations:
+                raise ValueError("consequence observations must be unique")
+            observations[observation.event_id] = observation
+        if len(observations) > config.maximum_real_observations:
+            raise ValueError("consequence model real-observation bound exceeded")
+
+        raw_records = _require_list(values, "records")
+        records: dict[str, ContextActionConsequenceRecord] = {}
+        for raw_record in raw_records:
+            record = ContextActionConsequenceRecord.from_snapshot(raw_record, config)
+            if record.record_id in records:
+                raise ValueError("consequence records must be unique")
+            records[record.record_id] = record
+        if len(records) > config.maximum_records:
+            raise ValueError("consequence model record bound exceeded")
+
+        expected_event_ids = sorted(observations)
+        if _require_string_list(values, "real_event_ids") != expected_event_ids:
+            raise ValueError("consequence model event identity list does not match contents")
+        if _require_int(values, "real_observation_count") != len(observations):
+            raise ValueError("consequence model observation count does not match contents")
+        if _require_int(values, "record_count") != len(records):
+            raise ValueError("consequence model record count does not match contents")
+
+        for observation in observations.values():
+            record_id = _record_id(observation.context, observation.action_code)
+            matched_record = records.get(record_id)
+            if matched_record is None:
+                raise ValueError("consequence observation lacks matching record")
+            retained_observation = observations.get(observation.event_id)
+            if (
+                retained_observation != observation
+                or observation.event_id not in matched_record.real_event_ids
+            ):
+                raise ValueError("consequence observation provenance is inconsistent")
+        for record in records.values():
+            for event_id in record.real_event_ids:
+                record_observation = observations.get(event_id)
+                if record_observation is None:
+                    raise ValueError("consequence record references an unknown observation")
+                if (
+                    record_observation.context != record.context
+                    or record_observation.action_code != record.action_code
+                ):
+                    raise ValueError("consequence record event does not match record identity")
+        expected_records = _records_from_observations(
+            observations=tuple(observations[event_id] for event_id in sorted(observations)),
+            config=config,
+        )
+        for record_id, record in records.items():
+            expected_record = expected_records.get(record_id)
+            if expected_record is None:
+                raise ValueError("consequence record lacks source observations")
+            if _record_evidence_snapshot(record, config) != _record_evidence_snapshot(
+                expected_record,
+                config,
+            ):
+                raise ValueError("consequence record evidence does not match observations")
+
+        model = cls(
+            config=config,
+            _observations=observations,
+            _records=records,
+            has_action_selection_authority=_require_bool(
+                values,
+                "has_action_selection_authority",
+            ),
+            has_production_action_authority=_require_bool(
+                values,
+                "has_production_action_authority",
+            ),
+        )
+        if model.snapshot() != dict(values):
+            raise ValueError("learned consequence model snapshot is not canonical")
+        return model
 
 
 def _record_id(context: ContextSignature, action_code: str) -> str:
@@ -831,6 +1143,54 @@ def _effect_snapshot(effect: EffectObservation) -> dict[str, object]:
     }
 
 
+def _records_from_observations(
+    *,
+    observations: tuple[ConsequenceModelObservation, ...],
+    config: LearnedConsequenceModelConfig,
+) -> dict[str, ContextActionConsequenceRecord]:
+    records: dict[str, ContextActionConsequenceRecord] = {}
+    for observation in observations:
+        record_id = _record_id(observation.context, observation.action_code)
+        record = records.get(record_id)
+        if record is None:
+            record = ContextActionConsequenceRecord(
+                context=observation.context,
+                action_code=observation.action_code,
+            )
+            records[record_id] = record
+        record.observe(observation, None, config)
+    return records
+
+
+def _record_evidence_snapshot(
+    record: ContextActionConsequenceRecord,
+    config: LearnedConsequenceModelConfig,
+) -> dict[str, object]:
+    snapshot = record.snapshot(config)
+    for key in (
+        "calibration_count",
+        "calibration_evaluations",
+        "cumulative_prediction_accuracy",
+        "cumulative_prediction_confidence",
+        "mean_calibration_accuracy",
+        "mean_prior_confidence",
+    ):
+        snapshot.pop(key)
+    return snapshot
+
+
+def _effect_from_snapshot(snapshot: object) -> EffectObservation:
+    values = _require_mapping("effect observation", snapshot)
+    effect = EffectObservation(
+        effect_code=_require_string(values, "effect_code"),
+        value=_require_float(values, "value"),
+        confidence=_require_float(values, "confidence"),
+    )
+    if _effect_snapshot(effect) != dict(values):
+        raise ValueError("effect observation snapshot is not canonical")
+    return effect
+
+
 def _validate_effects(
     name: str,
     effects: tuple[EffectObservation, ...],
@@ -860,6 +1220,56 @@ def _validate_code(name: str, value: str) -> None:
 def _validate_unit(name: str, value: float) -> None:
     if not isfinite(value) or not 0.0 <= value <= 1.0:
         raise ValueError(f"{name} must be between zero and one")
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_list(values: Mapping[str, object], key: str) -> list[object]:
+    value = values.get(key)
+    if not isinstance(value, list):
+        raise ValueError(f"{key} must be a list")
+    return value
+
+
+def _require_string(values: Mapping[str, object], key: str) -> str:
+    value = values.get(key)
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string")
+    return value
+
+
+def _require_bool(values: Mapping[str, object], key: str) -> bool:
+    value = values.get(key)
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be a boolean")
+    return value
+
+
+def _require_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    return value
+
+
+def _require_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise ValueError(f"{key} must be numeric")
+    return float(value)
+
+
+def _require_string_list(values: Mapping[str, object], key: str) -> list[str]:
+    result: list[str] = []
+    for item in _require_list(values, key):
+        if not isinstance(item, str):
+            raise ValueError(f"{key} must contain strings")
+        result.append(item)
+    return result
 
 
 __all__ = [

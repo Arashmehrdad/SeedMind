@@ -316,7 +316,7 @@ def run_human_approved_consolidation_execution_acceptance(
         or approved_store.temporary_path.exists()
     )
     pass_gate = bool(
-        BRAIN_SCHEMA_VERSION == 6
+        BRAIN_SCHEMA_VERSION == 7
         and control_load.status is BrainLoadStatus.LOADED
         and approved_load.status is BrainLoadStatus.LOADED
         and permit.approver_code.startswith("human:")

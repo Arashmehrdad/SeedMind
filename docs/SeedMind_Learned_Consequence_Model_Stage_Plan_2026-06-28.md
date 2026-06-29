@@ -176,14 +176,31 @@ Tests:
 
 ### Batch 4 - persistence and restart reconstruction
 
-Planned:
+Status: implemented in the commit containing this update.
 
-- Persist model observations, records, calibration state, and source identities.
+- Persist model observations, records, calibration evaluation provenance, calibration
+  totals, and source identities.
 - Add an explicit versioned consequence-model checkpoint.
-- Migrate older brain schemas to an explicit empty model checkpoint.
+- Advance brain persistence to schema version 7.
+- Migrate schemas 1 through 6 to an explicit empty learned-consequence checkpoint.
 - Preserve exact duplicate protection across restart.
-- Reject relational or checksum corruption with complete safe fallback.
+- Preserve observed-chain source-event conflict protection across restart.
+- Preserve contextual-transfer configuration without storing transfer predictions.
+- Reject checksum, schema, bound, truncation, conflict, or authority corruption with
+  complete safe fallback.
+- Keep failed saves atomic and leave the previous checkpoint intact.
+- Keep repeated valid loads idempotent.
 - Keep persistence reconstruction-only and outside cognition.
+
+Implementation:
+
+- `src/seedmind/research/ndnra/learned_consequence_persistence.py`
+- `src/seedmind/research/ndnra/persistence.py`
+- restore paths in the Batch 1, Batch 2, and Batch 3 modules.
+
+Tests:
+
+- `tests/unit/test_ndnra_learned_consequence_persistence.py`
 
 ### Batch 5 - live integration, acceptance, and closure
 
@@ -235,6 +252,12 @@ Batch 3:
 - `ObservedConsequenceChainUpdate`
 - `ObservedConsequenceChainModel`
 
+Batch 4:
+
+- `LEARNED_CONSEQUENCE_SCHEMA`
+- `LEARNED_CONSEQUENCE_SCHEMA_VERSION`
+- `NDNRALearnedConsequenceCheckpoint`
+
 ## 5. Confidence and uncertainty design
 
 For one requested effect dimension, Batch 1 tracks:
@@ -267,7 +290,7 @@ Therefore:
 
 ## 6. Explicit current exclusions
 
-Batches 1 through 3 do not provide:
+Batches 1 through 4 do not provide:
 
 - semantic abstraction beyond explicit grounded component similarity;
 - learned similarity weights;
@@ -280,7 +303,7 @@ Batches 1 through 3 do not provide:
 - action recommendation;
 - action ranking;
 - production integration;
-- persistence;
+- automatic restore loops;
 - timers, queues, or background workers;
 - SQLite cognition;
 - safe experiment proposals;
@@ -288,7 +311,7 @@ Batches 1 through 3 do not provide:
 
 ## 7. Progress rule
 
-The expanded developmental architecture marker remains **79%** through Batch 3. The new contracts and behavioural tests are necessary but do not complete persistence, live integration, or end-to-end acceptance.
+The expanded developmental architecture marker remains **79%** through Batch 3. Batch 4 supplies restart-safe persistence evidence and moves the marker to **80%**, but it still does not complete live integration, end-to-end acceptance, bounded imagination, imagined route optimisation, or safe experiment promotion.
 
 No percentage should increase merely because a prediction object exists. Later progress requires behavioural evidence, failure-path tests, restart safety where applicable, live invariance, and complete repository quality gates.
 
