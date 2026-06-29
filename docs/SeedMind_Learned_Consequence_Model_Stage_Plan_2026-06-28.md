@@ -204,7 +204,7 @@ Tests:
 
 ### Batch 5 - live integration, acceptance, and closure
 
-Planned:
+Completed in Batch 5:
 
 - Compare model-enabled shadow operation with an identical control.
 - Demonstrate real pre-action prediction followed by later outcome comparison.
@@ -213,8 +213,15 @@ Planned:
 - Demonstrate context-local failure consequences.
 - Demonstrate no production-action, advice, route-ranking, growth, replay, restoration, or SQLite cognitive influence.
 - Export inspectable observatory evidence.
-- Run complete repository quality gates.
-- Reassess the expanded progress marker only after all gates pass.
+
+Implementation:
+
+- `src/seedmind/integration/learned_consequence_acceptance.py`
+- `src/seedmind/integration/__init__.py`
+
+Tests:
+
+- `tests/unit/test_ndnra_learned_consequence_acceptance.py`
 
 ## 4. Public contracts
 
@@ -258,6 +265,15 @@ Batch 4:
 - `LEARNED_CONSEQUENCE_SCHEMA_VERSION`
 - `NDNRALearnedConsequenceCheckpoint`
 
+Batch 5:
+
+- `LearnedConsequenceLivePredictionRecord`
+- `LearnedConsequenceLiveSession`
+- `LearnedConsequenceAcceptanceResult`
+- `LearnedConsequenceAcceptanceEvidence`
+- `run_learned_consequence_acceptance`
+- `export_learned_consequence_acceptance`
+
 ## 5. Confidence and uncertainty design
 
 For one requested effect dimension, Batch 1 tracks:
@@ -290,7 +306,7 @@ Therefore:
 
 ## 6. Explicit current exclusions
 
-Batches 1 through 4 do not provide:
+Batches 1 through 5 do not provide:
 
 - semantic abstraction beyond explicit grounded component similarity;
 - learned similarity weights;
@@ -302,7 +318,7 @@ Batches 1 through 4 do not provide:
 - optimiser-driven search;
 - action recommendation;
 - action ranking;
-- production integration;
+- production-action authority;
 - automatic restore loops;
 - timers, queues, or background workers;
 - SQLite cognition;
@@ -311,7 +327,9 @@ Batches 1 through 4 do not provide:
 
 ## 7. Progress rule
 
-The expanded developmental architecture marker remains **79%** through Batch 3. Batch 4 supplies restart-safe persistence evidence and moves the marker to **80%**, but it still does not complete live integration, end-to-end acceptance, bounded imagination, imagined route optimisation, or safe experiment promotion.
+The expanded developmental architecture marker remains **79%** through Batch 3. Batch 4 supplies restart-safe persistence evidence and moves the marker to **80%**. Batch 5 supplies live-shadow acceptance and moves the marker to **82%**.
+
+The Batch 5 evidence is still not a 100% architecture claim. Bounded imagination, imagined route optimisation, safe experiment promotion, autonomous production authority, semantic abstraction, and learned similarity weights remain out of scope.
 
 No percentage should increase merely because a prediction object exists. Later progress requires behavioural evidence, failure-path tests, restart safety where applicable, live invariance, and complete repository quality gates.
 

@@ -1562,6 +1562,42 @@ Passing this boundary raises the expanded developmental architecture marker from
 80%. This is a restart-safety milestone, not stage closure, production readiness,
 autonomous authority, or a claim that the expanded architecture has reached 100%.
 
+### 17.24 Learned consequence live acceptance
+
+The live acceptance boundary connects the learned consequence model to the deterministic
+Nursery loop as an observer only.
+
+```text
+production observation
+  -> production curiosity selects the action
+  -> learned consequence model predicts before execution
+  -> Nursery executes the production action
+  -> predictive trainer updates from the real transition
+  -> learned consequence model records the real outcome
+  -> prior prediction is evaluated and calibrated
+```
+
+The observer is not part of the production action path. Acceptance requires a matched
+control with identical scenario seed, trainer seed, curiosity configuration, and play
+budget. The model-enabled pass must preserve both production action sequence and
+predictive-training error sequence.
+
+The gate also requires:
+
+- real pre-action predictions before each evaluated transition;
+- later real outcome comparison and calibration;
+- uncertainty reduction under repeated consistent real evidence;
+- confidence reduction under contradiction;
+- exact context-local unknown predictions for unsupported contexts;
+- zero advice decisions, route rankings, growth attempts, replay operations,
+  restoration operations, SQLite cognition, and production-action authority.
+
+Passing this boundary raises the expanded developmental architecture marker from 80% to
+82%. It closes the learned-consequence live integration gate. It does not add bounded
+imagination, imagined route optimisation, safe experiment promotion, semantic
+abstraction, learned similarity weights, autonomous production authority, or a 100%
+architecture claim.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1621,6 +1657,7 @@ The following rules must remain true:
 53. Reused or overlapping chain source events remain inspectable and cannot multiply independent support.
 54. Chain effects are reported per observed step unless a later stage defines a safe effect-specific aggregation rule.
 55. Observed chain predictions cannot select, rank, recommend, search, optimise, schedule, or execute actions.
+56. Live learned-consequence predictions may observe before production action execution and calibrate after the real outcome, but they cannot change production action selection, training updates, advice, route ranking, growth, replay, restoration, or SQLite lookup.
 
 ## 19. First prototype boundary
 

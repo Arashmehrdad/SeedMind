@@ -62,6 +62,14 @@ from seedmind.integration.human_approved_consolidation_execution_acceptance impo
     export_human_approved_consolidation_execution_acceptance,
     run_human_approved_consolidation_execution_acceptance,
 )
+from seedmind.integration.learned_consequence_acceptance import (
+    LearnedConsequenceAcceptanceEvidence,
+    LearnedConsequenceAcceptanceResult,
+    LearnedConsequenceLivePredictionRecord,
+    LearnedConsequenceLiveSession,
+    export_learned_consequence_acceptance,
+    run_learned_consequence_acceptance,
+)
 from seedmind.integration.ndnra_shadow import (
     NDNRAShadowAdapter,
     NDNRAShadowConfig,
@@ -129,6 +137,10 @@ __all__ = [
     "ControlledReplayRestorationAcceptanceResult",
     "HumanApprovedConsolidationExecutionAcceptanceEvidence",
     "HumanApprovedConsolidationExecutionAcceptanceResult",
+    "LearnedConsequenceAcceptanceEvidence",
+    "LearnedConsequenceAcceptanceResult",
+    "LearnedConsequenceLivePredictionRecord",
+    "LearnedConsequenceLiveSession",
     "LiveDevelopmentalSignalProvider",
     "LiveDevelopmentalSignals",
     "NDNRALiveShadowAdapter",
@@ -159,6 +171,7 @@ __all__ = [
     "export_contextual_mastery_acceptance",
     "export_controlled_replay_restoration_acceptance",
     "export_human_approved_consolidation_execution_acceptance",
+    "export_learned_consequence_acceptance",
     "export_persistent_shadow_evidence",
     "export_restart_safe_proposal_memory_acceptance",
     "export_shadow_comparison_evidence",
@@ -170,6 +183,7 @@ __all__ = [
     "run_contextual_mastery_acceptance",
     "run_controlled_replay_restoration_acceptance",
     "run_human_approved_consolidation_execution_acceptance",
+    "run_learned_consequence_acceptance",
     "run_persistent_shadow_experiment",
     "run_restart_safe_proposal_memory_acceptance",
     "run_shadow_comparison",

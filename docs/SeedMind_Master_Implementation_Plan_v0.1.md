@@ -2070,8 +2070,27 @@ and reconstruction-only; it does not create predictions, evidence, confidence, e
 chains, replay, restoration, timers, workers, SQLite lookup, or action authority.
 
 The expanded developmental architecture marker advances from 79% to 80% after Batch 4.
-Live integration, full acceptance, bounded imagination, imagined route optimisation,
-safe experiment promotion, and stage closure remain incomplete.
+At that Batch 4 boundary, live integration, full acceptance, bounded imagination,
+imagined route optimisation, safe experiment promotion, and stage closure remain
+incomplete.
+
+Batch 5 adds live-shadow acceptance for the learned consequence model. A first live
+Nursery pass teaches the model from real transitions. A second identical live pass makes
+pre-action predictions before production curiosity executes each selected action, then
+compares those predictions with the later real outcome. A matched control confirms that
+the model-enabled observer preserves production actions and predictive-training errors.
+
+The acceptance evidence also checks that consistent real evidence reduces uncertainty,
+contradictory evidence reduces confidence, and exact context-local failures remain
+unknown instead of borrowing certainty. The learned consequence observer does not make
+advice decisions, rank routes, trigger growth, replay, restore, use SQLite cognition, or
+hold production-action authority.
+
+Passing this live acceptance boundary advances the expanded developmental architecture
+marker from 80% to 82%. This closes the learned-consequence live integration gate but
+does not complete bounded imagination, imagined route optimisation, safe experiment
+promotion, semantic abstraction, learned similarity weights, or a 100% architecture
+claim.
 
 ---
 
