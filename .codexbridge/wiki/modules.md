@@ -428,6 +428,14 @@ Live acceptance for restart-safe human-approved NDNRA consolidation execution.
 - Classes: HumanApprovedConsolidationExecutionAcceptanceResult, HumanApprovedConsolidationExecutionAcceptanceEvidence
 - Functions/symbols: run_human_approved_consolidation_execution_acceptance, export_human_approved_consolidation_execution_acceptance, _write_ascii_json
 
+## `src/seedmind/integration/learned_consequence_acceptance.py`
+
+Live acceptance gate for non-authoritative learned consequence prediction.
+
+- Kind: python
+- Classes: LearnedConsequenceLivePredictionRecord, LearnedConsequenceLiveSession, LearnedConsequenceAcceptanceResult, LearnedConsequenceAcceptanceEvidence, _RestartEvidence, _FailurePathEvidence
+- Functions/symbols: run_learned_consequence_acceptance, export_learned_consequence_acceptance, pretraining_selection_count, _observe_live_chains, _chain_request, _ordered_event_ids_preserved, _restart_evidence, _failure_path_evidence, _bounded_update_failure_preserved_state, _configured_model_bound_enforced, _configured_chain_bound_enforced, _acceptance_signature, _observation_from_chain_step, _raises_value_error, _canonical_checksum, _write_brain_envelope, _run_control_session, _run_live_session, _context_from_observation, _observed_effects, _event_id, _uncertainty_reduction_observed, _consistent_probe_reduces_uncertainty, _contradiction_probe_reduces_confidence, _context_local_unknown_preserved, _probe_context, _build_trainer, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit, _write_ascii_json
+
 ## `src/seedmind/integration/ndnra_shadow.py`
 
 Non-authoritative NDNRA observation of the live SeedMind nursery loop.
@@ -560,6 +568,14 @@ Operational adaptive state restored alongside an NDNRA local graph.
 - Kind: python
 - Classes: AdaptiveRuntimeConfig, AdaptiveUpdate, ActivityMaintenanceApplication, PressureDischarge, NDNRARuntimeAdaptiveState
 - Functions/symbols: _validate_unit, _validate_signed
+
+## `src/seedmind/research/ndnra/bounded_imagination.py`
+
+Bounded caller-driven imagination over exact learned consequence predictions.
+
+- Kind: python
+- Classes: BoundedImaginationConfig, ImaginedActionSequence, ImaginedConsequenceRequest, ImaginedConsequenceStep, ImaginedConsequenceTrace, BoundedImaginationResult, BoundedConsequenceImagination
+- Functions/symbols: _canonical_json_bytes, _identity, _effect_snapshot, _validate_ascii_code, _validate_sorted_unique_codes, _validate_effects, _validate_zero_delta
 
 ## `src/seedmind/research/ndnra/composition.py`
 
@@ -735,7 +751,7 @@ Bounded contextual transfer over exact learned consequence records.
 
 - Kind: python
 - Classes: ConsequencePredictionMode, ContextualTransferConfig, ContextSimilarityEvidence, ContextTransferSourceEvidence, TransferredEffectEvidence, ContextualTransferPrediction, BoundedContextualTransferPolicy
-- Functions/symbols: _vector_similarity, _set_similarity, _weighted_similarity, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit, _validate_signed_unit
+- Functions/symbols: _vector_similarity, _set_similarity, _weighted_similarity, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit, _validate_signed_unit, _require_mapping, _require_int, _require_float
 
 ## `src/seedmind/research/ndnra/contextual_mastery_experiment.py`
 
@@ -854,7 +870,15 @@ Bounded single-step consequence learning from exact real context-action evidence
 
 - Kind: python
 - Classes: CalibrationDirection, LearnedConsequenceModelConfig, ConsequenceModelObservation, ConsequencePredictionRequest, ConsequencePrediction, ConsequencePredictionEvaluation, ConsequenceModelUpdate, _EffectStatistics, ContextActionConsequenceRecord, LearnedConsequenceModel
-- Functions/symbols: _record_id, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit
+- Functions/symbols: _record_id, _context_id, _prediction_id, _identity, _effect_snapshot, _records_from_observations, _record_evidence_snapshot, _effect_from_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code, _validate_unit, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_float, _require_string_list
+
+## `src/seedmind/research/ndnra/learned_consequence_persistence.py`
+
+Versioned learned-consequence checkpoint contracts for NDNRA.
+
+- Kind: python
+- Classes: NDNRALearnedConsequenceCheckpoint
+- Functions/symbols: _require_mapping, _require_string, _require_bool, _require_int
 
 ## `src/seedmind/research/ndnra/models.py`
 
@@ -894,7 +918,7 @@ Bounded observed consequence chains from exact real transition evidence.
 
 - Kind: python
 - Classes: ObservedConsequenceChainConfig, ObservedConsequenceChainStep, ObservedConsequenceChain, ConsequenceChainPredictionRequest, ConsequenceChainStepPrediction, ConsequenceChainCorrelationGroup, ConsequenceChainPrediction, ObservedConsequenceChainUpdate, ObservedConsequenceChainModel
-- Functions/symbols: _effect_prediction, _correlation_groups, _record_id, _chain_id, _context_id, _prediction_id, _identity, _effect_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code_sequence, _validate_code, _validate_unit
+- Functions/symbols: _effect_prediction, _correlation_groups, _record_id, _chain_id, _context_id, _prediction_id, _identity, _effect_snapshot, _effect_from_snapshot, _validate_effects, _validate_sorted_unique_codes, _validate_code_sequence, _validate_code, _validate_unit, _require_mapping, _require_list, _require_string, _require_bool, _require_int, _require_float, _require_string_list
 
 ## `src/seedmind/research/ndnra/persistence.py`
 
@@ -1084,6 +1108,20 @@ Tests for source-separated activity and bounded dormancy maintenance.
 - Kind: python
 - Functions/symbols: _graph, _runtime, _request, _ledger_with_real_support, test_real_replay_and_imagined_activity_have_ordered_strengths, test_replay_and_imagination_require_real_support, test_real_activity_requires_real_evidence_and_cannot_cite_other_events, test_harmful_redundant_and_irrelevant_pathways_remain_dormant, test_safety_critical_and_rare_use_memory_receive_bounded_floors, test_cycle_budget_limits_total_reactivation, test_event_budget_and_structure_budget_are_enforced, test_duplicate_activity_cannot_reduce_dormancy_twice, test_source_counters_remain_separate_and_inspectable, test_runtime_maintenance_only_reduces_dormancy, test_runtime_applies_real_more_than_replay_more_than_imagination, test_denied_or_duplicate_decision_does_not_change_runtime, test_unknown_structure_is_rejected_before_any_dormancy_change, test_activity_contract_rejects_confidence_mastery_and_authority_changes, test_activity_maintenance_has_no_execution_persistence_timer_or_sql_dependency
 
+## `tests/unit/test_ndnra_bounded_imagination.py`
+
+Tests for exact-source-only bounded imagination.
+
+- Kind: python
+- Functions/symbols: _context, _observation, _trained_model, test_valid_two_step_trace_preserves_order_continuity_and_provenance, test_reversed_order_remains_distinct_without_ranking_or_selection_fields, test_unsupported_failures_stop_at_first_missing_step_without_final_context, test_partial_effects_remain_partial_without_cumulative_aggregate, test_transfer_like_context_stays_unsupported_and_model_is_unchanged, test_request_bounds_reject_without_mutation, test_runtime_bounds_return_unsupported_trace_without_mutation, test_duplicate_candidate_sequences_are_rejected, test_identical_requests_produce_identical_ids_and_ascii_snapshots, test_imagination_changes_no_real_evidence_or_authority_state, test_static_dependencies_exclude_forbidden_integration_surfaces, test_snapshots_encode_as_ascii, test_imagined_types_cannot_be_accepted_as_real_consequence_evidence, _prediction_request
+
+## `tests/unit/test_ndnra_bounded_imagination_boundaries.py`
+
+Additional boundary tests for non-factual bounded imagination.
+
+- Kind: python
+- Functions/symbols: _model_and_context, _trace, test_trace_is_explicitly_imagined_and_non_authoritative, test_actual_imagined_trace_cannot_update_real_consequence_evidence, test_module_imports_no_forbidden_cognitive_or_execution_subsystems
+
 ## `tests/unit/test_ndnra_consolidation.py`
 
 Tests for pure retention-gated NDNRA consolidation eligibility.
@@ -1270,10 +1308,10 @@ Tests for exact restart-safe complete checkpoint restoration.
 
 ## `tests/unit/test_ndnra_controlled_replay_persistence.py`
 
-Tests for schema-6 durable controlled replay persistence.
+Tests for current-schema durable controlled replay persistence.
 
 - Kind: python
-- Functions/symbols: _canonical_checksum, test_schema_6_round_trips_issued_permit_and_activity_history, test_audit_only_permit_save_does_not_change_active_state_checksum, test_activity_ledger_and_replay_checkpoint_reconstruct_exactly, test_active_state_checksum_detects_tampering_even_with_valid_outer_checksum, test_schema_5_migrates_to_empty_replay_checkpoint
+- Functions/symbols: _canonical_checksum, test_current_schema_round_trips_issued_permit_and_activity_history, test_audit_only_permit_save_does_not_change_active_state_checksum, test_activity_ledger_and_replay_checkpoint_reconstruct_exactly, test_active_state_checksum_detects_tampering_even_with_valid_outer_checksum, test_schema_5_migrates_to_empty_replay_checkpoint
 
 ## `tests/unit/test_ndnra_controlled_replay_restoration_acceptance.py`
 
@@ -1317,12 +1355,26 @@ Tests for live acceptance of restart-safe human-approved execution.
 - Kind: python
 - Functions/symbols: test_one_human_approval_produces_one_durable_application, test_approved_execution_preserves_live_seedmind_cognition, test_live_acceptance_receipt_and_persisted_state_are_exact, test_live_acceptance_exports_ascii_inspectable_evidence, test_live_acceptance_has_no_autonomous_or_sqlite_execution_path
 
+## `tests/unit/test_ndnra_learned_consequence_acceptance.py`
+
+Tests for live learned-consequence acceptance without action authority.
+
+- Kind: python
+- Functions/symbols: test_learned_consequence_acceptance_passes_live_shadow_gate, test_evaluation_records_are_pre_action_predictions_with_real_calibration, test_live_acceptance_records_exact_real_consecutive_chains, test_live_acceptance_restart_paths_restore_and_fall_back, test_learned_consequence_acceptance_exports_are_ascii_and_inspectable, test_live_prediction_record_rejects_action_authority, test_learned_consequence_acceptance_has_no_decision_authority_dependencies
+
 ## `tests/unit/test_ndnra_learned_consequence_model.py`
 
 Tests for the bounded exact-context learned consequence model.
 
 - Kind: python
 - Functions/symbols: _context, _observation, _request, test_unknown_context_action_reports_complete_uncertainty, test_one_real_transition_creates_a_single_step_prediction, test_consistent_real_outcomes_increase_support_and_correct_underconfidence, test_contradiction_reduces_confidence_and_marks_prior_overconfidence, test_most_frequent_exact_next_context_is_predicted_deterministically, test_contexts_and_actions_never_share_model_evidence, test_missing_requested_dimension_stays_unknown_and_limits_coverage, test_zero_confidence_effect_does_not_increase_effect_support, test_unobserved_outcome_dimension_remains_unknown_during_evaluation, test_prediction_request_respects_effect_dimension_bound, test_prediction_evaluation_is_pure_and_requires_exact_real_transition, test_replay_and_imagination_cannot_update_the_model, test_exact_duplicate_is_ignored_and_identity_conflict_is_rejected, test_record_and_observation_bounds_fail_before_model_insertion, test_effect_dimension_and_next_context_bounds_are_atomic, test_stable_ordering_and_authority_contracts_are_enforced, test_snapshots_are_deterministic_ascii_and_non_authoritative, test_model_has_no_execution_persistence_timer_or_imagination_dependency
+
+## `tests/unit/test_ndnra_learned_consequence_persistence.py`
+
+Tests for learned consequence checkpoint persistence and restart reconstruction.
+
+- Kind: python
+- Functions/symbols: _context, _observation, _request, _chain_request, _checkpoint, _canonical_checksum, _state_payload_from_payload, _write_envelope, test_learned_checkpoint_round_trips_exactly_and_has_no_authority, test_brain_store_schema_7_restores_predictions_and_duplicate_protection, test_schema_6_migrates_to_empty_learned_consequence_checkpoint, test_corrupt_truncated_and_oversized_learned_checkpoints_fall_back, test_checksum_valid_conflicting_record_statistics_fall_back, test_checksum_valid_conflicting_calibration_totals_fall_back, test_interrupted_save_leaves_previous_checkpoint_intact, test_serialization_is_deterministic_ascii_and_rejects_manual_evidence_creation, test_durable_execution_preserves_existing_learned_checkpoint
 
 ## `tests/unit/test_ndnra_local_learning.py`
 

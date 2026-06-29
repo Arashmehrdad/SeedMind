@@ -150,14 +150,27 @@ Completed:
 
 ### Batch 5 - bounded imagination
 
-Planned:
+Partially implemented: only in-memory caller-driven Batch 1 is complete. The expanded marker remains **82%**.
+
+Implemented in Batch 1:
+
+- Accept only caller-supplied unique non-empty ASCII action sequences.
+- Preserve caller order exactly.
+- Roll forward only through exact `LearnedConsequenceModel.predict` evidence.
+- Require the same sorted relevant effect codes at every step.
+- Stop at the first unavailable action, missing exact evidence, missing exact next context, or supporting-source-event bound failure.
+- Preserve exact source prediction IDs and exact supporting real event IDs as provenance only.
+- Expose final predicted context only for fully supported traces.
+- Keep the module in memory only with zero confidence, mastery, competence, growth, replay-evidence, real-observation, and authority changes.
+
+Still planned:
 
 - Generate action candidates and short sequences from learned pieces.
-- Simulate possible outcomes without changing the real environment.
-- Keep imagined traces separate from real and replayed traces.
-- Limit sequence depth, candidate count, rollout count, and computation.
+- Rank or optimise imagined routes.
+- Persist imagination-specific state.
+- Accept live imagination into the deterministic Nursery loop.
 - Trigger imagination from unresolved needs, surprise, contradiction, low confidence, or bounded idle periods.
-- Reject unsupported chains and runaway self-confirmation.
+- Promote promising imagined traces into safe real experiments.
 
 ### Batch 6 - safe experiment proposals
 
@@ -211,7 +224,7 @@ The expanded marker started at 68% before Batch 1.
 
 After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raised it to **78%**. Live replay/restoration invariance, restart, failure-path, and export acceptance raised the expanded marker to **79%**. Learned consequence persistence raised it to **80%**. Learned consequence live acceptance and closure evidence raise it to **82%**.
 
-The marker remains limited because SeedMind still does not provide bounded imagination, imagined route optimisation, safe experiment promotion, imagination-specific persistence, or complete end-to-end integration.
+The marker remains limited because SeedMind still does not provide candidate generation, imagined route optimisation, safe experiment promotion, imagination-specific persistence, live imagination acceptance, or complete end-to-end integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 

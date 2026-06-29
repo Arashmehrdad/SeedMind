@@ -4,24 +4,24 @@
 
 ## Snapshot
 
-- Source files indexed: **263**
+- Source files indexed: **278**
 - Scan truncated: **no**
 - Project types: **Python**
 
 ## Languages and formats
 
-- Python: 204
+- Python: 211
 - JSON: 30
-- Markdown: 20
+- Markdown: 28
 - TXT: 8
 - TOML: 1
 
 ## Top-level areas
 
-- `src/`: 115 indexed files
-- `tests/`: 76 indexed files
+- `src/`: 118 indexed files
+- `tests/`: 80 indexed files
 - `artifacts/`: 30 indexed files
-- `docs/`: 18 indexed files
+- `docs/`: 26 indexed files
 - `scripts/`: 17 indexed files
 - `requirements/`: 4 indexed files
 

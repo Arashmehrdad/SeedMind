@@ -13,6 +13,15 @@ from seedmind.research.ndnra.adaptive import (
     NDNRARuntimeAdaptiveState,
     PressureDischarge,
 )
+from seedmind.research.ndnra.bounded_imagination import (
+    BoundedConsequenceImagination,
+    BoundedImaginationConfig,
+    BoundedImaginationResult,
+    ImaginedActionSequence,
+    ImaginedConsequenceRequest,
+    ImaginedConsequenceStep,
+    ImaginedConsequenceTrace,
+)
 from seedmind.research.ndnra.composition import (
     CompositionCandidate,
     CompositionResult,
@@ -314,7 +323,7 @@ from seedmind.research.ndnra.persistence import (
     NDNRAGrowthState,
 )
 
-__all__ = [
+__all__ = [  # noqa: RUF022
     "BRAIN_SCHEMA",
     "BRAIN_SCHEMA_VERSION",
     "EXECUTION_SCHEMA",
@@ -334,6 +343,9 @@ __all__ = [
     "ActivityMaintenanceRequest",
     "AdaptiveRuntimeConfig",
     "AdaptiveUpdate",
+    "BoundedConsequenceImagination",
+    "BoundedImaginationConfig",
+    "BoundedImaginationResult",
     "BoundedContextualTransferPolicy",
     "BrainLoadResult",
     "BrainLoadStatus",
@@ -476,6 +488,10 @@ __all__ = [
     "HeatFanWorld",
     "HeatTransition",
     "HeatWorldState",
+    "ImaginedActionSequence",
+    "ImaginedConsequenceRequest",
+    "ImaginedConsequenceStep",
+    "ImaginedConsequenceTrace",
     "LearnedConsequenceModel",
     "LearnedConsequenceModelConfig",
     "LessonIdentity",

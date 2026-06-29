@@ -2106,6 +2106,14 @@ does not complete bounded imagination, imagined route optimisation, safe experim
 promotion, semantic abstraction, learned similarity weights, or a 100% architecture
 claim.
 
+Bounded imagination has now started only at a narrower Batch 1 boundary. The implemented
+piece is an in-memory caller-driven layer over exact learned-consequence predictions. It
+accepts only explicit caller sequences, preserves caller order, rolls forward only when
+exact requested effects and an exact next context exist at each step, and stops at the
+first unsupported step without fabricating later outcomes. It adds no candidate
+generation, route optimisation, persistence, live integration, or safe-experiment
+promotion authority.
+
 ---
 
 # 14. Protected safety supervisor

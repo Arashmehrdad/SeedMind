@@ -1608,6 +1608,32 @@ imagination, imagined route optimisation, safe experiment promotion, semantic
 abstraction, learned similarity weights, autonomous production authority, or a 100%
 architecture claim.
 
+### 17.25 Bounded imagination Batch 1 boundary
+
+The first bounded-imagination boundary is narrower than the later full stage. It is an
+in-memory caller-driven rollout layer over exact `LearnedConsequenceModel.predict`
+evidence only.
+
+- The caller supplies every candidate action sequence.
+- Candidate order is preserved exactly and is never ranked, selected, scheduled,
+  optimised, recommended, or executed.
+- Each step begins from the exact current context and requests the same sorted relevant
+  effect codes.
+- A step is supported only when exact requested effects exist and an exact predicted next
+  context exists.
+- The exact predicted next context becomes the next step context.
+- Missing actions, missing exact evidence, missing exact next context, or supporting
+  source-event bound exhaustion stop the trace immediately.
+- Unsupported traces expose no final context.
+- Effects remain per-step only; there is no cumulative effect or route score.
+- Every step and trace remains explicitly imagined and preserves exact source prediction
+  IDs plus exact supporting real event IDs as provenance only.
+
+This boundary is deliberately non-persistent, non-integrated, and non-authoritative. It
+does not add candidate generation, contextual transfer as an alternate source, observed
+chain search, advice, growth, replay, SQLite, timers, workers, asyncio, safe-experiment
+promotion, or production integration.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
