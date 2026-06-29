@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Standalone NDNRA Acceptance and Restart Proof Batch 2
+- Latest completed milestone: NDNRA v0.1 retain-or-descope audit
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,8 +17,8 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: NDNRA
 - Last closed stage: Bounded Imagination at Batch 8
-- Current stage: Standalone NDNRA Acceptance and Restart Proof
-- Current status: complete through Batch 2; retain-or-descope audit next
+- Current stage: Normalized Recruitment and Local Saturation
+- Current status: planned; Batch 1 normalized competing recruitment next
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -86,6 +86,8 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-stage-closure.md`
 - `docs/architecture/NDNRA_Standalone_Completion_Gap_Audit_2026-06-29.md`
 - `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-acceptance-and-restart-proof.md`
+- `docs/architecture/NDNRA_Retain_Or_Descope_Audit_2026-06-29.md`
+- `docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md`
 
 ## Next planning target
 
@@ -97,15 +99,32 @@ The next stage is `Standalone NDNRA Acceptance and Restart Proof`. Batch 1 is co
 
 Batch 2 is complete as a separate standalone acceptance persistence store and restart-proof evidence boundary. It keeps the main brain schema unchanged, persists exactly one validated Batch 1 `StandaloneAcceptanceResult` as versioned canonical ASCII JSON with SHA-256 payload checksum and atomic temp-file replacement, restores only exact validated nested data, reports explicit loaded, missing-fallback, corrupt-fallback, and incompatible-fallback statuses, proves exact reload and deterministic rerun equivalence through a separate zero-authority result, and never synthesizes passing or partial evidence from missing or damaged storage.
 
-Required sequence:
+The retain-or-descope audit is complete.
 
-1. Run an NDNRA-only retain-or-descope audit for the remaining expanded research questions.
-2. Implement and independently prove every capability retained as necessary for full NDNRA closure.
-3. Run the final standalone NDNRA closure audit.
-4. Compare the completed NDNRA architecture with the original SeedMind plan.
-5. Decide explicitly whether, where, and how integration should occur.
+Retained as mandatory before standalone v0.1 closure:
 
-The gap audit also identifies later retain-or-descope questions for learned similarity, semantic abstraction, simultaneous-need coordination, recruitment normalization, locally derived saturation, growth initialization, and long-horizon interference. Passing the next acceptance stage will not silently declare those questions solved.
+- local spreading-activation normalization under competing recruitment;
+- locally derived representational saturation;
+- long-horizon mixed-task interference and adaptability evidence.
+
+Already sufficiently represented for v0.1:
+
+- bounded initial connections for specialist growth through deterministic local eligibility, bounded membership, configured specialist limits, and duplicate blocking.
+
+Deferred post-v0.1 research:
+
+- learned context-similarity weights;
+- semantic abstraction above grounded context signatures;
+- coordination of multiple simultaneous needs.
+
+The next stage is `Normalized Recruitment and Local Saturation`:
+
+1. Batch 1 — normalized competing recruitment while preserving deterministic heat-fan recall and dormancy behaviour.
+2. Batch 2 — graph-locally derived saturation and saturation-gated growth pressure.
+3. Then complete long-horizon mixed-task interference and adaptability.
+4. Run the final standalone NDNRA closure audit.
+5. Compare the completed NDNRA architecture with the original SeedMind plan.
+6. Decide explicitly whether, where, and how integration should occur.
 
 Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless a later NDNRA-only audit independently requires an equivalent capability.
 

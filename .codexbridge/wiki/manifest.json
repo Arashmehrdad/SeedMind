@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T18:44:26.865566+00:00",
+  "generated_at": "2026-06-29T19:09:05.727100+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 310,
+  "source_file_count": 312,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "7511c3a12cfad72c00e4995cca02c3df4a6e87d05f1f2aa84aa1496d1378f257",
-      "size_bytes": 7096
+      "sha256": "e278a35cb3b33af6bebf3b88fc6622303540c4b586f264df0ba4654e15378e14",
+      "size_bytes": 7684
     },
     {
       "path": "pyproject.toml",
@@ -181,14 +181,19 @@
       "size_bytes": 1561
     },
     {
+      "path": "docs/architecture/NDNRA_Retain_Or_Descope_Audit_2026-06-29.md",
+      "sha256": "11ae64873a201ccf41f10e25c0ef73a712ecc5d2616b720a5dbc163e4ba6db5b",
+      "size_bytes": 9430
+    },
+    {
       "path": "docs/architecture/NDNRA_Standalone_Completion_Gap_Audit_2026-06-29.md",
       "sha256": "7b3268784ab3c45cef292adb6fc3ca8d2145ad04057f7e6b2d0350d76c16a1ae",
       "size_bytes": 9921
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "dd37f05ba028289a59ee9a725ce07ea3dacc745b4b92975e0e2caec3ed6b799c",
-      "size_bytes": 88738
+      "sha256": "c5f43666f75b588ffde5e9c659a17d5ccca4cdcab9c1f2d064003aff720feda3",
+      "size_bytes": 89596
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -214,6 +219,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
       "sha256": "774fd17084c96418f877e36eb9dff8d28e02e1d4a525fbb2d3611c0bd6bc4a8e",
       "size_bytes": 2000
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md",
+      "sha256": "9bf3b028d199591b6d4125e12a65c256c6bff1cb28d541cd0c8cb9ddedd1ce71",
+      "size_bytes": 2825
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-acceptance-and-restart-proof.md",

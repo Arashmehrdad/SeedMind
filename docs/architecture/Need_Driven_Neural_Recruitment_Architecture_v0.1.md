@@ -1769,6 +1769,10 @@ The following rules must remain true:
 78. Standalone NDNRA acceptance aggregation is deterministic, in-memory, and non-authoritative; it cannot create factual evidence, checkpoint authority, restart authority, recommendation authority, scheduling authority, execution authority, live-integration authority, or production-action authority.
 79. Standalone acceptance restart persistence must remain a separate versioned canonical-ASCII JSON store that preserves exactly one validated Batch 1 acceptance result, verifies SHA-256 payload checksum before load, reports explicit loaded, missing-fallback, corrupt-fallback, or incompatible-fallback status, and never exposes partial or synthesized passing evidence.
 80. Restart proof must remain separate from the Batch 1 acceptance result and preserve zero authority, zero deltas, exact nested-result reload equivalence, deterministic post-restart rerun equivalence, unchanged bounded-imagination non-persistence, and an unchanged main brain schema.
+81. NDNRA v0.1 explicitly supports one active need pulse at a time, grounded exact context signatures, fixed bounded contextual-transfer weights, and specialist-interaction growth; learned similarity, semantic abstraction, and simultaneous-need coordination remain post-v0.1 research.
+82. Local spreading-activation normalization under competing recruitment and graph-locally derived representational saturation are required before standalone NDNRA v0.1 closure.
+83. The v0.1 initial-connection policy for newly grown specialist interactions must remain deterministic, eligibility-scoped, membership-bounded, specialist-count-bounded, duplicate-blocking, and preserving of old assemblies.
+84. Existing short bounded interference evidence does not satisfy final closure; a longer deterministic mixed-task interference and adaptability experiment is required.
 
 ## 19. First prototype boundary
 
