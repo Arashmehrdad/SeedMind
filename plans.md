@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed batch: Batch 7 — explicit human permission review for safe-experiment proposals
+- Latest completed batch: Batch 8 — explicit training-review and non-training bypass gate
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -28,6 +28,7 @@ Completed bounded increments:
 5. Batch 5 — deterministic unresolved-comparison uncertainty audit.
 6. Batch 6 — deterministic caller-nominated safe-experiment proposal contracts.
 7. Batch 7 — deterministic explicit human approve, reject, or defer review.
+8. Batch 8 — deterministic training-review or explicit configured non-training bypass resolution.
 
 ## Current accepted boundary
 
@@ -40,7 +41,7 @@ All bounded imagination outputs remain:
 - non-evidentiary;
 - non-authoritative.
 
-The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, preserve caller-supplied safe-experiment proposal semantics, and record an explicit human approve, reject, or defer decision without autonomous recommendation or execution.
+The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, preserve caller-supplied safe-experiment proposal semantics, record optional training-time human review, and resolve an explicit configured non-training review bypass without autonomous recommendation or execution.
 
 It must not:
 
@@ -58,13 +59,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Batch 7:
+After Batch 8:
 
 ```text
-ruff format --check .: 223 files already formatted
+ruff format --check .: 225 files already formatted
 ruff check .: passed
-mypy: no issues in 223 source files
-pytest -q: 875 passed
+mypy: no issues in 225 source files
+pytest -q: 891 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -79,12 +80,13 @@ Use these for architecture and implementation detail:
 - `docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md`
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md`
 - `docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md`
+- `docs/architecture/decisions/ADR-2026-06-29-explicit-training-review-gate-policy.md`
 
 ## Next planning target
 
-Audit and close the current bounded-imagination stage with Batch 7 documented as an optional training-time human-review gate, not a permanent runtime dependency. A future runtime may bypass this training gate through an explicit configured policy boundary; bypass must never be inferred silently from missing review evidence.
+Audit and close the bounded-imagination stage at Batch 8. The stage now has an explicit training-review path and an explicit configured non-training bypass path, both remaining non-executing and non-authoritative.
 
-The current permission decision is review evidence only. Even an approved proposal does not authorize scheduling or execution, and the absence of a Batch 7 decision must not prevent a separately approved future non-training runtime path.
+Do not add an experiment permit, scheduler, executor, persistence, live Nursery integration, autonomous promotion, recommendation, or production action path unless Arash separately approves that stronger boundary.
 
 ## Working rules
 

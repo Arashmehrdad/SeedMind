@@ -1759,6 +1759,10 @@ The following rules must remain true:
 68. Training approval requires explicit human acknowledgement of predicted benefit, uncertainty, possible harm, reversibility, and stop conditions; rejection and deferral remain explicit non-permission outcomes rather than inferred policy decisions.
 69. A granted permission decision is training review evidence only and cannot schedule, execute, persist, integrate, recommend, select, promote, or control a production action; those stronger boundaries require separate approval.
 70. Batch 7 is not a permanent runtime dependency. A future non-training runtime may bypass the human-review gate only through an explicit configured policy boundary; missing, rejected, or deferred review evidence must never be interpreted as an implicit bypass.
+71. Safe-experiment review-gate resolution must consume one complete revalidated Batch 6 proposal result and an explicit training or non-training mode.
+72. Training review, review approval, rejection, deferral, and non-training bypass must remain distinct deterministic statuses; absence of review evidence always resolves to review required unless an explicit valid bypass is supplied.
+73. Non-training bypass requires an enabled policy capability, an explicit caller bypass request, an ASCII runtime-policy identity, and no simultaneous Batch 7 permission result.
+74. Review-gate resolution remains descriptive policy evidence only and cannot schedule, execute, persist, integrate, recommend, select, promote, or control a production action.
 
 ## 19. First prototype boundary
 
