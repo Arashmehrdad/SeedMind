@@ -82,9 +82,9 @@ Use these for architecture and implementation detail:
 
 ## Next planning target
 
-Audit and close the current bounded-imagination stage at the explicit human permission-review boundary. Do not add an experiment execution permit, scheduler, persistence, live Nursery integration, autonomous promotion, recommendation, or production action path unless Arash explicitly approves that stronger boundary.
+Audit and close the current bounded-imagination stage with Batch 7 documented as an optional training-time human-review gate, not a permanent runtime dependency. A future runtime may bypass this training gate through an explicit configured policy boundary; bypass must never be inferred silently from missing review evidence.
 
-The current permission decision is review evidence only. Even an approved proposal does not authorize scheduling or execution.
+The current permission decision is review evidence only. Even an approved proposal does not authorize scheduling or execution, and the absence of a Batch 7 decision must not prevent a separately approved future non-training runtime path.
 
 ## Working rules
 

@@ -603,7 +603,7 @@ Pure non-authoritative need alignment for bounded imagined routes.
 
 ## `src/seedmind/research/ndnra/bounded_imagination_safe_experiment_permission.py`
 
-Explicit human permission review for one imagined safe-experiment proposal.
+Optional training-time human review for one imagined safe-experiment proposal.
 
 - Kind: python
 - Classes: ImaginedSafeExperimentPermissionAction, BoundedSafeExperimentPermissionConfig, ImaginedSafeExperimentPermissionRequest, ImaginedSafeExperimentPermissionDecision, ImaginedSafeExperimentPermissionResult, BoundedImaginedSafeExperimentPermissionReviewer

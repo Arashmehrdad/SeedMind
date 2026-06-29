@@ -1,4 +1,4 @@
-"""Explicit human permission review for one imagined safe-experiment proposal."""
+"""Optional training-time human review for one imagined safe-experiment proposal."""
 
 from __future__ import annotations
 
@@ -362,7 +362,7 @@ class ImaginedSafeExperimentPermissionResult:
 
 @dataclass(frozen=True, slots=True)
 class BoundedImaginedSafeExperimentPermissionReviewer:
-    """Record explicit human disposition without recommending or executing."""
+    """Record optional training-time human review without runtime authority."""
 
     def review(
         self,

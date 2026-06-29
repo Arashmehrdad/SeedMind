@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:15:50.726185+00:00",
+  "generated_at": "2026-06-29T16:30:57.854026+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "79ed243784f761929e0440f95df2bfca4716fa9ff3e6c10c90ee192366383596",
-      "size_bytes": 4240
+      "sha256": "c1b654f5ad9b1c96e7ba53da7898d2bb2554545ee8c59a2b86f5cafb0c890e41",
+      "size_bytes": 4359
     },
     {
       "path": "pyproject.toml",
@@ -182,8 +182,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "81d712a51a2bd2b426c96e59be8380ffca4f7433abffa874ab41743fce78ff84",
-      "size_bytes": 86190
+      "sha256": "949492cc770ab83dfeaf45cb15cb2908e4747614671a60919b44f59a847caa9b",
+      "size_bytes": 86485
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md",
-      "sha256": "da99aed39e888bff572f2772eefbb5ef87ae882f4627f366e25f399c82ca1b01",
-      "size_bytes": 1959
+      "sha256": "03eaaca72c3e9c1af6fbed3e8656986604e68788438d6712f889845d4cf31a3f",
+      "size_bytes": 2397
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
@@ -782,8 +782,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/bounded_imagination_safe_experiment_permission.py",
-      "sha256": "97e425ca03bb05e727b66aab9a6acd13ccd9a3f31c7ccaff594339a81ca0d3a3",
-      "size_bytes": 23297
+      "sha256": "a98dc546ec28f94d565a923ec33f61f436d9d69cb25f9607dfe8d4f210927baf",
+      "size_bytes": 23301
     },
     {
       "path": "src/seedmind/research/ndnra/bounded_imagination_safe_experiment_proposal.py",
