@@ -1755,6 +1755,9 @@ The following rules must remain true:
 64. Uncertainty audit output must revalidate the complete Batch 4 source result, preserve source pair and dimension order, remain deterministic and in memory, and retain zero evidence, learning, and production authority.
 65. Safe-experiment proposal construction must consume one complete revalidated Batch 5 uncertainty result and one explicit caller-nominated issue, preserving exact provenance and caller-supplied hypothesis, predicted benefit, uncertainty, possible harm, reversibility, stop conditions, and required permission.
 66. A proposal contract is descriptive only and cannot infer or recommend an issue, route, candidate, action, or experiment; grant permission; rank, optimise, schedule, promote, execute, persist, integrate live, or control production actions.
+67. Safe-experiment permission review must consume one complete revalidated Batch 6 proposal result, one exact expected proposal identity, one exact expected permission requirement, and one explicit human approve, reject, or defer action.
+68. Approval requires explicit human acknowledgement of predicted benefit, uncertainty, possible harm, reversibility, and stop conditions; rejection and deferral remain explicit non-permission outcomes rather than inferred policy decisions.
+69. A granted permission decision is review evidence only and cannot schedule, execute, persist, integrate, recommend, select, promote, or control a production action; those stronger boundaries require separate approval.
 
 ## 19. First prototype boundary
 

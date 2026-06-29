@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed batch: Batch 6 — caller-nominated safe-experiment proposal contracts
+- Latest completed batch: Batch 7 — explicit human permission review for safe-experiment proposals
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -27,6 +27,7 @@ Completed bounded increments:
 4. Batch 4 — deterministic caller-order pairwise route comparison.
 5. Batch 5 — deterministic unresolved-comparison uncertainty audit.
 6. Batch 6 — deterministic caller-nominated safe-experiment proposal contracts.
+7. Batch 7 — deterministic explicit human approve, reject, or defer review.
 
 ## Current accepted boundary
 
@@ -39,7 +40,7 @@ All bounded imagination outputs remain:
 - non-evidentiary;
 - non-authoritative.
 
-The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, and preserve caller-supplied safe-experiment proposal semantics without autonomous recommendation.
+The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, preserve caller-supplied safe-experiment proposal semantics, and record an explicit human approve, reject, or defer decision without autonomous recommendation or execution.
 
 It must not:
 
@@ -57,13 +58,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Batch 6:
+After Batch 7:
 
 ```text
-ruff format --check .: 221 files already formatted
+ruff format --check .: 223 files already formatted
 ruff check .: passed
-mypy: no issues in 221 source files
-pytest -q: 860 passed
+mypy: no issues in 223 source files
+pytest -q: 875 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -77,12 +78,13 @@ Use these for architecture and implementation detail:
 - `docs/archive/SeedMind_Master_Implementation_Plan_v0.1.md`
 - `docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md`
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md`
+- `docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md`
 
 ## Next planning target
 
-Plan the explicit human permission boundary for safe-experiment proposals. That next layer may review caller-nominated proposal contracts, but it must still avoid execution, persistence, scheduling, live integration, promotion, recommendation, and production action authority.
+Audit and close the current bounded-imagination stage at the explicit human permission-review boundary. Do not add an experiment execution permit, scheduler, persistence, live Nursery integration, autonomous promotion, recommendation, or production action path unless Arash explicitly approves that stronger boundary.
 
-The next increment must remain non-authoritative and in memory unless Arash explicitly approves a stronger boundary. Execution, persistence, scheduling, live integration, autonomous promotion, recommendation, and production action authority remain deferred.
+The current permission decision is review evidence only. Even an approved proposal does not authorize scheduling or execution.
 
 ## Working rules
 

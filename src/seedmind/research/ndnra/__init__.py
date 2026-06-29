@@ -52,6 +52,14 @@ from seedmind.research.ndnra.bounded_imagination_evaluation import (
     ImaginedRouteEvaluationResult,
     ImaginedRouteStepEvaluation,
 )
+from seedmind.research.ndnra.bounded_imagination_safe_experiment_permission import (
+    BoundedImaginedSafeExperimentPermissionReviewer,
+    BoundedSafeExperimentPermissionConfig,
+    ImaginedSafeExperimentPermissionAction,
+    ImaginedSafeExperimentPermissionDecision,
+    ImaginedSafeExperimentPermissionRequest,
+    ImaginedSafeExperimentPermissionResult,
+)
 from seedmind.research.ndnra.bounded_imagination_safe_experiment_proposal import (
     BoundedImaginedSafeExperimentProposer,
     ImaginedSafeExperimentProposal,
@@ -390,6 +398,7 @@ __all__ = [  # noqa: RUF022
     "BoundedConsequenceImagination",
     "BoundedCandidateGenerationConfig",
     "BoundedComparisonUncertaintyConfig",
+    "BoundedImaginedSafeExperimentPermissionReviewer",
     "BoundedImaginedSafeExperimentProposer",
     "BoundedImaginationConfig",
     "BoundedImaginationResult",
@@ -399,6 +408,7 @@ __all__ = [  # noqa: RUF022
     "BoundedImaginedRouteComparator",
     "BoundedRouteComparisonConfig",
     "BoundedRouteEvaluationConfig",
+    "BoundedSafeExperimentPermissionConfig",
     "BoundedContextualTransferPolicy",
     "BrainLoadResult",
     "BrainLoadStatus",
@@ -553,6 +563,10 @@ __all__ = [  # noqa: RUF022
     "ImaginedComparisonUncertaintyIssue",
     "ImaginedComparisonUncertaintyRequest",
     "ImaginedComparisonUncertaintyResult",
+    "ImaginedSafeExperimentPermissionAction",
+    "ImaginedSafeExperimentPermissionDecision",
+    "ImaginedSafeExperimentPermissionRequest",
+    "ImaginedSafeExperimentPermissionResult",
     "ImaginedSafeExperimentProposal",
     "ImaginedSafeExperimentProposalRequest",
     "ImaginedSafeExperimentProposalResult",

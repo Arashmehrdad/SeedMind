@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T15:08:12.716443+00:00",
+  "generated_at": "2026-06-29T16:15:50.726185+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 296,
+  "source_file_count": 299,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "105d385e64e152c98aa00e9ce4ed6a8c5e06aedd34b308f6de5c3472197cb2bd",
-      "size_bytes": 4063
+      "sha256": "79ed243784f761929e0440f95df2bfca4716fa9ff3e6c10c90ee192366383596",
+      "size_bytes": 4240
     },
     {
       "path": "pyproject.toml",
@@ -182,13 +182,18 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "d60647214d6f340db5ac4d7691590f5a527b247bd46826f79171c07d5e6792f1",
-      "size_bytes": 85489
+      "sha256": "81d712a51a2bd2b426c96e59be8380ffca4f7433abffa874ab41743fce78ff84",
+      "size_bytes": 86190
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
       "sha256": "faa0abd5d4ad6446373d08780741195a2182e38eacfdc476d41e0215fdc6a14c",
       "size_bytes": 1870
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md",
+      "sha256": "da99aed39e888bff572f2772eefbb5ef87ae882f4627f366e25f399c82ca1b01",
+      "size_bytes": 1959
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
@@ -742,8 +747,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "27e0cad06905505f49106fa8a8bbd25404f1d880abf697e86757f7790f38d466",
-      "size_bytes": 22405
+      "sha256": "6c9aa55a28e32ce7b5dc0c9857b7df455a8da04db9cc77b0b86dce9cae0d7929",
+      "size_bytes": 23054
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -774,6 +779,11 @@
       "path": "src/seedmind/research/ndnra/bounded_imagination_evaluation.py",
       "sha256": "6c171455618a3452b6781ece5bad908d44e44dbcbf5867455c13293b202efc1b",
       "size_bytes": 33774
+    },
+    {
+      "path": "src/seedmind/research/ndnra/bounded_imagination_safe_experiment_permission.py",
+      "sha256": "97e425ca03bb05e727b66aab9a6acd13ccd9a3f31c7ccaff594339a81ca0d3a3",
+      "size_bytes": 23297
     },
     {
       "path": "src/seedmind/research/ndnra/bounded_imagination_safe_experiment_proposal.py",
@@ -1174,6 +1184,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_evaluation.py",
       "sha256": "4d1f64e7b9d04c1cc97412811271c3bf51be010af89d519b555db8266a5e3979",
       "size_bytes": 15640
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_safe_experiment_permission.py",
+      "sha256": "4056494172a6d12006dcca611313db7238256f5e0715bd4630a4381c466a7844",
+      "size_bytes": 15690
     },
     {
       "path": "tests/unit/test_ndnra_bounded_imagination_safe_experiment_proposal.py",
