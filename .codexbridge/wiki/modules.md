@@ -601,6 +601,14 @@ Pure non-authoritative need alignment for bounded imagined routes.
 - Classes: ImaginedAlignmentDirection, BoundedRouteEvaluationConfig, ImaginedRouteEvaluationRequest, ImaginedEffectAlignment, ImaginedRouteStepEvaluation, ImaginedRouteEvaluation, ImaginedRouteEvaluationResult, BoundedImaginedRouteEvaluator
 - Functions/symbols: _alignment_for, _need_snapshot, _canonical_json_bytes, _identity, _validate_ascii_code, _validate_sorted_unique_codes, _validate_signed_nonzero, _validate_positive_unit, _validate_signed, _validate_unit, _validate_zero_delta
 
+## `src/seedmind/research/ndnra/bounded_imagination_safe_experiment_proposal.py`
+
+Caller-nominated safe-experiment proposal contracts over Batch 5 uncertainty.
+
+- Kind: python
+- Classes: ImaginedSafeExperimentProposalRequest, ImaginedSafeExperimentProposal, ImaginedSafeExperimentProposalResult, BoundedImaginedSafeExperimentProposer
+- Functions/symbols: _revalidate_source_result, _canonical_json_bytes, _identity, _validate_ascii_code, _validate_sorted_unique_ascii_codes, _validate_zero_delta
+
 ## `src/seedmind/research/ndnra/bounded_imagination_uncertainty.py`
 
 Deterministic uncertainty audit over imagined route comparisons.
@@ -1174,6 +1182,13 @@ Tests for pure non-authoritative imagined route evaluation.
 
 - Kind: python
 - Functions/symbols: _context, _observe, _model, _need, _candidates, _two_step_candidate, test_per_effect_alignment_classifies_improving_worsening_and_neutral, test_missing_effect_dimension_remains_unknown_not_neutral, test_evaluation_preserves_caller_candidate_order_without_winner_or_rank, test_intensity_is_inspectable_but_does_not_create_hidden_aggregate, test_candidate_need_mismatch_is_rejected_before_evaluation, test_later_step_need_change_is_rejected_before_evaluation, test_empty_candidate_request_returns_empty_deterministic_result, test_request_bounds_are_atomic, test_repeated_evaluation_is_identity_stable_and_ascii, test_evaluation_preserves_zero_evidence_and_authority_changes, test_actual_evaluation_cannot_update_real_consequence_evidence, test_static_dependencies_exclude_generation_execution_and_storage_surfaces
+
+## `tests/unit/test_ndnra_bounded_imagination_safe_experiment_proposal.py`
+
+Tests for bounded caller-nominated safe-experiment proposal contracts.
+
+- Kind: python
+- Functions/symbols: _context, _need, _observe, _source_result, _request, test_valid_proposal_creation_preserves_exact_provenance, test_missing_issue_is_rejected, test_tampered_source_result_is_rejected_before_proposal_construction, test_duplicate_stop_condition_codes_are_rejected, test_unsorted_stop_condition_codes_are_rejected, test_repeated_requests_have_stable_ascii_identities, test_zero_deltas_and_authority_remain_exact_on_all_layers, test_snapshots_exclude_ranking_scheduling_execution_and_persistence_fields, test_result_rejects_tampered_proposal, test_static_dependencies_exclude_earlier_stage_calls_and_runtime_surfaces
 
 ## `tests/unit/test_ndnra_bounded_imagination_uncertainty.py`
 

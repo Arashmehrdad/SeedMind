@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed batch: Batch 5 — comparison uncertainty audit
+- Latest completed batch: Batch 6 — caller-nominated safe-experiment proposal contracts
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -26,6 +26,7 @@ Completed bounded increments:
 3. Batch 3 — pure per-step, per-dimension need-alignment annotation.
 4. Batch 4 — deterministic caller-order pairwise route comparison.
 5. Batch 5 — deterministic unresolved-comparison uncertainty audit.
+6. Batch 6 — deterministic caller-nominated safe-experiment proposal contracts.
 
 ## Current accepted boundary
 
@@ -38,7 +39,7 @@ All bounded imagination outputs remain:
 - non-evidentiary;
 - non-authoritative.
 
-The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, and expose unresolved comparison reasons without proposing what to do.
+The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, and preserve caller-supplied safe-experiment proposal semantics without autonomous recommendation.
 
 It must not:
 
@@ -56,13 +57,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Batch 5:
+After Batch 6:
 
 ```text
-ruff format --check .: 219 files already formatted
+ruff format --check .: 221 files already formatted
 ruff check .: passed
-mypy: no issues in 219 source files
-pytest -q: 850 passed
+mypy: no issues in 221 source files
+pytest -q: 860 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -71,17 +72,17 @@ git diff --check: passed
 
 Use these for architecture and implementation detail:
 
-- `docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md`
-- `docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md`
-- `docs/SeedMind_Master_Implementation_Plan_v0.1.md`
+- `docs/archive/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md`
+- `docs/archive/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md`
+- `docs/archive/SeedMind_Master_Implementation_Plan_v0.1.md`
 - `docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md`
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md`
 
 ## Next planning target
 
-Plan the first bounded safe-experiment proposal contracts using explicit caller nomination of one exact imagined source. The proposal layer may describe a hypothesis, predicted benefit, uncertainty, possible harm, reversibility, stop conditions, and required permission, but it must not autonomously select a candidate, schedule, execute, promote, persist, or influence production actions.
+Plan the explicit human permission boundary for safe-experiment proposals. That next layer may review caller-nominated proposal contracts, but it must still avoid execution, persistence, scheduling, live integration, promotion, recommendation, and production action authority.
 
-The next increment must remain non-authoritative and in memory unless Arash explicitly approves a stronger boundary. Persistence, live integration, autonomous promotion, recommendation, and production action authority remain deferred.
+The next increment must remain non-authoritative and in memory unless Arash explicitly approves a stronger boundary. Execution, persistence, scheduling, live integration, autonomous promotion, recommendation, and production action authority remain deferred.
 
 ## Working rules
 

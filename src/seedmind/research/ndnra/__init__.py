@@ -52,6 +52,12 @@ from seedmind.research.ndnra.bounded_imagination_evaluation import (
     ImaginedRouteEvaluationResult,
     ImaginedRouteStepEvaluation,
 )
+from seedmind.research.ndnra.bounded_imagination_safe_experiment_proposal import (
+    BoundedImaginedSafeExperimentProposer,
+    ImaginedSafeExperimentProposal,
+    ImaginedSafeExperimentProposalRequest,
+    ImaginedSafeExperimentProposalResult,
+)
 from seedmind.research.ndnra.bounded_imagination_uncertainty import (
     BoundedComparisonUncertaintyConfig,
     BoundedImaginedComparisonUncertaintyAuditor,
@@ -384,6 +390,7 @@ __all__ = [  # noqa: RUF022
     "BoundedConsequenceImagination",
     "BoundedCandidateGenerationConfig",
     "BoundedComparisonUncertaintyConfig",
+    "BoundedImaginedSafeExperimentProposer",
     "BoundedImaginationConfig",
     "BoundedImaginationResult",
     "BoundedExactCandidateGenerator",
@@ -546,6 +553,9 @@ __all__ = [  # noqa: RUF022
     "ImaginedComparisonUncertaintyIssue",
     "ImaginedComparisonUncertaintyRequest",
     "ImaginedComparisonUncertaintyResult",
+    "ImaginedSafeExperimentProposal",
+    "ImaginedSafeExperimentProposalRequest",
+    "ImaginedSafeExperimentProposalResult",
     "ImaginedRouteComparisonRequest",
     "ImaginedRouteComparisonResult",
     "ImaginedRouteDimensionComparison",

@@ -9,6 +9,7 @@ Batch 2 status: complete in memory only
 Batch 3 status: complete in memory only
 Batch 4 status: complete in memory only
 Batch 5 status: complete in memory only
+Batch 6 status: complete in memory only
 
 ## Scope
 
@@ -58,6 +59,14 @@ Batch 5 implements only deterministic uncertainty auditing over one complete Bat
 - Issue order preserves source pair order and source dimension order.
 - The audit proposes no experiment, route, action, schedule, permission decision, promotion, or execution.
 - The complete Batch 4 result remains canonical provenance and is revalidated before auditing.
+
+Batch 6 implements only caller-nominated safe-experiment proposal contracts over one complete Batch 5 `ImaginedComparisonUncertaintyResult`.
+
+- The caller supplies exactly one explicit `issue_id` from the embedded Batch 5 result plus all proposal semantics.
+- The request revalidates the complete Batch 5 result before any proposal is constructed.
+- The proposal may describe only hypothesis, predicted benefit, uncertainty, possible harm, reversibility, stop conditions, and required permission.
+- The layer does not infer, rank, recommend, optimise, schedule, execute, persist, promote, or integrate anything.
+- The nominated Batch 5 issue and complete source result remain exact provenance.
 
 ## Exact-source-only invariants
 
@@ -110,6 +119,15 @@ Batch 5 adds these uncertainty-audit invariants:
 - Comparable pairs cannot carry uncertainty issues.
 - Issue identity and final result identity use canonical ASCII JSON plus SHA-256.
 - Audit output contains no proposed experiment, score, utility, rank, winner, recommendation, selection, scheduling, promotion, execution, persistence, or production authority.
+
+Batch 6 adds these safe-experiment proposal invariants:
+
+- Proposal construction consumes exactly one complete uncertainty result and one explicit caller-nominated issue ID.
+- The nominated issue must exist exactly once in the source result and remains attached as exact provenance.
+- Proposal semantics remain caller supplied only; no hidden experiment inference or recommendation path exists.
+- Stop-condition codes remain sorted unique ASCII codes when provided.
+- Request, proposal, and result identities use canonical ASCII JSON plus SHA-256.
+- Request, proposal, and result carry zero deltas and zero action or production authority.
 
 ## Limits
 
@@ -248,11 +266,23 @@ The Batch 5 test set adds coverage for:
 - rejection of uncertainty results as real consequence evidence;
 - static exclusion of earlier generation, evaluation, comparison execution, learned-model, transfer, persistence, integration, scheduling, optimisation, and execution surfaces.
 
+The Batch 6 test set adds coverage for:
+
+- valid caller-nominated proposal creation with exact Batch 5 provenance;
+- missing nominated issue rejection;
+- unstable or tampered source-result rejection before proposal construction;
+- duplicate and unsorted stop-condition-code rejection;
+- stable ASCII identities and snapshots;
+- zero deltas and zero authority on request, proposal, and result;
+- snapshots excluding ranking, scheduling, execution, persistence, promotion, and integration fields;
+- no earlier-stage calls;
+- static exclusion of persistence, integration, timers, threading, asyncio, sqlite, and optimisation surfaces.
+
 ## Deferred work
 
-Still pending after Batch 5:
+Still pending after Batch 6:
 
-- explicit caller-nominated safe-experiment proposal contracts;
+- explicit human permission boundary for safe-experiment proposals;
 - optional route optimisation only under a separately accepted non-authoritative semantics contract;
 - persistence;
 - live integration;

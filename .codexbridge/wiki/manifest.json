@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T05:00:44.422984+00:00",
+  "generated_at": "2026-06-29T15:08:12.716443+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 294,
+  "source_file_count": 296,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "a1e3a4a4e283e7f65df7fab325a0c3f9e266f638b72030273d3a97355639fde3",
-      "size_bytes": 3958
+      "sha256": "105d385e64e152c98aa00e9ce4ed6a8c5e06aedd34b308f6de5c3472197cb2bd",
+      "size_bytes": 4063
     },
     {
       "path": "pyproject.toml",
@@ -181,154 +181,9 @@
       "size_bytes": 1561
     },
     {
-      "path": "docs/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
-      "sha256": "fc3afe99c7bdc4a0b4dc03eb4b6c2b4a687c6be07d6c5cb27d6981a8e48d8391",
-      "size_bytes": 2114
-    },
-    {
-      "path": "docs/SeedMind_Bounded_Imagination_Batch2_Handover_2026-06-29.md",
-      "sha256": "935608a33111790dd8fd8363ec8b6b23c18151b56cf21083ca13b801d695d3d9",
-      "size_bytes": 4464
-    },
-    {
-      "path": "docs/SeedMind_Bounded_Imagination_Batch3_Handover_2026-06-29.md",
-      "sha256": "e69c094a53e06ac48b52de2a3a7a6a43832fa6e9077cc09257cea118117a2049",
-      "size_bytes": 4629
-    },
-    {
-      "path": "docs/SeedMind_Bounded_Imagination_Batch4_Handover_2026-06-29.md",
-      "sha256": "e6613cd39c3350c4f4edc2856865d7957888a3d7959c8a597a35b0146ab9c6b0",
-      "size_bytes": 3272
-    },
-    {
-      "path": "docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md",
-      "sha256": "689c455f4081b05e5f8f5f70f8a4a848ebf35b2cec1c2a9ca2a374ff74875aeb",
-      "size_bytes": 15762
-    },
-    {
-      "path": "docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
-      "sha256": "7a7259036b24caf643139ee26245319beee075de1d099dba1620f2f4d6ce1a4f",
-      "size_bytes": 16634
-    },
-    {
-      "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
-      "sha256": "ca7223b3fed62668d1e70dd3dbb393879dbba635f2f338110974aed92f25a924",
-      "size_bytes": 7101
-    },
-    {
-      "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Plan_2026-06-27.md",
-      "sha256": "0057720ade81589818b7d7b171738986eaadafbcaede671388044885e393c379",
-      "size_bytes": 5442
-    },
-    {
-      "path": "docs/SeedMind_Consolidation_Stage_Handover_2026-06-27.md",
-      "sha256": "8d7bf67b1710c0fd30cf61b3663b4581c35cd80ad9fb10999c0d891935632b05",
-      "size_bytes": 7860
-    },
-    {
-      "path": "docs/SeedMind_Controlled_Replay_Restoration_Stage_Handover_2026-06-28.md",
-      "sha256": "3e07bb9900a4f926239c0841092c0825bc7b43b14fee7a5165c59294028afae0",
-      "size_bytes": 9955
-    },
-    {
-      "path": "docs/SeedMind_Controlled_Replay_Restoration_Stage_Plan_2026-06-28.md",
-      "sha256": "e1362b18e0ffaf18fa62925af3297f27f60d0d612576fa99bbdfc6830f3576e3",
-      "size_bytes": 13912
-    },
-    {
-      "path": "docs/SeedMind_Human_Approved_Consolidation_Execution_Stage_Handover_2026-06-28.md",
-      "sha256": "8439906e7ab2cc5271d143d200b395341b00d74dc6a12ba57e002629b93b0157",
-      "size_bytes": 13423
-    },
-    {
-      "path": "docs/SeedMind_Human_Approved_Consolidation_Execution_Stage_Plan_2026-06-28.md",
-      "sha256": "765aa7372f02296380fa2ef19e4d0561330d2a62ad7c413b5db0959fad737f76",
-      "size_bytes": 9495
-    },
-    {
-      "path": "docs/SeedMind_Learned_Consequence_Model_Batch3_Handover_2026-06-29.md",
-      "sha256": "8a0d1eb08e5eba7ba41527a0d036c50c172aa9a98d9d91f6c72d6d9fa3769dab",
-      "size_bytes": 4403
-    },
-    {
-      "path": "docs/SeedMind_Learned_Consequence_Model_Batch4_Handover_2026-06-29.md",
-      "sha256": "933ca6c6984e56cf312d2937109619ea504220b382700d4cc067374cca932609",
-      "size_bytes": 4975
-    },
-    {
-      "path": "docs/SeedMind_Learned_Consequence_Model_Batch5_Handover_2026-06-29.md",
-      "sha256": "998b311f0630ef14b44cfb8e919aa4f5c4e4711f5fb21cfeebdacc363ffa3f14",
-      "size_bytes": 3617
-    },
-    {
-      "path": "docs/SeedMind_Learned_Consequence_Model_Stage_Closure_2026-06-29.md",
-      "sha256": "42ee2ec69b7b4d92d9cb9940c79e0d901b26f5a24e0aba54631f42404cde0266",
-      "size_bytes": 5803
-    },
-    {
-      "path": "docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md",
-      "sha256": "02ef8e2dc1fa4abef43b72eae09fd1b2335e4798c9495a83c5e1bfcdd1004538",
-      "size_bytes": 14356
-    },
-    {
-      "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "a2175e8f3ca7abdd18a825290c59ed416e9dc616e6b5be7011691205b1456a74",
-      "size_bytes": 104246
-    },
-    {
-      "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
-      "sha256": "dd5382017e461054ddba5984066d37434135281fb0fe31ea8ebb03757a0e6950",
-      "size_bytes": 8755
-    },
-    {
-      "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Plan_2026-06-27.md",
-      "sha256": "d8d68705a27f0cdbbc92c2488671279ec3866eb46749ae8571cb037c94e4f767",
-      "size_bytes": 6698
-    },
-    {
-      "path": "docs/SeedMind_Restart_Safe_Proposal_Memory_Stage_Handover_2026-06-28.md",
-      "sha256": "37e1d3ac2a18867dbd01a132f0152468230263ae7b78067fa693e6a088a9926f",
-      "size_bytes": 10607
-    },
-    {
-      "path": "docs/SeedMind_Restart_Safe_Proposal_Memory_Stage_Plan_2026-06-27.md",
-      "sha256": "bf8663c48109c2c4ed7f7d3cbdff99e8ba560cb774369d085b41456c46b9c31c",
-      "size_bytes": 7317
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-28.md",
-      "sha256": "e4dd56aafbc9ab2591de655525d0b38a4bfd2df4589e8f86313b3805f51663be",
-      "size_bytes": 38500
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-29.md",
-      "sha256": "81f297f10ff6cebfe5d91827d2a6cfce580b0deaf50d5898f3999366ebb7c22d",
-      "size_bytes": 17890
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md",
-      "sha256": "49d0d8ff501fad982b1840b97cf8ce6ddebd17faca2efa65c0355268ed64fa3c",
-      "size_bytes": 3904
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md",
-      "sha256": "e61b29bfdb95109ca01d5ce19463e958e7a441a1564974cf0c79e49789912b64",
-      "size_bytes": 3788
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md",
-      "sha256": "1114ae865d1a82ec6fc954c804f54051b22aff2cb1ae03bd6a7b945bf92519bb",
-      "size_bytes": 2500
-    },
-    {
-      "path": "docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md",
-      "sha256": "e0400b5a8f284312df5c8cfe1fa240e8851ffc7887a9cef1c137a49b20af2e96",
-      "size_bytes": 3550
-    },
-    {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "77134bdf36b479e6c8079a2ee113e227c5296e8c190d835732354bf377ce0746",
-      "size_bytes": 84934
+      "sha256": "d60647214d6f340db5ac4d7691590f5a527b247bd46826f79171c07d5e6792f1",
+      "size_bytes": 85489
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -339,6 +194,151 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
       "sha256": "774fd17084c96418f877e36eb9dff8d28e02e1d4a525fbb2d3611c0bd6bc4a8e",
       "size_bytes": 2000
+    },
+    {
+      "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
+      "sha256": "fc3afe99c7bdc4a0b4dc03eb4b6c2b4a687c6be07d6c5cb27d6981a8e48d8391",
+      "size_bytes": 2114
+    },
+    {
+      "path": "docs/archive/SeedMind_Bounded_Imagination_Batch2_Handover_2026-06-29.md",
+      "sha256": "935608a33111790dd8fd8363ec8b6b23c18151b56cf21083ca13b801d695d3d9",
+      "size_bytes": 4464
+    },
+    {
+      "path": "docs/archive/SeedMind_Bounded_Imagination_Batch3_Handover_2026-06-29.md",
+      "sha256": "e69c094a53e06ac48b52de2a3a7a6a43832fa6e9077cc09257cea118117a2049",
+      "size_bytes": 4629
+    },
+    {
+      "path": "docs/archive/SeedMind_Bounded_Imagination_Batch4_Handover_2026-06-29.md",
+      "sha256": "e6613cd39c3350c4f4edc2856865d7957888a3d7959c8a597a35b0146ab9c6b0",
+      "size_bytes": 3272
+    },
+    {
+      "path": "docs/archive/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md",
+      "sha256": "e59dd63e15674b243903c1f882da22b1fef66c639485a0ff4f80a0f500be872c",
+      "size_bytes": 17774
+    },
+    {
+      "path": "docs/archive/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
+      "sha256": "7a7259036b24caf643139ee26245319beee075de1d099dba1620f2f4d6ce1a4f",
+      "size_bytes": 16634
+    },
+    {
+      "path": "docs/archive/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
+      "sha256": "ca7223b3fed62668d1e70dd3dbb393879dbba635f2f338110974aed92f25a924",
+      "size_bytes": 7101
+    },
+    {
+      "path": "docs/archive/SeedMind_Consolidation_Scheduling_Stage_Plan_2026-06-27.md",
+      "sha256": "0057720ade81589818b7d7b171738986eaadafbcaede671388044885e393c379",
+      "size_bytes": 5442
+    },
+    {
+      "path": "docs/archive/SeedMind_Consolidation_Stage_Handover_2026-06-27.md",
+      "sha256": "8d7bf67b1710c0fd30cf61b3663b4581c35cd80ad9fb10999c0d891935632b05",
+      "size_bytes": 7860
+    },
+    {
+      "path": "docs/archive/SeedMind_Controlled_Replay_Restoration_Stage_Handover_2026-06-28.md",
+      "sha256": "3e07bb9900a4f926239c0841092c0825bc7b43b14fee7a5165c59294028afae0",
+      "size_bytes": 9955
+    },
+    {
+      "path": "docs/archive/SeedMind_Controlled_Replay_Restoration_Stage_Plan_2026-06-28.md",
+      "sha256": "e1362b18e0ffaf18fa62925af3297f27f60d0d612576fa99bbdfc6830f3576e3",
+      "size_bytes": 13912
+    },
+    {
+      "path": "docs/archive/SeedMind_Human_Approved_Consolidation_Execution_Stage_Handover_2026-06-28.md",
+      "sha256": "8439906e7ab2cc5271d143d200b395341b00d74dc6a12ba57e002629b93b0157",
+      "size_bytes": 13423
+    },
+    {
+      "path": "docs/archive/SeedMind_Human_Approved_Consolidation_Execution_Stage_Plan_2026-06-28.md",
+      "sha256": "765aa7372f02296380fa2ef19e4d0561330d2a62ad7c413b5db0959fad737f76",
+      "size_bytes": 9495
+    },
+    {
+      "path": "docs/archive/SeedMind_Learned_Consequence_Model_Batch3_Handover_2026-06-29.md",
+      "sha256": "8a0d1eb08e5eba7ba41527a0d036c50c172aa9a98d9d91f6c72d6d9fa3769dab",
+      "size_bytes": 4403
+    },
+    {
+      "path": "docs/archive/SeedMind_Learned_Consequence_Model_Batch4_Handover_2026-06-29.md",
+      "sha256": "933ca6c6984e56cf312d2937109619ea504220b382700d4cc067374cca932609",
+      "size_bytes": 4975
+    },
+    {
+      "path": "docs/archive/SeedMind_Learned_Consequence_Model_Batch5_Handover_2026-06-29.md",
+      "sha256": "998b311f0630ef14b44cfb8e919aa4f5c4e4711f5fb21cfeebdacc363ffa3f14",
+      "size_bytes": 3617
+    },
+    {
+      "path": "docs/archive/SeedMind_Learned_Consequence_Model_Stage_Closure_2026-06-29.md",
+      "sha256": "42ee2ec69b7b4d92d9cb9940c79e0d901b26f5a24e0aba54631f42404cde0266",
+      "size_bytes": 5803
+    },
+    {
+      "path": "docs/archive/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md",
+      "sha256": "02ef8e2dc1fa4abef43b72eae09fd1b2335e4798c9495a83c5e1bfcdd1004538",
+      "size_bytes": 14356
+    },
+    {
+      "path": "docs/archive/SeedMind_Master_Implementation_Plan_v0.1.md",
+      "sha256": "a2175e8f3ca7abdd18a825290c59ed416e9dc616e6b5be7011691205b1456a74",
+      "size_bytes": 104246
+    },
+    {
+      "path": "docs/archive/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
+      "sha256": "dd5382017e461054ddba5984066d37434135281fb0fe31ea8ebb03757a0e6950",
+      "size_bytes": 8755
+    },
+    {
+      "path": "docs/archive/SeedMind_Proposal_Lifecycle_Stage_Plan_2026-06-27.md",
+      "sha256": "d8d68705a27f0cdbbc92c2488671279ec3866eb46749ae8571cb037c94e4f767",
+      "size_bytes": 6698
+    },
+    {
+      "path": "docs/archive/SeedMind_Restart_Safe_Proposal_Memory_Stage_Handover_2026-06-28.md",
+      "sha256": "37e1d3ac2a18867dbd01a132f0152468230263ae7b78067fa693e6a088a9926f",
+      "size_bytes": 10607
+    },
+    {
+      "path": "docs/archive/SeedMind_Restart_Safe_Proposal_Memory_Stage_Plan_2026-06-27.md",
+      "sha256": "bf8663c48109c2c4ed7f7d3cbdff99e8ba560cb774369d085b41456c46b9c31c",
+      "size_bytes": 7317
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-28.md",
+      "sha256": "e4dd56aafbc9ab2591de655525d0b38a4bfd2df4589e8f86313b3805f51663be",
+      "size_bytes": 38500
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-29.md",
+      "sha256": "81f297f10ff6cebfe5d91827d2a6cfce580b0deaf50d5898f3999366ebb7c22d",
+      "size_bytes": 17890
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md",
+      "sha256": "49d0d8ff501fad982b1840b97cf8ce6ddebd17faca2efa65c0355268ed64fa3c",
+      "size_bytes": 3904
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md",
+      "sha256": "e61b29bfdb95109ca01d5ce19463e958e7a441a1564974cf0c79e49789912b64",
+      "size_bytes": 3788
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md",
+      "sha256": "1114ae865d1a82ec6fc954c804f54051b22aff2cb1ae03bd6a7b945bf92519bb",
+      "size_bytes": 2500
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md",
+      "sha256": "e0400b5a8f284312df5c8cfe1fa240e8851ffc7887a9cef1c137a49b20af2e96",
+      "size_bytes": 3550
     },
     {
       "path": "docs/wiki/SeedMind_Repository_Wiki.md",
@@ -742,8 +742,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "beec24c3eb82b5c011481e42c86b3ae523300fb2b2acdbe376e15bbff8133810",
-      "size_bytes": 21984
+      "sha256": "27e0cad06905505f49106fa8a8bbd25404f1d880abf697e86757f7790f38d466",
+      "size_bytes": 22405
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -774,6 +774,11 @@
       "path": "src/seedmind/research/ndnra/bounded_imagination_evaluation.py",
       "sha256": "6c171455618a3452b6781ece5bad908d44e44dbcbf5867455c13293b202efc1b",
       "size_bytes": 33774
+    },
+    {
+      "path": "src/seedmind/research/ndnra/bounded_imagination_safe_experiment_proposal.py",
+      "sha256": "e773221734623a690d67bbc1e0c9b82a3293fffb33cb990c6ed7e82eb0d8bbcc",
+      "size_bytes": 17079
     },
     {
       "path": "src/seedmind/research/ndnra/bounded_imagination_uncertainty.py",
@@ -1169,6 +1174,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_evaluation.py",
       "sha256": "4d1f64e7b9d04c1cc97412811271c3bf51be010af89d519b555db8266a5e3979",
       "size_bytes": 15640
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_safe_experiment_proposal.py",
+      "sha256": "64a721d9eb39af99c11e64e51f5230e37f9a2d4b09d05c2688cf23020666a505",
+      "size_bytes": 10726
     },
     {
       "path": "tests/unit/test_ndnra_bounded_imagination_uncertainty.py",
