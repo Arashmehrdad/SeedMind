@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Bounded Imagination Stage Closure
+- Latest completed milestone: NDNRA standalone completion gap audit
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,7 +17,8 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: NDNRA
 - Last closed stage: Bounded Imagination at Batch 8
-- Current status: remaining-stage audit and standalone NDNRA completion
+- Current stage: Standalone NDNRA Acceptance and Restart Proof
+- Current status: planned; implementation not yet started
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -83,12 +84,16 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md`
 - `docs/architecture/decisions/ADR-2026-06-29-explicit-training-review-gate-policy.md`
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-stage-closure.md`
+- `docs/architecture/NDNRA_Standalone_Completion_Gap_Audit_2026-06-29.md`
+- `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-acceptance-and-restart-proof.md`
 
 ## Next planning target
 
 Finish and prove NDNRA as a standalone research architecture before comparing it with, or integrating it into, the original SeedMind roadmap.
 
-The next task is an NDNRA-only gap audit: identify the remaining architecture components, experiments, and proof obligations after bounded-imagination closure, then select the smallest next NDNRA stage from that audit.
+The gap audit is complete. It confirms that the Section 20 prototype criteria are evidenced in isolation, while complete NDNRA proof remains fragmented across experiments and checkpoint boundaries.
+
+The next stage is `Standalone NDNRA Acceptance and Restart Proof`. It must aggregate existing heat-fan recall, multi-effect composition, structural growth, restart, corruption-fallback, and authority evidence into one deterministic standalone acceptance boundary without adding new cognitive authority.
 
 Required sequence:
 
@@ -97,9 +102,11 @@ Required sequence:
 3. Compare the completed NDNRA architecture with the original SeedMind plan.
 4. Decide explicitly whether, where, and how integration should occur.
 
-Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless the NDNRA gap audit independently identifies an equivalent capability as necessary for NDNRA completion.
+The gap audit also identifies later retain-or-descope questions for learned similarity, semantic abstraction, simultaneous-need coordination, recruitment normalization, locally derived saturation, growth initialization, and long-horizon interference. Passing the next acceptance stage will not silently declare those questions solved.
 
-Experiment permits, schedulers, executors, imagination persistence, live Nursery integration, autonomous promotion, recommendation, and production action authority remain separate boundaries requiring explicit approval.
+Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless a later NDNRA-only audit independently requires an equivalent capability.
+
+Experiment permits, schedulers, executors, bounded-imagination persistence, live Nursery integration, autonomous promotion, recommendation, and production action authority remain separate boundaries requiring explicit approval.
 
 ## Working rules
 
