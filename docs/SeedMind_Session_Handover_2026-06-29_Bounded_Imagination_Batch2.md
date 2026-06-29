@@ -1,5 +1,7 @@
 # SeedMind Session Handover - Bounded Imagination Batch 2
 
+Superseded for current continuation by `docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md`.
+
 Date: 29 June 2026
 Repository: `D:\Github\SeedMind`
 CodexBridge alias: `seedmind`

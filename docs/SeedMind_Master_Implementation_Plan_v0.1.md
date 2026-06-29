@@ -2106,11 +2106,11 @@ does not complete bounded imagination, imagined route optimisation, safe experim
 promotion, semantic abstraction, learned similarity weights, or a 100% architecture
 claim.
 
-Bounded imagination is now split across two narrow accepted increments. Batch 1 is the
-in-memory caller-driven layer over exact learned-consequence predictions. It accepts
-only explicit caller sequences, preserves caller order, rolls forward only when exact
-requested effects and an exact next context exist at each step, and stops at the first
-unsupported step without fabricating later outcomes.
+Bounded imagination is now split across three narrow accepted increments. Batch 1 is
+the in-memory caller-driven layer over exact learned-consequence predictions. It
+accepts only explicit caller sequences, preserves caller order, rolls forward only when
+exact requested effects and an exact next context exist at each step, and stops at the
+first unsupported step without fabricating later outcomes.
 
 Batch 2 adds only in-memory deterministic exact-record candidate enumeration. The caller
 supplies one exact starting context and sorted requested effect codes. The generator
@@ -2119,6 +2119,14 @@ context-action records plus exact `LearnedConsequenceModel.predict(...)` outputs
 exact source record and prediction provenance, enforces finite truncation bounds, and
 still adds no ranking, scoring, selection, recommendation, scheduling, execution,
 persistence, live integration, or safe-experiment promotion authority.
+
+Batch 3 adds only pure need-alignment annotation over already-generated imagined
+candidates. It preserves caller order and exact source provenance, classifies each
+need dimension per step as improving, worsening, neutral, or unknown, weights signed
+alignment by learned prediction confidence, leaves need intensity inspectable without
+creating a hidden route total, rejects active-need drift, and still creates no winner,
+rank, recommendation, selection, optimisation, schedule, promotion, execution,
+persistence, live integration, or production authority.
 
 ---
 

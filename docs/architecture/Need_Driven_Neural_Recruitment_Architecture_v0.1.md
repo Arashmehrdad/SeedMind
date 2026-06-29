@@ -1726,6 +1726,9 @@ The following rules must remain true:
 56. Live learned-consequence predictions may observe before production action execution and calibrate after the real outcome, but they cannot change production action selection, training updates, advice, route ranking, growth, replay, restoration, or SQLite lookup.
 57. Bounded imagination traces and generated candidates remain explicitly imagined, provenance-only, non-evidentiary, deterministic, finite, and unable to alter confidence, mastery, competence, growth, replay, persistence, or production authority.
 58. Exact-record candidate enumeration may preserve deterministic breadth-first order, but that order is not a score, rank, recommendation, selection, schedule, promotion, or execution decision.
+59. Imagined route evaluation must keep every need dimension and every route step explicit; missing effects remain unknown and arbitrary cross-effect or cross-step totals are forbidden until a separate semantics contract is accepted.
+60. Need-alignment annotation may preserve learned prediction confidence and exact source provenance, but it cannot create a route winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or production authority.
+61. Every evaluated step must retain the request need identity; active-need drift invalidates the route evaluation rather than being silently compared under the old need.
 
 ## 19. First prototype boundary
 

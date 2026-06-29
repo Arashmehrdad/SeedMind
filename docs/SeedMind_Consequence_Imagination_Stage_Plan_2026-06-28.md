@@ -150,7 +150,7 @@ Completed:
 
 ### Batch 5 - bounded imagination
 
-Partially implemented: in-memory caller-driven Batch 1 and in-memory exact-record deterministic candidate-enumeration Batch 2 are complete. The expanded marker remains **82%**.
+Partially implemented: in-memory caller-driven Batch 1, exact-record deterministic candidate-enumeration Batch 2, and pure need-alignment annotation Batch 3 are complete. The expanded marker remains **82%**.
 
 Implemented in Batch 1:
 
@@ -173,6 +173,15 @@ Implemented in Batch 2:
 - Stop extending one candidate when a source prediction ID would repeat.
 - Return partial deterministic output with result-level truncation reasons for branch, candidate, expansion, source-record, and supporting-event bounds.
 - Keep generated candidates free of scores, ranks, recommendations, schedules, execution fields, promotion fields, persistence, and integration.
+
+Implemented in Batch 3:
+
+- Accept an explicit `EffectNeed` and already-generated imagined candidates only.
+- Annotate each candidate step independently for every need dimension as improving, worsening, neutral, or unknown.
+- Weight directional alignment by learned prediction confidence while keeping need intensity inspectable and separate from any route total.
+- Preserve exact source step, record, prediction, context, next-context, and supporting-real-event provenance.
+- Reject candidate steps whose active need changes away from the evaluation need.
+- Preserve caller order with no route score, winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or live integration.
 
 Still planned:
 

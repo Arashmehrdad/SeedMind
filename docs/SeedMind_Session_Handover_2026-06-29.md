@@ -1,7 +1,7 @@
 # SeedMind Session Handover — 29 June 2026
 
 Superseded for current continuation by
-`docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md`.
+`docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md`.
 
 The remaining sections below are retained as historical context and must not be treated as the current repository state.
 

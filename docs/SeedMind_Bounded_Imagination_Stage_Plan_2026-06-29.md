@@ -6,6 +6,7 @@ Stage scope: bounded imagination
 Stage status: active
 Batch 1 status: complete in memory only
 Batch 2 status: complete in memory only
+Batch 3 status: complete in memory only
 
 ## Scope
 
@@ -27,6 +28,16 @@ Batch 2 implements only deterministic exact-record candidate enumeration over ex
 - Request, step, candidate, and result identities use deterministic canonical ASCII JSON plus SHA-256.
 - Batch 2 does not call Batch 1 implicitly. A caller may explicitly hand generated sequences into Batch 1 later.
 
+Batch 3 implements only pure need-alignment annotation for caller-ordered imagined candidates.
+
+- The caller supplies an explicit `EffectNeed` and already-generated imagined candidates.
+- Every candidate step is annotated independently for each need dimension as improving, worsening, neutral, or unknown.
+- Signed alignment uses predicted effect direction and learned prediction confidence; need intensity remains explicit metadata and is not hidden inside a route total.
+- Missing predicted dimensions remain unknown rather than neutral.
+- Exact source step, record, prediction, context, next-context, and supporting-real-event provenance remain inspectable.
+- Candidate order is preserved exactly. No route total, winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or live integration is created.
+- All step contexts must retain the same active need identity as the evaluation request.
+
 ## Exact-source-only invariants
 
 - Imagination begins from the exact caller-supplied `ContextSignature`.
@@ -45,6 +56,15 @@ Batch 2 adds these exact-source-only invariants:
 - Unsupported contexts return an empty deterministic result rather than an exception.
 - Bound exhaustion returns partial deterministic output with result-level truncation reasons only.
 - Candidate objects carry no per-candidate truncation flag and no ranking or authority fields.
+
+Batch 3 adds these need-alignment invariants:
+
+- Evaluation accepts imagined generated candidates only and never invokes generation or Batch 1 imagination internally.
+- Every candidate step context must preserve the request need identity.
+- Each need dimension remains a separate alignment record; arbitrary cross-effect and cross-step summation is prohibited.
+- Unknown dimensions retain zero prediction confidence, no signed alignment, and no borrowed provenance.
+- Known alignment provenance exactly matches the originating imagined step and its real supporting events.
+- Evaluation order is caller order and carries no quality semantics.
 
 ## Limits
 
@@ -66,7 +86,15 @@ Default Batch 2 limits:
 - `maximum_total_expansions=24`
 - `maximum_supporting_real_event_ids_per_candidate=64`
 
-All bounds are validated before prediction where possible. Any rejection or failure leaves the learned model snapshot unchanged.
+Default Batch 3 limits:
+
+- `maximum_candidates=8`
+- `maximum_steps_per_candidate=3`
+- `maximum_need_dimensions=16`
+- `maximum_total_alignments=384`
+- `neutral_tolerance=0.05`
+
+All bounds are validated before evaluation where possible. Batch 1 and Batch 2 leave the learned model snapshot unchanged; Batch 3 is pure and does not receive a mutable model reference.
 
 ## Immutable zero-authority contract
 
@@ -111,11 +139,25 @@ The Batch 2 test set adds coverage for:
 - static exclusion of contextual transfer, observed chains, persistence, growth, replay, SQLite, timers, threads, and asyncio;
 - absence of score, rank, schedule, execution, and promotion fields in snapshots.
 
+The Batch 3 test set adds coverage for:
+
+- improving, worsening, neutral, and unknown per-effect alignment classifications;
+- learned prediction confidence affecting signed alignment without creating a route total;
+- need intensity remaining inspectable without hidden aggregation;
+- exact step, record, prediction, context, next-context, and supporting-event provenance;
+- caller candidate order preserved without a winner or ranking field;
+- first-step and later-step active-need mismatches rejected before evaluation;
+- candidate, step, need-dimension, and total-alignment bounds;
+- deterministic ASCII identities and empty deterministic evaluation;
+- zero evidence, confidence, mastery, competence, growth, replay, and authority changes on every public layer;
+- rejection of imagined evaluations as real consequence evidence;
+- static exclusion of generation calls, integration, persistence, transfer, observed-chain substitution, timers, workers, SQLite, and optimisation.
+
 ## Deferred work
 
-Still pending after Batch 2:
+Still pending after Batch 3:
 
-- route optimisation;
+- route comparison or optimisation with an explicitly accepted non-authoritative semantics contract;
 - persistence;
 - live integration;
 - safe-experiment proposal promotion;
@@ -123,7 +165,7 @@ Still pending after Batch 2:
 
 ## Acceptance criteria
 
-Batch 1 and Batch 2 are accepted only when:
+Batch 1, Batch 2, and Batch 3 are accepted only when:
 
 - the modules stay in memory only;
 - snapshots and IDs are deterministic ASCII SHA-256 contracts;
