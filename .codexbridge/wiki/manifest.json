@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T22:48:27.190765+00:00",
+  "generated_at": "2026-06-29T23:36:41.420796+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 324,
+  "source_file_count": 327,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "9eeffbc15ef42cf15ffda5b6dce069480ffe7afbb30e3f621653a3b365a352d7",
-      "size_bytes": 7329
+      "sha256": "2fb0e9529dd49ab5a18e81fcbfd99e4a1632611d73c0cd29521447d0c21991b9",
+      "size_bytes": 7833
     },
     {
       "path": "pyproject.toml",
@@ -201,6 +201,11 @@
       "size_bytes": 96345
     },
     {
+      "path": "docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md",
+      "sha256": "e93c49774358c4c27069a4189ba103510e36bdeaf6e9ed338bd4b8b26f606fa1",
+      "size_bytes": 39469
+    },
+    {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
       "sha256": "faa0abd5d4ad6446373d08780741195a2182e38eacfdc476d41e0215fdc6a14c",
       "size_bytes": 1870
@@ -254,6 +259,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md",
       "sha256": "7eeb1c75aadb6e71d01fd0b9267f0a2b94210aae834c29a621963d4f48b4146e",
       "size_bytes": 3167
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md",
+      "sha256": "31875d7733bee08bf18d14560e5038618aff1b412660a7aa9060c8dd18f23d5b",
+      "size_bytes": 5052
     },
     {
       "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
@@ -399,6 +409,11 @@
       "path": "docs/archive/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md",
       "sha256": "e0400b5a8f284312df5c8cfe1fa240e8851ffc7887a9cef1c137a49b20af2e96",
       "size_bytes": 3550
+    },
+    {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-30_NDNRA_v0.1_Closed.md",
+      "sha256": "28a339dfb5ff58a6ce889b8d976f7d85e1859c672c3cd90d0a926ae386e738f1",
+      "size_bytes": 9440
     },
     {
       "path": "docs/wiki/SeedMind_Repository_Wiki.md",

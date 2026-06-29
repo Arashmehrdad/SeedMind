@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Final Standalone NDNRA v0.1 Closure Audit
+- Latest completed milestone: Original Plan and NDNRA v0.1 Comparison Decision
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Final Standalone NDNRA Closure Audit
-- Current stage: Original Plan Comparison and Integration Decision
-- Current status: Standalone NDNRA v0.1 is closed under the declared scope, no integration is approved, and comparison with the original SeedMind plan is next
+- Last closed stage: Original Plan and NDNRA v0.1 Comparison Decision
+- Current stage: Awaiting explicit integration-boundary approval
+- Current status: The original master plan remains the product and MVP spine; selective partial integration of NDNRA is recommended, but no runtime integration is approved
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged because closure consolidates and bounds accepted evidence without adding new cognitive architecture capability; it is not a completion percentage for the original SeedMind roadmap
+- Marker interpretation: unchanged because the comparison adds no new cognitive architecture capability; it is not a completion percentage for the original SeedMind roadmap
 
 Completed bounded increments:
 
@@ -62,7 +62,7 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Final Standalone NDNRA v0.1 Closure Audit:
+After Original Plan and NDNRA v0.1 Comparison Decision:
 
 ```text
 ruff format --check .: 237 files already formatted
@@ -94,48 +94,42 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-long-horizon-mixed-task-interference.md`
 - `docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md`
 - `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md`
+- `docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md`
+- `docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md`
 
 ## Next planning target
 
-Standalone NDNRA v0.1 is now closed under its declared standalone scope. The next work is comparison with the original SeedMind roadmap, followed by an explicit integration decision rather than immediate integration work.
+The documentation-first comparison is accepted. Its decision is:
 
-Closure evidence is recorded in:
+- retain the original SeedMind master plan as the governing product, MVP, safety, human-apprenticeship, evaluation, and competition roadmap;
+- adapt selected memory, persistence, observatory, metric, and roadmap interfaces around NDNRA;
+- consider later partial integration for local delayed credit, need-driven recall, consequence memory, recall effort, local saturation evidence, provenance, retention evidence, and bounded consolidation evidence;
+- keep NDNRA proof stores, research growth, shadow suggestions, human-approved research operations, and bounded imagination isolated unless a later ADR approves a narrower boundary;
+- reject proof-store merging, bounded-imagination persistence, implicit permission, autonomous execution, and NDNRA production action authority.
 
-- `docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md`
-- `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md`
+The original Week 8 reusable-skill objective remains mandatory. NDNRA has not yet proved a Nursery `approach_and_push` skill with explicit preconditions, termination, varied-start generalisation, reuse, known failure boundaries, and retention.
 
-The accepted closure keeps these boundaries:
+The original roadmap is active as the product sequence, but its dates and implementation order may require re-baselining after an integration boundary is approved. No milestone may be marked complete solely because a related NDNRA research proof exists.
 
-- one active need pulse at a time;
-- grounded exact context signatures;
-- fixed bounded inspectable transfer weights;
-- specialist interaction growth rather than unrestricted generic neuron creation;
-- no semantic abstraction claim;
-- no simultaneous multiple-need arbitration claim;
-- no production integration or production action authority.
+No runtime integration work is approved. The next possible work requires Arash's separate explicit approval and must begin with a bounded integration-boundary design rather than code.
 
-Separate proof stores remain separate:
+Any later integration proposal must preserve:
 
-- standalone acceptance persistence and restart proof are one isolated proof store;
-- long-horizon interference persistence and restart proof are a second isolated proof store;
-- neither is a unified cognitive runtime checkpoint;
-- bounded imagination remains non-persistent and non-authoritative.
+- production curiosity as the sole production action authority;
+- the protected external safety supervisor and human permission channels;
+- separate standalone-acceptance and long-horizon proof stores;
+- non-persistent bounded imagination;
+- atomic versioned runtime persistence with complete safe fallback;
+- matched-control behavioural invariance for unaffected production paths;
+- original retention, rollback, hardware, observability, and competition-claim gates.
 
-Deferred post-v0.1 research remains outside the closure claim:
+Deferred post-v0.1 research remains outside the accepted integration recommendation:
 
 - learned context-similarity weights;
 - semantic abstraction above grounded context signatures;
-- coordination of multiple simultaneous needs.
-
-Required sequence:
-
-1. Compare completed standalone NDNRA v0.1 with the original SeedMind master plan.
-2. Make an explicit retain, adapt, partially integrate, or do-not-integrate decision.
-3. Implement integration work only after separate explicit approval.
-
-Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless a later NDNRA-only audit independently requires an equivalent capability.
-
-Experiment permits, schedulers, executors, bounded-imagination persistence, live Nursery integration, autonomous promotion, recommendation, and production action authority remain separate boundaries requiring explicit approval.
+- simultaneous multiple-need coordination;
+- unrestricted generic neuron creation;
+- a unified production cognitive runtime checkpoint.
 
 ## Working rules
 
