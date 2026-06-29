@@ -338,6 +338,17 @@ from seedmind.research.ndnra.learned_consequence_persistence import (
     LEARNED_CONSEQUENCE_SCHEMA_VERSION,
     NDNRALearnedConsequenceCheckpoint,
 )
+from seedmind.research.ndnra.long_horizon_interference_experiment import (
+    LongHorizonConditionResult,
+    LongHorizonInterferenceCondition,
+    LongHorizonInterferenceConfig,
+    LongHorizonInterferenceEvidence,
+    LongHorizonInterferenceResult,
+    LongHorizonStepRecord,
+    LongHorizonTaskFamily,
+    run_long_horizon_interference_experiment,
+    validate_long_horizon_interference_result,
+)
 from seedmind.research.ndnra.models import (
     GrowthPressure,
     HeatAction,
@@ -635,6 +646,13 @@ __all__ = [  # noqa: RUF022
     "LocalEffectLink",
     "LocalNeuralGraph",
     "LocalNeuralGraphConfig",
+    "LongHorizonConditionResult",
+    "LongHorizonInterferenceCondition",
+    "LongHorizonInterferenceConfig",
+    "LongHorizonInterferenceEvidence",
+    "LongHorizonInterferenceResult",
+    "LongHorizonStepRecord",
+    "LongHorizonTaskFamily",
     "LocalSaturationReport",
     "LocalNeuron",
     "LocalSynapse",
@@ -700,6 +718,7 @@ __all__ = [  # noqa: RUF022
     "grow_random_specialist",
     "rollback_consolidation",
     "run_consolidation_interference_experiment",
+    "run_long_horizon_interference_experiment",
     "run_consolidation_proposal_lifecycle_experiment",
     "run_consolidation_scheduling_experiment",
     "run_contextual_mastery_experiment",
@@ -716,4 +735,5 @@ __all__ = [  # noqa: RUF022
     "standalone_acceptance_payload",
     "validate_standalone_acceptance_result",
     "validate_standalone_acceptance_restart_proof_result",
+    "validate_long_horizon_interference_result",
 ]
