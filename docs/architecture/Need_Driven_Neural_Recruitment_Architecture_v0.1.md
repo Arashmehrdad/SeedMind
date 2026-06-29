@@ -1763,6 +1763,8 @@ The following rules must remain true:
 72. Training review, review approval, rejection, deferral, and non-training bypass must remain distinct deterministic statuses; absence of review evidence always resolves to review required unless an explicit valid bypass is supplied.
 73. Non-training bypass requires an enabled policy capability, an explicit caller bypass request, an ASCII runtime-policy identity, and no simultaneous Batch 7 permission result.
 74. Review-gate resolution remains descriptive policy evidence only and cannot schedule, execute, persist, integrate, recommend, select, promote, or control a production action.
+75. The bounded-imagination stage is closed at Batch 8 as an in-memory, deterministic, provenance-preserving, non-evidentiary, and non-authoritative subsystem.
+76. Any experiment permit, scheduler, executor, persistence layer, live integration path, autonomous promotion mechanism, or production action authority must be introduced only through a separately accepted architecture boundary.
 
 ## 19. First prototype boundary
 

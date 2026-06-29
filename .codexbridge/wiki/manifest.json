@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:51:38.882212+00:00",
+  "generated_at": "2026-06-29T17:02:21.484927+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 302,
+  "source_file_count": 304,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "0a1044bc6bb31119ffd0674860b038b7524080b5884f3cd6817f10c2680ebe0c",
-      "size_bytes": 4443
+      "sha256": "70c580e4b320db745ce68a14a46e5c66406dcc70dea90b4e97e85e65502654f4",
+      "size_bytes": 4497
     },
     {
       "path": "pyproject.toml",
@@ -182,13 +182,18 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "95910758d6bb62c14feecd9adb01c69fbdf5f48328fe192f057b0201bb3f5433",
-      "size_bytes": 87229
+      "sha256": "be315a260785b29bb24485af84950965c153d4779b84e88464527c4423a5e655",
+      "size_bytes": 87619
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
       "sha256": "faa0abd5d4ad6446373d08780741195a2182e38eacfdc476d41e0215fdc6a14c",
       "size_bytes": 1870
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-stage-closure.md",
+      "sha256": "efff5935a4a64983a518dded4ab5c30ba90c4ecf27470caaff83d92adde2349d",
+      "size_bytes": 3855
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-explicit-training-review-gate-policy.md",
@@ -1209,6 +1214,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_safe_experiment_review_gate.py",
       "sha256": "0b8c505ea14e34821c7c0469116d760d142557e7d12d5495cd4fc77c53498009",
       "size_bytes": 19846
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_stage_closure.py",
+      "sha256": "5aaf8d9d3d4a2f24ed9bbe29f77aec88dbea1847cc879109cc160b5f380c8912",
+      "size_bytes": 5207
     },
     {
       "path": "tests/unit/test_ndnra_bounded_imagination_uncertainty.py",

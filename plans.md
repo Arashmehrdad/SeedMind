@@ -9,14 +9,14 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed batch: Batch 8 — explicit training-review and non-training bypass gate
+- Latest completed milestone: Bounded Imagination Stage Closure
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Stage: Bounded Imagination
-- Stage status: active
+- Stage status: closed at Batch 8
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -59,13 +59,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Batch 8:
+At stage closure:
 
 ```text
-ruff format --check .: 225 files already formatted
+ruff format --check .: 226 files already formatted
 ruff check .: passed
-mypy: no issues in 225 source files
-pytest -q: 891 passed
+mypy: no issues in 226 source files
+pytest -q: 896 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -81,12 +81,13 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md`
 - `docs/architecture/decisions/ADR-2026-06-29-human-permission-review-for-imagined-safe-experiments.md`
 - `docs/architecture/decisions/ADR-2026-06-29-explicit-training-review-gate-policy.md`
+- `docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-stage-closure.md`
 
 ## Next planning target
 
-Audit and close the bounded-imagination stage at Batch 8. The stage now has an explicit training-review path and an explicit configured non-training bypass path, both remaining non-executing and non-authoritative.
+Plan the next NDNRA stage without reopening bounded imagination. Prioritize the original Week 8 gap: learning, compiling, retaining, and reusing the first bounded skill across changed starts.
 
-Do not add an experiment permit, scheduler, executor, persistence, live Nursery integration, autonomous promotion, recommendation, or production action path unless Arash separately approves that stronger boundary.
+Experiment permits, schedulers, executors, imagination persistence, live Nursery integration, autonomous promotion, recommendation, and production action authority remain separate boundaries requiring explicit approval.
 
 ## Working rules
 
