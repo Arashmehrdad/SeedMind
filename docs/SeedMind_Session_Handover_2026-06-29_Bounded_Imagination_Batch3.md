@@ -10,11 +10,14 @@ Stage status: active
 Batch 1 status: complete in memory only
 Batch 2 status: complete in memory only
 Batch 3 status: complete in memory only
+Batch 4 status: complete in memory only
 Expanded developmental architecture marker: 82%
 
 ## Continue from here
 
-Verify the repository is clean and inspect the latest local commit before editing. Treat this document, `docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md`, and `docs/SeedMind_Bounded_Imagination_Batch3_Handover_2026-06-29.md` as the current continuation sources.
+This handover is superseded by `docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md`.
+
+Verify the repository is clean and inspect the latest local commit before editing. Treat the Batch 4 session handover, `docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md`, and `docs/SeedMind_Bounded_Imagination_Batch4_Handover_2026-06-29.md` as the current continuation sources.
 
 Do not begin persistence, live integration, safe-experiment promotion, or production action influence without a separately accepted boundary.
 
@@ -82,8 +85,8 @@ git diff --check: passed
 
 All imagination outputs remain `ExperienceOrigin.IMAGINED`, provenance-only, non-evidentiary, in-memory, deterministic, finite, and non-authoritative. Missing evidence remains unknown. Arbitrary cross-effect and cross-step totals are prohibited. Production curiosity remains the sole production action authority.
 
-## Next planning target
+## Batch 4 closure
 
-Plan the smallest non-authoritative route-comparison semantics contract. It must keep effect trade-offs explicit and must not create hidden scalar utility, action selection, recommendation, experiment promotion, persistence, live integration, or production authority.
+The smallest non-authoritative route-comparison semantics contract is complete in memory only. It compares one embedded Batch 3 `ImaginedRouteEvaluationResult` pairwise, keeps trade-offs explicit, and creates no score, rank, winner, recommendation, experiment promotion, persistence, live integration, or production authority.
 
 Before closing any later batch, refresh the CodexBridge repository wiki, record repository-scoped decision memory, run all repository gates, verify final Git metadata, create one bounded local commit, and do not push automatically.

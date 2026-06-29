@@ -2128,6 +2128,15 @@ creating a hidden route total, rejects active-need drift, and still creates no w
 rank, recommendation, selection, optimisation, schedule, promotion, execution,
 persistence, live integration, or production authority.
 
+Batch 4 adds only in-memory pairwise alignment comparison over one complete Batch 3
+`ImaginedRouteEvaluationResult`. It compares caller-order route pairs locally by
+step/effect alignment relation, blocks dominance for unknown evidence, low confidence,
+or route-depth mismatch, and reports conflicting trade-offs as incomparable. It embeds
+the complete source result as canonical provenance and still creates no route score,
+utility, global rank, winner, recommendation, selection, optimisation, schedule,
+promotion, execution, persistence, live integration, or production authority. The
+expanded developmental architecture marker remains 82%.
+
 ---
 
 # 14. Protected safety supervisor

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T03:44:23.785106+00:00",
+  "generated_at": "2026-06-29T04:35:20.251404+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 286,
+  "source_file_count": 291,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -191,14 +191,19 @@
       "size_bytes": 4629
     },
     {
+      "path": "docs/SeedMind_Bounded_Imagination_Batch4_Handover_2026-06-29.md",
+      "sha256": "e6613cd39c3350c4f4edc2856865d7957888a3d7959c8a597a35b0146ab9c6b0",
+      "size_bytes": 3272
+    },
+    {
       "path": "docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md",
-      "sha256": "6a4078a2ddfe7fc1604a7171bc35decbcd5178d639b173a40c9369ec4ffbf965",
-      "size_bytes": 9564
+      "sha256": "3e9b92c9dcbc1706ef88e06f1eb9c06f3308c8e3d410cc59b209012c54e754e2",
+      "size_bytes": 13129
     },
     {
       "path": "docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
-      "sha256": "eb8e697e18f098a5f07924ba0657c695b3d11033bbf95a79fd80e0e6e4978209",
-      "size_bytes": 14938
+      "sha256": "8ea1100b1033b7de802337e622d049a6d835c461e90bd28b0839bd80efcc54ce",
+      "size_bytes": 15805
     },
     {
       "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
@@ -262,8 +267,8 @@
     },
     {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "6c107b43be7cb6fbeb91f01463347221201846d8c500647bf3f60f3d9f4538db",
-      "size_bytes": 103180
+      "sha256": "c64c01f54652cf17965660f37735433b4365eb00925eafdc1dfd2b5b1b5af39b",
+      "size_bytes": 103824
     },
     {
       "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
@@ -292,8 +297,8 @@
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29.md",
-      "sha256": "6700c88ee4312ba9bf661887cbb6aa183b05f7a266cb7afb70821502b37070ee",
-      "size_bytes": 17748
+      "sha256": "81f297f10ff6cebfe5d91827d2a6cfce580b0deaf50d5898f3999366ebb7c22d",
+      "size_bytes": 17890
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md",
@@ -302,8 +307,13 @@
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md",
-      "sha256": "8e4469187f0d902194f87967fada26fd1f42a36efc9df36f01fc21cb4eb5f2e9",
-      "size_bytes": 3572
+      "sha256": "e61b29bfdb95109ca01d5ce19463e958e7a441a1564974cf0c79e49789912b64",
+      "size_bytes": 3788
+    },
+    {
+      "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md",
+      "sha256": "1114ae865d1a82ec6fc954c804f54051b22aff2cb1ae03bd6a7b945bf92519bb",
+      "size_bytes": 2500
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md",
@@ -312,8 +322,13 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "1a0b7bc4f6ffaf9cc08acb58cf814410cfe5d28b2230ec64cd869f280250fa5c",
-      "size_bytes": 83012
+      "sha256": "5ed1d60e77c6bc6ca63ae88823631e6a027a20a3eadb2dd29ca228c0a4fe3bd0",
+      "size_bytes": 84455
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
+      "sha256": "faa0abd5d4ad6446373d08780741195a2182e38eacfdc476d41e0215fdc6a14c",
+      "size_bytes": 1870
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
@@ -722,8 +737,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "f6983f6f70a2fefec3b00ba06bcbdc7f9b69c78f89581bc64eb81b5e0de9c47d",
-      "size_bytes": 20681
+      "sha256": "cd3c7df626480816577b75e8e5b6199123801a9aa4ced98005d7ab26a2517763",
+      "size_bytes": 21408
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -744,6 +759,11 @@
       "path": "src/seedmind/research/ndnra/bounded_imagination_candidates.py",
       "sha256": "43e14777a06bd5c5e78bd774bcd4506735e22ec2d8f3aed61e66c6a1f14dd154",
       "size_bytes": 30572
+    },
+    {
+      "path": "src/seedmind/research/ndnra/bounded_imagination_comparison.py",
+      "sha256": "35f9e9b22cb7bda2d38b35b0d5e16e96a46737cc6564b59cbeb8a678e7dfc4d2",
+      "size_bytes": 47025
     },
     {
       "path": "src/seedmind/research/ndnra/bounded_imagination_evaluation.py",
@@ -1129,6 +1149,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_candidates.py",
       "sha256": "e87f3352d4758e7c54bd4a311b24c8b55689c4abdc5d026e40efd1366038d058",
       "size_bytes": 20252
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_comparison.py",
+      "sha256": "46291568f1295b524cb04a68146aabdda185dc29063c12cfb78031f27f4eb9af",
+      "size_bytes": 29193
     },
     {
       "path": "tests/unit/test_ndnra_bounded_imagination_evaluation.py",

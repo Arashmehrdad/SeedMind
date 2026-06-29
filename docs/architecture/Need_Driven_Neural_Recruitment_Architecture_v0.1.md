@@ -1664,6 +1664,27 @@ non-authoritative. It does not add contextual transfer as an alternate source, o
 chain search, advice, growth, replay, SQLite, timers, workers, asyncio, safe-experiment
 promotion, or production integration.
 
+### 17.27 Bounded imagination Batch 4 boundary
+
+The fourth bounded-imagination boundary adds only pairwise alignment comparison over one
+complete Batch 3 `ImaginedRouteEvaluationResult`.
+
+- The comparison request embeds the complete source result.
+- Source result and request identities are derived from the embedded result rather than
+  caller-supplied strings.
+- Pair comparisons preserve caller-index order and never sort by quality.
+- Unknown alignments, low confidence, and route-depth mismatch block dominance.
+- Conflicting trade-offs remain incomparable.
+- Alignment-equivalent routes remain distinct and preserve source provenance through the
+  embedded Batch 3 result.
+- Incompatible need or evaluation semantics are rejected atomically.
+- No transitive closure, nondominated set, Pareto front, global route score, utility,
+  rank, winner, recommendation, selection, optimisation, schedule, promotion, execution,
+  persistence, live integration, or production authority is created.
+
+The expanded developmental architecture marker remains 82%. Persistence, live
+integration, safe-experiment promotion, and production action influence remain deferred.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1729,6 +1750,7 @@ The following rules must remain true:
 59. Imagined route evaluation must keep every need dimension and every route step explicit; missing effects remain unknown and arbitrary cross-effect or cross-step totals are forbidden until a separate semantics contract is accepted.
 60. Need-alignment annotation may preserve learned prediction confidence and exact source provenance, but it cannot create a route winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or production authority.
 61. Every evaluated step must retain the request need identity; active-need drift invalidates the route evaluation rather than being silently compared under the old need.
+62. Imagined route comparison may report caller-order pairwise alignment relations only; it cannot create a route score, utility, rank, winner, selected candidate, recommendation, optimisation, schedule, promotion, execution, persistence, live integration, or production authority.
 
 ## 19. First prototype boundary
 

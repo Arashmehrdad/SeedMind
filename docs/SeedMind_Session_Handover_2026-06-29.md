@@ -1,7 +1,7 @@
 # SeedMind Session Handover — 29 June 2026
 
 Superseded for current continuation by
-`docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch3.md`.
+`docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md`.
 
 The remaining sections below are retained as historical context and must not be treated as the current repository state.
 
@@ -24,11 +24,11 @@ Start from this document and inspect the repository before editing.
 
 Recommended opening prompt:
 
-> Continue SeedMind from `docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md`. Verify that `main` is clean and ahead of `origin/main`, then plan the bounded-imagination stage only. Preserve imagined evidence as non-factual and non-authoritative. Do not push. Do not begin safe-experiment proposals.
+> Continue SeedMind from `docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch4.md`. Verify that `main` is clean and ahead of `origin/main`, then plan the next bounded-imagination batch only. Preserve imagined evidence as non-factual and non-authoritative. Do not push. Do not begin persistence, live integration, safe-experiment proposals, route optimisation, or production action influence without a separately accepted boundary.
 
 Immediate task:
 
-> Plan the first bounded-imagination sub-batch. Do not implement safe-experiment proposals in that first pass.
+> Plan the next smallest bounded-imagination sub-batch after Batch 4. Do not implement safe-experiment proposals in that pass.
 
 ## 2. Repository state and recent commits
 

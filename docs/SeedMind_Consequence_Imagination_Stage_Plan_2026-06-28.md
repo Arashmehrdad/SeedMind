@@ -150,7 +150,7 @@ Completed:
 
 ### Batch 5 - bounded imagination
 
-Partially implemented: in-memory caller-driven Batch 1, exact-record deterministic candidate-enumeration Batch 2, and pure need-alignment annotation Batch 3 are complete. The expanded marker remains **82%**.
+Partially implemented: in-memory caller-driven Batch 1, exact-record deterministic candidate-enumeration Batch 2, pure need-alignment annotation Batch 3, and non-authoritative pairwise route-comparison semantics Batch 4 are complete. The expanded marker remains **82%**.
 
 Implemented in Batch 1:
 
@@ -183,9 +183,20 @@ Implemented in Batch 3:
 - Reject candidate steps whose active need changes away from the evaluation need.
 - Preserve caller order with no route score, winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or live integration.
 
+Implemented in Batch 4:
+
+- Consume exactly one complete `ImaginedRouteEvaluationResult`.
+- Compare routes only as caller-order unordered pairs.
+- Preserve the embedded Batch 3 source result as canonical provenance.
+- Report left dominance, right dominance, alignment equivalence, or incomparability without producing a global order.
+- Treat unknown alignments, low confidence, and route-depth mismatch as dominance blockers.
+- Treat conflicting trade-offs as incomparable instead of summing them.
+- Reject incompatible need or evaluation semantics atomically.
+- Preserve caller order with no route score, utility, winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or live integration.
+
 Still planned:
 
-- Rank or optimise imagined routes.
+- Optimise imagined routes only under a later separately accepted non-authoritative semantics contract.
 - Persist imagination-specific state.
 - Accept live imagination into the deterministic Nursery loop.
 - Trigger imagination from unresolved needs, surprise, contradiction, low confidence, or bounded idle periods.
