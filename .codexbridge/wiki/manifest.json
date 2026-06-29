@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T17:02:21.484927+00:00",
+  "generated_at": "2026-06-29T17:21:16.809608+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "70c580e4b320db745ce68a14a46e5c66406dcc70dea90b4e97e85e65502654f4",
-      "size_bytes": 4497
+      "sha256": "09da849c5be6f594c0f2814026c01e0caba79094644451b495b4b8dfd1908275",
+      "size_bytes": 5241
     },
     {
       "path": "pyproject.toml",

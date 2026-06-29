@@ -15,8 +15,9 @@ Update this file in place as work progresses. Do not create or update session ha
 
 ## Current stage
 
-- Stage: Bounded Imagination
-- Stage status: closed at Batch 8
+- Program: NDNRA
+- Last closed stage: Bounded Imagination at Batch 8
+- Current status: remaining-stage audit and standalone NDNRA completion
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -85,7 +86,18 @@ Use these for architecture and implementation detail:
 
 ## Next planning target
 
-Plan the next NDNRA stage without reopening bounded imagination. Prioritize the original Week 8 gap: learning, compiling, retaining, and reusing the first bounded skill across changed starts.
+Finish and prove NDNRA as a standalone research architecture before comparing it with, or integrating it into, the original SeedMind roadmap.
+
+The next task is an NDNRA-only gap audit: identify the remaining architecture components, experiments, and proof obligations after bounded-imagination closure, then select the smallest next NDNRA stage from that audit.
+
+Required sequence:
+
+1. Complete the remaining NDNRA stages in isolation.
+2. Run end-to-end NDNRA proof and acceptance experiments.
+3. Compare the completed NDNRA architecture with the original SeedMind plan.
+4. Decide explicitly whether, where, and how integration should occur.
+
+Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless the NDNRA gap audit independently identifies an equivalent capability as necessary for NDNRA completion.
 
 Experiment permits, schedulers, executors, imagination persistence, live Nursery integration, autonomous promotion, recommendation, and production action authority remain separate boundaries requiring explicit approval.
 
