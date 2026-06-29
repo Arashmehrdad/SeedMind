@@ -3,7 +3,7 @@
 Date: 28 June 2026
 Repository: `D:\Github\SeedMind`
 Branch: `main`
-Stage status: active
+Stage status: complete
 Authority: research-only, prediction-only, no action-selection or production-action authority
 Expanded developmental architecture progress at stage start: 79%
 
@@ -211,6 +211,17 @@ Completed in Batch 5:
 - Demonstrate uncertainty reduction under consistent real evidence.
 - Demonstrate confidence reduction under contradiction.
 - Demonstrate context-local failure consequences.
+- Construct bounded two-step observed consequence chains only from consecutive unique
+  real Nursery transitions.
+- Enforce exact context continuity for every accepted chain.
+- Preserve ordered event IDs and ordered action codes in live chain evidence.
+- Reject duplicate, conflicting, disconnected, replayed, imagined, transferred, partial,
+  missing, and bound-failing evidence paths without mutating accepted state.
+- Persist the live checkpoint through brain schema 7 and prove equivalent exact
+  predictions, chain predictions, provenance, duplicate protection, configuration,
+  confidence, and zero authority after restart.
+- Prove checksum-valid malformed persisted learned state causes complete safe fallback.
+- Prove repeated acceptance is deterministic and prediction-only.
 - Demonstrate no production-action, advice, route-ranking, growth, replay, restoration, or SQLite cognitive influence.
 - Export inspectable observatory evidence.
 

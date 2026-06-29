@@ -2023,9 +2023,9 @@ Stale evidence, duplicate use after restart, cancellation, expiry, interruption,
 
 Completing this stage raises the legacy narrow-scope theory-to-integration marker from 97% to 98%. The expanded developmental architecture marker is 79%, because learned consequence modelling, bounded imagination, imagined route optimisation, and safe experiment promotion remain separate future stages.
 
-## 13.11 In-progress learned consequence model stage
+## 13.11 Complete learned consequence model stage
 
-Status recorded on 28 June 2026.
+Status updated on 29 June 2026.
 
 Batch 1 introduces an isolated exact-context, single-action, one-step consequence model. It learns only from unique real transitions and predicts explicitly requested effects plus the most frequent exact next context.
 
@@ -2086,8 +2086,22 @@ unknown instead of borrowing certainty. The learned consequence observer does no
 advice decisions, rank routes, trigger growth, replay, restore, use SQLite cognition, or
 hold production-action authority.
 
+The Batch 5 closure correction extends live acceptance to exact observed consequence
+chains and restart evidence. Eligible live chains are built only from consecutive unique
+real Nursery transitions. The accepted chain model preserves exact context continuity,
+ordered event IDs, ordered action codes, and exact final contexts. Duplicate,
+conflicting, disconnected, replayed, imagined, transferred, missing, partial, and
+bound-failing evidence paths are rejected or remain non-evidentiary without mutating the
+previous accepted state.
+
+The live learned-consequence checkpoint is saved through brain schema 7 and reloaded to
+prove equivalent exact predictions, chain predictions, provenance, duplicate protection,
+configuration, confidence, and zero authority. Checksum-valid malformed persisted learned
+state causes complete safe fallback. Prediction remains pure and non-mutating, repeated
+acceptance is deterministic, and production action authority remains unchanged.
+
 Passing this live acceptance boundary advances the expanded developmental architecture
-marker from 80% to 82%. This closes the learned-consequence live integration gate but
+marker from 80% to 82% and formally completes the learned consequence model stage. It
 does not complete bounded imagination, imagined route optimisation, safe experiment
 promotion, semantic abstraction, learned similarity weights, or a 100% architecture
 claim.

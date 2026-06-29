@@ -1,5 +1,8 @@
 # SeedMind Session Handover — 29 June 2026
 
+Superseded for learned-consequence continuation by
+`docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md`.
+
 Repository: `D:\Github\SeedMind`
 CodexBridge repository alias: `seedmind`
 Branch: `main`
@@ -9,9 +12,9 @@ Expected relationship after this handover commit: `main...origin/main [ahead 8]`
 Latest implementation commit: `f71ee85548d4e33489263d71784f7e15666375b8`
 Push status: not pushed
 Current stage: Learned Consequence Model
-Stage progress: Batch 2 of 5 complete
+Stage progress: Learned Consequence Model stage complete
 Legacy narrow-scope theory-to-integration marker: 98%
-Expanded developmental architecture marker: 79%
+Expanded developmental architecture marker: 82%
 
 ## 1. New-session continuation instruction
 
@@ -19,11 +22,11 @@ Start from this document and inspect the repository before editing.
 
 Recommended opening prompt:
 
-> Continue SeedMind from `docs/SeedMind_Session_Handover_2026-06-29.md`. Attach CodexBridge to repository alias `seedmind`, verify that `main` is clean and ahead of `origin/main`, then plan Learned Consequence Model Batch 3 before implementing it. Batch 3 must represent ordered actions and bounded short consequence chains using exact real source transitions. Preserve every source event identity, enforce exact transition continuity, finite depth and branching, and zero action-selection or production-action authority. Do not push. Do not begin persistence, dreaming, optimisation, safe experiment promotion, or production integration.
+> Continue SeedMind from `docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md`. Verify that `main` is clean and ahead of `origin/main`, then plan the bounded-imagination stage only. Preserve imagined evidence as non-factual and non-authoritative. Do not push. Do not begin safe-experiment proposals.
 
 Immediate task:
 
-> Design and implement the first bounded Batch 3 sub-batch for observed action order and short consequence chains. Plan the contracts and adversarial tests first. Keep the first implementation exact-context and real-evidence-only unless repository inspection proves a safer boundary.
+> Plan the first bounded-imagination sub-batch. Do not implement safe-experiment proposals in that first pass.
 
 ## 2. Repository state and recent commits
 
@@ -83,12 +86,12 @@ Status:
 ```text
 Batch 1 — exact-context single-step consequence model: complete
 Batch 2 — bounded contextual transfer: complete
-Batch 3 — ordered actions and short consequence chains: next
-Batch 4 — persistence and restart reconstruction: pending
-Batch 5 — live integration, acceptance, and closure: pending
+Batch 3 — ordered actions and short consequence chains: complete
+Batch 4 — persistence and restart reconstruction: complete
+Batch 5 — live integration, acceptance, and closure: complete
 ```
 
-The expanded developmental architecture marker remains 79%. Do not increase it merely because new contracts or unit tests exist. Reassessment requires later persistence, live integration, failure-path evidence, and complete acceptance.
+The expanded developmental architecture marker is now 82% after learned-consequence persistence, live acceptance, restart evidence, failure-path evidence, and closure.
 
 ## 5. Batch 1 — exact-context single-step model
 
@@ -358,7 +361,9 @@ a83f4ba081d7e64335c89e4e3a8093cbaef60b15
 docs: close controlled replay restoration stage
 ```
 
-Brain persistence is currently schema 6 for replay/restoration state. The learned consequence model is not persisted yet; that is Batch 4 of the current stage.
+Historical note superseded by the learned-consequence closure handover: brain
+persistence is now schema 7 for learned-consequence checkpoints, and the Learned
+Consequence Model stage is formally complete.
 
 Do not modify persistence during Batch 3 unless the Batch 3 plan explicitly proves it is unavoidable. The expected boundary is in-memory chain contracts first, persistence later.
 

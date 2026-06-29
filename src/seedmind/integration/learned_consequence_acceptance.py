@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
-from dataclasses import asdict, dataclass
+from collections.abc import Callable
+from dataclasses import asdict, dataclass, replace
+from itertools import pairwise
 from math import isfinite
 from pathlib import Path
 from statistics import fmean
+from typing import cast
 
 import torch
 
@@ -17,13 +21,24 @@ from seedmind.curiosity import CuriosityConfig, CuriositySubsystem
 from seedmind.environment import DynamicNurseryScenarioFactory, NurseryRuntime
 from seedmind.perception import SymbolicInputSpec
 from seedmind.research.ndnra import (
+    BRAIN_SCHEMA_VERSION,
+    BoundedContextualTransferPolicy,
+    BrainLoadStatus,
+    ConsequenceChainPredictionRequest,
     ConsequenceModelObservation,
     ConsequencePredictionRequest,
     ContextSignature,
     EffectObservation,
     ExperienceOrigin,
     LearnedConsequenceModel,
+    LearnedConsequenceModelConfig,
+    NDNRABrainStore,
     NDNRALearnedConsequenceCheckpoint,
+    ObservedConsequenceChain,
+    ObservedConsequenceChainConfig,
+    ObservedConsequenceChainModel,
+    ObservedConsequenceChainStep,
+    build_capacity_limited_graph,
 )
 from seedmind.training import (
     ExperienceTransition,
@@ -113,6 +128,7 @@ class LearnedConsequenceLiveSession:
     action_codes: tuple[str, ...]
     prediction_errors: tuple[float, ...]
     records: tuple[LearnedConsequenceLivePredictionRecord, ...]
+    observations: tuple[ConsequenceModelObservation, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.scenario_id.strip():
@@ -121,6 +137,8 @@ class LearnedConsequenceLiveSession:
             raise ValueError("action and error timelines must have equal length")
         if len(self.records) not in {0, len(self.action_codes)}:
             raise ValueError("prediction records must be absent or cover the complete timeline")
+        if len(self.observations) not in {0, len(self.action_codes)}:
+            raise ValueError("observations must be absent or cover the complete timeline")
         for action_code in self.action_codes:
             if not action_code.strip() or not action_code.isascii():
                 raise ValueError("action code timeline contains invalid entries")
@@ -164,6 +182,37 @@ class LearnedConsequenceAcceptanceResult:
     replay_operation_count: int
     restoration_operation_count: int
     sqlite_used_for_learned_consequence_acceptance: bool
+    observed_chain_count: int
+    chain_prediction_count: int
+    chain_supporting_real_event_count: int
+    chain_ordered_event_ids_preserved: bool
+    chain_ordered_action_codes_preserved: bool
+    chain_exact_continuity_verified: bool
+    chain_duplicate_protection_passed: bool
+    event_identity_conflict_rejected: bool
+    chain_disconnected_rejected: bool
+    chain_replay_rejected: bool
+    chain_imagined_rejected: bool
+    chain_transfer_non_evidentiary: bool
+    chain_partial_effects_are_non_fabricated: bool
+    chain_missing_effects_are_unknown: bool
+    bounded_update_failure_preserved_state: bool
+    configured_model_bound_enforced: bool
+    configured_chain_bound_enforced: bool
+    prediction_caused_no_mutation: bool
+    deterministic_repeated_acceptance_result: bool
+    schema_version_saved: int
+    schema_version_loaded: int | None
+    restart_loaded_through_schema_7: bool
+    restart_checkpoint_round_trip_exact: bool
+    restart_exact_prediction_equivalent: bool
+    restart_chain_prediction_equivalent: bool
+    restart_provenance_preserved: bool
+    restart_duplicate_protection_preserved: bool
+    restart_configuration_preserved: bool
+    restart_confidence_preserved: bool
+    restart_zero_authority_preserved: bool
+    malformed_persisted_state_safe_fallback: bool
     expanded_architecture_before: int
     expanded_architecture_after: int
     pass_gate: bool
@@ -188,9 +237,15 @@ class LearnedConsequenceAcceptanceResult:
             self.growth_attempt_count,
             self.replay_operation_count,
             self.restoration_operation_count,
+            self.observed_chain_count,
+            self.chain_prediction_count,
+            self.chain_supporting_real_event_count,
+            self.schema_version_saved,
         )
         if any(count < 0 for count in counts):
             raise ValueError("acceptance counts must not be negative")
+        if self.schema_version_loaded is not None and self.schema_version_loaded < 0:
+            raise ValueError("loaded schema version must not be negative")
         _validate_unit("minimum_evaluation_accuracy", self.minimum_evaluation_accuracy)
         for name, value in (
             ("expanded_architecture_before", self.expanded_architecture_before),
@@ -209,6 +264,44 @@ class LearnedConsequenceAcceptanceEvidence:
     baseline: LearnedConsequenceLiveSession
     evaluation: LearnedConsequenceLiveSession
     checkpoint: NDNRALearnedConsequenceCheckpoint
+    observed_chains: tuple[ObservedConsequenceChain, ...]
+    state_path: Path
+    malformed_state_path: Path
+
+
+@dataclass(frozen=True, slots=True)
+class _RestartEvidence:
+    state_path: Path
+    malformed_state_path: Path
+    saved_schema_version: int
+    loaded_schema_version: int | None
+    loaded_through_schema_7: bool
+    checkpoint_round_trip_exact: bool
+    exact_prediction_equivalent: bool
+    chain_prediction_equivalent: bool
+    provenance_preserved: bool
+    duplicate_protection_preserved: bool
+    configuration_preserved: bool
+    confidence_preserved: bool
+    zero_authority_preserved: bool
+    malformed_persisted_state_safe_fallback: bool
+
+
+@dataclass(frozen=True, slots=True)
+class _FailurePathEvidence:
+    duplicate_protection_passed: bool
+    event_identity_conflict_rejected: bool
+    disconnected_rejected: bool
+    replay_rejected: bool
+    imagined_rejected: bool
+    transfer_non_evidentiary: bool
+    partial_effects_are_non_fabricated: bool
+    missing_effects_are_unknown: bool
+    bounded_update_failure_preserved_state: bool
+    configured_model_bound_enforced: bool
+    configured_chain_bound_enforced: bool
+    prediction_caused_no_mutation: bool
+    deterministic_repeated_acceptance_result: bool
 
 
 def run_learned_consequence_acceptance(
@@ -216,6 +309,7 @@ def run_learned_consequence_acceptance(
     *,
     seed: int = 7,
     play_budget: int = 8,
+    _verify_determinism: bool = True,
 ) -> LearnedConsequenceAcceptanceEvidence:
     """Run live pre-action consequence prediction without production authority."""
     if seed < 0:
@@ -245,7 +339,20 @@ def run_learned_consequence_acceptance(
         model=model,
     )
 
-    checkpoint = NDNRALearnedConsequenceCheckpoint(consequence_model=model)
+    chain_model = ObservedConsequenceChainModel(
+        ObservedConsequenceChainConfig(
+            maximum_chain_depth=2,
+            maximum_chains=max(1, (play_budget - 1) * 2),
+        )
+    )
+    observed_chains = _observe_live_chains(
+        chain_model,
+        (pretraining.observations, evaluation.observations),
+    )
+    checkpoint = NDNRALearnedConsequenceCheckpoint(
+        consequence_model=model,
+        observed_chain_model=chain_model,
+    )
     evaluation_records = evaluation.records
     evaluated = tuple(record for record in evaluation_records if record.evaluation_eligible)
     minimum_accuracy = (
@@ -262,11 +369,61 @@ def run_learned_consequence_acceptance(
     )
     contradiction_reduction = _contradiction_probe_reduces_confidence()
     context_local_unknown = _context_local_unknown_preserved()
+    chain_prediction = chain_model.predict(_chain_request(observed_chains[0]))
+    chain_ordered_event_ids = _ordered_event_ids_preserved(
+        observed_chains,
+        (pretraining.observations, evaluation.observations),
+    )
+    chain_ordered_action_codes = all(
+        chain.action_codes == tuple(step.action_code for step in chain.steps)
+        for chain in observed_chains
+    )
+    chain_exact_continuity = all(
+        step.next_context == chain.steps[index + 1].context
+        for chain in observed_chains
+        for index, step in enumerate(chain.steps[:-1])
+    )
+    restart = _restart_evidence(
+        output_directory=output_directory,
+        checkpoint=checkpoint,
+        observation=evaluation.observations[0],
+        chain=observed_chains[0],
+    )
+    deterministic_repeated = True
+    if _verify_determinism:
+        repeated = run_learned_consequence_acceptance(
+            output_directory / "determinism_repeat",
+            seed=seed,
+            play_budget=play_budget,
+            _verify_determinism=False,
+        )
+        deterministic_repeated = _acceptance_signature(
+            pretraining=pretraining,
+            baseline=baseline,
+            evaluation=evaluation,
+            checkpoint=checkpoint,
+            observed_chains=observed_chains,
+        ) == _acceptance_signature(
+            pretraining=repeated.pretraining,
+            baseline=repeated.baseline,
+            evaluation=repeated.evaluation,
+            checkpoint=repeated.checkpoint,
+            observed_chains=repeated.observed_chains,
+        )
+    failures = _failure_path_evidence(
+        model=model,
+        chain_model=chain_model,
+        observation=evaluation.observations[0],
+        chain=observed_chains[0],
+        deterministic_repeated=deterministic_repeated,
+    )
     authority_violations = (
         pretraining.authority_violation_count
         + evaluation.authority_violation_count
         + int(model.has_action_selection_authority)
         + int(model.has_production_action_authority)
+        + int(chain_model.has_action_selection_authority)
+        + int(chain_model.has_production_action_authority)
         + int(checkpoint.has_action_selection_authority)
         + int(checkpoint.has_production_action_authority)
     )
@@ -284,6 +441,35 @@ def run_learned_consequence_acceptance(
         and context_local_unknown
         and model.real_observation_count == play_budget * 2
         and model.record_count >= 1
+        and len(observed_chains) == (play_budget - 1) * 2
+        and chain_prediction.supporting_chain_ids
+        and chain_prediction.supporting_real_event_ids
+        and chain_ordered_event_ids
+        and chain_ordered_action_codes
+        and chain_exact_continuity
+        and failures.duplicate_protection_passed
+        and failures.event_identity_conflict_rejected
+        and failures.disconnected_rejected
+        and failures.replay_rejected
+        and failures.imagined_rejected
+        and failures.transfer_non_evidentiary
+        and failures.partial_effects_are_non_fabricated
+        and failures.missing_effects_are_unknown
+        and failures.bounded_update_failure_preserved_state
+        and failures.configured_model_bound_enforced
+        and failures.configured_chain_bound_enforced
+        and failures.prediction_caused_no_mutation
+        and failures.deterministic_repeated_acceptance_result
+        and restart.loaded_through_schema_7
+        and restart.checkpoint_round_trip_exact
+        and restart.exact_prediction_equivalent
+        and restart.chain_prediction_equivalent
+        and restart.provenance_preserved
+        and restart.duplicate_protection_preserved
+        and restart.configuration_preserved
+        and restart.confidence_preserved
+        and restart.zero_authority_preserved
+        and restart.malformed_persisted_state_safe_fallback
         and checkpoint.automatic_prediction_count == 0
         and authority_violations == 0
     )
@@ -314,6 +500,39 @@ def run_learned_consequence_acceptance(
         replay_operation_count=0,
         restoration_operation_count=0,
         sqlite_used_for_learned_consequence_acceptance=False,
+        observed_chain_count=len(observed_chains),
+        chain_prediction_count=len(chain_prediction.supporting_chain_ids),
+        chain_supporting_real_event_count=len(chain_prediction.supporting_real_event_ids),
+        chain_ordered_event_ids_preserved=chain_ordered_event_ids,
+        chain_ordered_action_codes_preserved=chain_ordered_action_codes,
+        chain_exact_continuity_verified=chain_exact_continuity,
+        chain_duplicate_protection_passed=failures.duplicate_protection_passed,
+        event_identity_conflict_rejected=failures.event_identity_conflict_rejected,
+        chain_disconnected_rejected=failures.disconnected_rejected,
+        chain_replay_rejected=failures.replay_rejected,
+        chain_imagined_rejected=failures.imagined_rejected,
+        chain_transfer_non_evidentiary=failures.transfer_non_evidentiary,
+        chain_partial_effects_are_non_fabricated=failures.partial_effects_are_non_fabricated,
+        chain_missing_effects_are_unknown=failures.missing_effects_are_unknown,
+        bounded_update_failure_preserved_state=(failures.bounded_update_failure_preserved_state),
+        configured_model_bound_enforced=failures.configured_model_bound_enforced,
+        configured_chain_bound_enforced=failures.configured_chain_bound_enforced,
+        prediction_caused_no_mutation=failures.prediction_caused_no_mutation,
+        deterministic_repeated_acceptance_result=(
+            failures.deterministic_repeated_acceptance_result
+        ),
+        schema_version_saved=restart.saved_schema_version,
+        schema_version_loaded=restart.loaded_schema_version,
+        restart_loaded_through_schema_7=restart.loaded_through_schema_7,
+        restart_checkpoint_round_trip_exact=restart.checkpoint_round_trip_exact,
+        restart_exact_prediction_equivalent=restart.exact_prediction_equivalent,
+        restart_chain_prediction_equivalent=restart.chain_prediction_equivalent,
+        restart_provenance_preserved=restart.provenance_preserved,
+        restart_duplicate_protection_preserved=restart.duplicate_protection_preserved,
+        restart_configuration_preserved=restart.configuration_preserved,
+        restart_confidence_preserved=restart.confidence_preserved,
+        restart_zero_authority_preserved=restart.zero_authority_preserved,
+        malformed_persisted_state_safe_fallback=(restart.malformed_persisted_state_safe_fallback),
         expanded_architecture_before=80,
         expanded_architecture_after=82,
         pass_gate=pass_gate,
@@ -324,6 +543,9 @@ def run_learned_consequence_acceptance(
         baseline=baseline,
         evaluation=evaluation,
         checkpoint=checkpoint,
+        observed_chains=observed_chains,
+        state_path=restart.state_path,
+        malformed_state_path=restart.malformed_state_path,
     )
 
 
@@ -394,6 +616,384 @@ def pretraining_selection_count(session: LearnedConsequenceLiveSession) -> int:
     return len(session.action_codes)
 
 
+def _observe_live_chains(
+    model: ObservedConsequenceChainModel,
+    sessions: tuple[tuple[ConsequenceModelObservation, ...], ...],
+) -> tuple[ObservedConsequenceChain, ...]:
+    chains: list[ObservedConsequenceChain] = []
+    for observations in sessions:
+        for first, second in pairwise(observations):
+            chain = ObservedConsequenceChain.from_observations((first, second))
+            update = model.observe(chain)
+            if not update.evidence_applied:
+                raise RuntimeError("live observed chain was not unique")
+            chains.append(chain)
+    return tuple(chains)
+
+
+def _chain_request(chain: ObservedConsequenceChain) -> ConsequenceChainPredictionRequest:
+    return ConsequenceChainPredictionRequest(
+        start_context=chain.start_context,
+        action_codes=chain.action_codes,
+        relevant_effect_codes=_EFFECT_CODES,
+    )
+
+
+def _ordered_event_ids_preserved(
+    chains: tuple[ObservedConsequenceChain, ...],
+    sessions: tuple[tuple[ConsequenceModelObservation, ...], ...],
+) -> bool:
+    expected = tuple(
+        tuple(observation.event_id for observation in observations[index : index + 2])
+        for observations in sessions
+        for index in range(len(observations) - 1)
+    )
+    return tuple(chain.source_event_ids for chain in chains) == expected
+
+
+def _restart_evidence(
+    *,
+    output_directory: Path,
+    checkpoint: NDNRALearnedConsequenceCheckpoint,
+    observation: ConsequenceModelObservation,
+    chain: ObservedConsequenceChain,
+) -> _RestartEvidence:
+    state_path = output_directory / "learned_consequence_closure_brain_state.json"
+    malformed_path = output_directory / "learned_consequence_malformed_brain_state.json"
+    store = NDNRABrainStore(state_path)
+    saved = store.save(
+        build_capacity_limited_graph(),
+        learned_consequence_checkpoint=checkpoint,
+    )
+    loaded = store.load()
+    loaded_checkpoint = loaded.learned_consequence_checkpoint
+    exact_request = ConsequencePredictionRequest(
+        context=observation.context,
+        action_code=observation.action_code,
+        relevant_effect_codes=_EFFECT_CODES,
+    )
+    chain_request = _chain_request(chain)
+    exact_before = checkpoint.consequence_model.predict(exact_request)
+    exact_after = loaded_checkpoint.consequence_model.predict(exact_request)
+    chain_before = checkpoint.observed_chain_model.predict(chain_request)
+    chain_after = loaded_checkpoint.observed_chain_model.predict(chain_request)
+    duplicate_before = loaded_checkpoint.snapshot()
+    duplicate = loaded_checkpoint.consequence_model.observe(observation)
+    chain_duplicate = loaded_checkpoint.observed_chain_model.observe(chain)
+    duplicate_after = loaded_checkpoint.snapshot()
+
+    raw = json.loads(state_path.read_text(encoding="ascii"))
+    payload = cast(dict[str, object], raw["payload"])
+    learned = cast(dict[str, object], payload["learned_consequence_checkpoint"])
+    learned["automatic_prediction_count"] = 1
+    _write_brain_envelope(
+        malformed_path,
+        schema=cast(str, raw["schema"]),
+        schema_version=cast(int, raw["schema_version"]),
+        payload=payload,
+    )
+    malformed = NDNRABrainStore(malformed_path).load()
+    return _RestartEvidence(
+        state_path=state_path,
+        malformed_state_path=malformed_path,
+        saved_schema_version=saved.schema_version,
+        loaded_schema_version=loaded.schema_version,
+        loaded_through_schema_7=(
+            saved.schema_version == BRAIN_SCHEMA_VERSION
+            and loaded.status is BrainLoadStatus.LOADED
+            and loaded.schema_version == BRAIN_SCHEMA_VERSION
+            and loaded.checksum_verified
+            and not loaded.used_fallback
+        ),
+        checkpoint_round_trip_exact=loaded_checkpoint.snapshot() == checkpoint.snapshot(),
+        exact_prediction_equivalent=exact_after.snapshot() == exact_before.snapshot(),
+        chain_prediction_equivalent=chain_after.snapshot() == chain_before.snapshot(),
+        provenance_preserved=(
+            exact_after.supporting_real_event_ids == exact_before.supporting_real_event_ids
+            and chain_after.supporting_real_event_ids == chain_before.supporting_real_event_ids
+        ),
+        duplicate_protection_preserved=(
+            not duplicate.evidence_applied
+            and not chain_duplicate.evidence_applied
+            and duplicate_before == duplicate_after
+        ),
+        configuration_preserved=(
+            loaded_checkpoint.consequence_model.config == checkpoint.consequence_model.config
+            and loaded_checkpoint.observed_chain_model.config
+            == checkpoint.observed_chain_model.config
+        ),
+        confidence_preserved=(
+            exact_after.calibrated_confidence == exact_before.calibrated_confidence
+            and chain_after.confidence == chain_before.confidence
+        ),
+        zero_authority_preserved=(
+            not loaded_checkpoint.has_action_selection_authority
+            and not loaded_checkpoint.has_production_action_authority
+            and not exact_after.has_action_selection_authority
+            and not exact_after.has_production_action_authority
+            and not chain_after.has_action_selection_authority
+            and not chain_after.has_production_action_authority
+            and loaded_checkpoint.automatic_prediction_count == 0
+        ),
+        malformed_persisted_state_safe_fallback=(
+            malformed.status is BrainLoadStatus.CORRUPT_FALLBACK
+            and malformed.used_fallback
+            and malformed.learned_consequence_checkpoint
+            == NDNRALearnedConsequenceCheckpoint.empty()
+        ),
+    )
+
+
+def _failure_path_evidence(
+    *,
+    model: LearnedConsequenceModel,
+    chain_model: ObservedConsequenceChainModel,
+    observation: ConsequenceModelObservation,
+    chain: ObservedConsequenceChain,
+    deterministic_repeated: bool,
+) -> _FailurePathEvidence:
+    duplicate_before = model.snapshot()
+    duplicate = model.observe(observation)
+    duplicate_after = model.snapshot()
+    conflict_before = model.snapshot()
+    event_identity_conflict = False
+    try:
+        model.observe(
+            replace(
+                observation,
+                observed_effects=(
+                    replace(
+                        observation.observed_effects[0],
+                        value=-observation.observed_effects[0].value,
+                    ),
+                    *observation.observed_effects[1:],
+                ),
+            )
+        )
+    except ValueError as error:
+        event_identity_conflict = "identity conflict" in str(error)
+    conflict_after = model.snapshot()
+
+    disconnected_rejected = _raises_value_error(
+        lambda: ObservedConsequenceChain.from_observations(
+            (
+                observation,
+                replace(
+                    _observation_from_chain_step(chain.steps[-1]),
+                    context=_probe_context("disconnected", 0.123),
+                ),
+            )
+        ),
+        "disconnected",
+    )
+    replay_rejected = _raises_value_error(
+        lambda: ObservedConsequenceChain.from_observations(
+            (replace(observation, origin=ExperienceOrigin.REPLAY),)
+        ),
+        "real origin",
+    )
+    imagined_rejected = _raises_value_error(
+        lambda: ObservedConsequenceChain.from_observations(
+            (replace(observation, origin=ExperienceOrigin.IMAGINED),)
+        ),
+        "real origin",
+    )
+    transfer_before = (model.snapshot(), chain_model.snapshot())
+    transfer_prediction = BoundedContextualTransferPolicy().predict(
+        model,
+        ConsequencePredictionRequest(
+            context=_probe_context("transfer", 0.8),
+            action_code=observation.action_code,
+            relevant_effect_codes=_EFFECT_CODES,
+        ),
+    )
+    transfer_after = (model.snapshot(), chain_model.snapshot())
+    partial = chain_model.predict(
+        ConsequenceChainPredictionRequest(
+            start_context=chain.start_context,
+            action_codes=chain.action_codes,
+            relevant_effect_codes=("controllable_change", "zz_unobserved_effect"),
+        )
+    )
+    missing = chain_model.predict(
+        ConsequenceChainPredictionRequest(
+            start_context=chain.start_context,
+            action_codes=chain.action_codes,
+            relevant_effect_codes=("zz_unobserved_effect",),
+        )
+    )
+    bounded_update_failure = _bounded_update_failure_preserved_state(chain)
+    model_bound = _configured_model_bound_enforced(observation)
+    chain_bound = _configured_chain_bound_enforced(chain)
+    prediction_before = (model.snapshot(), chain_model.snapshot())
+    model.predict(
+        ConsequencePredictionRequest(
+            context=observation.context,
+            action_code=observation.action_code,
+            relevant_effect_codes=_EFFECT_CODES,
+        )
+    )
+    chain_model.predict(_chain_request(chain))
+    prediction_after = (model.snapshot(), chain_model.snapshot())
+
+    return _FailurePathEvidence(
+        duplicate_protection_passed=(
+            not duplicate.evidence_applied and duplicate_before == duplicate_after
+        ),
+        event_identity_conflict_rejected=(
+            event_identity_conflict and conflict_before == conflict_after
+        ),
+        disconnected_rejected=disconnected_rejected,
+        replay_rejected=replay_rejected,
+        imagined_rejected=imagined_rejected,
+        transfer_non_evidentiary=(
+            not isinstance(transfer_prediction, ConsequenceModelObservation)
+            and transfer_before == transfer_after
+        ),
+        partial_effects_are_non_fabricated=(
+            0.0 < partial.effect_coverage < 1.0
+            and all(
+                effect.effect_code != "zz_unobserved_effect"
+                for step in partial.step_predictions
+                for effect in step.predicted_effects
+            )
+        ),
+        missing_effects_are_unknown=(
+            missing.effect_coverage == 0.0
+            and all(not step.predicted_effects for step in missing.step_predictions)
+        ),
+        bounded_update_failure_preserved_state=bounded_update_failure,
+        configured_model_bound_enforced=model_bound,
+        configured_chain_bound_enforced=chain_bound,
+        prediction_caused_no_mutation=prediction_before == prediction_after,
+        deterministic_repeated_acceptance_result=deterministic_repeated,
+    )
+
+
+def _bounded_update_failure_preserved_state(chain: ObservedConsequenceChain) -> bool:
+    model = ObservedConsequenceChainModel(ObservedConsequenceChainConfig(maximum_chains=1))
+    model.observe(chain)
+    before = model.snapshot()
+    extra = ObservedConsequenceChain.from_observations(
+        (
+            replace(
+                _observation_from_chain_step(chain.steps[0]), event_id="real:bounded:extra:0001"
+            ),
+            replace(
+                _observation_from_chain_step(chain.steps[1]), event_id="real:bounded:extra:0002"
+            ),
+        )
+    )
+    rejected = _raises_value_error(lambda: model.observe(extra), "bound exceeded")
+    return rejected and model.snapshot() == before
+
+
+def _configured_model_bound_enforced(observation: ConsequenceModelObservation) -> bool:
+    model = LearnedConsequenceModel(LearnedConsequenceModelConfig(maximum_real_observations=1))
+    model.observe(observation)
+    before = model.snapshot()
+    rejected = _raises_value_error(
+        lambda: model.observe(replace(observation, event_id="real:model-bound:extra")),
+        "bound exceeded",
+    )
+    return rejected and model.snapshot() == before
+
+
+def _configured_chain_bound_enforced(chain: ObservedConsequenceChain) -> bool:
+    model = ObservedConsequenceChainModel(ObservedConsequenceChainConfig(maximum_chain_depth=1))
+    before = model.snapshot()
+    rejected = _raises_value_error(lambda: model.observe(chain), "depth bound exceeded")
+    return rejected and model.snapshot() == before
+
+
+def _acceptance_signature(
+    *,
+    pretraining: LearnedConsequenceLiveSession,
+    baseline: LearnedConsequenceLiveSession,
+    evaluation: LearnedConsequenceLiveSession,
+    checkpoint: NDNRALearnedConsequenceCheckpoint,
+    observed_chains: tuple[ObservedConsequenceChain, ...],
+) -> dict[str, object]:
+    return {
+        "pretraining_actions": pretraining.action_codes,
+        "pretraining_errors": pretraining.prediction_errors,
+        "baseline_actions": baseline.action_codes,
+        "baseline_errors": baseline.prediction_errors,
+        "evaluation_actions": evaluation.action_codes,
+        "evaluation_errors": evaluation.prediction_errors,
+        "checkpoint": checkpoint.snapshot(),
+        "chains": [chain.snapshot() for chain in observed_chains],
+    }
+
+
+def _observation_from_chain_step(
+    step: ObservedConsequenceChainStep,
+) -> ConsequenceModelObservation:
+    return ConsequenceModelObservation(
+        event_id=step.event_id,
+        origin=step.origin,
+        context=step.context,
+        action_code=step.action_code,
+        next_context=step.next_context,
+        observed_effects=step.observed_effects,
+    )
+
+
+def _raises_value_error(callable_: Callable[[], object], expected: str) -> bool:
+    try:
+        callable_()
+    except ValueError as error:
+        return expected in str(error)
+    return False
+
+
+def _canonical_checksum(payload: object) -> str:
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=True,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("ascii")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _write_brain_envelope(
+    path: Path,
+    *,
+    schema: str,
+    schema_version: int,
+    payload: dict[str, object],
+) -> None:
+    replay_checkpoint = cast(dict[str, object], payload["replay_restoration_checkpoint"])
+    state_payload: dict[str, object] = {
+        "graph": payload["graph"],
+        "growth_state": payload["growth_state"],
+        "consolidation_checkpoint": payload["consolidation_checkpoint"],
+        "proposal_lifecycle_checkpoint": payload["proposal_lifecycle_checkpoint"],
+        "execution_checkpoint": payload["execution_checkpoint"],
+        "replay_restoration_active_state": {
+            "activity_ledger": replay_checkpoint["activity_ledger"],
+        },
+        "learned_consequence_checkpoint": payload["learned_consequence_checkpoint"],
+    }
+    body: dict[str, object] = {
+        "schema": schema,
+        "schema_version": schema_version,
+        "state_checksum": _canonical_checksum(state_payload),
+        "payload": payload,
+    }
+    path.write_text(
+        json.dumps(
+            {**body, "checksum": _canonical_checksum(body)},
+            ensure_ascii=True,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="ascii",
+    )
+
+
 def _run_control_session(
     seed: int,
     scenario_factory: DynamicNurseryScenarioFactory,
@@ -454,6 +1054,7 @@ def _run_live_session(
     actions: list[str] = []
     errors: list[float] = []
     records: list[LearnedConsequenceLivePredictionRecord] = []
+    observations: list[ConsequenceModelObservation] = []
     trainer.reset_episode()
     while not curiosity.budget_exhausted:
         observation = runtime.observe()
@@ -521,6 +1122,7 @@ def _run_live_session(
         )
         actions.append(selection.selected_action.value)
         errors.append(metrics.mean_absolute_error)
+        observations.append(event)
         if experience.terminated:
             raise RuntimeError("learned consequence session terminated before budget exhaustion")
     trainer.reset_episode()
@@ -529,6 +1131,7 @@ def _run_live_session(
         action_codes=tuple(actions),
         prediction_errors=tuple(errors),
         records=tuple(records),
+        observations=tuple(observations),
     )
 
 

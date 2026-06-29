@@ -1589,11 +1589,21 @@ The gate also requires:
 - uncertainty reduction under repeated consistent real evidence;
 - confidence reduction under contradiction;
 - exact context-local unknown predictions for unsupported contexts;
+- exact observed consequence chains built only from consecutive unique real Nursery
+  transitions;
+- preserved ordered source event IDs, ordered action codes, and exact context continuity;
+- duplicate, conflicting, disconnected, replayed, imagined, transferred, partial,
+  missing, and bound-failing evidence paths to be rejected or non-evidentiary without
+  mutating accepted real state;
+- schema-7 restart evidence proving equivalent exact predictions, chain predictions,
+  provenance, duplicate protection, configuration, confidence, and zero authority;
+- checksum-valid malformed persisted learned state to cause complete safe fallback;
+- deterministic repeated acceptance and pure non-mutating predictions;
 - zero advice decisions, route rankings, growth attempts, replay operations,
   restoration operations, SQLite cognition, and production-action authority.
 
 Passing this boundary raises the expanded developmental architecture marker from 80% to
-82%. It closes the learned-consequence live integration gate. It does not add bounded
+82%. It formally completes the learned consequence model stage. It does not add bounded
 imagination, imagined route optimisation, safe experiment promotion, semantic
 abstraction, learned similarity weights, autonomous production authority, or a 100%
 architecture claim.
@@ -1643,7 +1653,7 @@ The following rules must remain true:
 39. The current operation audit must contain source audit history, and restoration cannot revive cancelled, expired, or consumed approvals.
 40. Replay/restoration acceptance must preserve production actions and expose exact receipts, failure paths, restart state, and zero automatic-operation counts.
 41. Learned consequence records remain local to one exact context and action; contextual transfer is a separate derived prediction and cannot create a target-context record.
-42. Only unique real transitions may update the learned consequence model; replay, imagination, and transferred predictions remain non-evidentiary.
+42. Only unique real transitions may update the learned consequence model; observed chains must come from consecutive unique real transitions with exact continuity; replay, imagination, and transferred predictions remain non-evidentiary.
 43. Missing effect dimensions must remain unknown, and calibrated or transferred confidence cannot exceed its explicit evidence or transfer coverage.
 44. Consequence prediction and contextual-transfer evaluation must be pure and cannot mutate model state or select actions.
 45. Consequence predictions and transferred estimates cannot rank, recommend, schedule, or execute production actions.

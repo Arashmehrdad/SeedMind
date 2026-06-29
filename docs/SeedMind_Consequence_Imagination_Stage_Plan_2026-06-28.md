@@ -123,9 +123,9 @@ Completed:
 
 ### Batch 4 - learned consequence model
 
-Status: active. Exact-context single-step Batch 1 and bounded contextual-transfer Batch 2 are implemented in the commits referencing `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`.
+Status: complete. Exact-context single-step prediction, bounded contextual transfer, observed consequence chains, schema-7 persistence, live acceptance, restart evidence, and closure are implemented in the commits referencing `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`.
 
-Completed in Batches 1 and 2:
+Completed:
 
 - Predict requested one-step effects from exact context plus action.
 - Predict the most frequent exact next context.
@@ -139,13 +139,14 @@ Completed in Batches 1 and 2:
 - Compare grounded contexts with explicit component-level similarity evidence.
 - Attenuate and cap transferred confidence while preserving exact source provenance.
 - Surface directional source contradiction and prohibit transferred exact-next-context claims.
+- Represent ordered actions as exact observed consequence chains built only from consecutive unique real transitions.
+- Preserve ordered source event IDs, ordered action codes, exact continuity, and exact final context in chain evidence.
+- Keep duplicate, disconnected, replayed, imagined, transferred, missing, partial, and bound-failing evidence out of the real chain model.
+- Persist and reconstruct learned consequence state through schema 7.
+- Prove equivalent exact predictions, chain predictions, provenance, duplicate protection, configuration, confidence, and zero authority after restart.
+- Prove malformed persisted learned state causes complete safe fallback.
+- Prove live acceptance leaves production action authority unchanged.
 - Preserve zero action-selection and production-action authority.
-
-Remaining:
-
-- Represent action order and short combinations.
-- Persist and reconstruct the model across restart.
-- Complete live integration and acceptance.
 
 ### Batch 5 - bounded imagination
 
@@ -170,13 +171,13 @@ Planned:
 
 ### Batch 7 - persistence, live integration, and acceptance
 
-Partially complete: real consequence, activity-source, replay, restoration, restart, and live-invariance evidence are persisted and accepted. Imagination-specific persistence and acceptance remain planned.
+Partially complete: real consequence, activity-source, replay, restoration, learned consequence, restart, and live-invariance evidence are persisted and accepted. Imagination-specific persistence and acceptance remain planned.
 
 Remaining:
 
-- Persist later learned consequence-model and imagination evidence.
+- Persist later imagination evidence.
 - Demonstrate that imagined evidence cannot become real evidence after restart.
-- Demonstrate context-specific model correction and safe experiment promotion.
+- Demonstrate safe experiment promotion after bounded imagination is independently accepted.
 - Preserve production-action authority boundaries through later imagination integration.
 - Recalculate progress only after complete repository gates and live evidence pass.
 
@@ -208,9 +209,9 @@ A wrong outcome lowers local helpfulness and competence. It does not create emot
 
 The expanded marker started at 68% before Batch 1.
 
-After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raised it to **78%**. Live replay/restoration invariance, restart, failure-path, and export acceptance raise the expanded marker to **79%**.
+After Batch 1, the heuristic marker reached **71%**. Batch 2 raised it to **73%** by adding source-separated activity, bounded dormancy maintenance, duplicate protection, safety and rare-use floors, and explicit protection against false confidence or mastery gains. In-memory controlled replay raised it to **75%**. Restart-safe durable replay and exact complete-state restoration raised it to **78%**. Live replay/restoration invariance, restart, failure-path, and export acceptance raised the expanded marker to **79%**. Learned consequence persistence raised it to **80%**. Learned consequence live acceptance and closure evidence raise it to **82%**.
 
-The marker remains limited because SeedMind still does not provide a learned consequence model, dreaming, optimizer-driven route discovery, safe experiment promotion, imagination-specific persistence, or complete end-to-end integration.
+The marker remains limited because SeedMind still does not provide bounded imagination, imagined route optimisation, safe experiment promotion, imagination-specific persistence, or complete end-to-end integration.
 
 No later percentage should be raised merely because contracts exist. Each capability requires behavioural evidence, failure-path tests, persistence evidence where applicable, and repository-wide quality gates.
 
