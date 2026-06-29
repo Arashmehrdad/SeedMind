@@ -1765,6 +1765,8 @@ The following rules must remain true:
 74. Review-gate resolution remains descriptive policy evidence only and cannot schedule, execute, persist, integrate, recommend, select, promote, or control a production action.
 75. The bounded-imagination stage is closed at Batch 8 as an in-memory, deterministic, provenance-preserving, non-evidentiary, and non-authoritative subsystem.
 76. Any experiment permit, scheduler, executor, persistence layer, live integration path, autonomous promotion mechanism, or production action authority must be introduced only through a separately accepted architecture boundary.
+77. Standalone NDNRA acceptance aggregation must preserve each complete component experiment result as evidence rather than replacing it with summary-only claims.
+78. Standalone NDNRA acceptance aggregation is deterministic, in-memory, and non-authoritative; it cannot create factual evidence, checkpoint authority, restart authority, recommendation authority, scheduling authority, execution authority, live-integration authority, or production-action authority.
 
 ## 19. First prototype boundary
 

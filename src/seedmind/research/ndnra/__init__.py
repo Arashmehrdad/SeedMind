@@ -383,6 +383,13 @@ from seedmind.research.ndnra.persistence import (
     NDNRAConsolidationCheckpoint,
     NDNRAGrowthState,
 )
+from seedmind.research.ndnra.standalone_acceptance import (
+    StandaloneAcceptanceAuthority,
+    StandaloneAcceptanceDeltaReport,
+    StandaloneAcceptanceResult,
+    run_standalone_acceptance,
+    validate_standalone_acceptance_result,
+)
 
 __all__ = [  # noqa: RUF022
     "BRAIN_SCHEMA",
@@ -638,6 +645,9 @@ __all__ = [  # noqa: RUF022
     "RouteSupport",
     "SparseEffectMemory",
     "SpecialistInteraction",
+    "StandaloneAcceptanceAuthority",
+    "StandaloneAcceptanceDeltaReport",
+    "StandaloneAcceptanceResult",
     "StructuralGrowthConfig",
     "StructuralGrowthExperimentResult",
     "TeacherTrainingResult",
@@ -662,6 +672,8 @@ __all__ = [  # noqa: RUF022
     "run_ndnra_heat_fan_experiment",
     "run_ndnra_multieffect_experiment",
     "run_ndnra_structural_growth_experiment",
+    "run_standalone_acceptance",
     "structural_cooling_need",
     "train_teacher_demonstrations",
+    "validate_standalone_acceptance_result",
 ]

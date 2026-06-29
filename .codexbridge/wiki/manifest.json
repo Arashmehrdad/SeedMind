@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T17:33:50.207851+00:00",
+  "generated_at": "2026-06-29T18:05:36.166807+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 306,
+  "source_file_count": 308,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "8cff67edc99bae1575d373bf176ff6b9c05bddf589831af76c47a470445634a5",
-      "size_bytes": 6060
+      "sha256": "c1d995e95c7a91376bf0b7cb9b30a7aae9dc8736a8a4cefa66a31724c00b7e53",
+      "size_bytes": 6563
     },
     {
       "path": "pyproject.toml",
@@ -187,8 +187,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "be315a260785b29bb24485af84950965c153d4779b84e88464527c4423a5e655",
-      "size_bytes": 87619
+      "sha256": "96c4e59128b2e62eb72ca0d1fa59e0957771225ed7269be918dd26f8fedf8d41",
+      "size_bytes": 88083
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -767,8 +767,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "155f6639aa7e04bd6bc4a8cf796b7a7c6183a96a48bea98be1435f7dc11aadfd",
-      "size_bytes": 23766
+      "sha256": "e90367c278ed5d3eb8fb39281721edc6dde5f4c7492a8eafcb8d9343f6816e13",
+      "size_bytes": 24194
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -1039,6 +1039,11 @@
       "path": "src/seedmind/research/ndnra/persistence.py",
       "sha256": "a6436f4776e862c198049fd6e459fc2077f8740ae390e79fd02f0f82e4662267",
       "size_bytes": 23102
+    },
+    {
+      "path": "src/seedmind/research/ndnra/standalone_acceptance.py",
+      "sha256": "8ec458a8d9a50c88c33c88387bf6507a3262b12773adfa09cc284a0f6fd8afe2",
+      "size_bytes": 8944
     },
     {
       "path": "src/seedmind/safety/__init__.py",
@@ -1454,6 +1459,11 @@
       "path": "tests/unit/test_ndnra_shadow_integration.py",
       "sha256": "f5a94d2b223d7c0f2a048c1a0927d7b8e3495518a950cdf611ede7559101f740",
       "size_bytes": 3374
+    },
+    {
+      "path": "tests/unit/test_ndnra_standalone_acceptance.py",
+      "sha256": "040158411a10a13bee7808919e53059c1d33b74023ea75dbe5dd3519efad2419",
+      "size_bytes": 5122
     },
     {
       "path": "tests/unit/test_ndnra_structural_growth.py",

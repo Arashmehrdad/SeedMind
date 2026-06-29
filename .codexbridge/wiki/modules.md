@@ -984,6 +984,14 @@ Versioned non-SQL persistence for reconstructing an NDNRA brain graph.
 - Classes: BrainLoadStatus, NDNRAGrowthState, BrainSaveResult, BrainLoadResult, NDNRABrainStore
 - Functions/symbols: _interrupt, _restore_graph, _restore_assembly, _restore_specialist, _checksum, _canonical_bytes, _require_mapping, _require_list, _require_string, _require_int, _require_float, _require_string_list, _require_numeric_list, _validate_code, _validate_unit, _validate_signed
 
+## `src/seedmind/research/ndnra/standalone_acceptance.py`
+
+Deterministic standalone acceptance aggregation for Batch 1.
+
+- Kind: python
+- Classes: StandaloneAcceptanceAuthority, StandaloneAcceptanceDeltaReport, StandaloneAcceptanceResult
+- Functions/symbols: run_standalone_acceptance, validate_standalone_acceptance_result, _canonical_snapshot, _normalize, _authority_is_zero, _deltas_are_zero
+
 ## `src/seedmind/safety/__init__.py`
 
 SeedMind safety package.
@@ -1543,6 +1551,13 @@ Tests for non-authoritative NDNRA integration with the live nursery loop.
 
 - Kind: python
 - Functions/symbols: test_shadow_comparison_preserves_production_actions_and_training, test_shadow_learns_effects_and_emits_only_valid_suggestions, test_shadow_gate_advances_integration_without_action_authority, test_shadow_suggestion_rejects_action_authority, test_shadow_config_rejects_multi_action_control_depth, test_shadow_exports_are_ascii_and_inspectable, test_shadow_integration_has_no_sqlite_decision_dependency
+
+## `tests/unit/test_ndnra_standalone_acceptance.py`
+
+Tests for standalone NDNRA acceptance Batch 1 aggregation.
+
+- Kind: python
+- Functions/symbols: test_standalone_acceptance_preserves_complete_component_results, test_standalone_acceptance_is_deterministic_across_repeated_runs, test_standalone_acceptance_rejects_tampering, test_standalone_acceptance_has_no_forbidden_authority_or_runtime_dependencies, test_standalone_acceptance_cannot_be_observed_as_factual_consequence_evidence
 
 ## `tests/unit/test_ndnra_structural_growth.py`
 
