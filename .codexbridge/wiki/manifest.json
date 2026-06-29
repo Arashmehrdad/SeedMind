@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:32:45.169030+00:00",
+  "generated_at": "2026-06-29T22:15:36.850836+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 320,
+  "source_file_count": 322,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "2131c9d583f49a92048985dc13ef7c34fc56006cf9334a3ea3c46fa0a2c164c7",
-      "size_bytes": 8428
+      "sha256": "b4990bc7f7607d19f2a4d508133dd3cb666a0ee9ef3e7fc7d12f893910d88277",
+      "size_bytes": 8744
     },
     {
       "path": "pyproject.toml",
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "50a124d6b3e76690c053b8455dd8ec43b64fde83dc0ee02d6ea5fb3625dbe4b8",
-      "size_bytes": 93218
+      "sha256": "cf437079eb3942febb830629297ec747b10ee70945c3d277bff87ebb13a415c5",
+      "size_bytes": 94405
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -227,8 +227,8 @@
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-long-horizon-mixed-task-interference.md",
-      "sha256": "e50c01e03958a8d769aaed4a29aaf07d2cba5f1f2214228f370b4f614ca947e0",
-      "size_bytes": 3680
+      "sha256": "ccea5e17ae60eba0fd97f8c8cd017708ecf76679c8f671bf666c2aa16da6f8c0",
+      "size_bytes": 5396
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md",
@@ -792,8 +792,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "b5db8cee7108af1977bad9c244dfa994cc8265644d1af024228fec34441a577a",
-      "size_bytes": 26544
+      "sha256": "b5c107e0d8fb51a5f258cc9aaaec606f879da3a09e52974e7947ab1e7a6ae004",
+      "size_bytes": 27916
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -1037,8 +1037,13 @@
     },
     {
       "path": "src/seedmind/research/ndnra/long_horizon_interference_experiment.py",
-      "sha256": "57b4582a00e9c3d90288d8f4bf6110773d5ce9420ff72380d9f2fbf5332d210e",
-      "size_bytes": 63563
+      "sha256": "c6ca8cecbbeb191248d3f12130b6d680e439bed2772206d30d8656ea51a53b13",
+      "size_bytes": 85601
+    },
+    {
+      "path": "src/seedmind/research/ndnra/long_horizon_interference_persistence.py",
+      "sha256": "115a336ea2c31a595a75863d42cecd1d149e36ec5e623d5fe2dfa07f3595419c",
+      "size_bytes": 21690
     },
     {
       "path": "src/seedmind/research/ndnra/models.py",
@@ -1474,6 +1479,11 @@
       "path": "tests/unit/test_ndnra_long_horizon_interference.py",
       "sha256": "24b840640abf23de58a171f596c583b24a82307dd6e38a11e51f04c60174d36e",
       "size_bytes": 20053
+    },
+    {
+      "path": "tests/unit/test_ndnra_long_horizon_interference_persistence.py",
+      "sha256": "708b290f6104c7ab2ca5b9c3966ecc7ce4b19a631c5ef14d282b689f507e0ab1",
+      "size_bytes": 22484
     },
     {
       "path": "tests/unit/test_ndnra_multieffect.py",

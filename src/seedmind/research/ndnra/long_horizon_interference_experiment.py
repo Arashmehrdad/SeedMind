@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import StrEnum
 from math import isfinite
@@ -827,6 +828,119 @@ def validate_long_horizon_interference_result(result: LongHorizonInterferenceRes
         raise ValueError("sha256 identity does not match canonical snapshot")
 
 
+def long_horizon_interference_payload(
+    result: LongHorizonInterferenceResult,
+) -> dict[str, object]:
+    """Return the exact JSON-safe payload for one validated Batch 1 result."""
+
+    validate_long_horizon_interference_result(result)
+    return result.snapshot_payload()
+
+
+def restore_long_horizon_interference_result(payload: object) -> LongHorizonInterferenceResult:
+    """Restore one exact long-horizon interference result from JSON-safe data."""
+
+    values = _require_mapping("long-horizon interference result", payload)
+    expected_names = {
+        "config",
+        "no_consolidation",
+        "naive_protection",
+        "bounded_retention_replay",
+        "old_family_mastery_profile",
+        "consolidation_candidate",
+        "source_trace_count_before",
+        "source_trace_count_after",
+        "source_mastery_profile_after",
+        "source_evidence_unchanged",
+        "source_mastery_unchanged",
+        "replay_sources_resolved",
+        "replay_bounded",
+        "structure_unchanged",
+        "action_authority_violation_count",
+        "sqlite_used_for_experiment",
+        "action_selection_authority_used",
+        "recommendation_authority_used",
+        "scheduling_authority_used",
+        "execution_authority_used",
+        "live_integration_used",
+        "promotion_authority_used",
+        "production_action_authority_used",
+        "restart_proof_included",
+        "pass_gate",
+    }
+    if set(values) != expected_names:
+        raise ValueError(
+            "long-horizon interference result fields do not match the canonical schema"
+        )
+    restored = LongHorizonInterferenceResult(
+        config=_restore_long_horizon_config(values["config"]),
+        no_consolidation=_restore_condition_result(values["no_consolidation"]),
+        naive_protection=_restore_condition_result(values["naive_protection"]),
+        bounded_retention_replay=_restore_condition_result(values["bounded_retention_replay"]),
+        old_family_mastery_profile=_restore_mastery_profile(values["old_family_mastery_profile"]),
+        consolidation_candidate=_restore_consolidation_candidate(values["consolidation_candidate"]),
+        source_trace_count_before=_require_nonnegative_int(values, "source_trace_count_before"),
+        source_trace_count_after=_require_nonnegative_int(values, "source_trace_count_after"),
+        source_mastery_profile_after=_restore_mastery_profile(
+            values["source_mastery_profile_after"]
+        ),
+        source_evidence_unchanged=_require_bool(values, "source_evidence_unchanged"),
+        source_mastery_unchanged=_require_bool(values, "source_mastery_unchanged"),
+        replay_sources_resolved=_require_bool(values, "replay_sources_resolved"),
+        replay_bounded=_require_bool(values, "replay_bounded"),
+        structure_unchanged=_require_bool(values, "structure_unchanged"),
+        action_authority_violation_count=_require_nonnegative_int(
+            values, "action_authority_violation_count"
+        ),
+        sqlite_used_for_experiment=_require_bool(values, "sqlite_used_for_experiment"),
+        action_selection_authority_used=_require_bool(values, "action_selection_authority_used"),
+        recommendation_authority_used=_require_bool(values, "recommendation_authority_used"),
+        scheduling_authority_used=_require_bool(values, "scheduling_authority_used"),
+        execution_authority_used=_require_bool(values, "execution_authority_used"),
+        live_integration_used=_require_bool(values, "live_integration_used"),
+        promotion_authority_used=_require_bool(values, "promotion_authority_used"),
+        production_action_authority_used=_require_bool(values, "production_action_authority_used"),
+        restart_proof_included=_require_bool(values, "restart_proof_included"),
+        canonical_snapshot="{}",
+        sha256_identity="0" * 64,
+        pass_gate=_require_bool(values, "pass_gate"),
+    )
+    canonical_snapshot = _canonical_snapshot(restored.snapshot_payload())
+    result = LongHorizonInterferenceResult(
+        config=restored.config,
+        no_consolidation=restored.no_consolidation,
+        naive_protection=restored.naive_protection,
+        bounded_retention_replay=restored.bounded_retention_replay,
+        old_family_mastery_profile=restored.old_family_mastery_profile,
+        consolidation_candidate=restored.consolidation_candidate,
+        source_trace_count_before=restored.source_trace_count_before,
+        source_trace_count_after=restored.source_trace_count_after,
+        source_mastery_profile_after=restored.source_mastery_profile_after,
+        source_evidence_unchanged=restored.source_evidence_unchanged,
+        source_mastery_unchanged=restored.source_mastery_unchanged,
+        replay_sources_resolved=restored.replay_sources_resolved,
+        replay_bounded=restored.replay_bounded,
+        structure_unchanged=restored.structure_unchanged,
+        action_authority_violation_count=restored.action_authority_violation_count,
+        sqlite_used_for_experiment=restored.sqlite_used_for_experiment,
+        action_selection_authority_used=restored.action_selection_authority_used,
+        recommendation_authority_used=restored.recommendation_authority_used,
+        scheduling_authority_used=restored.scheduling_authority_used,
+        execution_authority_used=restored.execution_authority_used,
+        live_integration_used=restored.live_integration_used,
+        promotion_authority_used=restored.promotion_authority_used,
+        production_action_authority_used=restored.production_action_authority_used,
+        restart_proof_included=restored.restart_proof_included,
+        canonical_snapshot=canonical_snapshot,
+        sha256_identity=hashlib.sha256(canonical_snapshot.encode("ascii")).hexdigest(),
+        pass_gate=restored.pass_gate,
+    )
+    if long_horizon_interference_payload(result) != dict(values):
+        raise ValueError("long-horizon interference payload did not round-trip exactly")
+    validate_long_horizon_interference_result(result)
+    return result
+
+
 def _build_family_a_ledger() -> ContextualExperienceLedger:
     ledger = ContextualExperienceLedger()
     specifications = (
@@ -1080,6 +1194,37 @@ def _config_snapshot(config: LongHorizonInterferenceConfig) -> dict[str, object]
     }
 
 
+def _restore_long_horizon_config(snapshot: object) -> LongHorizonInterferenceConfig:
+    values = _require_mapping("long-horizon config", snapshot)
+    expected_names = set(_config_snapshot(LongHorizonInterferenceConfig()))
+    if set(values) != expected_names:
+        raise ValueError("long-horizon config fields do not match the canonical schema")
+    restored = LongHorizonInterferenceConfig(
+        learning_rate=_require_unit(values, "learning_rate"),
+        stability_protection_weight=_require_unit(values, "stability_protection_weight"),
+        old_training_passes=_require_positive_int(values, "old_training_passes"),
+        horizon_steps=_require_exact_int(values, "horizon_steps", _EXPECTED_TIMELINE_LENGTH),
+        retention_threshold=_require_unit(values, "retention_threshold"),
+        maximum_replays_per_learning_step=_require_exact_int(
+            values, "maximum_replays_per_learning_step", 1
+        ),
+        maximum_total_replays=_require_positive_int(values, "maximum_total_replays"),
+        minimum_old_family_retention_floor=_require_unit(
+            values, "minimum_old_family_retention_floor"
+        ),
+        minimum_b_family_novel_learning_floor=_require_unit(
+            values, "minimum_b_family_novel_learning_floor"
+        ),
+        minimum_c_family_novel_learning_floor=_require_unit(
+            values, "minimum_c_family_novel_learning_floor"
+        ),
+        minimum_joint_score_advantage=_require_unit(values, "minimum_joint_score_advantage"),
+    )
+    if _config_snapshot(restored) != dict(values):
+        raise ValueError("long-horizon config did not round-trip exactly")
+    return restored
+
+
 def _validate_memory_snapshot(snapshot: _MemorySnapshot) -> None:
     if not isinstance(snapshot, tuple) or len(snapshot) != 2:
         raise ValueError(
@@ -1113,6 +1258,31 @@ def _memory_snapshot_payload(snapshot: _MemorySnapshot) -> dict[str, object]:
     }
 
 
+def _restore_memory_snapshot(snapshot: object) -> _MemorySnapshot:
+    values = _require_mapping("memory snapshot", snapshot)
+    if set(values) != {"assembly_value", "route_values"}:
+        raise ValueError("memory snapshot fields do not match the canonical schema")
+    route_values = values.get("route_values")
+    if not isinstance(route_values, list):
+        raise ValueError("route_values must be a list")
+    restored_route_values: list[tuple[str, float]] = []
+    for item in route_values:
+        if not isinstance(item, list) or len(item) != 2:
+            raise ValueError("route_values must contain [route_id, value] pairs")
+        route_id, value = item
+        if not isinstance(route_id, str):
+            raise ValueError("route id must be a string")
+        _validate_code("route_id", route_id)
+        if isinstance(value, bool) or not isinstance(value, int | float) or not isfinite(value):
+            raise ValueError("route value must be a finite number")
+        restored_route_values.append((route_id, float(value)))
+    restored = (float(_require_signed(values, "assembly_value")), tuple(restored_route_values))
+    _validate_memory_snapshot(restored)
+    if _memory_snapshot_payload(restored) != dict(values):
+        raise ValueError("memory snapshot did not round-trip exactly")
+    return restored
+
+
 def _ledger_snapshot(snapshot: dict[str, object]) -> _LedgerSnapshot:
     return _canonical_snapshot(snapshot)
 
@@ -1129,6 +1299,149 @@ def _validate_ledger_snapshot(snapshot: _LedgerSnapshot) -> dict[str, object]:
     if _canonical_snapshot(payload) != snapshot:
         raise ValueError("source ledger snapshot must use canonical JSON encoding")
     return payload
+
+
+def _restore_step_record(snapshot: object) -> LongHorizonStepRecord:
+    values = _require_mapping("step record", snapshot)
+    expected_names = set(LongHorizonStepRecord.__dataclass_fields__)
+    if set(values) != expected_names:
+        raise ValueError("step record fields do not match the canonical schema")
+    restored = LongHorizonStepRecord(
+        step_index=_require_nonnegative_int(values, "step_index"),
+        task_family=_require_enum(values, "task_family", LongHorizonTaskFamily),
+        probe_only=_require_bool(values, "probe_only"),
+        learning_applied=_require_bool(values, "learning_applied"),
+        old_family_score_after=_require_unit(values, "old_family_score_after"),
+        b_family_score_after=_require_unit(values, "b_family_score_after"),
+        c_family_score_after=_require_unit(values, "c_family_score_after"),
+        replay_applied=_require_bool(values, "replay_applied"),
+        replay_source_event_id=_require_optional_ascii(values, "replay_source_event_id"),
+        replay_trigger_old_score=_require_optional_unit(values, "replay_trigger_old_score"),
+        specialist_count_before=_require_nonnegative_int(values, "specialist_count_before"),
+        specialist_count_after=_require_nonnegative_int(values, "specialist_count_after"),
+        structural_growth_operation_count=_require_nonnegative_int(
+            values, "structural_growth_operation_count"
+        ),
+        duplicate_specialist_membership_count=_require_nonnegative_int(
+            values, "duplicate_specialist_membership_count"
+        ),
+        memory_state_before=_restore_memory_snapshot(values["memory_state_before"]),
+        memory_state_after=_restore_memory_snapshot(values["memory_state_after"]),
+    )
+    if restored.snapshot() != dict(values):
+        raise ValueError("step record did not round-trip exactly")
+    return restored
+
+
+def _restore_condition_result(snapshot: object) -> LongHorizonConditionResult:
+    values = _require_mapping("condition result", snapshot)
+    expected_names = set(LongHorizonConditionResult.__dataclass_fields__)
+    if set(values) != expected_names:
+        raise ValueError("condition result fields do not match the canonical schema")
+    timeline = _require_list(values, "timeline")
+    restored = LongHorizonConditionResult(
+        condition=_require_enum(values, "condition", LongHorizonInterferenceCondition),
+        consolidation_applied=_require_bool(values, "consolidation_applied"),
+        initial_old_family_score=_require_unit(values, "initial_old_family_score"),
+        initial_b_family_score=_require_unit(values, "initial_b_family_score"),
+        initial_c_family_score=_require_unit(values, "initial_c_family_score"),
+        final_old_family_score=_require_unit(values, "final_old_family_score"),
+        final_b_family_score=_require_unit(values, "final_b_family_score"),
+        final_c_family_score=_require_unit(values, "final_c_family_score"),
+        old_family_interference=_require_unit(values, "old_family_interference"),
+        b_family_learning_gain=_require_unit(values, "b_family_learning_gain"),
+        c_family_learning_gain=_require_unit(values, "c_family_learning_gain"),
+        joint_score=_require_unit(values, "joint_score"),
+        timeline=tuple(_restore_step_record(item) for item in timeline),
+        replay_count=_require_nonnegative_int(values, "replay_count"),
+        replay_source_event_ids=tuple(_require_ascii_list(values, "replay_source_event_ids")),
+        replay_trigger_scores=tuple(
+            _require_finite_list(values, "replay_trigger_scores", unit=True)
+        ),
+        replay_step_indices=tuple(_require_int_list(values, "replay_step_indices")),
+        maximum_replays_per_learning_step=_require_exact_int(
+            values, "maximum_replays_per_learning_step", 1
+        ),
+        maximum_total_replays=_require_positive_int(values, "maximum_total_replays"),
+        replay_bound_held=_require_bool(values, "replay_bound_held"),
+        specialist_count_before=_require_nonnegative_int(values, "specialist_count_before"),
+        specialist_count_after=_require_nonnegative_int(values, "specialist_count_after"),
+        structural_growth_operation_count=_require_nonnegative_int(
+            values, "structural_growth_operation_count"
+        ),
+        duplicate_specialist_membership_count=_require_nonnegative_int(
+            values, "duplicate_specialist_membership_count"
+        ),
+        final_memory_state=_restore_memory_snapshot(values["final_memory_state"]),
+        condition_pass_evidence=_require_bool(values, "condition_pass_evidence"),
+    )
+    if restored.snapshot() != dict(values):
+        raise ValueError("condition result did not round-trip exactly")
+    return restored
+
+
+def _restore_mastery_profile(snapshot: object) -> MasteryProfile:
+    values = _require_mapping("mastery profile", snapshot)
+    expected_names = set(MasteryProfile.__dataclass_fields__)
+    if set(values) != expected_names:
+        raise ValueError("mastery profile fields do not match the canonical schema")
+    restored = MasteryProfile(
+        raw_repetition_count=_require_nonnegative_int(values, "raw_repetition_count"),
+        effective_support=_require_nonnegative_float(values, "effective_support"),
+        unique_context_count=_require_nonnegative_int(values, "unique_context_count"),
+        unique_route_count=_require_nonnegative_int(values, "unique_route_count"),
+        contradiction_count=_require_nonnegative_int(values, "contradiction_count"),
+        repetition_strength=_require_unit(values, "repetition_strength"),
+        context_diversity=_require_unit(values, "context_diversity"),
+        route_diversity=_require_unit(values, "route_diversity"),
+        causal_consistency=_require_unit(values, "causal_consistency"),
+        transfer_success=_require_unit(values, "transfer_success"),
+        protective_strength=_require_unit(values, "protective_strength"),
+        mastery_score=_require_unit(values, "mastery_score"),
+        broad_mastery=_require_bool(values, "broad_mastery"),
+        source_event_ids=tuple(_require_ascii_list(values, "source_event_ids")),
+    )
+    if restored.snapshot() != dict(values):
+        raise ValueError("mastery profile did not round-trip exactly")
+    return restored
+
+
+def _restore_consolidation_candidate(snapshot: object) -> ConsolidationCandidate:
+    values = _require_mapping("consolidation candidate", snapshot)
+    expected_names = {
+        "candidate_id",
+        "lesson_identity",
+        "source_event_ids",
+        "assembly_ids",
+        "route_ids",
+        "mastery_snapshot",
+        "requested_stability_increment",
+        "requested_plasticity_reduction",
+    }
+    if set(values) != expected_names:
+        raise ValueError("consolidation candidate fields do not match the canonical schema")
+    lesson_values = _require_mapping("lesson identity", values["lesson_identity"])
+    if set(lesson_values) != {"need_code", "effect_code", "desired_direction"}:
+        raise ValueError("lesson identity fields do not match the canonical schema")
+    restored = ConsolidationCandidate(
+        candidate_id=_require_ascii(values, "candidate_id"),
+        lesson_identity=LessonIdentity(
+            need_code=_require_ascii(lesson_values, "need_code"),
+            effect_code=_require_ascii(lesson_values, "effect_code"),
+            desired_direction=_require_signed(lesson_values, "desired_direction"),
+        ),
+        source_event_ids=tuple(_require_ascii_list(values, "source_event_ids")),
+        assembly_ids=tuple(_require_ascii_list(values, "assembly_ids")),
+        route_ids=tuple(_require_ascii_list(values, "route_ids")),
+        mastery_snapshot=_restore_mastery_profile(values["mastery_snapshot"]),
+        requested_stability_increment=_require_unit(values, "requested_stability_increment"),
+        requested_plasticity_reduction=_require_unit(values, "requested_plasticity_reduction"),
+    )
+    if restored.mastery_snapshot.source_event_ids != restored.source_event_ids:
+        raise ValueError("candidate mastery sources must match candidate sources exactly")
+    if restored.snapshot() != dict(values):
+        raise ValueError("consolidation candidate did not round-trip exactly")
+    return restored
 
 
 def _memory_family_score(snapshot: _MemorySnapshot, family: LongHorizonTaskFamily) -> float:
@@ -1387,3 +1700,140 @@ def _validate_signed(name: str, value: object) -> None:
 def _validate_code(name: str, value: str) -> None:
     if not value or not value.isascii() or not value.strip():
         raise ValueError(f"{name} must be non-empty ASCII")
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
+    return value
+
+
+def _require_list(values: Mapping[str, object], key: str) -> list[object]:
+    value = values.get(key)
+    if not isinstance(value, list):
+        raise ValueError(f"{key} must be a list")
+    return value
+
+
+def _require_bool(values: Mapping[str, object], key: str) -> bool:
+    value = values.get(key)
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be a boolean")
+    return value
+
+
+def _require_ascii(values: Mapping[str, object], key: str) -> str:
+    value = values.get(key)
+    if not isinstance(value, str) or not value.isascii() or not value.strip():
+        raise ValueError(f"{key} must be non-empty ASCII text")
+    return value
+
+
+def _require_optional_ascii(values: Mapping[str, object], key: str) -> str | None:
+    value = values.get(key)
+    if value is None:
+        return None
+    if not isinstance(value, str) or not value.isascii() or not value.strip():
+        raise ValueError(f"{key} must be null or non-empty ASCII text")
+    return value
+
+
+def _require_nonnegative_int(values: Mapping[str, object], key: str) -> int:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise ValueError(f"{key} must be a non-negative integer")
+    return value
+
+
+def _require_positive_int(values: Mapping[str, object], key: str) -> int:
+    value = _require_nonnegative_int(values, key)
+    if value <= 0:
+        raise ValueError(f"{key} must be a positive integer")
+    return value
+
+
+def _require_exact_int(values: Mapping[str, object], key: str, expected: int) -> int:
+    value = _require_nonnegative_int(values, key)
+    if value != expected:
+        raise ValueError(f"{key} must equal {expected}")
+    return value
+
+
+def _require_nonnegative_float(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float) or not isfinite(value):
+        raise ValueError(f"{key} must be a finite number")
+    numeric_value = float(value)
+    if numeric_value < 0.0:
+        raise ValueError(f"{key} must be non-negative")
+    return numeric_value
+
+
+def _require_unit(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    _validate_unit(key, value)
+    assert isinstance(value, int | float)
+    return float(value)
+
+
+def _require_signed(values: Mapping[str, object], key: str) -> float:
+    value = values.get(key)
+    _validate_signed(key, value)
+    assert isinstance(value, int | float)
+    return float(value)
+
+
+def _require_optional_unit(values: Mapping[str, object], key: str) -> float | None:
+    value = values.get(key)
+    if value is None:
+        return None
+    _validate_unit(key, value)
+    assert isinstance(value, int | float)
+    return float(value)
+
+
+def _require_ascii_list(values: Mapping[str, object], key: str) -> list[str]:
+    items = _require_list(values, key)
+    restored: list[str] = []
+    for item in items:
+        if not isinstance(item, str) or not item.isascii() or not item.strip():
+            raise ValueError(f"{key} must contain only non-empty ASCII text")
+        restored.append(item)
+    return restored
+
+
+def _require_int_list(values: Mapping[str, object], key: str) -> list[int]:
+    items = _require_list(values, key)
+    restored: list[int] = []
+    for item in items:
+        if isinstance(item, bool) or not isinstance(item, int) or item < 0:
+            raise ValueError(f"{key} must contain only non-negative integers")
+        restored.append(item)
+    return restored
+
+
+def _require_finite_list(values: Mapping[str, object], key: str, *, unit: bool) -> list[float]:
+    items = _require_list(values, key)
+    restored: list[float] = []
+    for item in items:
+        if unit:
+            _validate_unit(key, item)
+            assert isinstance(item, int | float)
+        elif isinstance(item, bool) or not isinstance(item, int | float) or not isfinite(item):
+            raise ValueError(f"{key} must contain only finite numbers")
+        restored.append(float(item))
+    return restored
+
+
+def _require_enum[TLongHorizonEnum: StrEnum](
+    values: Mapping[str, object],
+    key: str,
+    enum_type: type[TLongHorizonEnum],
+) -> TLongHorizonEnum:
+    value = values.get(key)
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be an enum string")
+    try:
+        return enum_type(value)
+    except ValueError as error:
+        raise ValueError(f"{key} contains an invalid enum value") from error

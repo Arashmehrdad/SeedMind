@@ -35,9 +35,17 @@ Implement Batch 1 as `long_horizon_interference_experiment.py` with these invari
 8. Keep action-selection, recommendation, scheduling, execution, live integration, promotion, and production action authority booleans explicitly false, with zero authority violations and `sqlite_used_for_experiment=False`.
 9. Keep all public evidence transitively immutable and accept a result identity only after revalidating exact schedule, memory continuity, per-step and final derived scores, replay summaries and bounds, source counts and mastery flags, structural invariants, aggregate pass criteria, canonical snapshot, and SHA-256 digest.
 
+Batch 2 extends the stage with an isolated persistence and restart-proof boundary:
+
+1. Add strict public payload and restore helpers that preserve the existing Batch 1 snapshot shapes exactly, reject unknown fields and semantic tampering, and reconstruct one exact validated `LongHorizonInterferenceResult` with a rederived canonical ASCII snapshot and SHA-256 identity.
+2. Store only one validated Batch 1 result in a separate versioned canonical-ASCII JSON envelope with checksum and identity protection. The store must not import or modify main brain persistence, standalone acceptance persistence, bounded imagination, integration, scheduling, recommendation, execution, promotion, production action authority, or SQLite cognition.
+3. Loading must expose only four explicit outcomes: loaded, missing fallback, corrupt fallback, and incompatible fallback. Every fallback must return `result=None`, no checksum or identity, no partial proof, no synthesized passing evidence, and no authority.
+4. Restart proof must remain separate from the stored Batch 1 result, must preserve `restart_proof_included=False`, must require exact source-to-restored equality and exact restored-to-rerun equality, and must require unchanged source evidence, unchanged mastery, bounded replay, zero structure drift, unchanged bounded-imagination non-persistence, unchanged main brain schema, unchanged standalone-acceptance schema, zero authority, and zero deltas.
+
 ## Consequences
 
 - NDNRA now has a materially longer standalone mixed-task interference result without broadening authority or persistence scope.
 - The retained old-family source ledger, trace count, and mastery profile remain unchanged despite replay, which keeps replay descriptive rather than evidentiary.
 - The experiment yields deterministic complete timelines, transitively immutable bounded replay evidence, canonical ASCII JSON snapshots, and semantically revalidated SHA-256 result identities suitable for strict equality checks.
-- Restart-equivalence proof is still missing by design and remains the next isolated Batch 2 task for this stage.
+- The stage now also has an isolated checksum-protected restart-equivalence proof store with explicit safe fallbacks and no new authority.
+- Main brain persistence, standalone acceptance persistence, bounded imagination, live integration, scheduling, recommendation, execution, promotion, production action authority, and SQLite cognition remain unchanged by this Batch 2 extension.
