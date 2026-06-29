@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T22:15:36.850836+00:00",
+  "generated_at": "2026-06-29T22:48:27.190765+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 322,
+  "source_file_count": 324,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "b4990bc7f7607d19f2a4d508133dd3cb666a0ee9ef3e7fc7d12f893910d88277",
-      "size_bytes": 8744
+      "sha256": "9eeffbc15ef42cf15ffda5b6dce069480ffe7afbb30e3f621653a3b365a352d7",
+      "size_bytes": 7329
     },
     {
       "path": "pyproject.toml",
@@ -181,6 +181,11 @@
       "size_bytes": 1561
     },
     {
+      "path": "docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md",
+      "sha256": "4fdeba763bade8dbd8f0dc1d711ea41b67ef3e67d79ae2a77de943695eb94ab4",
+      "size_bytes": 13555
+    },
+    {
       "path": "docs/architecture/NDNRA_Retain_Or_Descope_Audit_2026-06-29.md",
       "sha256": "11ae64873a201ccf41f10e25c0ef73a712ecc5d2616b720a5dbc163e4ba6db5b",
       "size_bytes": 9430
@@ -192,8 +197,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "cf437079eb3942febb830629297ec747b10ee70945c3d277bff87ebb13a415c5",
-      "size_bytes": 94405
+      "sha256": "5c563ad1064a167f7b6e105e922ef0a8f8bf89b9ea0350a7621ea51d7e0bce30",
+      "size_bytes": 96345
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -244,6 +249,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-acceptance-and-restart-proof.md",
       "sha256": "32f2d0dc5e0e4ada5064cf21bb432fd9575d495561b5bfa5a6f9d578aae5821e",
       "size_bytes": 3288
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md",
+      "sha256": "7eeb1c75aadb6e71d01fd0b9267f0a2b94210aae834c29a621963d4f48b4146e",
+      "size_bytes": 3167
     },
     {
       "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",

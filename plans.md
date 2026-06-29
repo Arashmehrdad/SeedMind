@@ -9,17 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Long-Horizon Mixed-Task Interference and Adaptability Batch 2
+- Latest completed milestone: Final Standalone NDNRA v0.1 Closure Audit
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Long-Horizon Mixed-Task Interference and Adaptability at Batch 2
-- Current stage: Final Standalone NDNRA Closure Audit
-- Current status: Long-Horizon Batch 2 is complete with an isolated checksum-protected restart-equivalence proof store for one validated Batch 1 result; closure-audit planning is next
+- Last closed stage: Final Standalone NDNRA Closure Audit
+- Current stage: Original Plan Comparison and Integration Decision
+- Current status: Standalone NDNRA v0.1 is closed under the declared scope, no integration is approved, and comparison with the original SeedMind plan is next
 - Expanded developmental architecture marker: 82%
+- Marker interpretation: unchanged because closure consolidates and bounds accepted evidence without adding new cognitive architecture capability; it is not a completion percentage for the original SeedMind roadmap
 
 Completed bounded increments:
 
@@ -61,7 +62,7 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Long-Horizon Mixed-Task Interference and Adaptability Batch 2:
+After Final Standalone NDNRA v0.1 Closure Audit:
 
 ```text
 ruff format --check .: 237 files already formatted
@@ -91,49 +92,46 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-normalized-competing-recruitment.md`
 - `docs/architecture/decisions/ADR-2026-06-29-locally-derived-representational-saturation.md`
 - `docs/architecture/decisions/ADR-2026-06-29-long-horizon-mixed-task-interference.md`
+- `docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md`
+- `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md`
 
 ## Next planning target
 
-Finish and prove NDNRA as a standalone research architecture before comparing it with, or integrating it into, the original SeedMind roadmap.
+Standalone NDNRA v0.1 is now closed under its declared standalone scope. The next work is comparison with the original SeedMind roadmap, followed by an explicit integration decision rather than immediate integration work.
 
-The gap audit is complete. It confirms that the Section 20 prototype criteria are evidenced in isolation, while complete NDNRA proof remains fragmented across experiments and checkpoint boundaries.
+Closure evidence is recorded in:
 
-`Standalone NDNRA Acceptance and Restart Proof` is complete through Batch 2. Its deterministic aggregate, isolated checkpoint store, exact reload, deterministic rerun, and safe non-proof fallbacks remain accepted without adding execution, recommendation, scheduling, promotion, or live integration authority.
+- `docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md`
+- `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md`
 
-The retain-or-descope audit is complete.
+The accepted closure keeps these boundaries:
 
-Retained as mandatory before standalone v0.1 closure:
+- one active need pulse at a time;
+- grounded exact context signatures;
+- fixed bounded inspectable transfer weights;
+- specialist interaction growth rather than unrestricted generic neuron creation;
+- no semantic abstraction claim;
+- no simultaneous multiple-need arbitration claim;
+- no production integration or production action authority.
 
-- local spreading-activation normalization under competing recruitment;
-- locally derived representational saturation;
-- long-horizon mixed-task interference and adaptability evidence.
+Separate proof stores remain separate:
 
-Already sufficiently represented for v0.1:
+- standalone acceptance persistence and restart proof are one isolated proof store;
+- long-horizon interference persistence and restart proof are a second isolated proof store;
+- neither is a unified cognitive runtime checkpoint;
+- bounded imagination remains non-persistent and non-authoritative.
 
-- bounded initial connections for specialist growth through deterministic local eligibility, bounded membership, configured specialist limits, and duplicate blocking.
-
-Deferred post-v0.1 research:
+Deferred post-v0.1 research remains outside the closure claim:
 
 - learned context-similarity weights;
 - semantic abstraction above grounded context signatures;
 - coordination of multiple simultaneous needs.
 
-`Normalized Recruitment and Local Saturation` is complete:
-
-1. Batch 1 normalized competing recruitment preserves deterministic heat-fan recall and dormancy behaviour using positive-only contributor averaging with separate immutable evidence.
-2. Batch 2 derives stable sorted local saturation from eligibility-before traces, canonical duplicate membership, and remaining specialist capacity; one event cannot self-certify saturation and stale pressure cannot bypass a weak current interaction.
-
-`Long-Horizon Mixed-Task Interference and Adaptability` is complete through Batch 2:
-
-1. A separate deterministic in-memory experiment now pretrains old family A to broad mastery across two routes and three exact source events, then runs an exact 36-step `A, B, A, C` horizon under three conditions: no consolidation, naive protection, and bounded retention replay.
-2. Batch 1 preserves one exact old-family source ledger and one exact consolidation candidate, keeps family A probes non-mutating, bounds replay to at most one exact old source event per B/C step and within a finite total cap, preserves zero structural drift, zero authority, zero SQLite cognition, transitively immutable evidence records, full semantic revalidation, stable canonical ASCII JSON snapshots, and stable SHA-256 result identities.
-3. Batch 2 adds strict payload/restore helpers, a separate versioned canonical-ASCII JSON store for exactly one validated `LongHorizonInterferenceResult`, explicit loaded and safe-fallback states, and a separate restart-proof result with exact reload equality, deterministic rerun equality, unchanged Batch 1 identities, unchanged `restart_proof_included=False`, zero authority, zero deltas, unchanged main-brain schema, and unchanged standalone-acceptance schema.
-
 Required sequence:
 
-1. Run the final standalone NDNRA closure audit.
-2. Compare the completed NDNRA architecture with the original SeedMind plan.
-3. Decide explicitly whether, where, and how integration should occur.
+1. Compare completed standalone NDNRA v0.1 with the original SeedMind master plan.
+2. Make an explicit retain, adapt, partially integrate, or do-not-integrate decision.
+3. Implement integration work only after separate explicit approval.
 
 Original-roadmap milestones, including Week 8 skill compilation, are not active implementation targets unless a later NDNRA-only audit independently requires an equivalent capability.
 
