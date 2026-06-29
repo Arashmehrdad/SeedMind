@@ -1634,6 +1634,36 @@ does not add candidate generation, contextual transfer as an alternate source, o
 chain search, advice, growth, replay, SQLite, timers, workers, asyncio, safe-experiment
 promotion, or production integration.
 
+### 17.26 Bounded imagination Batch 2 boundary
+
+The second bounded-imagination boundary remains narrower than later route-search,
+selection, or experiment-promotion stages. It adds only in-memory deterministic exact-record
+candidate enumeration.
+
+- The caller supplies one exact starting `ContextSignature` and sorted unique requested
+  effect codes.
+- The generator enumerates supported prefixes breadth-first from depth 1 through the
+  configured maximum.
+- Within each parent prefix, exact current-context records are considered in stable
+  `(action_code, record_id)` order.
+- A step is admitted only when the exact record context matches the current context, the
+  action is available, exact prediction returns every requested effect in exact requested
+  order, an exact predicted next context exists, and supporting provenance remains in
+  bounds.
+- The exact predicted next context becomes the next prefix context.
+- One exact source prediction ID may appear at most once inside one generated candidate.
+- Each imagined step preserves exact context, action, predicted effects, exact predicted
+  next context, source record ID, source prediction ID, and exact supporting real event
+  IDs.
+- Result-level truncation reasons remain explicit and deterministic. Candidate objects do
+  not carry ranking, scoring, selection, recommendation, schedule, execution, promotion,
+  or generic truncation fields.
+
+This boundary is still deliberately non-persistent, non-integrated, and
+non-authoritative. It does not add contextual transfer as an alternate source, observed
+chain search, advice, growth, replay, SQLite, timers, workers, asyncio, safe-experiment
+promotion, or production integration.
+
 ## 18. Architectural invariants
 
 The following rules must remain true:
@@ -1694,6 +1724,8 @@ The following rules must remain true:
 54. Chain effects are reported per observed step unless a later stage defines a safe effect-specific aggregation rule.
 55. Observed chain predictions cannot select, rank, recommend, search, optimise, schedule, or execute actions.
 56. Live learned-consequence predictions may observe before production action execution and calibrate after the real outcome, but they cannot change production action selection, training updates, advice, route ranking, growth, replay, restoration, or SQLite lookup.
+57. Bounded imagination traces and generated candidates remain explicitly imagined, provenance-only, non-evidentiary, deterministic, finite, and unable to alter confidence, mastery, competence, growth, replay, persistence, or production authority.
+58. Exact-record candidate enumeration may preserve deterministic breadth-first order, but that order is not a score, rank, recommendation, selection, schedule, promotion, or execution decision.
 
 ## 19. First prototype boundary
 

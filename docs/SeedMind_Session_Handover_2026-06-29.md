@@ -1,7 +1,9 @@
 # SeedMind Session Handover — 29 June 2026
 
-Superseded for learned-consequence continuation by
-`docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md`.
+Superseded for current continuation by
+`docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md`.
+
+The remaining sections below are retained as historical context and must not be treated as the current repository state.
 
 Repository: `D:\Github\SeedMind`
 CodexBridge repository alias: `seedmind`

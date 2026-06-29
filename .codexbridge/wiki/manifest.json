@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T02:26:53.459633+00:00",
+  "generated_at": "2026-06-29T02:58:57.609001+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 278,
+  "source_file_count": 282,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -181,14 +181,19 @@
       "size_bytes": 2114
     },
     {
+      "path": "docs/SeedMind_Bounded_Imagination_Batch2_Handover_2026-06-29.md",
+      "sha256": "935608a33111790dd8fd8363ec8b6b23c18151b56cf21083ca13b801d695d3d9",
+      "size_bytes": 4464
+    },
+    {
       "path": "docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md",
-      "sha256": "602654c3d99a52f16e2bc5f4287682e5b4094e462fc7f82faa93974a467767f7",
-      "size_bytes": 3371
+      "sha256": "88199bb0e4f1793cc563c8f909ce87829fcccbd70533b67a2784b78aaaed2d68",
+      "size_bytes": 6640
     },
     {
       "path": "docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
-      "sha256": "4f603ad45974a57ce82d67b17ae708e7dd70c45957549009d53afbde2b6bd2af",
-      "size_bytes": 13193
+      "sha256": "bf99c2f46474eddddb508c7c23d914242b912627d5395bed96bf07425e83f67f",
+      "size_bytes": 14184
     },
     {
       "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
@@ -252,8 +257,8 @@
     },
     {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "286a475c98566ec33e7524ffd66d97f3cdf12a71866faef98c760f2a99052d3a",
-      "size_bytes": 102183
+      "sha256": "0c9605efe56736b9a70d7f528c1db7ca6c2725ccc59a4af4a1ef7554c8ca3925",
+      "size_bytes": 102620
     },
     {
       "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
@@ -282,8 +287,13 @@
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29.md",
-      "sha256": "7534a9f5ddc9aaf864a7d703332e34b4c95c67c13421371f87ae91036a26ec5e",
-      "size_bytes": 17639
+      "sha256": "736706fc3e646a756eceb9cb93503dc827fc8046751fc7c6529b0c55f0e476d4",
+      "size_bytes": 17748
+    },
+    {
+      "path": "docs/SeedMind_Session_Handover_2026-06-29_Bounded_Imagination_Batch2.md",
+      "sha256": "2a8c184d55d124aeb36d4b134ce0785f4aeb163e2c465cac1470ff3d8982d3b1",
+      "size_bytes": 3789
     },
     {
       "path": "docs/SeedMind_Session_Handover_2026-06-29_Learned_Consequence_Closure.md",
@@ -292,8 +302,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "2b6bc20d2ef860069e82a8a9509b3b2df6e3168dc2c91797efb7c33ede2fd611",
-      "size_bytes": 80215
+      "sha256": "bf691445d669f89f9f0c2f4f3c0fa57f51309c19379575fccc0659096c49e751",
+      "size_bytes": 82351
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md",
@@ -702,8 +712,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "1e8c2f97dd8dea15ade2b6bf6886c83177a47e48fe28e19fd10322a054ecfdd0",
-      "size_bytes": 19457
+      "sha256": "940d2da1fb6bbb9415208e9d4e84d5f4c78ca9b38ab081dc248a0fd46aa551ac",
+      "size_bytes": 20068
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -719,6 +729,11 @@
       "path": "src/seedmind/research/ndnra/bounded_imagination.py",
       "sha256": "4b568b10e098590583fcd8b83fa0a4fdc919dadcd2d3bd4b588736c9ec9e5ecf",
       "size_bytes": 30629
+    },
+    {
+      "path": "src/seedmind/research/ndnra/bounded_imagination_candidates.py",
+      "sha256": "43e14777a06bd5c5e78bd774bcd4506735e22ec2d8f3aed61e66c6a1f14dd154",
+      "size_bytes": 30572
     },
     {
       "path": "src/seedmind/research/ndnra/composition.py",
@@ -1094,6 +1109,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_boundaries.py",
       "sha256": "9e91239a6e3d7711f20f19e9e5919eb701b231f82bc33637a5ae3cd77adb97c8",
       "size_bytes": 3948
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_candidates.py",
+      "sha256": "e87f3352d4758e7c54bd4a311b24c8b55689c4abdc5d026e40efd1366038d058",
+      "size_bytes": 20252
     },
     {
       "path": "tests/unit/test_ndnra_consolidation.py",

@@ -150,7 +150,7 @@ Completed:
 
 ### Batch 5 - bounded imagination
 
-Partially implemented: only in-memory caller-driven Batch 1 is complete. The expanded marker remains **82%**.
+Partially implemented: in-memory caller-driven Batch 1 and in-memory exact-record deterministic candidate-enumeration Batch 2 are complete. The expanded marker remains **82%**.
 
 Implemented in Batch 1:
 
@@ -163,9 +163,19 @@ Implemented in Batch 1:
 - Expose final predicted context only for fully supported traces.
 - Keep the module in memory only with zero confidence, mastery, competence, growth, replay-evidence, real-observation, and authority changes.
 
+Implemented in Batch 2:
+
+- Generate exact supported action-sequence prefixes from one exact starting context and sorted requested effect codes.
+- Enumerate breadth-first in deterministic order over exact retained learned consequence records only.
+- Preserve stable `(action_code, record_id)` branch order within each parent prefix.
+- Admit a step only when exact requested effects are fully returned in exact requested order and an exact predicted next context exists.
+- Preserve exact source record IDs, source prediction IDs, exact contexts, predicted effects, and exact supporting real event IDs at each imagined step.
+- Stop extending one candidate when a source prediction ID would repeat.
+- Return partial deterministic output with result-level truncation reasons for branch, candidate, expansion, source-record, and supporting-event bounds.
+- Keep generated candidates free of scores, ranks, recommendations, schedules, execution fields, promotion fields, persistence, and integration.
+
 Still planned:
 
-- Generate action candidates and short sequences from learned pieces.
 - Rank or optimise imagined routes.
 - Persist imagination-specific state.
 - Accept live imagination into the deterministic Nursery loop.

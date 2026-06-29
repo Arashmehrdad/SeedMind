@@ -2106,13 +2106,19 @@ does not complete bounded imagination, imagined route optimisation, safe experim
 promotion, semantic abstraction, learned similarity weights, or a 100% architecture
 claim.
 
-Bounded imagination has now started only at a narrower Batch 1 boundary. The implemented
-piece is an in-memory caller-driven layer over exact learned-consequence predictions. It
-accepts only explicit caller sequences, preserves caller order, rolls forward only when
-exact requested effects and an exact next context exist at each step, and stops at the
-first unsupported step without fabricating later outcomes. It adds no candidate
-generation, route optimisation, persistence, live integration, or safe-experiment
-promotion authority.
+Bounded imagination is now split across two narrow accepted increments. Batch 1 is the
+in-memory caller-driven layer over exact learned-consequence predictions. It accepts
+only explicit caller sequences, preserves caller order, rolls forward only when exact
+requested effects and an exact next context exist at each step, and stops at the first
+unsupported step without fabricating later outcomes.
+
+Batch 2 adds only in-memory deterministic exact-record candidate enumeration. The caller
+supplies one exact starting context and sorted requested effect codes. The generator
+enumerates supported prefixes in breadth-first order from exact retained
+context-action records plus exact `LearnedConsequenceModel.predict(...)` outputs, keeps
+exact source record and prediction provenance, enforces finite truncation bounds, and
+still adds no ranking, scoring, selection, recommendation, scheduling, execution,
+persistence, live integration, or safe-experiment promotion authority.
 
 ---
 
