@@ -1773,6 +1773,8 @@ The following rules must remain true:
 82. Local spreading-activation normalization under competing recruitment and graph-locally derived representational saturation are required before standalone NDNRA v0.1 closure.
 83. The v0.1 initial-connection policy for newly grown specialist interactions must remain deterministic, eligibility-scoped, membership-bounded, specialist-count-bounded, duplicate-blocking, and preserving of old assemblies.
 84. Existing short bounded interference evidence does not satisfy final closure; a longer deterministic mixed-task interference and adaptability experiment is required.
+85. Batch 1 normalized competing recruitment may use only graph-local incoming contributions, sum only positive incoming support, divide by positive contributor count with a safe zero floor when none contribute, and expose separate deterministic immutable evidence without changing persisted recall, standalone acceptance, or checkpoint schemas.
+86. Batch 1 normalization evidence is inspectable only; it cannot introduce SQLite lookup, worker, timer, scheduler, recommendation, execution, integration, or production authority.
 
 ## 19. First prototype boundary
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T19:09:05.727100+00:00",
+  "generated_at": "2026-06-29T19:51:06.384412+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 312,
+  "source_file_count": 315,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "e278a35cb3b33af6bebf3b88fc6622303540c4b586f264df0ba4654e15378e14",
-      "size_bytes": 7684
+      "sha256": "5a70c7e1c808a25dd18359bb1b5f2b07f0b187bd81e6e3b57821189bfab70af5",
+      "size_bytes": 7975
     },
     {
       "path": "pyproject.toml",
@@ -192,8 +192,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "c5f43666f75b588ffde5e9c659a17d5ccca4cdcab9c1f2d064003aff720feda3",
-      "size_bytes": 89596
+      "sha256": "bb404dba1fd4523f6aaf576ca6aad9f576bec293a2f5e78783b7fd6af7abaf65",
+      "size_bytes": 90124
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -224,6 +224,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-ndnra-v0.1-retain-or-descope.md",
       "sha256": "9bf3b028d199591b6d4125e12a65c256c6bff1cb28d541cd0c8cb9ddedd1ce71",
       "size_bytes": 2825
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-29-normalized-competing-recruitment.md",
+      "sha256": "508c1bbe5215af75779a8de93e99c57f2c6ea99f8cf4a506d86eec01326c6a32",
+      "size_bytes": 2698
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-acceptance-and-restart-proof.md",
@@ -777,8 +782,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "e11b0aec402dd4a5a475ec8331cf7a1056d6d2c07044e0eb56b1f07ab389a520",
-      "size_bytes": 25302
+      "sha256": "abbb00973c47414adec289086cff43dc09c8421478b9cca5ad936b7a90033fcb",
+      "size_bytes": 25745
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -1037,8 +1042,13 @@
     },
     {
       "path": "src/seedmind/research/ndnra/network.py",
-      "sha256": "435ab3382dedeafbbeda05a42739a9970a1a14722412a7add7e059b3b015b1bd",
-      "size_bytes": 15360
+      "sha256": "c8e28232357fac2108e896e3a19401fd00500ae08f9183434381d6385d6ea650",
+      "size_bytes": 17961
+    },
+    {
+      "path": "src/seedmind/research/ndnra/normalized_recruitment.py",
+      "sha256": "321f0c44b1aeb35355876b51b3dcdc8c1e8d64698a759e960554d82b6f23fccc",
+      "size_bytes": 6806
     },
     {
       "path": "src/seedmind/research/ndnra/observed_consequence_chains.py",
@@ -1446,6 +1456,11 @@
       "size_bytes": 4478
     },
     {
+      "path": "tests/unit/test_ndnra_normalized_recruitment.py",
+      "sha256": "a5cf62d849c783ba6e946812347a8ac13444ee23a04d16aad563f225138da7ee",
+      "size_bytes": 8236
+    },
+    {
       "path": "tests/unit/test_ndnra_observed_consequence_chains.py",
       "sha256": "8d8cef32fe0fa23e2b03c5218644650b07a519db6489f6f3a0f6f6ec4880495c",
       "size_bytes": 22018
@@ -1462,8 +1477,8 @@
     },
     {
       "path": "tests/unit/test_ndnra_recall.py",
-      "sha256": "083f0dd725e93cebd70994d304ba59903e039c8faac1e74adb825bf33cf34a73",
-      "size_bytes": 2879
+      "sha256": "3851207540da8bf0e4e6b3fc8958de7e5345cd40d260b5db23caf429cb577203",
+      "size_bytes": 3844
     },
     {
       "path": "tests/unit/test_ndnra_restart_safe_proposal_memory_acceptance.py",

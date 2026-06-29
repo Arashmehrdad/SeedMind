@@ -3,7 +3,9 @@
 from seedmind.research.ndnra import (
     GrowthPressure,
     HeatAction,
+    HeatContext,
     LocalNeuralGraph,
+    NeedPulse,
     evaluate_recall,
     run_ndnra_heat_fan_experiment,
     train_teacher_demonstrations,
@@ -61,6 +63,34 @@ def test_complete_experiment_passes_local_memory_gate() -> None:
     assert result.synapse_count_before_dormancy == result.synapse_count_after_dormancy
     assert result.growth_pressure >= 0.80
     assert not result.sqlite_used_for_recall
+
+
+def test_recall_normalization_evidence_is_deterministic_and_preserves_chain() -> None:
+    graph = LocalNeuralGraph()
+    train_teacher_demonstrations(graph, demonstration_count=6)
+    graph.enter_dormancy(0.80)
+    need_pulse = NeedPulse(
+        need_code="reduce_temperature",
+        intensity=1.0,
+        urgency=1.0,
+        effort_budget=5,
+    )
+
+    first = graph.recall_action_with_normalization_evidence(
+        need_pulse=need_pulse,
+        context=HeatContext.SITTING_AWAY,
+        maximum_depth=5,
+    )
+    second = graph.recall_action_with_normalization_evidence(
+        need_pulse=need_pulse,
+        context=HeatContext.SITTING_AWAY,
+        maximum_depth=5,
+    )
+
+    assert first.recall_result == second.recall_result
+    assert first.normalization_evidence == second.normalization_evidence
+    assert first.recall_result.selected_action is HeatAction.STAND
+    assert first.normalization_evidence.bounded
 
 
 def test_growth_pressure_requires_all_developmental_factors() -> None:

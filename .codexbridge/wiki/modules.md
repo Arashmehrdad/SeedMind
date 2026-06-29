@@ -968,6 +968,14 @@ Sparse local neural graph for the isolated NDNRA heat-fan prototype.
 - Classes: LocalNeuralGraphConfig, LocalNeuralGraph
 - Functions/symbols: _context_neuron_id, _action_neuron_id
 
+## `src/seedmind/research/ndnra/normalized_recruitment.py`
+
+Deterministic local normalization for competing incoming recruitment.
+
+- Kind: python
+- Classes: OrderedLocalIncomingContribution, NormalizedIncomingSupportEvidence, RecallDepthNormalizationEvidence, RecallNormalizationEvidence, RecallWithNormalizationEvidence
+- Functions/symbols: normalize_local_incoming_support
+
 ## `src/seedmind/research/ndnra/observed_consequence_chains.py`
 
 Bounded observed consequence chains from exact real transition evidence.
@@ -1518,6 +1526,13 @@ Tests for dynamic local dimensions and undemonstrated solution composition.
 - Kind: python
 - Functions/symbols: test_sparse_effect_memory_gains_dimensions_from_experience, test_shower_memory_keeps_all_observed_effects_on_neuron_and_link, test_shower_learned_for_cleaning_is_recruited_for_cooling, test_separate_window_memories_compose_an_unseen_cooling_solution, test_composition_respects_conditions_and_rejects_hot_shower_for_cooling, test_intended_effect_only_baseline_cannot_reuse_shower_for_cooling, test_complete_multieffect_gate_passes_without_sqlite, test_multieffect_prototype_has_no_sqlite_dependency
 
+## `tests/unit/test_ndnra_normalized_recruitment.py`
+
+Focused tests for normalized competing recruitment.
+
+- Kind: python
+- Functions/symbols: test_one_positive_contributor_matches_raw_support, test_zero_and_negative_contributors_do_not_inflate_support, test_duplicated_weaker_irrelevant_fan_in_cannot_beat_stronger_single_support, test_network_recall_uses_normalized_local_support, test_equal_normalized_supports_remain_deterministic, test_normalization_evidence_is_bounded_and_ordered, test_unsorted_or_tampered_normalization_evidence_is_rejected, test_normalized_recruitment_has_no_forbidden_runtime_dependencies, test_evidence_api_matches_recall_action_result_and_stays_bounded
+
 ## `tests/unit/test_ndnra_observed_consequence_chains.py`
 
 Tests for bounded observed consequence chains.
@@ -1544,7 +1559,7 @@ Tests for schema-v4 proposal lifecycle persistence in the NDNRA brain store.
 Tests for need-driven recruitment, dormancy, and effort-based recall.
 
 - Kind: python
-- Functions/symbols: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_growth_pressure_requires_all_developmental_factors
+- Functions/symbols: test_untrained_graph_cannot_reconstruct_cooling_chain, test_dormant_memory_requires_deeper_recall_and_resolves_need, test_complete_experiment_passes_local_memory_gate, test_recall_normalization_evidence_is_deterministic_and_preserves_chain, test_growth_pressure_requires_all_developmental_factors
 
 ## `tests/unit/test_ndnra_restart_safe_proposal_memory_acceptance.py`
 

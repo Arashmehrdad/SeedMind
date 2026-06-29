@@ -15,6 +15,14 @@ from seedmind.research.ndnra.models import (
     NeuronKind,
     RecallResult,
 )
+from seedmind.research.ndnra.normalized_recruitment import (
+    NormalizedIncomingSupportEvidence,
+    OrderedLocalIncomingContribution,
+    RecallDepthNormalizationEvidence,
+    RecallNormalizationEvidence,
+    RecallWithNormalizationEvidence,
+    normalize_local_incoming_support,
+)
 
 _NEED_NEURON_ID = "need:reduce_temperature"
 _OUTCOME_NEURON_ID = "outcome:cooling"
@@ -190,6 +198,20 @@ class LocalNeuralGraph:
         maximum_depth: int,
     ) -> RecallResult:
         """Recruit one action through bounded spreading activation."""
+        return self.recall_action_with_normalization_evidence(
+            need_pulse=need_pulse,
+            context=context,
+            maximum_depth=maximum_depth,
+        ).recall_result
+
+    def recall_action_with_normalization_evidence(
+        self,
+        *,
+        need_pulse: NeedPulse,
+        context: HeatContext,
+        maximum_depth: int,
+    ) -> RecallWithNormalizationEvidence:
+        """Recruit one action and expose deterministic local normalization evidence."""
         if maximum_depth <= 0:
             raise ValueError("maximum_depth must be positive")
         if maximum_depth > self.config.maximum_recall_depth:
@@ -204,23 +226,29 @@ class LocalNeuralGraph:
         self._neurons[context_id].activation = 1.0
         activated_ids: set[str] = {need_id, context_id}
         neuron_evaluations = 0
+        depth_evidence: list[RecallDepthNormalizationEvidence] = []
+        bounded = True
 
         for depth in range(1, maximum_depth + 1):
             previous = {neuron_id: neuron.activation for neuron_id, neuron in self._neurons.items()}
-            for neuron_id, neuron in self._neurons.items():
+            current_depth_evidence: list[NormalizedIncomingSupportEvidence] = []
+            for neuron_id in sorted(self._neurons):
+                neuron = self._neurons[neuron_id]
                 if neuron_id in (need_id, context_id):
                     continue
                 neuron_evaluations += 1
-                incoming = sum(
-                    previous[synapse.source_id] * synapse.effective_weight
-                    for synapse in self._incoming[neuron_id]
+                incoming_evidence = self._normalize_incoming_support(
+                    neuron_id=neuron_id,
+                    previous_activations=previous,
                 )
+                current_depth_evidence.append(incoming_evidence)
+                bounded = bounded and incoming_evidence.bounded
                 need_drive = (
                     need_pulse.intensity
                     * neuron.need_compatibility
                     * self.config.utility_drive_weight
                 )
-                support = need_pulse.intensity * incoming + need_drive
+                support = need_pulse.intensity * incoming_evidence.normalized_support + need_drive
                 effort = (depth - 1) * self.config.effort_boost_per_depth if support > 0.0 else 0.0
                 dormancy_resistance = neuron.dormancy_level * self.config.dormancy_penalty
                 candidate = max(0.0, support + effort - dormancy_resistance)
@@ -230,28 +258,46 @@ class LocalNeuralGraph:
                 )
                 if neuron.activation >= neuron.activation_threshold:
                     activated_ids.add(neuron_id)
+            depth_evidence.append(
+                RecallDepthNormalizationEvidence(
+                    depth=depth,
+                    neuron_evidence=tuple(current_depth_evidence),
+                )
+            )
 
             selected_action, selected_score = self._select_action()
             if selected_action is not None:
-                return RecallResult(
-                    selected_action=selected_action,
-                    requested_depth=maximum_depth,
-                    depth_used=depth,
-                    propagation_cycles=depth,
-                    neuron_evaluations=neuron_evaluations,
-                    selected_score=selected_score,
-                    activated_neuron_ids=tuple(sorted(activated_ids)),
+                return RecallWithNormalizationEvidence(
+                    recall_result=RecallResult(
+                        selected_action=selected_action,
+                        requested_depth=maximum_depth,
+                        depth_used=depth,
+                        propagation_cycles=depth,
+                        neuron_evaluations=neuron_evaluations,
+                        selected_score=selected_score,
+                        activated_neuron_ids=tuple(sorted(activated_ids)),
+                    ),
+                    normalization_evidence=RecallNormalizationEvidence(
+                        depth_evidence=tuple(depth_evidence),
+                        bounded=bounded,
+                    ),
                 )
 
         _, selected_score = self._select_action(require_threshold=False)
-        return RecallResult(
-            selected_action=None,
-            requested_depth=maximum_depth,
-            depth_used=maximum_depth,
-            propagation_cycles=maximum_depth,
-            neuron_evaluations=neuron_evaluations,
-            selected_score=selected_score,
-            activated_neuron_ids=tuple(sorted(activated_ids)),
+        return RecallWithNormalizationEvidence(
+            recall_result=RecallResult(
+                selected_action=None,
+                requested_depth=maximum_depth,
+                depth_used=maximum_depth,
+                propagation_cycles=maximum_depth,
+                neuron_evaluations=neuron_evaluations,
+                selected_score=selected_score,
+                activated_neuron_ids=tuple(sorted(activated_ids)),
+            ),
+            normalization_evidence=RecallNormalizationEvidence(
+                depth_evidence=tuple(depth_evidence),
+                bounded=bounded,
+            ),
         )
 
     def snapshot(self) -> dict[str, object]:
@@ -355,6 +401,25 @@ class LocalNeuralGraph:
     def _reset_activations(self) -> None:
         for neuron in self._neurons.values():
             neuron.reset_activation()
+
+    def _normalize_incoming_support(
+        self,
+        *,
+        neuron_id: str,
+        previous_activations: dict[str, float],
+    ) -> NormalizedIncomingSupportEvidence:
+        ordered_contributions = tuple(
+            OrderedLocalIncomingContribution(
+                source_id=synapse.source_id,
+                local_contribution=previous_activations[synapse.source_id]
+                * synapse.effective_weight,
+            )
+            for synapse in self._incoming[neuron_id]
+        )
+        return normalize_local_incoming_support(
+            target_neuron_id=neuron_id,
+            ordered_contributions=ordered_contributions,
+        )
 
     def _select_action(
         self,
