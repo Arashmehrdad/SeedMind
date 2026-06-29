@@ -52,6 +52,14 @@ from seedmind.research.ndnra.bounded_imagination_evaluation import (
     ImaginedRouteEvaluationResult,
     ImaginedRouteStepEvaluation,
 )
+from seedmind.research.ndnra.bounded_imagination_uncertainty import (
+    BoundedComparisonUncertaintyConfig,
+    BoundedImaginedComparisonUncertaintyAuditor,
+    ImaginedComparisonIssueScope,
+    ImaginedComparisonUncertaintyIssue,
+    ImaginedComparisonUncertaintyRequest,
+    ImaginedComparisonUncertaintyResult,
+)
 from seedmind.research.ndnra.composition import (
     CompositionCandidate,
     CompositionResult,
@@ -375,9 +383,11 @@ __all__ = [  # noqa: RUF022
     "AdaptiveUpdate",
     "BoundedConsequenceImagination",
     "BoundedCandidateGenerationConfig",
+    "BoundedComparisonUncertaintyConfig",
     "BoundedImaginationConfig",
     "BoundedImaginationResult",
     "BoundedExactCandidateGenerator",
+    "BoundedImaginedComparisonUncertaintyAuditor",
     "BoundedImaginedRouteEvaluator",
     "BoundedImaginedRouteComparator",
     "BoundedRouteComparisonConfig",
@@ -532,6 +542,10 @@ __all__ = [  # noqa: RUF022
     "ImaginedCandidateGenerationStep",
     "ImaginedEffectAlignment",
     "ImaginedGeneratedCandidate",
+    "ImaginedComparisonIssueScope",
+    "ImaginedComparisonUncertaintyIssue",
+    "ImaginedComparisonUncertaintyRequest",
+    "ImaginedComparisonUncertaintyResult",
     "ImaginedRouteComparisonRequest",
     "ImaginedRouteComparisonResult",
     "ImaginedRouteDimensionComparison",

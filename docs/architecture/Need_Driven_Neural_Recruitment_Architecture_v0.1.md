@@ -1751,6 +1751,8 @@ The following rules must remain true:
 60. Need-alignment annotation may preserve learned prediction confidence and exact source provenance, but it cannot create a route winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or production authority.
 61. Every evaluated step must retain the request need identity; active-need drift invalidates the route evaluation rather than being silently compared under the old need.
 62. Imagined route comparison may report caller-order pairwise alignment relations only; it cannot create a route score, utility, rank, winner, selected candidate, recommendation, optimisation, schedule, promotion, execution, persistence, live integration, or production authority.
+63. Comparison uncertainty auditing may expose only exact source-linked unknown alignment, low-confidence, route-depth, and conflicting-trade-off issues; it cannot propose an experiment, route, action, permission decision, schedule, promotion, or execution.
+64. Uncertainty audit output must revalidate the complete Batch 4 source result, preserve source pair and dimension order, remain deterministic and in memory, and retain zero evidence, learning, and production authority.
 
 ## 19. First prototype boundary
 

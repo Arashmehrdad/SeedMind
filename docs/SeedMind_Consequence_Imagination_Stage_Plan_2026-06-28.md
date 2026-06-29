@@ -150,7 +150,7 @@ Completed:
 
 ### Batch 5 - bounded imagination
 
-Partially implemented: in-memory caller-driven Batch 1, exact-record deterministic candidate-enumeration Batch 2, pure need-alignment annotation Batch 3, and non-authoritative pairwise route-comparison semantics Batch 4 are complete. The expanded marker remains **82%**.
+Partially implemented: in-memory caller-driven Batch 1, exact-record deterministic candidate-enumeration Batch 2, pure need-alignment annotation Batch 3, non-authoritative pairwise route-comparison semantics Batch 4, and unresolved-comparison uncertainty auditing Batch 5 are complete. The expanded marker remains **82%**.
 
 Implemented in Batch 1:
 
@@ -194,13 +194,23 @@ Implemented in Batch 4:
 - Reject incompatible need or evaluation semantics atomically.
 - Preserve caller order with no route score, utility, winner, rank, recommendation, selection, optimisation, schedule, promotion, execution, persistence, or live integration.
 
+Implemented in Batch 5:
+
+- Consume exactly one complete Batch 4 comparison result.
+- Emit dimension-scoped uncertainty issues only for unknown alignment, low confidence, or route-depth mismatch.
+- Emit pair-scoped uncertainty issues only for explicit conflicting trade-offs.
+- Preserve exact source pair, evaluation, candidate, and dimension identities.
+- Revalidate the complete source result before auditing.
+- Preserve source order and create no experiment proposal, route score, utility, rank, winner, recommendation, selection, scheduling, promotion, execution, persistence, live integration, or production authority.
+
 Still planned:
 
+- Add explicit caller-nominated safe-experiment proposal contracts without autonomous candidate selection.
 - Optimise imagined routes only under a later separately accepted non-authoritative semantics contract.
 - Persist imagination-specific state.
 - Accept live imagination into the deterministic Nursery loop.
 - Trigger imagination from unresolved needs, surprise, contradiction, low confidence, or bounded idle periods.
-- Promote promising imagined traces into safe real experiments.
+- Promote promising imagined traces into safe real experiments only after separate approval boundaries exist.
 
 ### Batch 6 - safe experiment proposals
 

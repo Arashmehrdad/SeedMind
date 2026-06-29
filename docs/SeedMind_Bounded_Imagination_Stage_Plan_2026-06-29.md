@@ -8,6 +8,7 @@ Batch 1 status: complete in memory only
 Batch 2 status: complete in memory only
 Batch 3 status: complete in memory only
 Batch 4 status: complete in memory only
+Batch 5 status: complete in memory only
 
 ## Scope
 
@@ -48,6 +49,15 @@ Batch 4 implements only pairwise alignment comparison over one complete Batch 3 
 - Conflicting trade-offs remain incomparable rather than being collapsed into a utility value.
 - Alignment-equivalent routes remain distinct and preserve separate provenance through the embedded source result.
 - No global route score, utility, rank, winner, selected candidate, recommendation, optimisation, schedule, promotion, execution, persistence, or live integration is created.
+
+Batch 5 implements only deterministic uncertainty auditing over one complete Batch 4 `ImaginedRouteComparisonResult`.
+
+- Comparable pairs emit no uncertainty issue.
+- Unknown alignments, low confidence, and route-depth mismatch emit dimension-scoped issues tied to the exact source dimension comparison.
+- Conflicting trade-offs emit one pair-scoped issue tied to the exact opposing dimension comparisons.
+- Issue order preserves source pair order and source dimension order.
+- The audit proposes no experiment, route, action, schedule, permission decision, promotion, or execution.
+- The complete Batch 4 result remains canonical provenance and is revalidated before auditing.
 
 ## Exact-source-only invariants
 
@@ -91,6 +101,16 @@ Batch 4 adds these comparison invariants:
 - Pair relation and incomparability reasons must be derivable exactly from their dimension relations.
 - Final results recompute expected caller-order pairs and reject altered source references or relations.
 
+Batch 5 adds these uncertainty-audit invariants:
+
+- Auditing consumes exactly one complete Batch 4 result and never invokes earlier generation, evaluation, or comparison stages.
+- Every issue retains exact source pair, evaluation, candidate, and optional dimension identities.
+- Dimension issues may report only unknown-alignment, low-confidence, or route-depth reasons.
+- Pair issues may report only explicit conflicting trade-offs and must retain the opposing dimension-comparison IDs.
+- Comparable pairs cannot carry uncertainty issues.
+- Issue identity and final result identity use canonical ASCII JSON plus SHA-256.
+- Audit output contains no proposed experiment, score, utility, rank, winner, recommendation, selection, scheduling, promotion, execution, persistence, or production authority.
+
 ## Limits
 
 Default request-wide limits:
@@ -130,7 +150,15 @@ Default Batch 4 limits:
 - `confidence_floor=0.0`
 - `comparison_epsilon=1e-12`
 
-All bounds are validated before evaluation where possible. Batch 1 and Batch 2 leave the learned model snapshot unchanged; Batch 3 and Batch 4 are pure and do not receive a mutable model reference.
+Default Batch 5 limits:
+
+- `maximum_pairs=28`
+- `maximum_dimension_issues=1344`
+- `maximum_pair_issues=28`
+- `maximum_total_issues=1372`
+- `maximum_reasons_per_issue=4`
+
+All bounds are validated before evaluation where possible. Batch 1 and Batch 2 leave the learned model snapshot unchanged; Batch 3, Batch 4, and Batch 5 are pure and do not receive a mutable model reference.
 
 ## Immutable zero-authority contract
 
@@ -206,19 +234,34 @@ The Batch 4 test set adds coverage for:
 - rejection of comparison results as real consequence evidence;
 - static exclusion of generation, imagination, learned-model, transfer, observed-chain, composition, replay, growth, persistence, SQLite, timers, workers, queues, threading, asyncio, integration, curiosity, advice, safe-experiment, optimisation, and execution surfaces.
 
+The Batch 5 test set adds coverage for:
+
+- comparable pairs producing no uncertainty issue;
+- exact dimension issues for unknown alignment, low confidence, and route-depth mismatch;
+- exact pair issues for conflicting trade-offs with opposing dimension provenance;
+- deterministic source pair and dimension issue order;
+- empty deterministic audit results;
+- pair, dimension-issue, and total-issue bounds;
+- tampered source comparison and tampered issue reference rejection;
+- stable ASCII identities;
+- zero evidence, confidence, mastery, competence, growth, replay, real-observation, and authority changes;
+- rejection of uncertainty results as real consequence evidence;
+- static exclusion of earlier generation, evaluation, comparison execution, learned-model, transfer, persistence, integration, scheduling, optimisation, and execution surfaces.
+
 ## Deferred work
 
-Still pending after Batch 4:
+Still pending after Batch 5:
 
-- route optimisation with an explicitly accepted non-authoritative semantics contract;
+- explicit caller-nominated safe-experiment proposal contracts;
+- optional route optimisation only under a separately accepted non-authoritative semantics contract;
 - persistence;
 - live integration;
-- safe-experiment proposal promotion;
+- autonomous proposal promotion;
 - any production-action path.
 
 ## Acceptance criteria
 
-Batch 1, Batch 2, Batch 3, and Batch 4 are accepted only when:
+Batch 1, Batch 2, Batch 3, Batch 4, and Batch 5 are accepted only when:
 
 - the modules stay in memory only;
 - snapshots and IDs are deterministic ASCII SHA-256 contracts;

@@ -9,7 +9,8 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed feature commit: `673f8ec3517ead408502f8f7ec90f811da6fa127`
+- Latest completed batch: Batch 5 — comparison uncertainty audit
+- Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
@@ -24,6 +25,7 @@ Completed bounded increments:
 2. Batch 2 — deterministic exact-record imagined candidate enumeration.
 3. Batch 3 — pure per-step, per-dimension need-alignment annotation.
 4. Batch 4 — deterministic caller-order pairwise route comparison.
+5. Batch 5 — deterministic unresolved-comparison uncertainty audit.
 
 ## Current accepted boundary
 
@@ -36,7 +38,7 @@ All bounded imagination outputs remain:
 - non-evidentiary;
 - non-authoritative.
 
-The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, and describe pairwise route relations.
+The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, and expose unresolved comparison reasons without proposing what to do.
 
 It must not:
 
@@ -54,13 +56,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Batch 4:
+After Batch 5:
 
 ```text
-ruff format --check .: 217 files already formatted
+ruff format --check .: 219 files already formatted
 ruff check .: passed
-mypy: no issues in 217 source files
-pytest -q: 835 passed
+mypy: no issues in 219 source files
+pytest -q: 850 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -77,9 +79,9 @@ Use these for architecture and implementation detail:
 
 ## Next planning target
 
-Define the smallest next bounded imagination increment before implementation.
+Plan the first bounded safe-experiment proposal contracts using explicit caller nomination of one exact imagined source. The proposal layer may describe a hypothesis, predicted benefit, uncertainty, possible harm, reversibility, stop conditions, and required permission, but it must not autonomously select a candidate, schedule, execute, promote, persist, or influence production actions.
 
-The next increment must remain non-authoritative and in memory unless Arash explicitly approves a stronger boundary. Persistence, live integration, safe-experiment promotion, recommendation, and production action authority remain deferred.
+The next increment must remain non-authoritative and in memory unless Arash explicitly approves a stronger boundary. Persistence, live integration, autonomous promotion, recommendation, and production action authority remain deferred.
 
 ## Working rules
 

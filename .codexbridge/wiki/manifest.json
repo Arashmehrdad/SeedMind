@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T04:35:20.251404+00:00",
+  "generated_at": "2026-06-29T05:00:44.422984+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 291,
+  "source_file_count": 294,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -19,6 +19,11 @@
       "path": "README.md",
       "sha256": "95d4cba3b3627992238c408584452b55ddd0a0b3c1b082a4c043fdfeea2fc3f1",
       "size_bytes": 2417
+    },
+    {
+      "path": "plans.md",
+      "sha256": "a1e3a4a4e283e7f65df7fab325a0c3f9e266f638b72030273d3a97355639fde3",
+      "size_bytes": 3958
     },
     {
       "path": "pyproject.toml",
@@ -197,13 +202,13 @@
     },
     {
       "path": "docs/SeedMind_Bounded_Imagination_Stage_Plan_2026-06-29.md",
-      "sha256": "3e9b92c9dcbc1706ef88e06f1eb9c06f3308c8e3d410cc59b209012c54e754e2",
-      "size_bytes": 13129
+      "sha256": "689c455f4081b05e5f8f5f70f8a4a848ebf35b2cec1c2a9ca2a374ff74875aeb",
+      "size_bytes": 15762
     },
     {
       "path": "docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md",
-      "sha256": "8ea1100b1033b7de802337e622d049a6d835c461e90bd28b0839bd80efcc54ce",
-      "size_bytes": 15805
+      "sha256": "7a7259036b24caf643139ee26245319beee075de1d099dba1620f2f4d6ce1a4f",
+      "size_bytes": 16634
     },
     {
       "path": "docs/SeedMind_Consolidation_Scheduling_Stage_Handover_2026-06-27.md",
@@ -267,8 +272,8 @@
     },
     {
       "path": "docs/SeedMind_Master_Implementation_Plan_v0.1.md",
-      "sha256": "c64c01f54652cf17965660f37735433b4365eb00925eafdc1dfd2b5b1b5af39b",
-      "size_bytes": 103824
+      "sha256": "a2175e8f3ca7abdd18a825290c59ed416e9dc616e6b5be7011691205b1456a74",
+      "size_bytes": 104246
     },
     {
       "path": "docs/SeedMind_Proposal_Lifecycle_Stage_Handover_2026-06-27.md",
@@ -322,8 +327,8 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "5ed1d60e77c6bc6ca63ae88823631e6a027a20a3eadb2dd29ca228c0a4fe3bd0",
-      "size_bytes": 84455
+      "sha256": "77134bdf36b479e6c8079a2ee113e227c5296e8c190d835732354bf377ce0746",
+      "size_bytes": 84934
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -737,8 +742,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "cd3c7df626480816577b75e8e5b6199123801a9aa4ced98005d7ab26a2517763",
-      "size_bytes": 21408
+      "sha256": "beec24c3eb82b5c011481e42c86b3ae523300fb2b2acdbe376e15bbff8133810",
+      "size_bytes": 21984
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -769,6 +774,11 @@
       "path": "src/seedmind/research/ndnra/bounded_imagination_evaluation.py",
       "sha256": "6c171455618a3452b6781ece5bad908d44e44dbcbf5867455c13293b202efc1b",
       "size_bytes": 33774
+    },
+    {
+      "path": "src/seedmind/research/ndnra/bounded_imagination_uncertainty.py",
+      "sha256": "50b4d37491c5b6b2a6482ae5aa82d28ecd2c715527662b487896c4060c81d37e",
+      "size_bytes": 25063
     },
     {
       "path": "src/seedmind/research/ndnra/composition.py",
@@ -1159,6 +1169,11 @@
       "path": "tests/unit/test_ndnra_bounded_imagination_evaluation.py",
       "sha256": "4d1f64e7b9d04c1cc97412811271c3bf51be010af89d519b555db8266a5e3979",
       "size_bytes": 15640
+    },
+    {
+      "path": "tests/unit/test_ndnra_bounded_imagination_uncertainty.py",
+      "sha256": "10bc31fdf033f2f7fba26a67644e6c9b007134fcc34e0a097096a19f3a8768ce",
+      "size_bytes": 19478
     },
     {
       "path": "tests/unit/test_ndnra_consolidation.py",

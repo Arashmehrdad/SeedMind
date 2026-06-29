@@ -2106,7 +2106,7 @@ does not complete bounded imagination, imagined route optimisation, safe experim
 promotion, semantic abstraction, learned similarity weights, or a 100% architecture
 claim.
 
-Bounded imagination is now split across three narrow accepted increments. Batch 1 is
+Bounded imagination is now split across five narrow accepted increments. Batch 1 is
 the in-memory caller-driven layer over exact learned-consequence predictions. It
 accepts only explicit caller sequences, preserves caller order, rolls forward only when
 exact requested effects and an exact next context exist at each step, and stops at the
@@ -2134,8 +2134,14 @@ step/effect alignment relation, blocks dominance for unknown evidence, low confi
 or route-depth mismatch, and reports conflicting trade-offs as incomparable. It embeds
 the complete source result as canonical provenance and still creates no route score,
 utility, global rank, winner, recommendation, selection, optimisation, schedule,
-promotion, execution, persistence, live integration, or production authority. The
-expanded developmental architecture marker remains 82%.
+promotion, execution, persistence, live integration, or production authority.
+
+Batch 5 adds only deterministic uncertainty auditing over one complete Batch 4
+comparison result. It exposes unknown alignment, low-confidence evidence, route-depth
+mismatch, and explicit trade-offs as exact source-linked issues while producing no
+experiment proposal, route score, utility, rank, winner, recommendation, selection,
+scheduling, promotion, execution, persistence, live integration, or production
+authority. The expanded developmental architecture marker remains 82%.
 
 ---
 
