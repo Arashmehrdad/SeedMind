@@ -14,7 +14,9 @@ from seedmind.research.ndnra import (
     StandaloneAcceptanceAuthority,
     StandaloneAcceptanceDeltaReport,
     StandaloneAcceptanceResult,
+    restore_standalone_acceptance_result,
     run_standalone_acceptance,
+    standalone_acceptance_payload,
     validate_standalone_acceptance_result,
 )
 from seedmind.research.ndnra.experiment import run_ndnra_heat_fan_experiment
@@ -48,6 +50,15 @@ def test_standalone_acceptance_is_deterministic_across_repeated_runs() -> None:
     assert second == first
     assert second.canonical_ascii_snapshot == first.canonical_ascii_snapshot
     assert second.result_identity == first.result_identity
+
+
+def test_standalone_acceptance_payload_restores_exact_result() -> None:
+    result = run_standalone_acceptance()
+
+    restored = restore_standalone_acceptance_result(standalone_acceptance_payload(result))
+
+    assert restored == result
+    assert not restored.checkpoint_restart_proof_included
 
 
 @pytest.mark.parametrize(
@@ -95,6 +106,10 @@ def test_standalone_acceptance_is_deterministic_across_repeated_runs() -> None:
             lambda result: replace(result, result_identity="0" * 64),
             "result identity does not match canonical snapshot",
         ),
+        (
+            lambda result: replace(result, checkpoint_restart_proof_included=True),
+            "checkpoint restart proof is deferred to Batch 2",
+        ),
     ],
 )
 def test_standalone_acceptance_rejects_tampering(
@@ -141,3 +156,20 @@ def test_standalone_acceptance_cannot_be_observed_as_factual_consequence_evidenc
     )
     assert not result.observable_as_factual_consequence_evidence
     validate_standalone_acceptance_result(result)
+
+
+def test_standalone_acceptance_restore_rejects_malformed_nested_payload() -> None:
+    result = run_standalone_acceptance()
+    payload = standalone_acceptance_payload(result)
+    heat_fan_payload = dict(cast(dict[str, Any], payload["heat_fan_result"]))
+    deep_payload = dict(cast(dict[str, Any], heat_fan_payload["deep_recall"]))
+    records = list(cast(list[object], deep_payload["records"]))
+    first_record = dict(cast(dict[str, Any], records[0]))
+    first_record["source_context"] = "not_a_context"
+    records[0] = first_record
+    deep_payload["records"] = records
+    heat_fan_payload["deep_recall"] = deep_payload
+    payload["heat_fan_result"] = heat_fan_payload
+
+    with pytest.raises(ValueError, match="source_context"):
+        restore_standalone_acceptance_result(payload)

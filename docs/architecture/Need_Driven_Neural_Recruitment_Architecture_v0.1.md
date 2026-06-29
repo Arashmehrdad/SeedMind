@@ -1767,6 +1767,8 @@ The following rules must remain true:
 76. Any experiment permit, scheduler, executor, persistence layer, live integration path, autonomous promotion mechanism, or production action authority must be introduced only through a separately accepted architecture boundary.
 77. Standalone NDNRA acceptance aggregation must preserve each complete component experiment result as evidence rather than replacing it with summary-only claims.
 78. Standalone NDNRA acceptance aggregation is deterministic, in-memory, and non-authoritative; it cannot create factual evidence, checkpoint authority, restart authority, recommendation authority, scheduling authority, execution authority, live-integration authority, or production-action authority.
+79. Standalone acceptance restart persistence must remain a separate versioned canonical-ASCII JSON store that preserves exactly one validated Batch 1 acceptance result, verifies SHA-256 payload checksum before load, reports explicit loaded, missing-fallback, corrupt-fallback, or incompatible-fallback status, and never exposes partial or synthesized passing evidence.
+80. Restart proof must remain separate from the Batch 1 acceptance result and preserve zero authority, zero deltas, exact nested-result reload equivalence, deterministic post-restart rerun equivalence, unchanged bounded-imagination non-persistence, and an unchanged main brain schema.
 
 ## 19. First prototype boundary
 

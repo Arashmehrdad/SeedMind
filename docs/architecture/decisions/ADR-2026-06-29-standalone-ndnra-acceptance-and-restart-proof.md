@@ -24,6 +24,8 @@ The stage must preserve each component report rather than replacing evidence wit
 
 The stage may add a checksum-protected standalone checkpoint only for state required by the acceptance proof. It must not persist bounded-imagination state or strengthen replayed, restored, transferred, or imagined activity into factual evidence.
 
+Batch 2 implements that checkpoint as a separate standalone acceptance persistence store rather than a brain-schema change. The store writes versioned canonical ASCII JSON, protects the persisted Batch 1 payload with a SHA-256 checksum, uses flushed atomic temp-file replacement, restores only exact validated nested data, and reports explicit loaded, missing-fallback, corrupt-fallback, and incompatible-fallback statuses. Fallback states expose no partial result, identity, checksum verification, acceptance proof, or authority. A separate zero-authority restart-proof result requires exact reload and deterministic post-restart rerun equivalence. Plain Batch 1 acceptance results continue to report that restart proof is not included.
+
 ## Authority boundary
 
 The stage grants no:
@@ -39,6 +41,7 @@ The stage grants no:
 ## Consequences
 
 - The original SeedMind roadmap remains outside the active implementation scope.
-- Passing this stage proves consolidated bounded viability and restart equivalence; it does not by itself close every open NDNRA research question.
+- Passing this stage proves consolidated bounded viability, exact reload, deterministic rerun equivalence, and safe non-proof fallback; it does not by itself close every open NDNRA research question.
+- Restart persistence remains descriptive acceptance evidence only; it does not create execution, recommendation, scheduling, promotion, integration, or broader persistence authority.
 - Learned similarity, semantic abstraction, simultaneous-need coordination, recruitment normalization, locally derived saturation, growth initialization, and long-horizon interference remain subject to a later explicit retain-or-descope audit.
 - The expanded developmental architecture marker remains 82% until new architectural capability, not merely aggregate proof, earns reassessment.

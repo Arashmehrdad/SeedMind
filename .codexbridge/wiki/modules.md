@@ -990,7 +990,15 @@ Deterministic standalone acceptance aggregation for Batch 1.
 
 - Kind: python
 - Classes: StandaloneAcceptanceAuthority, StandaloneAcceptanceDeltaReport, StandaloneAcceptanceResult
-- Functions/symbols: run_standalone_acceptance, validate_standalone_acceptance_result, _canonical_snapshot, _normalize, _authority_is_zero, _deltas_are_zero
+- Functions/symbols: run_standalone_acceptance, validate_standalone_acceptance_result, standalone_acceptance_payload, restore_standalone_acceptance_result, _canonical_snapshot, _normalize, _restore_dataclass, _restore_value, _require_mapping, _authority_is_zero, _deltas_are_zero
+
+## `src/seedmind/research/ndnra/standalone_acceptance_persistence.py`
+
+Versioned persistence for standalone NDNRA acceptance proof evidence.
+
+- Kind: python
+- Classes: StandaloneAcceptanceLoadStatus, StandaloneAcceptanceSaveResult, StandaloneAcceptanceLoadResult, StandaloneAcceptanceRestartProofResult
+- Functions/symbols: save_standalone_acceptance_result, load_standalone_acceptance_result, prove_standalone_acceptance_restart, validate_standalone_acceptance_restart_proof_result, _canonical_restart_proof_snapshot, _envelope_payload, _failed_load, _checksum_payload, _canonical_ascii_json, _json_ready, _require_mapping, _require_string, _require_int, _require_sha256, _validate_sha256, _remove_temporary_file, _zero_authority, _zero_deltas, _authority_is_zero, _deltas_are_zero
 
 ## `src/seedmind/safety/__init__.py`
 
@@ -1557,7 +1565,14 @@ Tests for non-authoritative NDNRA integration with the live nursery loop.
 Tests for standalone NDNRA acceptance Batch 1 aggregation.
 
 - Kind: python
-- Functions/symbols: test_standalone_acceptance_preserves_complete_component_results, test_standalone_acceptance_is_deterministic_across_repeated_runs, test_standalone_acceptance_rejects_tampering, test_standalone_acceptance_has_no_forbidden_authority_or_runtime_dependencies, test_standalone_acceptance_cannot_be_observed_as_factual_consequence_evidence
+- Functions/symbols: test_standalone_acceptance_preserves_complete_component_results, test_standalone_acceptance_is_deterministic_across_repeated_runs, test_standalone_acceptance_payload_restores_exact_result, test_standalone_acceptance_rejects_tampering, test_standalone_acceptance_has_no_forbidden_authority_or_runtime_dependencies, test_standalone_acceptance_cannot_be_observed_as_factual_consequence_evidence, test_standalone_acceptance_restore_rejects_malformed_nested_payload
+
+## `tests/unit/test_ndnra_standalone_acceptance_persistence.py`
+
+Tests for standalone acceptance persistence and restart proof.
+
+- Kind: python
+- Functions/symbols: test_store_round_trips_exact_result_and_writes_deterministic_ascii, test_restart_proof_includes_exact_reload_and_deterministic_rerun, test_missing_state_is_explicit_non_proof_fallback, test_malformed_json_is_corrupt_non_proof_fallback, test_checksum_tampering_is_corrupt_non_proof_fallback, test_rechecks_nested_shape_after_valid_checksum, test_incompatible_schema_is_explicit_non_proof_fallback, test_result_identity_tampering_is_corrupt_even_with_valid_payload, test_unknown_envelope_or_payload_fields_are_rejected, test_restart_proof_rejects_tampering, test_load_result_shape_cannot_claim_partial_or_authoritative_fallback, test_persistence_module_is_isolated_from_brain_and_imagination_authority, _read_envelope, _write_envelope, _payload, _object, _payload_checksum
 
 ## `tests/unit/test_ndnra_structural_growth.py`
 

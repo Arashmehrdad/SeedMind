@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Standalone NDNRA Acceptance and Restart Proof Batch 1
+- Latest completed milestone: Standalone NDNRA Acceptance and Restart Proof Batch 2
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -18,7 +18,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Program: NDNRA
 - Last closed stage: Bounded Imagination at Batch 8
 - Current stage: Standalone NDNRA Acceptance and Restart Proof
-- Current status: Batch 1 complete; Batch 2 pending
+- Current status: complete through Batch 2; retain-or-descope audit next
 - Expanded developmental architecture marker: 82%
 
 Completed bounded increments:
@@ -61,13 +61,13 @@ Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit tr
 
 ## Current validation baseline
 
-After Standalone Acceptance Batch 1:
+After Standalone Acceptance Batch 2:
 
 ```text
-ruff format --check .: 228 files already formatted
+ruff format --check .: 230 files already formatted
 ruff check .: passed
-mypy: no issues in 228 source files
-pytest -q: 905 passed
+mypy: no issues in 230 source files
+pytest -q: 925 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
@@ -95,14 +95,15 @@ The gap audit is complete. It confirms that the Section 20 prototype criteria ar
 
 The next stage is `Standalone NDNRA Acceptance and Restart Proof`. Batch 1 is complete as a deterministic in-memory acceptance aggregator over the existing heat-fan recall, multi-effect composition, and structural-growth experiment gates. It preserves complete component evidence, derives one canonical ASCII snapshot and SHA-256 identity, records explicit zero-authority and zero-delta invariants, and does not add restart persistence, execution, recommendation, scheduling, promotion, or live integration authority.
 
-Batch 2 is checksum-protected standalone checkpoint/restart equivalence and corruption fallback. It must add restart and corruption-fallback proof without weakening the Batch 1 non-authoritative boundary.
+Batch 2 is complete as a separate standalone acceptance persistence store and restart-proof evidence boundary. It keeps the main brain schema unchanged, persists exactly one validated Batch 1 `StandaloneAcceptanceResult` as versioned canonical ASCII JSON with SHA-256 payload checksum and atomic temp-file replacement, restores only exact validated nested data, reports explicit loaded, missing-fallback, corrupt-fallback, and incompatible-fallback statuses, proves exact reload and deterministic rerun equivalence through a separate zero-authority result, and never synthesizes passing or partial evidence from missing or damaged storage.
 
 Required sequence:
 
-1. Complete Batch 2 checksum-protected standalone checkpoint/restart equivalence and corruption fallback.
-2. Run end-to-end NDNRA proof and acceptance experiments.
-3. Compare the completed NDNRA architecture with the original SeedMind plan.
-4. Decide explicitly whether, where, and how integration should occur.
+1. Run an NDNRA-only retain-or-descope audit for the remaining expanded research questions.
+2. Implement and independently prove every capability retained as necessary for full NDNRA closure.
+3. Run the final standalone NDNRA closure audit.
+4. Compare the completed NDNRA architecture with the original SeedMind plan.
+5. Decide explicitly whether, where, and how integration should occur.
 
 The gap audit also identifies later retain-or-descope questions for learned similarity, semantic abstraction, simultaneous-need coordination, recruitment normalization, locally derived saturation, growth initialization, and long-horizon interference. Passing the next acceptance stage will not silently declare those questions solved.
 

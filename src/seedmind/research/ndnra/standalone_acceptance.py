@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass, fields, is_dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, fields, is_dataclass, replace
 from enum import Enum
-from typing import Any
+from types import UnionType
+from typing import Any, get_args, get_origin, get_type_hints
 
 from seedmind.research.ndnra.experiment import (
     NDNRAExperimentResult,
@@ -25,7 +27,9 @@ __all__ = [
     "StandaloneAcceptanceAuthority",
     "StandaloneAcceptanceDeltaReport",
     "StandaloneAcceptanceResult",
+    "restore_standalone_acceptance_result",
     "run_standalone_acceptance",
+    "standalone_acceptance_payload",
     "validate_standalone_acceptance_result",
 ]
 
@@ -200,12 +204,52 @@ def validate_standalone_acceptance_result(result: StandaloneAcceptanceResult) ->
         raise ValueError("aggregate pass gate does not match component evidence")
 
 
-def _canonical_snapshot(result: StandaloneAcceptanceResult) -> str:
-    payload = {
+def standalone_acceptance_payload(result: StandaloneAcceptanceResult) -> dict[str, object]:
+    """Return the deterministic JSON-safe payload for one acceptance result."""
+
+    return {
         field.name: _normalize(getattr(result, field.name))
         for field in fields(result)
         if field.name not in {"canonical_ascii_snapshot", "result_identity"}
     }
+
+
+def restore_standalone_acceptance_result(snapshot: object) -> StandaloneAcceptanceResult:
+    """Restore one exact standalone acceptance result from JSON-safe data."""
+
+    values = _require_mapping("acceptance result", snapshot)
+    persisted_fields = tuple(
+        field
+        for field in fields(StandaloneAcceptanceResult)
+        if field.name not in {"canonical_ascii_snapshot", "result_identity"}
+    )
+    expected_names = {field.name for field in persisted_fields}
+    if set(values) != expected_names:
+        raise ValueError("acceptance result fields do not match the canonical schema")
+    hints = get_type_hints(StandaloneAcceptanceResult)
+    restored_values = {
+        field.name: _restore_value(hints[field.name], values[field.name], field.name)
+        for field in persisted_fields
+    }
+    seed = StandaloneAcceptanceResult(
+        **restored_values,
+        canonical_ascii_snapshot="",
+        result_identity="",
+    )
+    snapshot_text = _canonical_snapshot(seed)
+    restored = replace(
+        seed,
+        canonical_ascii_snapshot=snapshot_text,
+        result_identity=hashlib.sha256(snapshot_text.encode("ascii")).hexdigest(),
+    )
+    if standalone_acceptance_payload(restored) != dict(values):
+        raise ValueError("acceptance result payload did not round-trip exactly")
+    validate_standalone_acceptance_result(restored)
+    return restored
+
+
+def _canonical_snapshot(result: StandaloneAcceptanceResult) -> str:
+    payload = standalone_acceptance_payload(result)
     return json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
 
 
@@ -220,6 +264,98 @@ def _normalize(value: Any) -> Any:
         return [_normalize(item) for item in value]
     if isinstance(value, dict):
         return {str(key): _normalize(item) for key, item in value.items()}
+    return value
+
+
+def _restore_dataclass(dataclass_type: type[Any], snapshot: object) -> Any:
+    values = _require_mapping(dataclass_type.__name__, snapshot)
+    dataclass_fields = fields(dataclass_type)
+    expected_names = {field.name for field in dataclass_fields}
+    if set(values) != expected_names:
+        raise ValueError(f"{dataclass_type.__name__} fields do not match the canonical schema")
+    hints = get_type_hints(dataclass_type)
+    restored_values = {
+        field.name: _restore_value(hints[field.name], values[field.name], field.name)
+        for field in dataclass_fields
+    }
+    return dataclass_type(**restored_values)
+
+
+def _restore_value(expected_type: Any, value: object, field_name: str) -> Any:
+    origin = get_origin(expected_type)
+    if origin is None:
+        if expected_type is Any:
+            return value
+        if isinstance(expected_type, type) and is_dataclass(expected_type):
+            return _restore_dataclass(expected_type, value)
+        if isinstance(expected_type, type) and issubclass(expected_type, Enum):
+            if not isinstance(value, str):
+                raise ValueError(f"{field_name} must be an enum string")
+            try:
+                return expected_type(value)
+            except ValueError as error:
+                raise ValueError(f"{field_name} contains an invalid enum value") from error
+        if expected_type is bool:
+            if not isinstance(value, bool):
+                raise ValueError(f"{field_name} must be a boolean")
+            return value
+        if expected_type is int:
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise ValueError(f"{field_name} must be an integer")
+            return value
+        if expected_type is float:
+            if isinstance(value, bool) or not isinstance(value, int | float):
+                raise ValueError(f"{field_name} must be numeric")
+            return float(value)
+        if expected_type is str:
+            if not isinstance(value, str) or not value.isascii():
+                raise ValueError(f"{field_name} must be ASCII text")
+            return value
+        raise TypeError(f"unsupported acceptance field type: {expected_type!r}")
+
+    if origin in {tuple, list}:
+        if not isinstance(value, list):
+            raise ValueError(f"{field_name} must be a list")
+        args = get_args(expected_type)
+        if origin is list:
+            if len(args) != 1:
+                raise TypeError(f"unsupported list annotation: {expected_type!r}")
+            return [_restore_value(args[0], item, field_name) for item in value]
+        if len(args) == 2 and args[1] is Ellipsis:
+            return tuple(_restore_value(args[0], item, field_name) for item in value)
+        if len(value) != len(args):
+            raise ValueError(f"{field_name} length does not match tuple annotation")
+        return tuple(
+            _restore_value(item_type, item, field_name)
+            for item_type, item in zip(args, value, strict=True)
+        )
+
+    if origin in {dict, Mapping}:
+        if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+            raise ValueError(f"{field_name} must be a string-keyed object")
+        key_type, value_type = get_args(expected_type)
+        if key_type is not str:
+            raise TypeError(f"unsupported mapping key type: {expected_type!r}")
+        return {key: _restore_value(value_type, item, field_name) for key, item in value.items()}
+
+    if origin is UnionType:
+        options = get_args(expected_type)
+        if value is None and type(None) in options:
+            return None
+        non_none_options = [option for option in options if option is not type(None)]
+        for option in non_none_options:
+            try:
+                return _restore_value(option, value, field_name)
+            except (TypeError, ValueError):
+                continue
+        raise ValueError(f"{field_name} does not match any supported union member")
+
+    raise TypeError(f"unsupported acceptance annotation: {expected_type!r}")
+
+
+def _require_mapping(name: str, value: object) -> Mapping[str, object]:
+    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+        raise ValueError(f"{name} must be a string-keyed object")
     return value
 
 
