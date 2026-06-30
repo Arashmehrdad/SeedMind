@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 7 protected conscience, learned responsibility, and action proposals
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 8 end-to-end software-only shadow trial
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 7 protected conscience, learned responsibility, and action proposals
-- Current stage: Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current status: Stage 7 is implemented and evidenced locally; Stage 8 may next run a software-only shadow trial where baseline production actions remain identical while NDNRA observes, activates needs and regions, forms coalitions, generates typed proposals, receives gateway feedback, and learns from observed outcomes without replacing actual actions
+- Last closed stage: Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
+- Current stage: NDNRA Developmental Network v0.2 authorised research programme closed through Stage 8
+- Current status: Stages -1, 0, 1, 1A, and 2 through 8 are implemented and evidenced locally; Stage 9 remains unauthorised and no production action, internet knowledge acquisition, or live runtime integration is approved
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged at this boundary because Stage 7 remains a bounded research closure and does not authorize production behavior
+- Marker interpretation: unchanged because Stage 8 is bounded shadow-only research evidence rather than production integration or authority evidence
 
 Completed bounded increments:
 
@@ -42,6 +42,7 @@ Completed bounded increments:
 16. Developmental Network v0.2 Stage 5 — deterministic homeostatic settling, sparse coalitions, edge-density budgets, inhibition and homeostasis controls, idle-capacity recruitment before expansion, repeated saturation evidence, bounded expansion proposal, duplicate rejection, exhausted-budget unresolved/help behavior, and zero-authority evidence.
 17. Developmental Network v0.2 Stage 6 — deterministic hibernating coalitions, caller-invoked dream maintenance, accessibility restoration, zero factual dream evidence, exact versioned restart, checksum fallback, protected-network preservation, and zero-authority evidence.
 18. Developmental Network v0.2 Stage 7 — deterministic protected prohibitions, trusted responsibility teaching, reward-resistant deterrence, safer-alternative activation, protected authority interruption handling, integrity mutation inhibition, typed internal action proposals, protected gateway test double denial, and zero-authority evidence.
+19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
 
 ## Current accepted boundary
 
@@ -110,18 +111,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 7 protected conscience, learned responsibility, and action proposals:
+After NDNRA Developmental Network v0.2 Stage 8 end-to-end software-only shadow trial:
 
 ```text
-ruff format --check .: 257 files already formatted
+ruff format --check .: 259 files already formatted
 ruff check .: passed
-mypy .: no issues in 257 source files
-pytest -q --basetemp .pytest_tmp/full_repo_stage7_final: 1100 passed
+mypy .: no issues in 259 source files
+pytest complete non-overlapping coverage: 525 + 355 + 232 = 1112 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage 7 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_conscience.py --basetemp .pytest_tmp/stage7_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 7 commit.
+The focused Stage 8 test file passed with 12 tests. A direct full-suite invocation reached 84% without failures before CodexBridge's fixed 120-second timeout, so all test files were run through three non-overlapping bounded groups, totalling 1112 passing tests.
 
 ## Current technical sources
 
@@ -169,15 +170,17 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-5-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-6-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-7-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-8-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1, Stage 0, Stage 1, Stage 1A, Stage 2, Stage 3, Stage 4, Stage 5, Stage 6, and Stage 7 are now implemented and evidenced. The next authorised implementation boundary is Stage 8 end-to-end software-only shadow trial:
+Stage -1, Stage 0, Stage 1, Stage 1A, and Stages 2 through 8 are now implemented and evidenced. No further NDNRA developmental stage is authorised by the current plan.
 
 ```text
-End-to-end software-only shadow trial
+Authorised NDNRA v0.2 research programme closed through Stage 8
+Stage 9 not authorised
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -305,23 +308,23 @@ Stage 7 is closed by `docs/architecture/NDNRA_Developmental_Stage_7_Evidence_202
 13. Every proposal preserves reasons, supporting experiences, uncertainty, outcome status, and authority requirements.
 14. External side effects remain zero.
 
-Stage 8 must prove:
+Stage 8 is closed by `docs/architecture/NDNRA_Developmental_Stage_8_Evidence_2026-06-30.md`, which proves:
 
 1. Production actions remain identical to the matched baseline.
 2. NDNRA produces useful context-sensitive proposals from recurrent experiential activation.
 3. DESA partitions the task, delegates familiar subtasks, escalates uncertainty, and preserves inspectable regional contributions.
-4. Multiple needs remain represented and protected prohibitions can inhibit unsafe proposals.
+4. Multiple needs remain represented and protected prohibitions inhibit unsafe proposals.
 5. A learned skill bundle, including its verifier and calibration history, survives maturation, dormancy, dream maintenance, and restart.
-6. A Nursery or prompt-defined desired state can maintain ambition while capability-gap evidence guides learning and later decreases after mastery.
-7. An unfamiliar task can incubate a temporary skill bundle and preserve an unverified outcome when grounded feedback is unavailable.
-8. New learning does not exceed the accepted degradation threshold on old tasks.
-9. Resource use remains within the local hardware budget.
-10. All relevant experiences, coalitions, needs, ambitions, capability gaps, skill bundles, verifiers, outcome states, DESA decisions, auditor findings, inhibition, conscience signals, and proposal reasons are inspectable.
+6. Desired-state ambition guides learning while capability-gap evidence decreases.
+7. An unfamiliar task incubates a temporary skill bundle and preserves an unverified outcome when grounded feedback is unavailable.
+8. New learning remains within the accepted old-task degradation threshold.
+9. Resource use remains within the declared local hardware budget.
+10. Required experiences, coalitions, needs, ambitions, gaps, skills, verifiers, outcomes, DESA decisions, auditor findings, inhibition, conscience signals, and proposal reasons remain inspectable.
 11. SQLite cognition remains zero.
-12. Production action-authority violations remain zero.
-13. Results are reproducible across the declared seeds.
+12. Production action-authority violations and external side effects remain zero.
+13. Results are deterministic across declared seeds.
 
-Do not begin internet knowledge acquisition, production action-gateway work, or any Stage 9 authority pilot during Stage 8.
+Stage 9 remains unauthorised. Internet knowledge acquisition, live runtime integration, and production action-gateway work require separate future planning and approval.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 
