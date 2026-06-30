@@ -20,11 +20,8 @@ from seedmind.integration.bounded_advice import (
     AdviceConfig,
     BoundedAdvicePolicy,
 )
-from seedmind.integration.candidate_session import (
-    CandidateSessionResult,
-    CandidateStep,
-    run_candidate_session,
-)
+from seedmind.integration.candidate_session import CandidateSessionResult, CandidateStep
+from seedmind.integration.parallel_operation import run_parallel_candidate_session
 from seedmind.integration.unified_shadow import (
     NDNRALiveShadowAdapter,
     UnifiedDevelopmentalShadowSession,
@@ -164,7 +161,7 @@ def run_advice_acceptance(
         factory,
         CuriosityTrainingConfig(seed=second_seed, curiosity=curiosity),
     ).run()
-    session = run_candidate_session(
+    parallel = run_parallel_candidate_session(
         scenario_factory=factory,
         seed=second_seed,
         curiosity_config=curiosity,
@@ -172,6 +169,7 @@ def run_advice_acceptance(
         signal_provider=_build_signal_provider(second_seed, factory),
         trainer=_build_trainer(second_seed, factory),
     )
+    session = parallel.session
     probes = _run_safety_probes(shadow, second_seed, factory)
     multi_growth = run_multi_growth_experiment()
     budget_exhaustion_probe = _growth_budget_exhaustion_probe_passed()

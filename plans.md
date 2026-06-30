@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 8 end-to-end software-only shadow trial
+- Latest completed milestone: canonical SeedMind and NDNRA parallel-operation policy
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
-- Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current stage: NDNRA Developmental Network v0.2 authorised research programme closed through Stage 8
-- Current status: Stages -1, 0, 1, 1A, and 2 through 8 are implemented and evidenced locally; Stage 9 remains unauthorised and no production action, internet knowledge acquisition, or live runtime integration is approved
+- Program: SeedMind main roadmap with NDNRA shadow evaluation
+- Last closed stage: NDNRA Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
+- Current stage: main SeedMind and NDNRA side-by-side operation
+- Current status: production curiosity remains the sole action selector; NDNRA now follows the canonical parallel-operation policy as a non-authoritative observer, every required disagreement is compared, automatic component promotion is disabled, and Stage 9 remains unauthorised
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged because Stage 8 is bounded shadow-only research evidence rather than production integration or authority evidence
+- Marker interpretation: unchanged because the parallel policy creates an evaluation boundary and no new cognitive capability or production authority
 
 Completed bounded increments:
 
@@ -43,6 +43,7 @@ Completed bounded increments:
 17. Developmental Network v0.2 Stage 6 — deterministic hibernating coalitions, caller-invoked dream maintenance, accessibility restoration, zero factual dream evidence, exact versioned restart, checksum fallback, protected-network preservation, and zero-authority evidence.
 18. Developmental Network v0.2 Stage 7 — deterministic protected prohibitions, trusted responsibility teaching, reward-resistant deterrence, safer-alternative activation, protected authority interruption handling, integrity mutation inhibition, typed internal action proposals, protected gateway test double denial, and zero-authority evidence.
 19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
+20. SeedMind and NDNRA parallel operation — production curiosity retains every executed action, NDNRA observes and suggests without authority, disagreements require comparison evidence, audits fail closed, and automatic component promotion remains disabled.
 
 ## Current accepted boundary
 
@@ -111,18 +112,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 8 end-to-end software-only shadow trial:
+After adopting canonical SeedMind and NDNRA parallel operation:
 
 ```text
-ruff format --check .: 259 files already formatted
+ruff format --check .: 261 files already formatted
 ruff check .: passed
-mypy .: no issues in 259 source files
-pytest complete non-overlapping coverage: 525 + 355 + 232 = 1112 passed
+mypy .: no issues in 261 source files
+pytest complete non-overlapping coverage: 525 + 355 + 237 = 1117 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The focused Stage 8 test file passed with 12 tests. A direct full-suite invocation reached 84% without failures before CodexBridge's fixed 120-second timeout, so all test files were run through three non-overlapping bounded groups, totalling 1112 passing tests.
+The focused parallel-policy and live unified-signal checks passed with 12 tests. The full repository was then run through three non-overlapping bounded groups to remain within CodexBridge's fixed single-command timeout, totalling 1117 passing tests.
 
 ## Current technical sources
 
@@ -171,16 +172,20 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-6-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-7-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-8-closure.md`
+- `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md`
+- `docs/architecture/decisions/ADR-2026-06-30-seedmind-ndnra-parallel-operation.md`
 
 ## Next implementation target
 
-The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
+The original SeedMind master plan remains the governing product roadmap. `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` governs how NDNRA accompanies that work.
 
-Stage -1, Stage 0, Stage 1, Stage 1A, and Stages 2 through 8 are now implemented and evidenced. No further NDNRA developmental stage is authorised by the current plan.
+The immediate target is to continue the main roadmap, with the original reusable-skill objective still mandatory, while collecting matched production-versus-shadow evidence from the same sessions.
 
 ```text
-Authorised NDNRA v0.2 research programme closed through Stage 8
-Stage 9 not authorised
+Main SeedMind: executes the retained production action
+NDNRA: observes, suggests, learns, and is compared
+Automatic promotion: disabled
+Stage 9: not authorised
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -324,7 +329,7 @@ Stage 8 is closed by `docs/architecture/NDNRA_Developmental_Stage_8_Evidence_202
 12. Production action-authority violations and external side effects remain zero.
 13. Results are deterministic across declared seeds.
 
-Stage 9 remains unauthorised. Internet knowledge acquisition, live runtime integration, and production action-gateway work require separate future planning and approval.
+Stage 9 remains unauthorised. The bounded non-authoritative shadow seam is now approved, but internet knowledge acquisition, production action-gateway work, action replacement, and component promotion still require separate future planning and approval.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 

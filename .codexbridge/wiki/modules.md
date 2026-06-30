@@ -444,6 +444,14 @@ Non-authoritative NDNRA observation of the live SeedMind nursery loop.
 - Classes: ShadowScenarioFactory, NDNRAShadowConfig, ShadowSuggestion, ShadowStepRecord, NDNRAShadowSessionConfig, NDNRAShadowSessionResult, NDNRAShadowAdapter, NDNRAShadowSession
 - Functions/symbols: _availability_fact, _assembly_id, _mean_absolute, _resource_cost, _clamp_unit, _validate_unit
 
+## `src/seedmind/integration/parallel_operation.py`
+
+Canonical side-by-side operation of production SeedMind and NDNRA shadow mode.
+
+- Kind: python
+- Classes: SeedMindOperatingMode, ProductionActionAuthority, ParallelOperationPolicy, ParallelOperationAudit, ParallelOperationResult
+- Functions/symbols: audit_parallel_candidate_session, run_parallel_candidate_session
+
 ## `src/seedmind/integration/persistent_shadow_experiment.py`
 
 Cross-session NDNRA shadow-memory persistence acceptance experiment.
@@ -1860,6 +1868,13 @@ Tests for deterministic Nursery v0 scenario construction.
 
 - Kind: python
 - Functions/symbols: test_same_seed_produces_identical_scenario, test_different_seeds_produce_different_layouts, test_factory_does_not_mutate_global_random_state, test_factory_builds_valid_perimeter_and_distinct_interior_layout, test_scenario_contains_two_raw_shape_objects_and_two_targets, test_resource_state_tracks_normalized_remaining_budget, test_target_occupancy_detects_object_on_target, test_target_occupancy_requires_at_least_one_target_for_completion, test_minimum_supported_factory_dimensions, test_factory_rejects_invalid_configuration, test_factory_rejects_negative_seed, test_scenario_rejects_invalid_metadata, test_scenario_resource_evaluation_is_state_based
+
+## `tests/unit/test_seedmind_parallel_operation.py`
+
+Tests for canonical SeedMind and NDNRA side-by-side operation.
+
+- Kind: python
+- Functions/symbols: _outcome, _session, test_default_policy_keeps_curiosity_authoritative_and_shadow_non_authoritative, test_parallel_audit_records_shadow_comparison_without_replacing_action, test_missing_disagreement_comparison_fails_the_parallel_boundary, test_parallel_policy_rejects_action_authority_and_automatic_promotion, test_audit_identity_mismatch_is_rejected
 
 ## `tests/unit/test_self_model.py`
 

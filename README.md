@@ -8,15 +8,21 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-Human-approved NDNRA consolidation execution is complete as a bounded, research-only integration stage.
+The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap now continues with NDNRA running beside it in non-authoritative shadow mode.
 
-SeedMind now preserves issued, cancelled, expired, and consumed execution permits plus successful execution receipts inside the checksum-protected schema-5 brain envelope. One explicit human approval still requires immediate current-evidence revalidation when the permit is issued and again immediately before commit. A permit is bounded, immutable, and single-use.
+The canonical operating mode is `production_with_ndnra_shadow`:
 
-Durable execution accepts only one of two complete envelopes: the exact old consolidation state with an issued permit and no receipt, or the exact new consolidation state with a consumed permit and its matching receipt and application. Pre-replacement interruption preserves the old durable state; post-replacement interruption recovers the complete new state. Invalid execution relationships cause complete safe fallback rather than partial recovery.
+- production curiosity selects the only action executed by the runtime;
+- NDNRA observes the same state, emits an optional internal suggestion, and learns from the actual grounded transition;
+- agreements and disagreements are recorded for comparison;
+- the production action is always retained;
+- NDNRA has no execution, scheduling, replacement, promotion, or production action authority;
+- automatic component promotion is disabled;
+- Stage 9 remains unauthorised.
 
-The live acceptance path recorded one explicit human approval, one current precommit revalidation, zero control applications, one approved application, one consumed permit, one execution receipt, zero automatic executions, zero replay triggers, zero restoration triggers, zero production-action authority violations, and no SQLite cognition. Production curiosity remains the sole production action authority; NDNRA and consolidation cannot choose production actions.
+A specific NDNRA component may be considered later only after repeated multi-task evidence, resource and interference checks, rollback and kill-switch coverage, and a separate accepted ADR. The original SeedMind plan, including reusable-skill formation, remains the product and MVP spine.
 
-The NDNRA heuristic theory-to-integration readiness indicator is 97%. This is an internal engineering progress measure for one research subsystem, not a production-readiness score, safety certification, AGI percentage, or claim that controlled replay and restoration are implemented.
+See `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` for the full operating boundary.
 
 ## Development order
 
