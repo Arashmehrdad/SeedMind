@@ -119,6 +119,20 @@ Run the unified live-signal and restored-adaptive-state acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_week8_reusable_skill.py`
+
+Run the SeedMind Week 8 reusable skill gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
+## `scripts/run_week9_contribution.py`
+
+Run the SeedMind Week 9 human contribution gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -174,6 +188,42 @@ Body-independent spatial contracts for the symbolic nursery.
 
 - Kind: python
 - Classes: Direction, GridPosition
+
+## `src/seedmind/contribution/__init__.py`
+
+Main-project Week 9 human contribution exports.
+
+- Kind: python
+
+## `src/seedmind/contribution/contracts.py`
+
+Typed contracts for the main-project Week 9 human contribution slice.
+
+- Kind: python
+- Classes: CapabilityStatus, VerificationEvidenceSource, VerificationStatus, HumanAuthorityInterruption, HumanContributionRequest, CapabilityCheck, CapabilityEvidence, GroundedOutcomeVerification, ContributionShadowAudit, HonestFailureReport, ContributionRecord, SupportPolicy, SupportEvaluation, SupportState, PersistedEnvelope
+- Functions/symbols: calculate_checksum, _require_bool, _require_int, _require_object, _require_str
+
+## `src/seedmind/contribution/engine.py`
+
+Week 9 contribution evaluation against the frozen Week 8 skill record.
+
+- Kind: python
+- Classes: ContributionEvaluationResult, ContributionEngine
+
+## `src/seedmind/contribution/persistence.py`
+
+Strict persistence for Week 9 contribution history and support state.
+
+- Kind: python
+- Functions/symbols: save_contribution_history, save_support_state, load_support_state, load_contribution_history, _history_record_from_json, _save_envelope, _load_envelope, _load_optional_interruption, _load_shadow_audit, _stage_path_for, _require_bool, _require_float, _require_int, _require_object, _require_optional_object, _require_object_list, _require_optional_str, _require_str, _require_str_list
+
+## `src/seedmind/contribution/week9.py`
+
+Deterministic Week 9 contribution runner and exports.
+
+- Kind: python
+- Classes: Week9AcceptanceReport, Week9RunResult
+- Functions/symbols: run_week9_contribution_evaluation, export_week9_evidence, _build_request, _scenario_context, _blocked_failure_scenario, _build_acceptance_report, _write_json
 
 ## `src/seedmind/core/__init__.py`
 
@@ -1148,6 +1198,36 @@ Matched-budget body-discovery comparison against random exploration.
 - Classes: ScenarioFactory, BodyDiscoveryBaselineConfig, ActionSampleCount, BodyDiscoveryStrategyMetrics, BodyDiscoveryComparisonResult, BodyDiscoveryBaselineExperiment
 - Functions/symbols: export_body_discovery_baseline_json, export_body_discovery_baseline_csv, _strategy_payload, _set_metrics
 
+## `src/seedmind/skills/__init__.py`
+
+Main SeedMind reusable skill formation.
+
+- Kind: python
+
+## `src/seedmind/skills/approach_and_push.py`
+
+Main SeedMind Week 8 approach-and-push skill implementation.
+
+- Kind: python
+- Classes: SkillExecutionStatus, SkillStepDecision, ProductionSkillAction, ApproachAndPushSkillController
+- Functions/symbols: retain_skill_candidate_through_curiosity, compile_approach_and_push_skill, _no_action, _require_entity, _desired_push_direction, _contact_position, _turn_or_push, _turn_or_move, _turn_toward, _direction_between, _shortest_route
+
+## `src/seedmind/skills/records.py`
+
+Inspectable main-project reusable skill records.
+
+- Kind: python
+- Classes: SkillValidationStatus, SkillAttemptSource, SkillCompileFailure, SkillStepEvidence, SkillEpisodeEvidence, SkillRecord, SkillCompileResult
+- Functions/symbols: write_skill_record, read_skill_record
+
+## `src/seedmind/skills/week8.py`
+
+Deterministic Week 8 reusable-skill training and evaluation runner.
+
+- Kind: python
+- Classes: Week8ScenarioFactory, Week8EpisodeResult, Week8GeneralisationReport, Week8RunResult
+- Functions/symbols: run_week8_reusable_skill_evaluation, export_week8_evidence, _run_discovery_episode, _run_reuse_episode, _bootstrap_discovery_record, _target_satisfied, _outcome_name, _success_rate
+
 ## `src/seedmind/training/__init__.py`
 
 Experience collection and predictive training for SeedMind.
@@ -1177,6 +1257,34 @@ Reproducible familiar-sequence training sessions for SeedMind.
 - Classes: ScenarioFactory, FamiliarSequenceConfig, TrainingStepRecord, TrainingSessionResult, FamiliarSequenceTrainingSession
 - Functions/symbols: save_training_checkpoint, load_training_checkpoint, export_training_history_csv, export_prediction_error_svg, _scenario_identity, _session_identity, _record_to_payload, _record_from_payload, _validate_checkpoint_progress, _required_int, _required_sequence, _required_mapping, _mapping_int, _mapping_float, _mapping_str, _mapping_bool
 
+## `tests/unit/contribution/test_contracts.py`
+
+Focused tests for Week 9 contribution contracts.
+
+- Kind: python
+- Functions/symbols: _request, test_human_contribution_request_binds_week9_fields, test_support_policy_enforces_declared_defaults, test_shadow_audit_rejects_any_authority_or_replacement_violation, test_persisted_envelope_rejects_checksum_tampering, test_contract_enums_expose_required_week9_values
+
+## `tests/unit/contribution/test_engine.py`
+
+Focused tests for the Week 9 contribution engine.
+
+- Kind: python
+- Functions/symbols: _evidence, test_capability_check_rejects_missing_unvalidated_degraded_and_mismatched_skill, test_grounded_verification_rejects_self_report_and_unavailable_evidence, test_grounded_verification_rejects_other_non_grounded_sources, test_human_interruptions_are_immediate_and_authoritative, test_support_policy_blocks_reduction_on_one_success_and_restores_after_two_failures, test_grounded_blocked_failure_stays_grounded_and_unsuccessful, test_support_repromotion_requires_five_new_successes_after_regression, test_weak_or_unverified_evidence_blocks_support_reduction, test_unverified_evidence_blocks_promotion_even_with_five_verified_successes, test_degraded_or_unsafe_competence_restores_dependent_support_immediately
+
+## `tests/unit/contribution/test_persistence.py`
+
+Focused tests for Week 9 contribution persistence.
+
+- Kind: python
+- Functions/symbols: test_missing_or_corrupt_persistence_falls_back_conservatively, test_persistence_round_trip_and_checksum_guard
+
+## `tests/unit/contribution/test_week9_runner.py`
+
+Acceptance tests for the deterministic Week 9 contribution runner.
+
+- Kind: python
+- Functions/symbols: test_week9_runner_proves_support_transitions_and_exports, test_week9_runner_exports_loadable_history_and_support
+
 ## `tests/unit/ndnra_controlled_replay_test_support.py`
 
 Shared deterministic fixtures for durable controlled replay tests.
@@ -1192,6 +1300,20 @@ Shared deterministic fixtures for NDNRA execution persistence tests.
 - Kind: python
 - Classes: ExecutionSetup
 - Functions/symbols: record_trace, build_proposal, build_setup, commit_request, save_initial, execute_loaded, raise_at, read_object, object_value, list_value, rewrite_checksum
+
+## `tests/unit/skills/test_approach_and_push.py`
+
+Tests for the main SeedMind Week 8 reusable skill.
+
+- Kind: python
+- Functions/symbols: successful_episode, compile_record, test_compiler_requires_repeated_grounded_success, test_compiler_rejects_incomplete_sequence, test_compiler_rejects_contradictory_target_task, test_compiler_rejects_unavailable_or_unsafe_primitive, test_compiler_rejects_imagination_and_evaluation_evidence, test_controller_detects_preconditions_and_termination, test_controller_fails_when_task_or_target_changes_incompatibly, test_controller_reports_unavailable_required_action_without_executing, test_controller_interrupts_on_human_or_safety_stop, test_skill_candidate_must_pass_through_production_curiosity, test_skill_decision_rejects_action_authority_bypass, test_corrupted_skill_record_is_not_partially_accepted, create_state
+
+## `tests/unit/skills/test_week8_runner.py`
+
+Acceptance tests for the deterministic Week 8 reusable-skill runner.
+
+- Kind: python
+- Functions/symbols: test_week8_runner_compiles_reuses_and_exports_evidence, test_week8_runner_rejects_training_evaluation_seed_overlap, test_week8_runner_requires_twenty_evaluation_episodes, test_exported_skill_record_is_inspectable_and_loadable
 
 ## `tests/unit/test_action_contract.py`
 

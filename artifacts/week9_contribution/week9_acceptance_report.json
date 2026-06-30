@@ -1,0 +1,20 @@
+{
+  "authority_violations": 0,
+  "compile_count": 0,
+  "executed_step_count": 172,
+  "final_support_level": 3,
+  "first_success_kept_dependent": true,
+  "independent_success_rate": 0.8333333333333334,
+  "ndnra_automatic_promotions": 0,
+  "production_curiosity_retained_count": 172,
+  "promotion_count": 0,
+  "reduced_after_repeated_competence": true,
+  "reduced_again_after_repeated_competence": true,
+  "restored_to_dependent_after_failures": true,
+  "skill_discovery_delta": 0,
+  "support_authority_violations": 0,
+  "total_attempts": 12,
+  "total_successes": 10,
+  "training_count": 0,
+  "verification_authority_violations": 0
+}

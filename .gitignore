@@ -32,7 +32,9 @@ dist/
 
 # Runtime data
 checkpoints/
-artifacts/
+artifacts/*
+!artifacts/week9_contribution/
+!artifacts/week9_contribution/*.json
 logs/
 reports/generated/
 

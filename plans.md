@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: original SeedMind Week 8 reusable skill
+- Latest completed milestone: original SeedMind Week 9 contribution and reduced support
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,10 +17,10 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: SeedMind main roadmap with NDNRA shadow evaluation
 - Last closed stage: NDNRA Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current stage: main SeedMind Week 8 reusable skill closed; Week 9 contribution is next but not started
-- Current status: `approach_and_push` is compiled as the first main SeedMind reusable skill from repeated grounded production episodes, frozen evaluation reuses the compiled skill across 20 unseen deterministic eligible starts, production curiosity remains the sole action selector, NDNRA stays non-authoritative, automatic component promotion is disabled, and Stage 9 remains unauthorised
-- Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged because the parallel policy creates an evaluation boundary and no new cognitive capability or production authority
+- Current stage: main SeedMind Week 9 contribution and reduced support closed; original Week 10 is next but not started
+- Current status: typed human requests reuse the frozen Week 8 `approach_and_push` skill; grounded runtime and actual-transition evidence verifies contribution; honest failures remain inspectable; support changes only after predeclared repeated competence; degradation restores Level 4 and starts a fresh promotion-evidence epoch; production curiosity retains every executed action; NDNRA stays non-authoritative; automatic component promotion is disabled; and NDNRA Stage 9 remains unauthorised
+- Expanded developmental architecture marker: 84%
+- Marker interpretation: increased because the main product now converts a reusable skill into grounded human contribution and evidence-gated support reduction without granting new production authority to NDNRA
 
 Completed bounded increments:
 
@@ -45,6 +45,7 @@ Completed bounded increments:
 19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
 20. SeedMind and NDNRA parallel operation — production curiosity retains every executed action, NDNRA observes and suggests without authority, disagreements require comparison evidence, audits fail closed, and automatic component promotion remains disabled.
 21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
+22. Original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, deterministic contribution artifacts, and zero production, verification, support, or NDNRA authority violations.
 
 ## Current accepted boundary
 
@@ -113,20 +114,20 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After closing original SeedMind Week 8 reusable skill:
+After closing original SeedMind Week 9 contribution and reduced support:
 
 ```text
-.\.venv\Scripts\python.exe -m pytest tests/unit/skills -q --basetemp .tmp_pytest\week8-focused: 16 passed
-.\.venv\Scripts\python.exe scripts\run_week8_reusable_skill.py: pass_gate=true
-.\.venv\Scripts\python.exe -m ruff format --check .: 268 files already formatted
+focused Week 9 tests: 19 passed
+real Week 9 CLI materialisation gate: passed
+.\.venv\Scripts\python.exe -m ruff format --check .: 278 files already formatted
 .\.venv\Scripts\python.exe -m ruff check .: passed
-.\.venv\Scripts\python.exe -m mypy .: no issues in 268 source files
-.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full: 1133 passed
+.\.venv\Scripts\python.exe -m mypy .: no issues in 278 source files
+complete pytest suite in four documented non-overlapping groups: 331 + 422 + 191 + 208 = 1152 passed
 .\.venv\Scripts\python.exe -m pip check: no broken requirements
-git diff --check: passed with README CRLF normalization warning only
+git diff --check: passed with line-ending normalization warnings only
 ```
 
-The previous full baseline after parallel-policy adoption was 1117 passing tests across three non-overlapping bounded groups.
+The previous full baseline after original Week 8 closure was 1133 passing tests.
 
 ## Current technical sources
 
@@ -179,12 +180,14 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-seedmind-ndnra-parallel-operation.md`
 - `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md`
+- `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`
+- `docs/architecture/decisions/ADR-2026-06-30-seedmind-week9-contribution-closure.md`
 
 ## Next implementation target
 
 The original SeedMind master plan remains the governing product roadmap. `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` governs how NDNRA accompanies that work.
 
-The immediate next target is original SeedMind Week 9 contribution and reduced support. Week 9 has not started in the Week 8 closure run.
+The immediate next target is original SeedMind Week 10 developmental blockage and diagnosis. Week 10 was not started in the Week 9 closure run.
 
 ```text
 Main SeedMind: executes the retained production action

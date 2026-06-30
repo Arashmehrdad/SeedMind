@@ -1,0 +1,188 @@
+{
+  "checksum": "f8e7fadc25418401c663713f21bb97d3ce79df54720eb5ffbf16a468c5beefd0",
+  "payload": {
+    "contribution_schema_version": 1,
+    "support_state": {
+      "current_level": 3,
+      "history": [
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-001",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_diagonal",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-002",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_row",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-003",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_column",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-004",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_column",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-005",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_diagonal",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-006",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_row",
+          "success": false,
+          "unsafe": false,
+          "verification_status": "rejected"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-007",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_column",
+          "success": false,
+          "unsafe": false,
+          "verification_status": "rejected"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-008",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_row",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-009",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_row",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-010",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_column",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-011",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_diagonal",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        },
+        {
+          "context_mismatched": false,
+          "contradictory": false,
+          "contribution_id": "week9-contribution-012",
+          "degraded": false,
+          "evidence_fresh": true,
+          "familiar_context": true,
+          "independent_execution": true,
+          "scenario_context": "familiar_row",
+          "success": true,
+          "unsafe": false,
+          "verification_status": "verified"
+        }
+      ],
+      "last_evaluation": {
+        "blocker_codes": [
+          "none"
+        ],
+        "distinct_scenario_contexts": 3,
+        "next_level": 3,
+        "previous_level": 4,
+        "recent_grounded_familiar_failures": 0,
+        "recent_success_rate": 1.0,
+        "recent_verified_independent_familiar_successes": 5
+      },
+      "policy": {
+        "grounded_failures_to_restore_dependent": 2,
+        "minimum_distinct_scenario_contexts": 3,
+        "minimum_success_rate": 0.8,
+        "minimum_verified_independent_familiar_successes": 5,
+        "recent_evidence_window": 12
+      },
+      "promotion_evidence_start_index": 7
+    }
+  },
+  "payload_type": "support_state",
+  "schema_version": 1
+}

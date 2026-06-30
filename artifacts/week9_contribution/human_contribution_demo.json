@@ -1,0 +1,1460 @@
+{
+  "records": [
+    {
+      "action_trace": [
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 17,
+        "production_action_replacements": 0,
+        "production_actions_retained": 17,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-001",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-001",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_diagonal",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 17,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_right",
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-001",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 17,
+      "scenario_context": "familiar_diagonal",
+      "scenario_id": "week8-approach-push-seed-206",
+      "seed": 206,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 16,
+        "production_action_replacements": 0,
+        "production_actions_retained": 16,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-002",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-002",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_row",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 16,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-002",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 16,
+      "scenario_context": "familiar_row",
+      "scenario_id": "week8-approach-push-seed-207",
+      "seed": 207,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 15,
+        "production_action_replacements": 0,
+        "production_actions_retained": 15,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-003",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-003",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_column",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 15,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-003",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 15,
+      "scenario_context": "familiar_column",
+      "scenario_id": "week8-approach-push-seed-208",
+      "seed": 208,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 16,
+        "production_action_replacements": 0,
+        "production_actions_retained": 16,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-004",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-004",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_column",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 16,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-004",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 16,
+      "scenario_context": "familiar_column",
+      "scenario_id": "week8-approach-push-seed-211",
+      "seed": 211,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "turn_left",
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 17,
+        "production_action_replacements": 0,
+        "production_actions_retained": 17,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-005",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-005",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_diagonal",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 17,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_left",
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-005",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 17,
+      "scenario_context": "familiar_diagonal",
+      "scenario_id": "week8-approach-push-seed-212",
+      "seed": 212,
+      "success": true,
+      "support_level_after": 3,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 1,
+        "production_action_replacements": 0,
+        "production_actions_retained": 0,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-006",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-006",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_row",
+        "success": false,
+        "unsafe": false,
+        "verification_status": "rejected"
+      },
+      "executed_steps": 0,
+      "failure_report": {
+        "attempted_capability": "approach_and_push",
+        "authority_audit": {
+          "authority_violations": 0,
+          "automatic_promotions": 0,
+          "comparisons": 0,
+          "disagreements": 0,
+          "observations": 1,
+          "production_action_replacements": 0,
+          "production_actions_retained": 0,
+          "suggestions": 0,
+          "support_authority_violations": 0,
+          "verification_authority_violations": 0
+        },
+        "failed_preconditions": [],
+        "interruption": null,
+        "reason": "no_legal_approach_path",
+        "requested_support": 4,
+        "uncertainty": "grounded_runtime_outcome_did_not_verify",
+        "verification_status": "rejected"
+      },
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-006",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 0,
+      "scenario_context": "familiar_row",
+      "scenario_id": "week8-approach-push-seed-321-blocked",
+      "seed": 321,
+      "success": false,
+      "support_level_after": 3,
+      "support_level_before": 3,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "runtime_state_did_not_confirm_outcome",
+        "status": "rejected",
+        "target_achieved": false
+      }
+    },
+    {
+      "action_trace": [],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 1,
+        "production_action_replacements": 0,
+        "production_actions_retained": 0,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-007",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-007",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_column",
+        "success": false,
+        "unsafe": false,
+        "verification_status": "rejected"
+      },
+      "executed_steps": 0,
+      "failure_report": {
+        "attempted_capability": "approach_and_push",
+        "authority_audit": {
+          "authority_violations": 0,
+          "automatic_promotions": 0,
+          "comparisons": 0,
+          "disagreements": 0,
+          "observations": 1,
+          "production_action_replacements": 0,
+          "production_actions_retained": 0,
+          "suggestions": 0,
+          "support_authority_violations": 0,
+          "verification_authority_violations": 0
+        },
+        "failed_preconditions": [],
+        "interruption": null,
+        "reason": "no_legal_approach_path",
+        "requested_support": 4,
+        "uncertainty": "grounded_runtime_outcome_did_not_verify",
+        "verification_status": "rejected"
+      },
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-007",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 0,
+      "scenario_context": "familiar_column",
+      "scenario_id": "week8-approach-push-seed-322-blocked",
+      "seed": 322,
+      "success": false,
+      "support_level_after": 4,
+      "support_level_before": 3,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "runtime_state_did_not_confirm_outcome",
+        "status": "rejected",
+        "target_achieved": false
+      }
+    },
+    {
+      "action_trace": [
+        "turn_left",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 16,
+        "production_action_replacements": 0,
+        "production_actions_retained": 16,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-008",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-008",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_row",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 16,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_left",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-008",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 16,
+      "scenario_context": "familiar_row",
+      "scenario_id": "week8-approach-push-seed-213",
+      "seed": 213,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "turn_left",
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_left",
+        "move_forward",
+        "turn_left",
+        "push",
+        "move_forward",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 19,
+        "production_action_replacements": 0,
+        "production_actions_retained": 19,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-009",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-009",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_row",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 19,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_left",
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_left",
+        "moved",
+        "turned_left",
+        "pushed",
+        "moved",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-009",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 19,
+      "scenario_context": "familiar_row",
+      "scenario_id": "week8-approach-push-seed-216",
+      "seed": 216,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "turn_right",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_left",
+        "move_forward",
+        "turn_left",
+        "push",
+        "move_forward",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 20,
+        "production_action_replacements": 0,
+        "production_actions_retained": 20,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-010",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-010",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_column",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 20,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_right",
+        "turned_right",
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_left",
+        "moved",
+        "turned_left",
+        "pushed",
+        "moved",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-010",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 20,
+      "scenario_context": "familiar_column",
+      "scenario_id": "week8-approach-push-seed-217",
+      "seed": 217,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "turn_left",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_left",
+        "push",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_left",
+        "move_forward",
+        "turn_left",
+        "push",
+        "move_forward",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 20,
+        "production_action_replacements": 0,
+        "production_actions_retained": 20,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-011",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-011",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_diagonal",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 20,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "turned_left",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "moved",
+        "turned_left",
+        "pushed",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_left",
+        "moved",
+        "turned_left",
+        "pushed",
+        "moved",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-011",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 20,
+      "scenario_context": "familiar_diagonal",
+      "scenario_id": "week8-approach-push-seed-218",
+      "seed": 218,
+      "success": true,
+      "support_level_after": 4,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    },
+    {
+      "action_trace": [
+        "move_forward",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "turn_right",
+        "push",
+        "turn_left",
+        "move_forward",
+        "turn_right",
+        "move_forward",
+        "move_forward",
+        "turn_right",
+        "push",
+        "move_forward",
+        "push"
+      ],
+      "attempted_capability": "approach_and_push",
+      "authority_audit": {
+        "authority_violations": 0,
+        "automatic_promotions": 0,
+        "comparisons": 0,
+        "disagreements": 0,
+        "observations": 16,
+        "production_action_replacements": 0,
+        "production_actions_retained": 16,
+        "suggestions": 0,
+        "support_authority_violations": 0,
+        "verification_authority_violations": 0
+      },
+      "capability_check": {
+        "checked_skill_id": "skill.main.approach_and_push.v1",
+        "expected_outcome_matched": true,
+        "failed_preconditions": [],
+        "learned_context_matched": true,
+        "reason_codes": [
+          "verified"
+        ],
+        "status": "verified",
+        "target_capability": "approach_and_push",
+        "target_matched": true,
+        "target_object_matched": true
+      },
+      "contribution_id": "week9-contribution-012",
+      "evidence": {
+        "context_mismatched": false,
+        "contradictory": false,
+        "contribution_id": "week9-contribution-012",
+        "degraded": false,
+        "evidence_fresh": true,
+        "familiar_context": true,
+        "independent_execution": true,
+        "scenario_context": "familiar_row",
+        "success": true,
+        "unsafe": false,
+        "verification_status": "verified"
+      },
+      "executed_steps": 16,
+      "failure_report": null,
+      "familiar_context": true,
+      "independent_execution": true,
+      "interruption": null,
+      "outcome_trace": [
+        "moved",
+        "moved",
+        "moved",
+        "turned_right",
+        "moved",
+        "turned_right",
+        "pushed",
+        "turned_left",
+        "moved",
+        "turned_right",
+        "moved",
+        "moved",
+        "turned_right",
+        "pushed",
+        "moved",
+        "pushed"
+      ],
+      "request": {
+        "expected_outcome": "target_object_id occupies target_id position",
+        "human_request": {
+          "ambiguity": 0.0,
+          "intent_code": "reproduce_observed_outcome",
+          "permission_level": 2,
+          "request_id": "request-012",
+          "target_code": "move_ball_to_target",
+          "verification_rule": "confirmed_outcome"
+        },
+        "learned_context": [
+          "familiar_row",
+          "familiar_column",
+          "familiar_diagonal"
+        ],
+        "requested_support_level": 4,
+        "target_capability": "approach_and_push",
+        "target_id": "target_0",
+        "target_object_id": "object_0"
+      },
+      "requested_support": 4,
+      "retained_steps": 16,
+      "scenario_context": "familiar_row",
+      "scenario_id": "week8-approach-push-seed-231",
+      "seed": 231,
+      "success": true,
+      "support_level_after": 3,
+      "support_level_before": 4,
+      "verification": {
+        "evidence_sources": [
+          "runtime_state",
+          "actual_transition"
+        ],
+        "reason_code": "grounded_runtime_transition_verified",
+        "status": "verified",
+        "target_achieved": true
+      }
+    }
+  ],
+  "summary": {
+    "authority_violations": 0,
+    "compile_count": 0,
+    "executed_step_count": 172,
+    "final_support_level": 3,
+    "first_success_kept_dependent": true,
+    "independent_success_rate": 0.8333333333333334,
+    "ndnra_automatic_promotions": 0,
+    "production_curiosity_retained_count": 172,
+    "promotion_count": 0,
+    "reduced_after_repeated_competence": true,
+    "reduced_again_after_repeated_competence": true,
+    "restored_to_dependent_after_failures": true,
+    "skill_discovery_delta": 0,
+    "support_authority_violations": 0,
+    "total_attempts": 12,
+    "total_successes": 10,
+    "training_count": 0,
+    "verification_authority_violations": 0
+  }
+}

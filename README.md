@@ -8,7 +8,7 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap has now closed Week 8 with the first reusable product skill, `approach_and_push`, while NDNRA continues beside it in non-authoritative shadow mode.
+The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap has now closed Week 9 by using the frozen `approach_and_push` skill for verified human contribution and evidence-gated support reduction, while NDNRA continues beside it in non-authoritative shadow mode.
 
 The canonical operating mode is `production_with_ndnra_shadow`:
 
@@ -26,23 +26,26 @@ See `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` fo
 
 ## Current main-roadmap evidence
 
-SeedMind Week 8 is closed by the main `seedmind.skills` implementation:
+SeedMind Week 9 is closed by the main `seedmind.contribution` implementation:
 
-- `approach_and_push` is compiled from repeated grounded production episodes;
-- frozen evaluation reuses the compiled skill across 20 unseen deterministic eligible starts;
-- evaluation success rate is `1.0000`;
-- primitive rediscovery baseline success rate is `1.0000`;
-- evaluation discovery count remains `0`;
-- production action-authority violations remain `0`;
-- NDNRA automatic promotions remain `0`.
+- typed human requests bind the target capability, expected outcome, object, target, context, permission, and verification rule;
+- capability checks distinguish unavailable, unproven, degraded, context-mismatched, and verified states;
+- contribution success requires grounded runtime state and actual-transition evidence;
+- self-report, imagination, producer-verifier agreement, and NDNRA agreement cannot certify success;
+- support reduces from Level 4 to Level 3 only after five verified independent familiar successes, at least `0.80` success, and three distinct familiar contexts;
+- two consecutive grounded familiar failures restore Level 4, and re-promotion requires five fresh post-regression successes;
+- deterministic evaluation completed `10/12` requests for an independent success rate of `0.8333`;
+- all `172` executed primitive actions were retained through production curiosity;
+- Week 8 discovery delta, compilation, training, and component promotion remain `0`;
+- production, verification, support, and NDNRA authority violations remain `0`.
 
 Run the deterministic gate with:
 
 ```text
-.\.venv\Scripts\python.exe scripts\run_week8_reusable_skill.py
+.\.venv\Scripts\python.exe scripts\run_week9_contribution.py
 ```
 
-Evidence is documented in `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
+Evidence is documented in `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`. Week 8 remains closed separately in `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
 
 ## Development order
 

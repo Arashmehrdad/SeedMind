@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T18:02:44.277088+00:00",
+  "generated_at": "2026-06-30T21:35:31.076383+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 379,
+  "source_file_count": 407,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -17,13 +17,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "4a93a388eb83b49258dc70d4b7b3a2e38b0f7170bbf3d895962590b1b0e82bc0",
-      "size_bytes": 1880
+      "sha256": "3e776445780c0b9d5e8ddabdbaabf1b54ad5ad43ad425380c557621bf24af3c3",
+      "size_bytes": 3496
     },
     {
       "path": "plans.md",
-      "sha256": "736a46657701b6db38c11c963285997bd63eb1b8bd4f44b611c28234ff7bbb42",
-      "size_bytes": 26998
+      "sha256": "576b58e63ddc7aa90e9dd50f3df745122f80b69bde97480d3089e9c418853b8a",
+      "size_bytes": 28708
     },
     {
       "path": "pyproject.toml",
@@ -181,6 +181,36 @@
       "size_bytes": 1561
     },
     {
+      "path": "artifacts/week8_reusable_skill/approach_and_push_skill_record.json",
+      "sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+      "size_bytes": 1849
+    },
+    {
+      "path": "artifacts/week8_reusable_skill/week8_generalisation_report.json",
+      "sha256": "10e6fc3755a44897322ff0650a012d293333e078570627f613297d61a5c2007f",
+      "size_bytes": 827
+    },
+    {
+      "path": "artifacts/week9_contribution/contribution_history.json",
+      "sha256": "fb61cca076866aba4f1ceed7d0d716277248874f4842198a8f2c83c9af3f919b",
+      "size_bytes": 46326
+    },
+    {
+      "path": "artifacts/week9_contribution/human_contribution_demo.json",
+      "sha256": "c3f2030959891a56a15636bf54f8fe929c967b7c5e05d1d2c3cf85143260509e",
+      "size_bytes": 43944
+    },
+    {
+      "path": "artifacts/week9_contribution/support_level_report.json",
+      "sha256": "c6b6545ffd5c93aa584d13c137ccefce8e8a3963dad17b7fa8a846b314c8980e",
+      "size_bytes": 6333
+    },
+    {
+      "path": "artifacts/week9_contribution/week9_acceptance_report.json",
+      "sha256": "39b787e840c9079bc0e5b18dd00543c2f479826f657b9289fe5d943c07878a7a",
+      "size_bytes": 652
+    },
+    {
       "path": "docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md",
       "sha256": "bf98060bf4d4b505f30618daaccf19138872ed704728e9c7b7585e5ac253cee0",
       "size_bytes": 58821
@@ -269,6 +299,16 @@
       "path": "docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md",
       "sha256": "e93c49774358c4c27069a4189ba103510e36bdeaf6e9ed338bd4b8b26f606fa1",
       "size_bytes": 39469
+    },
+    {
+      "path": "docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md",
+      "sha256": "71a0f3392b53e4e1081e4c1458a9e835357d99b8c731c40adfa99bd3ccfe9c2e",
+      "size_bytes": 3459
+    },
+    {
+      "path": "docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md",
+      "sha256": "cc447bbcc20a0a0d76f4e11abe3e98f4d56eebbcd5f08f577725e81602ae63c1",
+      "size_bytes": 7260
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -404,6 +444,16 @@
       "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-ndnra-parallel-operation.md",
       "sha256": "2818345e32f77533a5680e656af3ab31ea582bb7b203fb700461cb483b9a7d14",
       "size_bytes": 2577
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md",
+      "sha256": "67869cfcb7efb6aa86ab38604648263e888087ae4c69c7dcbeb00600e90373d8",
+      "size_bytes": 2437
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-week9-contribution-closure.md",
+      "sha256": "83b84a2a5a89cf461f114898fb0aa6f80b45220993ec348d44f05033249fec20",
+      "size_bytes": 3984
     },
     {
       "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
@@ -556,9 +606,14 @@
       "size_bytes": 9440
     },
     {
+      "path": "docs/archive/SeedMind_Session_Handover_2026-06-30_Week8_Complete.md",
+      "sha256": "a74a1a20034b36bf20c86321808bc92b3ac8d45546af7a7be76c4d956a09a472",
+      "size_bytes": 13335
+    },
+    {
       "path": "docs/wiki/SeedMind_Repository_Wiki.md",
-      "sha256": "93eb0e0bfdba36a43cdafbda52d5e7224ff02e627cf3ee5fe054520bfacc40d8",
-      "size_bytes": 2029
+      "sha256": "ae87a11e3d56fa2ad2bba7385642de388b30ee362a2c2934099a50c0cc25ae93",
+      "size_bytes": 2769
     },
     {
       "path": "requirements/base.txt",
@@ -666,6 +721,16 @@
       "size_bytes": 5004
     },
     {
+      "path": "scripts/run_week8_reusable_skill.py",
+      "sha256": "3e9d6e71728c4d0c3d25adf7563335f0183b6796857a6d89bd92bd69834cf19a",
+      "size_bytes": 1975
+    },
+    {
+      "path": "scripts/run_week9_contribution.py",
+      "sha256": "6a744031b20f09894e0e41ff2f592afd222a49c7bc40a5fc4062273060cf93a4",
+      "size_bytes": 3739
+    },
+    {
       "path": "src/seedmind/__init__.py",
       "sha256": "762e911e668d4168bb113a5a08d45d37a1d4346eb6c12b7deefae3757e880736",
       "size_bytes": 74
@@ -704,6 +769,31 @@
       "path": "src/seedmind/contracts/spatial.py",
       "sha256": "0ecf1b09c404771b73b41bb7855f4238e89a3eb530c6aad00c16be0634b8a6e7",
       "size_bytes": 1496
+    },
+    {
+      "path": "src/seedmind/contribution/__init__.py",
+      "sha256": "79362d033c7b1a2cac71626f71764ddba497f7d18d94163bdf04e7d50062083a",
+      "size_bytes": 1964
+    },
+    {
+      "path": "src/seedmind/contribution/contracts.py",
+      "sha256": "93fee15a487d1e005d90e8f604cfb318ff3aa7c25bdb2fb703b145327a47f75e",
+      "size_bytes": 21922
+    },
+    {
+      "path": "src/seedmind/contribution/engine.py",
+      "sha256": "93aa6e9f4df03b94e5756e961ab3d19824031f2ad866ea90bf357bc70b4fa85a",
+      "size_bytes": 23723
+    },
+    {
+      "path": "src/seedmind/contribution/persistence.py",
+      "sha256": "6999ecfbb297a3fb1bfde987e3525bce2d25f149168a5ffcb283bd88c3a200c5",
+      "size_bytes": 15280
+    },
+    {
+      "path": "src/seedmind/contribution/week9.py",
+      "sha256": "dc65aaeea507712b6e66682bb5fa8e18befb7c40309927367cb8dffccdf565f7",
+      "size_bytes": 12763
     },
     {
       "path": "src/seedmind/core/__init__.py",
@@ -1336,6 +1426,26 @@
       "size_bytes": 21143
     },
     {
+      "path": "src/seedmind/skills/__init__.py",
+      "sha256": "97bb8109e70e8760e1815d596aa95ff305c891f50a4af8b1e306e90ef5ce40d0",
+      "size_bytes": 1740
+    },
+    {
+      "path": "src/seedmind/skills/approach_and_push.py",
+      "sha256": "1cf1358ca7e77cd9772e37273aaed6463693f1cffc206a42ca580bfc4d85cadf",
+      "size_bytes": 14171
+    },
+    {
+      "path": "src/seedmind/skills/records.py",
+      "sha256": "dc54bc374f593cc01057d90ecb01e7d0b64eac0534cfa771adb0da4fdfed980f",
+      "size_bytes": 11113
+    },
+    {
+      "path": "src/seedmind/skills/week8.py",
+      "sha256": "38d3f7080ba1b8d244d37e6d0e5c32c466594eb73da82c93ff79d2d999dfbb93",
+      "size_bytes": 18057
+    },
+    {
       "path": "src/seedmind/training/__init__.py",
       "sha256": "4efe487282ef813eab81ea68bff21af5934133bf7361a9f61ff026359475c5c1",
       "size_bytes": 1034
@@ -1904,6 +2014,36 @@
       "path": "tests/unit/test_world_processes.py",
       "sha256": "a78a8b25dc2c0c9a841325941200950284512fc1e885d65f257c37cd3b1ed473",
       "size_bytes": 6815
+    },
+    {
+      "path": "tests/unit/contribution/test_contracts.py",
+      "sha256": "62cb7e6a6c65125de3ac6e1996cfa55f692cde7056a217fc0430a3ea4535b5d2",
+      "size_bytes": 3114
+    },
+    {
+      "path": "tests/unit/contribution/test_engine.py",
+      "sha256": "7f1251cce542d3adca9fd2f2f6edf977e4c82181d8450375372177394aed27cc",
+      "size_bytes": 13688
+    },
+    {
+      "path": "tests/unit/contribution/test_persistence.py",
+      "sha256": "e4c70ea1836542e01398bfea257f09e86c9eb06789ddc079808a6eb52a250a4c",
+      "size_bytes": 3156
+    },
+    {
+      "path": "tests/unit/contribution/test_week9_runner.py",
+      "sha256": "03114adc126487cb9859f38b84a6bcbe682c2969bdbc68bd5d2ceab40281356b",
+      "size_bytes": 2832
+    },
+    {
+      "path": "tests/unit/skills/test_approach_and_push.py",
+      "sha256": "b796842bac94091da1b81d4ee4b8a72e21d210a20f378ec8a036ecf9f45c4069",
+      "size_bytes": 8135
+    },
+    {
+      "path": "tests/unit/skills/test_week8_runner.py",
+      "sha256": "7c37f26033546a5d32d1f5938b5fe9b39d975865432a3ffa0d486ea4ad7a268a",
+      "size_bytes": 2569
     }
   ],
   "version": 1,
