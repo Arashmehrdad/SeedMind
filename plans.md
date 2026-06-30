@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage -1 constitutional contracts
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 0 identity and lifecycle contracts
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage -1 developmental constitution, desired-state ambition, adaptive DESA, and skill-bundle contracts
-- Current stage: Developmental Network v0.2 — Stage 0 v0.2 identity, lifecycle, trace, and schema-separation contracts
-- Current status: Stage -1 contracts are implemented and evidenced locally; Stage 0 must define v0.2 identities and lifecycle transitions without runtime adapter, action gateway, persistence-store merging, or production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 0 v0.2 identity, lifecycle, trace, and schema-separation contracts
+- Current stage: Developmental Network v0.2 — Stage 1 persistent recurrent experiential substrate
+- Current status: Stage 0 contracts are implemented and evidenced locally; Stage 1 may now define the reusable sparse recurrent neuron pool, excitatory and inhibitory connections, distributed experience coalitions, and deterministic bounded settling without persistence implementation, runtime adapter, action gateway, SQLite cognition, structural neuron creation, or production action authority
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
@@ -33,6 +33,7 @@ Completed bounded increments:
 7. Batch 7 — deterministic explicit human approve, reject, or defer review.
 8. Batch 8 — deterministic training-review or explicit configured non-training bypass resolution.
 9. Developmental Network v0.2 Stage -1 — deterministic developmental constitution, DESA, Nursery curriculum, ambition, skill-bundle, Outcome Fidelity, authority, integrity, and causal-responsibility contracts.
+10. Developmental Network v0.2 Stage 0 — deterministic v0.2 schema identity, typed identities, lifecycle transitions, trace evidence, and v0.1 schema separation contracts.
 
 ## Current accepted boundary
 
@@ -101,18 +102,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage -1 constitutional contracts:
+After NDNRA Developmental Network v0.2 Stage 0 identity and lifecycle contracts:
 
 ```text
-ruff format --check .: 239 files already formatted
+ruff format --check .: 241 files already formatted
 ruff check .: passed
-mypy: no issues in 239 source files
-pytest -q: 1001 passed
+mypy: no issues in 241 source files
+pytest -q: 1008 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage -1 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_constitution.py` with 15 tests. The full repository gates also passed before the bounded local Stage -1 commit.
+The Stage 0 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_identity.py` with 7 tests. The full repository gates also passed before the bounded local Stage 0 commit.
 
 ## Current technical sources
 
@@ -139,20 +140,20 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md`
 - `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
 - `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-0-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1 is now implemented and evidenced. The next authorised implementation boundary is Stage 0 contracts, followed by Stage 1 and Stage 1A in separate bounded batches:
+Stage -1 and Stage 0 are now implemented and evidenced. The next authorised implementation boundary is Stage 1 contracts and in-memory substrate behavior, followed by Stage 1A in a separate bounded batch:
 
 ```text
-v0.2 lifecycle identities and schema separation
-    +
 reusable sparse recurrent neuron pool
     +
 excitatory and inhibitory connections
@@ -176,7 +177,7 @@ Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evi
 8. Human authority remains separate from reward, and reward/evidence/verifier integrity is protected.
 9. DESA contains no task solution, pretrained language model, imported task knowledge, or external action authority.
 
-Stage 0 must prove:
+Stage 0 is closed by `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md`, which proves:
 
 1. v0.2 identities and schemas cannot be confused with the closed v0.1 persistence boundary.
 2. Cognitive, DESA, value-source, desired-state ambition, capability-gap, skill-bundle, verifier, outcome-state, authority, integrity, and causal-responsibility identities serialise deterministically.
