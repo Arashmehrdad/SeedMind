@@ -873,6 +873,14 @@ Durable restart-safe commit of one controlled retention replay.
 - Classes: ControlledRetentionReplayDurableResult, ControlledRetentionReplayDurablePolicy
 - Functions/symbols: _matches_persisted_boundaries, _matches_loaded_result, _matches_expected, _interrupt
 
+## `src/seedmind/research/ndnra/developmental_associative_recall.py`
+
+Stage 2 associative need-and-context recall over distinct experiences.
+
+- Kind: python
+- Classes: AssociativeRecallLinkKind, AssociativeRecallControl, AssociativeRecallConfig, AssociativeRecallCue, AssociativeRecallLink, AssociativeRecallActivation, AssociativeRecallResult, RecallCostMeasurement, StageTwoAssociativeRecallEvidence
+- Functions/symbols: run_associative_recall, run_stage_two_associative_recall_acceptance, build_stage_two_associative_state, build_stage_two_associative_links, _settle_associative_scores, _dominant_episode_ids, _control_links, _cue_source_codes, _link_kind_enabled, _stage_two_episodes, _episode_need_codes, _episode_context_feature_codes, _estimated_effort_cost, _validate_score_rows, _validate_non_empty_sequence, _validate_positive_int, _validate_non_negative_int, _validate_zero_int, _validate_unit, _validate_unit_open, _validate_non_negative_finite, _validate_signed_unit_nonzero, _validate_ascii_code, _validate_sorted_unique_ascii_codes, _validate_unique_ascii_codes, _clamp_unit, _identity, _canonical_json_bytes
+
 ## `src/seedmind/research/ndnra/developmental_constitution.py`
 
 Stage -1 contracts for the NDNRA v0.2 developmental constitution.
@@ -1531,6 +1539,13 @@ Tests for restart-safe durable controlled retention replay.
 
 - Kind: python
 - Functions/symbols: _execute, test_durable_replay_round_trips_consumed_permit_receipt_and_activity, test_restart_retains_single_use_and_blocks_replay_again, test_interruption_before_save_preserves_exact_old_envelope, test_interruption_after_atomic_replace_recovers_complete_new_envelope, test_durable_replay_rejects_state_or_caller_boundary_drift
+
+## `tests/unit/test_ndnra_developmental_associative_recall.py`
+
+Tests for NDNRA v0.2 Stage 2 associative recall evidence.
+
+- Kind: python
+- Functions/symbols: _warm_sunny_cue, test_stage_two_acceptance_matrix_is_complete_and_zero_authority, test_need_relevant_experiences_exceed_unrelated_without_merging_identity, test_partial_context_changes_order_and_beats_exact_context_only, test_compatible_multi_experience_coalition_beats_one_winner_control, test_contradictory_experience_remains_available_but_inhibited, test_partial_cue_beats_shuffled_need_removed_and_context_removed_controls, test_false_coactivation_and_recall_cost_stay_bounded, test_stage_two_links_cover_required_association_types_and_reject_bad_links, test_recall_is_deterministic_and_rejects_invalid_cues_and_mutated_results, test_run_associative_recall_rejects_unencoded_link_targets, test_public_exports_cover_stage_two_associative_recall, test_stage_two_associative_recall_has_no_forbidden_runtime_dependencies
 
 ## `tests/unit/test_ndnra_developmental_constitution.py`
 

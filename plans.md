@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 1A DESA bootstrap and hierarchical metacognition
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 2 associative need-and-context recall
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 1A DESA bootstrap and hierarchical metacognition
-- Current stage: Developmental Network v0.2 — Stage 2 associative need-and-context recall
-- Current status: Stage 1A is implemented and evidenced locally; Stage 2 may next test associative recruitment, partial-cue completion, inhibition, pattern separation, coalition competition, context ordering, bounded recall depth, and matched controls while preserving separate experience identity and without simultaneous needs, mature skill promotion, dreaming, persistence, action gateway work, SQLite cognition, or production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 2 associative need-and-context recall
+- Current stage: Developmental Network v0.2 — Stage 3 specialised concurrent regions and multiple needs
+- Current status: Stage 2 is implemented and evidenced locally; Stage 3 may next test region-local pools, typed cross-region communication, simultaneous need representation, compatibility reinforcement, conflict inhibition, protected safety and permission participation, and no permanent global scalar collapse while preserving zero SQLite cognition and zero production action authority
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged at this boundary because Stage 1A remains a bounded research closure and does not authorize production behavior
+- Marker interpretation: unchanged at this boundary because Stage 2 remains a bounded research closure and does not authorize production behavior
 
 Completed bounded increments:
 
@@ -36,6 +36,7 @@ Completed bounded increments:
 10. Developmental Network v0.2 Stage 0 — deterministic v0.2 schema identity, typed identities, lifecycle transitions, trace evidence, and v0.1 schema separation contracts.
 11. Developmental Network v0.2 Stage 1 — deterministic fixed-pool recurrent substrate, signed connections, distributed overlapping experience coalitions, bounded settling, and zero-authority replay evidence.
 12. Developmental Network v0.2 Stage 1A — deterministic DESA bootstrap, regional captain summaries, bounded workspace routing, optional steward gates, temporary skill incubation, verifier calibration, Executive Auditor correction, event partition preservation, temporary ambition, and zero-authority evidence.
+13. Developmental Network v0.2 Stage 2 — deterministic associative need-and-context recall, partial-cue completion, inhibitory pattern separation, compatible coalition selection, matched recall controls, bounded depth and dormancy cost, and zero-authority evidence.
 
 ## Current accepted boundary
 
@@ -104,18 +105,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 1 recurrent experiential substrate:
+After NDNRA Developmental Network v0.2 Stage 2 associative need-and-context recall:
 
 ```text
-ruff format --check .: 243 files already formatted
+ruff format --check .: 247 files already formatted
 ruff check .: passed
-mypy: no issues in 243 source files
-pytest -q: 1017 passed
+mypy: no issues in 247 source files
+pytest -q --basetemp .pytest_tmp/full_repo_stage2_final: 1040 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage 1 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_network.py` with 9 tests. The full repository gates also passed before the bounded local Stage 1 commit.
+The Stage 2 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_associative_recall.py --basetemp .pytest_tmp/stage2_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 2 commit.
 
 ## Current technical sources
 
@@ -145,6 +146,7 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_2_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
@@ -152,15 +154,16 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-0-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1a-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-2-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1, Stage 0, Stage 1, and Stage 1A are now implemented and evidenced. The next authorised implementation boundary is Stage 2 associative need-and-context recall:
+Stage -1, Stage 0, Stage 1, Stage 1A, and Stage 2 are now implemented and evidenced. The next authorised implementation boundary is Stage 3 specialised concurrent regions and multiple needs:
 
 ```text
-Associative need-and-context recall
+Specialised concurrent regions and multiple needs
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -207,7 +210,7 @@ Stage 1A is closed by `docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2
 10. Pending or unavailable feedback remains unverified rather than successful.
 11. SQLite cognition, external side effects, and production action-authority violations remain zero.
 
-Stage 2 must prove:
+Stage 2 is closed by `docs/architecture/NDNRA_Developmental_Stage_2_Evidence_2026-06-30.md`, which proves:
 
 1. Need-relevant experiences respond more strongly than unrelated controls.
 2. Present context changes the response ordering.
@@ -218,7 +221,17 @@ Stage 2 must prove:
 7. False co-activation remains below the declared threshold.
 8. Recall cost rises predictably with dormancy and depth.
 
-Do not begin simultaneous multiple-need work, mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 2 passes.
+Stage 3 must prove:
+
+1. Independent compatible needs remain represented simultaneously.
+2. Compatible regional coalitions cooperate rather than forcing one need to disappear.
+3. A protected safety or permission need inhibits an incompatible task proposal.
+4. A lower-priority dormant need can re-emerge after the blocking need is resolved.
+5. Region-local learning produces less cross-task interference than a uniform-network control.
+6. Cross-region messages remain typed and inspectable.
+7. No region gains external action authority.
+
+Do not begin mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 3 passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 
