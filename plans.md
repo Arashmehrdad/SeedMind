@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network Implementation and Test Plan v0.2
+- Latest completed milestone: NDNRA DESA Executive Foundation Planning Refinement
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Original Plan and NDNRA v0.1 Comparison Decision
-- Current stage: Developmental Network v0.2 — Stage 0 contracts and lifecycle identities
-- Current status: The post-v0.1 implementation and test plan is accepted; isolated Stage 0 and Stage 1 research work is authorised, but production integration and action authority remain prohibited
+- Last closed stage: NDNRA DESA Executive Foundation Planning Refinement
+- Current stage: Developmental Network v0.2 — Stage -1 developmental constitution, DESA, and Nursery curricula
+- Current status: No known architecture gap blocks bounded implementation; Stage -1, Stage 0, Stage 1, and Stage 1A must establish and test the organising seed before broader cognitive mechanisms begin
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
@@ -48,13 +48,20 @@ The accepted post-v0.1 theory is:
 - caller-invoked dream maintenance that cannot create factual evidence or actions;
 - exact restoration of the same developmental network after restart;
 - protected prohibitions plus directly taught and experience-refined responsibility;
-- typed internal action proposals separated from an external protected action gateway.
+- typed internal action proposals separated from an external protected action gateway;
+- a multi-level Developmental Executive Steward Architecture (DESA) with local monitors, skill stewards, regional captains, a cross-region executive council, an independent Executive Auditor, and constitutional authority;
+- DESA-managed event partitioning over a preserved raw chronological stream;
+- ambition as a persistent capability gap arising from observed ability, a failed human request, or a recognised mistake;
+- causal responsibility that requires prediction, repetition, intervention, ablation, or contradiction evidence beyond co-activation;
+- an ordinary Nursery and a dedicated Executive Nursery;
+- human stop, denial, correction, clarification, teaching, and permission as a protected control plane separate from reward.
 
 The v0.2 research programme must remain:
 
 - inside `src/seedmind/research/ndnra` until a later integration ADR;
 - deterministic and seeded;
 - software-only and symbolic, with physical robotics deferred;
+- grounded in the Nursery without a pretrained language model or imported task knowledge as the initial cognitive foundation;
 - non-authoritative;
 - non-SQLite for cognition;
 - provenance-preserving;
@@ -73,13 +80,17 @@ The programme must not:
 - introduce autonomous background workers, queues, or timers;
 - persist bounded imagination as real experience;
 - merge proof stores;
-- connect to physical robotic actuators.
+- connect to physical robotic actuators;
+- turn DESA into a hidden task-solving model or mandatory bottleneck;
+- promote causal responsibility from co-activation alone;
+- couple human authority to ordinary reward;
+- create persistent ambition without evidence of a real capability gap.
 
 Production curiosity remains the sole production action authority. The protected external safety supervisor and human permission channels remain authoritative.
 
 ## Current validation baseline
 
-After NDNRA Developmental Network Implementation and Test Plan v0.2:
+After NDNRA DESA Executive Foundation Planning Refinement:
 
 ```text
 ruff format --check .: 237 files already formatted
@@ -90,7 +101,7 @@ pip check: no broken requirements
 git diff --check: passed
 ```
 
-The planning documents passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
+The DESA planning refinement passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
 
 ## Current technical sources
 
@@ -117,15 +128,20 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md`
 - `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-The first authorised implementation boundary is Stage 0 followed by Stage 1 only:
+The first authorised implementation boundary is Stage -1 and Stage 0 contracts, followed by Stage 1 and Stage 1A in separate bounded batches:
 
 ```text
-v0.2 typed contracts and lifecycle identities
+developmental constitution and ordinary and Executive Nursery curricula
+    +
+DESA hierarchy, event partitioning, metacognition, capability-gap, causal, and authority contracts
+    +
+v0.2 lifecycle identities and schema separation
     +
 reusable sparse recurrent neuron pool
     +
@@ -134,13 +150,24 @@ excitatory and inhibitory connections
 distributed experience coalitions
     +
 deterministic bounded recurrent settling
+    +
+DESA bootstrap and hierarchical metacognition
 ```
+
+Stage -1 must prove at the contract and scenario level:
+
+1. DESA is a hierarchy rather than one all-knowing captain.
+2. Event open, continue, split, nest, relate, and close operations preserve the exact raw chronological stream.
+3. The ordinary Nursery teaches grounded cognition and the Executive Nursery teaches partitioning, routing, delegation, escalation, causal investigation, confidence calibration, authority, and help-seeking.
+4. Capability gaps preserve whether they came from observed ability, a failed request, or a recognised mistake.
+5. Human authority remains separate from reward.
+6. DESA contains no task solution, pretrained language model, imported task knowledge, or external action authority.
 
 Stage 0 must prove:
 
 1. v0.2 identities and schemas cannot be confused with the closed v0.1 persistence boundary.
-2. Neuron, connection, region, experience, coalition, need, context, proposal, and outcome identities serialise deterministically.
-3. Active, resting, dormant, dream-active, protected, and relearning lifecycle transitions are explicit and invalid transitions fail.
+2. Cognitive, DESA, metacognitive, capability-gap, ambition, authority, and causal-responsibility identities serialise deterministically.
+3. Lifecycle transitions are explicit and invalid transitions fail.
 4. Existing v0.1 tests remain unchanged and pass.
 5. No runtime adapter or action gateway connection is introduced.
 
@@ -154,7 +181,18 @@ Stage 1 must prove:
 6. Structural neuron creation remains disabled.
 7. SQLite cognition and action-authority violations remain zero.
 
-Do not begin simultaneous multiple-need work, developmental maturity, dream maintenance, conscience, or action proposals until the Stage 1 substrate passes its gate.
+Stage 1A must prove:
+
+1. Familiar low-risk work can resolve locally while uncertainty and conflict escalate.
+2. Several regional captains can contribute without one region monopolising unfamiliar input.
+3. DESA routing beats shuffled routing and a single-central-captain control on usefulness, interference, or compute cost.
+4. Confidence calibration beats raw maximum activation.
+5. The Executive Auditor can identify a wrong DESA decision from independent later evidence.
+6. Event partitioning improves reusable recall over one-session and every-step controls.
+7. Temporary capability gaps remain grounded and non-authoritative.
+8. External side effects and production action-authority violations remain zero.
+
+Do not begin broad associative recall, simultaneous multiple-need work, mature ambition commitment, dream maintenance, conscience-guided proposals, or action-gateway work until Stage 1A passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 
