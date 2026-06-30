@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA DESA Executive Foundation Planning Refinement
+- Latest completed milestone: NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: NDNRA DESA Executive Foundation Planning Refinement
-- Current stage: Developmental Network v0.2 — Stage -1 developmental constitution, DESA, and Nursery curricula
-- Current status: No known architecture gap blocks bounded implementation; Stage -1, Stage 0, Stage 1, and Stage 1A must establish and test the organising seed before broader cognitive mechanisms begin
+- Last closed stage: NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement
+- Current stage: Developmental Network v0.2 — Stage -1 developmental constitution, desired-state ambition, adaptive DESA, and skill-bundle contracts
+- Current status: The latest theory corrections are now reflected in the governing plan; implementation must begin with the updated Stage -1 contracts before recurrent-network work
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
@@ -49,10 +49,15 @@ The accepted post-v0.1 theory is:
 - exact restoration of the same developmental network after restart;
 - protected prohibitions plus directly taught and experience-refined responsibility;
 - typed internal action proposals separated from an external protected action gateway;
-- a multi-level Developmental Executive Steward Architecture (DESA) with local monitors, skill stewards, regional captains, a cross-region executive council, an independent Executive Auditor, and constitutional authority;
+- a minimal adaptive Developmental Executive Steward Architecture (DESA) with skill-local monitors, regional captains, a cross-region executive council, an independent Executive Auditor, constitutional authority, and optional evidence-gated intermediate stewards;
 - DESA-managed event partitioning over a preserved raw chronological stream;
-- ambition as a persistent capability gap arising from observed ability, a failed human request, or a recognised mistake;
+- ambition as persistent pressure toward a valued desired state supplied by Nursery purpose, trusted teaching, mature prompts, or purpose-compatible positive outcomes;
+- capability gaps as separate obstacle evidence from observed ability, failed requests, and recognised mistakes;
+- automatically incubated skill bundles containing a producer, expected-outcome model, verifier, termination model, feedback, and calibration history;
+- developmental Outcome Fidelity that learns domain-specific verification from grounded feedback and preserves pending or unverified states;
+- bounded producer-verifier iteration controlled by DESA;
 - causal responsibility that requires prediction, repetition, intervention, ablation, or contradiction evidence beyond co-activation;
+- learned Deterrence plus protected engineering controls for reward, evidence, feedback, verifier, evaluation-window, and audit integrity;
 - an ordinary Nursery and a dedicated Executive Nursery;
 - human stop, denial, correction, clarification, teaching, and permission as a protected control plane separate from reward.
 
@@ -82,15 +87,20 @@ The programme must not:
 - merge proof stores;
 - connect to physical robotic actuators;
 - turn DESA into a hidden task-solving model or mandatory bottleneck;
+- keep an intermediate management layer that adds no measurable benefit;
+- treat capability gaps as the complete definition or value source of ambition;
+- let producer-verifier agreement certify success without grounded feedback;
+- convert unavailable feedback into success instead of pending or unverified outcome state;
+- allow ambition to manipulate reward, evidence, feedback, verifier state, evaluation scope, or audit history;
 - promote causal responsibility from co-activation alone;
 - couple human authority to ordinary reward;
-- create persistent ambition without evidence of a real capability gap.
+- create persistent ambition without an accepted desired-state source.
 
 Production curiosity remains the sole production action authority. The protected external safety supervisor and human permission channels remain authoritative.
 
 ## Current validation baseline
 
-After NDNRA DESA Executive Foundation Planning Refinement:
+After NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement:
 
 ```text
 ruff format --check .: 237 files already formatted
@@ -101,7 +111,7 @@ pip check: no broken requirements
 git diff --check: passed
 ```
 
-The DESA planning refinement passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
+The adaptive-skill planning refinement passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
 
 ## Current technical sources
 
@@ -129,6 +139,7 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
 
 ## Next implementation target
 
@@ -139,7 +150,11 @@ The first authorised implementation boundary is Stage -1 and Stage 0 contracts, 
 ```text
 developmental constitution and ordinary and Executive Nursery curricula
     +
-DESA hierarchy, event partitioning, metacognition, capability-gap, causal, and authority contracts
+desired-state value-source, ambition, capability-gap, and integrity contracts
+    +
+minimal adaptive DESA hierarchy, event partitioning, and metacognition
+    +
+skill-bundle, developmental Outcome Fidelity, and feedback-iteration contracts
     +
 v0.2 lifecycle identities and schema separation
     +
@@ -156,17 +171,20 @@ DESA bootstrap and hierarchical metacognition
 
 Stage -1 must prove at the contract and scenario level:
 
-1. DESA is a hierarchy rather than one all-knowing captain.
-2. Event open, continue, split, nest, relate, and close operations preserve the exact raw chronological stream.
-3. The ordinary Nursery teaches grounded cognition and the Executive Nursery teaches partitioning, routing, delegation, escalation, causal investigation, confidence calibration, authority, and help-seeking.
-4. Capability gaps preserve whether they came from observed ability, a failed request, or a recognised mistake.
-5. Human authority remains separate from reward.
-6. DESA contains no task solution, pretrained language model, imported task knowledge, or external action authority.
+1. DESA begins with skill bundles, regional captains, and a cross-region council rather than one all-knowing captain or a fixed bureaucracy.
+2. An intermediate skill steward is optional and survives only when its measured benefit justifies its cost.
+3. Event open, continue, split, nest, relate, and close operations preserve the exact raw chronological stream.
+4. The ordinary Nursery teaches grounded cognition, desired-state ambition, curiosity, feedback, and temporary skill formation; the Executive Nursery teaches partitioning, routing, incubation, delegation, escalation, verifier calibration, causal investigation, integrity protection, authority, and help-seeking.
+5. Ambition preserves an accepted desired state while capability gaps preserve separate obstacle evidence from observed ability, failed requests, or recognised mistakes.
+6. Temporary skill bundles represent producer, expected outcome, verifier, termination, feedback, and calibration without predefined domain knowledge.
+7. Producer-verifier agreement alone cannot certify success; unavailable feedback preserves pending or unverified outcome state.
+8. Human authority remains separate from reward, and reward/evidence/verifier integrity is protected.
+9. DESA contains no task solution, pretrained language model, imported task knowledge, or external action authority.
 
 Stage 0 must prove:
 
 1. v0.2 identities and schemas cannot be confused with the closed v0.1 persistence boundary.
-2. Cognitive, DESA, metacognitive, capability-gap, ambition, authority, and causal-responsibility identities serialise deterministically.
+2. Cognitive, DESA, value-source, desired-state ambition, capability-gap, skill-bundle, verifier, outcome-state, authority, integrity, and causal-responsibility identities serialise deterministically.
 3. Lifecycle transitions are explicit and invalid transitions fail.
 4. Existing v0.1 tests remain unchanged and pass.
 5. No runtime adapter or action gateway connection is introduced.
@@ -185,14 +203,17 @@ Stage 1A must prove:
 
 1. Familiar low-risk work can resolve locally while uncertainty and conflict escalate.
 2. Several regional captains can contribute without one region monopolising unfamiliar input.
-3. DESA routing beats shuffled routing and a single-central-captain control on usefulness, interference, or compute cost.
-4. Confidence calibration beats raw maximum activation.
-5. The Executive Auditor can identify a wrong DESA decision from independent later evidence.
-6. Event partitioning improves reusable recall over one-session and every-step controls.
-7. Temporary capability gaps remain grounded and non-authoritative.
-8. External side effects and production action-authority violations remain zero.
+3. Minimal DESA routing beats shuffled routing and a single-central-captain control on usefulness, interference, or compute cost.
+4. An optional intermediate steward survives only when it improves a declared benefit metric without unacceptable cost.
+5. A temporary skill bundle learns from grounded feedback more reliably than producer self-verification.
+6. Confidence and verifier calibration beat raw maximum activation and producer confidence.
+7. The Executive Auditor can identify a wrong DESA or verifier decision from independent later evidence.
+8. Event partitioning improves reusable recall over one-session and every-step controls.
+9. Temporary ambitions preserve their desired-state source separately from capability-gap evidence.
+10. Pending or unavailable feedback remains unverified rather than successful.
+11. External side effects and production action-authority violations remain zero.
 
-Do not begin broad associative recall, simultaneous multiple-need work, mature ambition commitment, dream maintenance, conscience-guided proposals, or action-gateway work until Stage 1A passes.
+Do not begin broad associative recall, simultaneous multiple-need work, mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 1A passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 

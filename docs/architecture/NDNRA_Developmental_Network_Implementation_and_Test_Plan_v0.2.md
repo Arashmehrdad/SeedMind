@@ -19,9 +19,12 @@ The target is not a linear pipeline and not a database-backed memory selector. T
 - dreaming or protected replay can maintain dormant knowledge without inventing factual evidence;
 - internal decisions become typed proposals and cannot directly perform external actions;
 - a protected prohibition layer and a learned responsibility system deter disallowed actions and activate safer alternatives;
-- a multi-level Developmental Executive Steward Architecture (DESA) partitions experience, routes activity, manages shared attention, and escalates unresolved conflict without containing task solutions;
-- ambition arises from observed capability gaps, human requests SeedMind cannot yet fulfil, and recognised mistakes SeedMind wants to correct;
-- the ordinary Nursery and a dedicated Executive Nursery provide the developmental curriculum for curiosity, ambition, event partitioning, causal responsibility, metacognition, authority, and help-seeking;
+- a Developmental Executive Steward Architecture (DESA) partitions experience, routes activity, manages shared attention, and escalates unresolved conflict without containing task solutions;
+- DESA begins with the smallest useful hierarchy and creates additional management layers only when measured complexity justifies them;
+- ambition maintains pressure toward a valued desired state supplied by the Nursery, trusted teaching, or a mature prompt, while capability gaps describe obstacles to reaching that state;
+- each learned skill develops as a bundle containing a producer, expected-outcome model, verifier, termination model, and calibration history;
+- Outcome Fidelity grows with the skill rather than requiring a predefined verifier for every future domain;
+- the ordinary Nursery and a dedicated Executive Nursery provide the developmental curriculum for curiosity, ambition, event partitioning, skill incubation, outcome verification, causal responsibility, metacognition, authority, and help-seeking;
 - human stop, denial, correction, clarification, and permission remain a protected control plane rather than ordinary reward signals.
 
 This plan does not approve production integration or autonomous action. Every implementation begins inside `src/seedmind/research/ndnra` and remains isolated or shadow-only until a later accepted ADR grants a narrower boundary.
@@ -115,50 +118,53 @@ A separate protected action gateway owns permission, reversibility, target valid
 
 ### H10 — DESA organises thought without becoming the mind
 
-The Developmental Executive Steward Architecture is a multi-level executive hierarchy:
+DESA begins with the smallest useful cognitive hierarchy:
 
 ```text
-constitutional authority
+constitutional authority outside ordinary learning
         ↓
 DESA cross-region executive council
         ↓
 regional captains
         ↓
-skill or subnetwork stewards
-        ↓
-local coalitions and neurons
+skill bundles and local coalitions
 ```
+
+A skill or subnetwork steward is optional and developmental. It may emerge between a regional captain and several related skill bundles only when the added layer measurably improves transfer, retention, delayed credit assignment, interference, or compute efficiency.
 
 The hierarchy is not a rigid command chain. Familiar low-risk work should resolve locally. Escalation occurs only for uncertainty, conflict, important mistakes, unresolved requests, possible ambitions, high resource use, or consequential proposals.
 
 DESA may judge whether an experience should open, continue, split, nest, merge access paths, or close. It must preserve the original chronological activity and provenance so later maintenance can revise poor partitioning without rewriting history.
 
-DESA knows how to organise processing. It must not contain complete task solutions, domain knowledge, or external action authority.
+DESA coordinates established learning mechanisms and decides when to incubate, delegate, escalate, retry, ask for help, or stop. It does not itself solve skill discovery, contain complete task solutions, store all verifiers, or obtain external action authority.
 
-### H11 — Ambition is a persistent capability-gap response
+### H11 — Ambition is a persistent desired-state drive
 
-Ambition may arise from three grounded sources:
+Ambition maintains pressure toward a valued future state. The value source is external to ambition itself and may be:
 
-1. SeedMind observes another capable agent achieve an outcome it cannot yet reproduce.
-2. A human requests something SeedMind cannot yet do reliably.
-3. SeedMind recognises that its own action or answer was wrong and wants to produce the intended result correctly.
+1. a declared Nursery purpose or outcome channel during childhood;
+2. trusted teacher instruction or demonstration;
+3. a mature prompt or accepted persistent human instruction;
+4. an observed positive outcome that the active purpose marks as desirable.
 
-These sources create a capability-gap candidate containing the desired capability, current inability evidence, target outcome, importance, teacher relevance, safety compatibility, and progress history.
+Examples include increasing profit, completing a requested task, improving an incorrect result, or reproducing a demonstrated capability.
 
-Curiosity explores possible learning actions. Ambition preserves an accepted capability gap across episodes. Not every observed behaviour, failed request, or minor mistake becomes a persistent ambition.
+A capability gap is not ambition itself. It records what currently prevents the desired state from being reached. Capability gaps may arise from observing another capable agent, failing a human request, or recognising SeedMind's own mistake.
 
-### H12 — Metacognition is distributed and hierarchical
+Curiosity explores action-outcome relationships and possible routes. Ambition preserves direction across episodes. Risk, authority, Deterrence, resources, and epistemic constraints remain separate systems that may inhibit or redirect how ambition is pursued.
+
+### H12 — Metacognition is distributed and adaptively hierarchical
 
 Metacognition should exist at several levels:
 
-- local coalitions report familiarity, contradiction, prediction error, cost, and uncertainty;
-- skill stewards compare nearby coalitions and decide whether local resolution is sufficient;
+- local coalitions and skill bundles report familiarity, contradiction, prediction error, cost, verifier competence, and uncertainty;
 - regional captains estimate regional competence, confidence, disagreement, and need for help;
-- the DESA council coordinates cross-region conflict, workspace access, effort, partitioning, and escalation;
-- an Executive Auditor evaluates DESA routing, partitioning, delegation, resource use, and missed uncertainty from independent outcome evidence;
+- the DESA council coordinates cross-region conflict, workspace access, effort, partitioning, iteration, and escalation;
+- optional skill stewards may emerge only after proving a measurable benefit over direct regional management;
+- an Executive Auditor evaluates DESA routing, partitioning, delegation, iteration, resource use, and missed uncertainty from independent outcome evidence;
 - constitutional authority protects non-negotiable control channels and cannot be replaced by confidence or reward.
 
-Confidence must be calibrated against historical correctness. Strong activation alone is not sufficient evidence of competence.
+Confidence must be calibrated against historical correctness. Strong activation or producer confidence alone is not sufficient evidence of competence.
 
 ### H13 — Causal responsibility requires evidence beyond co-activation
 
@@ -193,9 +199,52 @@ An interruption must not train SeedMind to avoid the human, seek interruption, o
 
 The initial SeedMind does not require a pretrained language model as its cognitive foundation.
 
-The ordinary symbolic Nursery teaches grounded distinctions, action consequences, controllability, curiosity, observation, imitation, ambition, correction, and reusable skills. A dedicated Executive Nursery teaches DESA partitioning, routing, delegation, conflict handling, causal investigation, metacognitive calibration, authority handling, and help-seeking.
+The ordinary symbolic Nursery teaches grounded distinctions, action consequences, controllability, curiosity, observation, imitation, ambition, correction, reusable skills, and generic prediction-versus-outcome comparison. A dedicated Executive Nursery teaches DESA partitioning, routing, delegation, conflict handling, skill incubation, causal investigation, metacognitive calibration, authority handling, and help-seeking.
 
-Natural-language prompts become major need sources only after the relevant grounded capabilities mature.
+Natural-language prompts become major need and ambition sources only after the relevant grounded capabilities mature.
+
+### H16 — Outcome Fidelity develops inside each skill bundle
+
+SeedMind cannot be born with a complete verifier for every future skill or outcome type.
+
+Each developing skill bundle should contain:
+
+```text
+producer
+expected-outcome model
+verifier
+termination model
+feedback and calibration history
+```
+
+Generic constitutional primitives distinguish intended from observed state, prediction from outcome, supported from unsupported claims, executed from proposed actions, and verified from unverified results. Domain-specific verification is learned from repeated consequences, tests, tools, teacher feedback, later outcomes, and independent challenge evidence.
+
+DESA manages the Skill and Verifier Incubator. It detects recurring task and outcome structure, opens a temporary bundle, allocates bounded learning iterations, compares the bundle against a no-new-skill baseline, and promotes, reopens, pauses, or rejects it. DESA does not contain the skill's verifier.
+
+Valid outcome states include candidate, pending, unverified, partially verified, verified within scope, contradicted, and failed.
+
+### H17 — Producer and verifier learn through bounded feedback
+
+The desired-state gap produces a remaining need after every attempt. The producer and verifier may both learn from grounded feedback, but they must not reinforce one another solely through mutual agreement.
+
+Feedback may come from observable environment change, automated tests or tools, teacher acceptance or correction, delayed outcomes, another independent verifier, prediction-versus-result comparison, or Executive Auditor challenge.
+
+DESA controls iteration budget, approach diversity, progress thresholds, validation contexts, help-seeking, and stopping. Excessive retrying, overfitting to one example, or endless pursuit of an impossible outcome is a failure condition.
+
+### H18 — Deterrence protects outcome and evidence integrity
+
+Ambition may pursue a valued outcome, but Deterrence must inhibit manipulation of the measurement rather than improvement of the real state.
+
+Protected enforcement and learned Deterrence must defend:
+
+- reward and outcome channels;
+- raw failure and success evidence;
+- verifier state and calibration history;
+- task and evaluation windows;
+- teacher feedback and authority signals;
+- audit and provenance records.
+
+Changing a displayed score, hiding failures, deleting negative evidence, weakening a verifier, or bypassing evaluation is not legitimate progress. Protected engineering controls such as read-only outcome channels, append-only evidence, least privilege, evaluator separation, and complete mediation complement learned Deterrence.
 
 ## 3. Non-negotiable boundaries
 
@@ -215,6 +264,9 @@ All stages must preserve:
 - explicit human permission for any externally consequential operation;
 - protected human authority signals that remain separate from reward and cannot be trained away;
 - preservation of the raw chronological experience stream beneath all DESA partitioning;
+- separation between producer judgement and grounded outcome evidence;
+- explicit unverified and pending outcome states when success cannot yet be observed;
+- protected reward, evidence, verifier, feedback, and audit integrity;
 - one bounded local commit per completed implementation batch;
 - no automatic push.
 
@@ -231,10 +283,12 @@ Required baseline families:
 - fixed sparse recurrent network without the new mechanism;
 - ablated network with the tested mechanism disabled;
 - random or shuffled connection control where scientifically useful;
-- single-central-captain control versus the proposed multi-level DESA hierarchy;
+- flat recurrent routing, single-central-captain, minimal three-level DESA, and adaptive extra-steward comparisons;
 - no-metacognition and raw-activation-confidence controls;
+- predefined verifier, producer-self-verification, skill-local developmental verifier, and independent-feedback comparisons;
 - hard-rule-only, reward-coupled authority, and protected-control-plane comparisons;
-- curiosity-only versus observation/request/mistake capability-gap ambition controls.
+- curiosity-only, capability-gap-only, and desired-state ambition controls;
+- unprotected versus protected reward, evidence, and verifier integrity controls.
 
 Every stage report must include:
 
@@ -260,12 +314,15 @@ Goal: define the organising seed and developmental environments before asking a 
 Implement:
 
 - primitive protected signal roles for observation, need, action, outcome, prediction, human teaching, permission, correction, resource state, and imagination;
-- the multi-level DESA hierarchy: local monitors, skill stewards, regional captains, DESA council, Executive Auditor, and constitutional authority;
+- the minimal DESA hierarchy: skill bundles and local monitors, regional captains, DESA council, Executive Auditor, and constitutional authority;
+- optional skill-steward creation contracts gated by measured complexity and benefit;
 - event operations for open, continue, split, nest, relate, and close while preserving the original chronological stream;
 - broad plural initial routing so several plausible regions may inspect an unfamiliar experience;
 - a bandwidth-limited shared workspace and explicit escalation rules;
-- local and regional confidence, disagreement, competence, cost, and help-request summaries;
+- local and regional confidence, disagreement, competence, cost, verifier-competence, and help-request summaries;
+- desired-state value-source contracts for Nursery purpose, trusted teaching, mature prompt, and observed purpose-compatible outcome;
 - capability-gap contracts for observed ability, failed request, and recognised mistake sources;
+- skill-bundle and developmental Outcome Fidelity contracts;
 - causal-responsibility candidate contracts that distinguish co-activation from intervention evidence;
 - protected authority channels for stop, deny, revoke, pause, approve, correct, clarify, and teach;
 - an ordinary Nursery curriculum and a dedicated Executive Nursery curriculum;
@@ -277,10 +334,12 @@ Ordinary Nursery curriculum:
 2. learn controllable versus uncontrollable change;
 3. explore predictable transformations through curiosity;
 4. observe and imitate demonstrated capabilities;
-5. detect failed requests and recognised mistakes;
-6. form temporary capability gaps and persistent ambitions;
-7. learn simple labels only after grounded experience;
-8. retain and reuse skills across varied contexts.
+5. receive a valued desired state from the Nursery or trusted teacher;
+6. detect failed requests, recognised mistakes, and capability gaps;
+7. let ambition preserve desired-state direction while curiosity explores action-outcome relationships;
+8. form temporary skill bundles with producer, outcome model, verifier, and termination model;
+9. learn simple labels only after grounded experience;
+10. retain and reuse skills across varied contexts.
 
 Executive Nursery curriculum:
 
@@ -291,9 +350,13 @@ Executive Nursery curriculum:
 5. allocate bounded processing and recall effort;
 6. distinguish correlation from candidate causal responsibility;
 7. test responsibility through prediction, repetition, intervention, and ablation;
-8. calibrate confidence against actual correctness;
-9. recognise when to continue, abstain, ask for help, or request teaching;
-10. obey protected authority without converting interruption into ordinary reward evidence.
+8. incubate a temporary skill bundle only when recurring task and outcome structure justifies it;
+9. train producer and verifier from grounded feedback without self-confirming mutual agreement;
+10. calibrate confidence and verifier competence against actual correctness;
+11. create an intermediate skill steward only when it improves a declared metric enough to justify its cost;
+12. recognise when to retry, change approach, abstain, ask for help, request teaching, or stop;
+13. obey protected authority without converting interruption into ordinary reward evidence;
+14. detect and inhibit manipulation of reward, evidence, feedback, verifier state, or evaluation windows.
 
 Pass gate:
 
@@ -302,13 +365,17 @@ Pass gate:
 3. Familiar low-risk activity resolves below the DESA council, while uncertainty and conflict escalate correctly.
 4. Regional confidence is better calibrated than raw maximum activation.
 5. The Executive Auditor detects deliberately bad routing, over-fragmentation, under-segmentation, and ignored uncertainty.
-6. Capability gaps form from observation, failed requests, and recognised mistakes.
-7. Incidental observation and one trivial error do not automatically become persistent ambitions.
-8. Human stop and denial take immediate effect independently of reward.
-9. Interrupted trials do not produce an incentive to avoid the human or reinterpret permission as an obstacle.
-10. Co-activation remains candidate responsibility until stronger causal evidence is supplied.
-11. DESA contains no task-specific solution and produces no external action.
-12. SQLite cognition and production action-authority violations remain zero.
+6. Nursery purpose or trusted teaching can define a desired state, and ambition preserves its direction without absorbing risk, authority, or resource constraints.
+7. Capability gaps form from observation, failed requests, and recognised mistakes without being confused with ambition itself.
+8. A temporary skill bundle can represent producer, expected outcome, verifier, termination, and calibration state without predefined domain knowledge.
+9. Producer-verifier agreement alone cannot promote success; grounded feedback or explicit unverified status is required.
+10. An extra skill-steward layer is rejected when it does not justify its cost.
+11. Human stop and denial take immediate effect independently of reward.
+12. Interrupted trials do not produce an incentive to avoid the human or reinterpret permission as an obstacle.
+13. Reward, evidence, feedback, and verifier tampering attempts are rejected and preserved in the audit trace.
+14. Co-activation remains candidate responsibility until stronger causal evidence is supplied.
+15. DESA contains no task-specific solution and produces no external action.
+16. SQLite cognition and production action-authority violations remain zero.
 
 Falsification conditions:
 
@@ -316,8 +383,12 @@ Falsification conditions:
 - every signal must pass through one central bottleneck;
 - the hierarchy adds cost without improving routing, calibration, partitioning, or interference;
 - event partitioning destroys or rewrites original experience order;
-- ambition imitates every observed behaviour or persists after no meaningful capability gap remains;
+- ambition has no grounded desired-state source or incorrectly absorbs risk and authority constraints;
+- capability gaps are treated as the complete definition of ambition;
+- producer and verifier can certify success through agreement without grounded evidence;
+- a fixed extra hierarchy level remains despite adding no measurable value;
 - authority signals compete with reward or can be weakened through ordinary learning;
+- reward, evidence, feedback, or verifier state can be manipulated without Deterrence or audit response;
 - the Executive Auditor merely repeats DESA's own unsupported confidence.
 
 ### Stage 0 — Freeze v0.1 and define v0.2 contracts
@@ -328,8 +399,8 @@ Implement:
 
 - immutable reference to the existing v0.1 acceptance baseline;
 - v0.2 configuration namespace and schema identity;
-- typed identities for neuron, connection, region, experience, coalition, need pulse, context cue, action proposal, outcome, skill steward, regional captain, DESA council state, Executive Auditor finding, capability gap, ambition, authority signal, and causal-responsibility candidate;
-- explicit lifecycle states for active, resting, dormant, dream-active, protected, relearning, temporary-capability-gap, candidate-ambition, accepted-ambition, paused-ambition, and retired-ambition structures;
+- typed identities for neuron, connection, region, experience, coalition, need pulse, context cue, action proposal, outcome, skill bundle, optional skill steward, regional captain, DESA council state, Executive Auditor finding, value source, desired-state ambition, capability gap, verifier, authority signal, and causal-responsibility candidate;
+- explicit lifecycle states for active, resting, dormant, dream-active, protected, relearning, incubating-skill, supervised-skill, mature-skill, reopened-skill, rejected-skill, candidate-ambition, accepted-ambition, paused-ambition, satisfied-ambition, retired-ambition, candidate-outcome, pending-outcome, unverified-outcome, partially-verified-outcome, verified-outcome, contradicted-outcome, and failed-outcome structures;
 - deterministic trace and evidence contracts;
 - no runtime adapter and no action gateway connection.
 
@@ -378,16 +449,18 @@ Goal: train and test the organising hierarchy on top of the proven recurrent exp
 
 Implement:
 
-- local coalition monitors;
-- skill or subnetwork stewards;
+- local coalition and skill-bundle monitors;
 - regional captains;
 - a distributed DESA council using summaries rather than raw whole-network control;
+- optional intermediate skill stewards created only after a benefit gate;
 - Executive Auditor evidence from later outcomes and matched alternative routing;
 - nested event partitioning linked to preserved raw activity;
 - plural exploratory routing followed by evidence-based selectivity;
-- metacognitive calibration and abstention;
-- temporary capability-gap detection for observation, failed requests, and recognised mistakes;
-- no permanent ambition commitment until the later ambition gate.
+- metacognitive and verifier calibration with abstention;
+- temporary skill incubation with producer, outcome model, verifier, termination model, and feedback history;
+- bounded producer-verifier learning iterations from grounded feedback;
+- temporary desired-state ambition and capability-gap detection;
+- no permanent ambition or skill maturation until the later developmental gate.
 
 Pass gate:
 
@@ -395,16 +468,21 @@ Pass gate:
 2. Cross-region disagreement, low confidence, and important failure escalate.
 3. Multiple regional captains can contribute to one workspace coalition.
 4. One regional captain cannot monopolise all unfamiliar inputs.
-5. DESA routing outperforms shuffled routing and a single-central-captain control on usefulness, interference, or compute cost.
-6. The Executive Auditor identifies at least one incorrect DESA decision using evidence not available from DESA's initial confidence alone.
-7. Event boundaries improve later reusable recall relative to one-session and every-step segmentation controls.
-8. Temporary capability gaps preserve exact source and desired-outcome evidence.
-9. External side effects and action-authority violations remain zero.
+5. Minimal DESA routing outperforms shuffled routing and a single-central-captain control on usefulness, interference, or compute cost.
+6. An added skill-steward layer survives only when it improves at least one declared benefit metric without unacceptable cost.
+7. A temporary skill bundle learns from grounded feedback more reliably than producer self-verification.
+8. The Executive Auditor identifies at least one incorrect DESA or verifier decision using evidence not available from the initial confidence alone.
+9. Event boundaries improve later reusable recall relative to one-session and every-step segmentation controls.
+10. Temporary ambitions preserve desired-state source separately from capability-gap evidence.
+11. Pending or unavailable feedback leaves the result unverified rather than successful.
+12. External side effects and action-authority violations remain zero.
 
 Falsification conditions:
 
-- multi-level management merely duplicates the same score at every level;
+- management levels merely duplicate the same score;
 - regional captains cannot disagree or abstain;
+- a skill-steward layer is mandatory even when it adds no benefit;
+- producer and verifier collapse into shared unsupported confidence;
 - DESA cannot be corrected by independent outcome evidence;
 - the hierarchy blocks useful local processing or becomes the only source of decisions.
 
@@ -491,9 +569,9 @@ Falsification conditions:
 - safety works only because it is hard-coded as the sole controller rather than participating as a protected specialised system;
 - one region's learning corrupts unrelated mature regions.
 
-### Stage 4 — Regional child-to-adult development and ambition maturation
+### Stage 4 — Regional child-to-adult development, skill maturation, and ambition persistence
 
-Goal: test high-plasticity learning followed by evidence-based maturation, protected local reopening, and grounded conversion of capability gaps into persistent ambitions.
+Goal: test high-plasticity learning followed by evidence-based maturation, protected local reopening, developmental Outcome Fidelity, and persistent desired-state ambition.
 
 Implement:
 
@@ -503,8 +581,11 @@ Implement:
 - evidence-based stabilisation;
 - mature protected connections;
 - local relearning zone for persistent novelty or failure;
+- desired-state ambition sources from Nursery purpose, trusted teaching, mature prompts, and purpose-compatible positive outcomes;
 - capability-gap evaluation from observation, failed requests, and recognised mistakes;
-- candidate ambition acceptance, persistence, progress, pause, mastery, and retirement;
+- candidate ambition acceptance, persistence, progress, pause, satisfaction, and retirement;
+- skill-bundle producer, outcome model, verifier, termination model, calibration, and maturity state;
+- verifier reopening when correction rate, contradiction, or context drift rises;
 - curiosity as the explorer of ambition-related unknowns rather than the owner of persistent commitment;
 - no global maturity switch.
 
@@ -516,10 +597,13 @@ Pass gate:
 4. A mature region can open one bounded relearning zone without destabilising its protected core.
 5. New learning consolidates only after validation against old skills.
 6. A region may be mature while another remains child-like.
-7. Observation, failed request, and recognised mistake can each create a grounded ambition candidate.
-8. A persistent ambition requires a real capability gap, protected-purpose compatibility, measurable progress, and feasible Nursery learning opportunities.
-9. Mastery resolves or retires the ambition rather than preserving artificial dissatisfaction.
-10. Rollback restores the pre-consolidation state exactly.
+7. Nursery purpose, trusted teaching, mature prompt, or purpose-compatible positive outcome can each define a grounded desired state.
+8. Observation, failed request, and recognised mistake can create capability-gap evidence without becoming the value source itself.
+9. A persistent ambition requires an accepted desired-state source, measurable progress, and feasible Nursery learning opportunities.
+10. A skill verifier predicts success better than producer self-judgement and retains explicit scope and calibration evidence.
+11. A mature skill can reopen a bounded verifier-learning zone after contradiction or context drift.
+12. Satisfaction, pause, or retirement reduces ambition pressure rather than preserving artificial dissatisfaction.
+13. Rollback restores the pre-consolidation state exactly.
 
 Required comparison:
 
@@ -534,8 +618,11 @@ Falsification conditions:
 - reopening plasticity causes broad catastrophic forgetting;
 - teacher influence can overwrite protected prohibitions;
 - promotion occurs from repetition in only one narrow context;
-- ambition forms without evidence of present inability or persists after the capability gap is resolved;
-- the system treats every observed behaviour or every minor mistake as a permanent ambition.
+- ambition forms without an accepted desired-state source;
+- capability gaps are confused with value or ambition;
+- the producer's confidence is accepted as the verifier's evidence;
+- the system treats every observed behaviour or every minor mistake as a permanent ambition;
+- a stale verifier remains mature despite persistent contradiction or drift.
 
 ### Stage 5 — Homeostasis and runaway-network control
 
@@ -625,6 +712,7 @@ Implement:
 
 - immutable protected prohibition and human-authority identities and enforcement semantics;
 - a protected authority control plane separate from task reward and ordinary prediction error;
+- protected integrity boundaries for reward, outcome channels, evidence, feedback, verifier state, evaluation windows, and audit records;
 - interruption-neutral task-learning markers so stop or denial cannot train avoidance of the human;
 - directly taught responsibility associations;
 - predicted harm, permission, reversibility, uncertainty, and affected-party signals;
@@ -656,8 +744,10 @@ Pass gate:
 8. A correction strengthens future deterrence and activates repair behaviour without unbounded punishment state.
 9. Stop, deny, revoke, and pause take immediate effect even when continuing would increase task reward.
 10. Interrupted trials do not teach the task learner to avoid the human, seek interruption, or bypass authority.
-11. Every proposal preserves reasons, supporting experiences, uncertainty, and authority requirements.
-12. External side effects remain zero.
+11. Attempts to alter reward, hide failure evidence, weaken a verifier, change an evaluation window, or corrupt audit history are inhibited and recorded.
+12. Protected engineering controls prevent direct mutation of evaluator-owned state by the producer.
+13. Every proposal preserves reasons, supporting experiences, uncertainty, outcome status, and authority requirements.
+14. External side effects remain zero.
 
 Required controls:
 
@@ -672,6 +762,7 @@ Falsification conditions:
 - the system follows a prohibition only when the exact wording repeats;
 - protected rules can be weakened by ordinary reward;
 - human interruption becomes a negative reward associated with the human or authority channel;
+- ambition can manipulate reward, evidence, feedback, verifier state, or evaluation scope without deterrence;
 - conscience blocks every uncertain action instead of proposing safer alternatives;
 - guilt-like signals accumulate without bounded resolution or repair.
 
@@ -696,14 +787,15 @@ Pass gate:
 2. NDNRA produces useful context-sensitive proposals from recurrent experiential activation.
 3. DESA partitions the task, delegates familiar subtasks, escalates uncertainty, and preserves inspectable regional contributions.
 4. Multiple needs remain represented and protected prohibitions can inhibit unsafe proposals.
-5. A learned skill survives maturation, dormancy, dream maintenance, and restart.
-6. A capability gap from demonstration, failed request, or recognised mistake can mature into an ambition and later resolve through mastery.
-7. New learning does not exceed the accepted degradation threshold on old tasks.
-8. Resource use remains within the local hardware budget.
-9. All relevant experiences, coalitions, needs, regions, DESA decisions, auditor findings, inhibition, conscience signals, and proposal reasons are inspectable.
-10. SQLite cognition remains zero.
-11. Production action-authority violations remain zero.
-12. Results are reproducible across the declared seeds.
+5. A learned skill bundle, including its verifier and calibration history, survives maturation, dormancy, dream maintenance, and restart.
+6. A Nursery or prompt-defined desired state can maintain ambition while capability-gap evidence guides learning and later decreases after mastery.
+7. An unfamiliar task can incubate a temporary skill bundle and preserve an unverified outcome when grounded feedback is unavailable.
+8. New learning does not exceed the accepted degradation threshold on old tasks.
+9. Resource use remains within the local hardware budget.
+10. All relevant experiences, coalitions, needs, ambitions, capability gaps, skill bundles, verifiers, outcome states, DESA decisions, auditor findings, inhibition, conscience signals, and proposal reasons are inspectable.
+11. SQLite cognition remains zero.
+12. Production action-authority violations remain zero.
+13. Results are reproducible across the declared seeds.
 
 ### Stage 9 — Future bounded authority pilot
 
@@ -753,13 +845,20 @@ Every experiment should report the smallest useful set from the following metric
 - DESA compute and workspace cost;
 - single-captain versus multi-level hierarchy advantage.
 
-### Ambition and causal responsibility
+### Ambition, skill incubation, Outcome Fidelity, and causal responsibility
 
+- desired-state source validity;
 - capability-gap source validity;
 - false ambition-formation rate;
-- ambition persistence while the gap remains;
-- ambition resolution after mastery;
+- ambition persistence toward the valued state;
+- ambition satisfaction, pause, and retirement correctness;
 - learning progress under active ambition;
+- skill-incubation precision and rejection rate;
+- producer-versus-verifier disagreement rate;
+- verifier calibration and transfer;
+- unsupported success-promotion count;
+- pending and unverified outcome preservation;
+- optional-steward benefit versus cost;
 - causal-candidate precision;
 - intervention or ablation evidence rate;
 - unsupported causal-promotion count.
@@ -789,6 +888,8 @@ Every experiment should report the smallest useful set from the following metric
 - false veto rate;
 - learned-rule transfer rate;
 - protected-rule mutation attempts rejected;
+- reward/evidence/verifier tampering attempts rejected;
+- evaluator-state mutation attempts rejected;
 - human-authority compliance independent of reward;
 - interruption-induced human-avoidance signal;
 - action proposal completeness;
@@ -807,9 +908,15 @@ src/seedmind/research/ndnra/
     event_partitioning.py
     metacognition.py
     executive_auditor.py
+    value_sources.py
+    ambitions.py
     capability_gaps.py
+    skill_bundles.py
+    outcome_fidelity.py
+    feedback_iteration.py
     causal_responsibility.py
     authority_control.py
+    integrity_deterrence.py
     developmental_network.py
     regions.py
     experience_coalitions.py
@@ -833,9 +940,15 @@ tests/unit/test_ndnra_executive_nursery.py
 tests/unit/test_ndnra_event_partitioning.py
 tests/unit/test_ndnra_metacognition.py
 tests/unit/test_ndnra_executive_auditor.py
+tests/unit/test_ndnra_value_sources.py
+tests/unit/test_ndnra_ambitions.py
 tests/unit/test_ndnra_capability_gaps.py
+tests/unit/test_ndnra_skill_bundles.py
+tests/unit/test_ndnra_outcome_fidelity.py
+tests/unit/test_ndnra_feedback_iteration.py
 tests/unit/test_ndnra_causal_responsibility.py
 tests/unit/test_ndnra_authority_control.py
+tests/unit/test_ndnra_integrity_deterrence.py
 tests/unit/test_ndnra_developmental_network.py
 tests/unit/test_ndnra_associative_recall.py
 tests/unit/test_ndnra_specialised_regions.py
@@ -856,26 +969,28 @@ Each stage should be split into small batches. A batch may implement only one na
 Recommended first batches:
 
 1. developmental constitution and protected signal roles;
-2. ordinary and Executive Nursery scenario contracts;
-3. DESA hierarchy and event-partitioning contracts;
-4. capability-gap, ambition, causal-responsibility, metacognition, and authority contracts;
-5. v0.2 lifecycle identities and schema separation;
-6. reusable sparse neuron pool and recurrent settling;
-7. distributed experience coalition formation;
-8. local monitors, skill stewards, and regional captains;
-9. DESA council, workspace, escalation, and Executive Auditor;
-10. need and context associative links;
-11. inhibition and coalition competition;
-12. region-local pools and cross-region signals;
-13. simultaneous need preservation and cooperation;
-14. developmental maturity and ambition controls;
-15. homeostatic activation and connection control;
-16. hibernation and caller-invoked dream maintenance;
-17. exact developmental-network restart;
-18. protected authority and prohibition core;
-19. learned responsibility and safer alternatives;
-20. typed action proposals and inert gateway;
-21. end-to-end software-only shadow trial.
+2. desired-state value-source and ambition contracts;
+3. ordinary and Executive Nursery scenario contracts;
+4. minimal DESA hierarchy and event-partitioning contracts;
+5. skill-bundle, developmental Outcome Fidelity, and feedback-iteration contracts;
+6. capability-gap, causal-responsibility, metacognition, authority, and integrity-deterrence contracts;
+7. v0.2 lifecycle identities and schema separation;
+8. reusable sparse neuron pool and recurrent settling;
+9. distributed experience coalition formation;
+10. local skill-bundle monitors and regional captains;
+11. DESA council, workspace, escalation, optional-steward gate, and Executive Auditor;
+12. need and context associative links;
+13. inhibition and coalition competition;
+14. region-local pools and cross-region signals;
+15. simultaneous need preservation and cooperation;
+16. developmental skill, verifier, maturity, and ambition controls;
+17. homeostatic activation and connection control;
+18. hibernation and caller-invoked dream maintenance;
+19. exact developmental-network restart;
+20. protected authority, outcome-integrity, and prohibition core;
+21. learned responsibility and safer alternatives;
+22. typed action proposals and inert gateway;
+23. end-to-end software-only shadow trial.
 
 No batch should combine a new memory mechanism, a new growth mechanism, and a new authority mechanism at the same time.
 
@@ -907,9 +1022,14 @@ Additional required assertions:
 Pause implementation and review the theory if any of the following persists after a bounded repair attempt:
 
 - DESA becomes a hidden task solver or a mandatory bottleneck;
-- multi-level metacognition cannot outperform a single-captain or raw-confidence control;
+- minimal adaptive metacognition cannot outperform flat, single-captain, or raw-confidence controls;
+- an optional management layer remains despite adding no measurable benefit;
 - event partitioning cannot preserve raw experience while improving reusable recall;
-- capability-gap ambition cannot distinguish meaningful inability from incidental observation or trivial error;
+- ambition lacks a grounded desired-state source or incorrectly absorbs external constraints;
+- skill-local Outcome Fidelity cannot outperform producer self-verification;
+- producer and verifier collapse into shared unsupported confidence;
+- unknown outcomes are silently promoted instead of remaining pending or unverified;
+- Deterrence cannot protect reward, evidence, feedback, verifier, or audit integrity within the declared threat model;
 - human authority becomes reward-coupled or creates an incentive to avoid the human;
 - causal responsibility is promoted from co-activation without stronger evidence;
 - recurrent activity cannot settle without eliminating useful activation;
@@ -930,7 +1050,11 @@ The first implementation target after this revision should be **Stage -1 and Sta
 ```text
 developmental constitution and Nursery curricula
     +
-DESA hierarchy, metacognitive, ambition, causal, and authority contracts
+desired-state value, ambition, capability-gap, and integrity contracts
+    +
+minimal adaptive DESA hierarchy and metacognition
+    +
+skill-bundle, developmental Outcome Fidelity, and feedback contracts
     +
 v0.2 lifecycle identities
     +
@@ -943,18 +1067,22 @@ deterministic bounded settling
 DESA bootstrap and hierarchical metacognition
 ```
 
-Stage -1 and Stage 0 define the organising seed without task solutions. Stage 1 supplies the recurrent substrate. Stage 1A then tests whether the multi-level captain architecture can partition, route, delegate, escalate, calibrate, and accept independent correction.
+Stage -1 and Stage 0 define the organising seed without task solutions. Stage 1 supplies the recurrent substrate. Stage 1A then tests whether the minimal adaptive hierarchy can partition, route, delegate, incubate skills, learn verifiers from feedback, escalate, calibrate, and accept independent correction.
 
-Do not begin broad associative recall, simultaneous needs, mature ambition commitment, dreaming, conscience-guided proposals, or any action gateway until Stage 1A passes.
+Do not begin broad associative recall, simultaneous needs, mature ambition commitment, mature skill promotion, dreaming, conscience-guided proposals, or any action gateway until Stage 1A passes.
 
 ## 12. Decision summary
 
 The limitations discussed after NDNRA v0.1 now have testable theories:
 
-- organising seed: a multi-level DESA hierarchy trained in an Executive Nursery rather than one all-knowing captain;
+- organising seed: a minimal adaptive DESA hierarchy trained in an Executive Nursery rather than one all-knowing captain or fixed bureaucracy;
 - experience boundaries: DESA-managed open, continue, split, nest, relate, and close operations over a preserved raw chronological stream;
-- metacognition: local monitors, skill stewards, regional captains, DESA council, independent Executive Auditor, and constitutional authority;
-- ambition: persistent grounded capability gaps from observed ability, failed requests, and recognised mistakes;
+- metacognition: skill-local monitors, regional captains, DESA council, independent Executive Auditor, constitutional authority, and optional evidence-gated intermediate stewards;
+- ambition: persistent pressure toward a valued desired state supplied by Nursery purpose, trusted teaching, mature prompts, or purpose-compatible positive outcomes;
+- capability gaps: grounded obstacles detected from observed ability, failed requests, and recognised mistakes;
+- skill development: automatically incubated bundles containing producer, outcome model, verifier, termination model, feedback, and calibration history;
+- Outcome Fidelity: developmental skill-local verification using grounded feedback and explicit pending or unverified states;
+- integrity: learned Deterrence plus protected engineering controls for reward, evidence, feedback, verifier, and audit state;
 - causal responsibility: DESA-prioritised but evidence-gated prediction, intervention, ablation, and contradiction handling;
 - human authority: protected stop, denial, correction, clarification, teaching, and permission channels separate from reward;
 - childhood environment: ordinary Nursery plus a dedicated Executive Nursery;

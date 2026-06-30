@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T01:06:01.077748+00:00",
+  "generated_at": "2026-06-30T02:05:46.805871+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 330,
+  "source_file_count": 331,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "a829c0bc22f6244d43466f988967d80c7324c108528e235b78a2fd77f33d44f2",
-      "size_bytes": 11668
+      "sha256": "b2d50e5bdd095c4e7df0e32912a5422556d2ad6cb351f2f5f784e4182d8ef751",
+      "size_bytes": 14274
     },
     {
       "path": "pyproject.toml",
@@ -182,8 +182,8 @@
     },
     {
       "path": "docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md",
-      "sha256": "9734a0d12797a7441b19b130d3e68c799c90dfb3e19e591ee4e152c3afcbdaae",
-      "size_bytes": 47556
+      "sha256": "bf98060bf4d4b505f30618daaccf19138872ed704728e9c7b7585e5ac253cee0",
+      "size_bytes": 58821
     },
     {
       "path": "docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md",
@@ -264,6 +264,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md",
       "sha256": "7eeb1c75aadb6e71d01fd0b9267f0a2b94210aae834c29a621963d4f48b4146e",
       "size_bytes": 3167
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md",
+      "sha256": "59a51883e093de2ecaf74e9dfc07242535352b119cce64d1d59461d1d4cfdb62",
+      "size_bytes": 7730
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md",
