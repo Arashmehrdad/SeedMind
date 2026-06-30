@@ -889,6 +889,14 @@ Stage 0 identity, lifecycle, and schema-separation contracts for NDNRA v0.2.
 - Classes: DevelopmentalIdentityKind, DevelopmentalLifecycleState, V01AcceptanceBaselineReference, DevelopmentalSchemaIdentity, DevelopmentalIdentity, StageZeroIdentityCatalog, DevelopmentalLifecycleTransition, DevelopmentalTraceEvent, DevelopmentalEvidenceTrace, StageZeroContractEvidence
 - Functions/symbols: make_developmental_identity, default_stage_zero_identity_catalog, run_stage_zero_contract_acceptance, _validate_index, _validate_positive_int, _validate_zero_int, _validate_ascii_code, _identity, _canonical_json_bytes
 
+## `src/seedmind/research/ndnra/developmental_network.py`
+
+Stage 1 recurrent experiential substrate for NDNRA v0.2 research.
+
+- Kind: python
+- Classes: DevelopmentalNetworkConfig, DevelopmentalNeuronState, DevelopmentalConnectionState, DevelopmentalExperienceEpisode, DevelopmentalCoalition, DevelopmentalRecurrentTraceStep, DevelopmentalReplayResult, DevelopmentalNetworkState, StageOneSubstrateEvidence
+- Functions/symbols: create_developmental_network_state, encode_developmental_episode, replay_developmental_episode, run_stage_one_substrate_acceptance, _build_stage_one_acceptance_state, _coalition_neuron_ids, _bounded_index, _update_neuron, _connections_for_new_coalition, _merge_connections, _incoming_connections, _trace_step, _coalition_scores, _peak_activations, _validate_score_rows, _validate_non_empty_sequence, _validate_index, _validate_positive_int, _validate_non_negative_int, _validate_zero_int, _validate_unit, _validate_unit_open, _validate_signed_unit_nonzero, _validate_ascii_code, _validate_sorted_unique_ascii_codes, _clamp_unit, _identity, _canonical_json_bytes
+
 ## `src/seedmind/research/ndnra/effects.py`
 
 Dynamically expanding sparse effect memory for NDNRA research.
@@ -1529,6 +1537,13 @@ Tests for NDNRA v0.2 Stage 0 identity and lifecycle contracts.
 
 - Kind: python
 - Functions/symbols: _identity, _transition, test_stage_zero_acceptance_matrix_is_complete_and_zero_authority, test_v0_2_schema_identity_cannot_be_confused_with_v0_1_schemas, test_identity_catalog_has_exact_canonical_kind_coverage, test_lifecycle_transitions_are_explicit_deterministic_and_non_authoritative, test_trace_contract_rejects_runtime_gateway_and_sequence_mutations, test_public_exports_cover_stage_zero_contracts, test_developmental_identity_has_no_runtime_adapter_or_gateway_imports
+
+## `tests/unit/test_ndnra_developmental_network.py`
+
+Tests for NDNRA v0.2 Stage 1 recurrent experiential substrate.
+
+- Kind: python
+- Functions/symbols: _episode, test_stage_one_acceptance_matrix_is_complete_and_zero_authority, test_overlapping_episodes_share_neurons_without_merging_identity_or_outcome, test_replay_activates_target_coalition_more_than_unrelated, test_contradictory_contexts_create_inhibitory_connections_without_erasing_details, test_fixed_seed_reconstructs_same_state_and_different_seed_changes_it, test_substrate_rejects_structural_neuron_creation_and_full_pool_coalitions, test_episode_encoding_is_deterministic_and_duplicate_safe, test_public_exports_cover_stage_one_substrate, test_developmental_network_has_no_forbidden_runtime_dependencies
 
 ## `tests/unit/test_ndnra_human_approved_consolidation_execution_acceptance.py`
 

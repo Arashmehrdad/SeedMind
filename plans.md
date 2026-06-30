@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 0 identity and lifecycle contracts
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 1 recurrent experiential substrate
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 0 v0.2 identity, lifecycle, trace, and schema-separation contracts
-- Current stage: Developmental Network v0.2 — Stage 1 persistent recurrent experiential substrate
-- Current status: Stage 0 contracts are implemented and evidenced locally; Stage 1 may now define the reusable sparse recurrent neuron pool, excitatory and inhibitory connections, distributed experience coalitions, and deterministic bounded settling without persistence implementation, runtime adapter, action gateway, SQLite cognition, structural neuron creation, or production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 1 persistent recurrent experiential substrate
+- Current stage: Developmental Network v0.2 — Stage 1A DESA bootstrap and hierarchical metacognition
+- Current status: Stage 1 substrate behavior is implemented and evidenced locally; Stage 1A may now test local monitors, regional captains, DESA council summaries, optional steward gates, Executive Auditor evidence, event partitioning, temporary skill incubation, verifier calibration, temporary ambition, and bounded feedback iteration over the Stage 1 substrate without broad associative recall, simultaneous needs, mature skill promotion, dreaming, action gateway work, SQLite cognition, or production action authority
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
@@ -34,6 +34,7 @@ Completed bounded increments:
 8. Batch 8 — deterministic training-review or explicit configured non-training bypass resolution.
 9. Developmental Network v0.2 Stage -1 — deterministic developmental constitution, DESA, Nursery curriculum, ambition, skill-bundle, Outcome Fidelity, authority, integrity, and causal-responsibility contracts.
 10. Developmental Network v0.2 Stage 0 — deterministic v0.2 schema identity, typed identities, lifecycle transitions, trace evidence, and v0.1 schema separation contracts.
+11. Developmental Network v0.2 Stage 1 — deterministic fixed-pool recurrent substrate, signed connections, distributed overlapping experience coalitions, bounded settling, and zero-authority replay evidence.
 
 ## Current accepted boundary
 
@@ -102,18 +103,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 0 identity and lifecycle contracts:
+After NDNRA Developmental Network v0.2 Stage 1 recurrent experiential substrate:
 
 ```text
-ruff format --check .: 241 files already formatted
+ruff format --check .: 243 files already formatted
 ruff check .: passed
-mypy: no issues in 241 source files
-pytest -q: 1008 passed
+mypy: no issues in 243 source files
+pytest -q: 1017 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage 0 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_identity.py` with 7 tests. The full repository gates also passed before the bounded local Stage 0 commit.
+The Stage 1 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_network.py` with 9 tests. The full repository gates also passed before the bounded local Stage 1 commit.
 
 ## Current technical sources
 
@@ -141,27 +142,21 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
 - `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-0-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1 and Stage 0 are now implemented and evidenced. The next authorised implementation boundary is Stage 1 contracts and in-memory substrate behavior, followed by Stage 1A in a separate bounded batch:
+Stage -1, Stage 0, and Stage 1 are now implemented and evidenced. The next authorised implementation boundary is Stage 1A DESA bootstrap and hierarchical metacognition:
 
 ```text
-reusable sparse recurrent neuron pool
-    +
-excitatory and inhibitory connections
-    +
-distributed experience coalitions
-    +
-deterministic bounded recurrent settling
-    +
 DESA bootstrap and hierarchical metacognition
 ```
 
@@ -185,7 +180,7 @@ Stage 0 is closed by `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_202
 4. Existing v0.1 tests remain unchanged and pass.
 5. No runtime adapter or action gateway connection is introduced.
 
-Stage 1 must prove:
+Stage 1 is closed by `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md`, which proves:
 
 1. Experiences are distributed coalitions in an existing reusable neuron pool.
 2. Experiences may overlap while retaining separate identity, provenance, and outcomes.
