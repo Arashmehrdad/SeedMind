@@ -21,6 +21,14 @@ from seedmind.contribution.contracts import (
     calculate_checksum,
 )
 from seedmind.contribution.engine import ContributionEngine, ContributionEvaluationResult
+from seedmind.contribution.parallel_comparison import (
+    Week9ComparisonStep,
+    Week9NDNRARollout,
+    Week9ParallelComparisonReport,
+    Week9ParallelComparisonResult,
+    Week9ScenarioComparison,
+    run_week9_parallel_comparison,
+)
 from seedmind.contribution.persistence import (
     load_contribution_history,
     load_support_state,
@@ -61,12 +69,18 @@ __all__ = [
     "VerificationEvidenceSource",
     "VerificationStatus",
     "Week9AcceptanceReport",
+    "Week9ComparisonStep",
+    "Week9NDNRARollout",
+    "Week9ParallelComparisonReport",
+    "Week9ParallelComparisonResult",
     "Week9RunResult",
+    "Week9ScenarioComparison",
     "calculate_checksum",
     "export_week9_evidence",
     "load_contribution_history",
     "load_support_state",
     "run_week9_contribution_evaluation",
+    "run_week9_parallel_comparison",
     "save_contribution_history",
     "save_support_state",
 ]

@@ -1,7 +1,7 @@
 # ADR: SeedMind Week 9 Contribution Closure
 
 Date: 30 June 2026
-Status: Accepted
+Status: Accepted after comparative-evidence correction
 Scope: original SeedMind Master Implementation Plan Week 9
 
 ## Context
@@ -15,6 +15,10 @@ certify contribution. Evaluation cannot silently train, compile, promote, or
 increase discovery. Human authority remains separate from reward and ordinary
 learning. NDNRA remains a non-authoritative shadow under the accepted parallel
 operating policy.
+
+The initial Week 9 closure recorded only authority counters and did not obtain or
+export actual NDNRA proposals, candidate comparisons, or NDNRA task outcomes. The
+closure was therefore reopened and corrected before continuing to Week 10.
 
 ## Decision
 
@@ -44,8 +48,13 @@ The accepted design is:
 9. Missing, corrupt, or incompatible persisted state fails safely to a complete
    fresh Level 4 state and empty history.
 10. Production curiosity retains every executed primitive action. NDNRA has no
-    execution, verification, support, scheduling, replacement, or promotion
-    authority, and automatic NDNRA promotion remains disabled.
+    production execution, verification, support, scheduling, replacement, or
+    promotion authority, and automatic NDNRA promotion remains disabled.
+11. Corrected shadow operation must collect a Default and NDNRA proposal from the
+    same pre-action state, score every NDNRA proposal, and compare every
+    disagreement.
+12. A separate isolated NDNRA-only rollout must cover every Week 9 scenario so
+    task-completion rates can be compared without granting production authority.
 
 ## Evidence
 
@@ -75,6 +84,26 @@ support_authority_violations=0
 ndnra_automatic_promotions=0
 ```
 
+Observed corrected parallel comparison:
+
+```text
+total_production_steps=172
+ndnra_proposal_count=171
+ndnra_abstention_count=1
+agreement_count=34
+disagreement_count=137
+disagreement_comparison_coverage=1.0
+default_better_count=133
+ndnra_better_count=4
+tied_count=34
+mean_default_combined_score=0.1091104458581823
+mean_ndnra_combined_score=0.0773852996593519
+default_task_successes=10/12
+ndnra_isolated_task_successes=0/12
+production_action_replacements=0
+authority_violations=0
+```
+
 Observed support behavior:
 
 ```text
@@ -92,6 +121,7 @@ Artifacts:
 - `artifacts/week9_contribution/support_level_report.json`
 - `artifacts/week9_contribution/contribution_history.json`
 - `artifacts/week9_contribution/week9_acceptance_report.json`
+- `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
 - `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`
 
 ## Consequences
@@ -102,6 +132,9 @@ Artifacts:
 - The frozen Week 8 skill is reused without rediscovery or recompilation.
 - Competence degradation can restore higher support, and recovery requires a new
   full evidence threshold.
-- NDNRA remains a shadow observer and cannot lower support or certify outcomes.
+- NDNRA remains non-authoritative but now produces measurable proposals and
+  isolated task outcomes for direct comparison.
+- The observed NDNRA result is currently weaker than Default: `0/12` isolated
+  task successes and only four better one-step candidates versus 133 for Default.
 - Original SeedMind Week 10 was not started.
 - NDNRA Stage 9 was not started or authorised.

@@ -1,5 +1,5 @@
 {
-  "checksum": "79f764c2fefeb55f574c0dcab80b8a4ce9fe27fa08d30063152c7f89d54160e2",
+  "checksum": "4f41c88fbacdf9a4a792af40c46632ee1438260cd4e4419b2498cb94d4148def",
   "payload": {
     "contribution_schema_version": 1,
     "records": [
@@ -662,7 +662,9 @@
             "support_authority_violations": 0,
             "verification_authority_violations": 0
           },
-          "failed_preconditions": [],
+          "failed_preconditions": [
+            "no_legal_approach_path"
+          ],
           "interruption": null,
           "reason": "no_legal_approach_path",
           "requested_support": 4,
@@ -768,7 +770,9 @@
             "support_authority_violations": 0,
             "verification_authority_violations": 0
           },
-          "failed_preconditions": [],
+          "failed_preconditions": [
+            "no_legal_approach_path"
+          ],
           "interruption": null,
           "reason": "no_legal_approach_path",
           "requested_support": 4,

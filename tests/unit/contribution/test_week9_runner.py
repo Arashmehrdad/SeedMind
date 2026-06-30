@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from seedmind.contribution import (
@@ -18,6 +19,7 @@ from seedmind.human import SupportLevel
 def test_week9_runner_proves_support_transitions_and_exports(tmp_path: Path) -> None:
     result = run_week9_contribution_evaluation(output_dir=tmp_path)
     report = result.acceptance_report
+    comparison = result.parallel_comparison.report
 
     assert report.total_attempts == len(DEFAULT_SUCCESS_SEEDS) + len(DEFAULT_FAILURE_SEEDS)
     assert report.independent_success_rate >= WEEK9_SUCCESS_TARGET
@@ -34,17 +36,40 @@ def test_week9_runner_proves_support_transitions_and_exports(tmp_path: Path) -> 
     assert report.verification_authority_violations == 0
     assert report.support_authority_violations == 0
     assert report.ndnra_automatic_promotions == 0
+    assert comparison.pass_gate
+    assert comparison.total_production_steps == report.executed_step_count
+    assert comparison.default_proposal_count == comparison.total_production_steps
+    assert comparison.ndnra_observation_count == comparison.total_production_steps
+    assert (
+        comparison.ndnra_proposal_count + comparison.ndnra_abstention_count
+        == comparison.total_production_steps
+    )
+    assert comparison.comparison_count == comparison.ndnra_proposal_count
+    assert comparison.disagreement_comparison_count == comparison.disagreement_count
+    assert comparison.disagreement_comparison_coverage == 1.0
+    assert comparison.default_task_success_rate == report.independent_success_rate
+    assert len(result.parallel_comparison.ndnra_rollouts) == report.total_attempts
+    assert comparison.ndnra_rollout_attempts == report.total_attempts
+    assert comparison.production_action_replacements == 0
+    assert comparison.authority_violations == 0
+    assert comparison.automatic_promotions == 0
     assert result.support_state.current_level is SupportLevel.GUIDED_LEARNER
     assert (tmp_path / "human_contribution_demo.json").exists()
     assert (tmp_path / "support_level_report.json").exists()
     assert (tmp_path / "contribution_history.json").exists()
     assert (tmp_path / "week9_acceptance_report.json").exists()
+    comparison_path = tmp_path / "default_vs_ndnra_comparison.json"
+    assert comparison_path.exists()
+    comparison_payload = json.loads(comparison_path.read_text(encoding="ascii"))
+    assert comparison_payload["summary"]["pass_gate"] is True
+    assert comparison_payload["summary"]["total_production_steps"] == report.executed_step_count
 
 
 def test_week9_runner_exports_loadable_history_and_support(tmp_path: Path) -> None:
-    run_week9_contribution_evaluation(output_dir=tmp_path)
-    run_week9_contribution_evaluation(output_dir=tmp_path)
+    first = run_week9_contribution_evaluation(output_dir=tmp_path)
+    second = run_week9_contribution_evaluation(output_dir=tmp_path)
 
+    assert first.parallel_comparison.to_json() == second.parallel_comparison.to_json()
     assert not tuple(tmp_path.glob("*.tmp"))
     history = load_contribution_history(tmp_path / "contribution_history.json")
     support_state = load_support_state(tmp_path / "support_level_report.json")

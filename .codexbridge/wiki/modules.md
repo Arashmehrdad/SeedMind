@@ -210,6 +210,14 @@ Week 9 contribution evaluation against the frozen Week 8 skill record.
 - Kind: python
 - Classes: ContributionEvaluationResult, ContributionEngine
 
+## `src/seedmind/contribution/parallel_comparison.py`
+
+Default SeedMind versus NDNRA comparison for Week 9 contribution.
+
+- Kind: python
+- Classes: Week9ComparisonStep, Week9ScenarioComparison, Week9NDNRARollout, Week9ParallelComparisonReport, Week9ParallelComparisonResult, _ScoredCandidates
+- Functions/symbols: run_week9_parallel_comparison, _score_candidates, _goal_progress, _distance, _target_achieved, state_target_pairs, _selection_for_action, _metrics_for_experience, _comparison_signals, _build_step, _scenario_summary, _run_isolated_ndnra_rollouts, _build_report, _mean_optional, _mean_absolute, _clamp_signed
+
 ## `src/seedmind/contribution/persistence.py`
 
 Strict persistence for Week 9 contribution history and support state.
@@ -1270,6 +1278,13 @@ Focused tests for the Week 9 contribution engine.
 
 - Kind: python
 - Functions/symbols: _evidence, test_capability_check_rejects_missing_unvalidated_degraded_and_mismatched_skill, test_grounded_verification_rejects_self_report_and_unavailable_evidence, test_grounded_verification_rejects_other_non_grounded_sources, test_human_interruptions_are_immediate_and_authoritative, test_support_policy_blocks_reduction_on_one_success_and_restores_after_two_failures, test_grounded_blocked_failure_stays_grounded_and_unsuccessful, test_support_repromotion_requires_five_new_successes_after_regression, test_weak_or_unverified_evidence_blocks_support_reduction, test_unverified_evidence_blocks_promotion_even_with_five_verified_successes, test_degraded_or_unsafe_competence_restores_dependent_support_immediately
+
+## `tests/unit/contribution/test_parallel_comparison.py`
+
+Tests for Week 9 Default-vs-NDNRA comparative evidence.
+
+- Kind: python
+- Functions/symbols: test_week9_parallel_comparison_covers_every_production_step, test_week9_parallel_comparison_reports_separate_task_outcomes
 
 ## `tests/unit/contribution/test_persistence.py`
 

@@ -94,7 +94,20 @@ The production and shadow execution path reuses:
 - `src/seedmind/integration/bounded_advice.py`;
 - `src/seedmind/integration/comparison_oracle.py`.
 
-The existing advice acceptance path now runs its candidate session through the canonical parallel-operation policy before using the result.
+The existing advice acceptance path runs its candidate session through the canonical parallel-operation policy before using the result.
+
+Corrected original SeedMind Week 9 also applies this operating intent to human
+contribution evaluation through:
+
+- `src/seedmind/contribution/parallel_comparison.py`;
+- exact deterministic replay of the frozen Default action traces;
+- same-state NDNRA proposals and complete proposal scoring;
+- isolated NDNRA-only rollouts across the same scenario set;
+- `artifacts/week9_contribution/default_vs_ndnra_comparison.json`.
+
+The corrected Week 9 evidence found Default task success of `10/12` and isolated
+NDNRA task success of `0/12`. Across 171 scored NDNRA proposals, Default was better
+133 times, NDNRA was better four times, and 34 comparisons tied.
 
 ## 7. Persistence Boundary
 
@@ -108,12 +121,15 @@ The main SeedMind stores and NDNRA research proof stores remain distinct.
 
 ## 8. Immediate Next Work
 
-The next main-project work should continue the original roadmap, especially the still-mandatory reusable-skill objective, while producing parallel evidence from the same training sessions.
+The original reusable-skill and contribution objectives are now closed with
+parallel evidence. Original Week 10 may proceed while comparison remains mandatory.
 
 Near-term batches should:
 
-1. make the parallel-operation audit available in the canonical development runner;
-2. export a compact production-versus-shadow timeline;
-3. define repeated multi-seed comparison reports;
+1. preserve same-state Default-vs-NDNRA proposals in subsequent roadmap stages;
+2. keep task outcomes separate from one-step candidate scores;
+3. expand comparison across new tasks, contexts, and random seeds;
 4. measure NDNRA usefulness, calibration, interference, latency, CPU, and memory;
-5. keep promotion disabled until a component-specific ADR is accepted.
+5. investigate why current NDNRA local proposals do not compose into successful
+   full contribution policies;
+6. keep promotion disabled until a component-specific ADR is accepted.

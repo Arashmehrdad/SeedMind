@@ -1,7 +1,7 @@
 # SeedMind Week 9 Contribution Evidence
 
 Date: 30 June 2026
-Status: Passed
+Status: Passed after Default-vs-NDNRA comparison correction
 Scope: original SeedMind Master Implementation Plan Week 9 only
 
 ## Objective
@@ -9,8 +9,9 @@ Scope: original SeedMind Master Implementation Plan Week 9 only
 Complete the original main-roadmap Week 9 milestone: accept a typed human request,
 check whether the familiar capability is available and appropriate, execute the
 frozen Week 8 `approach_and_push` skill, verify the result from grounded runtime
-evidence, report failure honestly, and reduce or restore human support only from
-predeclared competence evidence.
+evidence, report failure honestly, reduce or restore human support only from
+predeclared competence evidence, and collect actual Default-vs-NDNRA comparative
+data from the same contribution scenarios.
 
 This work does not reopen or recompile Week 8, does not begin original Week 10,
 and does not implement NDNRA Stage 9.
@@ -26,9 +27,13 @@ Week 9 is owned by the main `seedmind.contribution` package:
   verification, honest failure construction, and evidence-gated support changes.
 - `persistence.py` saves and loads checksum-protected ASCII JSON, with a complete
   conservative Level 4 fallback for missing, corrupt, or incompatible state.
-- `week9.py` runs the deterministic contribution, degradation, and recovery
-  sequence and exports the required deliverables.
-- `scripts/run_week9_contribution.py` executes the complete acceptance gate.
+- `parallel_comparison.py` replays the exact Default action traces, obtains NDNRA
+  proposals from the same pre-action states, scores every proposal, and runs
+  isolated NDNRA-only task rollouts after shadow learning.
+- `week9.py` runs the deterministic contribution, degradation, recovery, and
+  corrected parallel-comparison sequence and exports the required deliverables.
+- `scripts/run_week9_contribution.py` executes the complete contribution and
+  comparison acceptance gate.
 
 ## Human Request Flow
 
@@ -181,11 +186,67 @@ component_promotion_count=0
 No evaluation episode trains, compiles, promotes, mutates the frozen skill
 record, or increases its discovery count.
 
-## NDNRA Shadow Boundary
+## Default-vs-NDNRA Parallel Comparison
 
-Main SeedMind owns the contribution, verification, and support state. Production
-curiosity remains the sole production action selector. NDNRA is represented only
-through non-authoritative shadow audit fields.
+The original closure was reopened because authority-only shadow counters did not
+provide comparative performance evidence. Corrected Week 9 now evaluates both
+systems while preserving the authority boundary.
+
+For each of the 172 executed Default steps:
+
+```text
+recreate the exact contribution scenario and Default action trace
+capture the same immutable pre-action state
+obtain an NDNRA proposal from that state
+score each NDNRA proposal against the fixed Default proposal
+execute only the Default action in the production replay
+feed the grounded Default transition to NDNRA for shadow learning
+```
+
+Candidate scoring combines task relevance and the existing nursery oracle:
+
+```text
+combined score = 0.70 * target progress + 0.30 * nursery outcome score
+```
+
+After shadow learning, NDNRA receives one isolated rollout on each of the same 12
+scenarios. These cloned evaluations measure NDNRA task completion but do not grant
+it production authority.
+
+Observed comparison metrics:
+
+```text
+total_scenarios=12
+total_production_steps=172
+default_proposal_count=172
+ndnra_observation_count=172
+ndnra_proposal_count=171
+ndnra_abstention_count=1
+agreement_count=34
+disagreement_count=137
+comparison_count=171
+disagreement_comparison_count=137
+disagreement_comparison_coverage=1.0
+default_better_count=133
+ndnra_better_count=4
+tied_count=34
+mean_default_combined_score=0.1091104458581823
+mean_ndnra_combined_score=0.0773852996593519
+mean_ndnra_advantage=-0.031725146198830406
+default_task_successes=10
+default_task_success_rate=0.8333333333333334
+ndnra_rollout_attempts=12
+ndnra_rollout_successes=0
+ndnra_rollout_success_rate=0.0
+learned_assembly_count=4
+effect_dimension_count=8
+```
+
+The result is unambiguous: the current Default skill controller reliably performs
+the Week 9 contribution task, while the current NDNRA shadow does not yet compose
+a successful full task policy. NDNRA nevertheless produced four locally better
+one-step proposals, which remain useful diagnostic evidence rather than grounds
+for promotion.
 
 Observed authority metrics:
 
@@ -197,8 +258,8 @@ support_authority_violations=0
 ndnra_automatic_promotions=0
 ```
 
-NDNRA cannot execute, replace, schedule, verify, promote, or lower support. No
-NDNRA Stage 9 implementation was added.
+NDNRA cannot replace production actions, certify contribution, change support, or
+promote itself. No NDNRA Stage 9 implementation was added.
 
 ## Persistence
 
@@ -220,20 +281,22 @@ Level 4 state and an empty contribution history.
 - `artifacts/week9_contribution/support_level_report.json`
 - `artifacts/week9_contribution/contribution_history.json`
 - `artifacts/week9_contribution/week9_acceptance_report.json`
+- `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
 
 ## Validation
 
 ```text
-focused Week 9 tests: 19 passed
-real Week 9 CLI materialisation gate: passed
-ruff format --check .: 278 files already formatted
+focused corrected Week 9 tests: 21 passed
+remaining main-product tests: 312 passed
+main-product total: 333 passed
+early NDNRA tests: 422 passed
+controlled and developmental NDNRA tests: 191 passed
+remaining NDNRA tests: 208 passed
+complete pytest total: 1154 passed
+real Week 9 artifact regeneration gate: passed
+ruff format --check .: 280 files already formatted
 ruff check .: passed
-mypy .: no issues in 278 source files
-pytest group 1, main product: 331 passed
-pytest group 2, early NDNRA: 422 passed
-pytest group 3, controlled and developmental NDNRA: 191 passed
-pytest group 4, remaining NDNRA: 208 passed
-complete pytest total: 1152 passed
+mypy .: no issues in 280 source files
 pip check: no broken requirements
 git diff --check: passed with line-ending normalization warnings only
 ```

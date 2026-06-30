@@ -14,6 +14,10 @@ from seedmind.contribution.contracts import (
     SupportState,
 )
 from seedmind.contribution.engine import ContributionEngine
+from seedmind.contribution.parallel_comparison import (
+    Week9ParallelComparisonResult,
+    run_week9_parallel_comparison,
+)
 from seedmind.contribution.persistence import save_contribution_history, save_support_state
 from seedmind.environment import EntityRole, EntityState, NurseryScenario, ShapeCode
 from seedmind.human.contracts import (
@@ -83,6 +87,7 @@ class Week9RunResult:
     records: tuple[ContributionRecord, ...]
     support_state: SupportState
     acceptance_report: Week9AcceptanceReport
+    parallel_comparison: Week9ParallelComparisonResult
 
 
 def run_week9_contribution_evaluation(
@@ -99,13 +104,16 @@ def run_week9_contribution_evaluation(
     support_state = SupportState.fresh(engine.policy)
     factory = Week8ScenarioFactory()
     records: list[ContributionRecord] = []
+    scenarios: list[NurseryScenario] = []
     contribution_index = 1
     for seed in DEFAULT_SUCCESS_SEEDS[:5]:
+        scenario = factory.create(seed)
+        scenarios.append(scenario)
         evaluation_result = engine.evaluate_request(
             contribution_id=f"week9-contribution-{contribution_index:03d}",
             request=_build_request(request_id=f"request-{contribution_index:03d}"),
             skill_record=skill_record,
-            scenario=factory.create(seed),
+            scenario=scenario,
             scenario_context=_scenario_context(seed),
             support_state=support_state,
         )
@@ -113,11 +121,13 @@ def run_week9_contribution_evaluation(
         support_state = evaluation_result.support_state
         contribution_index += 1
     for seed in DEFAULT_FAILURE_SEEDS:
+        scenario = _blocked_failure_scenario(factory.create(seed))
+        scenarios.append(scenario)
         evaluation_result = engine.evaluate_request(
             contribution_id=f"week9-contribution-{contribution_index:03d}",
             request=_build_request(request_id=f"request-{contribution_index:03d}"),
             skill_record=skill_record,
-            scenario=_blocked_failure_scenario(factory.create(seed)),
+            scenario=scenario,
             scenario_context=_scenario_context(seed),
             support_state=support_state,
         )
@@ -125,11 +135,13 @@ def run_week9_contribution_evaluation(
         support_state = evaluation_result.support_state
         contribution_index += 1
     for seed in DEFAULT_SUCCESS_SEEDS[5:]:
+        scenario = factory.create(seed)
+        scenarios.append(scenario)
         evaluation_result = engine.evaluate_request(
             contribution_id=f"week9-contribution-{contribution_index:03d}",
             request=_build_request(request_id=f"request-{contribution_index:03d}"),
             skill_record=skill_record,
-            scenario=factory.create(seed),
+            scenario=scenario,
             scenario_context=_scenario_context(seed),
             support_state=support_state,
         )
@@ -141,10 +153,15 @@ def run_week9_contribution_evaluation(
         support_state=support_state,
         skill_discovery_delta=skill_record.discovery_count - skill_discovery_before,
     )
+    parallel_comparison = run_week9_parallel_comparison(
+        records=tuple(records),
+        scenarios=tuple(scenarios),
+    )
     run_result = Week9RunResult(
         records=tuple(records),
         support_state=support_state,
         acceptance_report=acceptance,
+        parallel_comparison=parallel_comparison,
     )
     if output_dir is not None:
         export_week9_evidence(run_result, output_dir)
@@ -153,24 +170,33 @@ def run_week9_contribution_evaluation(
 
 def export_week9_evidence(
     result: Week9RunResult, output_dir: Path
-) -> tuple[Path, Path, Path, Path]:
-    """Write the required Week 9 contribution artifacts."""
+) -> tuple[Path, Path, Path, Path, Path]:
+    """Write the required Week 9 contribution and comparison artifacts."""
     output_dir.mkdir(parents=True, exist_ok=True)
     history_path = output_dir / "contribution_history.json"
     support_path = output_dir / "support_level_report.json"
     demo_path = output_dir / "human_contribution_demo.json"
     acceptance_path = output_dir / "week9_acceptance_report.json"
+    comparison_path = output_dir / "default_vs_ndnra_comparison.json"
     save_contribution_history(history_path, result.records)
     save_support_state(support_path, result.support_state)
     _write_json(
         demo_path,
         {
+            "parallel_comparison": result.parallel_comparison.report.to_json(),
             "records": [record.to_json() for record in result.records],
             "summary": result.acceptance_report.to_json(),
         },
     )
-    _write_json(acceptance_path, result.acceptance_report.to_json())
-    return demo_path, support_path, history_path, acceptance_path
+    _write_json(
+        acceptance_path,
+        {
+            "parallel_comparison": result.parallel_comparison.report.to_json(),
+            "week9_acceptance": result.acceptance_report.to_json(),
+        },
+    )
+    _write_json(comparison_path, result.parallel_comparison.to_json())
+    return demo_path, support_path, history_path, acceptance_path, comparison_path
 
 
 def _build_request(*, request_id: str) -> HumanContributionRequest:
