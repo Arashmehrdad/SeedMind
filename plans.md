@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: canonical SeedMind and NDNRA parallel-operation policy
+- Latest completed milestone: original SeedMind Week 8 reusable skill
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,8 +17,8 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: SeedMind main roadmap with NDNRA shadow evaluation
 - Last closed stage: NDNRA Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current stage: main SeedMind and NDNRA side-by-side operation
-- Current status: production curiosity remains the sole action selector; NDNRA now follows the canonical parallel-operation policy as a non-authoritative observer, every required disagreement is compared, automatic component promotion is disabled, and Stage 9 remains unauthorised
+- Current stage: main SeedMind Week 8 reusable skill closed; Week 9 contribution is next but not started
+- Current status: `approach_and_push` is compiled as the first main SeedMind reusable skill from repeated grounded production episodes, frozen evaluation reuses the compiled skill across 20 unseen deterministic eligible starts, production curiosity remains the sole action selector, NDNRA stays non-authoritative, automatic component promotion is disabled, and Stage 9 remains unauthorised
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the parallel policy creates an evaluation boundary and no new cognitive capability or production authority
 
@@ -44,6 +44,7 @@ Completed bounded increments:
 18. Developmental Network v0.2 Stage 7 — deterministic protected prohibitions, trusted responsibility teaching, reward-resistant deterrence, safer-alternative activation, protected authority interruption handling, integrity mutation inhibition, typed internal action proposals, protected gateway test double denial, and zero-authority evidence.
 19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
 20. SeedMind and NDNRA parallel operation — production curiosity retains every executed action, NDNRA observes and suggests without authority, disagreements require comparison evidence, audits fail closed, and automatic component promotion remains disabled.
+21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
 
 ## Current accepted boundary
 
@@ -112,18 +113,20 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After adopting canonical SeedMind and NDNRA parallel operation:
+After closing original SeedMind Week 8 reusable skill:
 
 ```text
-ruff format --check .: 261 files already formatted
-ruff check .: passed
-mypy .: no issues in 261 source files
-pytest complete non-overlapping coverage: 525 + 355 + 237 = 1117 passed
-pip check: no broken requirements
-git diff --check: passed
+.\.venv\Scripts\python.exe -m pytest tests/unit/skills -q --basetemp .tmp_pytest\week8-focused: 16 passed
+.\.venv\Scripts\python.exe scripts\run_week8_reusable_skill.py: pass_gate=true
+.\.venv\Scripts\python.exe -m ruff format --check .: 268 files already formatted
+.\.venv\Scripts\python.exe -m ruff check .: passed
+.\.venv\Scripts\python.exe -m mypy .: no issues in 268 source files
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full: 1133 passed
+.\.venv\Scripts\python.exe -m pip check: no broken requirements
+git diff --check: passed with README CRLF normalization warning only
 ```
 
-The focused parallel-policy and live unified-signal checks passed with 12 tests. The full repository was then run through three non-overlapping bounded groups to remain within CodexBridge's fixed single-command timeout, totalling 1117 passing tests.
+The previous full baseline after parallel-policy adoption was 1117 passing tests across three non-overlapping bounded groups.
 
 ## Current technical sources
 
@@ -174,12 +177,14 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-8-closure.md`
 - `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-seedmind-ndnra-parallel-operation.md`
+- `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`
+- `docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md`
 
 ## Next implementation target
 
 The original SeedMind master plan remains the governing product roadmap. `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` governs how NDNRA accompanies that work.
 
-The immediate target is to continue the main roadmap, with the original reusable-skill objective still mandatory, while collecting matched production-versus-shadow evidence from the same sessions.
+The immediate next target is original SeedMind Week 9 contribution and reduced support. Week 9 has not started in the Week 8 closure run.
 
 ```text
 Main SeedMind: executes the retained production action
@@ -331,7 +336,7 @@ Stage 8 is closed by `docs/architecture/NDNRA_Developmental_Stage_8_Evidence_202
 
 Stage 9 remains unauthorised. The bounded non-authoritative shadow seam is now approved, but internet knowledge acquisition, production action-gateway work, action replacement, and component promotion still require separate future planning and approval.
 
-The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
+The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective is now closed from main SeedMind product evidence, not NDNRA research evidence. Original Week 9 contribution and reduced support is the next main-roadmap target and has not started here.
 
 ## Working rules
 

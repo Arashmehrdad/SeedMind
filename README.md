@@ -8,7 +8,7 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap now continues with NDNRA running beside it in non-authoritative shadow mode.
+The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap has now closed Week 8 with the first reusable product skill, `approach_and_push`, while NDNRA continues beside it in non-authoritative shadow mode.
 
 The canonical operating mode is `production_with_ndnra_shadow`:
 
@@ -23,6 +23,26 @@ The canonical operating mode is `production_with_ndnra_shadow`:
 A specific NDNRA component may be considered later only after repeated multi-task evidence, resource and interference checks, rollback and kill-switch coverage, and a separate accepted ADR. The original SeedMind plan, including reusable-skill formation, remains the product and MVP spine.
 
 See `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` for the full operating boundary.
+
+## Current main-roadmap evidence
+
+SeedMind Week 8 is closed by the main `seedmind.skills` implementation:
+
+- `approach_and_push` is compiled from repeated grounded production episodes;
+- frozen evaluation reuses the compiled skill across 20 unseen deterministic eligible starts;
+- evaluation success rate is `1.0000`;
+- primitive rediscovery baseline success rate is `1.0000`;
+- evaluation discovery count remains `0`;
+- production action-authority violations remain `0`;
+- NDNRA automatic promotions remain `0`.
+
+Run the deterministic gate with:
+
+```text
+.\.venv\Scripts\python.exe scripts\run_week8_reusable_skill.py
+```
+
+Evidence is documented in `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
 
 ## Development order
 

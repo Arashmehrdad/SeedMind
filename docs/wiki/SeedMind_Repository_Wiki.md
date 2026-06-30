@@ -1,62 +1,103 @@
 # SeedMind Repository Wiki
 
-Last refreshed: 29 June 2026
+Last refreshed: 30 June 2026
 
 ## Current State
 
 - Branch: `main`
 - Push policy: do not push automatically.
-- Learned Consequence Model stage: complete.
-- Expanded developmental architecture marker: 82%.
-- Next planned stage: bounded imagination only.
+- Latest completed main-roadmap milestone: original SeedMind Week 8 reusable skill.
+- Latest completed NDNRA research stage: Developmental Network v0.2 Stage 8.
+- Current operating mode: `production_with_ndnra_shadow`.
+- Next main-roadmap target: Week 9 contribution and reduced support.
+- NDNRA Stage 9: not authorised.
 
-## Current Learned Consequence Boundary
+## Week 8 Main Skill Boundary
 
-Learned consequence evidence is restart-safe, live accepted, prediction-only, and
-non-authoritative.
+Week 8 is closed by the main `seedmind.skills` package, not by NDNRA research
+contracts.
 
-Accepted factual evidence:
+Implemented main skill:
 
-- unique real one-step Nursery transitions;
-- observed consequence chains built only from consecutive unique real Nursery
-  transitions with exact context continuity;
-- schema-7 persisted learned-consequence checkpoints that reload exactly.
+- `approach_and_push`
+- stable identity: `skill.main.approach_and_push.v1`
+- version: `1.0.0`
+- primitive policy: `axis_aligned_object_target_push_policy_v1`
 
-Rejected or non-evidentiary inputs:
+The skill is compiled from repeated grounded production episodes and preserves
+explicit preconditions, expected outcome, termination conditions, failure
+conditions, evidence counts, reuse count, discovery count, validation status,
+and deterministic snapshot.
 
-- duplicate events;
-- conflicting event identity;
-- disconnected chains;
-- replayed evidence;
-- imagined evidence;
-- transferred predictions;
-- malformed persisted learned state;
-- partial, missing, or bound-failing evidence paths.
+## Week 8 Evidence
 
-## Stage Documents
+Training seeds:
 
-- `docs/SeedMind_Learned_Consequence_Model_Stage_Plan_2026-06-28.md`
-- `docs/SeedMind_Learned_Consequence_Model_Stage_Closure_2026-06-29.md`
-- `docs/SeedMind_Consequence_Imagination_Stage_Plan_2026-06-28.md`
-- `docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md`
-- `docs/architecture/decisions/ADR-2026-06-29-learned-consequence-evidence.md`
+```text
+6, 7, 8, 11
+```
+
+Evaluation seeds:
+
+```text
+206, 207, 208, 211, 212, 213, 216, 217, 218, 231,
+232, 233, 236, 237, 238, 241, 242, 243, 256, 257
+```
+
+Observed metrics:
+
+```text
+success_rate=1.0000
+baseline_success_rate=1.0000
+compilation_evidence_count=4
+skill_invocation_count=352
+reuse_count=20
+discovery_count=0
+authority_violations=0
+ndnra_authority_violations=0
+ndnra_automatic_promotions=0
+pass_gate=true
+```
+
+Evidence files:
+
+- `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`
+- `docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md`
+
+Generated local artifacts:
+
+- `artifacts/week8_reusable_skill/approach_and_push_skill_record.json`
+- `artifacts/week8_reusable_skill/week8_generalisation_report.json`
+
+## Authority Boundary
+
+- Production curiosity remains the only production action authority.
+- The reusable skill emits primitive candidates and does not bypass production
+  curiosity.
+- NDNRA observes, suggests, and learns only as a non-authoritative shadow.
+- NDNRA cannot execute, schedule, replace, promote, or select production
+  actions.
+- Automatic NDNRA component promotion remains disabled.
 
 ## Next Stage Boundary
 
-Bounded imagination should begin with non-factual hypotheses only.
+Original SeedMind Week 9 may begin after this closure commit.
 
-Initial scope:
+Week 9 scope:
 
-- generate bounded imagined action candidates and short sequences;
-- consume learned consequence predictions as non-authoritative estimates;
-- keep imagined traces separate from real and replayed evidence;
-- enforce depth, candidate, rollout, and computation bounds;
-- prove imagined evidence cannot update real consequence, competence, mastery, or
-  production authority.
+- human request to move the ball;
+- capability check;
+- contribution verification;
+- honest failure reporting;
+- support-level promotion rules;
+- independent familiar-request performance after teaching.
 
-Explicitly not in the first bounded-imagination stage:
+Explicitly not authorised by Week 8 closure:
 
-- safe-experiment proposals;
-- production action authority;
-- route recommendation or automatic execution;
-- treating imagined outcomes as facts.
+- NDNRA Stage 9;
+- production action replacement;
+- internet access;
+- shell access inside the seed;
+- source self-modification;
+- autonomous background workers;
+- new specialist growth.

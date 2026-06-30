@@ -4,9 +4,17 @@
 
 ## Snapshot
 
-- Source files indexed: **379**
+- Python source files checked: **268**
 - Scan truncated: **no**
 - Project types: **Python**
+
+## Current milestone
+
+- Latest main-roadmap closure: original SeedMind Week 8 reusable skill.
+- Main skill: `approach_and_push` in `src/seedmind/skills`.
+- Evidence: `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
+- Closure ADR: `docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md`.
+- NDNRA Stage 9 remains unauthorised.
 
 ## Languages and formats
 
