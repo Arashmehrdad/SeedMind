@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 2 associative need-and-context recall
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 3 specialised concurrent regions and multiple needs
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 2 associative need-and-context recall
-- Current stage: Developmental Network v0.2 — Stage 3 specialised concurrent regions and multiple needs
-- Current status: Stage 2 is implemented and evidenced locally; Stage 3 may next test region-local pools, typed cross-region communication, simultaneous need representation, compatibility reinforcement, conflict inhibition, protected safety and permission participation, and no permanent global scalar collapse while preserving zero SQLite cognition and zero production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 3 specialised concurrent regions and multiple needs
+- Current stage: Developmental Network v0.2 — Stage 4 regional child-to-adult development, skill maturation, and ambition persistence
+- Current status: Stage 3 is implemented and evidenced locally; Stage 4 may next test regional maturity states, maturity-dependent plasticity, evidence-based stabilisation, protected local reopening, developmental Outcome Fidelity, desired-state ambition sources, capability-gap evidence, skill-bundle maturity, verifier reopening, and exact rollback while preserving zero SQLite cognition and zero production action authority
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged at this boundary because Stage 2 remains a bounded research closure and does not authorize production behavior
+- Marker interpretation: unchanged at this boundary because Stage 3 remains a bounded research closure and does not authorize production behavior
 
 Completed bounded increments:
 
@@ -37,6 +37,7 @@ Completed bounded increments:
 11. Developmental Network v0.2 Stage 1 — deterministic fixed-pool recurrent substrate, signed connections, distributed overlapping experience coalitions, bounded settling, and zero-authority replay evidence.
 12. Developmental Network v0.2 Stage 1A — deterministic DESA bootstrap, regional captain summaries, bounded workspace routing, optional steward gates, temporary skill incubation, verifier calibration, Executive Auditor correction, event partition preservation, temporary ambition, and zero-authority evidence.
 13. Developmental Network v0.2 Stage 2 — deterministic associative need-and-context recall, partial-cue completion, inhibitory pattern separation, compatible coalition selection, matched recall controls, bounded depth and dormancy cost, and zero-authority evidence.
+14. Developmental Network v0.2 Stage 3 — deterministic specialised regional concurrency, region-local pools, simultaneous need pulses, typed cross-region messages, compatibility support, protected conflict inhibition, dormant need re-emergence, uniform-network controls, no permanent global scalar collapse, and zero-authority evidence.
 
 ## Current accepted boundary
 
@@ -105,18 +106,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 2 associative need-and-context recall:
+After NDNRA Developmental Network v0.2 Stage 3 specialised concurrent regions and multiple needs:
 
 ```text
-ruff format --check .: 247 files already formatted
+ruff format --check .: 249 files already formatted
 ruff check .: passed
-mypy: no issues in 247 source files
-pytest -q --basetemp .pytest_tmp/full_repo_stage2_final: 1040 passed
+mypy: no issues in 249 source files
+pytest -q --basetemp .pytest_tmp/full_repo_stage3_final: 1052 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage 2 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_associative_recall.py --basetemp .pytest_tmp/stage2_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 2 commit.
+The Stage 3 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_regions.py --basetemp .pytest_tmp/stage3_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 3 commit.
 
 ## Current technical sources
 
@@ -147,6 +148,7 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_2_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_3_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
@@ -155,15 +157,16 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1a-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-2-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-3-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1, Stage 0, Stage 1, Stage 1A, and Stage 2 are now implemented and evidenced. The next authorised implementation boundary is Stage 3 specialised concurrent regions and multiple needs:
+Stage -1, Stage 0, Stage 1, Stage 1A, Stage 2, and Stage 3 are now implemented and evidenced. The next authorised implementation boundary is Stage 4 regional child-to-adult development, skill maturation, and ambition persistence:
 
 ```text
-Specialised concurrent regions and multiple needs
+Regional child-to-adult development, skill maturation, and ambition persistence
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -221,7 +224,7 @@ Stage 2 is closed by `docs/architecture/NDNRA_Developmental_Stage_2_Evidence_202
 7. False co-activation remains below the declared threshold.
 8. Recall cost rises predictably with dormancy and depth.
 
-Stage 3 must prove:
+Stage 3 is closed by `docs/architecture/NDNRA_Developmental_Stage_3_Evidence_2026-06-30.md`, which proves:
 
 1. Independent compatible needs remain represented simultaneously.
 2. Compatible regional coalitions cooperate rather than forcing one need to disappear.
@@ -230,8 +233,25 @@ Stage 3 must prove:
 5. Region-local learning produces less cross-task interference than a uniform-network control.
 6. Cross-region messages remain typed and inspectable.
 7. No region gains external action authority.
+8. No permanent global scalar collapses all needs into one ranking.
 
-Do not begin mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 3 passes.
+Stage 4 must prove:
+
+1. Child mode learns a new association faster than mature mode.
+2. Mature mode retains established associations better under conflicting new examples.
+3. Promotion requires varied-context success, retention, low interference, and reduced teacher correction.
+4. A mature region can open one bounded relearning zone without destabilising its protected core.
+5. New learning consolidates only after validation against old skills.
+6. A region may be mature while another remains child-like.
+7. Nursery purpose, trusted teaching, mature prompt, or purpose-compatible positive outcome can each define a grounded desired state.
+8. Observation, failed request, and recognised mistake can create capability-gap evidence without becoming the value source itself.
+9. A persistent ambition requires an accepted desired-state source, measurable progress, and feasible Nursery learning opportunities.
+10. A skill verifier predicts success better than producer self-judgement and retains explicit scope and calibration evidence.
+11. A mature skill can reopen a bounded verifier-learning zone after contradiction or context drift.
+12. Satisfaction, pause, or retirement reduces ambition pressure rather than preserving artificial dissatisfaction.
+13. Rollback restores the pre-consolidation state exactly.
+
+Do not begin homeostasis, hibernation, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 4 passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 
