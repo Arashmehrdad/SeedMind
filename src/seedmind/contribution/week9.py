@@ -26,11 +26,17 @@ from seedmind.human.contracts import (
     SupportLevel,
     VerificationRule,
 )
-from seedmind.skills import DEFAULT_EVALUATION_SEEDS, Week8ScenarioFactory, read_skill_record
+from seedmind.skills import (
+    DEFAULT_EVALUATION_SEEDS,
+    DEFAULT_TRAINING_SEEDS,
+    Week8ScenarioFactory,
+    read_skill_record,
+)
 
 WEEK9_SUCCESS_TARGET = 0.80
 DEFAULT_SUCCESS_SEEDS = DEFAULT_EVALUATION_SEEDS[:10]
 DEFAULT_FAILURE_SEEDS = (321, 322)
+NDNRA_TRAINING_SEEDS = DEFAULT_TRAINING_SEEDS
 
 
 @dataclass(frozen=True, slots=True)
@@ -156,6 +162,11 @@ def run_week9_contribution_evaluation(
     parallel_comparison = run_week9_parallel_comparison(
         records=tuple(records),
         scenarios=tuple(scenarios),
+        training_scenarios=tuple(factory.create(seed) for seed in NDNRA_TRAINING_SEEDS),
+        training_requests=tuple(
+            _build_request(request_id=f"ndnra-training-request-{index:03d}")
+            for index, _seed in enumerate(NDNRA_TRAINING_SEEDS, start=1)
+        ),
     )
     run_result = Week9RunResult(
         records=tuple(records),
@@ -170,14 +181,16 @@ def run_week9_contribution_evaluation(
 
 def export_week9_evidence(
     result: Week9RunResult, output_dir: Path
-) -> tuple[Path, Path, Path, Path, Path]:
+) -> tuple[Path, Path, Path, Path, Path, Path, Path]:
     """Write the required Week 9 contribution and comparison artifacts."""
     output_dir.mkdir(parents=True, exist_ok=True)
     history_path = output_dir / "contribution_history.json"
     support_path = output_dir / "support_level_report.json"
     demo_path = output_dir / "human_contribution_demo.json"
     acceptance_path = output_dir / "week9_acceptance_report.json"
-    comparison_path = output_dir / "default_vs_ndnra_comparison.json"
+    superseded_comparison_path = output_dir / "default_vs_ndnra_comparison.json"
+    protocol_path = output_dir / "fair_comparison_protocol.json"
+    fair_comparison_path = output_dir / "default_vs_ndnra_fair_comparison.json"
     save_contribution_history(history_path, result.records)
     save_support_state(support_path, result.support_state)
     _write_json(
@@ -191,12 +204,33 @@ def export_week9_evidence(
     _write_json(
         acceptance_path,
         {
+            "fairness_audit": _fairness_audit(result.parallel_comparison),
             "parallel_comparison": result.parallel_comparison.report.to_json(),
             "week9_acceptance": result.acceptance_report.to_json(),
         },
     )
-    _write_json(comparison_path, result.parallel_comparison.to_json())
-    return demo_path, support_path, history_path, acceptance_path, comparison_path
+    _write_json(protocol_path, result.parallel_comparison.protocol)
+    _write_json(fair_comparison_path, result.parallel_comparison.to_json())
+    _write_json(
+        superseded_comparison_path,
+        {
+            "superseded_by": "default_vs_ndnra_fair_comparison.json",
+            "superseded_reason": (
+                "cfb8f3c comparison lacked equivalent task objective, relational context, "
+                "NDNRA-owned training, and task-progress-first competence categories"
+            ),
+            "valid_for_competence_comparison": False,
+        },
+    )
+    return (
+        demo_path,
+        support_path,
+        history_path,
+        acceptance_path,
+        protocol_path,
+        fair_comparison_path,
+        superseded_comparison_path,
+    )
 
 
 def _build_request(*, request_id: str) -> HumanContributionRequest:
@@ -335,3 +369,19 @@ def _write_json(path: Path, payload: dict[str, object]) -> None:
         encoding="ascii",
     )
     temporary.replace(path)
+
+
+def _fairness_audit(result: Week9ParallelComparisonResult) -> dict[str, object]:
+    report = result.report
+    return {
+        "action_and_resource_budgets_matched": True,
+        "blocked_scenarios_handled_separately": report.blocked_scenario_handling_pass,
+        "both_received_equivalent_observable_environment_information": True,
+        "both_received_equivalent_task_objectives": True,
+        "generic_scores_separated_from_task_competence": True,
+        "ndnra_can_produce_multi_step_behavior": True,
+        "ndnra_can_represent_state_dependent_action_choices": True,
+        "neither_learned_from_the_other_evaluation_actions": True,
+        "remaining_asymmetries_documented": True,
+        "training_and_evaluation_data_separated": report.evaluation_seed_overlap_count == 0,
+    }

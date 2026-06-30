@@ -36,21 +36,14 @@ def test_week9_runner_proves_support_transitions_and_exports(tmp_path: Path) -> 
     assert report.verification_authority_violations == 0
     assert report.support_authority_violations == 0
     assert report.ndnra_automatic_promotions == 0
-    assert comparison.pass_gate
-    assert comparison.total_production_steps == report.executed_step_count
-    assert comparison.default_proposal_count == comparison.total_production_steps
-    assert comparison.ndnra_observation_count == comparison.total_production_steps
-    assert (
-        comparison.ndnra_proposal_count + comparison.ndnra_abstention_count
-        == comparison.total_production_steps
-    )
-    assert comparison.comparison_count == comparison.ndnra_proposal_count
-    assert comparison.disagreement_comparison_count == comparison.disagreement_count
-    assert comparison.disagreement_comparison_coverage == 1.0
-    assert comparison.default_task_success_rate == report.independent_success_rate
-    assert len(result.parallel_comparison.ndnra_rollouts) == report.total_attempts
-    assert comparison.ndnra_rollout_attempts == report.total_attempts
-    assert comparison.production_action_replacements == 0
+    assert comparison.experiment_integrity_pass
+    assert comparison.default_competence_pass
+    assert comparison.blocked_scenario_handling_pass
+    assert comparison.authority_containment_pass
+    assert comparison.week9_main_milestone_pass
+    assert comparison.default_solvable_completion_rate == 1.0
+    assert comparison.default_solvable_attempts == 10
+    assert comparison.blocked_scenarios == 2
     assert comparison.authority_violations == 0
     assert comparison.automatic_promotions == 0
     assert result.support_state.current_level is SupportLevel.GUIDED_LEARNER
@@ -58,11 +51,15 @@ def test_week9_runner_proves_support_transitions_and_exports(tmp_path: Path) -> 
     assert (tmp_path / "support_level_report.json").exists()
     assert (tmp_path / "contribution_history.json").exists()
     assert (tmp_path / "week9_acceptance_report.json").exists()
-    comparison_path = tmp_path / "default_vs_ndnra_comparison.json"
+    assert (tmp_path / "fair_comparison_protocol.json").exists()
+    comparison_path = tmp_path / "default_vs_ndnra_fair_comparison.json"
+    superseded_path = tmp_path / "default_vs_ndnra_comparison.json"
     assert comparison_path.exists()
+    assert superseded_path.exists()
     comparison_payload = json.loads(comparison_path.read_text(encoding="ascii"))
-    assert comparison_payload["summary"]["pass_gate"] is True
-    assert comparison_payload["summary"]["total_production_steps"] == report.executed_step_count
+    superseded_payload = json.loads(superseded_path.read_text(encoding="ascii"))
+    assert comparison_payload["summary"]["experiment_integrity_pass"] is True
+    assert superseded_payload["valid_for_competence_comparison"] is False
 
 
 def test_week9_runner_exports_loadable_history_and_support(tmp_path: Path) -> None:

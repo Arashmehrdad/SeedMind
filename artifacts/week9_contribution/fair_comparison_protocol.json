@@ -1,0 +1,60 @@
+{
+  "action_budgets_matched": true,
+  "blocked_evaluation_seeds": [
+    321,
+    322
+  ],
+  "blocked_scenarios_reported_separately": true,
+  "comparison_type": "frozen held-out Default-vs-goal-conditioned-NDNRA",
+  "default_goal_information": "typed Week 9 human contribution request",
+  "evaluation_seeds": [
+    206,
+    207,
+    208,
+    211,
+    212,
+    321,
+    322,
+    213,
+    216,
+    217,
+    218,
+    231
+  ],
+  "generic_scores_separated_from_task_competence": true,
+  "ndnra_goal_information": "same object, target, outcome, completion condition, and context",
+  "ndnra_state_context": [
+    "agent position",
+    "agent orientation",
+    "target-object position",
+    "destination-target position",
+    "object-to-target relative direction and distance",
+    "agent-to-object relative direction and distance",
+    "alignment, behind/contact, useful-push, blockers, target occupancy, resource budget"
+  ],
+  "ndnra_training_source": "NDNRA-executed sandbox transitions only",
+  "remaining_asymmetries": [
+    "Default uses compiled Week 8 skill record.",
+    "NDNRA uses a bounded relational adapter and local action-value evidence."
+  ],
+  "same_initial_state_and_request": true,
+  "solvable_evaluation_seeds": [
+    206,
+    207,
+    208,
+    211,
+    212,
+    213,
+    216,
+    217,
+    218,
+    231
+  ],
+  "training_evaluation_disjoint": true,
+  "training_seeds": [
+    6,
+    7,
+    8,
+    11
+  ]
+}

@@ -212,11 +212,11 @@ Week 9 contribution evaluation against the frozen Week 8 skill record.
 
 ## `src/seedmind/contribution/parallel_comparison.py`
 
-Default SeedMind versus NDNRA comparison for Week 9 contribution.
+Fair Default SeedMind versus goal-conditioned NDNRA comparison for Week 9.
 
 - Kind: python
-- Classes: Week9ComparisonStep, Week9ScenarioComparison, Week9NDNRARollout, Week9ParallelComparisonReport, Week9ParallelComparisonResult, _ScoredCandidates
-- Functions/symbols: run_week9_parallel_comparison, _score_candidates, _goal_progress, _distance, _target_achieved, state_target_pairs, _selection_for_action, _metrics_for_experience, _comparison_signals, _build_step, _scenario_summary, _run_isolated_ndnra_rollouts, _build_report, _mean_optional, _mean_absolute, _clamp_signed
+- Classes: ScenarioKind, TaskProgressCategory, Week9ContributionGoal, NDNRAStateFeatures, NDNRAProposal, GoalConditionedNDNRAController, Week9ComparisonStep, Week9ScenarioOutcome, Week9FairComparisonReport, Week9ParallelComparisonResult
+- Functions/symbols: goal_from_request, extract_ndnra_state_features, train_ndnra_in_sandbox, run_week9_parallel_comparison, _task_progress_delta, _task_progress_category, _scenario_kind, _run_default_counterfactual_steps, _rollout, _build_report, _protocol_payload
 
 ## `src/seedmind/contribution/persistence.py`
 

@@ -60,29 +60,40 @@ def main() -> int:
     print(f"verification_authority_violations={report.verification_authority_violations}")
     print(f"support_authority_violations={report.support_authority_violations}")
     print(f"ndnra_automatic_promotions={report.ndnra_automatic_promotions}")
-    print(f"comparison_total_steps={comparison.total_production_steps}")
-    print(f"ndnra_proposal_count={comparison.ndnra_proposal_count}")
-    print(f"ndnra_abstention_count={comparison.ndnra_abstention_count}")
-    print(f"agreement_count={comparison.agreement_count}")
-    print(f"disagreement_count={comparison.disagreement_count}")
-    print(f"comparison_count={comparison.comparison_count}")
-    print(f"disagreement_comparison_coverage={comparison.disagreement_comparison_coverage:.4f}")
-    print(f"default_better_count={comparison.default_better_count}")
-    print(f"ndnra_better_count={comparison.ndnra_better_count}")
-    print(f"tied_count={comparison.tied_count}")
-    print(f"mean_default_combined_score={comparison.mean_default_combined_score:.6f}")
-    print(f"mean_ndnra_combined_score={comparison.mean_ndnra_combined_score:.6f}")
-    print(f"mean_ndnra_advantage={comparison.mean_ndnra_advantage:.6f}")
-    print(f"default_task_success_rate={comparison.default_task_success_rate:.4f}")
-    print(f"ndnra_rollout_success_rate={comparison.ndnra_rollout_success_rate:.4f}")
-    print(f"ndnra_rollout_successes={comparison.ndnra_rollout_successes}")
-    print(f"learned_assembly_count={comparison.learned_assembly_count}")
-    print(f"effect_dimension_count={comparison.effect_dimension_count}")
+    print(f"experiment_integrity_pass={str(comparison.experiment_integrity_pass).lower()}")
+    print(f"default_competence_pass={str(comparison.default_competence_pass).lower()}")
+    print(f"ndnra_competence_pass={str(comparison.ndnra_competence_pass).lower()}")
+    print(
+        f"blocked_scenario_handling_pass={str(comparison.blocked_scenario_handling_pass).lower()}"
+    )
+    print(f"authority_containment_pass={str(comparison.authority_containment_pass).lower()}")
+    print(f"week9_main_milestone_pass={str(comparison.week9_main_milestone_pass).lower()}")
+    print(f"default_solvable_completion_rate={comparison.default_solvable_completion_rate:.4f}")
+    print(
+        f"ndnra_frozen_solvable_completion_rate={comparison.ndnra_frozen_solvable_completion_rate:.4f}"
+    )
+    print(
+        "ndnra_adaptive_solvable_completion_rate="
+        f"{comparison.ndnra_adaptive_solvable_completion_rate:.4f}"
+    )
+    print(f"task_progress_default_better={comparison.task_progress_default_better}")
+    print(f"task_progress_ndnra_better={comparison.task_progress_ndnra_better}")
+    print(f"task_equivalent={comparison.task_equivalent}")
+    print(f"generic_score_only_difference={comparison.generic_score_only_difference}")
+    print(f"not_comparable={comparison.not_comparable}")
     print(f"human_contribution_demo={args.output_dir / 'human_contribution_demo.json'}")
     print(f"support_level_report={args.output_dir / 'support_level_report.json'}")
     print(f"contribution_history={args.output_dir / 'contribution_history.json'}")
     print(f"week9_acceptance_report={args.output_dir / 'week9_acceptance_report.json'}")
-    print(f"default_vs_ndnra_comparison={args.output_dir / 'default_vs_ndnra_comparison.json'}")
+    print(f"fair_comparison_protocol={args.output_dir / 'fair_comparison_protocol.json'}")
+    print(
+        "default_vs_ndnra_fair_comparison="
+        f"{args.output_dir / 'default_vs_ndnra_fair_comparison.json'}"
+    )
+    print(
+        "superseded_default_vs_ndnra_comparison="
+        f"{args.output_dir / 'default_vs_ndnra_comparison.json'}"
+    )
     passed = (
         report.independent_success_rate >= 0.80
         and report.first_success_kept_dependent
@@ -99,11 +110,11 @@ def main() -> int:
         and report.verification_authority_violations == 0
         and report.support_authority_violations == 0
         and report.ndnra_automatic_promotions == 0
-        and comparison.pass_gate
-        and comparison.default_task_success_rate == report.independent_success_rate
-        and comparison.production_action_replacements == 0
-        and comparison.authority_violations == 0
-        and comparison.automatic_promotions == 0
+        and comparison.experiment_integrity_pass
+        and comparison.default_competence_pass
+        and comparison.blocked_scenario_handling_pass
+        and comparison.authority_containment_pass
+        and comparison.week9_main_milestone_pass
     )
     return 0 if passed else 1
 

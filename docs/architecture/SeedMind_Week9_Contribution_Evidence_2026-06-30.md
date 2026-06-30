@@ -27,9 +27,11 @@ Week 9 is owned by the main `seedmind.contribution` package:
   verification, honest failure construction, and evidence-gated support changes.
 - `persistence.py` saves and loads checksum-protected ASCII JSON, with a complete
   conservative Level 4 fallback for missing, corrupt, or incompatible state.
-- `parallel_comparison.py` replays the exact Default action traces, obtains NDNRA
-  proposals from the same pre-action states, scores every proposal, and runs
-  isolated NDNRA-only task rollouts after shadow learning.
+- `parallel_comparison.py` gives both systems the same typed contribution goal,
+  relational pre-action state context, primitive action set, budgets, and safety
+  constraints; trains NDNRA only from NDNRA-executed sandbox transitions; then
+  runs frozen held-out counterfactual comparisons plus separate frozen and
+  adaptive NDNRA-only rollouts.
 - `week9.py` runs the deterministic contribution, degradation, recovery, and
   corrected parallel-comparison sequence and exports the required deliverables.
 - `scripts/run_week9_contribution.py` executes the complete contribution and
@@ -188,65 +190,68 @@ record, or increases its discovery count.
 
 ## Default-vs-NDNRA Parallel Comparison
 
-The original closure was reopened because authority-only shadow counters did not
-provide comparative performance evidence. Corrected Week 9 now evaluates both
-systems while preserving the authority boundary.
+The original corrected comparison in commit `cfb8f3c` is preserved in Git history
+but is invalid for NDNRA competence assessment. It gave Default a task-specific
+object/target/geometry policy while NDNRA lacked an equivalent typed objective
+and relational state context, trained NDNRA from Default evaluation actions,
+counted generic-score-only differences as NDNRA task wins, mixed blocked tasks
+into ordinary task-success percentages, and exposed one ambiguous `pass_gate`.
 
-For each of the 172 executed Default steps:
+The fair replacement evaluates both systems while preserving the authority
+boundary. For each of the 172 executed Default steps:
 
 ```text
 recreate the exact contribution scenario and Default action trace
 capture the same immutable pre-action state
-obtain an NDNRA proposal from that state
-score each NDNRA proposal against the fixed Default proposal
+give NDNRA the same object, target, outcome, completion condition, context,
+  available actions, budgets, and relational geometry available to Default
+obtain a goal-conditioned NDNRA proposal from that cloned state
+compare the fixed Default action and NDNRA proposal by task progress first
 execute only the Default action in the production replay
-feed the grounded Default transition to NDNRA for shadow learning
+do not update either controller during frozen held-out comparison
 ```
 
-Candidate scoring combines task relevance and the existing nursery oracle:
+NDNRA training is separated from held-out evaluation:
 
 ```text
-combined score = 0.70 * target progress + 0.30 * nursery outcome score
+training seeds: 6, 7, 8, 11
+held-out evaluation seeds: 206, 207, 208, 211, 212, 213, 206, 207, 208, 211, 212, 213
+blocked evaluation seeds: 321, 322
+training/evaluation seed overlap: 0
+NDNRA training source: NDNRA-executed sandbox transitions only
+frozen evaluation updates: 0
+adaptive diagnostic updates: 64
 ```
 
-After shadow learning, NDNRA receives one isolated rollout on each of the same 12
-scenarios. These cloned evaluations measure NDNRA task completion but do not grant
-it production authority.
+Generic developmental scores are retained for diagnostics but are separated from
+task-progress competence categories. They cannot count as NDNRA task wins.
 
-Observed comparison metrics:
+Observed fair comparison summary:
 
 ```text
-total_scenarios=12
-total_production_steps=172
-default_proposal_count=172
-ndnra_observation_count=172
-ndnra_proposal_count=171
-ndnra_abstention_count=1
-agreement_count=34
-disagreement_count=137
-comparison_count=171
-disagreement_comparison_count=137
-disagreement_comparison_coverage=1.0
-default_better_count=133
-ndnra_better_count=4
-tied_count=34
-mean_default_combined_score=0.1091104458581823
-mean_ndnra_combined_score=0.0773852996593519
-mean_ndnra_advantage=-0.031725146198830406
-default_task_successes=10
-default_task_success_rate=0.8333333333333334
-ndnra_rollout_attempts=12
-ndnra_rollout_successes=0
-ndnra_rollout_success_rate=0.0
-learned_assembly_count=4
-effect_dimension_count=8
+experiment_integrity_pass=true
+default_competence_pass=true
+ndnra_competence_pass=false
+blocked_scenario_handling_pass=true
+authority_containment_pass=true
+week9_main_milestone_pass=true
+default_solvable_successes=10/10
+ndnra_frozen_solvable_successes=0/10
+ndnra_adaptive_solvable_successes=0/10
+blocked_default_honest_failures=2/2
+blocked_ndnra_honest_failures=2/2
+task_progress_default_better=23
+task_progress_ndnra_better=0
+task_equivalent=85
+generic_score_only_difference=64
+not_comparable=0
 ```
 
 The result is unambiguous: the current Default skill controller reliably performs
-the Week 9 contribution task, while the current NDNRA shadow does not yet compose
-a successful full task policy. NDNRA nevertheless produced four locally better
-one-step proposals, which remain useful diagnostic evidence rather than grounds
-for promotion.
+the solvable Week 9 contribution task, while the current goal-conditioned NDNRA
+adapter does not yet compose a successful full task policy. No NDNRA competence
+claim is made. The generic-score-only differences remain diagnostic evidence,
+not task-progress wins or grounds for promotion.
 
 Observed authority metrics:
 
@@ -281,22 +286,21 @@ Level 4 state and an empty contribution history.
 - `artifacts/week9_contribution/support_level_report.json`
 - `artifacts/week9_contribution/contribution_history.json`
 - `artifacts/week9_contribution/week9_acceptance_report.json`
+- `artifacts/week9_contribution/fair_comparison_protocol.json`
+- `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
+  (`valid_for_competence_comparison=false`, superseded marker only)
 
 ## Validation
 
 ```text
-focused corrected Week 9 tests: 21 passed
-remaining main-product tests: 312 passed
-main-product total: 333 passed
-early NDNRA tests: 422 passed
-controlled and developmental NDNRA tests: 191 passed
-remaining NDNRA tests: 208 passed
-complete pytest total: 1154 passed
 real Week 9 artifact regeneration gate: passed
+focused Week 9 contribution tests: 29 passed
+complete pytest total: 1162 passed
 ruff format --check .: 280 files already formatted
 ruff check .: passed
 mypy .: no issues in 280 source files
 pip check: no broken requirements
-git diff --check: passed with line-ending normalization warnings only
+git diff --check: passed with line-ending normalization warnings for README.md
+  and .codexbridge/wiki/manifest.json only
 ```

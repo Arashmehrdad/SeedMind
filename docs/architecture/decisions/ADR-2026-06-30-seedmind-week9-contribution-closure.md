@@ -17,8 +17,14 @@ learning. NDNRA remains a non-authoritative shadow under the accepted parallel
 operating policy.
 
 The initial Week 9 closure recorded only authority counters and did not obtain or
-export actual NDNRA proposals, candidate comparisons, or NDNRA task outcomes. The
-closure was therefore reopened and corrected before continuing to Week 10.
+export actual NDNRA proposals, candidate comparisons, or NDNRA task outcomes. A
+later commit, `cfb8f3c`, added a comparison but was methodologically invalid for
+NDNRA competence assessment because NDNRA lacked the same typed object-to-target
+goal and relational state context as Default, learned from Default evaluation
+actions, counted generic-score-only differences as task wins, mixed blocked
+scenarios into ordinary task-success percentages, and exposed one ambiguous
+`pass_gate`. Week 9 was therefore reopened again and corrected before continuing
+to Week 10.
 
 ## Decision
 
@@ -50,11 +56,18 @@ The accepted design is:
 10. Production curiosity retains every executed primitive action. NDNRA has no
     production execution, verification, support, scheduling, replacement, or
     promotion authority, and automatic NDNRA promotion remains disabled.
-11. Corrected shadow operation must collect a Default and NDNRA proposal from the
-    same pre-action state, score every NDNRA proposal, and compare every
-    disagreement.
-12. A separate isolated NDNRA-only rollout must cover every Week 9 scenario so
-    task-completion rates can be compared without granting production authority.
+11. Fair shadow comparison must give both controllers the same initial state,
+    human request, object, target, available primitive actions, budgets, safety
+    and interruption constraints.
+12. NDNRA must receive an explicit typed goal and relational state context rather
+    than only available actions.
+13. NDNRA training must use NDNRA-executed sandbox transitions, with disjoint
+    training and held-out evaluation seeds.
+14. Frozen held-out counterfactual comparisons must update neither controller and
+    must classify outcomes by task progress before generic developmental score.
+15. Separate frozen and adaptive NDNRA-only rollouts must report task-completion
+    rates without granting production authority.
+16. Solvable and intentionally blocked scenarios must be reported separately.
 
 ## Evidence
 
@@ -84,23 +97,28 @@ support_authority_violations=0
 ndnra_automatic_promotions=0
 ```
 
-Observed corrected parallel comparison:
+Observed fair parallel comparison:
 
 ```text
-total_production_steps=172
-ndnra_proposal_count=171
-ndnra_abstention_count=1
-agreement_count=34
-disagreement_count=137
-disagreement_comparison_coverage=1.0
-default_better_count=133
-ndnra_better_count=4
-tied_count=34
-mean_default_combined_score=0.1091104458581823
-mean_ndnra_combined_score=0.0773852996593519
-default_task_successes=10/12
-ndnra_isolated_task_successes=0/12
-production_action_replacements=0
+experiment_integrity_pass=true
+default_competence_pass=true
+ndnra_competence_pass=false
+blocked_scenario_handling_pass=true
+authority_containment_pass=true
+week9_main_milestone_pass=true
+default_solvable_successes=10/10
+ndnra_frozen_solvable_successes=0/10
+ndnra_adaptive_solvable_successes=0/10
+blocked_default_honest_failures=2/2
+blocked_ndnra_honest_failures=2/2
+task_progress_default_better=23
+task_progress_ndnra_better=0
+task_equivalent=85
+generic_score_only_difference=64
+not_comparable=0
+frozen_evaluation_updates=0
+adaptive_ndnra_updates=64
+training_evaluation_seed_overlap=0
 authority_violations=0
 ```
 
@@ -121,7 +139,10 @@ Artifacts:
 - `artifacts/week9_contribution/support_level_report.json`
 - `artifacts/week9_contribution/contribution_history.json`
 - `artifacts/week9_contribution/week9_acceptance_report.json`
+- `artifacts/week9_contribution/fair_comparison_protocol.json`
+- `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
+  (`valid_for_competence_comparison=false`, superseded marker only)
 - `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`
 
 ## Consequences
@@ -132,9 +153,10 @@ Artifacts:
 - The frozen Week 8 skill is reused without rediscovery or recompilation.
 - Competence degradation can restore higher support, and recovery requires a new
   full evidence threshold.
-- NDNRA remains non-authoritative but now produces measurable proposals and
-  isolated task outcomes for direct comparison.
-- The observed NDNRA result is currently weaker than Default: `0/12` isolated
-  task successes and only four better one-step candidates versus 133 for Default.
+- NDNRA remains non-authoritative but now receives an explicit comparable task
+  goal and relational context for fair held-out comparison.
+- The observed NDNRA result is currently weaker than Default: `0/10` frozen
+  solvable successes and `0/10` adaptive solvable successes, with zero
+  task-progress wins against Default. NDNRA competence is explicitly false.
 - Original SeedMind Week 10 was not started.
 - NDNRA Stage 9 was not started or authorised.

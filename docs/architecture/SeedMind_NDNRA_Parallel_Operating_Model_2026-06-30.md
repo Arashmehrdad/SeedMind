@@ -49,7 +49,7 @@ The policy fails closed if any session reports a replaced production action, an 
 
 ## 4. Learning and Comparison
 
-For every production step, NDNRA receives the same observation and the grounded result of the action that was actually executed.
+For every production step, NDNRA receives the same observation and the grounded result of the action that was actually executed. When a comparison claims task competence, NDNRA must also receive the same typed task objective and relational state context that the production controller uses.
 
 When NDNRA proposes the same action as production, the agreement is recorded. When it proposes a different valid action, the candidates are compared after both candidates are fixed. The comparison is evidence only and does not alter the current production action.
 
@@ -60,7 +60,10 @@ The audit records:
 - NDNRA shadow observations;
 - suggestions and disagreements;
 - comparison coverage;
-- cases where the NDNRA candidate would have scored better;
+- task-progress comparison categories;
+- generic-score-only diagnostic differences;
+- frozen and adaptive NDNRA task completion;
+- solvable and intentionally blocked scenarios separately;
 - authority violations;
 - automatic promotions.
 
@@ -101,13 +104,24 @@ contribution evaluation through:
 
 - `src/seedmind/contribution/parallel_comparison.py`;
 - exact deterministic replay of the frozen Default action traces;
-- same-state NDNRA proposals and complete proposal scoring;
-- isolated NDNRA-only rollouts across the same scenario set;
-- `artifacts/week9_contribution/default_vs_ndnra_comparison.json`.
+- a goal-conditioned NDNRA adapter receiving the same object, target, expected
+  outcome, completion condition, scenario context, primitive actions, budgets,
+  safety constraints, and relational geometry as Default;
+- NDNRA sandbox training from NDNRA-executed transitions only;
+- disjoint training and held-out evaluation seeds;
+- frozen same-state counterfactual comparisons with zero evaluation learning;
+- separate frozen and adaptive NDNRA-only rollouts across the same held-out
+  scenario set;
+- `artifacts/week9_contribution/fair_comparison_protocol.json`;
+- `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`;
+- `artifacts/week9_contribution/default_vs_ndnra_comparison.json`, retained only
+  as a superseded `valid_for_competence_comparison=false` marker.
 
-The corrected Week 9 evidence found Default task success of `10/12` and isolated
-NDNRA task success of `0/12`. Across 171 scored NDNRA proposals, Default was better
-133 times, NDNRA was better four times, and 34 comparisons tied.
+The corrected Week 9 evidence found Default solvable task success of `10/10`,
+frozen NDNRA solvable task success of `0/10`, and adaptive NDNRA solvable task
+success of `0/10`. Blocked scenarios are reported separately as honest failures.
+Counterfactual task-progress categories were Default better `23`, NDNRA better
+`0`, equivalent `85`, generic-score-only `64`, and not comparable `0`.
 
 ## 7. Persistence Boundary
 
@@ -121,8 +135,9 @@ The main SeedMind stores and NDNRA research proof stores remain distinct.
 
 ## 8. Immediate Next Work
 
-The original reusable-skill and contribution objectives are now closed with
-parallel evidence. Original Week 10 may proceed while comparison remains mandatory.
+The original reusable-skill and contribution objectives are now closed with fair
+parallel evidence. Original Week 10 may proceed after this correction while
+comparison remains mandatory.
 
 Near-term batches should:
 

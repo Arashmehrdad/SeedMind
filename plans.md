@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: corrected original SeedMind Week 9 contribution, reduced support, and Default-vs-NDNRA comparative evidence
+- Latest completed milestone: original SeedMind Week 9 contribution, reduced support, and fair Default-vs-NDNRA comparison correction
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,8 +17,8 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: SeedMind main roadmap with NDNRA shadow evaluation
 - Last closed stage: NDNRA Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current stage: corrected main SeedMind Week 9 is closed; original Week 10 remains next and not started
-- Current status: typed human contribution and support reduction now run with mandatory Default-vs-NDNRA comparative evidence. The exact Default action trace is replayed deterministically; NDNRA observes the same pre-action state, proposes without authority, every proposal is scored, disagreements have complete comparison coverage, and NDNRA receives grounded Default transitions for learning. A separate isolated NDNRA-only rollout covers all 12 scenarios. Default remains the only production controller. Automatic component promotion remains disabled and NDNRA Stage 9 remains unauthorised.
+- Current stage: main SeedMind Week 9 fair-comparison correction is closed; original Week 10 remains next and not started
+- Current status: commit `cfb8f3c` is preserved but superseded as invalid Default-vs-NDNRA competence evidence. The replacement fair comparison gives NDNRA the same typed object-to-target goal and relational context as Default, trains NDNRA only from NDNRA-executed sandbox transitions, keeps training and held-out evaluation seeds disjoint, freezes evaluation, separates adaptive diagnostics, classifies task-progress outcomes separately from generic score differences, and reports blocked scenarios separately. Experiment integrity, Default competence, blocked-scenario handling, authority containment, and Week 9 main-milestone gates pass. NDNRA competence is reported separately and honestly fails.
 - Expanded developmental architecture marker: 84%
 - Marker interpretation: restored after Week 9 produced both grounded human contribution evidence and actual parallel Default-vs-NDNRA results
 
@@ -45,7 +45,13 @@ Completed bounded increments:
 19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
 20. SeedMind and NDNRA parallel operation — production curiosity retains every executed action, NDNRA observes and suggests without authority, disagreements require comparison evidence, audits fail closed, and automatic component promotion remains disabled.
 21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
-22. Corrected original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, exact-trace Default-vs-NDNRA comparison, full disagreement coverage, isolated NDNRA rollouts across all 12 scenarios, deterministic comparison artifacts, and zero production, verification, support, or NDNRA authority violations.
+22. Original SeedMind Week 9 contribution, reduced support, and fair Default-vs-NDNRA comparison — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, fair held-out Default-vs-goal-conditioned-NDNRA comparison, separate NDNRA competence failure, and zero production, verification, support, or NDNRA authority violations.
+
+Superseded evidence:
+
+- `cfb8f3c` is preserved in history but is not valid evidence for NDNRA competence comparison.
+- `artifacts/week9_contribution/default_vs_ndnra_comparison.json` is annotated as `valid_for_competence_comparison=false` and superseded by `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`.
+- Week 9 closure now rests on `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`, `fair_comparison_protocol.json`, and `week9_acceptance_report.json`, which distinguish experiment integrity, Default competence, NDNRA competence, blocked-scenario handling, authority containment, and Week 9 main milestone status.
 
 ## Current accepted boundary
 
@@ -112,79 +118,79 @@ The programme must not:
 
 Production curiosity remains the sole production action authority. The protected external safety supervisor and human permission channels remain authoritative.
 
-## Week 9 parallel-comparison correction
+## Week 9 fair-comparison correction
 
-Week 9 now runs Default SeedMind and NDNRA side by side on the same contribution states. Shadow means comparative evaluation without NDNRA production authority, not passive observation.
+Week 9 now runs a fair Default-vs-NDNRA comparison on the same contribution tasks. Shadow means comparative evaluation without NDNRA production authority, not passive observation.
 
-Required flow for every eligible production step:
+The superseded `cfb8f3c` comparison is invalid for competence assessment because Default received task-specific object, target, geometry, route, contact, and sequence policy while NDNRA did not receive an equivalent object-to-target objective or relational state context. It also learned from Default evaluation actions, executed isolated NDNRA rollouts without NDNRA consequence updates, counted generic-score-only differences as task wins, and mixed intentionally blocked scenarios into ordinary task-success percentages.
 
-1. capture one immutable pre-action observation and available-action set;
-2. obtain the Default SeedMind production proposal;
-3. obtain the NDNRA shadow proposal from that same state;
-4. record agreement, disagreement, or NDNRA abstention;
-5. when proposals differ, score both fixed candidates with the existing comparison oracle before the Default action changes the state;
-6. execute only the Default action;
-7. give NDNRA the grounded result of that executed action for learning;
-8. retain complete per-step provenance and authority evidence.
+Implemented fair protocol:
 
-Required exported evidence:
+1. give both systems the same initial state, human request, target object, destination target, primitive actions, step budget, resource budget, safety and interruption constraints;
+2. give NDNRA a typed goal with object identity, destination target, requested outcome, completion condition, and scenario context;
+3. give NDNRA relational state context, not only available actions;
+4. train NDNRA primarily from NDNRA-executed sandbox transitions and keep training and held-out evaluation seeds disjoint;
+5. freeze both systems for primary held-out competence evaluation;
+6. run a separate adaptive NDNRA diagnostic that learns only from its own grounded rollout transitions;
+7. execute per-step counterfactual action comparisons on independent cloned states without training either controller;
+8. report solvable and intentionally blocked scenarios separately;
+9. keep generic developmental score differences separate from task-progress competence categories;
+10. keep Default as the only production controller and keep NDNRA automatic promotion disabled.
 
-- total comparable production steps;
-- Default and NDNRA proposal counts;
-- agreements, disagreements, abstentions, and comparison coverage;
-- Default-better, NDNRA-better, and tied candidate counts;
-- aggregate candidate scores and score advantage;
-- per-scenario and per-step comparison timeline;
-- a sandboxed NDNRA-only rollout on the same scenario set after shadow learning, producing an NDNRA task-completion rate without granting production authority;
-- Default task completion, NDNRA sandbox task completion, and one-step candidate-comparison outcomes reported as three separate measurements;
-- contribution outcomes and support transitions kept separate from candidate-comparison outcomes;
-- zero action replacements, authority violations, support-authority violations, verification-authority violations, and automatic promotions.
+Exported evidence:
 
-Week 9 pass gate:
+- `fair_comparison_protocol.json`
+- `default_vs_ndnra_fair_comparison.json`
+- `week9_acceptance_report.json`
+- regenerated `human_contribution_demo.json`
+- annotated superseded `default_vs_ndnra_comparison.json` with `valid_for_competence_comparison=false`
 
-- all eligible steps have one Default proposal and one NDNRA observation;
-- every disagreement has a comparison record;
-- exported metrics directly compare Default task completion, NDNRA sandbox task completion, and same-state candidate quality;
-- Default remains the only production controller; NDNRA actions execute only inside isolated evaluation clones;
-- existing contribution, verification, honest-failure, persistence, and support-reduction tests pass;
-- focused and complete repository test suites pass after evidence regeneration.
+Week 9 pass fields:
 
-Observed corrected comparison:
+- `experiment_integrity_pass`: fair, complete, reproducible, and leak-free;
+- `default_competence_pass`: Default meets declared solvable and blocked criteria;
+- `ndnra_competence_pass`: NDNRA meets separately declared thresholds, and may be false;
+- `blocked_scenario_handling_pass`: blocked scenarios are honest failures, help, or abstentions without loops or false success;
+- `authority_containment_pass`: zero action replacement, verification/support authority leakage, or automatic promotion;
+- `week9_main_milestone_pass`: original main-roadmap Week 9 contribution and support-reduction requirements remain satisfied, without implying NDNRA competence.
+
+Observed fair comparison result:
 
 ```text
-Default task success: 10/12 = 0.8333333333333334
-NDNRA isolated task success: 0/12 = 0.0
-production steps: 172
-NDNRA proposals: 171
-NDNRA abstentions: 1
-agreements: 34
-disagreements: 137
-disagreement comparison coverage: 1.0
-Default better: 133
-NDNRA better: 4
-ties: 34
-mean Default combined score: 0.1091104458581823
-mean NDNRA combined score: 0.0773852996593519
-mean NDNRA advantage: -0.031725146198830406
+experiment_integrity_pass=true
+default_competence_pass=true
+ndnra_competence_pass=false
+blocked_scenario_handling_pass=true
+authority_containment_pass=true
+week9_main_milestone_pass=true
+default_solvable_successes=10/10
+ndnra_frozen_solvable_successes=0/10
+ndnra_adaptive_solvable_successes=0/10
+blocked_default_honest_failures=2/2
+blocked_ndnra_honest_failures=2/2
+task_progress_default_better=23
+task_progress_ndnra_better=0
+task_equivalent=85
+generic_score_only_difference=64
+not_comparable=0
+frozen_evaluation_updates=0
+adaptive_ndnra_updates=64
+training_evaluation_seed_overlap=0
 ```
 
 ## Current validation baseline
 
-After corrected original SeedMind Week 9 closure:
+After fair corrected original SeedMind Week 9 closure:
 
 ```text
-focused Week 9 tests: 21 passed
-remaining main-product tests: 312 passed
-main-product total: 333 passed
-NDNRA group 1: 422 passed
-NDNRA group 2: 191 passed
-NDNRA group 3: 208 passed
-complete pytest total: 1154 passed
-.\.venv\Scripts\python.exe -m ruff format --check .: 280 files already formatted
-.\.venv\Scripts\python.exe -m ruff check .: passed
-.\.venv\Scripts\python.exe -m mypy .: no issues in 280 source files
+.\.venv\Scripts\python.exe scripts\run_week9_contribution.py: passed
+.\.venv\Scripts\python.exe -m pytest tests\unit\contribution -q --basetemp .tmp_pytest\week9-fair-final: 29 passed
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full-final: 1162 passed
+.\.venv\Scripts\ruff.exe format --check .: 280 files already formatted
+.\.venv\Scripts\ruff.exe check .: passed
+.\.venv\Scripts\mypy.exe .: no issues in 280 source files
 .\.venv\Scripts\python.exe -m pip check: no broken requirements
-git diff --check: passed with line-ending normalization warnings only
+git diff --check: passed with line-ending normalization warnings for README.md and .codexbridge/wiki/manifest.json only
 ```
 
 The previous full baseline after original Week 8 closure was 1133 passing tests.
