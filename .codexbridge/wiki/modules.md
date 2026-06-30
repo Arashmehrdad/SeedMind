@@ -905,6 +905,14 @@ Stage 0 identity, lifecycle, and schema-separation contracts for NDNRA v0.2.
 - Classes: DevelopmentalIdentityKind, DevelopmentalLifecycleState, V01AcceptanceBaselineReference, DevelopmentalSchemaIdentity, DevelopmentalIdentity, StageZeroIdentityCatalog, DevelopmentalLifecycleTransition, DevelopmentalTraceEvent, DevelopmentalEvidenceTrace, StageZeroContractEvidence
 - Functions/symbols: make_developmental_identity, default_stage_zero_identity_catalog, run_stage_zero_contract_acceptance, _validate_index, _validate_positive_int, _validate_zero_int, _validate_ascii_code, _identity, _canonical_json_bytes
 
+## `src/seedmind/research/ndnra/developmental_maturation.py`
+
+Stage 4 regional maturation, skill, and ambition persistence evidence.
+
+- Kind: python
+- Classes: RegionalMaturityState, MaturationComparisonStrategy, AmbitionPressureState, StageFourMaturationConfig, RegionalMaturityProfile, MaturationComparisonResult, SkillMaturationEvidence, PersistentAmbitionEvidence, RelearningRollbackEvidence, StageFourMaturationEvidence
+- Functions/symbols: run_stage_four_maturation_acceptance, _maturation_comparisons, _skill_maturation_evidence, _persistent_ambition_evidence, _build_relearning_evidence, _validate_non_empty_sequence, _validate_positive_int, _validate_non_negative_int, _validate_zero_int, _validate_unit, _validate_ascii_code, _validate_sorted_unique_ascii_codes, _identity, _canonical_json_bytes
+
 ## `src/seedmind/research/ndnra/developmental_network.py`
 
 Stage 1 recurrent experiential substrate for NDNRA v0.2 research.
@@ -1575,6 +1583,13 @@ Tests for NDNRA v0.2 Stage 0 identity and lifecycle contracts.
 
 - Kind: python
 - Functions/symbols: _identity, _transition, test_stage_zero_acceptance_matrix_is_complete_and_zero_authority, test_v0_2_schema_identity_cannot_be_confused_with_v0_1_schemas, test_identity_catalog_has_exact_canonical_kind_coverage, test_lifecycle_transitions_are_explicit_deterministic_and_non_authoritative, test_trace_contract_rejects_runtime_gateway_and_sequence_mutations, test_public_exports_cover_stage_zero_contracts, test_developmental_identity_has_no_runtime_adapter_or_gateway_imports
+
+## `tests/unit/test_ndnra_developmental_maturation.py`
+
+Tests for NDNRA v0.2 Stage 4 maturation, skill, and ambition evidence.
+
+- Kind: python
+- Functions/symbols: test_stage_four_acceptance_matrix_is_complete_and_zero_authority, test_child_and_mature_regions_use_distinct_local_maturity_controls, test_maturation_controls_show_regional_control_beats_required_baselines, test_promotion_requires_varied_context_retention_low_interference_and_low_correction, test_relearning_zone_is_bounded_and_rollback_restores_exact_state, test_value_sources_and_capability_gaps_are_complete_and_separate, test_ambition_pressure_reduces_after_pause_satisfaction_and_retirement, test_skill_verifier_beats_producer_and_reopens_after_drift, test_stage_four_config_bounds_are_enforced, test_stage_four_acceptance_is_deterministic, test_public_exports_cover_stage_four_maturation, test_developmental_maturation_has_no_forbidden_runtime_dependencies
 
 ## `tests/unit/test_ndnra_developmental_network.py`
 
