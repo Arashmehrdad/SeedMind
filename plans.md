@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 1 recurrent experiential substrate
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 1A DESA bootstrap and hierarchical metacognition
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 1 persistent recurrent experiential substrate
-- Current stage: Developmental Network v0.2 — Stage 1A DESA bootstrap and hierarchical metacognition
-- Current status: Stage 1 substrate behavior is implemented and evidenced locally; Stage 1A may now test local monitors, regional captains, DESA council summaries, optional steward gates, Executive Auditor evidence, event partitioning, temporary skill incubation, verifier calibration, temporary ambition, and bounded feedback iteration over the Stage 1 substrate without broad associative recall, simultaneous needs, mature skill promotion, dreaming, action gateway work, SQLite cognition, or production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 1A DESA bootstrap and hierarchical metacognition
+- Current stage: Developmental Network v0.2 — Stage 2 associative need-and-context recall
+- Current status: Stage 1A is implemented and evidenced locally; Stage 2 may next test associative recruitment, partial-cue completion, inhibition, pattern separation, coalition competition, context ordering, bounded recall depth, and matched controls while preserving separate experience identity and without simultaneous needs, mature skill promotion, dreaming, persistence, action gateway work, SQLite cognition, or production action authority
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
+- Marker interpretation: unchanged at this boundary because Stage 1A remains a bounded research closure and does not authorize production behavior
 
 Completed bounded increments:
 
@@ -35,6 +35,7 @@ Completed bounded increments:
 9. Developmental Network v0.2 Stage -1 — deterministic developmental constitution, DESA, Nursery curriculum, ambition, skill-bundle, Outcome Fidelity, authority, integrity, and causal-responsibility contracts.
 10. Developmental Network v0.2 Stage 0 — deterministic v0.2 schema identity, typed identities, lifecycle transitions, trace evidence, and v0.1 schema separation contracts.
 11. Developmental Network v0.2 Stage 1 — deterministic fixed-pool recurrent substrate, signed connections, distributed overlapping experience coalitions, bounded settling, and zero-authority replay evidence.
+12. Developmental Network v0.2 Stage 1A — deterministic DESA bootstrap, regional captain summaries, bounded workspace routing, optional steward gates, temporary skill incubation, verifier calibration, Executive Auditor correction, event partition preservation, temporary ambition, and zero-authority evidence.
 
 ## Current accepted boundary
 
@@ -143,21 +144,23 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-0-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1a-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1, Stage 0, and Stage 1 are now implemented and evidenced. The next authorised implementation boundary is Stage 1A DESA bootstrap and hierarchical metacognition:
+Stage -1, Stage 0, Stage 1, and Stage 1A are now implemented and evidenced. The next authorised implementation boundary is Stage 2 associative need-and-context recall:
 
 ```text
-DESA bootstrap and hierarchical metacognition
+Associative need-and-context recall
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -190,7 +193,7 @@ Stage 1 is closed by `docs/architecture/NDNRA_Developmental_Stage_1_Evidence_202
 6. Structural neuron creation remains disabled.
 7. SQLite cognition and action-authority violations remain zero.
 
-Stage 1A must prove:
+Stage 1A is closed by `docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2026-06-30.md`, which proves:
 
 1. Familiar low-risk work can resolve locally while uncertainty and conflict escalate.
 2. Several regional captains can contribute without one region monopolising unfamiliar input.
@@ -202,9 +205,20 @@ Stage 1A must prove:
 8. Event partitioning improves reusable recall over one-session and every-step controls.
 9. Temporary ambitions preserve their desired-state source separately from capability-gap evidence.
 10. Pending or unavailable feedback remains unverified rather than successful.
-11. External side effects and production action-authority violations remain zero.
+11. SQLite cognition, external side effects, and production action-authority violations remain zero.
 
-Do not begin broad associative recall, simultaneous multiple-need work, mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 1A passes.
+Stage 2 must prove:
+
+1. Need-relevant experiences respond more strongly than unrelated controls.
+2. Present context changes the response ordering.
+3. The best context match or a useful compatible coalition dominates.
+4. Original experience identities remain separately inspectable.
+5. Contradictory experiences remain available but are inhibited when inappropriate.
+6. Partial-cue recall succeeds more often than a shuffled-association control.
+7. False co-activation remains below the declared threshold.
+8. Recall cost rises predictably with dormancy and depth.
+
+Do not begin simultaneous multiple-need work, mature ambition commitment, mature skill promotion, dream maintenance, conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 2 passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 

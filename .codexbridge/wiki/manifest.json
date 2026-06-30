@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T04:27:51.955023+00:00",
+  "generated_at": "2026-06-30T04:46:40.854376+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 343,
+  "source_file_count": 347,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "1c5286c439f84e20a5540e4d85523da33ad1a403111d6b2a20c660cc6787f89d",
-      "size_bytes": 15527
+      "sha256": "a6b1fe3afe2d7c90aa6972b6ffbe7120ea6af1c74ee8740f865c668711a14d17",
+      "size_bytes": 16551
     },
     {
       "path": "pyproject.toml",
@@ -191,6 +191,11 @@
       "size_bytes": 5590
     },
     {
+      "path": "docs/architecture/NDNRA_Developmental_Stage_1A_Evidence_2026-06-30.md",
+      "sha256": "0ccbb2a0341431ab82416832dda73cb8e1a44f04b3b95790b35ad4bd1abe79e8",
+      "size_bytes": 9541
+    },
+    {
       "path": "docs/architecture/NDNRA_Developmental_Stage_1_Evidence_2026-06-30.md",
       "sha256": "bb4aa42fafac3f33523ad4de00d96a42da9e6de9dfa0e08cc92eacd49bbd3812",
       "size_bytes": 6156
@@ -304,6 +309,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1-closure.md",
       "sha256": "36ca8980182d5579ac19b14b8e9bab880e459136f239d71879b7eed7f6bcf63e",
       "size_bytes": 1835
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-1a-closure.md",
+      "sha256": "16969fdc45c9ebb9d4346698efcee18545f0528001357a448dcd0b3251356cd8",
+      "size_bytes": 2330
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md",
@@ -867,8 +877,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "972ddd8946c3ef189056a821122c478eb9adc023dee2381fae97a046b68e30e5",
-      "size_bytes": 33056
+      "sha256": "ba997d19350fbe5e6a5bf759ec8c622675bc247980b2c68534b3de97aa869282",
+      "size_bytes": 33957
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -1074,6 +1084,11 @@
       "path": "src/seedmind/research/ndnra/developmental_constitution.py",
       "sha256": "2d6f458a35234513a95bc4ebafbd9b216147c55a7982256c774a6bb1af18a94f",
       "size_bytes": 80432
+    },
+    {
+      "path": "src/seedmind/research/ndnra/developmental_desa_bootstrap.py",
+      "sha256": "0eaed8428e1d093fb32b30023aace386cba3b1badf76b709f400dcef7f9c440c",
+      "size_bytes": 38094
     },
     {
       "path": "src/seedmind/research/ndnra/developmental_identity.py",
@@ -1539,6 +1554,11 @@
       "path": "tests/unit/test_ndnra_developmental_constitution.py",
       "sha256": "32c8ff54ffca7beb06b1e4a96b4407d833809880dd29fdc742e634e1ab8944a5",
       "size_bytes": 19215
+    },
+    {
+      "path": "tests/unit/test_ndnra_developmental_desa_bootstrap.py",
+      "sha256": "f6f1e58b6762ce752ac6537760c11e017ff646e3b3c3ceb8ae950dc16223d599",
+      "size_bytes": 10458
     },
     {
       "path": "tests/unit/test_ndnra_developmental_identity.py",
