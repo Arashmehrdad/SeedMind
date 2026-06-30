@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage -1 constitutional contracts
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement
-- Current stage: Developmental Network v0.2 — Stage -1 developmental constitution, desired-state ambition, adaptive DESA, and skill-bundle contracts
-- Current status: The latest theory corrections are now reflected in the governing plan; implementation must begin with the updated Stage -1 contracts before recurrent-network work
+- Last closed stage: Developmental Network v0.2 — Stage -1 developmental constitution, desired-state ambition, adaptive DESA, and skill-bundle contracts
+- Current stage: Developmental Network v0.2 — Stage 0 v0.2 identity, lifecycle, trace, and schema-separation contracts
+- Current status: Stage -1 contracts are implemented and evidenced locally; Stage 0 must define v0.2 identities and lifecycle transitions without runtime adapter, action gateway, persistence-store merging, or production action authority
 - Expanded developmental architecture marker: 82%
 - Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
@@ -32,6 +32,7 @@ Completed bounded increments:
 6. Batch 6 — deterministic caller-nominated safe-experiment proposal contracts.
 7. Batch 7 — deterministic explicit human approve, reject, or defer review.
 8. Batch 8 — deterministic training-review or explicit configured non-training bypass resolution.
+9. Developmental Network v0.2 Stage -1 — deterministic developmental constitution, DESA, Nursery curriculum, ambition, skill-bundle, Outcome Fidelity, authority, integrity, and causal-responsibility contracts.
 
 ## Current accepted boundary
 
@@ -100,18 +101,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Adaptive Skill and Outcome Fidelity Planning Refinement:
+After NDNRA Developmental Network v0.2 Stage -1 constitutional contracts:
 
 ```text
-ruff format --check .: 237 files already formatted
+ruff format --check .: 239 files already formatted
 ruff check .: passed
-mypy: no issues in 237 source files
-pytest -q: 986 passed
+mypy: no issues in 239 source files
+pytest -q: 1001 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The adaptive-skill planning refinement passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
+The Stage -1 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_constitution.py` with 15 tests. The full repository gates also passed before the bounded local Stage -1 commit.
 
 ## Current technical sources
 
@@ -137,25 +138,19 @@ Use these for architecture and implementation detail:
 - `docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md`
 - `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
+- `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-The first authorised implementation boundary is Stage -1 and Stage 0 contracts, followed by Stage 1 and Stage 1A in separate bounded batches:
+Stage -1 is now implemented and evidenced. The next authorised implementation boundary is Stage 0 contracts, followed by Stage 1 and Stage 1A in separate bounded batches:
 
 ```text
-developmental constitution and ordinary and Executive Nursery curricula
-    +
-desired-state value-source, ambition, capability-gap, and integrity contracts
-    +
-minimal adaptive DESA hierarchy, event partitioning, and metacognition
-    +
-skill-bundle, developmental Outcome Fidelity, and feedback-iteration contracts
-    +
 v0.2 lifecycle identities and schema separation
     +
 reusable sparse recurrent neuron pool
@@ -169,7 +164,7 @@ deterministic bounded recurrent settling
 DESA bootstrap and hierarchical metacognition
 ```
 
-Stage -1 must prove at the contract and scenario level:
+Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
 
 1. DESA begins with skill bundles, regional captains, and a cross-region council rather than one all-knowing captain or a fixed bureaucracy.
 2. An intermediate skill steward is optional and survives only when its measured benefit justifies its cost.
