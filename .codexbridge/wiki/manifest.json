@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T23:36:41.420796+00:00",
+  "generated_at": "2026-06-30T00:27:37.622536+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 327,
+  "source_file_count": 329,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "2fb0e9529dd49ab5a18e81fcbfd99e4a1632611d73c0cd29521447d0c21991b9",
-      "size_bytes": 7833
+      "sha256": "053d063e4e6f614796c64658bc130db2dfca7d0f2e1838ec35c97fb8617dfb98",
+      "size_bytes": 8769
     },
     {
       "path": "pyproject.toml",
@@ -181,6 +181,11 @@
       "size_bytes": 1561
     },
     {
+      "path": "docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md",
+      "sha256": "46177213b15b5bb9b828563eea224f49c74ad90e452bb8d3295bf82975f98d81",
+      "size_bytes": 29498
+    },
+    {
       "path": "docs/architecture/NDNRA_Final_Standalone_Closure_Audit_2026-06-29.md",
       "sha256": "4fdeba763bade8dbd8f0dc1d711ea41b67ef3e67d79ae2a77de943695eb94ab4",
       "size_bytes": 13555
@@ -259,6 +264,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md",
       "sha256": "7eeb1c75aadb6e71d01fd0b9267f0a2b94210aae834c29a621963d4f48b4146e",
       "size_bytes": 3167
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md",
+      "sha256": "0f65dcbf5a739efd482e93e6ac19c793d4746f092e774b7573a0aca90c3aa1f1",
+      "size_bytes": 4268
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md",

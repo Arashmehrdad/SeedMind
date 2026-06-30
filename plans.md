@@ -9,7 +9,7 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: Original Plan and NDNRA v0.1 Comparison Decision
+- Latest completed milestone: NDNRA Developmental Network Implementation and Test Plan v0.2
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
@@ -17,10 +17,10 @@ Update this file in place as work progresses. Do not create or update session ha
 
 - Program: NDNRA
 - Last closed stage: Original Plan and NDNRA v0.1 Comparison Decision
-- Current stage: Awaiting explicit integration-boundary approval
-- Current status: The original master plan remains the product and MVP spine; selective partial integration of NDNRA is recommended, but no runtime integration is approved
+- Current stage: Developmental Network v0.2 — Stage 0 contracts and lifecycle identities
+- Current status: The post-v0.1 implementation and test plan is accepted; isolated Stage 0 and Stage 1 research work is authorised, but production integration and action authority remain prohibited
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged because the comparison adds no new cognitive architecture capability; it is not a completion percentage for the original SeedMind roadmap
+- Marker interpretation: unchanged because the new document is an implementation and falsification plan, not evidence that a new cognitive capability has passed
 
 Completed bounded increments:
 
@@ -35,34 +35,51 @@ Completed bounded increments:
 
 ## Current accepted boundary
 
-All bounded imagination outputs remain:
+Standalone NDNRA v0.1 remains closed under its accepted bounded evidence boundary. Its proof stores, persistence schemas, bounded imagination rules, and authority restrictions must not be mutated merely to implement v0.2 research.
 
-- explicitly `ExperienceOrigin.IMAGINED`;
-- in memory only;
-- deterministic and finite;
+The accepted post-v0.1 theory is:
+
+- specialised concurrent regions rather than one uniform mind;
+- separate experiences connected through learned need, context, action, outcome, excitation, and inhibition;
+- ordinary recruitment of a reusable existing neuron pool rather than one new neuron per experience;
+- homeostatic control of connectivity, activation, repeated recruitment, and rare evidence-gated structural expansion;
+- regional child-to-adult plasticity with bounded local reopening;
+- reversible dormancy and hibernation rather than deletion of memory-bearing structures;
+- caller-invoked dream maintenance that cannot create factual evidence or actions;
+- exact restoration of the same developmental network after restart;
+- protected prohibitions plus directly taught and experience-refined responsibility;
+- typed internal action proposals separated from an external protected action gateway.
+
+The v0.2 research programme must remain:
+
+- inside `src/seedmind/research/ndnra` until a later integration ADR;
+- deterministic and seeded;
+- software-only and symbolic, with physical robotics deferred;
+- non-authoritative;
+- non-SQLite for cognition;
 - provenance-preserving;
-- non-evidentiary;
-- non-authoritative.
+- bounded by explicit pass and falsification conditions;
+- matched against controls and ablations;
+- unable to modify the closed v0.1 proof stores.
 
-The subsystem may represent exact imagined traces, enumerate exact supported candidates, annotate need alignment, describe pairwise route relations, expose unresolved comparison reasons, preserve caller-supplied safe-experiment proposal semantics, record optional training-time human review, and resolve an explicit configured non-training review bypass without autonomous recommendation or execution.
+The programme must not:
 
-It must not:
+- create factual evidence from dreams or imagination;
+- permanently delete memory-bearing neurons or synapses;
+- create a neuron automatically for each experience;
+- merge separate experiences merely to obtain generalisation;
+- grant any region, conscience system, dream process, proposal, or NDNRA component production action authority;
+- weaken protected prohibitions through ordinary learning;
+- introduce autonomous background workers, queues, or timers;
+- persist bounded imagination as real experience;
+- merge proof stores;
+- connect to physical robotic actuators.
 
-- create factual evidence;
-- change confidence, mastery, competence, growth pressure, replay evidence, or real-observation state;
-- create a hidden route utility or arbitrary cross-effect total;
-- globally rank candidates;
-- select a winner;
-- recommend, optimise, schedule, promote, or execute an action;
-- persist imagination state;
-- integrate with the live Nursery loop;
-- influence production curiosity or production actions.
-
-Unknown evidence, low-confidence evidence, route-depth mismatch, and explicit trade-offs block unsupported dominance claims.
+Production curiosity remains the sole production action authority. The protected external safety supervisor and human permission channels remain authoritative.
 
 ## Current validation baseline
 
-After Original Plan and NDNRA v0.1 Comparison Decision:
+After NDNRA Developmental Network Implementation and Test Plan v0.2:
 
 ```text
 ruff format --check .: 237 files already formatted
@@ -72,6 +89,8 @@ pytest -q: 986 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
+
+The planning documents passed the full repository validation baseline without changing the closed v0.1 implementation or test count.
 
 ## Current technical sources
 
@@ -96,40 +115,48 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-29-standalone-ndnra-v0.1-closure.md`
 - `docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md`
+- `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 
-## Next planning target
+## Next implementation target
 
-The documentation-first comparison is accepted. Its decision is:
+The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-- retain the original SeedMind master plan as the governing product, MVP, safety, human-apprenticeship, evaluation, and competition roadmap;
-- adapt selected memory, persistence, observatory, metric, and roadmap interfaces around NDNRA;
-- consider later partial integration for local delayed credit, need-driven recall, consequence memory, recall effort, local saturation evidence, provenance, retention evidence, and bounded consolidation evidence;
-- keep NDNRA proof stores, research growth, shadow suggestions, human-approved research operations, and bounded imagination isolated unless a later ADR approves a narrower boundary;
-- reject proof-store merging, bounded-imagination persistence, implicit permission, autonomous execution, and NDNRA production action authority.
+The first authorised implementation boundary is Stage 0 followed by Stage 1 only:
 
-The original Week 8 reusable-skill objective remains mandatory. NDNRA has not yet proved a Nursery `approach_and_push` skill with explicit preconditions, termination, varied-start generalisation, reuse, known failure boundaries, and retention.
+```text
+v0.2 typed contracts and lifecycle identities
+    +
+reusable sparse recurrent neuron pool
+    +
+excitatory and inhibitory connections
+    +
+distributed experience coalitions
+    +
+deterministic bounded recurrent settling
+```
 
-The original roadmap is active as the product sequence, but its dates and implementation order may require re-baselining after an integration boundary is approved. No milestone may be marked complete solely because a related NDNRA research proof exists.
+Stage 0 must prove:
 
-No runtime integration work is approved. The next possible work requires Arash's separate explicit approval and must begin with a bounded integration-boundary design rather than code.
+1. v0.2 identities and schemas cannot be confused with the closed v0.1 persistence boundary.
+2. Neuron, connection, region, experience, coalition, need, context, proposal, and outcome identities serialise deterministically.
+3. Active, resting, dormant, dream-active, protected, and relearning lifecycle transitions are explicit and invalid transitions fail.
+4. Existing v0.1 tests remain unchanged and pass.
+5. No runtime adapter or action gateway connection is introduced.
 
-Any later integration proposal must preserve:
+Stage 1 must prove:
 
-- production curiosity as the sole production action authority;
-- the protected external safety supervisor and human permission channels;
-- separate standalone-acceptance and long-horizon proof stores;
-- non-persistent bounded imagination;
-- atomic versioned runtime persistence with complete safe fallback;
-- matched-control behavioural invariance for unaffected production paths;
-- original retention, rollback, hardware, observability, and competition-claim gates.
+1. Experiences are distributed coalitions in an existing reusable neuron pool.
+2. Experiences may overlap while retaining separate identity, provenance, and outcomes.
+3. Recurrent activity settles within a fixed compute budget.
+4. Contradictory episodes remain inspectable.
+5. No coalition recruits the complete network.
+6. Structural neuron creation remains disabled.
+7. SQLite cognition and action-authority violations remain zero.
 
-Deferred post-v0.1 research remains outside the accepted integration recommendation:
+Do not begin simultaneous multiple-need work, developmental maturity, dream maintenance, conscience, or action proposals until the Stage 1 substrate passes its gate.
 
-- learned context-similarity weights;
-- semantic abstraction above grounded context signatures;
-- simultaneous multiple-need coordination;
-- unrestricted generic neuron creation;
-- a unified production cognitive runtime checkpoint.
+The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 
 ## Working rules
 
