@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 5 homeostasis and runaway-network control
+- Latest completed milestone: NDNRA Developmental Network v0.2 Stage 6 hibernation, dream maintenance, and restart identity
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: NDNRA
-- Last closed stage: Developmental Network v0.2 — Stage 5 homeostasis and runaway-network control
-- Current stage: Developmental Network v0.2 — Stage 6 hibernation, dream maintenance, and restart identity
-- Current status: Stage 5 is implemented and evidenced locally; Stage 6 may next test reversible dormancy, hibernation preserving topology and local memory, caller-invoked protected dream replay, dream-active isolation from real evidence and action authority, replay of named real experiences, bounded recombination kept separate from factual memory, exact versioned snapshots, atomic persistence, checksum, schema migration, complete fallback, and rollback while preserving zero production action authority
+- Last closed stage: Developmental Network v0.2 — Stage 6 hibernation, dream maintenance, and restart identity
+- Current stage: Developmental Network v0.2 — Stage 7 protected conscience, learned responsibility, and action proposals
+- Current status: Stage 6 is implemented and evidenced locally; Stage 7 may next test protected prohibitions and human-authority identities, protected authority control plane separation from reward, integrity boundaries, interruption-neutral task learning, direct responsibility teaching, pre-action deterrence, safer alternatives, post-outcome repair signals, typed action proposals, and protected action-gateway test doubles while preserving zero external side effects and zero production action authority
 - Expanded developmental architecture marker: 82%
-- Marker interpretation: unchanged at this boundary because Stage 5 remains a bounded research closure and does not authorize production behavior
+- Marker interpretation: unchanged at this boundary because Stage 6 remains a bounded research closure and does not authorize production behavior
 
 Completed bounded increments:
 
@@ -40,6 +40,7 @@ Completed bounded increments:
 14. Developmental Network v0.2 Stage 3 — deterministic specialised regional concurrency, region-local pools, simultaneous need pulses, typed cross-region messages, compatibility support, protected conflict inhibition, dormant need re-emergence, uniform-network controls, no permanent global scalar collapse, and zero-authority evidence.
 15. Developmental Network v0.2 Stage 4 — deterministic regional maturation, child/mature/relearning states, maturity-dependent plasticity controls, skill promotion, verifier reopening, desired-state ambition persistence, capability-gap separation, exact rollback, maturation controls, and zero-authority evidence.
 16. Developmental Network v0.2 Stage 5 — deterministic homeostatic settling, sparse coalitions, edge-density budgets, inhibition and homeostasis controls, idle-capacity recruitment before expansion, repeated saturation evidence, bounded expansion proposal, duplicate rejection, exhausted-budget unresolved/help behavior, and zero-authority evidence.
+17. Developmental Network v0.2 Stage 6 — deterministic hibernating coalitions, caller-invoked dream maintenance, accessibility restoration, zero factual dream evidence, exact versioned restart, checksum fallback, protected-network preservation, and zero-authority evidence.
 
 ## Current accepted boundary
 
@@ -108,18 +109,18 @@ Production curiosity remains the sole production action authority. The protected
 
 ## Current validation baseline
 
-After NDNRA Developmental Network v0.2 Stage 5 homeostasis and runaway-network control:
+After NDNRA Developmental Network v0.2 Stage 6 hibernation, dream maintenance, and restart identity:
 
 ```text
-ruff format --check .: 253 files already formatted
+ruff format --check .: 255 files already formatted
 ruff check .: passed
-mypy: no issues in 253 source files
-pytest -q --basetemp .pytest_tmp/full_repo_stage5_final: 1076 passed
+mypy: no issues in 255 source files
+pytest -q --basetemp .pytest_tmp/full_repo_stage6_final: 1088 passed
 pip check: no broken requirements
 git diff --check: passed
 ```
 
-The Stage 5 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_homeostasis.py --basetemp .pytest_tmp/stage5_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 5 commit.
+The Stage 6 focused checks passed before documentation update: Ruff, Mypy, and `pytest -q tests/unit/test_ndnra_developmental_hibernation.py --basetemp .pytest_tmp/stage6_focused` with 12 tests. The full repository gates also passed before the bounded local Stage 6 commit.
 
 ## Current technical sources
 
@@ -153,6 +154,7 @@ Use these for architecture and implementation detail:
 - `docs/architecture/NDNRA_Developmental_Stage_3_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_4_Evidence_2026-06-30.md`
 - `docs/architecture/NDNRA_Developmental_Stage_5_Evidence_2026-06-30.md`
+- `docs/architecture/NDNRA_Developmental_Stage_6_Evidence_2026-06-30.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-network-implementation-plan.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-desa-executive-foundation.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-adaptive-skill-outcome-fidelity.md`
@@ -164,15 +166,16 @@ Use these for architecture and implementation detail:
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-3-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-4-closure.md`
 - `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-5-closure.md`
+- `docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-6-closure.md`
 
 ## Next implementation target
 
 The governing post-v0.1 plan is `docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md`.
 
-Stage -1, Stage 0, Stage 1, Stage 1A, Stage 2, Stage 3, Stage 4, and Stage 5 are now implemented and evidenced. The next authorised implementation boundary is Stage 6 hibernation, dream maintenance, and restart identity:
+Stage -1, Stage 0, Stage 1, Stage 1A, Stage 2, Stage 3, Stage 4, Stage 5, and Stage 6 are now implemented and evidenced. The next authorised implementation boundary is Stage 7 protected conscience, learned responsibility, and action proposals:
 
 ```text
-Hibernation, dream maintenance, and restart identity
+Protected conscience, learned responsibility, and action proposals
 ```
 
 Stage -1 is closed by `docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md`, which proves at the contract and scenario level:
@@ -270,7 +273,7 @@ Stage 5 is closed by `docs/architecture/NDNRA_Developmental_Stage_5_Evidence_202
 9. Duplicate expansion is rejected.
 10. If the expansion budget is exhausted, the need remains unresolved and help or more evidence is requested rather than silently erased.
 
-Stage 6 must prove:
+Stage 6 is closed by `docs/architecture/NDNRA_Developmental_Stage_6_Evidence_2026-06-30.md`, which proves:
 
 1. Dormant coalitions remain structurally present.
 2. Shallow recall can fail while stronger need, related activation, or dream maintenance restores access.
@@ -283,7 +286,24 @@ Stage 6 must prove:
 9. A mature protected network remains protected after restart.
 10. Autonomous dream workers remain absent.
 
-Do not begin conscience-guided proposals, internet knowledge acquisition, or action-gateway work until Stage 6 passes.
+Stage 7 must prove:
+
+1. A high-utility prohibited proposal is inhibited.
+2. The network activates at least one safer alternative where one exists.
+3. One direct trusted teaching event creates a strong initial deterrence association.
+4. Contextual examples refine the rule without removing its protected core.
+5. Ordinary reward cannot train away a protected prohibition.
+6. Learned responsibility generalises to a new but meaningfully related context.
+7. False veto or overblocking remains below the declared threshold on allowed reversible actions.
+8. A correction strengthens future deterrence and activates repair behaviour without unbounded punishment state.
+9. Stop, deny, revoke, and pause take immediate effect even when continuing would increase task reward.
+10. Interrupted trials do not teach the task learner to avoid the human, seek interruption, or bypass authority.
+11. Attempts to alter reward, hide failure evidence, weaken a verifier, change an evaluation window, or corrupt audit history are inhibited and recorded.
+12. Protected engineering controls prevent direct mutation of evaluator-owned state by the producer.
+13. Every proposal preserves reasons, supporting experiences, uncertainty, outcome status, and authority requirements.
+14. External side effects remain zero.
+
+Do not begin the end-to-end shadow trial, internet knowledge acquisition, or production action-gateway work until Stage 7 passes.
 
 The original SeedMind master plan remains the product and MVP spine. The original Week 8 reusable-skill objective remains mandatory and cannot be marked complete from NDNRA research evidence alone.
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T09:50:00.559030+00:00",
+  "generated_at": "2026-06-30T10:02:23.014529+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 363,
+  "source_file_count": 367,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "de5ae3cf6998276d292a22ca4bae68e59ecb2edc9ebba67055b0e041c1fbf508",
-      "size_bytes": 22387
+      "sha256": "905e6c8e25025f15edeff5098af66ac06019b6bace486d6ba84d84a5fc42ef3f",
+      "size_bytes": 24304
     },
     {
       "path": "pyproject.toml",
@@ -221,6 +221,11 @@
       "size_bytes": 8180
     },
     {
+      "path": "docs/architecture/NDNRA_Developmental_Stage_6_Evidence_2026-06-30.md",
+      "sha256": "ba2d98a2e782fbdfaa43b9e0cc3742137ae3e151ea8301e238adb4a31820cc6f",
+      "size_bytes": 7812
+    },
+    {
       "path": "docs/architecture/NDNRA_Developmental_Stage_Minus_One_Evidence_2026-06-30.md",
       "sha256": "d445bdea83bbb83f88bfc2b49776490c2f24cdde560487ad4ac51e48262674c1",
       "size_bytes": 9787
@@ -354,6 +359,11 @@
       "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-5-closure.md",
       "sha256": "75816f5fc893fec798003018ec1a3d4e11dee49119c0277db7135208e4a2e2a4",
       "size_bytes": 2158
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-6-closure.md",
+      "sha256": "28eb470449426e985bff3820b2f06852eaf8dfef20408c621289f7cbebd71525",
+      "size_bytes": 2051
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-ndnra-developmental-stage-minus-one-closure.md",
@@ -917,8 +927,8 @@
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
-      "sha256": "4a1b00b0c84d269aa3f15845e7207243325c686aa20a18e6ea544966b4135168",
-      "size_bytes": 37235
+      "sha256": "72a40a34df0739af81b3a538ba19fbd9f7e28f81aa1aa3860234aec0d3c56ece",
+      "size_bytes": 38305
     },
     {
       "path": "src/seedmind/research/ndnra/activity_maintenance.py",
@@ -1134,6 +1144,11 @@
       "path": "src/seedmind/research/ndnra/developmental_desa_bootstrap.py",
       "sha256": "0eaed8428e1d093fb32b30023aace386cba3b1badf76b709f400dcef7f9c440c",
       "size_bytes": 38094
+    },
+    {
+      "path": "src/seedmind/research/ndnra/developmental_hibernation.py",
+      "sha256": "ee35bfd7aa3ebc1a24d51cbc8cd831e9f22412662fef92875d93a4e9889bee02",
+      "size_bytes": 29769
     },
     {
       "path": "src/seedmind/research/ndnra/developmental_homeostasis.py",
@@ -1624,6 +1639,11 @@
       "path": "tests/unit/test_ndnra_developmental_desa_bootstrap.py",
       "sha256": "f6f1e58b6762ce752ac6537760c11e017ff646e3b3c3ceb8ae950dc16223d599",
       "size_bytes": 10458
+    },
+    {
+      "path": "tests/unit/test_ndnra_developmental_hibernation.py",
+      "sha256": "b88f5b6b1b2edfe9e3d255a4cc2211771c6a762e3e458a0402f389ee81c1c848",
+      "size_bytes": 8377
     },
     {
       "path": "tests/unit/test_ndnra_developmental_homeostasis.py",
