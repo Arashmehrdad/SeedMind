@@ -11,7 +11,7 @@ from seedmind.growth.specialist import (
     ExpertModuleOutput,
     SpecialistLatentState,
 )
-from seedmind.growth.week10 import _target_satisfied
+from seedmind.growth.week10 import capacity_target_satisfied as _target_satisfied
 from seedmind.growth.week11_inputs import STEP_BUDGET
 from seedmind.skills import (
     ApproachAndPushSkillController,
@@ -95,7 +95,7 @@ def run_specialist(
     for _ in range(STEP_BUDGET):
         if _target_satisfied(runtime.state):
             break
-        proposal = candidate.propose(_module_input(runtime, "control_angular_object_position"))
+        proposal = candidate.propose(build_module_input(runtime, "control_angular_object_position"))
         if proposal.abstain or proposal.action_proposal is None:
             abstentions += 1
             break
@@ -132,7 +132,7 @@ def run_routed(
             break
         routing = router.route(
             general_proposal=_general_proposal(controller, runtime),
-            specialist_proposal=candidate.propose(_module_input(runtime, goal)),
+            specialist_proposal=candidate.propose(build_module_input(runtime, goal)),
             specialist_registered=True,
             specialist_active=True,
         )
@@ -180,7 +180,7 @@ def _general_proposal(
     )
 
 
-def _module_input(runtime: NurseryRuntime, goal: str) -> ExpertModuleInput:
+def build_module_input(runtime: NurseryRuntime, goal: str) -> ExpertModuleInput:
     return ExpertModuleInput(
         SpecialistLatentState.from_nursery(runtime.state),
         goal,

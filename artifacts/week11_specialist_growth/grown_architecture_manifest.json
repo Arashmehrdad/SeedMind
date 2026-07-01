@@ -1,5 +1,5 @@
 {
-  "accepted_candidate_checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+  "accepted_candidate_checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2",
   "checkpoint_references": {
     "accepted_candidate": "checkpoints/accepted_specialist_checkpoint.json",
     "accepted_registry": "checkpoints/accepted_candidate_registry.json",
@@ -47,7 +47,7 @@
       },
       {
         "active": false,
-        "checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+        "checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2",
         "module_id": "skill.expert.angular_push.v1",
         "module_type": "skill_expert",
         "parent_module": "general_push_controller",
@@ -64,6 +64,7 @@
   "temporary_specialist": {
     "active_in_sandbox": true,
     "module_id": "skill.expert.angular_push.v1",
+    "policy_version": "1.1.0",
     "production_active": false,
     "status": "accepted_for_week12"
   }

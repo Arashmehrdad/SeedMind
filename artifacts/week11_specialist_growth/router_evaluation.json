@@ -1996,6 +1996,13 @@
     "general_selected_for_cube_while_specialist_available": 0,
     "specialist_selected_for_familiar_ball": 0
   },
+  "property_checks": {
+    "all_modules_abstain": true,
+    "below_threshold_falls_back": true,
+    "inactive_specialist_cannot_activate": true,
+    "mislabeled_round_abstains": true,
+    "unregistered_specialist_cannot_activate": true
+  },
   "routing_inputs": [
     "latent_state",
     "current_goal",

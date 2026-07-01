@@ -1616,6 +1616,11 @@ def _scenario_state(scenario_family: str, seed: int, *, plan_kind: str) -> Nurse
     return _angular_state(seed=seed, impossible=False)
 
 
+def build_angular_capacity_state(*, seed: int, impossible: bool = False) -> NurseryState:
+    """Build the public grounded angular-object state used by later growth stages."""
+    return _angular_state(seed=seed, impossible=impossible)
+
+
 def _angular_state(*, seed: int, impossible: bool) -> NurseryState:
     agent_positions = (
         GridPosition(2, 2),
@@ -2082,6 +2087,11 @@ def _object_position(state: NurseryState) -> GridPosition:
 
 def _target_position(state: NurseryState) -> GridPosition:
     return next(entity.position for entity in state.entities if entity.entity_id == "target_0")
+
+
+def capacity_target_satisfied(state: NurseryState) -> bool:
+    """Return whether the grounded Week 10 object occupies its target."""
+    return _target_satisfied(state)
 
 
 def _target_satisfied(state: NurseryState) -> bool:

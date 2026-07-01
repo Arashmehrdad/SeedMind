@@ -529,7 +529,7 @@ Original Week 11 is closed by:
 - `docs/architecture/decisions/ADR-2026-07-01-seedmind-week11-specialist-growth-closure.md`;
 - `artifacts/week11_specialist_growth/week11_acceptance_report.json`.
 
-The selected `skill.expert.angular_push.v1` specialist achieved cube-like success `20/20` versus `0/20` for the frozen general controller, preserved the authoritative familiar-task cohort at `20/20`, added six parameters under the 25 percent cap, preserved production-curiosity authority, and proved exact failed-candidate disposal and rollback. It is accepted only for original Week 12 retention and consolidation evaluation. The router and specialist remain inactive in production.
+The selected `skill.expert.angular_push.v1` policy version `1.1.0` achieved authoritative cube-like success `20/20` versus `0/20` for the frozen general controller and preserved the authoritative familiar-task cohort at `20/20`. A post-closure refinement added seven mirrored or rotated holdout geometries across 32 disjoint seeds; the specialist achieved `32/32` versus `0/32` for the general controller. Independent raw-shape scope checks, router registration/activity/threshold properties, pairwise-disjoint evaluation partitions, and executable implementation hashes now form part of the acceptance gate. The specialist adds six bounded policy scalars under the 25 percent cap, preserves production-curiosity authority, and proves exact failed-candidate disposal and rollback. It remains accepted only for original Week 12 retention and consolidation evaluation; the router and specialist are inactive in production.
 
 Original Week 12 consolidation and full retention gating is next and has not started here.
 

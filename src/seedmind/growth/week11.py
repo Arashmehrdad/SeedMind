@@ -62,6 +62,8 @@ def export_week11_evidence(
         "accepted_specialist_checkpoint.json": {
             "candidate_id": evidence.candidate.candidate_id,
             "checkpoint_sha256": evidence.candidate.checkpoint_sha256,
+            "creation_provenance": evidence.candidate_manifest["creation_provenance"],
+            "policy_version": evidence.candidate_manifest["policy_version"],
             "profile": evidence.candidate.profile.to_json(),
             "status": evidence.candidate.status.value,
         },

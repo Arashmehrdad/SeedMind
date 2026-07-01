@@ -77,13 +77,13 @@ graph LR
 - `src/seedmind/growth/week11.py` — classes: Week11RunResult; functions: run_week11_specialist_growth, export_week11_evidence, _brain_graph_svg, _write_json, _write_text
 - `src/seedmind/growth/week11_evaluation.py` — classes: EvaluationBundle; functions: evaluate_candidate
 - `src/seedmind/growth/week11_gate.py` — classes: Week11Evidence; functions: run_week11_gate, _registration, _seed_parameter_count
-- `src/seedmind/growth/week11_inputs.py` — functions: cube_like_state
+- `src/seedmind/growth/week11_inputs.py` — functions: cube_like_state, cube_like_holdout_state, _holdout_wall_entities
 - `src/seedmind/growth/week11_io.py` — functions: read_json, sha256_file
 - `src/seedmind/growth/week11_metrics.py` — functions: success_rate, rollout_summary
 - `src/seedmind/growth/week11_profile_comparison.py` — classes: ProfileRow; functions: compare_candidate_profiles
 - `src/seedmind/growth/week11_profiles.py` — Week 11 candidate identifiers.
-- `src/seedmind/growth/week11_provenance.py` — functions: validate_week10_proposal, authoritative_hashes, frozen_ndnra_boundary_pass
-- `src/seedmind/growth/week11_rollout.py` — classes: RolloutRecord; functions: run_general, run_specialist, run_routed, abstaining_output, _general_proposal, _module_input, _retain
+- `src/seedmind/growth/week11_provenance.py` — functions: validate_week10_proposal, authoritative_hashes, implementation_hashes, frozen_ndnra_boundary_pass
+- `src/seedmind/growth/week11_rollout.py` — classes: RolloutRecord; functions: run_general, run_specialist, run_routed, abstaining_output, _general_proposal, build_module_input, _retain
 - `src/seedmind/growth/week11_selection.py` — functions: candidate_profiles, build_candidate
 - `src/seedmind/human/__init__.py` — Symbolic human apprenticeship and calibrated help seeking.
 - `src/seedmind/human/apprenticeship.py` — classes: HelpReason, CaregiverEventType, HelpSeekingConfig, HelpContext, HelpDecision, TeacherResponse, CaregiverEvent, CaregiverMemory; functions: export_apprenticeship_report_json, export_apprenticeship_timeline_csv, _event_payload, _validate_unit_interval

@@ -1,6 +1,33 @@
 {
   "candidate_id": "skill.expert.angular_push.v1",
-  "checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+  "checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2",
+  "creation_provenance": {
+    "authoritative_input_hashes": {
+      "artifacts/week10_capacity_diagnosis/diagnostic_report.json": "b4f6afaa5cbdd81661b63d9c48d02c7bf957f1007a964222fe3f4d6364e8bb53",
+      "artifacts/week10_capacity_diagnosis/grounded_episode_traces.json": "5fb9dcd2b4aab149dc899e2e2c05d30ed704d25f97e8e9e1de89c4202e9a0119",
+      "artifacts/week10_capacity_diagnosis/growth_proposal_record.json": "07289aa2adf1d5293fc98535ab1996e0fd005d3f69391eaff5ae6b32cff7a39b",
+      "artifacts/week10_capacity_diagnosis/learning_progress_windows.json": "2a24890bd6319c21f5a85fc2096e47583775dccda423daa01a63e93efab05f54",
+      "artifacts/week10_capacity_diagnosis/week10_acceptance_report.json": "a67500fbc61f89b6af17eae72f96b17d516ac660698ecd512382c0cac5d81c09",
+      "artifacts/week8_reusable_skill/approach_and_push_skill_record.json": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+      "artifacts/week9_contribution/week9_acceptance_report.json": "9dbdb7e0d90a1e4f3ae340f1bfbc7e05d2763e1154fd43a686b90e2f2b4f4d4f",
+      "docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json": "fe02d4929259af460ecbf14c60171b00baba6f8616e9a7663932e1eed3b9d058"
+    },
+    "growth_proposal_id": "growth-week10-cube-policy-0001",
+    "implementation_hashes": {
+      "src/seedmind/growth/rollback.py": "9228fcc4469402ea28fd925765d869b59f9cb532a9e4f68b44a55939434c225f",
+      "src/seedmind/growth/router.py": "d196e744c46104d1b8b2f4c9b2e1391be0db04137d09928c10330c277e55784f",
+      "src/seedmind/growth/specialist.py": "cb29f839894f5ac1ecd887012587798a77ccdb64e645750d75054641b7297f01",
+      "src/seedmind/growth/week11.py": "455d9cefbcd0572a80af1e57d49fd2868335f854a145d49e9a70728b28b35f08",
+      "src/seedmind/growth/week11_evaluation.py": "971dd10762dcc3b3255e1a9a2a860c8b6d2794cc5f7d09ba573bfc9e088574b2",
+      "src/seedmind/growth/week11_gate.py": "c34024f4244d14eca98d74e35a3d4ec151ee0b757799a6c4f6263c748f129d60",
+      "src/seedmind/growth/week11_inputs.py": "6c32798c5ec33452dd58a5c4632785fb9193c692dc0c89051928f56931e8e89e",
+      "src/seedmind/growth/week11_profile_comparison.py": "23bca4fae6f348693d8fe856bdf7a1d2bf8d0fb3e416749c4740f61a66322a1a",
+      "src/seedmind/growth/week11_rollout.py": "eea1da19979e1a3feee1ef5bdf4744a56e42d1b1098ad5f6367b8e1d9360a716",
+      "src/seedmind/growth/week11_selection.py": "5fddd8f4e1f15eaf313822b06b92a1f07affd8068afa398499be83720e474203"
+    },
+    "selected_incubation_checkpoint": "ddfeff9c647daf2ede857b615baacadf8ecbdbcf99f4076c0d51e994c0e20b5c"
+  },
+  "policy_version": "1.1.0",
   "profile": {
     "parameters": {
       "abstain_threshold": -10.0,

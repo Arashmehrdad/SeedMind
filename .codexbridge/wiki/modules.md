@@ -437,7 +437,7 @@ Grounded deterministic Week 10 capacity-diagnosis runner.
 
 - Kind: python
 - Classes: PredictionTraceRecord, EpisodeStepTrace, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, RepositoryInventory, Week10AcceptanceReport, Week10RunResult
-- Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence, _early_evidence_diagnosis, _temporary_failure_diagnosis, _execute_sustained_grounded_sequence, _sustained_blockage_diagnosis, _non_capacity_diagnosis, _execute_attempt, _execute_demonstration, _execute_trace, _prediction_trace, _persist_trace_events, _grounded_replay, _retrieve_replay_events, _actions_from_retrieved_memory, _retreat_then_replay_actions, _actions_from_demonstration, _attempt_prediction_evidence_resolved, _help_record, _variant_records_from_attempts, _build_sustained_proposal_if_allowed, _with_proposal_state, _scenario_state, _angular_state, _planned_actions, _retreat_reapproach_actions, _run_frozen_skill_actions, _run_familiar_control, _cube_push_outcomes, _object_state, _push_once, _repository_inventory, _diagnostic_report_payload, _traces_payload, _windows_payload, _write_svg, _preserve_superseded_scripted_evidence, _write_json, _write_text, _empty_replay, _empty_help, _attempt_json, _attempt_index_for_family, _progress, _object_target_distance, _object_position, _target_position, _target_satisfied, _shortest_route, _direction_between, _turn_actions, _wall_entities, _episode_counts, _position_json, _state_digest, _canonical_digest, _sha256_file, _clamp_unit, _frozen_ndnra_boundary_pass
+- Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence, _early_evidence_diagnosis, _temporary_failure_diagnosis, _execute_sustained_grounded_sequence, _sustained_blockage_diagnosis, _non_capacity_diagnosis, _execute_attempt, _execute_demonstration, _execute_trace, _prediction_trace, _persist_trace_events, _grounded_replay, _retrieve_replay_events, _actions_from_retrieved_memory, _retreat_then_replay_actions, _actions_from_demonstration, _attempt_prediction_evidence_resolved, _help_record, _variant_records_from_attempts, _build_sustained_proposal_if_allowed, _with_proposal_state, _scenario_state, build_angular_capacity_state, _angular_state, _planned_actions, _retreat_reapproach_actions, _run_frozen_skill_actions, _run_familiar_control, _cube_push_outcomes, _object_state, _push_once, _repository_inventory, _diagnostic_report_payload, _traces_payload, _windows_payload, _write_svg, _preserve_superseded_scripted_evidence, _write_json, _write_text, _empty_replay, _empty_help, _attempt_json, _attempt_index_for_family, _progress, _object_target_distance, _object_position, _target_position, capacity_target_satisfied, _target_satisfied, _shortest_route, _direction_between, _turn_actions, _wall_entities, _episode_counts, _position_json, _state_digest, _canonical_digest, _sha256_file, _clamp_unit, _frozen_ndnra_boundary_pass
 
 ## `src/seedmind/growth/week11.py`
 
@@ -468,7 +468,7 @@ Evidence-derived specialist growth gate for original SeedMind Week 11.
 Authoritative Week 11 scenario and evidence inputs.
 
 - Kind: python
-- Functions/symbols: cube_like_state
+- Functions/symbols: cube_like_state, cube_like_holdout_state, _holdout_wall_entities
 
 ## `src/seedmind/growth/week11_io.py`
 
@@ -503,7 +503,7 @@ Week 11 candidate identifiers.
 Authoritative Week 11 input and freeze-boundary checks.
 
 - Kind: python
-- Functions/symbols: validate_week10_proposal, authoritative_hashes, frozen_ndnra_boundary_pass
+- Functions/symbols: validate_week10_proposal, authoritative_hashes, implementation_hashes, frozen_ndnra_boundary_pass
 
 ## `src/seedmind/growth/week11_rollout.py`
 
@@ -511,7 +511,7 @@ Grounded candidate, general-controller, and routed Week 11 rollouts.
 
 - Kind: python
 - Classes: RolloutRecord
-- Functions/symbols: run_general, run_specialist, run_routed, abstaining_output, _general_proposal, _module_input, _retain
+- Functions/symbols: run_general, run_specialist, run_routed, abstaining_output, _general_proposal, build_module_input, _retain
 
 ## `src/seedmind/growth/week11_selection.py`
 

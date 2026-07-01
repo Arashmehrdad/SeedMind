@@ -12,6 +12,9 @@ from math import exp
 from seedmind.contracts import Direction, GridPosition, PrimitiveAction
 from seedmind.environment import EntityRole, NurseryState, ShapeCode
 
+SPECIALIST_POLICY_VERSION = "1.1.0"
+ANGULAR_SCOPE_THRESHOLD = 0.75
+
 SPECIALIST_PARAMETER_NAMES = (
     "distance_progress_weight",
     "clearance_weight",
@@ -159,6 +162,7 @@ class CandidateSkillExpert:
         payload = {
             "candidate_id": self.candidate_id,
             "parent_module": self.parent_module,
+            "policy_version": SPECIALIST_POLICY_VERSION,
             "profile": self.profile.to_json(),
             "status": self.status.value,
         }
@@ -178,6 +182,8 @@ class CandidateSkillExpert:
         if module_input.current_goal != "control_angular_object_position":
             return _abstain("goal_outside_specialist_scope")
         latent = module_input.latent_state
+        if latent.raw_shape_feature < ANGULAR_SCOPE_THRESHOLD:
+            return _abstain("object_outside_angular_scope")
         if latent.target_satisfied:
             return _abstain("goal_already_satisfied")
         selected = self._select_push_direction(latent)

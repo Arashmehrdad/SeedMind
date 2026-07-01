@@ -16,11 +16,12 @@ The implementation imports no NDNRA subsystem. Only the frozen NDNRA boundary is
 - Type: `skill_expert`
 - Parent: `general_push_controller`
 - Selected profile: `clearance_strong`
-- Added parameters: `6`
+- Policy version: `1.1.0`
+- Added bounded policy scalars: `6`
 - Status: `accepted_for_week12`
 - Production authority: `false`
 
-The candidate manifest records SHA-256 hashes for the authoritative Week 10 proposal, grounded traces, diagnostic report, learning windows, acceptance report, frozen Week 8 skill, Week 9 acceptance report, and NDNRA freeze manifest.
+The candidate manifest records SHA-256 hashes for the authoritative Week 10 proposal, grounded traces, diagnostic report, learning windows, acceptance report, frozen Week 8 skill, Week 9 acceptance report, and NDNRA freeze manifest. It also binds the accepted checkpoint to the executable Week 11 specialist, router, rollback, gate, evaluation, input, rollout, and selection source files.
 
 ## 3. Incubation
 
@@ -46,6 +47,20 @@ The candidate therefore exceeded the required margin by `0.80`.
 
 The specialist's successful episodes used real primitive actions and deterministic Nursery transition outcomes. It corrected the Week 10 failure mode by avoiding ineffective eastward angular-object contact until lateral clearance was available.
 
+### Holdout generalisation re-evaluation
+
+A post-closure audit identified that the original twenty evaluation seeds varied only agent pose and orientation around one geometry. The gate was strengthened with a disjoint 32-seed holdout partition spanning seven mirrored or rotated angular-object blockage geometries.
+
+| Holdout measure | General controller | Candidate specialist |
+|---|---:|---:|
+| Successes | 0 / 32 | 32 / 32 |
+| Success rate | 0.00 | 1.00 |
+| Candidate gain | - | +1.00 |
+| Required candidate success | - | 0.80 |
+| Required gain | - | +0.20 |
+
+Training, authoritative evaluation, router evaluation, holdout evaluation, and familiar-retention seed sets are pairwise disjoint.
+
 ## 5. Preliminary familiar-task retention
 
 The routed architecture was evaluated on the authoritative twenty-seed Week 8 familiar-ball cohort.
@@ -66,6 +81,10 @@ The router consumed the required module inputs and remained proposal-only.
 - General-controller selection while an eligible specialist was available on cube-like tasks: `0`.
 - Specialist selection on familiar-ball tasks: `0`.
 - Explicit all-module abstention was preserved.
+- An unregistered specialist could not activate.
+- An inactive specialist could not activate.
+- A below-threshold specialist proposal fell back to the general controller.
+- A round object mislabeled with the angular goal still caused specialist abstention because raw shape scope is independently checked.
 - Action-authority violations: `0`.
 
 Every routed primitive action still passed through `production_curiosity` retention before execution.
@@ -74,8 +93,8 @@ Every routed primitive action still passed through `production_curiosity` retent
 
 - Instantiated seed-core parameters: `137,149`
 - 25 percent cap: `34,287`
-- Actual added parameters: `6`
-- Candidate float32 parameter memory: `24 bytes`
+- Actual added bounded policy scalars: `6`
+- Candidate float32-equivalent scalar memory: `24 bytes`
 - Cap violations: `0`
 - Cube gain per added parameter: `0.1666666667`
 
@@ -101,13 +120,17 @@ The accepted candidate has a separate sandbox registry and checkpoint reference.
 Every separate Week 11 field passed:
 
 - authoritative input;
+- executable implementation provenance;
 - module contract;
 - incubation provenance;
-- capability gain;
+- disjoint evaluation partitions;
+- authoritative capability gain;
+- holdout generalisation;
 - repeated-seed evaluation;
 - preliminary familiar retention;
 - router scope;
 - router fallback;
+- router property checks;
 - parameter budget;
 - rollback;
 - failed-candidate disposal;
@@ -122,7 +145,7 @@ Every separate Week 11 field passed:
 - The environment remains deterministic, symbolic, and small.
 - Only two bounded parameter profiles were incubated.
 - Confidence is a policy-routing score, not a fully calibrated probabilistic confidence estimate.
-- Evaluation covers one angular-object blockage family.
+- Holdout coverage is seven deliberately constructed symbolic geometries, not exhaustive random-world generalisation.
 - Week 11 does not prove long-term retention or consolidation.
 - No production activation is authorised.
 - Week 12 must accept or reject the candidate after full retention, safety, character, and stable-checkpoint gates.

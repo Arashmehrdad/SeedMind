@@ -18,10 +18,13 @@ Week 11 uses `plans.md`, the archived master implementation plan, hardened Week 
 2. Implement the master-plan expert interface and proposal-only router.
 3. Incubate bounded candidate profiles on the exact Week 10 cube-like Nursery state.
 4. Compare candidate and frozen general controller across repeated seeds.
-5. Enforce the 25 percent parameter cap.
-6. Prove exact failed-candidate disposal and rollback.
-7. Export separate acceptance fields and a brain graph.
-8. Accept only for Week 12 retention evaluation.
+5. Require generalisation on mirrored and rotated holdout geometries not used for incubation.
+6. Enforce router properties: no activation while unregistered or inactive, low-confidence fallback, all-module abstention, and independent angular-object scope checks.
+7. Enforce the 25 percent parameter cap.
+8. Prove exact failed-candidate disposal and rollback.
+9. Bind evidence to executable implementation hashes and a policy version.
+10. Export separate acceptance fields and a brain graph.
+11. Accept only for Week 12 retention evaluation.
 
 ## Non-goals
 
@@ -48,7 +51,7 @@ Every output is a proposal. `production_curiosity` retains primitive-action auth
 
 ## Specialist design
 
-The candidate is a clearance-aware policy expert using raw symbolic geometry and a normalized shape feature, never a privileged `cube` label. Six bounded parameters score distance progress, lateral clearance, route cost, direct-axis preference, confidence, and abstention. It searches for a reachable effective contact cell, proposes one primitive action at a time, and abstains outside scope or safety.
+The candidate is a clearance-aware policy expert using raw symbolic geometry and a normalized shape feature, never a privileged `cube` label. Six bounded policy scalars score distance progress, lateral clearance, route cost, direct-axis preference, confidence, and abstention. It searches for a reachable effective contact cell, proposes one primitive action at a time, and abstains outside scope or safety. Angular scope is checked independently from the caller-supplied goal so a mislabeled round object cannot activate the specialist.
 
 ## Router contract
 
@@ -56,9 +59,9 @@ The specialist is eligible only when registered, active in the sandbox, non-abst
 
 ## Incubation and comparison
 
-Each candidate profile runs across fixed training seeds with action, transition, success, step, abstention, and checkpoint provenance. Selection is by success rate, then mean steps, then stable profile order. General and specialist controllers then run identical evaluation seeds and budgets.
+Each candidate profile runs across fixed training seeds with action, transition, success, step, abstention, and checkpoint provenance. Selection is by success rate, then mean steps, then stable profile order. General and specialist controllers then run identical authoritative evaluation seeds and budgets.
 
-Required cube-like gain is at least `+0.20`. Preliminary familiar retention must be at least `0.90` on the authoritative Week 8 evaluation cohort.
+A disjoint holdout partition covers seven mirrored or rotated angular-object geometries across 32 seeds. Holdout success must be at least `0.80`, and holdout gain over the frozen general controller must be at least `+0.20`. Required authoritative cube-like gain remains `+0.20`. Preliminary familiar retention must remain at least `0.90` on the authoritative Week 8 evaluation cohort.
 
 ## Parameter budget
 
@@ -66,10 +69,10 @@ Actual added parameters must not exceed 25 percent of the instantiated seed-core
 
 ## Checkpoint and rollback
 
-A pre-growth registry contains only the frozen general controller. A rejected candidate is registered, discarded, and compared with the checkpoint by structured equality and SHA-256 digest. The frozen skill hash must remain unchanged, the failed module and router registration must be removed, and no NDNRA dependency may appear.
+A pre-growth registry contains only the frozen general controller. A rejected candidate is registered, discarded, and compared with the checkpoint by structured equality and SHA-256 digest. The frozen skill hash must remain unchanged, the failed module and router registration must be removed, and no NDNRA dependency may appear. The accepted checkpoint also records policy version `1.1.0`, authoritative input hashes, executable implementation hashes, and the disjoint training/evaluation partitions.
 
 ## Acceptance gates
 
-All fields must pass independently: authoritative input, module contract, incubation provenance, capability gain, repeated seeds, preliminary retention, router scope, fallback, parameter budget, rollback, failed-candidate disposal, frozen-skill preservation, authority containment, and the NDNRA freeze boundary.
+All fields must pass independently: authoritative input, executable implementation provenance, module contract, incubation provenance, disjoint evaluation partitions, authoritative capability gain, holdout generalisation, repeated seeds, preliminary retention, router scope, fallback, router property tests, parameter budget, rollback, failed-candidate disposal, frozen-skill preservation, authority containment, and the NDNRA freeze boundary.
 
 A passing candidate is only `accepted_for_week12`. Week 12 must run full consolidation and retention before stable production activation.

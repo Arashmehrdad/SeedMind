@@ -24,7 +24,7 @@
   ],
   "profiles": [
     {
-      "checkpoint_sha256": "0ae316b0b25aa123048090bc2c8806998d9736aa478a525ac34770272050012a",
+      "checkpoint_sha256": "3c2ae42bcc30db7a677857ea4231048947ae419c1d5c19fb7ee72f738a3aa3bd",
       "episodes": [
         {
           "abstention_count": 1,
@@ -138,7 +138,7 @@
       "success_rate": 0.0
     },
     {
-      "checkpoint_sha256": "1bcfda6b3995223d83139a1e1a8782c663caeac47a4d06762e41e5df4e561f88",
+      "checkpoint_sha256": "ddfeff9c647daf2ede857b615baacadf8ecbdbcf99f4076c0d51e994c0e20b5c",
       "episodes": [
         {
           "abstention_count": 0,
@@ -528,7 +528,7 @@
       "success_rate": 1.0
     }
   ],
-  "selected_checkpoint_sha256": "1bcfda6b3995223d83139a1e1a8782c663caeac47a4d06762e41e5df4e561f88",
+  "selected_checkpoint_sha256": "ddfeff9c647daf2ede857b615baacadf8ecbdbcf99f4076c0d51e994c0e20b5c",
   "selected_profile_id": "clearance_strong",
   "training_seeds": [
     710,

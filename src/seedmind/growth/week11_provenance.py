@@ -6,6 +6,24 @@ from seedmind.growth.week11_inputs import WEEK8_SKILL, WEEK10_DIR
 from seedmind.growth.week11_io import read_json, sha256_file
 from seedmind.growth.week11_profiles import PARENT_MODULE
 
+WEEK11_IMPLEMENTATION_PATHS = (
+    Path("src/seedmind/growth/specialist.py"),
+    Path("src/seedmind/growth/router.py"),
+    Path("src/seedmind/growth/rollback.py"),
+    Path("src/seedmind/growth/week11.py"),
+    Path("src/seedmind/growth/week11_evaluation.py"),
+    Path("src/seedmind/growth/week11_gate.py"),
+    Path("src/seedmind/growth/week11_inputs.py"),
+    Path("src/seedmind/growth/week11_profile_comparison.py"),
+    Path("src/seedmind/growth/week11_rollout.py"),
+    Path("src/seedmind/growth/week11_selection.py"),
+)
+FORBIDDEN_NDNRA_REFERENCES = (
+    "seedmind.research.ndnra",
+    "parallel_comparison",
+    "parallel_operation",
+)
+
 
 def validate_week10_proposal() -> dict[str, object]:
     proposal = read_json(WEEK10_DIR / "growth_proposal_record.json")
@@ -35,10 +53,19 @@ def authoritative_hashes() -> dict[str, str]:
     return {path.as_posix(): sha256_file(path) for path in paths}
 
 
+def implementation_hashes() -> dict[str, str]:
+    """Hash the executable Week 11 implementation tied to candidate evidence."""
+    return {path.as_posix(): sha256_file(path) for path in WEEK11_IMPLEMENTATION_PATHS}
+
+
 def frozen_ndnra_boundary_pass() -> bool:
     manifest = read_json(Path("docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json"))
+    implementation_text = "\n".join(
+        path.read_text(encoding="utf-8") for path in WEEK11_IMPLEMENTATION_PATHS
+    )
     return bool(
         manifest.get("active_in_seedmind") is False
         and manifest.get("new_ndnra_stages_allowed_in_seedmind") is False
         and manifest.get("production_integration_allowed") is False
+        and not any(reference in implementation_text for reference in FORBIDDEN_NDNRA_REFERENCES)
     )

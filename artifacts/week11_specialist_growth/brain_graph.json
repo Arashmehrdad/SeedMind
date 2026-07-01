@@ -20,23 +20,27 @@
   ],
   "nodes": [
     {
-      "active": true,
+      "active_in_sandbox": true,
       "id": "predictive_seed_core",
+      "production_active": true,
       "type": "shared_state"
     },
     {
-      "active": false,
+      "active_in_sandbox": true,
       "id": "specialist_router",
+      "production_active": false,
       "type": "proposal_router"
     },
     {
-      "active": true,
+      "active_in_sandbox": true,
       "id": "general_push_controller",
+      "production_active": true,
       "type": "general_controller"
     },
     {
-      "active": true,
+      "active_in_sandbox": true,
       "id": "skill.expert.angular_push.v1",
+      "production_active": false,
       "type": "temporary_skill_expert"
     }
   ],
