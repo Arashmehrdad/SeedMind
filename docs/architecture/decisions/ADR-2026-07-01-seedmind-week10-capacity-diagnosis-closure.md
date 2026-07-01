@@ -15,9 +15,13 @@ effects, demonstration outcomes, prediction values, and proposal generation were
 scripted rather than derived from executed Nursery episodes.
 
 The original `13140df` Week 10 evidence used scripted diagnostic timelines and
-was not valid grounded evidence. The corrected implementation derives attempts,
-progress, replay outcomes, demonstration effects, prediction evidence,
-classification, and proposal generation from executed Nursery episodes.
+was not valid grounded evidence. Commit `ea15047` replaced those timelines with
+executed episodes, but a direct audit found five remaining defects: scenario
+seeds did not affect initial states; replay and demonstration action plans were
+assigned before evidence derivation; multiple strategy labels executed the same
+frozen policy; prediction acceptance required only a non-negative value; and
+teacher traces shifted learner attempt indexes. The hardened implementation
+corrects those defects while preserving the grounded architecture.
 
 ## Decision
 
@@ -35,9 +39,15 @@ The corrected implementation:
 6. Measures learner performance before and after protected teacher
    demonstration.
 7. Proves sustained-task reachability through an isolated teacher trace.
-8. Generates the growth proposal only from complete evidence.
-9. Preserves Week 8 familiar skill competence and hash.
-10. Creates no specialist, router, parameters, production mutation, or Week 11
+8. Derives replay action plans from retrieved source traces and derives learner
+   demonstration plans from the executed teacher trace.
+9. Executes distinct primitive-action policies for the sustained strategy
+   variants and reports the actual tested-variant count.
+10. Requires prediction evidence to remain within a declared `0.05` MAE ceiling.
+11. Excludes teacher demonstrations from learner attempt indexes.
+12. Generates the growth proposal only from complete evidence.
+13. Preserves Week 8 familiar skill competence and hash.
+14. Creates no specialist, router, parameters, production mutation, or Week 11
     implementation.
 
 ## Evidence

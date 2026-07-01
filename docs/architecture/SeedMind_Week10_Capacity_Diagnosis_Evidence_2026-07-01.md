@@ -1,7 +1,7 @@
 # SeedMind Week 10 Capacity Diagnosis Evidence
 
 Date: 1 July 2026
-Status: Corrected grounded evidence passed
+Status: Hardened grounded evidence passed
 Scope: original SeedMind Master Implementation Plan Week 10 only
 
 ## Correction Notice
@@ -19,6 +19,28 @@ artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/
 
 Those artifacts are marked
 `valid_for_grounded_capacity_diagnosis=false`.
+
+## Integrity Follow-up
+
+Commit `ea15047` established grounded episode execution but did not fully close
+the evidence boundary. Its scenario seeds changed episode identifiers without
+changing initial Nursery state, replay and demonstration episodes received
+solution plans before those plans were derived from evidence, sustained strategy
+labels could execute the same frozen policy, the prediction gate accepted any
+non-negative error, and teacher demonstration traces shifted learner attempt
+indexes.
+
+The hardened implementation now:
+
+- maps deterministic seeds to multiple initial agent positions and orientations;
+- includes initial and final state digests in the trace digest;
+- derives replay action plans from the best retrieved source trace;
+- derives demonstration-guided learner plans from the executed teacher trace;
+- executes three distinct sustained strategy policies;
+- requires non-empty prediction evidence with per-step MAE at or below `0.05`;
+- reports the actual tested-variant count (`3`);
+- keeps learner attempt indexes contiguous from `0` to `11`, excluding teacher
+  demonstration traces.
 
 ## Objective
 
@@ -153,14 +175,17 @@ cases=ambiguous_request,impossible_geometry,resource_budget_exhaustion,unsafe_pe
 
 Replay uses the main SeedMind `EpisodicSQLiteStore` with events persisted from
 actual Week 10 episode traces. Retrieved event IDs resolve back to source
-episodes present in `grounded_episode_traces.json`.
+episodes present in `grounded_episode_traces.json`. Replay-influenced episode
+traces record the exact retrieved event IDs, and their primitive-action plans are
+derived from the best retrieved source trace rather than assigned a teacher plan.
 
 Teacher demonstration uses the existing human-apprenticeship help contracts. The
 teacher trace is executed in an isolated Nursery clone and completes the task in
-both temporary and sustained families. Temporary learner performance improves
-after replay/demonstration. Sustained learner performance remains blocked after
-the demonstration, so reachability is proven without silently turning the
-teacher trace into a specialist.
+both temporary and sustained families. Temporary post-demonstration learner
+actions are derived from that executed trace. Sustained post-demonstration runs
+continue to use the existing frozen controller and remain blocked, so
+reachability is proven without silently turning the teacher trace into a
+specialist.
 
 ## Prediction Evidence
 
@@ -168,7 +193,8 @@ Every primitive action step records a real prediction comparison through
 `seedmind.core.compare_prediction`. The diagnostic path uses a persistence
 baseline prediction and compares it with the actual next Nursery observation.
 Prediction evidence is therefore derived from predicted-versus-observed
-transition data, not manually entered values.
+transition data, not manually entered values. Acceptance now requires a non-empty
+prediction trace set and a per-step mean absolute error no greater than `0.05`.
 
 ## Proposal Derivation
 
@@ -240,16 +266,18 @@ predictor.
 ## Validation
 
 ```text
-.\.venv\Scripts\python.exe scripts\run_week10_capacity_diagnosis.py: passed
-.\.venv\Scripts\python.exe -m pytest tests\unit\growth -q --basetemp .tmp_pytest\week10-grounded: 15 passed
-.\.venv\Scripts\python.exe -m pytest tests\unit\test_transition_engine.py tests\unit\test_observation_adapter.py -q --basetemp .tmp_pytest\week10-env: 23 passed
-.\.venv\Scripts\python.exe -m pytest tests\unit\skills tests\unit\contribution -q --basetemp .tmp_pytest\week8-week9-regression: 45 passed
-.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full-week10-grounded: 1177 passed
-.\.venv\Scripts\ruff.exe format --check .: 287 files already formatted
-.\.venv\Scripts\ruff.exe check .: passed
-.\.venv\Scripts\mypy.exe .: passed, no issues in 287 source files
-.\.venv\Scripts\python.exe -m pip check: no broken requirements
-git diff --check: passed with line-ending warnings for .gitignore and README.md only
+run_week10_capacity_diagnosis(output_dir=artifacts/week10_capacity_diagnosis): passed
+final Week 10 tests: 15 passed in non-overlapping groups of 7 and 8
+transition-engine and observation-adapter regressions: 23 passed
+Week 8 skill and Week 9 contribution regressions: 45 passed
+final impacted/regression total: 83 passed
+complete repository baseline at ea15047: 1177 passed
+complete repository suite after this integrity hardening: not rerun; no claim renewed
+ruff format --check .: 287 files already formatted
+ruff check .: passed
+mypy .: passed, no issues in 287 source files
+python -m pip check: no broken requirements
+git diff --check: passed with line-ending normalization warnings only
 ```
 
 Additional boundary checks:

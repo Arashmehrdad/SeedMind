@@ -119,6 +119,13 @@ Run the unified live-signal and restored-adaptive-state acceptance gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_week10_capacity_diagnosis.py`
+
+Run the original SeedMind Week 10 capacity-diagnosis gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `scripts/run_week8_reusable_skill.py`
 
 Run the SeedMind Week 8 reusable skill gate.
@@ -129,13 +136,6 @@ Run the SeedMind Week 8 reusable skill gate.
 ## `scripts/run_week9_contribution.py`
 
 Run the SeedMind Week 9 human contribution gate.
-
-- Kind: python
-- Functions/symbols: parse_args, main
-
-## `scripts/run_week10_capacity_diagnosis.py`
-
-Run the corrected original SeedMind Week 10 grounded capacity-diagnosis gate.
 
 - Kind: python
 - Functions/symbols: parse_args, main
@@ -369,6 +369,7 @@ Deterministic primitive-action transitions for SeedMind Nursery v0.
 
 - Kind: python
 - Classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
+- Functions/symbols: _angular_push_contact_is_effective, _lateral_positions
 
 ## `src/seedmind/growth/__init__.py`
 
@@ -386,7 +387,7 @@ Typed diagnostic ladder for Week 10 capacity diagnosis.
 
 ## `src/seedmind/growth/proposal.py`
 
-Non-authoritative Week 10 growth proposal records. Proposal creation now consumes grounded diagnostic evidence and rejects incomplete ladders, replay, reachability, prediction evidence, ambiguity, safety, impossibility, resource limits, or ongoing improvement.
+Non-authoritative Week 10 growth proposal records.
 
 - Kind: python
 - Classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord
@@ -398,15 +399,15 @@ Learning-progress windows and plateau classification for Week 10.
 
 - Kind: python
 - Classes: PlateauClassification, LearningProgressThresholds, LearningAttempt, LearningProgressWindow
-- Functions/symbols: build_learning_progress_windows, final_classification
+- Functions/symbols: build_learning_progress_windows, final_classification, _classify_window, _mean, _validate_unit_interval
 
 ## `src/seedmind/growth/week10.py`
 
-Grounded deterministic Week 10 capacity-diagnosis runner. This module supersedes the scripted `13140df` closure evidence by executing Nursery episodes, exporting `grounded_episode_traces.json`, deriving progress windows from traces, retrieving real episodic-memory replay, measuring teacher-demonstration effects, and deriving the non-authoritative proposal from complete evidence.
+Grounded deterministic Week 10 capacity-diagnosis runner.
 
 - Kind: python
-- Classes: PredictionTraceRecord, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult
-- Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence
+- Classes: PredictionTraceRecord, EpisodeStepTrace, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, RepositoryInventory, Week10AcceptanceReport, Week10RunResult
+- Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence, _early_evidence_diagnosis, _temporary_failure_diagnosis, _execute_sustained_grounded_sequence, _sustained_blockage_diagnosis, _non_capacity_diagnosis, _execute_attempt, _execute_demonstration, _execute_trace, _prediction_trace, _persist_trace_events, _grounded_replay, _retrieve_replay_events, _actions_from_retrieved_memory, _retreat_then_replay_actions, _actions_from_demonstration, _attempt_prediction_evidence_resolved, _help_record, _variant_records_from_attempts, _build_sustained_proposal_if_allowed, _with_proposal_state, _scenario_state, _angular_state, _planned_actions, _retreat_reapproach_actions, _run_frozen_skill_actions, _run_familiar_control, _cube_push_outcomes, _object_state, _push_once, _repository_inventory, _diagnostic_report_payload, _traces_payload, _windows_payload, _write_svg, _preserve_superseded_scripted_evidence, _write_json, _write_text, _empty_replay, _empty_help, _attempt_json, _attempt_index_for_family, _progress, _object_target_distance, _object_position, _target_position, _target_satisfied, _shortest_route, _direction_between, _turn_actions, _wall_entities, _episode_counts, _position_json, _state_digest, _canonical_digest, _sha256_file, _clamp_unit, _frozen_ndnra_boundary_pass
 
 ## `src/seedmind/human/__init__.py`
 
@@ -1344,6 +1345,13 @@ Acceptance tests for the deterministic Week 9 contribution runner.
 
 - Kind: python
 - Functions/symbols: test_week9_runner_proves_support_transitions_and_exports, test_week9_runner_exports_loadable_history_and_support
+
+## `tests/unit/growth/test_week10_capacity_diagnosis.py`
+
+Grounded tests for original Week 10 capacity diagnosis.
+
+- Kind: python
+- Functions/symbols: test_cube_like_raw_dynamics_differ_from_ball_without_breaking_ball_push, test_policy_facing_observation_has_raw_shape_not_privileged_cube_label, test_every_learning_attempt_references_executed_episode_trace, test_episode_traces_have_primitive_actions_real_outcomes_and_prediction_evidence, test_temporary_and_sustained_seed_sets_are_consumed, test_temporary_failure_improves_from_executed_replay_and_demonstration, test_sustained_blockage_uses_real_windows_full_ladder_and_reachability_proof, test_replay_memory_ids_resolve_to_committed_source_episodes, test_strategy_variants_actually_execute_without_growth_or_skill_mutation, test_non_capacity_cases_are_separate_grounded_stops_without_proposal, test_proposal_is_evidence_derived_and_rejects_incomplete_evidence, test_familiar_skill_retention_and_no_week11_or_ndnra_dependency, test_visualisation_and_json_artifacts_are_deterministic_and_leave_no_tmp_files, test_synthetic_rows_are_limited_to_pure_window_classifier, test_modifying_runtime_outcomes_changes_diagnosis, _diagnosis, _recalculated_progress, _push_outcome, _state, _walls
 
 ## `tests/unit/ndnra_controlled_replay_test_support.py`
 

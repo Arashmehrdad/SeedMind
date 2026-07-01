@@ -57,6 +57,9 @@ def test_every_learning_attempt_references_executed_episode_trace() -> None:
     traces = {trace.episode_id: trace for trace in result.episode_traces}
 
     for diagnosis in result.diagnoses:
+        assert [attempt.attempt_index for attempt in diagnosis.attempts] == list(
+            range(len(diagnosis.attempts))
+        )
         for attempt in diagnosis.attempts:
             assert attempt.has_grounded_provenance
             assert attempt.episode_id in traces
@@ -87,6 +90,7 @@ def test_temporary_and_sustained_seed_sets_are_consumed() -> None:
     result = run_week10_capacity_diagnosis()
     temporary = _diagnosis(result, "temporary_cube_recovery")
     sustained = _diagnosis(result, "sustained_cube_blockage")
+    traces = {trace.episode_id: trace for trace in result.episode_traces}
 
     assert {attempt.episode_id.split("-")[2] for attempt in temporary.attempts} == {
         str(seed) for seed in range(410, 422)
@@ -94,6 +98,12 @@ def test_temporary_and_sustained_seed_sets_are_consumed() -> None:
     assert {attempt.episode_id.split("-")[2] for attempt in sustained.attempts} == {
         str(seed) for seed in range(510, 522)
     }
+    assert (
+        len({traces[attempt.episode_id].initial_state_digest for attempt in temporary.attempts}) > 1
+    )
+    assert (
+        len({traces[attempt.episode_id].initial_state_digest for attempt in sustained.attempts}) > 1
+    )
 
 
 def test_temporary_failure_improves_from_executed_replay_and_demonstration() -> None:
@@ -135,18 +145,22 @@ def test_sustained_blockage_uses_real_windows_full_ladder_and_reachability_proof
 
 def test_replay_memory_ids_resolve_to_committed_source_episodes() -> None:
     result = run_week10_capacity_diagnosis()
-    trace_ids = {trace.episode_id for trace in result.episode_traces}
+    traces = {trace.episode_id: trace for trace in result.episode_traces}
+    trace_ids = set(traces)
 
     for family in ("temporary_cube_recovery", "sustained_cube_blockage"):
         replay = _diagnosis(result, family).replay
         assert replay.relevant_memory_ids
         assert set(replay.source_episode_ids).issubset(trace_ids)
         assert set(replay.replay_influenced_episode_ids).issubset(trace_ids)
+        for episode_id in replay.replay_influenced_episode_ids:
+            assert set(traces[episode_id].replay_influence) == set(replay.relevant_memory_ids)
 
 
 def test_strategy_variants_actually_execute_without_growth_or_skill_mutation() -> None:
     result = run_week10_capacity_diagnosis()
-    trace_ids = {trace.episode_id for trace in result.episode_traces}
+    traces = {trace.episode_id: trace for trace in result.episode_traces}
+    trace_ids = set(traces)
 
     assert result.strategy_variants
     for variant in result.strategy_variants:
@@ -156,6 +170,18 @@ def test_strategy_variants_actually_execute_without_growth_or_skill_mutation() -
         assert variant.attempts <= variant.safe_attempt_budget
         assert not variant.created_specialist
         assert not variant.mutated_frozen_skill
+
+    sustained_variants = tuple(
+        variant
+        for variant in result.strategy_variants
+        if variant.variant_id.startswith("sustained_cube_blockage-")
+    )
+    action_signatures = {
+        tuple(traces[episode_id].actions for episode_id in variant.executed_episode_ids)
+        for variant in sustained_variants
+    }
+    assert len(sustained_variants) >= 3
+    assert len(action_signatures) == len(sustained_variants)
 
 
 def test_non_capacity_cases_are_separate_grounded_stops_without_proposal() -> None:

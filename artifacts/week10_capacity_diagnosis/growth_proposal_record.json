@@ -24,7 +24,7 @@
     ],
     "relevant_memory_replayed": true,
     "safe_exploration_sufficient": true,
-    "strategy_variants_tested": 4,
+    "strategy_variants_tested": 3,
     "task_confirmed": true
   },
   "expected_benefit": {

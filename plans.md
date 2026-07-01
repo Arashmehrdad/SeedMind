@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: corrected original SeedMind Week 10 grounded capacity diagnosis; NDNRA remains frozen for separate-project extraction
+- Latest completed milestone: hardened original SeedMind Week 10 grounded capacity diagnosis; NDNRA remains frozen for separate-project extraction
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: SeedMind original main-product roadmap only
-- Last closed stage: corrected original SeedMind Week 10 grounded capacity diagnosis
+- Last closed stage: hardened original SeedMind Week 10 grounded capacity diagnosis
 - Current stage: original SeedMind Week 11 specialist growth is next and not started
-- Current status: Week 10 is closed by corrected grounded Nursery evidence. Commit `13140df` remains in history and is structurally useful, but it is invalid as grounded capacity-diagnosis closure evidence because its temporary-failure and sustained-blockage conclusions used scripted diagnostic timelines rather than executed Nursery episodes. Corrected Week 10 replaces those artifacts with grounded attempts, executable strategy variants, real main-memory replay, measured teacher-demonstration effects, real prediction evidence, and evidence-derived proposal generation. No specialist, router, parameter growth, production mutation, or Week 11 growth gate was created. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration.
+- Current status: Week 10 is closed by hardened grounded Nursery evidence. Commit `13140df` remains invalid for closure because it used scripted diagnostic timelines. Commit `ea15047` replaced those timelines with executed episodes, but a direct follow-up audit found that seeds still built identical states, replay and demonstration plans were selected before evidence derivation, several distinct variant labels executed the same frozen policy, prediction acceptance was only a non-negative check, and teacher demonstrations shifted learner attempt indexes. The hardened implementation now varies seeded initial states, derives replay actions from retrieved traces, derives demonstration-guided actions from the executed teacher trace, executes distinct sustained variants, enforces a `0.05` prediction-MAE ceiling, records the actual variant count, and keeps learner attempt indexes contiguous. No specialist, router, parameter growth, production mutation, or Week 11 growth gate was created. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration.
 - Expanded developmental architecture marker: 84%
 - Marker interpretation: unchanged; the freeze is a repository and roadmap boundary, not new cognitive capability evidence
 
@@ -47,14 +47,15 @@ Completed bounded increments:
 21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
 22. Original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, and zero production, verification, or support-authority violations. Historical NDNRA comparison artifacts are retained but are not required for Week 9 closure or future SeedMind work.
 23. NDNRA freeze and extraction boundary — preserve the current NDNRA source, tests, documents, ADRs, and evidence without further development inside SeedMind; remove NDNRA comparison and integration requirements from Week 10 onward; reserve all future NDNRA capability work for a separate project.
-24. Corrected original SeedMind Week 10 grounded capacity diagnosis — raw angular-object flat-contact dynamics, familiar ball retention, deterministic learning-progress windows built from executed Nursery episodes, early-evidence and non-capacity early stops, temporary-failure recovery through executable strategy/replay/demonstration evidence, sustained-blockage full diagnostic ladder, grounded main-memory replay, measured protected teacher demonstrations, real prediction comparisons, exactly one evidence-derived non-authoritative growth proposal with `candidate.created=false`, preserved superseded `13140df` scripted artifacts, frozen Week 8 skill preservation, frozen NDNRA boundary preservation, and no specialist, router, parameters, production mutation, or Week 11 implementation.
+24. Hardened original SeedMind Week 10 grounded capacity diagnosis — raw angular-object flat-contact dynamics, familiar ball retention, seeded state variation, deterministic learning-progress windows built from executed Nursery episodes, early-evidence and non-capacity early stops, replay actions derived from retrieved episode traces, demonstration-guided actions derived from the executed teacher trace, distinct executable sustained strategy variants, prediction comparisons bounded by a `0.05` MAE ceiling, contiguous learner attempt indexes, exactly one evidence-derived non-authoritative growth proposal with `candidate.created=false`, preserved superseded `13140df` scripted artifacts, frozen Week 8 skill preservation, frozen NDNRA boundary preservation, and no specialist, router, parameters, production mutation, or Week 11 implementation.
 
 Superseded evidence:
 
 - `cfb8f3c` is preserved in history but is not valid evidence for NDNRA competence comparison.
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json` is annotated as `valid_for_competence_comparison=false` and superseded by `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`.
 - Week 9 closure rests on the main SeedMind contribution, grounded verification, honest-failure, persistence, and support-transition evidence. The NDNRA comparison artifacts remain historical audit material only and are not required for closure or future product acceptance.
-- `13140df` is preserved in history but is not valid grounded evidence for original Week 10 capacity-diagnosis closure. Its artifacts under `artifacts/week10_capacity_diagnosis/` must be superseded by corrected grounded artifacts that derive attempts, progress, replay, demonstration effects, prediction evidence, classification, and proposal generation from executed Nursery episodes.
+- `13140df` is preserved in history but is not valid grounded evidence for original Week 10 capacity-diagnosis closure. Its artifacts are preserved under `artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/`.
+- `ea15047` established grounded episode traces but required a follow-up integrity hardening because it ignored seeds when constructing states, preassigned replay and demonstration solution plans, used identical frozen-policy executions under multiple variant labels, accepted any non-negative prediction error, and counted teacher traces in learner attempt indexes.
 
 ## NDNRA freeze and extraction boundary
 
@@ -145,19 +146,21 @@ Week 10 artifacts:
 - `artifacts/week10_capacity_diagnosis/week10_acceptance_report.json`
 - `artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/`
 
-Corrected Week 10 validation:
+Hardened Week 10 validation:
 
 ```text
-scripts/run_week10_capacity_diagnosis.py: passed
-tests/unit/growth: 15 passed
-tests/unit/test_transition_engine.py + tests/unit/test_observation_adapter.py: 23 passed
-tests/unit/skills + tests/unit/contribution: 45 passed
-complete repository pytest: 1177 passed
-ruff format --check .: passed
+run_week10_capacity_diagnosis(output_dir=artifacts/week10_capacity_diagnosis): passed
+final Week 10 tests: 15 passed in non-overlapping groups of 7 and 8
+transition-engine and observation-adapter regressions: 23 passed
+Week 8 skill and Week 9 contribution regressions: 45 passed
+final impacted/regression total: 83 passed
+complete repository baseline at ea15047: 1177 passed
+complete repository suite after this integrity hardening: not rerun; no claim renewed
+ruff format --check .: 287 files already formatted
 ruff check .: passed
-mypy .: passed
+mypy .: passed, no issues in 287 source files
 python -m pip check: passed
-git diff --check: passed with line-ending warnings for .gitignore and README.md only
+git diff --check: passed with line-ending normalization warnings only
 NDNRA source diff: none
 Week 10 NDNRA/parallel import-line scan: none
 temporary pytest/artifact files retained: none

@@ -68,6 +68,7 @@ WEEK10_EARLY_SEEDS = (310, 311, 312, 313)
 WEEK10_TEMPORARY_SEEDS = (410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421)
 WEEK10_BLOCKAGE_SEEDS = (510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521)
 WEEK10_NON_CAPACITY_SEEDS = (610, 611, 612, 613)
+MAX_RESOLVED_PREDICTION_MAE = 0.05
 
 
 @dataclass(frozen=True, slots=True)
@@ -462,10 +463,11 @@ def run_week10_capacity_diagnosis(
     grounded_attempt_pass = all(
         attempt.has_grounded_provenance for diagnosis in diagnoses for attempt in diagnosis.attempts
     ) and all(trace.step_traces for trace in trace_tuple)
-    prediction_pass = all(
-        step.prediction.evidence_available and step.prediction.mean_absolute_error >= 0.0
-        for trace in trace_tuple
-        for step in trace.step_traces
+    prediction_steps = tuple(step.prediction for trace in trace_tuple for step in trace.step_traces)
+    prediction_pass = bool(prediction_steps) and all(
+        prediction.evidence_available
+        and prediction.mean_absolute_error <= MAX_RESOLVED_PREDICTION_MAE
+        for prediction in prediction_steps
     )
     learning_progress_pass = (
         early.classification is PlateauClassification.INSUFFICIENT_EVIDENCE
@@ -664,87 +666,226 @@ def _temporary_failure_diagnosis(
 ) -> Week10ScenarioDiagnosis:
     seeds = temporary_seeds[:12]
     attempts: list[LearningAttempt] = []
-    for index, seed in enumerate(seeds):
-        if index < 4:
-            strategy_id = "frozen_skill"
-            plan_kind = "frozen_skill"
-        elif index < 6:
-            strategy_id = "variant_reposition_south"
-            plan_kind = "south_only"
-        elif index < 8:
-            strategy_id = "memory_guided_contact"
-            plan_kind = "full_teacher"
-        else:
-            strategy_id = "teacher_demonstrated_contact"
-            plan_kind = "full_teacher"
+    for seed in seeds[:4]:
         attempts.append(
             _execute_attempt(
                 scenario_family="temporary_cube_recovery",
                 seed=seed,
-                strategy_id=strategy_id,
-                plan_kind=plan_kind,
+                strategy_id="frozen_skill",
+                plan_kind="frozen_skill",
                 store=store,
                 scorer=scorer,
                 traces=traces,
-                replay_influence=("temporary-replay",) if index in (6, 7) else (),
-                demonstration_influence=("temporary-demo",) if index >= 8 else (),
             )
         )
-    strategy_variants.extend(
-        _variant_records_from_attempts("temporary_cube_recovery", tuple(attempts))
+    for seed in seeds[4:6]:
+        attempts.append(
+            _execute_attempt(
+                scenario_family="temporary_cube_recovery",
+                seed=seed,
+                strategy_id="variant_reposition_south",
+                plan_kind="south_only",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+            )
+        )
+
+    source_attempts = tuple(attempts)
+    memories = _retrieve_replay_events("temporary_cube_recovery", store, source_attempts)
+    for seed in seeds[6:8]:
+        state = _scenario_state("temporary_cube_recovery", seed, plan_kind="memory_replay")
+        attempts.append(
+            _execute_attempt(
+                scenario_family="temporary_cube_recovery",
+                seed=seed,
+                strategy_id="memory_guided_contact",
+                plan_kind="memory_replay",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+                replay_influence=tuple(event.event_id for event in memories),
+                actions_override=_actions_from_retrieved_memory(
+                    state,
+                    memories,
+                    traces,
+                    complete_toward_target=True,
+                    budget=18,
+                ),
+            )
+        )
+
+    demonstration = _execute_demonstration(
+        "temporary_cube_recovery",
+        seed=900,
+        store=store,
+        scorer=scorer,
+        traces=traces,
     )
+    for seed in seeds[8:12]:
+        state = _scenario_state("temporary_cube_recovery", seed, plan_kind="demonstration")
+        attempts.append(
+            _execute_attempt(
+                scenario_family="temporary_cube_recovery",
+                seed=seed,
+                strategy_id="teacher_demonstrated_contact",
+                plan_kind="demonstration",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+                demonstration_influence=(demonstration.trace_digest,),
+                actions_override=_actions_from_demonstration(
+                    state,
+                    demonstration,
+                    budget=18,
+                ),
+            )
+        )
+
+    attempt_tuple = tuple(attempts)
+    variant_records = _variant_records_from_attempts("temporary_cube_recovery", attempt_tuple)
+    strategy_variants.extend(variant_records)
     replay = _grounded_replay(
         "temporary_cube_recovery",
         store,
-        source_attempts=tuple(attempts[:6]),
-        influenced_attempts=tuple(attempts[6:8]),
+        source_attempts=source_attempts,
+        influenced_attempts=attempt_tuple[6:8],
     )
     help_record = _help_record(
         "temporary_cube_recovery",
-        before_attempts=tuple(attempts[:6]),
-        after_attempts=tuple(attempts[8:12]),
-        demonstration_trace=_execute_demonstration(
-            "temporary_cube_recovery",
-            seed=900,
-            store=store,
-            scorer=scorer,
-            traces=traces,
-        ),
+        before_attempts=attempt_tuple[:6],
+        after_attempts=attempt_tuple[8:12],
+        demonstration_trace=demonstration,
     )
     windows = build_learning_progress_windows(
-        tuple(attempts),
+        attempt_tuple,
         thresholds,
         scenario_family="temporary_cube_recovery",
         strategy_variants_exhausted=False,
         replay_attempted=bool(replay.relevant_memory_ids),
         help_or_demonstration_considered=help_record.help_requested,
     )
+    classification = final_classification(windows)
+    prediction_resolved = _attempt_prediction_evidence_resolved(attempt_tuple, traces)
     ladder = build_ladder(
         scenario_family="temporary_cube_recovery",
         task_confirmed=True,
-        safe_exploration_sufficient=True,
+        safe_exploration_sufficient=len(attempt_tuple) >= thresholds.minimum_attempts_for_blockage,
         relevant_memory_retrieved=bool(replay.relevant_memory_ids),
-        existing_skill_attempted=True,
-        strategy_variants_tested=True,
-        help_or_demonstration_considered=help_record.help_requested,
-        replay_attempted=True,
-        prediction_quality_checked=True,
-        competence_still_improving=True,
+        existing_skill_attempted=any(
+            attempt.strategy == "frozen_skill" for attempt in attempt_tuple
+        ),
+        strategy_variants_tested=bool(variant_records),
+        help_or_demonstration_considered=(
+            help_record.help_requested and help_record.demonstration_available
+        ),
+        replay_attempted=bool(replay.replay_influenced_episode_ids),
+        prediction_quality_checked=prediction_resolved,
+        competence_still_improving=classification is PlateauClassification.IMPROVING,
         inferred_policy_capacity_limitation=False,
         proposal_allowed=False,
-        attempt_count=len(attempts),
+        attempt_count=len(attempt_tuple),
         evidence_prefix="trace:temporary_cube_recovery",
     )
     return Week10ScenarioDiagnosis(
         scenario_family="temporary_cube_recovery",
-        classification=final_classification(windows),
-        attempts=tuple(attempts),
+        classification=classification,
+        attempts=attempt_tuple,
         windows=windows,
         ladder=ladder,
         replay=replay,
         help=help_record,
         proposal_generated=False,
     )
+
+
+def _execute_sustained_grounded_sequence(
+    *,
+    seeds: tuple[int, ...],
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+) -> tuple[tuple[LearningAttempt, ...], tuple[LearningAttempt, ...], GroundedEpisodeTrace]:
+    attempts: list[LearningAttempt] = []
+    for seed in seeds[:2]:
+        attempts.append(
+            _execute_attempt(
+                scenario_family="sustained_cube_blockage",
+                seed=seed,
+                strategy_id="frozen_skill",
+                plan_kind="frozen_skill",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+            )
+        )
+    for seed in seeds[2:4]:
+        attempts.append(
+            _execute_attempt(
+                scenario_family="sustained_cube_blockage",
+                seed=seed,
+                strategy_id="variant_offset_contact",
+                plan_kind="push_north",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+            )
+        )
+    source_attempts = tuple(attempts)
+    memories = _retrieve_replay_events("sustained_cube_blockage", store, source_attempts)
+    for seed in seeds[4:6]:
+        state = _scenario_state("sustained_cube_blockage", seed, plan_kind="memory_replay")
+        attempts.append(
+            _execute_attempt(
+                scenario_family="sustained_cube_blockage",
+                seed=seed,
+                strategy_id="variant_retreat_reapproach",
+                plan_kind="memory_replay",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+                replay_influence=tuple(event.event_id for event in memories),
+                actions_override=_retreat_then_replay_actions(
+                    state,
+                    memories,
+                    traces,
+                    budget=8,
+                ),
+            )
+        )
+    for seed in seeds[6:8]:
+        attempts.append(
+            _execute_attempt(
+                scenario_family="sustained_cube_blockage",
+                seed=seed,
+                strategy_id="variant_alternate_side",
+                plan_kind="push_west",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+            )
+        )
+    demonstration = _execute_demonstration(
+        "sustained_cube_blockage",
+        seed=901,
+        store=store,
+        scorer=scorer,
+        traces=traces,
+    )
+    for seed in seeds[8:12]:
+        attempts.append(
+            _execute_attempt(
+                scenario_family="sustained_cube_blockage",
+                seed=seed,
+                strategy_id="post_demo_existing_controller",
+                plan_kind="frozen_skill",
+                store=store,
+                scorer=scorer,
+                traces=traces,
+                demonstration_influence=(demonstration.trace_digest,),
+            )
+        )
+    return tuple(attempts), source_attempts, demonstration
 
 
 def _sustained_blockage_diagnosis(
@@ -757,80 +898,66 @@ def _sustained_blockage_diagnosis(
     blockage_seeds: tuple[int, ...],
 ) -> Week10ScenarioDiagnosis:
     seeds = blockage_seeds[:12]
-    strategies = (
-        "frozen_skill",
-        "frozen_skill",
-        "variant_offset_contact",
-        "variant_offset_contact",
-        "variant_retreat_reapproach",
-        "variant_retreat_reapproach",
-        "variant_alternate_side",
-        "variant_alternate_side",
-        "post_demo_existing_controller",
-        "post_demo_existing_controller",
-        "post_demo_existing_controller",
-        "post_demo_existing_controller",
+    attempts, source_attempts, demonstration = _execute_sustained_grounded_sequence(
+        seeds=seeds,
+        store=store,
+        scorer=scorer,
+        traces=traces,
     )
-    attempts = tuple(
-        _execute_attempt(
-            scenario_family="sustained_cube_blockage",
-            seed=seed,
-            strategy_id=strategy,
-            plan_kind="frozen_skill",
-            store=store,
-            scorer=scorer,
-            traces=traces,
-            replay_influence=("sustained-replay",) if index in (4, 5) else (),
-            demonstration_influence=("sustained-demo",) if index >= 8 else (),
-        )
-        for index, (seed, strategy) in enumerate(zip(seeds, strategies, strict=True))
-    )
-    strategy_variants.extend(_variant_records_from_attempts("sustained_cube_blockage", attempts))
+    variant_records = _variant_records_from_attempts("sustained_cube_blockage", attempts)
+    strategy_variants.extend(variant_records)
     replay = _grounded_replay(
         "sustained_cube_blockage",
         store,
-        source_attempts=attempts[:6],
+        source_attempts=source_attempts,
         influenced_attempts=attempts[4:6],
     )
     help_record = _help_record(
         "sustained_cube_blockage",
         before_attempts=attempts[:8],
         after_attempts=attempts[8:12],
-        demonstration_trace=_execute_demonstration(
-            "sustained_cube_blockage",
-            seed=901,
-            store=store,
-            scorer=scorer,
-            traces=traces,
-        ),
+        demonstration_trace=demonstration,
     )
     windows = build_learning_progress_windows(
         attempts,
         thresholds,
         scenario_family="sustained_cube_blockage",
-        strategy_variants_exhausted=True,
+        strategy_variants_exhausted=bool(variant_records),
         replay_attempted=bool(replay.relevant_memory_ids),
         help_or_demonstration_considered=help_record.help_requested,
+    )
+    classification = final_classification(windows)
+    prediction_resolved = _attempt_prediction_evidence_resolved(attempts, traces)
+    inferred_limitation = (
+        classification is PlateauClassification.SUSTAINED_BLOCKAGE
+        and bool(variant_records)
+        and bool(replay.relevant_memory_ids)
+        and not replay.progress_resumed
+        and help_record.demonstration_completed_task
+        and help_record.blockage_remained
+        and prediction_resolved
     )
     ladder = build_ladder(
         scenario_family="sustained_cube_blockage",
         task_confirmed=True,
-        safe_exploration_sufficient=True,
+        safe_exploration_sufficient=len(attempts) >= thresholds.minimum_attempts_for_blockage,
         relevant_memory_retrieved=bool(replay.relevant_memory_ids),
-        existing_skill_attempted=True,
-        strategy_variants_tested=True,
-        help_or_demonstration_considered=help_record.help_requested,
-        replay_attempted=True,
-        prediction_quality_checked=True,
-        competence_still_improving=False,
-        inferred_policy_capacity_limitation=True,
-        proposal_allowed=True,
+        existing_skill_attempted=any(attempt.strategy == "frozen_skill" for attempt in attempts),
+        strategy_variants_tested=bool(variant_records),
+        help_or_demonstration_considered=(
+            help_record.help_requested and help_record.demonstration_available
+        ),
+        replay_attempted=bool(replay.replay_influenced_episode_ids),
+        prediction_quality_checked=prediction_resolved,
+        competence_still_improving=classification is PlateauClassification.IMPROVING,
+        inferred_policy_capacity_limitation=inferred_limitation,
+        proposal_allowed=inferred_limitation,
         attempt_count=len(attempts),
         evidence_prefix="trace:sustained_cube_blockage",
     )
     return Week10ScenarioDiagnosis(
         scenario_family="sustained_cube_blockage",
-        classification=final_classification(windows),
+        classification=classification,
         attempts=attempts,
         windows=windows,
         ladder=ladder,
@@ -918,13 +1045,22 @@ def _execute_attempt(
     traces: list[GroundedEpisodeTrace],
     replay_influence: tuple[str, ...] = (),
     demonstration_influence: tuple[str, ...] = (),
+    actions_override: tuple[PrimitiveAction, ...] | None = None,
 ) -> LearningAttempt:
     state = _scenario_state(scenario_family, seed, plan_kind=plan_kind)
     episode_id = f"week10-{scenario_family}-{seed}-{strategy_id}"
-    if plan_kind == "frozen_skill" or plan_kind == "frozen_skill_impossible":
+    if actions_override is not None:
+        actions = actions_override
+    elif plan_kind == "frozen_skill" or plan_kind == "frozen_skill_impossible":
         actions = _run_frozen_skill_actions(state, budget=8)
     elif plan_kind == "south_only":
         actions = _planned_actions(state, (Direction.SOUTH,), budget=10)
+    elif plan_kind == "push_north":
+        actions = _planned_actions(state, (Direction.NORTH,), budget=8)
+    elif plan_kind == "push_west":
+        actions = _planned_actions(state, (Direction.WEST,), budget=8)
+    elif plan_kind == "retreat_reapproach":
+        actions = _retreat_reapproach_actions(state, budget=8)
     elif plan_kind == "full_teacher":
         actions = _planned_actions(
             state, (Direction.SOUTH, Direction.EAST, Direction.EAST), budget=18
@@ -1058,11 +1194,14 @@ def _execute_trace(
         if len(step_traces) >= len(actions)
         else "stopped"
     )
+    final_digest = _state_digest(runtime.state)
     payload = {
         "actions": [step.action.value for step in step_traces],
         "episode_id": episode_id,
         "final_distance": final_distance,
+        "final_state_digest": final_digest,
         "initial_distance": initial_distance,
+        "initial_state_digest": initial_digest,
         "outcomes": [step.transition_outcome.value for step in step_traces],
         "progress": progress,
         "scenario_family": scenario_family,
@@ -1097,7 +1236,7 @@ def _execute_trace(
         demonstration_influence=demonstration_influence,
         termination_reason=termination_reason,
         step_traces=tuple(step_traces),
-        final_state_digest=_state_digest(runtime.state),
+        final_state_digest=final_digest,
         trace_digest=trace_digest,
     )
 
@@ -1210,6 +1349,119 @@ def _grounded_replay(
     )
 
 
+def _retrieve_replay_events(
+    scenario_family: str,
+    store: EpisodicSQLiteStore,
+    source_attempts: tuple[LearningAttempt, ...],
+) -> tuple[EpisodicEvent, ...]:
+    source_episode_ids = {attempt.episode_id for attempt in source_attempts}
+    query = MemoryQuery(
+        minimum_significance=0.05,
+        context_code=f"{scenario_family}_angular_contact",
+        event_type=EpisodicEventType.ACTION,
+        limit=500,
+    )
+    return tuple(event for event in store.retrieve(query) if event.episode_id in source_episode_ids)
+
+
+def _actions_from_retrieved_memory(
+    state: NurseryState,
+    memories: tuple[EpisodicEvent, ...],
+    traces: list[GroundedEpisodeTrace],
+    *,
+    complete_toward_target: bool,
+    budget: int,
+) -> tuple[PrimitiveAction, ...]:
+    """Build a bounded action plan from the best retrieved source episode."""
+    source_ids = {event.episode_id for event in memories}
+    source_traces = [trace for trace in traces if trace.episode_id in source_ids]
+    if not source_traces:
+        return _run_frozen_skill_actions(state, budget=budget)
+    best = max(source_traces, key=lambda trace: (trace.task_progress, trace.episode_id))
+    if not complete_toward_target:
+        return tuple(step.action for step in best.step_traces)[:budget]
+
+    push_directions = [
+        _direction_between(step.object_position_before, step.object_position_after)
+        for step in best.step_traces
+        if step.object_position_before != step.object_position_after
+    ]
+    simulated_object = _object_position(state)
+    for direction in push_directions:
+        simulated_object = simulated_object.moved(direction)
+    target = _target_position(state)
+    while simulated_object.x != target.x:
+        direction = Direction.EAST if simulated_object.x < target.x else Direction.WEST
+        push_directions.append(direction)
+        simulated_object = simulated_object.moved(direction)
+    while simulated_object.y != target.y:
+        direction = Direction.SOUTH if simulated_object.y < target.y else Direction.NORTH
+        push_directions.append(direction)
+        simulated_object = simulated_object.moved(direction)
+    return _planned_actions(state, tuple(push_directions), budget=budget)
+
+
+def _retreat_then_replay_actions(
+    state: NurseryState,
+    memories: tuple[EpisodicEvent, ...],
+    traces: list[GroundedEpisodeTrace],
+    *,
+    budget: int,
+) -> tuple[PrimitiveAction, ...]:
+    """Apply a bounded retreat, then retry the best retrieved action sequence."""
+    engine = NurseryTransitionEngine()
+    current = state
+    prefix: list[PrimitiveAction] = []
+    retreat_direction = Direction((int(current.agent.orientation) + 2) % 4)
+    for turn in _turn_actions(current.agent.orientation, retreat_direction):
+        prefix.append(turn)
+        current = engine.apply(current, turn).state
+    destination = current.agent.position.moved(retreat_direction)
+    if (
+        len(prefix) < budget
+        and current.is_in_bounds(destination)
+        and current.blocking_entity_at(destination) is None
+    ):
+        prefix.append(PrimitiveAction.MOVE_FORWARD)
+        current = engine.apply(current, PrimitiveAction.MOVE_FORWARD).state
+    remembered = _actions_from_retrieved_memory(
+        current,
+        memories,
+        traces,
+        complete_toward_target=False,
+        budget=max(0, budget - len(prefix)),
+    )
+    return tuple((*prefix, *remembered)[:budget])
+
+
+def _actions_from_demonstration(
+    state: NurseryState,
+    demonstration: GroundedEpisodeTrace,
+    *,
+    budget: int,
+) -> tuple[PrimitiveAction, ...]:
+    push_directions = tuple(
+        _direction_between(step.object_position_before, step.object_position_after)
+        for step in demonstration.step_traces
+        if step.object_position_before != step.object_position_after
+    )
+    return _planned_actions(state, push_directions, budget=budget)
+
+
+def _attempt_prediction_evidence_resolved(
+    attempts: tuple[LearningAttempt, ...],
+    traces: list[GroundedEpisodeTrace],
+) -> bool:
+    attempt_ids = {attempt.episode_id for attempt in attempts}
+    relevant_traces = [trace for trace in traces if trace.episode_id in attempt_ids]
+    prediction_steps = [step.prediction for trace in relevant_traces for step in trace.step_traces]
+    return bool(prediction_steps) and all(
+        prediction.evidence_available
+        and prediction.mean_absolute_error <= MAX_RESOLVED_PREDICTION_MAE
+        for prediction in prediction_steps
+    )
+
+
 def _help_record(
     scenario_family: str,
     *,
@@ -1306,7 +1558,11 @@ def _build_sustained_proposal_if_allowed(
             classification=sustained.classification,
             ladder=sustained.ladder,
             windows=sustained.windows,
-            grounded_replay_pass=bool(sustained.replay.relevant_memory_ids),
+            grounded_replay_pass=(
+                bool(sustained.replay.relevant_memory_ids)
+                and bool(sustained.replay.replay_influenced_episode_ids)
+                and not sustained.replay.evidence_insufficient
+            ),
             reachability_proven=sustained.help.demonstration_completed_task,
             strategy_variant_count=len(
                 {
@@ -1316,8 +1572,15 @@ def _build_sustained_proposal_if_allowed(
                 }
             ),
             help_requested=sustained.help.help_requested,
-            demonstration_attempted=sustained.help.demonstration_available,
-            prediction_evidence_resolved=True,
+            demonstration_attempted=(
+                sustained.help.demonstration_available
+                and sustained.help.demonstration_applied
+                and sustained.help.demonstration_episode_id is not None
+            ),
+            prediction_evidence_resolved=all(
+                attempt.prediction_error <= MAX_RESOLVED_PREDICTION_MAE
+                for attempt in sustained.attempts
+            ),
             competence_still_improving=sustained.classification is PlateauClassification.IMPROVING,
             ambiguity_resolved=True,
             safety_or_permission_clear=True,
@@ -1354,7 +1617,14 @@ def _scenario_state(scenario_family: str, seed: int, *, plan_kind: str) -> Nurse
 
 
 def _angular_state(*, seed: int, impossible: bool) -> NurseryState:
-    del seed
+    agent_positions = (
+        GridPosition(2, 2),
+        GridPosition(1, 2),
+        GridPosition(2, 3),
+        GridPosition(1, 3),
+    )
+    agent_position = agent_positions[(seed // 4) % len(agent_positions)]
+    orientation = tuple(Direction)[seed % len(tuple(Direction))]
     blockers = [
         EntityState(
             entity_id="flat_contact_blocker",
@@ -1386,7 +1656,7 @@ def _angular_state(*, seed: int, impossible: bool) -> NurseryState:
     return NurseryState(
         width=7,
         height=6,
-        agent=AgentState(position=GridPosition(2, 2), orientation=Direction.EAST),
+        agent=AgentState(position=agent_position, orientation=orientation),
         entities=(
             *_wall_entities(7, 6),
             *blockers,
@@ -1438,6 +1708,32 @@ def _planned_actions(
         current = engine.apply(current, PrimitiveAction.PUSH).state
         if len(actions) >= budget:
             break
+    return tuple(actions[:budget])
+
+
+def _retreat_reapproach_actions(
+    state: NurseryState,
+    *,
+    budget: int,
+) -> tuple[PrimitiveAction, ...]:
+    """Execute a bounded retreat before retrying a non-progressing north contact."""
+    engine = NurseryTransitionEngine()
+    current = state
+    actions: list[PrimitiveAction] = []
+    retreat_direction = Direction((int(current.agent.orientation) + 2) % 4)
+    for turn in _turn_actions(current.agent.orientation, retreat_direction):
+        actions.append(turn)
+        current = engine.apply(current, turn).state
+    destination = current.agent.position.moved(retreat_direction)
+    if (
+        len(actions) < budget
+        and current.is_in_bounds(destination)
+        and current.blocking_entity_at(destination) is None
+    ):
+        actions.append(PrimitiveAction.MOVE_FORWARD)
+        current = engine.apply(current, PrimitiveAction.MOVE_FORWARD).state
+    remaining = max(0, budget - len(actions))
+    actions.extend(_planned_actions(current, (Direction.NORTH,), budget=remaining))
     return tuple(actions[:budget])
 
 
@@ -1570,6 +1866,17 @@ def _diagnostic_report_payload(result: Week10RunResult) -> dict[str, object]:
                 "and was not valid grounded evidence. The corrected implementation derives "
                 "attempts, progress, replay outcomes, demonstration effects, prediction "
                 "evidence, classification, and proposal generation from executed Nursery episodes."
+            ),
+        },
+        "integrity_followup": {
+            "hardens_commit": "ea15047",
+            "reason": (
+                "The ea15047 grounded correction still ignored scenario seeds when building "
+                "Nursery states, assigned replay and demonstration solution plans before deriving "
+                "them from evidence, labelled identical frozen-policy executions as distinct "
+                "strategy variants, accepted any non-negative prediction error, and counted "
+                "teacher demonstrations in learner attempt indexes. This follow-up corrects "
+                "those remaining evidence-integrity defects."
             ),
         },
         "cube_like_raw_behavior": result.cube_push_outcomes,
@@ -1751,7 +2058,15 @@ def _attempt_index_for_family(
     traces: list[GroundedEpisodeTrace],
     scenario_family: str,
 ) -> int:
-    return sum(1 for trace in traces if trace.scenario_family == scenario_family) - 1
+    return (
+        sum(
+            1
+            for trace in traces
+            if trace.scenario_family == scenario_family
+            and trace.strategy_id != "protected_teacher_oracle_demonstration"
+        )
+        - 1
+    )
 
 
 def _progress(initial_distance: int, final_distance: int) -> float:

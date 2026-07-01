@@ -25,14 +25,17 @@ See `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md` for t
 
 ## Current main-roadmap evidence
 
-SeedMind Week 10 is closed by the corrected main `seedmind.growth` implementation.
+SeedMind Week 10 is closed by the hardened main `seedmind.growth` implementation.
 
-Correction note: the original `13140df` Week 10 evidence used scripted diagnostic timelines and was not valid grounded evidence. The corrected implementation derives attempts, progress, replay outcomes, demonstration effects, prediction evidence, classification, and proposal generation from executed Nursery episodes.
+Correction note: the original `13140df` Week 10 evidence used scripted diagnostic timelines and was not valid grounded evidence. Commit `ea15047` replaced those timelines with executed episodes, but a follow-up audit found that scenario seeds still produced identical states, replay and demonstration plans were assigned before evidence derivation, several variant labels shared the frozen policy, the prediction gate accepted any non-negative error, and teacher traces shifted learner attempt indexes. The current implementation corrects those remaining integrity defects.
 
 - angular movable objects now have raw flat-contact push resistance while familiar round-object behavior is retained;
 - policy-facing observations expose numeric geometry, movability, and shape channels, not a privileged `cube` label;
 - learning-progress windows use predeclared thresholds: window size `4`, minimum `3` windows, minimum `12` attempts, and improvement threshold `0.10`;
 - every active Week 10 `LearningAttempt` references a grounded episode trace with primitive actions, transition outcomes, state digests, measured progress, prediction evidence, and trace digest;
+- deterministic seeds now produce multiple distinct initial Nursery states rather than changing identifiers only;
+- replay-influenced action plans are derived from retrieved source traces, demonstration-guided plans are derived from the executed teacher trace, and the sustained strategy variants have distinct primitive-action signatures;
+- prediction evidence must be present and remain within the declared mean-absolute-error ceiling of `0.05`;
 - early evidence remains `insufficient_evidence` and cannot produce growth;
 - temporary cube-like failure recovers to `improving` after executable strategy, grounded replay, and measured teacher-demonstration evidence, with no growth proposal;
 - sustained cube-like blockage remains plateaued after executed variants, grounded replay, and a reachability-proving teacher trace, then produces exactly one proposal;

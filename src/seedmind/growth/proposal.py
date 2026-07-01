@@ -177,7 +177,7 @@ def build_week10_growth_proposal(
             safe_exploration_sufficient=True,
             relevant_memory_replayed=True,
             existing_skill_attempted=True,
-            strategy_variants_tested=4,
+            strategy_variants_tested=strategy_variant_count,
             help_requested=True,
             demonstration_attempted=True,
             progress_plateau=True,
