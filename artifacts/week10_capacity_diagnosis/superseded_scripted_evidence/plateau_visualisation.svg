@@ -2,11 +2,11 @@
   <rect x="0" y="0" width="640" height="260" fill="white"/>
   <line x1="70" y1="40" x2="70" y2="210" stroke="black"/>
   <line x1="70" y1="210" x2="560" y2="210" stroke="black"/>
-  <text x="70" y="24" font-family="monospace" font-size="14">Week 10 grounded plateau evidence</text>
-  <polyline points="70,210 160,110 250,60" fill="none" stroke="#167a3a" stroke-width="3"/>
-  <polyline points="70,210 160,210 250,210" fill="none" stroke="#b3261e" stroke-width="3"/>
+  <text x="70" y="24" font-family="monospace" font-size="14">Week 10 plateau evidence</text>
+  <polyline points="70,199 160,137 250,84" fill="none" stroke="#167a3a" stroke-width="3"/>
+  <polyline points="70,194 160,192 250,192" fill="none" stroke="#b3261e" stroke-width="3"/>
   <text x="360" y="72" font-family="monospace" font-size="12" fill="#167a3a">temporary recovery/improving</text>
   <text x="360" y="94" font-family="monospace" font-size="12" fill="#b3261e">sustained blockage</text>
   <text x="20" y="54" font-family="monospace" font-size="11">progress</text>
-  <text x="250" y="238" font-family="monospace" font-size="11">grounded learning-progress windows</text>
+  <text x="250" y="238" font-family="monospace" font-size="11">learning-progress windows</text>
 </svg>

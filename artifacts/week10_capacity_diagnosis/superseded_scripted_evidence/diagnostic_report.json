@@ -1,0 +1,642 @@
+{
+  "cube_like_raw_behavior": {
+    "angular_open_push": "pushed",
+    "angular_wall_push": "push_ineffective_contact",
+    "round_open_push": "pushed"
+  },
+  "diagnoses": [
+    {
+      "classification": "insufficient_evidence",
+      "help": {
+        "blockage_remained": true,
+        "demonstration_applied": false,
+        "demonstration_available": false,
+        "demonstration_provenance": "not_applicable",
+        "help_reason": "minimum evidence not reached",
+        "help_requested": true,
+        "performance_improved_afterward": false,
+        "scenario_family": "early_cube_evidence"
+      },
+      "ladder": {
+        "completed_for_growth_proposal": false,
+        "scenario_family": "early_cube_evidence",
+        "steps": [
+          {
+            "attempt_count": 4,
+            "code": "confirm_task_and_success_condition",
+            "evidence_refs": [
+              "early:confirm_task_and_success_condition"
+            ],
+            "next_permitted_step": "confirm_sufficient_safe_exploration",
+            "reason": "task and success condition are confirmed",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 4,
+            "code": "confirm_sufficient_safe_exploration",
+            "evidence_refs": [
+              "early:confirm_sufficient_safe_exploration"
+            ],
+            "next_permitted_step": null,
+            "reason": "safe exploration meets the minimum evidence window",
+            "remaining_uncertainty": "safe exploration meets the minimum evidence window",
+            "result": "blocked",
+            "status": "blocked"
+          }
+        ],
+        "stop_reason": "safe exploration meets the minimum evidence window",
+        "stopped_early": true
+      },
+      "non_capacity_reason": null,
+      "proposal_generated": false,
+      "replay": {
+        "changed_strategy": false,
+        "evidence_insufficient": true,
+        "progress_resumed": false,
+        "query": {},
+        "relevance_reasons": [],
+        "relevant_memory_ids": [],
+        "replayed_summaries": [],
+        "scenario_family": "early_cube_evidence"
+      },
+      "scenario_family": "early_cube_evidence",
+      "windows": [
+        {
+          "attempt_end": 3,
+          "attempt_start": 0,
+          "classification": "insufficient_evidence",
+          "demonstration_involved": false,
+          "help_requests": 0,
+          "improvement": null,
+          "invalid_or_ineffective_action_count": 8,
+          "mean_prediction_error": 0.6625,
+          "mean_steps": 4.0,
+          "mean_task_progress": 0.0575,
+          "replay_involved": false,
+          "scenario_family": "early_cube_evidence",
+          "strategy": "frozen_skill",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "early_cube_evidence-window-01"
+        }
+      ]
+    },
+    {
+      "classification": "improving",
+      "help": {
+        "blockage_remained": false,
+        "demonstration_applied": true,
+        "demonstration_available": true,
+        "demonstration_provenance": "protected_teacher_response_policy",
+        "help_reason": "blocked_high_uncertainty",
+        "help_requested": true,
+        "performance_improved_afterward": true,
+        "scenario_family": "temporary_cube_recovery"
+      },
+      "ladder": {
+        "completed_for_growth_proposal": false,
+        "scenario_family": "temporary_cube_recovery",
+        "steps": [
+          {
+            "attempt_count": 12,
+            "code": "confirm_task_and_success_condition",
+            "evidence_refs": [
+              "temporary:confirm_task_and_success_condition"
+            ],
+            "next_permitted_step": "confirm_sufficient_safe_exploration",
+            "reason": "task and success condition are confirmed",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "confirm_sufficient_safe_exploration",
+            "evidence_refs": [
+              "temporary:confirm_sufficient_safe_exploration"
+            ],
+            "next_permitted_step": "retrieve_relevant_memories",
+            "reason": "safe exploration meets the minimum evidence window",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "retrieve_relevant_memories",
+            "evidence_refs": [
+              "temporary:retrieve_relevant_memories"
+            ],
+            "next_permitted_step": "attempt_existing_frozen_skill",
+            "reason": "relevant grounded main-memory evidence was retrieved",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "attempt_existing_frozen_skill",
+            "evidence_refs": [
+              "temporary:attempt_existing_frozen_skill"
+            ],
+            "next_permitted_step": "try_bounded_alternative_strategies",
+            "reason": "the frozen approach_and_push skill was attempted",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "try_bounded_alternative_strategies",
+            "evidence_refs": [
+              "temporary:try_bounded_alternative_strategies"
+            ],
+            "next_permitted_step": null,
+            "reason": "bounded general strategy variants were exhausted",
+            "remaining_uncertainty": "bounded general strategy variants were exhausted",
+            "result": "blocked",
+            "status": "blocked"
+          }
+        ],
+        "stop_reason": "bounded general strategy variants were exhausted",
+        "stopped_early": true
+      },
+      "non_capacity_reason": null,
+      "proposal_generated": false,
+      "replay": {
+        "changed_strategy": true,
+        "evidence_insufficient": false,
+        "progress_resumed": true,
+        "query": {
+          "context_code": "angular_contact",
+          "event_type": "action",
+          "limit": 3,
+          "minimum_significance": 0.2
+        },
+        "relevance_reasons": [
+          "same raw angular contact geometry and object-progress outcome",
+          "same raw angular contact geometry and object-progress outcome",
+          "same raw angular contact geometry and object-progress outcome"
+        ],
+        "relevant_memory_ids": [
+          "temporary_cube_recovery-grounded-contact-2",
+          "temporary_cube_recovery-grounded-contact-1",
+          "temporary_cube_recovery-grounded-contact-0"
+        ],
+        "replayed_summaries": [
+          "temporary_cube_recovery-grounded-contact-2:object_progress:True",
+          "temporary_cube_recovery-grounded-contact-1:object_progress:False",
+          "temporary_cube_recovery-grounded-contact-0:object_progress:False"
+        ],
+        "scenario_family": "temporary_cube_recovery"
+      },
+      "scenario_family": "temporary_cube_recovery",
+      "windows": [
+        {
+          "attempt_end": 3,
+          "attempt_start": 0,
+          "classification": "insufficient_evidence",
+          "demonstration_involved": false,
+          "help_requests": 0,
+          "improvement": null,
+          "invalid_or_ineffective_action_count": 8,
+          "mean_prediction_error": 0.615,
+          "mean_steps": 4.5,
+          "mean_task_progress": 0.075,
+          "replay_involved": false,
+          "scenario_family": "temporary_cube_recovery",
+          "strategy": "reposition_before_push",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "temporary_cube_recovery-window-01"
+        },
+        {
+          "attempt_end": 7,
+          "attempt_start": 4,
+          "classification": "improving",
+          "demonstration_involved": true,
+          "help_requests": 1,
+          "improvement": 0.4175,
+          "invalid_or_ineffective_action_count": 1,
+          "mean_prediction_error": 0.31,
+          "mean_steps": 5.75,
+          "mean_task_progress": 0.4925,
+          "replay_involved": true,
+          "scenario_family": "temporary_cube_recovery",
+          "strategy": "teacher_demonstrated_contact",
+          "success_rate": 0.75,
+          "successes": 3,
+          "total_attempts": 4,
+          "window_id": "temporary_cube_recovery-window-02"
+        },
+        {
+          "attempt_end": 11,
+          "attempt_start": 8,
+          "classification": "improving",
+          "demonstration_involved": false,
+          "help_requests": 0,
+          "improvement": 0.3475,
+          "invalid_or_ineffective_action_count": 0,
+          "mean_prediction_error": 0.155,
+          "mean_steps": 5.0,
+          "mean_task_progress": 0.84,
+          "replay_involved": false,
+          "scenario_family": "temporary_cube_recovery",
+          "strategy": "teacher_demonstrated_contact",
+          "success_rate": 1.0,
+          "successes": 4,
+          "total_attempts": 4,
+          "window_id": "temporary_cube_recovery-window-03"
+        }
+      ]
+    },
+    {
+      "classification": "sustained_blockage",
+      "help": {
+        "blockage_remained": true,
+        "demonstration_applied": true,
+        "demonstration_available": true,
+        "demonstration_provenance": "protected_teacher_response_policy",
+        "help_reason": "blocked_high_uncertainty",
+        "help_requested": true,
+        "performance_improved_afterward": false,
+        "scenario_family": "sustained_cube_blockage"
+      },
+      "ladder": {
+        "completed_for_growth_proposal": true,
+        "scenario_family": "sustained_cube_blockage",
+        "steps": [
+          {
+            "attempt_count": 12,
+            "code": "confirm_task_and_success_condition",
+            "evidence_refs": [
+              "sustained:confirm_task_and_success_condition"
+            ],
+            "next_permitted_step": "confirm_sufficient_safe_exploration",
+            "reason": "task and success condition are confirmed",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "confirm_sufficient_safe_exploration",
+            "evidence_refs": [
+              "sustained:confirm_sufficient_safe_exploration"
+            ],
+            "next_permitted_step": "retrieve_relevant_memories",
+            "reason": "safe exploration meets the minimum evidence window",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "retrieve_relevant_memories",
+            "evidence_refs": [
+              "sustained:retrieve_relevant_memories"
+            ],
+            "next_permitted_step": "attempt_existing_frozen_skill",
+            "reason": "relevant grounded main-memory evidence was retrieved",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "attempt_existing_frozen_skill",
+            "evidence_refs": [
+              "sustained:attempt_existing_frozen_skill"
+            ],
+            "next_permitted_step": "try_bounded_alternative_strategies",
+            "reason": "the frozen approach_and_push skill was attempted",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "try_bounded_alternative_strategies",
+            "evidence_refs": [
+              "sustained:try_bounded_alternative_strategies"
+            ],
+            "next_permitted_step": "request_help_or_demonstration",
+            "reason": "bounded general strategy variants were exhausted",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "request_help_or_demonstration",
+            "evidence_refs": [
+              "sustained:request_help_or_demonstration"
+            ],
+            "next_permitted_step": "attempt_bounded_memory_replay",
+            "reason": "help and demonstration were considered or attempted",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "attempt_bounded_memory_replay",
+            "evidence_refs": [
+              "sustained:attempt_bounded_memory_replay"
+            ],
+            "next_permitted_step": "check_prediction_quality",
+            "reason": "bounded replay of grounded main-memory evidence was attempted",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "check_prediction_quality",
+            "evidence_refs": [
+              "sustained:check_prediction_quality"
+            ],
+            "next_permitted_step": "check_learning_progress",
+            "reason": "prediction-quality evidence was checked",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "check_learning_progress",
+            "evidence_refs": [
+              "sustained:check_learning_progress"
+            ],
+            "next_permitted_step": "infer_policy_capacity_limitation",
+            "reason": "competence is not improving above the declared threshold",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "infer_policy_capacity_limitation",
+            "evidence_refs": [
+              "sustained:infer_policy_capacity_limitation"
+            ],
+            "next_permitted_step": "produce_non_authoritative_growth_proposal",
+            "reason": "remaining evidence supports a possible policy-capacity limitation",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          },
+          {
+            "attempt_count": 12,
+            "code": "produce_non_authoritative_growth_proposal",
+            "evidence_refs": [
+              "sustained:produce_non_authoritative_growth_proposal"
+            ],
+            "next_permitted_step": null,
+            "reason": "a non-authoritative Week 11 investigation proposal is allowed",
+            "remaining_uncertainty": "none",
+            "result": "passed",
+            "status": "passed"
+          }
+        ],
+        "stop_reason": null,
+        "stopped_early": false
+      },
+      "non_capacity_reason": null,
+      "proposal_generated": true,
+      "replay": {
+        "changed_strategy": false,
+        "evidence_insufficient": false,
+        "progress_resumed": false,
+        "query": {
+          "context_code": "angular_contact",
+          "event_type": "action",
+          "limit": 3,
+          "minimum_significance": 0.2
+        },
+        "relevance_reasons": [
+          "same raw angular contact geometry and object-progress outcome",
+          "same raw angular contact geometry and object-progress outcome",
+          "same raw angular contact geometry and object-progress outcome"
+        ],
+        "relevant_memory_ids": [
+          "sustained_cube_blockage-grounded-contact-2",
+          "sustained_cube_blockage-grounded-contact-1",
+          "sustained_cube_blockage-grounded-contact-0"
+        ],
+        "replayed_summaries": [
+          "sustained_cube_blockage-grounded-contact-2:object_progress:True",
+          "sustained_cube_blockage-grounded-contact-1:object_progress:False",
+          "sustained_cube_blockage-grounded-contact-0:object_progress:False"
+        ],
+        "scenario_family": "sustained_cube_blockage"
+      },
+      "scenario_family": "sustained_cube_blockage",
+      "windows": [
+        {
+          "attempt_end": 3,
+          "attempt_start": 0,
+          "classification": "insufficient_evidence",
+          "demonstration_involved": false,
+          "help_requests": 0,
+          "improvement": null,
+          "invalid_or_ineffective_action_count": 14,
+          "mean_prediction_error": 0.585,
+          "mean_steps": 8.0,
+          "mean_task_progress": 0.1075,
+          "replay_involved": false,
+          "scenario_family": "sustained_cube_blockage",
+          "strategy": "offset_contact",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "sustained_cube_blockage-window-01"
+        },
+        {
+          "attempt_end": 7,
+          "attempt_start": 4,
+          "classification": "insufficient_evidence",
+          "demonstration_involved": true,
+          "help_requests": 1,
+          "improvement": 0.0175,
+          "invalid_or_ineffective_action_count": 12,
+          "mean_prediction_error": 0.48,
+          "mean_steps": 8.0,
+          "mean_task_progress": 0.125,
+          "replay_involved": true,
+          "scenario_family": "sustained_cube_blockage",
+          "strategy": "alternate_side",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "sustained_cube_blockage-window-02"
+        },
+        {
+          "attempt_end": 11,
+          "attempt_start": 8,
+          "classification": "sustained_blockage",
+          "demonstration_involved": false,
+          "help_requests": 0,
+          "improvement": 0.0,
+          "invalid_or_ineffective_action_count": 12,
+          "mean_prediction_error": 0.445,
+          "mean_steps": 8.0,
+          "mean_task_progress": 0.125,
+          "replay_involved": false,
+          "scenario_family": "sustained_cube_blockage",
+          "strategy": "bounded_retry_angle",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "sustained_cube_blockage-window-03"
+        }
+      ]
+    },
+    {
+      "classification": "insufficient_evidence",
+      "help": {
+        "blockage_remained": true,
+        "demonstration_applied": false,
+        "demonstration_available": false,
+        "demonstration_provenance": "not_applicable",
+        "help_reason": "clarification required",
+        "help_requested": true,
+        "performance_improved_afterward": false,
+        "scenario_family": "ambiguous_non_capacity_blockage"
+      },
+      "ladder": {
+        "completed_for_growth_proposal": false,
+        "scenario_family": "ambiguous_non_capacity_blockage",
+        "steps": [
+          {
+            "attempt_count": 4,
+            "code": "confirm_task_and_success_condition",
+            "evidence_refs": [
+              "non-capacity:confirm_task_and_success_condition"
+            ],
+            "next_permitted_step": null,
+            "reason": "task and success condition are confirmed",
+            "remaining_uncertainty": "task and success condition are confirmed",
+            "result": "blocked",
+            "status": "blocked"
+          }
+        ],
+        "stop_reason": "task and success condition are confirmed",
+        "stopped_early": true
+      },
+      "non_capacity_reason": "ambiguous_goal_resource_limit_or_impossible_geometry",
+      "proposal_generated": false,
+      "replay": {
+        "changed_strategy": false,
+        "evidence_insufficient": true,
+        "progress_resumed": false,
+        "query": {},
+        "relevance_reasons": [],
+        "relevant_memory_ids": [],
+        "replayed_summaries": [],
+        "scenario_family": "ambiguous_non_capacity_blockage"
+      },
+      "scenario_family": "ambiguous_non_capacity_blockage",
+      "windows": [
+        {
+          "attempt_end": 3,
+          "attempt_start": 0,
+          "classification": "insufficient_evidence",
+          "demonstration_involved": false,
+          "help_requests": 2,
+          "improvement": null,
+          "invalid_or_ineffective_action_count": 0,
+          "mean_prediction_error": 0.3,
+          "mean_steps": 2.0,
+          "mean_task_progress": 0.0,
+          "replay_involved": false,
+          "scenario_family": "ambiguous_non_capacity_blockage",
+          "strategy": "no_growth_impossible_geometry",
+          "success_rate": 0.0,
+          "successes": 0,
+          "total_attempts": 4,
+          "window_id": "ambiguous_non_capacity_blockage-window-01"
+        }
+      ]
+    }
+  ],
+  "familiar_control": {
+    "seeds": [
+      206,
+      207,
+      208,
+      211
+    ],
+    "step_counts": [
+      17,
+      16,
+      15,
+      16
+    ],
+    "success_rate": 1.0
+  },
+  "limitations": "Week 10 has diagnosed and proposed. It has not grown, trained, accepted, routed, or deployed a specialist.",
+  "strategy_variants": [
+    {
+      "alignment_tolerance": 0,
+      "approach_side": "behind_object",
+      "attempts": 4,
+      "contact_offset": 0,
+      "created_specialist": false,
+      "mutated_frozen_skill": false,
+      "reposition_before_push": false,
+      "retry_angle": "none",
+      "safe_attempt_budget": 4,
+      "variant_id": "variant-01"
+    },
+    {
+      "alignment_tolerance": 0,
+      "approach_side": "left_side",
+      "attempts": 4,
+      "contact_offset": 1,
+      "created_specialist": false,
+      "mutated_frozen_skill": false,
+      "reposition_before_push": true,
+      "retry_angle": "quarter_turn",
+      "safe_attempt_budget": 4,
+      "variant_id": "variant-02"
+    },
+    {
+      "alignment_tolerance": 0,
+      "approach_side": "right_side",
+      "attempts": 4,
+      "contact_offset": -1,
+      "created_specialist": false,
+      "mutated_frozen_skill": false,
+      "reposition_before_push": true,
+      "retry_angle": "quarter_turn",
+      "safe_attempt_budget": 4,
+      "variant_id": "variant-03"
+    },
+    {
+      "alignment_tolerance": 1,
+      "approach_side": "retreat_reapproach",
+      "attempts": 4,
+      "contact_offset": 0,
+      "created_specialist": false,
+      "mutated_frozen_skill": false,
+      "reposition_before_push": true,
+      "retry_angle": "half_turn",
+      "safe_attempt_budget": 4,
+      "variant_id": "variant-04"
+    }
+  ],
+  "thresholds": {
+    "improvement_threshold": 0.1,
+    "minimum_attempts_for_blockage": 12,
+    "minimum_windows_for_blockage": 3,
+    "progress_resume_threshold": 0.2,
+    "sustained_progress_ceiling": 0.3,
+    "sustained_success_rate_ceiling": 0.25,
+    "window_size": 4
+  }
+}

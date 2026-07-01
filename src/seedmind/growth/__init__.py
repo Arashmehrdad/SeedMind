@@ -24,8 +24,10 @@ from seedmind.growth.stagnation import (
 )
 from seedmind.growth.week10 import (
     DEFAULT_WEEK10_OUTPUT_DIR,
+    GroundedEpisodeTrace,
     HelpDemonstrationRecord,
     MemoryReplayRecord,
+    PredictionTraceRecord,
     StrategyVariantRecord,
     Week10AcceptanceReport,
     Week10RunResult,
@@ -40,6 +42,7 @@ __all__ = [
     "DiagnosticStepCode",
     "DiagnosticStepRecord",
     "DiagnosticStepStatus",
+    "GroundedEpisodeTrace",
     "GrowthCandidateSummary",
     "GrowthDiagnosisSummary",
     "GrowthProposalRecord",
@@ -50,6 +53,7 @@ __all__ = [
     "LearningProgressWindow",
     "MemoryReplayRecord",
     "PlateauClassification",
+    "PredictionTraceRecord",
     "StrategyVariantRecord",
     "Week10AcceptanceReport",
     "Week10RunResult",

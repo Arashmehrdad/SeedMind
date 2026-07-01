@@ -66,9 +66,9 @@ graph LR
 - `src/seedmind/environment/teacher.py` — classes: TeacherPushDemonstrationProcess, TeacherDemonstrationScenarioFactory; functions: _entity_by_id
 - `src/seedmind/environment/transition.py` — classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
 - `src/seedmind/growth/diagnostic_ladder.py` — classes: DiagnosticStepStatus, DiagnosticStepCode, DiagnosticStepRecord, DiagnosticLadderRecord; functions: build_ladder
-- `src/seedmind/growth/proposal.py` — classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord; functions: build_week10_growth_proposal
+- `src/seedmind/growth/proposal.py` — classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord; functions: build_week10_growth_proposal. Week 10 proposal creation is evidence-derived and rejects incomplete grounded evidence.
 - `src/seedmind/growth/stagnation.py` — classes: PlateauClassification, LearningProgressThresholds, LearningAttempt, LearningProgressWindow; functions: build_learning_progress_windows, final_classification
-- `src/seedmind/growth/week10.py` — classes: StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult; functions: run_week10_capacity_diagnosis, export_week10_evidence
+- `src/seedmind/growth/week10.py` — classes: PredictionTraceRecord, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult; functions: run_week10_capacity_diagnosis, export_week10_evidence. Corrected Week 10 executes grounded Nursery episodes for every active attempt and supersedes the scripted `13140df` closure evidence.
 - `src/seedmind/human/__init__.py` — Symbolic human apprenticeship and calibrated help seeking.
 - `src/seedmind/human/apprenticeship.py` — classes: HelpReason, CaregiverEventType, HelpSeekingConfig, HelpContext, HelpDecision, TeacherResponse, CaregiverEvent, CaregiverMemory; functions: export_apprenticeship_report_json, export_apprenticeship_timeline_csv, _event_payload, _validate_unit_interval
 - `src/seedmind/human/contracts.py` — classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec; functions: _validate_unit_interval

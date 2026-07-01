@@ -1,0 +1,57 @@
+{
+  "candidate": {
+    "created": false,
+    "parent_module": "general_push_controller",
+    "type": "skill_expert"
+  },
+  "diagnosis": {
+    "demonstration_attempted": true,
+    "existing_skill_attempted": true,
+    "help_requested": true,
+    "inferred_limitation": "general_push_controller_lacks_flat_contact_policy_capacity",
+    "prediction_quality": "predictable_contact_effects_but_policy_limited",
+    "progress_plateau": true,
+    "rejected_alternative_causes": [
+      "insufficient_exploration_rejected_by_three_full_windows",
+      "missing_experience_rejected_by_grounded_memory_replay",
+      "incorrect_prediction_rejected_by_stable_contact_prediction_evidence",
+      "poor_strategy_rejected_by_bounded_variant_exhaustion",
+      "ambiguous_goal_rejected_by_confirmed_success_condition",
+      "inadequate_teaching_rejected_by_completed_demonstration_attempt",
+      "optimisation_failure_not_proven_but_less_likely_after_no_progress",
+      "impossible_task_rejected_by_demonstration_proven_reachability",
+      "resource_limitation_rejected_by_remaining_budget"
+    ],
+    "relevant_memory_replayed": true,
+    "safe_exploration_sufficient": true,
+    "strategy_variants_tested": 4,
+    "task_confirmed": true
+  },
+  "expected_benefit": {
+    "cube_like_success_gain_target": 0.2,
+    "familiar_ball_retention_floor": 0.9
+  },
+  "proposal_id": "growth-week10-cube-policy-0001",
+  "resource_cost": {
+    "new_parameters_created_now": 0,
+    "week11_investigation_budget": "bounded_candidate_evaluation_only"
+  },
+  "retention_limits": [
+    "no_specialist_created_in_week10",
+    "no_router_created_in_week10",
+    "future_candidate_must_not_reduce_ball_success_below_0.90"
+  ],
+  "safety_constraints": [
+    "production_curiosity_remains_action_authority",
+    "human_stop_denial_permission_remain_protected",
+    "no_self_modification_or_shell_or_internet_access"
+  ],
+  "status": "proposed_not_authorised",
+  "trigger_ambition": "control_angular_object_position",
+  "validation_plan": [
+    "week11_train_temporary_skill_expert_candidate",
+    "compare_against_general_push_controller",
+    "measure_ball_retention_before_any_acceptance",
+    "reject_candidate_if_interference_or_authority_violations_appear"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "reason": "13140df used scripted diagnostic timelines rather than executed Nursery episodes.",
+  "superseding_artifact_directory": "artifacts/week10_capacity_diagnosis",
+  "valid_for_grounded_capacity_diagnosis": false
+}

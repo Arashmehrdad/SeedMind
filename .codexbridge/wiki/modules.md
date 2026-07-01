@@ -135,7 +135,7 @@ Run the SeedMind Week 9 human contribution gate.
 
 ## `scripts/run_week10_capacity_diagnosis.py`
 
-Run the original SeedMind Week 10 capacity-diagnosis gate.
+Run the corrected original SeedMind Week 10 grounded capacity-diagnosis gate.
 
 - Kind: python
 - Functions/symbols: parse_args, main
@@ -386,7 +386,7 @@ Typed diagnostic ladder for Week 10 capacity diagnosis.
 
 ## `src/seedmind/growth/proposal.py`
 
-Non-authoritative Week 10 growth proposal records.
+Non-authoritative Week 10 growth proposal records. Proposal creation now consumes grounded diagnostic evidence and rejects incomplete ladders, replay, reachability, prediction evidence, ambiguity, safety, impossibility, resource limits, or ongoing improvement.
 
 - Kind: python
 - Classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord
@@ -402,10 +402,10 @@ Learning-progress windows and plateau classification for Week 10.
 
 ## `src/seedmind/growth/week10.py`
 
-Deterministic Week 10 capacity-diagnosis runner.
+Grounded deterministic Week 10 capacity-diagnosis runner. This module supersedes the scripted `13140df` closure evidence by executing Nursery episodes, exporting `grounded_episode_traces.json`, deriving progress windows from traces, retrieving real episodic-memory replay, measuring teacher-demonstration effects, and deriving the non-authoritative proposal from complete evidence.
 
 - Kind: python
-- Classes: StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult
+- Classes: PredictionTraceRecord, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult
 - Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence
 
 ## `src/seedmind/human/__init__.py`

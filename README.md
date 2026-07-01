@@ -8,7 +8,7 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-SeedMind continues on its original main-product roadmap. Original Week 10 is closed through developmental blockage diagnosis, learning-progress windows, diagnostic-ladder evidence, and one non-authoritative growth proposal for later Week 11 investigation.
+SeedMind continues on its original main-product roadmap. Original Week 10 is closed through corrected grounded developmental blockage diagnosis, learning-progress windows, diagnostic-ladder evidence, and one non-authoritative growth proposal for later Week 11 investigation.
 
 NDNRA is frozen inside this repository at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and will continue, if at all, as a separate project. Its source, tests, documents, ADRs, and artifacts remain only as a preserved research snapshot and extraction source.
 
@@ -25,14 +25,17 @@ See `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md` for t
 
 ## Current main-roadmap evidence
 
-SeedMind Week 10 is closed by the main `seedmind.growth` implementation:
+SeedMind Week 10 is closed by the corrected main `seedmind.growth` implementation.
+
+Correction note: the original `13140df` Week 10 evidence used scripted diagnostic timelines and was not valid grounded evidence. The corrected implementation derives attempts, progress, replay outcomes, demonstration effects, prediction evidence, classification, and proposal generation from executed Nursery episodes.
 
 - angular movable objects now have raw flat-contact push resistance while familiar round-object behavior is retained;
 - policy-facing observations expose numeric geometry, movability, and shape channels, not a privileged `cube` label;
 - learning-progress windows use predeclared thresholds: window size `4`, minimum `3` windows, minimum `12` attempts, and improvement threshold `0.10`;
+- every active Week 10 `LearningAttempt` references a grounded episode trace with primitive actions, transition outcomes, state digests, measured progress, prediction evidence, and trace digest;
 - early evidence remains `insufficient_evidence` and cannot produce growth;
-- temporary cube-like failure recovers to `improving` after bounded strategy, replay, and demonstration evidence, with no growth proposal;
-- sustained cube-like blockage remains plateaued after the full ladder and produces exactly one proposal;
+- temporary cube-like failure recovers to `improving` after executable strategy, grounded replay, and measured teacher-demonstration evidence, with no growth proposal;
+- sustained cube-like blockage remains plateaued after executed variants, grounded replay, and a reachability-proving teacher trace, then produces exactly one proposal;
 - ambiguous, impossible, unsafe, or resource-limited cases stop early and do not masquerade as capacity limits;
 - the proposal status is `proposed_not_authorised`, with `candidate.created=false`;
 - no specialist, router, parameter growth, production mutation, Week 11 gate, or NDNRA dependency is introduced;
@@ -44,7 +47,7 @@ Run the deterministic gate with:
 .\.venv\Scripts\python.exe scripts\run_week10_capacity_diagnosis.py
 ```
 
-Week 10 evidence is documented in `docs/architecture/SeedMind_Week10_Capacity_Diagnosis_Evidence_2026-07-01.md`, with deterministic artifacts under `artifacts/week10_capacity_diagnosis/`. Week 9 and Week 8 remain closed separately, while the active NDNRA freeze is documented in `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`.
+Week 10 evidence is documented in `docs/architecture/SeedMind_Week10_Capacity_Diagnosis_Evidence_2026-07-01.md`, with deterministic artifacts under `artifacts/week10_capacity_diagnosis/`, including `grounded_episode_traces.json`. The superseded scripted `13140df` artifacts are preserved under `artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/`. Week 9 and Week 8 remain closed separately, while the active NDNRA freeze is documented in `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`.
 
 ## Development order
 

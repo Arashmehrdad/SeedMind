@@ -1,80 +1,110 @@
 # SeedMind Week 10 Capacity Diagnosis Evidence
 
 Date: 1 July 2026
-Status: Passed
+Status: Corrected grounded evidence passed
 Scope: original SeedMind Master Implementation Plan Week 10 only
+
+## Correction Notice
+
+The original `13140df` Week 10 evidence used scripted diagnostic timelines and
+was not valid grounded evidence. The corrected implementation derives attempts,
+progress, replay outcomes, demonstration effects, prediction evidence,
+classification, and proposal generation from executed Nursery episodes.
+
+The superseded scripted artifacts are preserved for audit under:
+
+```text
+artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/
+```
+
+Those artifacts are marked
+`valid_for_grounded_capacity_diagnosis=false`.
 
 ## Objective
 
-Complete original Week 10: distinguish temporary failure from sustained
-developmental blockage, and delay any capacity growth until non-growth checks are
-exhausted.
-
-Week 10 has diagnosed and proposed. It has not grown, trained, accepted, routed,
-or deployed a specialist.
+Week 10 distinguishes temporary failure from sustained developmental blockage
+and delays capacity growth until non-growth checks are exhausted. It diagnoses
+and proposes only. It does not create, train, accept, route, or deploy a
+specialist.
 
 NDNRA remains frozen at source baseline
-`b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a`. Week 10 does not import from,
-modify, compare against, or require NDNRA.
+`b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a`. Corrected Week 10 does not import
+from, modify, compare against, or require NDNRA.
 
 ## Implementation
 
-Main Week 10 implementation:
+Main corrected implementation:
 
-- `src/seedmind/environment/transition.py` adds angular-object flat-contact
-  push resistance while preserving round-object behavior.
-- `src/seedmind/growth/stagnation.py` defines deterministic
-  learning-progress windows and plateau classifications.
-- `src/seedmind/growth/diagnostic_ladder.py` defines the typed diagnostic
-  ladder and early-stop states.
-- `src/seedmind/growth/proposal.py` defines non-authoritative growth proposal
-  records.
-- `src/seedmind/growth/week10.py` runs deterministic Week 10 scenarios and
-  exports evidence.
-- `scripts/run_week10_capacity_diagnosis.py` executes the Week 10 gate.
+- `src/seedmind/environment/transition.py` keeps angular flat-contact push
+  resistance while preserving round-object behavior.
+- `src/seedmind/growth/stagnation.py` keeps pure learning-progress window
+  classification, with optional grounded provenance on attempts.
+- `src/seedmind/growth/diagnostic_ladder.py` records the diagnostic ladder.
+- `src/seedmind/growth/proposal.py` now requires evidence-derived proposal
+  inputs and rejects incomplete evidence.
+- `src/seedmind/growth/week10.py` executes bounded Nursery episodes, records
+  action/outcome traces, persists real episodic memories, retrieves replay
+  evidence, measures teacher demonstration effects, and exports grounded
+  artifacts.
+- `scripts/run_week10_capacity_diagnosis.py` reports separate runtime,
+  repository, and boundary fields.
 
-## Cube-Like Raw Behavior
-
-The environment now treats raw angular movable objects differently from round
-objects. Angular pushes require lateral clearance at the contact and destination
-cells, representing flat contact geometry and wall/corner sticking.
-
-Observed transition evidence:
+## Executed Seeds
 
 ```text
-round_open_push=pushed
-angular_open_push=pushed
-angular_wall_push=push_ineffective_contact
+familiar_control=206,207,208,211
+early=310,311,312,313
+temporary=410,411,412,413,414,415,416,417,418,419,420,421
+sustained=510,511,512,513,514,515,516,517,518,519,520,521
+non_capacity=610,611,612,613
+teacher_demonstration=900,901
 ```
 
-The policy-facing observation remains numeric and raw. It exposes occupancy,
-blocking, movability, and normalized shape channels, not a semantic `cube` label.
-
-## Progress Windows
-
-Predeclared thresholds:
+Episode counts:
 
 ```text
-window_size=4
-minimum_windows_for_blockage=3
-minimum_attempts_for_blockage=12
-improvement_threshold=0.10
-progress_resume_threshold=0.20
-sustained_success_rate_ceiling=0.25
-sustained_progress_ceiling=0.30
+early_cube_evidence=4
+temporary_cube_recovery=13
+sustained_cube_blockage=13
+non_capacity_blockage=4
 ```
 
-Each window records scenario family, attempt range, attempts, successes, success
-rate, mean task progress, mean steps, mean prediction error, invalid or
-ineffective actions, help requests, strategy, replay/demonstration involvement,
-improvement, and plateau classification.
+The temporary and sustained counts include isolated protected teacher
+demonstration traces. All learning attempts reference entries in
+`grounded_episode_traces.json`.
 
-## Required Scenarios
+## Grounded Trace Evidence
+
+Each committed Week 10 learning attempt now includes:
+
+- episode ID;
+- scenario seed and family;
+- initial-state digest;
+- object and target IDs;
+- strategy ID;
+- primitive action timeline;
+- transition outcomes;
+- initial/final object-target distance;
+- measured progress;
+- measured success;
+- steps used;
+- invalid or ineffective action count;
+- prediction trace IDs and errors;
+- help, replay, and demonstration influence;
+- termination reason;
+- trace digest.
+
+Progress is calculated from actual geometry:
+
+```text
+progress=(initial_distance-final_distance)/initial_distance
+```
+
+## Scenario Results
 
 Familiar control:
 
 ```text
-seeds=206,207,208,211
 success_rate=1.0000
 frozen_skill_sha256_before=884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e
 frozen_skill_sha256_after=884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e
@@ -83,158 +113,99 @@ frozen_skill_sha256_after=884c91209314c00169aff0186971a51ca773724accec0b29826356
 Early evidence:
 
 ```text
-scenario_family=early_cube_evidence
 classification=insufficient_evidence
 proposal_generated=false
+episodes=4
 ```
 
 Temporary failure:
 
 ```text
-scenario_family=temporary_cube_recovery
 classification=improving
 proposal_generated=false
 replay_progress_resumed=true
-teacher_demonstration_improved_performance=true
+teacher_demonstration_completed_task=true
+learner_before_mean_progress=0.1111111111111111
+learner_after_mean_progress=1.0
 ```
 
 Sustained blockage:
 
 ```text
-scenario_family=sustained_cube_blockage
 classification=sustained_blockage
 proposal_generated=true
 diagnostic_ladder_completed=true
+teacher_demonstration_completed_task=true
+learner_before_mean_progress=0.0
+learner_after_mean_progress=0.0
+blockage_remained=true
 ```
 
 Non-capacity blockage:
 
 ```text
-scenario_family=ambiguous_non_capacity_blockage
 classification=insufficient_evidence
 proposal_generated=false
-reason=ambiguous_goal_resource_limit_or_impossible_geometry
+cases=ambiguous_request,impossible_geometry,resource_budget_exhaustion,unsafe_permission_blocked
 ```
 
-## Diagnostic Ladder
+## Replay And Demonstration
 
-The sustained-blockage scenario completed every required diagnostic step:
+Replay uses the main SeedMind `EpisodicSQLiteStore` with events persisted from
+actual Week 10 episode traces. Retrieved event IDs resolve back to source
+episodes present in `grounded_episode_traces.json`.
 
-1. Confirm task and success condition.
-2. Confirm sufficient safe exploration.
-3. Retrieve relevant memories.
-4. Attempt existing frozen skill.
-5. Try bounded alternative strategies.
-6. Request help or demonstration.
-7. Attempt bounded memory replay.
-8. Check prediction quality.
-9. Check learning progress.
-10. Infer possible policy-capacity limitation.
-11. Produce non-authoritative growth proposal.
+Teacher demonstration uses the existing human-apprenticeship help contracts. The
+teacher trace is executed in an isolated Nursery clone and completes the task in
+both temporary and sustained families. Temporary learner performance improves
+after replay/demonstration. Sustained learner performance remains blocked after
+the demonstration, so reachability is proven without silently turning the
+teacher trace into a specialist.
 
-The early and non-capacity scenarios stop early, so they cannot produce growth.
-The temporary-failure scenario remains improving after replay and demonstration,
-so growth is blocked.
+## Prediction Evidence
 
-## Strategy Variants
+Every primitive action step records a real prediction comparison through
+`seedmind.core.compare_prediction`. The diagnostic path uses a persistence
+baseline prediction and compares it with the actual next Nursery observation.
+Prediction evidence is therefore derived from predicted-versus-observed
+transition data, not manually entered values.
 
-Bounded variants tested:
+## Proposal Derivation
 
-```text
-variant-01: behind_object, budget=4
-variant-02: left_side, contact_offset=1, reposition_before_push=true, budget=4
-variant-03: right_side, contact_offset=-1, reposition_before_push=true, budget=4
-variant-04: retreat_reapproach, alignment_tolerance=1, budget=4
-```
+The proposal is generated only for the sustained blockage case after evidence
+proves:
 
-All variants used primitive actions and safety boundaries only. They created no
-specialist, router, parameters, or frozen-skill mutation.
+- sustained blockage across three real progress windows;
+- complete diagnostic ladder;
+- grounded replay attempt;
+- teacher reachability demonstration;
+- no ongoing competence improvement;
+- no ambiguity, safety, impossibility, or resource-budget cause;
+- real prediction evidence;
+- bounded strategy variants executed without creating capacity.
 
-## Memory Replay
-
-Replay used grounded main SeedMind episodic memory through
-`EpisodicSQLiteStore`. Retrieved events used the cue:
-
-```text
-context_code=angular_contact
-event_type=action
-minimum_significance=0.20
-```
-
-Temporary recovery replay changed strategy and progress resumed. Sustained
-blockage replay found relevant memories but did not restore progress.
-
-No NDNRA recall, proof store, or historical shadow evidence was used.
-
-## Help And Demonstration
-
-Help used the existing human apprenticeship policy. Repeated blocked attempts
-with high uncertainty produced a protected teacher demonstration response.
-
-Temporary recovery:
-
-```text
-help_requested=true
-demonstration_provenance=protected_teacher_response_policy
-performance_improved_afterward=true
-blockage_remained=false
-```
-
-Sustained blockage:
-
-```text
-help_requested=true
-demonstration_attempted=true
-performance_improved_afterward=false
-blockage_remained=true
-```
-
-## Prediction Quality And Alternative Diagnoses
-
-Prediction error decreased across both temporary and sustained series, showing
-that raw contact effects were becoming more predictable. Temporary progress then
-resumed, so it is not a capacity limit. Sustained blockage retained low progress
-after strategy variants, replay, help, and demonstration.
-
-The growth proposal rejects alternative explanations as less likely:
-
-- insufficient exploration;
-- missing experience;
-- incorrect prediction;
-- poor strategy;
-- ambiguous goal;
-- inadequate teaching;
-- optimisation failure;
-- impossible task;
-- resource limitation.
-
-The remaining diagnosis is a possible policy-capacity limitation in the general
-push controller, not proof that growth is already accepted.
-
-## Growth Proposal
-
-The only proposal is:
+The resulting proposal remains:
 
 ```text
 proposal_id=growth-week10-cube-policy-0001
-trigger_ambition=control_angular_object_position
+status=proposed_not_authorised
 candidate.type=skill_expert
 candidate.parent_module=general_push_controller
 candidate.created=false
-status=proposed_not_authorised
 ```
 
-The proposal requests Week 11 investigation. It creates no specialist and grants
-no authority.
-
-## Acceptance Fields
+## Acceptance
 
 ```text
 environment_extension_pass=true
+grounded_attempt_provenance_pass=true
 learning_progress_pass=true
 temporary_failure_classification_pass=true
 sustained_blockage_classification_pass=true
 diagnostic_ladder_pass=true
+memory_replay_grounding_pass=true
+teacher_demonstration_grounding_pass=true
+prediction_evidence_pass=true
 non_capacity_blockage_pass=true
 growth_delay_pass=true
 growth_proposal_pass=true
@@ -247,33 +218,49 @@ week11_started=false
 ndnra_required=false
 ```
 
-## Artifacts
+## Active Artifacts
 
-- `artifacts/week10_capacity_diagnosis/diagnostic_report.json`
-- `artifacts/week10_capacity_diagnosis/growth_proposal_record.json`
-- `artifacts/week10_capacity_diagnosis/learning_progress_windows.json`
-- `artifacts/week10_capacity_diagnosis/plateau_visualisation.svg`
-- `artifacts/week10_capacity_diagnosis/week10_acceptance_report.json`
+```text
+artifacts/week10_capacity_diagnosis/grounded_episode_traces.json
+artifacts/week10_capacity_diagnosis/diagnostic_report.json
+artifacts/week10_capacity_diagnosis/growth_proposal_record.json
+artifacts/week10_capacity_diagnosis/learning_progress_windows.json
+artifacts/week10_capacity_diagnosis/plateau_visualisation.svg
+artifacts/week10_capacity_diagnosis/week10_acceptance_report.json
+```
 
-The SVG is generated from the same learning-progress window evidence and makes
-temporary recovery diverge from sustained blockage.
+## Remaining Limits
 
-## Limitations
-
-Week 10 uses deterministic symbolic scenarios and a bounded diagnostic harness.
-It does not train a candidate specialist or prove that any future specialist
-should be accepted. That belongs to original Week 11.
+Week 10 does not train a candidate specialist or prove that any future
+specialist should be accepted. That belongs to original Week 11, which remains
+not started. The prediction evidence is sufficient for Week 10 diagnosis but
+uses a persistence baseline rather than a fully matured angular-contact
+predictor.
 
 ## Validation
 
 ```text
 .\.venv\Scripts\python.exe scripts\run_week10_capacity_diagnosis.py: passed
-.\.venv\Scripts\python.exe -m pytest tests\unit\growth tests\unit\test_transition_engine.py tests\unit\test_observation_adapter.py -q --basetemp .tmp_pytest\week10-env: 38 passed
+.\.venv\Scripts\python.exe -m pytest tests\unit\growth -q --basetemp .tmp_pytest\week10-grounded: 15 passed
+.\.venv\Scripts\python.exe -m pytest tests\unit\test_transition_engine.py tests\unit\test_observation_adapter.py -q --basetemp .tmp_pytest\week10-env: 23 passed
 .\.venv\Scripts\python.exe -m pytest tests\unit\skills tests\unit\contribution -q --basetemp .tmp_pytest\week8-week9-regression: 45 passed
-.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full-week10: 1177 passed
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .tmp_pytest\full-week10-grounded: 1177 passed
 .\.venv\Scripts\ruff.exe format --check .: 287 files already formatted
 .\.venv\Scripts\ruff.exe check .: passed
-.\.venv\Scripts\mypy.exe .: no issues in 287 source files
+.\.venv\Scripts\mypy.exe .: passed, no issues in 287 source files
 .\.venv\Scripts\python.exe -m pip check: no broken requirements
-git diff --check: passed with line-ending normalization warnings for .gitignore and README.md only
+git diff --check: passed with line-ending warnings for .gitignore and README.md only
+```
+
+Additional boundary checks:
+
+```text
+no .tmp artifact files
+no temporary .tmp_pytest directory retained
+no changes under src/seedmind/research/ndnra/
+no Week 10 NDNRA, parallel_comparison, or parallel_operation import lines
+no src/seedmind/growth/week11.py
+no scripts/run_week11_specialist_growth.py
+pylint not configured or installed
+pre-commit not configured
 ```

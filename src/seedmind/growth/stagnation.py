@@ -67,6 +67,9 @@ class LearningAttempt:
     steps_used: int
     prediction_error: float
     invalid_or_ineffective_actions: int
+    episode_id: str = ""
+    trace_digest: str = ""
+    trace_ref: str = ""
     help_requested: bool = False
     replay_involved: bool = False
     demonstration_involved: bool = False
@@ -82,8 +85,20 @@ class LearningAttempt:
             raise ValueError("steps_used must be positive")
         if self.invalid_or_ineffective_actions < 0:
             raise ValueError("invalid_or_ineffective_actions must not be negative")
+        for name, value in (
+            ("episode_id", self.episode_id),
+            ("trace_digest", self.trace_digest),
+            ("trace_ref", self.trace_ref),
+        ):
+            if value and (not value.strip() or not value.isascii()):
+                raise ValueError(f"{name} must be non-empty ASCII when supplied")
         _validate_unit_interval("task_progress", self.task_progress)
         _validate_unit_interval("prediction_error", self.prediction_error)
+
+    @property
+    def has_grounded_provenance(self) -> bool:
+        """Return whether this attempt references an executed episode trace."""
+        return bool(self.episode_id and self.trace_digest and self.trace_ref)
 
 
 @dataclass(frozen=True, slots=True)

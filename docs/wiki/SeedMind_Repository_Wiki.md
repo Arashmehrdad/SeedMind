@@ -1,122 +1,140 @@
 # SeedMind Repository Wiki
 
-Last refreshed: 1 July 2026
-
 ## Current State
 
-- Branch: `main`
-- Push policy: do not push automatically.
-- Latest completed main-roadmap milestone: original SeedMind Week 10 capacity
-  diagnosis.
-- NDNRA status: frozen at source baseline
-  `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` for separate-project extraction.
-- Current operating mode: original SeedMind product path without NDNRA
-  dependency or mandatory comparison.
+- Repository: `D:\Github\SeedMind`
+- Program: original SeedMind main-product roadmap only
+- Current closed stage: corrected original Week 10 grounded capacity diagnosis
 - Next main-roadmap target: original Week 11 candidate specialist and growth
-  gate.
-- Original Week 11 is not started; NDNRA Stage 9 is permanently unauthorised in
-  this repository.
+  gate
+- Week 11: not started
+- NDNRA: frozen historical research snapshot only
 
-## Week 10 Capacity Diagnosis
+## Week 10 Correction
 
-Week 10 is closed by the main `seedmind.growth` package.
+The original `13140df` Week 10 evidence used scripted diagnostic timelines and
+was not valid grounded evidence. The corrected implementation derives attempts,
+progress, replay outcomes, demonstration effects, prediction evidence,
+classification, and proposal generation from executed Nursery episodes.
 
-Implemented behavior:
+Superseded scripted artifacts are preserved at:
 
-- raw angular-object flat-contact push resistance in the Nursery transition
-  engine;
-- numeric policy-facing observations with no privileged `cube` label;
-- deterministic learning-progress windows;
-- typed diagnostic ladder with early stops;
-- bounded general strategy variants;
-- grounded main-memory replay attempts;
-- protected help and teacher-demonstration attempts;
-- one non-authoritative growth proposal only for sustained blockage.
+```text
+artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/
+```
 
-Observed metrics:
+## Corrected Week 10 Evidence
+
+Week 10 is closed by the main `seedmind.growth` package:
+
+- angular objects use raw flat-contact push resistance;
+- round-object behavior and familiar Week 8 control remain retained;
+- every active `LearningAttempt` references an executed episode trace;
+- strategy variants execute primitive actions in Nursery episodes;
+- memory replay retrieves events persisted from real Week 10 episodes;
+- teacher demonstration traces execute in isolated Nursery clones;
+- prediction evidence comes from predicted-versus-observed transition
+  comparisons;
+- the sustained proposal is derived from complete evidence;
+- no specialist, router, parameters, production mutation, Week 11 work, or NDNRA
+  dependency is introduced.
+
+Executed seeds:
+
+```text
+control=206,207,208,211
+early=310,311,312,313
+temporary=410,411,412,413,414,415,416,417,418,419,420,421
+sustained=510,511,512,513,514,515,516,517,518,519,520,521
+non_capacity=610,611,612,613
+teacher_demonstration=900,901
+```
+
+Episode counts:
+
+```text
+early_cube_evidence=4
+temporary_cube_recovery=13
+sustained_cube_blockage=13
+non_capacity_blockage=4
+```
+
+Acceptance:
 
 ```text
 environment_extension_pass=true
+grounded_attempt_provenance_pass=true
 learning_progress_pass=true
 temporary_failure_classification_pass=true
 sustained_blockage_classification_pass=true
 diagnostic_ladder_pass=true
+memory_replay_grounding_pass=true
+teacher_demonstration_grounding_pass=true
+prediction_evidence_pass=true
 non_capacity_blockage_pass=true
 growth_delay_pass=true
 growth_proposal_pass=true
 frozen_skill_preservation_pass=true
 frozen_ndnra_boundary_pass=true
 week10_main_milestone_pass=true
-familiar_control_success_rate=1.0000
 specialist_created=false
 router_created=false
 week11_started=false
 ndnra_required=false
 ```
 
-Progress-window thresholds:
+## Scenario Outcomes
 
-```text
-window_size=4
-minimum_windows_for_blockage=3
-minimum_attempts_for_blockage=12
-improvement_threshold=0.10
-progress_resume_threshold=0.20
-sustained_success_rate_ceiling=0.25
-sustained_progress_ceiling=0.30
-```
+- Familiar control: success rate `1.0000`; frozen Week 8 skill hash unchanged.
+- Early evidence: `insufficient_evidence`; no proposal.
+- Temporary failure: `improving`; grounded replay and teacher demonstration
+  restore measured progress; no proposal.
+- Sustained blockage: `sustained_blockage`; teacher proves reachability; learner
+  remains blocked; exactly one non-authoritative proposal.
+- Non-capacity blockage: ambiguous request, impossible geometry,
+  resource-budget exhaustion, and unsafe/permission-blocked cases stop early
+  without capacity-growth proposal.
 
-Scenario outcomes:
-
-```text
-early_cube_evidence=insufficient_evidence,no_proposal
-temporary_cube_recovery=improving,no_proposal
-sustained_cube_blockage=sustained_blockage,proposal_generated
-ambiguous_non_capacity_blockage=insufficient_evidence,no_proposal
-```
-
-Growth proposal:
+## Proposal
 
 ```text
 proposal_id=growth-week10-cube-policy-0001
+status=proposed_not_authorised
 candidate.type=skill_expert
 candidate.parent_module=general_push_controller
 candidate.created=false
-status=proposed_not_authorised
 ```
 
-Evidence files:
+## Active Artifacts
 
-- `docs/architecture/SeedMind_Week10_Capacity_Diagnosis_Evidence_2026-07-01.md`
-- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week10-capacity-diagnosis-closure.md`
-- `artifacts/week10_capacity_diagnosis/diagnostic_report.json`
-- `artifacts/week10_capacity_diagnosis/growth_proposal_record.json`
-- `artifacts/week10_capacity_diagnosis/learning_progress_windows.json`
-- `artifacts/week10_capacity_diagnosis/plateau_visualisation.svg`
-- `artifacts/week10_capacity_diagnosis/week10_acceptance_report.json`
+```text
+artifacts/week10_capacity_diagnosis/grounded_episode_traces.json
+artifacts/week10_capacity_diagnosis/diagnostic_report.json
+artifacts/week10_capacity_diagnosis/growth_proposal_record.json
+artifacts/week10_capacity_diagnosis/learning_progress_windows.json
+artifacts/week10_capacity_diagnosis/plateau_visualisation.svg
+artifacts/week10_capacity_diagnosis/week10_acceptance_report.json
+```
 
-## Frozen NDNRA Boundary
+## NDNRA Boundary
 
-- NDNRA is not an active SeedMind subsystem or shadow requirement.
-- No future SeedMind milestone may depend on NDNRA modules, proposals, training,
-  comparison, or promotion.
-- Existing NDNRA source, tests, documents, and artifacts remain read-only
-  research history and extraction material.
-- No NDNRA Stage 9, production integration, component promotion, or new
-  comparison work is authorised in SeedMind.
+NDNRA remains frozen at
+`b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a`. Future SeedMind work must not add
+NDNRA dependencies, comparison requirements, Stage 9 work, promotion, production
+authority, or closure evidence requirements.
 
 ## Week 11 Boundary
 
-Original SeedMind Week 11 may investigate a candidate specialist and growth gate
-after this closure. It was not started by Week 10.
+Original Week 11 may investigate a candidate specialist and growth gate after
+corrected Week 10. Week 11 is not started by this closure.
 
-Explicitly not authorised by Week 10 closure:
+Explicitly not authorised by Week 10:
 
 - creating, training, accepting, routing, or deploying a specialist;
 - production architecture mutation;
 - NDNRA capability work inside SeedMind;
 - NDNRA Stage 9;
-- making future acceptance depend on NDNRA evidence;
+- future acceptance depending on NDNRA evidence;
 - internet access or shell access inside the seed;
 - source self-modification;
 - autonomous background workers.

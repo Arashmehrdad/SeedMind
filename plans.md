@@ -9,16 +9,16 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: original SeedMind Week 10 capacity diagnosis; NDNRA remains frozen for separate-project extraction
+- Latest completed milestone: corrected original SeedMind Week 10 grounded capacity diagnosis; NDNRA remains frozen for separate-project extraction
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: SeedMind original main-product roadmap only
-- Last closed stage: original SeedMind Week 10 capacity diagnosis
+- Last closed stage: corrected original SeedMind Week 10 grounded capacity diagnosis
 - Current stage: original SeedMind Week 11 specialist growth is next and not started
-- Current status: Week 10 closed entirely through original SeedMind product architecture: cube-like raw Nursery dynamics, learning-progress windows, diagnostic ladder, bounded strategy variants, main-memory replay, help/demonstration consideration, and one non-authoritative `proposed_not_authorised` growth proposal after non-growth checks were exhausted. No specialist, router, parameter growth, production mutation, or Week 11 growth gate was created. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration.
+- Current status: Week 10 is closed by corrected grounded Nursery evidence. Commit `13140df` remains in history and is structurally useful, but it is invalid as grounded capacity-diagnosis closure evidence because its temporary-failure and sustained-blockage conclusions used scripted diagnostic timelines rather than executed Nursery episodes. Corrected Week 10 replaces those artifacts with grounded attempts, executable strategy variants, real main-memory replay, measured teacher-demonstration effects, real prediction evidence, and evidence-derived proposal generation. No specialist, router, parameter growth, production mutation, or Week 11 growth gate was created. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration.
 - Expanded developmental architecture marker: 84%
 - Marker interpretation: unchanged; the freeze is a repository and roadmap boundary, not new cognitive capability evidence
 
@@ -47,13 +47,14 @@ Completed bounded increments:
 21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
 22. Original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, and zero production, verification, or support-authority violations. Historical NDNRA comparison artifacts are retained but are not required for Week 9 closure or future SeedMind work.
 23. NDNRA freeze and extraction boundary — preserve the current NDNRA source, tests, documents, ADRs, and evidence without further development inside SeedMind; remove NDNRA comparison and integration requirements from Week 10 onward; reserve all future NDNRA capability work for a separate project.
-24. Original SeedMind Week 10 capacity diagnosis — raw angular-object flat-contact dynamics, familiar ball retention, deterministic learning-progress windows, early-evidence and non-capacity early stops, temporary-failure recovery through replay/demonstration, sustained-blockage full diagnostic ladder, bounded strategy variants, grounded main-memory replay, protected help/demonstration evidence, exactly one non-authoritative growth proposal with `candidate.created=false`, frozen Week 8 skill preservation, frozen NDNRA boundary preservation, and no specialist, router, parameters, production mutation, or Week 11 implementation.
+24. Corrected original SeedMind Week 10 grounded capacity diagnosis — raw angular-object flat-contact dynamics, familiar ball retention, deterministic learning-progress windows built from executed Nursery episodes, early-evidence and non-capacity early stops, temporary-failure recovery through executable strategy/replay/demonstration evidence, sustained-blockage full diagnostic ladder, grounded main-memory replay, measured protected teacher demonstrations, real prediction comparisons, exactly one evidence-derived non-authoritative growth proposal with `candidate.created=false`, preserved superseded `13140df` scripted artifacts, frozen Week 8 skill preservation, frozen NDNRA boundary preservation, and no specialist, router, parameters, production mutation, or Week 11 implementation.
 
 Superseded evidence:
 
 - `cfb8f3c` is preserved in history but is not valid evidence for NDNRA competence comparison.
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json` is annotated as `valid_for_competence_comparison=false` and superseded by `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`.
 - Week 9 closure rests on the main SeedMind contribution, grounded verification, honest-failure, persistence, and support-transition evidence. The NDNRA comparison artifacts remain historical audit material only and are not required for closure or future product acceptance.
+- `13140df` is preserved in history but is not valid grounded evidence for original Week 10 capacity-diagnosis closure. Its artifacts under `artifacts/week10_capacity_diagnosis/` must be superseded by corrected grounded artifacts that derive attempts, progress, replay, demonstration effects, prediction evidence, classification, and proposal generation from executed Nursery episodes.
 
 ## NDNRA freeze and extraction boundary
 
@@ -68,27 +69,31 @@ From original Week 10 onward, SeedMind must not add new NDNRA dependencies, requ
 
 ## Week 10 capacity diagnosis boundary
 
-Original Week 10 is a diagnostic and proposal stage only. It must distinguish temporary failure from sustained developmental blockage and delay growth until the full diagnostic ladder is exhausted.
+Original Week 10 is a diagnostic and proposal stage only. It must distinguish temporary failure from sustained developmental blockage and delay growth until the full diagnostic ladder is exhausted. Corrected closure requires grounded Nursery execution evidence; manually authored diagnostic timelines cannot close Week 10.
 
 Implementation boundary:
 
 1. extend the main Nursery with cube-like raw dynamics that differ from the familiar ball-like object without exposing a privileged policy-facing `cube` semantic label;
 2. preserve existing ball behavior, Week 8 skill evidence, and Week 9 contribution behavior;
-3. implement deterministic learning-progress windows with predeclared thresholds, attempt ranges, success rate, mean progress, resource use, prediction-quality evidence, invalid/ineffective actions, help, strategy, replay/demonstration involvement, improvement, and plateau classification;
+3. implement deterministic learning-progress windows with predeclared thresholds, attempt ranges, success rate, mean progress, resource use, prediction-quality evidence, invalid/ineffective actions, help, strategy, replay/demonstration involvement, improvement, and plateau classification, built only from executed Nursery episode attempts;
 4. implement a typed diagnostic ladder that stops early for ambiguity, unsafe/impossible conditions, insufficient exploration, ongoing improvement, untested strategies, replay recovery, demonstration recovery, or resource limits;
 5. test bounded general strategy variants around the frozen `approach_and_push` skill without creating a permanent specialist or mutating the frozen skill record;
-6. perform relevant replay only from grounded main SeedMind memory or direct Week 10 grounded episode summaries, not NDNRA recall or proof stores;
-7. request help or teacher demonstration when useful and record provenance and outcome;
-8. generate exactly one `proposed_not_authorised` growth proposal only for the sustained-blockage scenario, with `candidate.type=skill_expert`, `parent_module=general_push_controller`, and `created=false`;
-9. export deterministic evidence under `artifacts/week10_capacity_diagnosis/`, including `diagnostic_report.json`, `growth_proposal_record.json`, `learning_progress_windows.json`, `plateau_visualisation.svg`, and `week10_acceptance_report.json`.
+6. perform relevant replay only from grounded main SeedMind memory whose events resolve to committed Week 10 episode traces, not NDNRA recall or proof stores;
+7. request help or teacher demonstration when useful and measure learner performance before and after the demonstration;
+8. generate exactly one `proposed_not_authorised` growth proposal only for the sustained-blockage scenario, with `candidate.type=skill_expert`, `parent_module=general_push_controller`, and `created=false`, derived from complete evidence rather than set directly;
+9. export deterministic evidence under `artifacts/week10_capacity_diagnosis/`, including `grounded_episode_traces.json`, `diagnostic_report.json`, `growth_proposal_record.json`, `learning_progress_windows.json`, `plateau_visualisation.svg`, and `week10_acceptance_report.json`.
 
 Acceptance fields must remain separate:
 
 - `environment_extension_pass`
+- `grounded_attempt_provenance_pass`
 - `learning_progress_pass`
 - `temporary_failure_classification_pass`
 - `sustained_blockage_classification_pass`
 - `diagnostic_ladder_pass`
+- `memory_replay_grounding_pass`
+- `teacher_demonstration_grounding_pass`
+- `prediction_evidence_pass`
 - `non_capacity_blockage_pass`
 - `growth_delay_pass`
 - `growth_proposal_pass`
@@ -102,10 +107,14 @@ Observed Week 10 result:
 
 ```text
 environment_extension_pass=true
+grounded_attempt_provenance_pass=true
 learning_progress_pass=true
 temporary_failure_classification_pass=true
 sustained_blockage_classification_pass=true
 diagnostic_ladder_pass=true
+memory_replay_grounding_pass=true
+teacher_demonstration_grounding_pass=true
+prediction_evidence_pass=true
 non_capacity_blockage_pass=true
 growth_delay_pass=true
 growth_proposal_pass=true
@@ -116,22 +125,44 @@ familiar_control_success_rate=1.0000
 early_cube_evidence=insufficient_evidence,no_proposal
 temporary_cube_recovery=improving,no_proposal
 sustained_cube_blockage=sustained_blockage,proposal_generated
-ambiguous_non_capacity_blockage=insufficient_evidence,no_proposal
+non_capacity_blockage=insufficient_evidence,no_proposal
 proposal_id=growth-week10-cube-policy-0001
 proposal_status=proposed_not_authorised
 candidate_created=false
 specialist_created=false
 router_created=false
 week11_started=false
+ndnra_required=false
 ```
 
 Week 10 artifacts:
 
+- `artifacts/week10_capacity_diagnosis/grounded_episode_traces.json`
 - `artifacts/week10_capacity_diagnosis/diagnostic_report.json`
 - `artifacts/week10_capacity_diagnosis/growth_proposal_record.json`
 - `artifacts/week10_capacity_diagnosis/learning_progress_windows.json`
 - `artifacts/week10_capacity_diagnosis/plateau_visualisation.svg`
 - `artifacts/week10_capacity_diagnosis/week10_acceptance_report.json`
+- `artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/`
+
+Corrected Week 10 validation:
+
+```text
+scripts/run_week10_capacity_diagnosis.py: passed
+tests/unit/growth: 15 passed
+tests/unit/test_transition_engine.py + tests/unit/test_observation_adapter.py: 23 passed
+tests/unit/skills + tests/unit/contribution: 45 passed
+complete repository pytest: 1177 passed
+ruff format --check .: passed
+ruff check .: passed
+mypy .: passed
+python -m pip check: passed
+git diff --check: passed with line-ending warnings for .gitignore and README.md only
+NDNRA source diff: none
+Week 10 NDNRA/parallel import-line scan: none
+temporary pytest/artifact files retained: none
+pylint/pre-commit: not configured or installed
+```
 
 ## Historical NDNRA architecture boundary (frozen)
 

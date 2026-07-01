@@ -37,10 +37,14 @@ artifacts/*
 !artifacts/week9_contribution/*.json
 !artifacts/week10_capacity_diagnosis/
 !artifacts/week10_capacity_diagnosis/diagnostic_report.json
+!artifacts/week10_capacity_diagnosis/grounded_episode_traces.json
 !artifacts/week10_capacity_diagnosis/growth_proposal_record.json
 !artifacts/week10_capacity_diagnosis/learning_progress_windows.json
 !artifacts/week10_capacity_diagnosis/plateau_visualisation.svg
 !artifacts/week10_capacity_diagnosis/week10_acceptance_report.json
+!artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/
+!artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/*.json
+!artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/*.svg
 logs/
 reports/generated/
 

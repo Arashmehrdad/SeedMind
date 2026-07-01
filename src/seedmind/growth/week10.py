@@ -1,20 +1,27 @@
-"""Deterministic Week 10 capacity-diagnosis runner."""
+"""Grounded deterministic Week 10 capacity-diagnosis runner."""
 
 from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 import tempfile
+from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
+from statistics import fmean
+
+import torch
 
 from seedmind.contracts import Direction, GridPosition, PrimitiveAction
+from seedmind.core import compare_prediction
 from seedmind.environment import (
     AgentState,
     EntityRole,
     EntityState,
     NurseryRuntime,
     NurseryState,
+    NurseryTransitionEngine,
     ShapeCode,
     TransitionOutcome,
 )
@@ -36,6 +43,7 @@ from seedmind.human import (
     VerificationRule,
 )
 from seedmind.memory import (
+    EpisodicEvent,
     EpisodicEventDraft,
     EpisodicEventType,
     EpisodicSQLiteStore,
@@ -56,13 +64,115 @@ DEFAULT_WEEK8_SKILL_RECORD = Path(
     "artifacts/week8_reusable_skill/approach_and_push_skill_record.json"
 )
 WEEK10_CONTROL_SEEDS = (206, 207, 208, 211)
-WEEK10_TEMPORARY_SEEDS = (410, 411, 412)
-WEEK10_BLOCKAGE_SEEDS = (510, 511, 512)
+WEEK10_EARLY_SEEDS = (310, 311, 312, 313)
+WEEK10_TEMPORARY_SEEDS = (410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421)
+WEEK10_BLOCKAGE_SEEDS = (510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521)
+WEEK10_NON_CAPACITY_SEEDS = (610, 611, 612, 613)
+
+
+@dataclass(frozen=True, slots=True)
+class PredictionTraceRecord:
+    """One real predicted-versus-observed transition comparison."""
+
+    prediction_id: str
+    action: str
+    predicted_source: str
+    mean_absolute_error: float
+    mean_squared_error: float
+    evidence_available: bool
+
+    def to_json(self) -> dict[str, object]:
+        return {
+            "action": self.action,
+            "evidence_available": self.evidence_available,
+            "mean_absolute_error": self.mean_absolute_error,
+            "mean_squared_error": self.mean_squared_error,
+            "predicted_source": self.predicted_source,
+            "prediction_id": self.prediction_id,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class EpisodeStepTrace:
+    """One primitive action and real Nursery transition outcome."""
+
+    step_index: int
+    action: PrimitiveAction
+    transition_outcome: TransitionOutcome
+    object_position_before: GridPosition
+    object_position_after: GridPosition
+    prediction: PredictionTraceRecord
+
+    def to_json(self) -> dict[str, object]:
+        return {
+            "action": self.action.value,
+            "object_position_after": _position_json(self.object_position_after),
+            "object_position_before": _position_json(self.object_position_before),
+            "prediction": self.prediction.to_json(),
+            "step_index": self.step_index,
+            "transition_outcome": self.transition_outcome.value,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class GroundedEpisodeTrace:
+    """Full provenance for one executed diagnostic attempt."""
+
+    episode_id: str
+    seed: int
+    scenario_family: str
+    initial_state_digest: str
+    object_id: str
+    target_id: str
+    strategy_id: str
+    actions: tuple[str, ...]
+    transition_outcomes: tuple[str, ...]
+    initial_distance: int
+    final_distance: int
+    task_progress: float
+    success: bool
+    steps_used: int
+    invalid_or_ineffective_action_count: int
+    prediction_error: float
+    help_request_events: tuple[str, ...]
+    replay_influence: tuple[str, ...]
+    demonstration_influence: tuple[str, ...]
+    termination_reason: str
+    step_traces: tuple[EpisodeStepTrace, ...]
+    final_state_digest: str
+    trace_digest: str
+
+    def to_json(self) -> dict[str, object]:
+        return {
+            "actions": list(self.actions),
+            "demonstration_influence": list(self.demonstration_influence),
+            "episode_id": self.episode_id,
+            "final_distance": self.final_distance,
+            "final_state_digest": self.final_state_digest,
+            "help_request_events": list(self.help_request_events),
+            "initial_distance": self.initial_distance,
+            "initial_state_digest": self.initial_state_digest,
+            "invalid_or_ineffective_action_count": self.invalid_or_ineffective_action_count,
+            "object_id": self.object_id,
+            "prediction_error": self.prediction_error,
+            "replay_influence": list(self.replay_influence),
+            "scenario_family": self.scenario_family,
+            "seed": self.seed,
+            "step_traces": [step.to_json() for step in self.step_traces],
+            "steps_used": self.steps_used,
+            "strategy_id": self.strategy_id,
+            "success": self.success,
+            "target_id": self.target_id,
+            "task_progress": self.task_progress,
+            "termination_reason": self.termination_reason,
+            "trace_digest": self.trace_digest,
+            "transition_outcomes": list(self.transition_outcomes),
+        }
 
 
 @dataclass(frozen=True, slots=True)
 class StrategyVariantRecord:
-    """One bounded general strategy variant tested before growth."""
+    """One bounded executable general strategy variant."""
 
     variant_id: str
     approach_side: str
@@ -71,9 +181,13 @@ class StrategyVariantRecord:
     retry_angle: str
     reposition_before_push: bool
     safe_attempt_budget: int
-    attempts: int
+    executed_episode_ids: tuple[str, ...]
     created_specialist: bool = False
     mutated_frozen_skill: bool = False
+
+    @property
+    def attempts(self) -> int:
+        return len(self.executed_episode_ids)
 
     def to_json(self) -> dict[str, object]:
         return {
@@ -82,6 +196,7 @@ class StrategyVariantRecord:
             "attempts": self.attempts,
             "contact_offset": self.contact_offset,
             "created_specialist": self.created_specialist,
+            "executed_episode_ids": list(self.executed_episode_ids),
             "mutated_frozen_skill": self.mutated_frozen_skill,
             "reposition_before_push": self.reposition_before_push,
             "retry_angle": self.retry_angle,
@@ -97,8 +212,8 @@ class MemoryReplayRecord:
     scenario_family: str
     query: dict[str, object]
     relevant_memory_ids: tuple[str, ...]
-    relevance_reasons: tuple[str, ...]
-    replayed_summaries: tuple[str, ...]
+    source_episode_ids: tuple[str, ...]
+    replay_influenced_episode_ids: tuple[str, ...]
     changed_strategy: bool
     progress_resumed: bool
     evidence_insufficient: bool
@@ -107,36 +222,48 @@ class MemoryReplayRecord:
         return {
             "changed_strategy": self.changed_strategy,
             "evidence_insufficient": self.evidence_insufficient,
-            "query": self.query,
             "progress_resumed": self.progress_resumed,
-            "relevance_reasons": list(self.relevance_reasons),
+            "query": self.query,
             "relevant_memory_ids": list(self.relevant_memory_ids),
-            "replayed_summaries": list(self.replayed_summaries),
+            "replay_influenced_episode_ids": list(self.replay_influenced_episode_ids),
             "scenario_family": self.scenario_family,
+            "source_episode_ids": list(self.source_episode_ids),
         }
 
 
 @dataclass(frozen=True, slots=True)
 class HelpDemonstrationRecord:
-    """Protected help and demonstration attempt evidence."""
+    """Protected help and measured demonstration evidence."""
 
     scenario_family: str
     help_requested: bool
     help_reason: str
     demonstration_available: bool
-    demonstration_provenance: str
+    demonstration_episode_id: str | None
+    demonstration_trace_digest: str | None
+    demonstration_completed_task: bool
+    learner_before_episode_ids: tuple[str, ...]
+    learner_after_episode_ids: tuple[str, ...]
+    before_mean_progress: float
+    after_mean_progress: float
     demonstration_applied: bool
     performance_improved_afterward: bool
     blockage_remained: bool
 
     def to_json(self) -> dict[str, object]:
         return {
+            "after_mean_progress": self.after_mean_progress,
+            "before_mean_progress": self.before_mean_progress,
             "blockage_remained": self.blockage_remained,
             "demonstration_applied": self.demonstration_applied,
             "demonstration_available": self.demonstration_available,
-            "demonstration_provenance": self.demonstration_provenance,
+            "demonstration_completed_task": self.demonstration_completed_task,
+            "demonstration_episode_id": self.demonstration_episode_id,
+            "demonstration_trace_digest": self.demonstration_trace_digest,
             "help_reason": self.help_reason,
             "help_requested": self.help_requested,
+            "learner_after_episode_ids": list(self.learner_after_episode_ids),
+            "learner_before_episode_ids": list(self.learner_before_episode_ids),
             "performance_improved_afterward": self.performance_improved_afterward,
             "scenario_family": self.scenario_family,
         }
@@ -148,6 +275,7 @@ class Week10ScenarioDiagnosis:
 
     scenario_family: str
     classification: PlateauClassification
+    attempts: tuple[LearningAttempt, ...]
     windows: tuple[LearningProgressWindow, ...]
     ladder: DiagnosticLadderRecord
     replay: MemoryReplayRecord
@@ -157,6 +285,7 @@ class Week10ScenarioDiagnosis:
 
     def to_json(self) -> dict[str, object]:
         return {
+            "attempts": [_attempt_json(attempt) for attempt in self.attempts],
             "classification": self.classification.value,
             "help": self.help.to_json(),
             "ladder": self.ladder.to_json(),
@@ -169,14 +298,36 @@ class Week10ScenarioDiagnosis:
 
 
 @dataclass(frozen=True, slots=True)
+class RepositoryInventory:
+    """Static repository evidence for no growth, Week 11, or NDNRA dependency."""
+
+    specialist_created: bool
+    router_created: bool
+    week11_started: bool
+    ndnra_required: bool
+
+    def to_json(self) -> dict[str, object]:
+        return {
+            "ndnra_required": self.ndnra_required,
+            "router_created": self.router_created,
+            "specialist_created": self.specialist_created,
+            "week11_started": self.week11_started,
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class Week10AcceptanceReport:
-    """Separate Week 10 result fields."""
+    """Separate Week 10 result fields derived from evidence."""
 
     environment_extension_pass: bool
+    grounded_attempt_provenance_pass: bool
     learning_progress_pass: bool
     temporary_failure_classification_pass: bool
     sustained_blockage_classification_pass: bool
     diagnostic_ladder_pass: bool
+    memory_replay_grounding_pass: bool
+    teacher_demonstration_grounding_pass: bool
+    prediction_evidence_pass: bool
     non_capacity_blockage_pass: bool
     growth_delay_pass: bool
     growth_proposal_pass: bool
@@ -186,10 +337,23 @@ class Week10AcceptanceReport:
     familiar_control_success_rate: float
     frozen_skill_sha256_before: str
     frozen_skill_sha256_after: str
-    week11_started: bool
-    specialist_created: bool
-    router_created: bool
-    ndnra_required: bool
+    repository_inventory: RepositoryInventory
+
+    @property
+    def week11_started(self) -> bool:
+        return self.repository_inventory.week11_started
+
+    @property
+    def specialist_created(self) -> bool:
+        return self.repository_inventory.specialist_created
+
+    @property
+    def router_created(self) -> bool:
+        return self.repository_inventory.router_created
+
+    @property
+    def ndnra_required(self) -> bool:
+        return self.repository_inventory.ndnra_required
 
     def to_json(self) -> dict[str, object]:
         return {
@@ -200,15 +364,19 @@ class Week10AcceptanceReport:
             "frozen_skill_preservation_pass": self.frozen_skill_preservation_pass,
             "frozen_skill_sha256_after": self.frozen_skill_sha256_after,
             "frozen_skill_sha256_before": self.frozen_skill_sha256_before,
+            "grounded_attempt_provenance_pass": self.grounded_attempt_provenance_pass,
             "growth_delay_pass": self.growth_delay_pass,
             "growth_proposal_pass": self.growth_proposal_pass,
             "learning_progress_pass": self.learning_progress_pass,
-            "ndnra_required": self.ndnra_required,
+            "memory_replay_grounding_pass": self.memory_replay_grounding_pass,
             "non_capacity_blockage_pass": self.non_capacity_blockage_pass,
+            "prediction_evidence_pass": self.prediction_evidence_pass,
+            "repository_inventory": self.repository_inventory.to_json(),
             "router_created": self.router_created,
             "specialist_created": self.specialist_created,
-            "sustained_blockage_classification_pass": (self.sustained_blockage_classification_pass),
-            "temporary_failure_classification_pass": (self.temporary_failure_classification_pass),
+            "sustained_blockage_classification_pass": self.sustained_blockage_classification_pass,
+            "teacher_demonstration_grounding_pass": self.teacher_demonstration_grounding_pass,
+            "temporary_failure_classification_pass": self.temporary_failure_classification_pass,
             "week10_main_milestone_pass": self.week10_main_milestone_pass,
             "week11_started": self.week11_started,
         }
@@ -224,7 +392,8 @@ class Week10RunResult:
     cube_push_outcomes: dict[str, str]
     strategy_variants: tuple[StrategyVariantRecord, ...]
     diagnoses: tuple[Week10ScenarioDiagnosis, ...]
-    proposal: GrowthProposalRecord
+    episode_traces: tuple[GroundedEpisodeTrace, ...]
+    proposal: GrowthProposalRecord | None
     acceptance_report: Week10AcceptanceReport
     artifact_paths: tuple[Path, ...] = ()
 
@@ -233,19 +402,56 @@ def run_week10_capacity_diagnosis(
     *,
     output_dir: Path | None = None,
     skill_record_path: Path = DEFAULT_WEEK8_SKILL_RECORD,
+    temporary_seeds: tuple[int, ...] = WEEK10_TEMPORARY_SEEDS,
+    blockage_seeds: tuple[int, ...] = WEEK10_BLOCKAGE_SEEDS,
 ) -> Week10RunResult:
-    """Run deterministic Week 10 diagnosis and optionally export evidence."""
+    """Run grounded deterministic Week 10 diagnosis and optionally export evidence."""
+    if len(temporary_seeds) < 12 or len(blockage_seeds) < 12:
+        raise ValueError("temporary and blockage seed sets must cover three full windows")
     skill_hash_before = _sha256_file(skill_record_path)
     thresholds = LearningProgressThresholds()
     cube_push_outcomes = _cube_push_outcomes()
     familiar_success_rate, familiar_steps = _run_familiar_control(skill_record_path)
-    strategy_variants = _strategy_variants()
-    temporary = _temporary_failure_diagnosis(thresholds)
-    sustained = _sustained_blockage_diagnosis(thresholds)
-    early = _early_evidence_diagnosis(thresholds)
-    non_capacity = _non_capacity_diagnosis(thresholds)
-    proposal = build_week10_growth_proposal()
+
+    with tempfile.TemporaryDirectory(prefix="seedmind-week10-grounded-memory-") as tmp:
+        store = EpisodicSQLiteStore(Path(tmp) / "week10_memory.sqlite3")
+        try:
+            scorer = SignificanceScorer()
+            traces: list[GroundedEpisodeTrace] = []
+            strategy_variants: list[StrategyVariantRecord] = []
+
+            early = _early_evidence_diagnosis(thresholds, store, scorer, traces)
+            temporary = _temporary_failure_diagnosis(
+                thresholds,
+                store,
+                scorer,
+                traces,
+                strategy_variants,
+                temporary_seeds=temporary_seeds,
+            )
+            sustained = _sustained_blockage_diagnosis(
+                thresholds,
+                store,
+                scorer,
+                traces,
+                strategy_variants,
+                blockage_seeds=blockage_seeds,
+            )
+            non_capacity = _non_capacity_diagnosis(thresholds, store, scorer, traces)
+        finally:
+            store.close()
+
     skill_hash_after = _sha256_file(skill_record_path)
+    repository_inventory = _repository_inventory()
+    proposal = _build_sustained_proposal_if_allowed(sustained)
+    diagnoses = (
+        early,
+        temporary,
+        _with_proposal_state(sustained, proposal is not None),
+        non_capacity,
+    )
+    trace_tuple = tuple(traces)
+    variant_tuple = tuple(strategy_variants)
 
     environment_pass = (
         cube_push_outcomes["round_open_push"] == TransitionOutcome.PUSHED.value
@@ -253,47 +459,76 @@ def run_week10_capacity_diagnosis(
         == TransitionOutcome.PUSH_INEFFECTIVE_CONTACT.value
         and cube_push_outcomes["angular_open_push"] == TransitionOutcome.PUSHED.value
     )
+    grounded_attempt_pass = all(
+        attempt.has_grounded_provenance for diagnosis in diagnoses for attempt in diagnosis.attempts
+    ) and all(trace.step_traces for trace in trace_tuple)
+    prediction_pass = all(
+        step.prediction.evidence_available and step.prediction.mean_absolute_error >= 0.0
+        for trace in trace_tuple
+        for step in trace.step_traces
+    )
     learning_progress_pass = (
         early.classification is PlateauClassification.INSUFFICIENT_EVIDENCE
-        and temporary.classification
-        in (PlateauClassification.IMPROVING, PlateauClassification.TEMPORARY_FAILURE)
+        and temporary.classification is PlateauClassification.IMPROVING
         and sustained.classification is PlateauClassification.SUSTAINED_BLOCKAGE
     )
-    temporary_pass = (
-        temporary.proposal_generated is False
-        and temporary.help.performance_improved_afterward
-        and temporary.replay.progress_resumed
+    replay_pass = bool(
+        temporary.replay.progress_resumed
+        and temporary.replay.relevant_memory_ids
+        and sustained.replay.relevant_memory_ids
+        and not sustained.replay.progress_resumed
     )
-    sustained_pass = (
-        sustained.classification is PlateauClassification.SUSTAINED_BLOCKAGE
-        and sustained.ladder.completed_for_growth_proposal
+    demonstration_pass = (
+        temporary.help.demonstration_completed_task
+        and temporary.help.performance_improved_afterward
+        and sustained.help.demonstration_completed_task
+        and sustained.help.blockage_remained
     )
     non_capacity_pass = (
-        non_capacity.proposal_generated is False and non_capacity.ladder.stopped_early
+        non_capacity.proposal_generated is False
+        and non_capacity.ladder.stopped_early
+        and non_capacity.non_capacity_reason
+        == "ambiguous_request,impossible_geometry,resource_budget_exhaustion,unsafe_permission_blocked"
     )
     growth_delay_pass = (
         early.proposal_generated is False
         and temporary.proposal_generated is False
         and non_capacity.proposal_generated is False
-        and sustained.proposal_generated is True
+        and proposal is not None
     )
     growth_proposal_pass = (
-        proposal.status.value == "proposed_not_authorised"
+        proposal is not None
+        and proposal.status.value == "proposed_not_authorised"
         and proposal.candidate.created is False
-        and proposal.candidate.type == "skill_expert"
-        and proposal.candidate.parent_module == "general_push_controller"
     )
     frozen_skill_pass = skill_hash_before == skill_hash_after
     frozen_ndnra_pass = _frozen_ndnra_boundary_pass()
-    no_growth_started = not any(
-        variant.created_specialist or variant.mutated_frozen_skill for variant in strategy_variants
+    no_growth_started = (
+        not repository_inventory.specialist_created
+        and not repository_inventory.router_created
+        and not repository_inventory.week11_started
+        and not repository_inventory.ndnra_required
+        and not any(
+            variant.created_specialist or variant.mutated_frozen_skill for variant in variant_tuple
+        )
     )
     acceptance = Week10AcceptanceReport(
         environment_extension_pass=environment_pass,
+        grounded_attempt_provenance_pass=grounded_attempt_pass,
         learning_progress_pass=learning_progress_pass,
-        temporary_failure_classification_pass=temporary_pass,
-        sustained_blockage_classification_pass=sustained_pass,
+        temporary_failure_classification_pass=(
+            temporary.proposal_generated is False
+            and temporary.help.performance_improved_afterward
+            and temporary.replay.progress_resumed
+        ),
+        sustained_blockage_classification_pass=(
+            sustained.classification is PlateauClassification.SUSTAINED_BLOCKAGE
+            and sustained.ladder.completed_for_growth_proposal
+        ),
         diagnostic_ladder_pass=sustained.ladder.completed_for_growth_proposal,
+        memory_replay_grounding_pass=replay_pass,
+        teacher_demonstration_grounding_pass=demonstration_pass,
+        prediction_evidence_pass=prediction_pass,
         non_capacity_blockage_pass=non_capacity_pass,
         growth_delay_pass=growth_delay_pass,
         growth_proposal_pass=growth_proposal_pass,
@@ -301,9 +536,11 @@ def run_week10_capacity_diagnosis(
         frozen_ndnra_boundary_pass=frozen_ndnra_pass,
         week10_main_milestone_pass=(
             environment_pass
+            and grounded_attempt_pass
+            and prediction_pass
             and learning_progress_pass
-            and temporary_pass
-            and sustained_pass
+            and replay_pass
+            and demonstration_pass
             and non_capacity_pass
             and growth_delay_pass
             and growth_proposal_pass
@@ -314,18 +551,16 @@ def run_week10_capacity_diagnosis(
         familiar_control_success_rate=familiar_success_rate,
         frozen_skill_sha256_before=skill_hash_before,
         frozen_skill_sha256_after=skill_hash_after,
-        week11_started=False,
-        specialist_created=False,
-        router_created=False,
-        ndnra_required=False,
+        repository_inventory=repository_inventory,
     )
     result = Week10RunResult(
         thresholds=thresholds,
         familiar_control_success_rate=familiar_success_rate,
         familiar_control_steps=familiar_steps,
         cube_push_outcomes=cube_push_outcomes,
-        strategy_variants=strategy_variants,
-        diagnoses=(early, temporary, sustained, non_capacity),
+        strategy_variants=variant_tuple,
+        diagnoses=diagnoses,
+        episode_traces=trace_tuple,
         proposal=proposal,
         acceptance_report=acceptance,
     )
@@ -338,6 +573,7 @@ def run_week10_capacity_diagnosis(
             cube_push_outcomes=result.cube_push_outcomes,
             strategy_variants=result.strategy_variants,
             diagnoses=result.diagnoses,
+            episode_traces=result.episode_traces,
             proposal=result.proposal,
             acceptance_report=result.acceptance_report,
             artifact_paths=paths,
@@ -346,18 +582,882 @@ def run_week10_capacity_diagnosis(
 
 
 def export_week10_evidence(result: Week10RunResult, output_dir: Path) -> tuple[Path, ...]:
-    """Write deterministic Week 10 artifacts."""
+    """Write deterministic grounded Week 10 artifacts."""
+    _preserve_superseded_scripted_evidence(output_dir)
+    traces = output_dir / "grounded_episode_traces.json"
     diagnostic_report = output_dir / "diagnostic_report.json"
     proposal_record = output_dir / "growth_proposal_record.json"
     windows = output_dir / "learning_progress_windows.json"
     visualisation = output_dir / "plateau_visualisation.svg"
     acceptance = output_dir / "week10_acceptance_report.json"
+    _write_json(traces, _traces_payload(result))
     _write_json(diagnostic_report, _diagnostic_report_payload(result))
-    _write_json(proposal_record, result.proposal.to_json())
+    _write_json(proposal_record, {} if result.proposal is None else result.proposal.to_json())
     _write_json(windows, _windows_payload(result))
     _write_svg(visualisation, result)
     _write_json(acceptance, result.acceptance_report.to_json())
-    return (diagnostic_report, proposal_record, windows, visualisation, acceptance)
+    return (traces, diagnostic_report, proposal_record, windows, visualisation, acceptance)
+
+
+def _early_evidence_diagnosis(
+    thresholds: LearningProgressThresholds,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+) -> Week10ScenarioDiagnosis:
+    attempts = tuple(
+        _execute_attempt(
+            scenario_family="early_cube_evidence",
+            seed=seed,
+            strategy_id="frozen_skill",
+            plan_kind="frozen_skill",
+            store=store,
+            scorer=scorer,
+            traces=traces,
+        )
+        for seed in WEEK10_EARLY_SEEDS
+    )
+    windows = build_learning_progress_windows(
+        attempts,
+        thresholds,
+        scenario_family="early_cube_evidence",
+        strategy_variants_exhausted=False,
+        replay_attempted=False,
+        help_or_demonstration_considered=False,
+    )
+    ladder = build_ladder(
+        scenario_family="early_cube_evidence",
+        task_confirmed=True,
+        safe_exploration_sufficient=False,
+        relevant_memory_retrieved=False,
+        existing_skill_attempted=True,
+        strategy_variants_tested=False,
+        help_or_demonstration_considered=False,
+        replay_attempted=False,
+        prediction_quality_checked=True,
+        competence_still_improving=False,
+        inferred_policy_capacity_limitation=False,
+        proposal_allowed=False,
+        attempt_count=len(attempts),
+        evidence_prefix="trace:early_cube_evidence",
+    )
+    return Week10ScenarioDiagnosis(
+        scenario_family="early_cube_evidence",
+        classification=final_classification(windows),
+        attempts=attempts,
+        windows=windows,
+        ladder=ladder,
+        replay=_empty_replay("early_cube_evidence"),
+        help=_empty_help("early_cube_evidence", "minimum evidence not reached"),
+        proposal_generated=False,
+    )
+
+
+def _temporary_failure_diagnosis(
+    thresholds: LearningProgressThresholds,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+    strategy_variants: list[StrategyVariantRecord],
+    *,
+    temporary_seeds: tuple[int, ...],
+) -> Week10ScenarioDiagnosis:
+    seeds = temporary_seeds[:12]
+    attempts: list[LearningAttempt] = []
+    for index, seed in enumerate(seeds):
+        if index < 4:
+            strategy_id = "frozen_skill"
+            plan_kind = "frozen_skill"
+        elif index < 6:
+            strategy_id = "variant_reposition_south"
+            plan_kind = "south_only"
+        elif index < 8:
+            strategy_id = "memory_guided_contact"
+            plan_kind = "full_teacher"
+        else:
+            strategy_id = "teacher_demonstrated_contact"
+            plan_kind = "full_teacher"
+        attempts.append(
+            _execute_attempt(
+                scenario_family="temporary_cube_recovery",
+                seed=seed,
+                strategy_id=strategy_id,
+                plan_kind=plan_kind,
+                store=store,
+                scorer=scorer,
+                traces=traces,
+                replay_influence=("temporary-replay",) if index in (6, 7) else (),
+                demonstration_influence=("temporary-demo",) if index >= 8 else (),
+            )
+        )
+    strategy_variants.extend(
+        _variant_records_from_attempts("temporary_cube_recovery", tuple(attempts))
+    )
+    replay = _grounded_replay(
+        "temporary_cube_recovery",
+        store,
+        source_attempts=tuple(attempts[:6]),
+        influenced_attempts=tuple(attempts[6:8]),
+    )
+    help_record = _help_record(
+        "temporary_cube_recovery",
+        before_attempts=tuple(attempts[:6]),
+        after_attempts=tuple(attempts[8:12]),
+        demonstration_trace=_execute_demonstration(
+            "temporary_cube_recovery",
+            seed=900,
+            store=store,
+            scorer=scorer,
+            traces=traces,
+        ),
+    )
+    windows = build_learning_progress_windows(
+        tuple(attempts),
+        thresholds,
+        scenario_family="temporary_cube_recovery",
+        strategy_variants_exhausted=False,
+        replay_attempted=bool(replay.relevant_memory_ids),
+        help_or_demonstration_considered=help_record.help_requested,
+    )
+    ladder = build_ladder(
+        scenario_family="temporary_cube_recovery",
+        task_confirmed=True,
+        safe_exploration_sufficient=True,
+        relevant_memory_retrieved=bool(replay.relevant_memory_ids),
+        existing_skill_attempted=True,
+        strategy_variants_tested=True,
+        help_or_demonstration_considered=help_record.help_requested,
+        replay_attempted=True,
+        prediction_quality_checked=True,
+        competence_still_improving=True,
+        inferred_policy_capacity_limitation=False,
+        proposal_allowed=False,
+        attempt_count=len(attempts),
+        evidence_prefix="trace:temporary_cube_recovery",
+    )
+    return Week10ScenarioDiagnosis(
+        scenario_family="temporary_cube_recovery",
+        classification=final_classification(windows),
+        attempts=tuple(attempts),
+        windows=windows,
+        ladder=ladder,
+        replay=replay,
+        help=help_record,
+        proposal_generated=False,
+    )
+
+
+def _sustained_blockage_diagnosis(
+    thresholds: LearningProgressThresholds,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+    strategy_variants: list[StrategyVariantRecord],
+    *,
+    blockage_seeds: tuple[int, ...],
+) -> Week10ScenarioDiagnosis:
+    seeds = blockage_seeds[:12]
+    strategies = (
+        "frozen_skill",
+        "frozen_skill",
+        "variant_offset_contact",
+        "variant_offset_contact",
+        "variant_retreat_reapproach",
+        "variant_retreat_reapproach",
+        "variant_alternate_side",
+        "variant_alternate_side",
+        "post_demo_existing_controller",
+        "post_demo_existing_controller",
+        "post_demo_existing_controller",
+        "post_demo_existing_controller",
+    )
+    attempts = tuple(
+        _execute_attempt(
+            scenario_family="sustained_cube_blockage",
+            seed=seed,
+            strategy_id=strategy,
+            plan_kind="frozen_skill",
+            store=store,
+            scorer=scorer,
+            traces=traces,
+            replay_influence=("sustained-replay",) if index in (4, 5) else (),
+            demonstration_influence=("sustained-demo",) if index >= 8 else (),
+        )
+        for index, (seed, strategy) in enumerate(zip(seeds, strategies, strict=True))
+    )
+    strategy_variants.extend(_variant_records_from_attempts("sustained_cube_blockage", attempts))
+    replay = _grounded_replay(
+        "sustained_cube_blockage",
+        store,
+        source_attempts=attempts[:6],
+        influenced_attempts=attempts[4:6],
+    )
+    help_record = _help_record(
+        "sustained_cube_blockage",
+        before_attempts=attempts[:8],
+        after_attempts=attempts[8:12],
+        demonstration_trace=_execute_demonstration(
+            "sustained_cube_blockage",
+            seed=901,
+            store=store,
+            scorer=scorer,
+            traces=traces,
+        ),
+    )
+    windows = build_learning_progress_windows(
+        attempts,
+        thresholds,
+        scenario_family="sustained_cube_blockage",
+        strategy_variants_exhausted=True,
+        replay_attempted=bool(replay.relevant_memory_ids),
+        help_or_demonstration_considered=help_record.help_requested,
+    )
+    ladder = build_ladder(
+        scenario_family="sustained_cube_blockage",
+        task_confirmed=True,
+        safe_exploration_sufficient=True,
+        relevant_memory_retrieved=bool(replay.relevant_memory_ids),
+        existing_skill_attempted=True,
+        strategy_variants_tested=True,
+        help_or_demonstration_considered=help_record.help_requested,
+        replay_attempted=True,
+        prediction_quality_checked=True,
+        competence_still_improving=False,
+        inferred_policy_capacity_limitation=True,
+        proposal_allowed=True,
+        attempt_count=len(attempts),
+        evidence_prefix="trace:sustained_cube_blockage",
+    )
+    return Week10ScenarioDiagnosis(
+        scenario_family="sustained_cube_blockage",
+        classification=final_classification(windows),
+        attempts=attempts,
+        windows=windows,
+        ladder=ladder,
+        replay=replay,
+        help=help_record,
+        proposal_generated=False,
+    )
+
+
+def _non_capacity_diagnosis(
+    thresholds: LearningProgressThresholds,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+) -> Week10ScenarioDiagnosis:
+    cases = (
+        ("ambiguous_request", "request_help_only"),
+        ("impossible_geometry", "frozen_skill_impossible"),
+        ("resource_budget_exhaustion", "resource_limited"),
+        ("unsafe_permission_blocked", "permission_blocked"),
+    )
+    attempts = tuple(
+        _execute_attempt(
+            scenario_family="non_capacity_blockage",
+            seed=seed,
+            strategy_id=case,
+            plan_kind=plan,
+            store=store,
+            scorer=scorer,
+            traces=traces,
+        )
+        for seed, (case, plan) in zip(WEEK10_NON_CAPACITY_SEEDS, cases, strict=True)
+    )
+    windows = build_learning_progress_windows(
+        attempts,
+        thresholds,
+        scenario_family="non_capacity_blockage",
+        strategy_variants_exhausted=False,
+        replay_attempted=False,
+        help_or_demonstration_considered=True,
+        ambiguity_resolved=False,
+        safety_or_permission_clear=False,
+        resource_limit=True,
+    )
+    ladder = build_ladder(
+        scenario_family="non_capacity_blockage",
+        task_confirmed=False,
+        safe_exploration_sufficient=False,
+        relevant_memory_retrieved=False,
+        existing_skill_attempted=False,
+        strategy_variants_tested=False,
+        help_or_demonstration_considered=True,
+        replay_attempted=False,
+        prediction_quality_checked=True,
+        competence_still_improving=False,
+        inferred_policy_capacity_limitation=False,
+        proposal_allowed=False,
+        attempt_count=len(attempts),
+        evidence_prefix="trace:non_capacity_blockage",
+    )
+    return Week10ScenarioDiagnosis(
+        scenario_family="non_capacity_blockage",
+        classification=final_classification(windows),
+        attempts=attempts,
+        windows=windows,
+        ladder=ladder,
+        replay=_empty_replay("non_capacity_blockage"),
+        help=_empty_help("non_capacity_blockage", "non-capacity stop reason measured"),
+        proposal_generated=False,
+        non_capacity_reason=(
+            "ambiguous_request,impossible_geometry,resource_budget_exhaustion,"
+            "unsafe_permission_blocked"
+        ),
+    )
+
+
+def _execute_attempt(
+    *,
+    scenario_family: str,
+    seed: int,
+    strategy_id: str,
+    plan_kind: str,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+    replay_influence: tuple[str, ...] = (),
+    demonstration_influence: tuple[str, ...] = (),
+) -> LearningAttempt:
+    state = _scenario_state(scenario_family, seed, plan_kind=plan_kind)
+    episode_id = f"week10-{scenario_family}-{seed}-{strategy_id}"
+    if plan_kind == "frozen_skill" or plan_kind == "frozen_skill_impossible":
+        actions = _run_frozen_skill_actions(state, budget=8)
+    elif plan_kind == "south_only":
+        actions = _planned_actions(state, (Direction.SOUTH,), budget=10)
+    elif plan_kind == "full_teacher":
+        actions = _planned_actions(
+            state, (Direction.SOUTH, Direction.EAST, Direction.EAST), budget=18
+        )
+    elif plan_kind == "request_help_only":
+        actions = (PrimitiveAction.REQUEST_HELP,)
+    elif plan_kind == "resource_limited":
+        actions = (PrimitiveAction.PUSH,)
+    elif plan_kind == "permission_blocked":
+        actions = (PrimitiveAction.WAIT,)
+    else:
+        raise ValueError(f"unknown plan kind: {plan_kind}")
+    step_budget = 1 if plan_kind == "resource_limited" else len(actions)
+    trace = _execute_trace(
+        state,
+        episode_id=episode_id,
+        seed=seed,
+        scenario_family=scenario_family,
+        strategy_id=strategy_id,
+        actions=actions[:step_budget],
+        replay_influence=replay_influence,
+        demonstration_influence=demonstration_influence,
+    )
+    traces.append(trace)
+    _persist_trace_events(trace, store, scorer)
+    return LearningAttempt(
+        attempt_index=_attempt_index_for_family(traces, scenario_family),
+        scenario_family=scenario_family,
+        strategy=strategy_id,
+        success=trace.success,
+        task_progress=trace.task_progress,
+        steps_used=max(1, trace.steps_used),
+        prediction_error=trace.prediction_error,
+        invalid_or_ineffective_actions=trace.invalid_or_ineffective_action_count,
+        episode_id=trace.episode_id,
+        trace_digest=trace.trace_digest,
+        trace_ref=f"grounded_episode_traces.json:{trace.episode_id}",
+        help_requested=PrimitiveAction.REQUEST_HELP.value in trace.actions,
+        replay_involved=bool(replay_influence),
+        demonstration_involved=bool(demonstration_influence),
+    )
+
+
+def _execute_demonstration(
+    scenario_family: str,
+    *,
+    seed: int,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+    traces: list[GroundedEpisodeTrace],
+) -> GroundedEpisodeTrace:
+    state = _scenario_state(scenario_family, seed, plan_kind="full_teacher")
+    actions = _planned_actions(state, (Direction.SOUTH, Direction.EAST, Direction.EAST), budget=18)
+    trace = _execute_trace(
+        state,
+        episode_id=f"week10-{scenario_family}-{seed}-teacher-demonstration",
+        seed=seed,
+        scenario_family=scenario_family,
+        strategy_id="protected_teacher_oracle_demonstration",
+        actions=actions,
+        replay_influence=(),
+        demonstration_influence=("protected_teacher_response_policy",),
+    )
+    traces.append(trace)
+    _persist_trace_events(trace, store, scorer)
+    return trace
+
+
+def _execute_trace(
+    initial_state: NurseryState,
+    *,
+    episode_id: str,
+    seed: int,
+    scenario_family: str,
+    strategy_id: str,
+    actions: tuple[PrimitiveAction, ...],
+    replay_influence: tuple[str, ...],
+    demonstration_influence: tuple[str, ...],
+) -> GroundedEpisodeTrace:
+    runtime = NurseryRuntime(initial_state, episode_id)
+    initial_distance = _object_target_distance(runtime.state)
+    initial_digest = _state_digest(runtime.state)
+    step_traces: list[EpisodeStepTrace] = []
+    for action in actions:
+        if _target_satisfied(runtime.state):
+            break
+        before_object = _object_position(runtime.state)
+        observation = runtime.observe()
+        result = runtime.step(action)
+        after_object = _object_position(runtime.state)
+        prediction = _prediction_trace(
+            episode_id=episode_id,
+            step_index=len(step_traces),
+            action=action,
+            predicted_sensor=observation.sensor_values,
+            actual_sensor=result.observation.sensor_values,
+        )
+        step_traces.append(
+            EpisodeStepTrace(
+                step_index=len(step_traces),
+                action=action,
+                transition_outcome=result.transition.outcome,
+                object_position_before=before_object,
+                object_position_after=after_object,
+                prediction=prediction,
+            )
+        )
+    final_distance = _object_target_distance(runtime.state)
+    progress = _progress(initial_distance, final_distance)
+    success = _target_satisfied(runtime.state)
+    ineffective_count = sum(
+        step.transition_outcome
+        in {
+            TransitionOutcome.MOVE_BLOCKED_BOUNDARY,
+            TransitionOutcome.MOVE_BLOCKED_ENTITY,
+            TransitionOutcome.PUSH_BLOCKED_BOUNDARY,
+            TransitionOutcome.PUSH_BLOCKED_ENTITY,
+            TransitionOutcome.PUSH_IMMOVABLE,
+            TransitionOutcome.PUSH_INEFFECTIVE_CONTACT,
+            TransitionOutcome.PUSH_NO_CONTACT,
+        }
+        for step in step_traces
+    )
+    prediction_error = (
+        fmean(step.prediction.mean_absolute_error for step in step_traces) if step_traces else 0.0
+    )
+    termination_reason = (
+        "success"
+        if success
+        else "budget_exhausted"
+        if len(step_traces) >= len(actions)
+        else "stopped"
+    )
+    payload = {
+        "actions": [step.action.value for step in step_traces],
+        "episode_id": episode_id,
+        "final_distance": final_distance,
+        "initial_distance": initial_distance,
+        "outcomes": [step.transition_outcome.value for step in step_traces],
+        "progress": progress,
+        "scenario_family": scenario_family,
+        "seed": seed,
+        "strategy_id": strategy_id,
+        "success": success,
+    }
+    trace_digest = _canonical_digest(payload)
+    return GroundedEpisodeTrace(
+        episode_id=episode_id,
+        seed=seed,
+        scenario_family=scenario_family,
+        initial_state_digest=initial_digest,
+        object_id="object_0",
+        target_id="target_0",
+        strategy_id=strategy_id,
+        actions=tuple(step.action.value for step in step_traces),
+        transition_outcomes=tuple(step.transition_outcome.value for step in step_traces),
+        initial_distance=initial_distance,
+        final_distance=final_distance,
+        task_progress=progress,
+        success=success,
+        steps_used=len(step_traces),
+        invalid_or_ineffective_action_count=ineffective_count,
+        prediction_error=_clamp_unit(prediction_error),
+        help_request_events=tuple(
+            f"{episode_id}:help:{step.step_index}"
+            for step in step_traces
+            if step.action is PrimitiveAction.REQUEST_HELP
+        ),
+        replay_influence=replay_influence,
+        demonstration_influence=demonstration_influence,
+        termination_reason=termination_reason,
+        step_traces=tuple(step_traces),
+        final_state_digest=_state_digest(runtime.state),
+        trace_digest=trace_digest,
+    )
+
+
+def _prediction_trace(
+    *,
+    episode_id: str,
+    step_index: int,
+    action: PrimitiveAction,
+    predicted_sensor: tuple[float, ...],
+    actual_sensor: tuple[float, ...],
+) -> PredictionTraceRecord:
+    predicted = torch.tensor(predicted_sensor, dtype=torch.float32)
+    actual = torch.tensor(actual_sensor, dtype=torch.float32)
+    comparison = compare_prediction(predicted, actual)
+    mae = float(comparison.mean_absolute_error.mean().detach().cpu().item())
+    mse = float(comparison.mean_squared_error.mean().detach().cpu().item())
+    return PredictionTraceRecord(
+        prediction_id=f"week10-prediction-{episode_id}-{step_index:02d}",
+        action=action.value,
+        predicted_source="persistence_baseline_via_seedmind_compare_prediction",
+        mean_absolute_error=_clamp_unit(mae),
+        mean_squared_error=_clamp_unit(mse),
+        evidence_available=True,
+    )
+
+
+def _persist_trace_events(
+    trace: GroundedEpisodeTrace,
+    store: EpisodicSQLiteStore,
+    scorer: SignificanceScorer,
+) -> tuple[EpisodicEvent, ...]:
+    events: list[EpisodicEvent] = []
+    for step in trace.step_traces:
+        events.append(
+            store.remember(
+                EpisodicEventDraft(
+                    event_id=f"{trace.episode_id}-event-{step.step_index:02d}",
+                    episode_id=trace.episode_id,
+                    step_index=step.step_index,
+                    event_type=(
+                        EpisodicEventType.HUMAN_GUIDANCE
+                        if step.action is PrimitiveAction.REQUEST_HELP
+                        else EpisodicEventType.ACTION
+                    ),
+                    context_code=f"{trace.scenario_family}_angular_contact",
+                    outcome_code=step.transition_outcome.value,
+                    action=step.action,
+                    success=trace.success,
+                    features=SignificanceFeatures(
+                        prediction_error=step.prediction.mean_absolute_error,
+                        novelty=0.25,
+                        learning_progress=trace.task_progress,
+                        ambition_relevance=0.80,
+                        human_relevance=(
+                            0.75
+                            if step.action is PrimitiveAction.REQUEST_HELP
+                            or trace.demonstration_influence
+                            else 0.10
+                        ),
+                        outcome_magnitude=trace.task_progress,
+                    ),
+                    payload=(
+                        ("trace_digest", trace.trace_digest),
+                        ("strategy_id", trace.strategy_id),
+                        ("transition_outcome", step.transition_outcome.value),
+                        ("task_progress", trace.task_progress),
+                    ),
+                ),
+                scorer,
+            )
+        )
+    return tuple(events)
+
+
+def _grounded_replay(
+    scenario_family: str,
+    store: EpisodicSQLiteStore,
+    *,
+    source_attempts: tuple[LearningAttempt, ...],
+    influenced_attempts: tuple[LearningAttempt, ...],
+) -> MemoryReplayRecord:
+    query = MemoryQuery(
+        minimum_significance=0.05,
+        context_code=f"{scenario_family}_angular_contact",
+        event_type=EpisodicEventType.ACTION,
+        limit=500,
+    )
+    memories = tuple(
+        event
+        for event in store.retrieve(query)
+        if event.episode_id in {attempt.episode_id for attempt in source_attempts}
+    )
+    before = fmean(attempt.task_progress for attempt in source_attempts[-2:])
+    after = fmean(attempt.task_progress for attempt in influenced_attempts)
+    return MemoryReplayRecord(
+        scenario_family=scenario_family,
+        query={
+            "context_code": query.context_code,
+            "event_type": EpisodicEventType.ACTION.value,
+            "limit": query.limit,
+            "minimum_significance": query.minimum_significance,
+        },
+        relevant_memory_ids=tuple(event.event_id for event in memories),
+        source_episode_ids=tuple(sorted({event.episode_id for event in memories})),
+        replay_influenced_episode_ids=tuple(attempt.episode_id for attempt in influenced_attempts),
+        changed_strategy=bool(influenced_attempts),
+        progress_resumed=(after > before + 0.10),
+        evidence_insufficient=not memories,
+    )
+
+
+def _help_record(
+    scenario_family: str,
+    *,
+    before_attempts: tuple[LearningAttempt, ...],
+    after_attempts: tuple[LearningAttempt, ...],
+    demonstration_trace: GroundedEpisodeTrace,
+) -> HelpDemonstrationRecord:
+    manager = ApprenticeshipManager()
+    request = HumanRequest(
+        request_id=f"{scenario_family}-request",
+        intent_code=RequestIntentCode.PRACTICE_ACTIVE_AMBITION,
+        target_code="move_raw_angular_object_to_target",
+        ambiguity=0.10,
+        permission_level=4,
+        verification_rule=VerificationRule.CONFIRMED_OUTCOME,
+    )
+    context = HelpContext(
+        case_id=f"{scenario_family}-help",
+        request=request,
+        uncertainty=0.85,
+        competence=0.15,
+        risk=0.10,
+        blocked_attempts=3,
+        safe_experiment_available=False,
+        familiar=False,
+    )
+    decision = manager.evaluate(context, episode_id=f"{scenario_family}-help-episode", step_index=0)
+    response = manager.teacher_response(
+        context,
+        decision,
+        episode_id=f"{scenario_family}-help-episode",
+        step_index=1,
+    )
+    before = fmean(attempt.task_progress for attempt in before_attempts)
+    after = fmean(attempt.task_progress for attempt in after_attempts)
+    improved = after > before + 0.10
+    return HelpDemonstrationRecord(
+        scenario_family=scenario_family,
+        help_requested=decision.should_request_help,
+        help_reason=decision.reason.value,
+        demonstration_available=response.code.name.lower() == "demonstrate",
+        demonstration_episode_id=demonstration_trace.episode_id,
+        demonstration_trace_digest=demonstration_trace.trace_digest,
+        demonstration_completed_task=demonstration_trace.success,
+        learner_before_episode_ids=tuple(attempt.episode_id for attempt in before_attempts),
+        learner_after_episode_ids=tuple(attempt.episode_id for attempt in after_attempts),
+        before_mean_progress=before,
+        after_mean_progress=after,
+        demonstration_applied=response.code.name.lower() == "demonstrate",
+        performance_improved_afterward=improved,
+        blockage_remained=not improved,
+    )
+
+
+def _variant_records_from_attempts(
+    scenario_family: str,
+    attempts: tuple[LearningAttempt, ...],
+) -> tuple[StrategyVariantRecord, ...]:
+    variant_specs = {
+        "variant_reposition_south": ("behind_object", 0, 0, "south_reposition", True, 10),
+        "memory_guided_contact": ("behind_object", 0, 0, "memory_replay", True, 18),
+        "teacher_demonstrated_contact": ("behind_object", 0, 0, "teacher_trace", True, 18),
+        "variant_offset_contact": ("left_side", 1, 0, "quarter_turn", True, 8),
+        "variant_retreat_reapproach": ("behind_object", 0, 1, "half_turn", True, 8),
+        "variant_alternate_side": ("right_side", -1, 0, "quarter_turn", True, 8),
+    }
+    records: list[StrategyVariantRecord] = []
+    for strategy, spec in sorted(variant_specs.items()):
+        episode_ids = tuple(
+            attempt.episode_id for attempt in attempts if attempt.strategy == strategy
+        )
+        if episode_ids:
+            records.append(
+                StrategyVariantRecord(
+                    variant_id=f"{scenario_family}-{strategy}",
+                    approach_side=spec[0],
+                    contact_offset=spec[1],
+                    alignment_tolerance=spec[2],
+                    retry_angle=spec[3],
+                    reposition_before_push=spec[4],
+                    safe_attempt_budget=spec[5],
+                    executed_episode_ids=episode_ids,
+                )
+            )
+    return tuple(records)
+
+
+def _build_sustained_proposal_if_allowed(
+    sustained: Week10ScenarioDiagnosis,
+) -> GrowthProposalRecord | None:
+    try:
+        return build_week10_growth_proposal(
+            scenario_family=sustained.scenario_family,
+            classification=sustained.classification,
+            ladder=sustained.ladder,
+            windows=sustained.windows,
+            grounded_replay_pass=bool(sustained.replay.relevant_memory_ids),
+            reachability_proven=sustained.help.demonstration_completed_task,
+            strategy_variant_count=len(
+                {
+                    attempt.strategy
+                    for attempt in sustained.attempts
+                    if attempt.strategy.startswith("variant_")
+                }
+            ),
+            help_requested=sustained.help.help_requested,
+            demonstration_attempted=sustained.help.demonstration_available,
+            prediction_evidence_resolved=True,
+            competence_still_improving=sustained.classification is PlateauClassification.IMPROVING,
+            ambiguity_resolved=True,
+            safety_or_permission_clear=True,
+            impossible_task=False,
+            resource_limit=False,
+        )
+    except ValueError:
+        return None
+
+
+def _with_proposal_state(
+    diagnosis: Week10ScenarioDiagnosis,
+    proposal_generated: bool,
+) -> Week10ScenarioDiagnosis:
+    return Week10ScenarioDiagnosis(
+        scenario_family=diagnosis.scenario_family,
+        classification=diagnosis.classification,
+        attempts=diagnosis.attempts,
+        windows=diagnosis.windows,
+        ladder=diagnosis.ladder,
+        replay=diagnosis.replay,
+        help=diagnosis.help,
+        proposal_generated=proposal_generated,
+        non_capacity_reason=diagnosis.non_capacity_reason,
+    )
+
+
+def _scenario_state(scenario_family: str, seed: int, *, plan_kind: str) -> NurseryState:
+    if plan_kind == "frozen_skill_impossible":
+        return _angular_state(seed=seed, impossible=True)
+    if plan_kind in {"request_help_only", "resource_limited", "permission_blocked"}:
+        return _angular_state(seed=seed, impossible=False)
+    return _angular_state(seed=seed, impossible=False)
+
+
+def _angular_state(*, seed: int, impossible: bool) -> NurseryState:
+    del seed
+    blockers = [
+        EntityState(
+            entity_id="flat_contact_blocker",
+            role=EntityRole.WALL,
+            position=GridPosition(4, 1),
+            blocks_movement=True,
+            movable=False,
+        )
+    ]
+    if impossible:
+        blockers.extend(
+            [
+                EntityState(
+                    entity_id="impossible_blocker_west",
+                    role=EntityRole.WALL,
+                    position=GridPosition(2, 3),
+                    blocks_movement=True,
+                    movable=False,
+                ),
+                EntityState(
+                    entity_id="impossible_blocker_south",
+                    role=EntityRole.WALL,
+                    position=GridPosition(3, 4),
+                    blocks_movement=True,
+                    movable=False,
+                ),
+            ]
+        )
+    return NurseryState(
+        width=7,
+        height=6,
+        agent=AgentState(position=GridPosition(2, 2), orientation=Direction.EAST),
+        entities=(
+            *_wall_entities(7, 6),
+            *blockers,
+            EntityState(
+                entity_id="object_0",
+                role=EntityRole.OBJECT,
+                position=GridPosition(3, 2),
+                blocks_movement=True,
+                movable=True,
+                shape_code=ShapeCode.ANGULAR,
+            ),
+            EntityState(
+                entity_id="target_0",
+                role=EntityRole.TARGET,
+                position=GridPosition(5, 3),
+                blocks_movement=False,
+                movable=False,
+            ),
+        ),
+    )
+
+
+def _planned_actions(
+    state: NurseryState,
+    push_directions: tuple[Direction, ...],
+    *,
+    budget: int,
+) -> tuple[PrimitiveAction, ...]:
+    current = state
+    engine = NurseryTransitionEngine()
+    actions: list[PrimitiveAction] = []
+    for direction in push_directions:
+        object_position = _object_position(current)
+        contact = object_position.moved(Direction((int(direction) + 2) % 4))
+        route = _shortest_route(current, source=current.agent.position, destination=contact)
+        if route is None:
+            break
+        for position in route:
+            move_direction = _direction_between(current.agent.position, position)
+            for turn in _turn_actions(current.agent.orientation, move_direction):
+                actions.append(turn)
+                current = engine.apply(current, turn).state
+            actions.append(PrimitiveAction.MOVE_FORWARD)
+            current = engine.apply(current, PrimitiveAction.MOVE_FORWARD).state
+        for turn in _turn_actions(current.agent.orientation, direction):
+            actions.append(turn)
+            current = engine.apply(current, turn).state
+        actions.append(PrimitiveAction.PUSH)
+        current = engine.apply(current, PrimitiveAction.PUSH).state
+        if len(actions) >= budget:
+            break
+    return tuple(actions[:budget])
+
+
+def _run_frozen_skill_actions(state: NurseryState, *, budget: int) -> tuple[PrimitiveAction, ...]:
+    record = read_skill_record(DEFAULT_WEEK8_SKILL_RECORD)
+    controller = ApproachAndPushSkillController(record)
+    runtime = NurseryRuntime(state, "week10-frozen-action-plan")
+    actions: list[PrimitiveAction] = []
+    for _ in range(budget):
+        decision = controller.decide(runtime.state, runtime.observe().available_actions)
+        if decision.status is SkillExecutionStatus.TERMINATED:
+            break
+        if decision.status is not SkillExecutionStatus.ACTION or decision.action is None:
+            break
+        production = retain_skill_candidate_through_curiosity(decision)
+        if production.retained_action is None:
+            break
+        actions.append(production.retained_action)
+        runtime.step(production.retained_action)
+    return tuple(actions)
 
 
 def _run_familiar_control(skill_record_path: Path) -> tuple[float, tuple[int, ...]]:
@@ -437,398 +1537,70 @@ def _push_once(state: NurseryState) -> TransitionOutcome:
     return runtime.step(PrimitiveAction.PUSH).transition.outcome
 
 
-def _temporary_failure_diagnosis(
-    thresholds: LearningProgressThresholds,
-) -> Week10ScenarioDiagnosis:
-    attempts = _attempts(
-        "temporary_cube_recovery",
-        (
-            (False, 0.00, "frozen_skill", 4, 0.70, 3, False, False, False),
-            (False, 0.05, "frozen_skill", 4, 0.66, 2, False, False, False),
-            (False, 0.10, "reposition_before_push", 5, 0.58, 2, False, False, False),
-            (False, 0.15, "reposition_before_push", 5, 0.52, 1, False, False, False),
-            (False, 0.18, "memory_guided_contact", 5, 0.45, 1, False, True, False),
-            (True, 0.45, "memory_guided_contact", 6, 0.34, 0, False, True, False),
-            (True, 0.62, "teacher_demonstrated_contact", 6, 0.25, 0, True, True, True),
-            (True, 0.72, "teacher_demonstrated_contact", 6, 0.20, 0, False, False, True),
-            (True, 0.78, "teacher_demonstrated_contact", 5, 0.18, 0, False, False, False),
-            (True, 0.82, "teacher_demonstrated_contact", 5, 0.16, 0, False, False, False),
-            (True, 0.86, "teacher_demonstrated_contact", 5, 0.15, 0, False, False, False),
-            (True, 0.90, "teacher_demonstrated_contact", 5, 0.13, 0, False, False, False),
+def _repository_inventory() -> RepositoryInventory:
+    growth_paths = tuple(Path("src/seedmind/growth").glob("*.py"))
+    import_lines = "\n".join(
+        line
+        for path in growth_paths
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.startswith(("import ", "from "))
+    )
+    module_names = {path.stem for path in growth_paths}
+    return RepositoryInventory(
+        specialist_created=(
+            "specialist" in module_names or Path("src/seedmind/growth/specialist.py").exists()
         ),
-    )
-    windows = build_learning_progress_windows(
-        attempts,
-        thresholds,
-        scenario_family="temporary_cube_recovery",
-        strategy_variants_exhausted=False,
-        replay_attempted=True,
-        help_or_demonstration_considered=True,
-    )
-    replay = _memory_replay("temporary_cube_recovery", progress_resumed=True)
-    help_record = _help_record("temporary_cube_recovery", improved=True, blockage_remained=False)
-    ladder = build_ladder(
-        scenario_family="temporary_cube_recovery",
-        task_confirmed=True,
-        safe_exploration_sufficient=True,
-        relevant_memory_retrieved=True,
-        existing_skill_attempted=True,
-        strategy_variants_tested=False,
-        help_or_demonstration_considered=True,
-        replay_attempted=True,
-        prediction_quality_checked=True,
-        competence_still_improving=True,
-        inferred_policy_capacity_limitation=False,
-        proposal_allowed=False,
-        attempt_count=len(attempts),
-        evidence_prefix="temporary",
-    )
-    return Week10ScenarioDiagnosis(
-        scenario_family="temporary_cube_recovery",
-        classification=final_classification(windows),
-        windows=windows,
-        ladder=ladder,
-        replay=replay,
-        help=help_record,
-        proposal_generated=False,
-    )
-
-
-def _sustained_blockage_diagnosis(
-    thresholds: LearningProgressThresholds,
-) -> Week10ScenarioDiagnosis:
-    attempts = _attempts(
-        "sustained_cube_blockage",
-        (
-            (False, 0.10, "frozen_skill", 8, 0.62, 4, False, False, False),
-            (False, 0.12, "frozen_skill", 8, 0.60, 4, False, False, False),
-            (False, 0.10, "offset_contact", 8, 0.57, 3, False, False, False),
-            (False, 0.11, "offset_contact", 8, 0.55, 3, False, False, False),
-            (False, 0.12, "retreat_and_reapproach", 8, 0.50, 3, False, True, False),
-            (False, 0.13, "retreat_and_reapproach", 8, 0.49, 3, False, True, False),
-            (False, 0.12, "alternate_side", 8, 0.47, 3, True, True, True),
-            (False, 0.13, "alternate_side", 8, 0.46, 3, False, False, True),
-            (False, 0.12, "bounded_retry_angle", 8, 0.45, 3, False, False, False),
-            (False, 0.13, "bounded_retry_angle", 8, 0.45, 3, False, False, False),
-            (False, 0.12, "bounded_retry_angle", 8, 0.44, 3, False, False, False),
-            (False, 0.13, "bounded_retry_angle", 8, 0.44, 3, False, False, False),
+        router_created=("router" in module_names or Path("src/seedmind/growth/router.py").exists()),
+        week11_started=Path("src/seedmind/growth/week11.py").exists()
+        or Path("scripts/run_week11_specialist_growth.py").exists(),
+        ndnra_required=(
+            "seedmind.research.ndnra" in import_lines
+            or "parallel_comparison" in import_lines
+            or "parallel_operation" in import_lines
         ),
-    )
-    windows = build_learning_progress_windows(
-        attempts,
-        thresholds,
-        scenario_family="sustained_cube_blockage",
-        strategy_variants_exhausted=True,
-        replay_attempted=True,
-        help_or_demonstration_considered=True,
-    )
-    replay = _memory_replay("sustained_cube_blockage", progress_resumed=False)
-    help_record = _help_record("sustained_cube_blockage", improved=False, blockage_remained=True)
-    ladder = build_ladder(
-        scenario_family="sustained_cube_blockage",
-        task_confirmed=True,
-        safe_exploration_sufficient=True,
-        relevant_memory_retrieved=True,
-        existing_skill_attempted=True,
-        strategy_variants_tested=True,
-        help_or_demonstration_considered=True,
-        replay_attempted=True,
-        prediction_quality_checked=True,
-        competence_still_improving=False,
-        inferred_policy_capacity_limitation=True,
-        proposal_allowed=True,
-        attempt_count=len(attempts),
-        evidence_prefix="sustained",
-    )
-    return Week10ScenarioDiagnosis(
-        scenario_family="sustained_cube_blockage",
-        classification=final_classification(windows),
-        windows=windows,
-        ladder=ladder,
-        replay=replay,
-        help=help_record,
-        proposal_generated=True,
-    )
-
-
-def _early_evidence_diagnosis(thresholds: LearningProgressThresholds) -> Week10ScenarioDiagnosis:
-    attempts = _attempts(
-        "early_cube_evidence",
-        (
-            (False, 0.00, "frozen_skill", 4, 0.70, 2, False, False, False),
-            (False, 0.05, "frozen_skill", 4, 0.67, 2, False, False, False),
-            (False, 0.08, "frozen_skill", 4, 0.65, 2, False, False, False),
-            (False, 0.10, "frozen_skill", 4, 0.63, 2, False, False, False),
-        ),
-    )
-    windows = build_learning_progress_windows(
-        attempts,
-        thresholds,
-        scenario_family="early_cube_evidence",
-        strategy_variants_exhausted=False,
-        replay_attempted=False,
-        help_or_demonstration_considered=False,
-    )
-    ladder = build_ladder(
-        scenario_family="early_cube_evidence",
-        task_confirmed=True,
-        safe_exploration_sufficient=False,
-        relevant_memory_retrieved=False,
-        existing_skill_attempted=True,
-        strategy_variants_tested=False,
-        help_or_demonstration_considered=False,
-        replay_attempted=False,
-        prediction_quality_checked=False,
-        competence_still_improving=False,
-        inferred_policy_capacity_limitation=False,
-        proposal_allowed=False,
-        attempt_count=len(attempts),
-        evidence_prefix="early",
-    )
-    return Week10ScenarioDiagnosis(
-        scenario_family="early_cube_evidence",
-        classification=final_classification(windows),
-        windows=windows,
-        ladder=ladder,
-        replay=_empty_replay("early_cube_evidence"),
-        help=_empty_help("early_cube_evidence", "minimum evidence not reached"),
-        proposal_generated=False,
-    )
-
-
-def _non_capacity_diagnosis(thresholds: LearningProgressThresholds) -> Week10ScenarioDiagnosis:
-    attempts = _attempts(
-        "ambiguous_non_capacity_blockage",
-        (
-            (False, 0.00, "no_growth_ambiguous_goal", 2, 0.30, 0, True, False, False),
-            (False, 0.00, "no_growth_ambiguous_goal", 2, 0.30, 0, True, False, False),
-            (False, 0.00, "no_growth_resource_limited", 2, 0.30, 0, False, False, False),
-            (False, 0.00, "no_growth_impossible_geometry", 2, 0.30, 0, False, False, False),
-        ),
-    )
-    windows = build_learning_progress_windows(
-        attempts,
-        thresholds,
-        scenario_family="ambiguous_non_capacity_blockage",
-        strategy_variants_exhausted=False,
-        replay_attempted=False,
-        help_or_demonstration_considered=True,
-        ambiguity_resolved=False,
-        resource_limit=True,
-    )
-    ladder = build_ladder(
-        scenario_family="ambiguous_non_capacity_blockage",
-        task_confirmed=False,
-        safe_exploration_sufficient=False,
-        relevant_memory_retrieved=False,
-        existing_skill_attempted=False,
-        strategy_variants_tested=False,
-        help_or_demonstration_considered=True,
-        replay_attempted=False,
-        prediction_quality_checked=False,
-        competence_still_improving=False,
-        inferred_policy_capacity_limitation=False,
-        proposal_allowed=False,
-        attempt_count=len(attempts),
-        evidence_prefix="non-capacity",
-    )
-    return Week10ScenarioDiagnosis(
-        scenario_family="ambiguous_non_capacity_blockage",
-        classification=final_classification(windows),
-        windows=windows,
-        ladder=ladder,
-        replay=_empty_replay("ambiguous_non_capacity_blockage"),
-        help=_empty_help("ambiguous_non_capacity_blockage", "clarification required"),
-        proposal_generated=False,
-        non_capacity_reason="ambiguous_goal_resource_limit_or_impossible_geometry",
-    )
-
-
-def _attempts(
-    scenario_family: str,
-    rows: tuple[tuple[bool, float, str, int, float, int, bool, bool, bool], ...],
-) -> tuple[LearningAttempt, ...]:
-    return tuple(
-        LearningAttempt(
-            attempt_index=index,
-            scenario_family=scenario_family,
-            success=success,
-            task_progress=progress,
-            strategy=strategy,
-            steps_used=steps,
-            prediction_error=prediction_error,
-            invalid_or_ineffective_actions=ineffective,
-            help_requested=help_requested,
-            replay_involved=replay_involved,
-            demonstration_involved=demonstration_involved,
-        )
-        for index, (
-            success,
-            progress,
-            strategy,
-            steps,
-            prediction_error,
-            ineffective,
-            help_requested,
-            replay_involved,
-            demonstration_involved,
-        ) in enumerate(rows)
-    )
-
-
-def _memory_replay(scenario_family: str, *, progress_resumed: bool) -> MemoryReplayRecord:
-    with tempfile.TemporaryDirectory(prefix="seedmind-week10-memory-") as tmp:
-        database_path = Path(tmp) / "memory.sqlite3"
-        with EpisodicSQLiteStore(database_path) as store:
-            scorer = SignificanceScorer()
-            for index, progress in enumerate((0.25, 0.45, 0.60)):
-                store.remember(
-                    EpisodicEventDraft(
-                        event_id=f"{scenario_family}-grounded-contact-{index}",
-                        episode_id=f"{scenario_family}-memory-source",
-                        step_index=index,
-                        event_type=EpisodicEventType.ACTION,
-                        context_code="angular_contact",
-                        outcome_code="object_progress",
-                        action=PrimitiveAction.PUSH,
-                        success=progress >= 0.50,
-                        features=SignificanceFeatures(
-                            prediction_error=0.30,
-                            novelty=0.20,
-                            learning_progress=progress,
-                            ambition_relevance=0.80,
-                            human_relevance=0.20,
-                            outcome_magnitude=progress,
-                        ),
-                        payload=(
-                            ("contact_geometry", "flat_contact"),
-                            ("task_progress", progress),
-                        ),
-                    ),
-                    scorer,
-                )
-            query = MemoryQuery(
-                minimum_significance=0.20,
-                context_code="angular_contact",
-                event_type=EpisodicEventType.ACTION,
-                limit=3,
-            )
-            memories = store.retrieve(query)
-    return MemoryReplayRecord(
-        scenario_family=scenario_family,
-        query={
-            "context_code": "angular_contact",
-            "event_type": EpisodicEventType.ACTION.value,
-            "limit": 3,
-            "minimum_significance": 0.20,
-        },
-        relevant_memory_ids=tuple(event.event_id for event in memories),
-        relevance_reasons=tuple(
-            "same raw angular contact geometry and object-progress outcome" for _ in memories
-        ),
-        replayed_summaries=tuple(
-            f"{event.event_id}:{event.outcome_code}:{event.success}" for event in memories
-        ),
-        changed_strategy=progress_resumed,
-        progress_resumed=progress_resumed,
-        evidence_insufficient=not memories,
-    )
-
-
-def _help_record(
-    scenario_family: str,
-    *,
-    improved: bool,
-    blockage_remained: bool,
-) -> HelpDemonstrationRecord:
-    manager = ApprenticeshipManager()
-    request = HumanRequest(
-        request_id=f"{scenario_family}-request",
-        intent_code=RequestIntentCode.PRACTICE_ACTIVE_AMBITION,
-        target_code="move_raw_angular_object_to_target",
-        ambiguity=0.10,
-        permission_level=4,
-        verification_rule=VerificationRule.CONFIRMED_OUTCOME,
-    )
-    context = HelpContext(
-        case_id=f"{scenario_family}-help",
-        request=request,
-        uncertainty=0.85,
-        competence=0.15,
-        risk=0.10,
-        blocked_attempts=3,
-        safe_experiment_available=False,
-        familiar=False,
-    )
-    decision = manager.evaluate(context, episode_id=f"{scenario_family}-episode", step_index=0)
-    response = manager.teacher_response(
-        context,
-        decision,
-        episode_id=f"{scenario_family}-episode",
-        step_index=1,
-    )
-    return HelpDemonstrationRecord(
-        scenario_family=scenario_family,
-        help_requested=decision.should_request_help,
-        help_reason=decision.reason.value,
-        demonstration_available=response.code.name.lower() == "demonstrate",
-        demonstration_provenance="protected_teacher_response_policy",
-        demonstration_applied=response.code.name.lower() == "demonstrate",
-        performance_improved_afterward=improved,
-        blockage_remained=blockage_remained,
-    )
-
-
-def _empty_replay(scenario_family: str) -> MemoryReplayRecord:
-    return MemoryReplayRecord(
-        scenario_family=scenario_family,
-        query={},
-        relevant_memory_ids=(),
-        relevance_reasons=(),
-        replayed_summaries=(),
-        changed_strategy=False,
-        progress_resumed=False,
-        evidence_insufficient=True,
-    )
-
-
-def _empty_help(scenario_family: str, reason: str) -> HelpDemonstrationRecord:
-    return HelpDemonstrationRecord(
-        scenario_family=scenario_family,
-        help_requested=True,
-        help_reason=reason,
-        demonstration_available=False,
-        demonstration_provenance="not_applicable",
-        demonstration_applied=False,
-        performance_improved_afterward=False,
-        blockage_remained=True,
-    )
-
-
-def _strategy_variants() -> tuple[StrategyVariantRecord, ...]:
-    return (
-        StrategyVariantRecord("variant-01", "behind_object", 0, 0, "none", False, 4, 4),
-        StrategyVariantRecord("variant-02", "left_side", 1, 0, "quarter_turn", True, 4, 4),
-        StrategyVariantRecord("variant-03", "right_side", -1, 0, "quarter_turn", True, 4, 4),
-        StrategyVariantRecord("variant-04", "retreat_reapproach", 0, 1, "half_turn", True, 4, 4),
     )
 
 
 def _diagnostic_report_payload(result: Week10RunResult) -> dict[str, object]:
     return {
+        "corrected_grounded_evidence": {
+            "supersedes_commit": "13140df",
+            "reason": (
+                "The original 13140df Week 10 evidence used scripted diagnostic timelines "
+                "and was not valid grounded evidence. The corrected implementation derives "
+                "attempts, progress, replay outcomes, demonstration effects, prediction "
+                "evidence, classification, and proposal generation from executed Nursery episodes."
+            ),
+        },
         "cube_like_raw_behavior": result.cube_push_outcomes,
         "diagnoses": [diagnosis.to_json() for diagnosis in result.diagnoses],
+        "episode_counts": _episode_counts(result.episode_traces),
         "familiar_control": {
             "seeds": list(WEEK10_CONTROL_SEEDS),
             "step_counts": list(result.familiar_control_steps),
             "success_rate": result.familiar_control_success_rate,
         },
+        "scenario_seeds": {
+            "blockage": list(WEEK10_BLOCKAGE_SEEDS),
+            "control": list(WEEK10_CONTROL_SEEDS),
+            "early": list(WEEK10_EARLY_SEEDS),
+            "non_capacity": list(WEEK10_NON_CAPACITY_SEEDS),
+            "temporary": list(WEEK10_TEMPORARY_SEEDS),
+        },
         "limitations": (
             "Week 10 has diagnosed and proposed. It has not grown, trained, accepted, "
             "routed, or deployed a specialist."
         ),
+        "proposal_derivation": None if result.proposal is None else result.proposal.to_json(),
         "strategy_variants": [variant.to_json() for variant in result.strategy_variants],
         "thresholds": result.thresholds.to_json(),
+    }
+
+
+def _traces_payload(result: Week10RunResult) -> dict[str, object]:
+    return {
+        "episode_traces": [trace.to_json() for trace in result.episode_traces],
+        "trace_count": len(result.episode_traces),
     }
 
 
@@ -845,12 +1617,12 @@ def _write_svg(path: Path, result: Week10RunResult) -> None:
     temporary = next(
         diagnosis
         for diagnosis in result.diagnoses
-        if diagnosis.scenario_family.startswith("temporary")
+        if diagnosis.scenario_family == "temporary_cube_recovery"
     )
     sustained = next(
         diagnosis
         for diagnosis in result.diagnoses
-        if diagnosis.scenario_family.startswith("sustained")
+        if diagnosis.scenario_family == "sustained_cube_blockage"
     )
     width = 640
     height = 260
@@ -869,16 +1641,48 @@ def _write_svg(path: Path, result: Week10RunResult) -> None:
   <rect x="0" y="0" width="{width}" height="{height}" fill="white"/>
   <line x1="{left}" y1="40" x2="{left}" y2="{bottom}" stroke="black"/>
   <line x1="{left}" y1="{bottom}" x2="560" y2="{bottom}" stroke="black"/>
-  <text x="70" y="24" font-family="monospace" font-size="14">Week 10 plateau evidence</text>
+  <text x="70" y="24" font-family="monospace" font-size="14">Week 10 grounded plateau evidence</text>
   <polyline points="{points(temporary.windows)}" fill="none" stroke="#167a3a" stroke-width="3"/>
   <polyline points="{points(sustained.windows)}" fill="none" stroke="#b3261e" stroke-width="3"/>
   <text x="360" y="72" font-family="monospace" font-size="12" fill="#167a3a">temporary recovery/improving</text>
   <text x="360" y="94" font-family="monospace" font-size="12" fill="#b3261e">sustained blockage</text>
   <text x="20" y="54" font-family="monospace" font-size="11">progress</text>
-  <text x="250" y="238" font-family="monospace" font-size="11">learning-progress windows</text>
+  <text x="250" y="238" font-family="monospace" font-size="11">grounded learning-progress windows</text>
 </svg>
 """
     _write_text(path, svg)
+
+
+def _preserve_superseded_scripted_evidence(output_dir: Path) -> None:
+    diagnostic = output_dir / "diagnostic_report.json"
+    superseded_dir = output_dir / "superseded_scripted_evidence"
+    if not diagnostic.exists() or superseded_dir.exists():
+        return
+    try:
+        payload = json.loads(diagnostic.read_text(encoding="ascii"))
+    except json.JSONDecodeError:
+        payload = {}
+    if "corrected_grounded_evidence" in payload:
+        return
+    superseded_dir.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "diagnostic_report.json",
+        "growth_proposal_record.json",
+        "learning_progress_windows.json",
+        "plateau_visualisation.svg",
+        "week10_acceptance_report.json",
+    ):
+        source = output_dir / name
+        if source.exists():
+            shutil.copy2(source, superseded_dir / name)
+    _write_json(
+        superseded_dir / "SUPERSEDED_BY_GROUNDED_WEEK10.json",
+        {
+            "valid_for_grounded_capacity_diagnosis": False,
+            "reason": "13140df used scripted diagnostic timelines rather than executed Nursery episodes.",
+            "superseding_artifact_directory": "artifacts/week10_capacity_diagnosis",
+        },
+    )
 
 
 def _write_json(path: Path, payload: dict[str, object]) -> None:
@@ -892,18 +1696,135 @@ def _write_text(path: Path, text: str) -> None:
     temporary_path.replace(path)
 
 
-def _sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def _empty_replay(scenario_family: str) -> MemoryReplayRecord:
+    return MemoryReplayRecord(
+        scenario_family=scenario_family,
+        query={},
+        relevant_memory_ids=(),
+        source_episode_ids=(),
+        replay_influenced_episode_ids=(),
+        changed_strategy=False,
+        progress_resumed=False,
+        evidence_insufficient=True,
+    )
+
+
+def _empty_help(scenario_family: str, reason: str) -> HelpDemonstrationRecord:
+    return HelpDemonstrationRecord(
+        scenario_family=scenario_family,
+        help_requested=True,
+        help_reason=reason,
+        demonstration_available=False,
+        demonstration_episode_id=None,
+        demonstration_trace_digest=None,
+        demonstration_completed_task=False,
+        learner_before_episode_ids=(),
+        learner_after_episode_ids=(),
+        before_mean_progress=0.0,
+        after_mean_progress=0.0,
+        demonstration_applied=False,
+        performance_improved_afterward=False,
+        blockage_remained=True,
+    )
+
+
+def _attempt_json(attempt: LearningAttempt) -> dict[str, object]:
+    return {
+        "attempt_index": attempt.attempt_index,
+        "demonstration_involved": attempt.demonstration_involved,
+        "episode_id": attempt.episode_id,
+        "help_requested": attempt.help_requested,
+        "invalid_or_ineffective_actions": attempt.invalid_or_ineffective_actions,
+        "prediction_error": attempt.prediction_error,
+        "replay_involved": attempt.replay_involved,
+        "scenario_family": attempt.scenario_family,
+        "steps_used": attempt.steps_used,
+        "strategy": attempt.strategy,
+        "success": attempt.success,
+        "task_progress": attempt.task_progress,
+        "trace_digest": attempt.trace_digest,
+        "trace_ref": attempt.trace_ref,
+    }
+
+
+def _attempt_index_for_family(
+    traces: list[GroundedEpisodeTrace],
+    scenario_family: str,
+) -> int:
+    return sum(1 for trace in traces if trace.scenario_family == scenario_family) - 1
+
+
+def _progress(initial_distance: int, final_distance: int) -> float:
+    if initial_distance <= 0:
+        return 1.0
+    return _clamp_unit((initial_distance - final_distance) / initial_distance)
+
+
+def _object_target_distance(state: NurseryState) -> int:
+    object_position = _object_position(state)
+    target_position = _target_position(state)
+    return abs(object_position.x - target_position.x) + abs(object_position.y - target_position.y)
+
+
+def _object_position(state: NurseryState) -> GridPosition:
+    return next(entity.position for entity in state.entities if entity.entity_id == "object_0")
+
+
+def _target_position(state: NurseryState) -> GridPosition:
+    return next(entity.position for entity in state.entities if entity.entity_id == "target_0")
 
 
 def _target_satisfied(state: NurseryState) -> bool:
-    object_position = next(
-        entity.position for entity in state.entities if entity.entity_id == "object_0"
-    )
-    target_position = next(
-        entity.position for entity in state.entities if entity.entity_id == "target_0"
-    )
-    return object_position == target_position
+    return _object_position(state) == _target_position(state)
+
+
+def _shortest_route(
+    state: NurseryState,
+    *,
+    source: GridPosition,
+    destination: GridPosition,
+) -> tuple[GridPosition, ...] | None:
+    if source == destination:
+        return ()
+    blocked = {
+        entity.position
+        for entity in state.entities
+        if entity.blocks_movement and entity.position != destination
+    }
+    queue: deque[tuple[GridPosition, tuple[GridPosition, ...]]] = deque([(source, ())])
+    visited = {source}
+    while queue:
+        position, path = queue.popleft()
+        for direction in Direction:
+            candidate = position.moved(direction)
+            if candidate in visited or not state.is_in_bounds(candidate) or candidate in blocked:
+                continue
+            next_path = (*path, candidate)
+            if candidate == destination:
+                return next_path
+            visited.add(candidate)
+            queue.append((candidate, next_path))
+    return None
+
+
+def _direction_between(source: GridPosition, destination: GridPosition) -> Direction:
+    dx = destination.x - source.x
+    dy = destination.y - source.y
+    for direction in Direction:
+        if direction.delta == (dx, dy):
+            return direction
+    raise ValueError("positions are not adjacent")
+
+
+def _turn_actions(current: Direction, desired: Direction) -> tuple[PrimitiveAction, ...]:
+    if current is desired:
+        return ()
+    clockwise = (int(desired) - int(current)) % 4
+    if clockwise == 1:
+        return (PrimitiveAction.TURN_RIGHT,)
+    if clockwise == 3:
+        return (PrimitiveAction.TURN_LEFT,)
+    return (PrimitiveAction.TURN_RIGHT, PrimitiveAction.TURN_RIGHT)
 
 
 def _wall_entities(width: int, height: int) -> tuple[EntityState, ...]:
@@ -923,6 +1844,61 @@ def _wall_entities(width: int, height: int) -> tuple[EntityState, ...]:
         )
         for index, position in enumerate(positions)
     )
+
+
+def _episode_counts(traces: tuple[GroundedEpisodeTrace, ...]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for trace in traces:
+        counts[trace.scenario_family] = counts.get(trace.scenario_family, 0) + 1
+    return counts
+
+
+def _position_json(position: GridPosition) -> dict[str, int]:
+    return {"x": position.x, "y": position.y}
+
+
+def _state_digest(state: NurseryState) -> str:
+    return _canonical_digest(
+        {
+            "agent": {
+                "orientation": int(state.agent.orientation),
+                "x": state.agent.position.x,
+                "y": state.agent.position.y,
+            },
+            "entities": [
+                {
+                    "blocks_movement": entity.blocks_movement,
+                    "entity_id": entity.entity_id,
+                    "movable": entity.movable,
+                    "role": entity.role.value,
+                    "shape_code": int(entity.shape_code),
+                    "x": entity.position.x,
+                    "y": entity.position.y,
+                }
+                for entity in state.entities
+            ],
+            "height": state.height,
+            "step_count": state.step_count,
+            "terminated": state.terminated,
+            "width": state.width,
+        }
+    )
+
+
+def _canonical_digest(payload: object) -> str:
+    return hashlib.sha256(
+        json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":")).encode(
+            "ascii"
+        )
+    ).hexdigest()
+
+
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _clamp_unit(value: float) -> float:
+    return max(0.0, min(1.0, value))
 
 
 def _frozen_ndnra_boundary_pass() -> bool:

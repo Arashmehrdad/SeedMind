@@ -5,6 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import StrEnum
 
+from seedmind.growth.diagnostic_ladder import DiagnosticLadderRecord
+from seedmind.growth.stagnation import LearningProgressWindow, PlateauClassification
+
 
 class GrowthProposalStatus(StrEnum):
     """Authority state for a Week 10 proposal."""
@@ -122,8 +125,50 @@ class GrowthProposalRecord:
         }
 
 
-def build_week10_growth_proposal() -> GrowthProposalRecord:
-    """Return the single non-authoritative sustained-blockage proposal."""
+def build_week10_growth_proposal(
+    *,
+    scenario_family: str,
+    classification: PlateauClassification,
+    ladder: DiagnosticLadderRecord,
+    windows: tuple[LearningProgressWindow, ...],
+    grounded_replay_pass: bool,
+    reachability_proven: bool,
+    strategy_variant_count: int,
+    help_requested: bool,
+    demonstration_attempted: bool,
+    prediction_evidence_resolved: bool,
+    competence_still_improving: bool,
+    ambiguity_resolved: bool,
+    safety_or_permission_clear: bool,
+    impossible_task: bool,
+    resource_limit: bool,
+) -> GrowthProposalRecord:
+    """Derive the non-authoritative sustained-blockage proposal from evidence."""
+    if scenario_family != "sustained_cube_blockage":
+        raise ValueError("Week 10 proposal is only allowed for sustained cube blockage")
+    if classification is not PlateauClassification.SUSTAINED_BLOCKAGE:
+        raise ValueError("proposal requires sustained_blockage classification")
+    if not ladder.completed_for_growth_proposal:
+        raise ValueError("proposal requires a complete diagnostic ladder")
+    if len(windows) < 3:
+        raise ValueError("proposal requires repeated grounded progress windows")
+    if not grounded_replay_pass:
+        raise ValueError("proposal requires grounded replay evidence")
+    if not reachability_proven:
+        raise ValueError("proposal requires reachability proof")
+    if strategy_variant_count <= 0:
+        raise ValueError("proposal requires executed strategy variants")
+    if not help_requested or not demonstration_attempted:
+        raise ValueError("proposal requires help and demonstration evidence")
+    if not prediction_evidence_resolved:
+        raise ValueError("proposal requires resolved prediction evidence")
+    if competence_still_improving:
+        raise ValueError("proposal cannot be created while competence is improving")
+    if not ambiguity_resolved or not safety_or_permission_clear:
+        raise ValueError("proposal cannot be created with ambiguity or safety uncertainty")
+    if impossible_task or resource_limit:
+        raise ValueError("proposal cannot be created for impossible or resource-limited failure")
+
     return GrowthProposalRecord(
         proposal_id="growth-week10-cube-policy-0001",
         trigger_ambition="control_angular_object_position",

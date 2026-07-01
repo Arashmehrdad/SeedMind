@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T00:49:23.9275003Z",
+  "generated_at": "2026-07-01T02:22:59.2874268Z",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,12 +8,22 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 430,
+  "source_file_count": 439,
   "source_files": [
     {
+      "path": ".codexbridge/wiki/architecture.md",
+      "sha256": "63b7a8f85d638a2c657e611a5211efbac3e6607421d6020efcfbec4e8445e4ff",
+      "size_bytes": 30584
+    },
+    {
+      "path": ".codexbridge/wiki/modules.md",
+      "sha256": "7471298823e00214518e87c9b6218326e76699163db852756c31d99961c712e2",
+      "size_bytes": 152577
+    },
+    {
       "path": ".gitignore",
-      "sha256": "64cde3f5a07535f55fee91e41d61aa6257e550966dcaccfaef12222f39574a6b",
-      "size_bytes": 972
+      "sha256": "a9a75dceb0c0244299cfc15f77390e9abd58f76a5a54a536b17dc7cb7cbdf117",
+      "size_bytes": 1250
     },
     {
       "path": "AGENTS.md",
@@ -172,8 +182,13 @@
     },
     {
       "path": "artifacts/week10_capacity_diagnosis/diagnostic_report.json",
-      "sha256": "7e6c034260b618c92bb6a042fec73bd79c6cca771d7ec0a493ae075c19d999bd",
-      "size_bytes": 23518
+      "sha256": "132d74b377c0ac7d908167cb32a3fc19c53a35a20c33503ffbbae5569087ef0c",
+      "size_bytes": 65432
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/grounded_episode_traces.json",
+      "sha256": "69f929d2a6a25cf3a09a06d88e022ad9620ef7243ec69f84ad05b27109d35df0",
+      "size_bytes": 272833
     },
     {
       "path": "artifacts/week10_capacity_diagnosis/growth_proposal_record.json",
@@ -182,18 +197,48 @@
     },
     {
       "path": "artifacts/week10_capacity_diagnosis/learning_progress_windows.json",
+      "sha256": "169e44f301474d77ded0961a9aaccd3eb1fadd8023941a1f3bc7149f31ab30d0",
+      "size_bytes": 5343
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/plateau_visualisation.svg",
+      "sha256": "daaaf4f55ec35bc735f069304aa42e78b7ea697a5c971e5c76e6cf2ff791f7a8",
+      "size_bytes": 968
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/diagnostic_report.json",
+      "sha256": "7e6c034260b618c92bb6a042fec73bd79c6cca771d7ec0a493ae075c19d999bd",
+      "size_bytes": 23518
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/growth_proposal_record.json",
+      "sha256": "b20629b5e974f2452f075cae451b164c4ed89d7501d9312cdec312c6073f14a3",
+      "size_bytes": 2292
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/learning_progress_windows.json",
       "sha256": "9d1128a38c174a131c7fe6e4b9271769874fba694a9ba16248a64bf30ff802a4",
       "size_bytes": 5314
     },
     {
-      "path": "artifacts/week10_capacity_diagnosis/plateau_visualisation.svg",
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/plateau_visualisation.svg",
       "sha256": "bc2c50d820146a47905f7e044be72179bd4e5fd0a4f6cd839efaed0c8f23c690",
       "size_bytes": 950
     },
     {
-      "path": "artifacts/week10_capacity_diagnosis/week10_acceptance_report.json",
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/SUPERSEDED_BY_GROUNDED_WEEK10.json",
+      "sha256": "8b0d1917f897d31f6884a0180689bdcae63888372ad14adc89f661329d8ff52b",
+      "size_bytes": 230
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/week10_acceptance_report.json",
       "sha256": "c1706c26d4ccfe4b413bed808e8a379a13a2c40571cf2871095482f2ad4a8c50",
       "size_bytes": 796
+    },
+    {
+      "path": "artifacts/week10_capacity_diagnosis/week10_acceptance_report.json",
+      "sha256": "a67500fbc61f89b6af17eae72f96b17d516ac660698ecd512382c0cac5d81c09",
+      "size_bytes": 1098
     },
     {
       "path": "artifacts/week8_reusable_skill/approach_and_push_skill_record.json",
@@ -387,8 +432,8 @@
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-07-01-seedmind-week10-capacity-diagnosis-closure.md",
-      "sha256": "3085a0dded6e2771a253bd9e0d0ac1c8d84a0cbab8c8466cd9a3034b6e7dd4ba",
-      "size_bytes": 3911
+      "sha256": "26fafe87de00c781747da558864776c43d8862788aba53fafcc6c3f83f6b6a56",
+      "size_bytes": 3987
     },
     {
       "path": "docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md",
@@ -492,8 +537,8 @@
     },
     {
       "path": "docs/architecture/SeedMind_Week10_Capacity_Diagnosis_Evidence_2026-07-01.md",
-      "sha256": "7ac1b438ac144aed30fd411d04748c30a713e110752090205ff34c8227b0e2c6",
-      "size_bytes": 8568
+      "sha256": "40a43d82e51d1ffe3c4fc79dd286a3f669fd594502868f1cd8ae58d8aebca73d",
+      "size_bytes": 8594
     },
     {
       "path": "docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md",
@@ -662,13 +707,13 @@
     },
     {
       "path": "docs/wiki/SeedMind_Repository_Wiki.md",
-      "sha256": "8b7f05c57c7e819d046137434bc3f9cf06743c4f2fe7e0b91181983506903e00",
-      "size_bytes": 3915
+      "sha256": "ae8b494f7a03c041043f054e34a2370d267e40e38137dbfd2fedfde2ab14bc94",
+      "size_bytes": 4548
     },
     {
       "path": "plans.md",
-      "sha256": "e80fd32219848d61d7698ca485bb7fe3dcbc67989cd43e9635542ea93966940d",
-      "size_bytes": 38875
+      "sha256": "d32fc7c8f11aa720ed1946107b3e7d88a088ad97c1bd85751c4f53f0490855a4",
+      "size_bytes": 41069
     },
     {
       "path": "pyproject.toml",
@@ -677,8 +722,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "cfa305b382392fe5a91b7c754c2ebd5d53f9b4e3974f3426f5cab831b8aa4770",
-      "size_bytes": 3439
+      "sha256": "98d33cf3944c97582f3d9cf9a7e62cf427453cf81736743b55e35f6ae573fe5d",
+      "size_bytes": 4250
     },
     {
       "path": "requirements/base.txt",
@@ -787,8 +832,8 @@
     },
     {
       "path": "scripts/run_week10_capacity_diagnosis.py",
-      "sha256": "6bfc8f94aabede9ecfbda14ae327a63176a6c97779c8e79b7245de61ec2af3ff",
-      "size_bytes": 2238
+      "sha256": "a247571ed7e4e48ef4e5d4a83b17b3af15f4d3dee8ecd26a32f669d455fa9241",
+      "size_bytes": 2735
     },
     {
       "path": "scripts/run_week8_reusable_skill.py",
@@ -982,8 +1027,8 @@
     },
     {
       "path": "src/seedmind/growth/__init__.py",
-      "sha256": "4cc2691538c8e5a149b50e5efad8ccf002868a52781021061f61286c614a3857",
-      "size_bytes": 1682
+      "sha256": "ea4186bf6da0965c78470820bbd54d585414e3e54510a617204b0e65ccee0e19",
+      "size_bytes": 1792
     },
     {
       "path": "src/seedmind/growth/diagnostic_ladder.py",
@@ -992,18 +1037,18 @@
     },
     {
       "path": "src/seedmind/growth/proposal.py",
-      "sha256": "4b88cec3b7022758ce5ce2a7e8bf8cd93fc1b32f07b34f9dcbfceebc60dbf43d",
-      "size_bytes": 7277
+      "sha256": "361cd11164584b207cc6c95b58d99bb5075882a45515549b20cac5fed8e0c52b",
+      "size_bytes": 9460
     },
     {
       "path": "src/seedmind/growth/stagnation.py",
-      "sha256": "eac464bef21c3565ad01799c2c994aa0eed815454ca5b0832a6e53cd7f74fcc1",
-      "size_bytes": 12505
+      "sha256": "633139b36e064107bae683d60befec7ee7e2237cec33ce8a1caaededac2ec3b1",
+      "size_bytes": 13129
     },
     {
       "path": "src/seedmind/growth/week10.py",
-      "sha256": "1a90f8e20e4e8b54511ae89fd0c0b25850158c2e1fa8c3f5d6a944c353fa03ab",
-      "size_bytes": 36422
+      "sha256": "4d02744f49032b10a56a027dbb328823be312bad336c5921d877b948edeb6ae2",
+      "size_bytes": 72114
     },
     {
       "path": "src/seedmind/human/__init__.py",
@@ -1617,8 +1662,8 @@
     },
     {
       "path": "tests/unit/growth/test_week10_capacity_diagnosis.py",
-      "sha256": "97fb9e702ec85a991a67c83209886d0ab4f722ae24a1bd84f05ed82186fa955c",
-      "size_bytes": 11794
+      "sha256": "25ddf90c815b3390f8083f3779d4661113a3c83fc5b72033579c3675169f8151",
+      "size_bytes": 12938
     },
     {
       "path": "tests/unit/ndnra_controlled_replay_test_support.py",
