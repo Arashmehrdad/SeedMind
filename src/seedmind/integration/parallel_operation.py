@@ -1,4 +1,8 @@
-"""Canonical side-by-side operation of production SeedMind and NDNRA shadow mode."""
+"""Historical SeedMind/NDNRA shadow operation retained after the NDNRA freeze.
+
+Do not use this module as an active dependency for original Week 10 or later
+SeedMind product work. It remains executable only for historical reproducibility.
+"""
 
 from __future__ import annotations
 
@@ -17,7 +21,7 @@ from seedmind.training import OnlinePredictiveTrainer
 
 
 class SeedMindOperatingMode(StrEnum):
-    """Authorised main-project operating mode."""
+    """Historical operating mode retained for reproducibility."""
 
     PRODUCTION_WITH_NDNRA_SHADOW = "production_with_ndnra_shadow"
 
@@ -159,7 +163,7 @@ def run_parallel_candidate_session(
     trainer: OnlinePredictiveTrainer,
     policy: ParallelOperationPolicy | None = None,
 ) -> ParallelOperationResult:
-    """Run the existing candidate session under the canonical safe policy."""
+    """Run the frozen historical candidate session under its preserved policy."""
     resolved_policy = ParallelOperationPolicy() if policy is None else policy
     session = run_candidate_session(
         scenario_factory=scenario_factory,

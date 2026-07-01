@@ -1,0 +1,14 @@
+{
+  "active_in_seedmind": false,
+  "comparison_required_for_future_seedmind_stages": false,
+  "freeze_date": "2026-07-01",
+  "freeze_reason": "NDNRA will continue, if at all, as a separate project rather than an active SeedMind subsystem.",
+  "frozen_for_extraction": true,
+  "future_ndnra_repository": "separate_project_not_created_by_this_change",
+  "historical_code_retained": true,
+  "historical_evidence_retained": true,
+  "new_ndnra_stages_allowed_in_seedmind": false,
+  "next_seedmind_stage": "original_week_10_capacity_diagnosis",
+  "production_integration_allowed": false,
+  "source_baseline_commit": "b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a"
+}

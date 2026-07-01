@@ -8,22 +8,20 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-The authorised NDNRA Developmental Network v0.2 research programme is closed through Stage 8. The main SeedMind product roadmap has closed corrected Week 9 by using the frozen `approach_and_push` skill for verified human contribution and evidence-gated support reduction while collecting fair Default-vs-goal-conditioned-NDNRA comparative evidence.
+SeedMind continues on its original main-product roadmap. Original Week 9 is closed through verified human contribution, grounded outcome verification, and evidence-gated support reduction.
 
-The canonical operating mode is `production_with_ndnra_shadow`:
+NDNRA is frozen inside this repository at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and will continue, if at all, as a separate project. Its source, tests, documents, ADRs, and artifacts remain only as a preserved research snapshot and extraction source.
 
-- production curiosity selects the only action executed by the runtime;
-- NDNRA receives the same typed contribution goal and relational pre-action state context, emits an optional internal suggestion, and learns only in sandbox/adaptive diagnostics from NDNRA-executed transitions;
-- frozen held-out counterfactual comparisons score the fixed Default action and the NDNRA proposal from cloned states without evaluation learning;
-- frozen and adaptive NDNRA-only rollouts measure task completion without giving NDNRA production authority;
-- the production action is always retained;
-- NDNRA has no execution, scheduling, replacement, promotion, or production action authority;
-- automatic component promotion is disabled;
-- Stage 9 remains unauthorised.
+For future SeedMind work:
 
-A specific NDNRA component may be considered later only after repeated multi-task evidence, resource and interference checks, rollback and kill-switch coverage, and a separate accepted ADR. The original SeedMind plan, including reusable-skill formation, remains the product and MVP spine.
+- `production_with_ndnra_shadow` is not the canonical operating mode;
+- NDNRA comparison is not a product acceptance requirement;
+- no NDNRA Stage 9 or component promotion is authorised here;
+- no new SeedMind code may depend on NDNRA;
+- historical NDNRA runners and artifacts remain available only for reproducibility;
+- original Week 10 capacity diagnosis proceeds without NDNRA participation.
 
-See `docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md` for the full operating boundary.
+See `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md` for the active boundary.
 
 ## Current main-roadmap evidence
 
@@ -36,11 +34,8 @@ SeedMind Week 9 is closed by the main `seedmind.contribution` implementation:
 - support reduces from Level 4 to Level 3 only after five verified independent familiar successes, at least `0.80` success, and three distinct familiar contexts;
 - two consecutive grounded familiar failures restore Level 4, and re-promotion requires five fresh post-regression successes;
 - deterministic Default evaluation completed `10/12` requests for an independent success rate of `0.8333`;
-- fair comparison integrity, Default competence, blocked-scenario handling, authority containment, and Week 9 main-milestone gates pass separately;
-- NDNRA competence is reported separately and currently fails honestly;
-- held-out solvable completion is Default `10/10`, frozen NDNRA `0/10`, and adaptive NDNRA `0/10`;
-- intentionally blocked scenarios are reported separately as `2/2` Default honest failures and `2/2` NDNRA honest failures;
-- counterfactual task-progress categories are Default better `23`, NDNRA better `0`, equivalent `85`, generic-score-only `64`, and not comparable `0`;
+- deterministic solvable Default evaluation completed `10/10` tasks, while two intentionally blocked scenarios remained honest failures;
+- historical NDNRA comparison artifacts are preserved for audit but are not treated as competence evidence about the complete NDNRA architecture or as future SeedMind product gates;
 - all `172` executed primitive actions remained Default actions;
 - Week 8 discovery delta, compilation, training, and component promotion remain `0`;
 - production, verification, support, and NDNRA authority violations remain `0`.
@@ -51,7 +46,7 @@ Run the deterministic gate with:
 .\.venv\Scripts\python.exe scripts\run_week9_contribution.py
 ```
 
-Evidence is documented in `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`, with the fair comparison timeline in `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json` and the superseded old comparison marker in `artifacts/week9_contribution/default_vs_ndnra_comparison.json`. Week 8 remains closed separately in `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
+Week 9 evidence is documented in `docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md`. Historical comparison artifacts remain under `artifacts/week9_contribution/`, while the active NDNRA freeze is documented in `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`. Week 8 remains closed separately in `docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md`.
 
 ## Development order
 

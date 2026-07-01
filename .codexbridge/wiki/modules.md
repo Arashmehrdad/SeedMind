@@ -212,11 +212,11 @@ Week 9 contribution evaluation against the frozen Week 8 skill record.
 
 ## `src/seedmind/contribution/parallel_comparison.py`
 
-Fair Default SeedMind versus goal-conditioned NDNRA comparison for Week 9.
+Historical Week 9 goal-conditioned adapter comparison.
 
 - Kind: python
-- Classes: ScenarioKind, TaskProgressCategory, Week9ContributionGoal, NDNRAStateFeatures, NDNRAProposal, GoalConditionedNDNRAController, Week9ComparisonStep, Week9ScenarioOutcome, Week9FairComparisonReport, Week9ParallelComparisonResult
-- Functions/symbols: goal_from_request, extract_ndnra_state_features, train_ndnra_in_sandbox, run_week9_parallel_comparison, _task_progress_delta, _task_progress_category, _scenario_kind, _run_default_counterfactual_steps, _rollout, _build_report, _protocol_payload
+- Classes: ScenarioKind, TaskProgressCategory, Week9ContributionGoal, NDNRAStateFeatures, NDNRAProposal, GoalConditionedNDNRAController, Week9ComparisonStep, Week9ScenarioOutcome, Week9FairComparisonReport, Week9ParallelComparisonResult, _RolloutResult
+- Functions/symbols: goal_from_request, extract_ndnra_state_features, train_ndnra_in_sandbox, run_week9_parallel_comparison, _counterfactual_steps, _rollout, _scenario_outcome, _compare_actions, _build_report, _protocol_payload, _scenario_kind, _action_progress, _apply_action_clone, _apply_action_with_processes, _goal_satisfied, _entity_position, _distance, _dominant_direction, _comparison_signals, _rate, _clamp_signed
 
 ## `src/seedmind/contribution/persistence.py`
 
@@ -231,7 +231,7 @@ Deterministic Week 9 contribution runner and exports.
 
 - Kind: python
 - Classes: Week9AcceptanceReport, Week9RunResult
-- Functions/symbols: run_week9_contribution_evaluation, export_week9_evidence, _build_request, _scenario_context, _blocked_failure_scenario, _build_acceptance_report, _write_json
+- Functions/symbols: run_week9_contribution_evaluation, export_week9_evidence, _build_request, _scenario_context, _blocked_failure_scenario, _build_acceptance_report, _write_json, _fairness_audit
 
 ## `src/seedmind/core/__init__.py`
 
@@ -504,7 +504,7 @@ Non-authoritative NDNRA observation of the live SeedMind nursery loop.
 
 ## `src/seedmind/integration/parallel_operation.py`
 
-Canonical side-by-side operation of production SeedMind and NDNRA shadow mode.
+Historical SeedMind/NDNRA shadow operation retained after the NDNRA freeze.
 
 - Kind: python
 - Classes: SeedMindOperatingMode, ProductionActionAuthority, ParallelOperationPolicy, ParallelOperationAudit, ParallelOperationResult
@@ -1281,10 +1281,10 @@ Focused tests for the Week 9 contribution engine.
 
 ## `tests/unit/contribution/test_parallel_comparison.py`
 
-Tests for Week 9 Default-vs-NDNRA comparative evidence.
+Tests for fair Week 9 Default-vs-NDNRA comparative evidence.
 
 - Kind: python
-- Functions/symbols: test_week9_parallel_comparison_covers_every_production_step, test_week9_parallel_comparison_reports_separate_task_outcomes
+- Functions/symbols: test_ndnra_receives_explicit_week9_goal_and_goal_omission_blocks_competence, test_ndnra_receives_relational_context_not_only_available_actions, test_identical_available_actions_with_different_geometry_can_change_proposal, test_ndnra_training_uses_ndnra_executed_sandbox_transitions, test_frozen_evaluation_refuses_to_train_ndnra, test_fair_comparison_separates_integrity_from_ndnra_competence, test_counterfactual_categories_do_not_count_generic_only_as_task_wins, test_solvable_and_blocked_scenarios_are_reported_separately, test_default_remains_sole_production_controller_and_ndnra_cannot_promote, test_fair_comparison_is_deterministic, _state
 
 ## `tests/unit/contribution/test_persistence.py`
 

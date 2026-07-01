@@ -1,8 +1,8 @@
 # Need-Driven Neural Recruitment Architecture (NDNRA)
 
 Version: 0.1  
-Status: Research architecture  
-Project: SeedMind
+Status: Frozen research architecture; retained for separate-project extraction
+Project: Historical SeedMind research snapshot
 
 ## 1. Purpose
 

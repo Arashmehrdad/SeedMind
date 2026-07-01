@@ -1,4 +1,9 @@
-"""Fair Default SeedMind versus goal-conditioned NDNRA comparison for Week 9."""
+"""Historical Week 9 goal-conditioned adapter comparison.
+
+This module does not implement or evaluate the complete NDNRA architecture. It is
+retained only to reproduce committed Week 9 adapter evidence after NDNRA was
+frozen for extraction to a separate project.
+"""
 
 from __future__ import annotations
 
@@ -169,7 +174,7 @@ class NDNRAProposal:
 
 @dataclass(slots=True)
 class GoalConditionedNDNRAController:
-    """Bounded goal-conditioned NDNRA adapter for contribution comparison."""
+    """Historical goal-conditioned adapter, not the complete NDNRA architecture."""
 
     maximum_steps: int = 96
     _progress: dict[tuple[str, PrimitiveAction], list[float]] | None = None

@@ -1,7 +1,7 @@
 # ADR: SeedMind and NDNRA Parallel Operation
 
 Date: 30 June 2026
-Status: Accepted
+Status: Superseded on 1 July 2026 by `ADR-2026-07-01-freeze-ndnra-for-separate-project.md`
 Scope: main SeedMind development after NDNRA v0.2 Stage 8 closure
 
 ## Context

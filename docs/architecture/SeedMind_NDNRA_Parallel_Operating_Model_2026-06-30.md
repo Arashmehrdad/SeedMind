@@ -1,12 +1,16 @@
 # SeedMind and NDNRA Parallel Operating Model
 
 Date: 30 June 2026
-Status: Active main-project operating model
-Scope: bounded side-by-side operation of production SeedMind and non-authoritative NDNRA
+Status: Superseded on 1 July 2026 by the NDNRA freeze and extraction boundary
+Scope: historical bounded side-by-side operating model; not active for future SeedMind stages
 
-## 1. Purpose
+## Freeze notice
 
-SeedMind continues along the original product and MVP roadmap while NDNRA runs beside it as a developmental shadow system.
+This operating model is retained only as a historical record. `production_with_ndnra_shadow` is no longer the canonical mode for future SeedMind work. NDNRA is frozen for extraction into a separate project under `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`.
+
+## 1. Historical purpose
+
+SeedMind continued along the original product and MVP roadmap while NDNRA ran beside it as a developmental shadow system.
 
 The purpose is to collect real comparative evidence without replacing the trusted production path or granting NDNRA action authority.
 
@@ -67,9 +71,9 @@ The audit records:
 - authority violations;
 - automatic promotions.
 
-## 5. Component Promotion Rule
+## 5. Historical Component Promotion Rule
 
-A complete NDNRA replacement is not permitted. A specific component may be considered later only through a separate bounded integration decision.
+This promotion path is superseded by the freeze decision. No NDNRA component may be considered for SeedMind integration inside this repository. The remaining text records the former rule for historical context only.
 
 The required sequence is:
 
@@ -133,18 +137,6 @@ The main SeedMind stores and NDNRA research proof stores remain distinct.
 - Bounded imagination is not converted into factual experience.
 - Only actual production transitions and accepted grounded feedback may become observed evidence.
 
-## 8. Immediate Next Work
+## 8. Frozen continuation
 
-The original reusable-skill and contribution objectives are now closed with fair
-parallel evidence. Original Week 10 may proceed after this correction while
-comparison remains mandatory.
-
-Near-term batches should:
-
-1. preserve same-state Default-vs-NDNRA proposals in subsequent roadmap stages;
-2. keep task outcomes separate from one-step candidate scores;
-3. expand comparison across new tasks, contexts, and random seeds;
-4. measure NDNRA usefulness, calibration, interference, latency, CPU, and memory;
-5. investigate why current NDNRA local proposals do not compose into successful
-   full contribution policies;
-6. keep promotion disabled until a component-specific ADR is accepted.
+There is no further NDNRA work authorised inside SeedMind. Original Week 10 proceeds independently without NDNRA proposals, comparisons, training, promotion, or integration. Any future NDNRA capability work belongs in a separate repository.

@@ -1,7 +1,7 @@
 # ADR: Original SeedMind Plan and NDNRA Integration Decision
 
 Date: 30 June 2026  
-Status: Accepted comparison decision  
+Status: Superseded on 1 July 2026 by `ADR-2026-07-01-freeze-ndnra-for-separate-project.md`
 Scope: architecture direction only; runtime integration implementation is not approved
 
 ## Context

@@ -6,11 +6,11 @@ Last refreshed: 1 July 2026
 
 - Branch: `main`
 - Push policy: do not push automatically.
-- Latest completed main-roadmap milestone: original SeedMind Week 9 contribution, reduced support, and fair Default-vs-NDNRA comparison correction.
-- Latest completed NDNRA research stage: Developmental Network v0.2 Stage 8.
-- Current operating mode: `production_with_ndnra_shadow`.
+- Latest completed main-roadmap milestone: original SeedMind Week 9 contribution and reduced support.
+- NDNRA status: frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` for separate-project extraction.
+- Current operating mode: original SeedMind product path without NDNRA dependency or mandatory comparison.
 - Next main-roadmap target: original Week 10 capacity diagnosis.
-- Original Week 10 and NDNRA Stage 9: not started or authorised.
+- Original Week 10 is not started; NDNRA Stage 9 is permanently unauthorised in this repository.
 
 ## Week 9 Main Roadmap Boundary
 
@@ -48,14 +48,9 @@ ndnra_automatic_promotions=0
 week9_main_milestone_pass=true
 ```
 
-## Fair Default-vs-NDNRA Comparison
+## Historical Goal-Conditioned Adapter Comparison
 
-Commit `cfb8f3c` is preserved but superseded as invalid evidence for NDNRA
-competence. The current comparison gives NDNRA the same typed object-to-target
-goal and relational state context as Default, trains NDNRA only from
-NDNRA-executed sandbox transitions, keeps training and held-out evaluation seeds
-disjoint, freezes evaluation, separates adaptive diagnostics, and reports
-blocked scenarios separately.
+Commit `cfb8f3c` is preserved but superseded as invalid evidence for NDNRA competence. Commit `b9a2ae6` added a goal-conditioned adapter experiment, but that adapter is not the complete `seedmind.research.ndnra` architecture. Its metrics remain historical diagnostic evidence only and are not future SeedMind product gates or competence claims about NDNRA.
 
 Observed fair-comparison metrics:
 
@@ -91,28 +86,26 @@ Evidence files:
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
   (`valid_for_competence_comparison=false`, superseded marker only)
 
-## Authority Boundary
+## Frozen NDNRA Boundary
 
-- Production curiosity remains the only production action authority.
-- Default remains the sole production controller.
-- NDNRA observes, suggests, trains in bounded diagnostics, and reports evidence
-  only as a non-authoritative shadow.
-- NDNRA cannot execute, schedule, replace, promote, verify contribution, or
-  change support level.
-- Automatic NDNRA component promotion remains disabled.
-- Human stop, denial, correction, clarification, teaching, and permission remain
-  protected controls separate from reward.
+- NDNRA is not an active SeedMind subsystem or shadow requirement.
+- No future SeedMind milestone may depend on NDNRA modules, proposals, training, comparison, or promotion.
+- Existing NDNRA source, tests, documents, and artifacts remain read-only research history and extraction material.
+- No NDNRA Stage 9, production integration, component promotion, or new comparison work is authorised in SeedMind.
+- Human stop, denial, correction, clarification, teaching, and permission remain protected controls separate from reward.
 
 ## Next Stage Boundary
 
-Original SeedMind Week 10 may begin after the fair Week 9 closure commit.
+Original SeedMind Week 10 capacity diagnosis is the next authorised stage and proceeds without NDNRA participation.
 
-Explicitly not authorised by Week 9 closure:
+Explicitly not authorised:
 
+- any NDNRA capability work inside SeedMind;
 - NDNRA Stage 9;
-- production action replacement;
+- NDNRA production integration or promotion;
+- making Week 10 acceptance depend on NDNRA evidence;
 - internet access;
 - shell access inside the seed;
 - source self-modification;
 - autonomous background workers;
-- new specialist growth.
+- new specialist growth before Week 10 capacity diagnosis is complete.

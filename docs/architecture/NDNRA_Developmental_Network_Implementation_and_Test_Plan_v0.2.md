@@ -1,7 +1,7 @@
 # NDNRA Developmental Network Implementation and Test Plan v0.2
 
 Date: 30 June 2026  
-Status: Accepted implementation and falsification plan; isolated research work only
+Status: Frozen on 1 July 2026 for extraction to a separate project; no further SeedMind implementation authorised
 Scope: Test the corrected NDNRA developmental-network theories without granting production action authority
 
 ## 1. Purpose

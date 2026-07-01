@@ -1,7 +1,7 @@
 # SeedMind Week 9 Contribution Evidence
 
 Date: 30 June 2026
-Status: Passed after Default-vs-NDNRA comparison correction
+Status: Passed for the main SeedMind Week 9 milestone; NDNRA comparison retained as historical adapter evidence only
 Scope: original SeedMind Master Implementation Plan Week 9 only
 
 ## Objective
@@ -9,9 +9,8 @@ Scope: original SeedMind Master Implementation Plan Week 9 only
 Complete the original main-roadmap Week 9 milestone: accept a typed human request,
 check whether the familiar capability is available and appropriate, execute the
 frozen Week 8 `approach_and_push` skill, verify the result from grounded runtime
-evidence, report failure honestly, reduce or restore human support only from
-predeclared competence evidence, and collect actual Default-vs-NDNRA comparative
-data from the same contribution scenarios.
+evidence, report failure honestly, and reduce or restore human support only from
+predeclared competence evidence.
 
 This work does not reopen or recompile Week 8, does not begin original Week 10,
 and does not implement NDNRA Stage 9.
@@ -27,15 +26,9 @@ Week 9 is owned by the main `seedmind.contribution` package:
   verification, honest failure construction, and evidence-gated support changes.
 - `persistence.py` saves and loads checksum-protected ASCII JSON, with a complete
   conservative Level 4 fallback for missing, corrupt, or incompatible state.
-- `parallel_comparison.py` gives both systems the same typed contribution goal,
-  relational pre-action state context, primitive action set, budgets, and safety
-  constraints; trains NDNRA only from NDNRA-executed sandbox transitions; then
-  runs frozen held-out counterfactual comparisons plus separate frozen and
-  adaptive NDNRA-only rollouts.
-- `week9.py` runs the deterministic contribution, degradation, recovery, and
-  corrected parallel-comparison sequence and exports the required deliverables.
-- `scripts/run_week9_contribution.py` executes the complete contribution and
-  comparison acceptance gate.
+- `parallel_comparison.py` contains a historical goal-conditioned adapter experiment retained for audit and reproducibility. It is not the complete NDNRA architecture and is not required for future SeedMind acceptance.
+- `week9.py` runs the deterministic contribution, degradation, and recovery sequence and exports the required deliverables plus the historical comparison artifacts.
+- `scripts/run_week9_contribution.py` executes the historical complete Week 9 evidence materialisation gate.
 
 ## Human Request Flow
 
@@ -188,7 +181,7 @@ component_promotion_count=0
 No evaluation episode trains, compiles, promotes, mutates the frozen skill
 record, or increases its discovery count.
 
-## Default-vs-NDNRA Parallel Comparison
+## Historical Goal-Conditioned Adapter Comparison
 
 The original corrected comparison in commit `cfb8f3c` is preserved in Git history
 but is invalid for NDNRA competence assessment. It gave Default a task-specific
@@ -197,8 +190,7 @@ and relational state context, trained NDNRA from Default evaluation actions,
 counted generic-score-only differences as NDNRA task wins, mixed blocked tasks
 into ordinary task-success percentages, and exposed one ambiguous `pass_gate`.
 
-The fair replacement evaluates both systems while preserving the authority
-boundary. For each of the 172 executed Default steps:
+A later replacement evaluated Default against a newly constructed goal-conditioned adapter while preserving the authority boundary. That adapter is not implemented through the complete `seedmind.research.ndnra` architecture, so the results are not valid as a competence comparison of the full NDNRA project. For each of the 172 executed Default steps:
 
 ```text
 recreate the exact contribution scenario and Default action trace
@@ -215,7 +207,7 @@ NDNRA training is separated from held-out evaluation:
 
 ```text
 training seeds: 6, 7, 8, 11
-held-out evaluation seeds: 206, 207, 208, 211, 212, 213, 206, 207, 208, 211, 212, 213
+held-out evaluation seeds: 206, 207, 208, 211, 212, 321, 322, 213, 216, 217, 218, 231
 blocked evaluation seeds: 321, 322
 training/evaluation seed overlap: 0
 NDNRA training source: NDNRA-executed sandbox transitions only
@@ -226,7 +218,7 @@ adaptive diagnostic updates: 64
 Generic developmental scores are retained for diagnostics but are separated from
 task-progress competence categories. They cannot count as NDNRA task wins.
 
-Observed fair comparison summary:
+Observed historical adapter comparison summary:
 
 ```text
 experiment_integrity_pass=true
@@ -247,11 +239,7 @@ generic_score_only_difference=64
 not_comparable=0
 ```
 
-The result is unambiguous: the current Default skill controller reliably performs
-the solvable Week 9 contribution task, while the current goal-conditioned NDNRA
-adapter does not yet compose a successful full task policy. No NDNRA competence
-claim is made. The generic-score-only differences remain diagnostic evidence,
-not task-progress wins or grounds for promotion.
+The valid product conclusion is that the Default skill controller reliably performs the solvable Week 9 contribution task. The adapter result does not establish the capability or incapability of the complete NDNRA architecture. It remains historical diagnostic evidence only and is not a future product gate, promotion basis, or architecture claim.
 
 Observed authority metrics:
 
@@ -263,8 +251,7 @@ support_authority_violations=0
 ndnra_automatic_promotions=0
 ```
 
-NDNRA cannot replace production actions, certify contribution, change support, or
-promote itself. No NDNRA Stage 9 implementation was added.
+The historical adapter had no authority to replace production actions, certify contribution, change support, or promote itself. NDNRA is now frozen in SeedMind under `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`; no NDNRA Stage 9 or further comparison work is authorised here.
 
 ## Persistence
 
@@ -290,6 +277,8 @@ Level 4 state and an empty contribution history.
 - `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json`
   (`valid_for_competence_comparison=false`, superseded marker only)
+- `docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json`
+- `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`
 
 ## Validation
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T22:52:42.349345+00:00",
+  "generated_at": "2026-07-01T00:12:59.175170+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 410,
+  "source_file_count": 415,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -17,13 +17,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "8dfbc1f675d126f7ed50ab5fe86e79fe45a02b14200a12b61927858818b8370d",
-      "size_bytes": 4599
+      "sha256": "412c5a31b81e992617c5165950192e8ff4f90c0e417f588ae31c68960ffb387f",
+      "size_bytes": 3729
     },
     {
       "path": "plans.md",
-      "sha256": "875b4beaec870ea0705e4fdf2f623c455ad2f6c41b5bac43ea707e6989208641",
-      "size_bytes": 33160
+      "sha256": "c076b577905d69069b301d151b687aecb892ef84b263d8edef1e44a8967390db",
+      "size_bytes": 33789
     },
     {
       "path": "pyproject.toml",
@@ -201,11 +201,6 @@
       "size_bytes": 279
     },
     {
-      "path": "artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json",
-      "sha256": "f89121bbea662da2ff46c5f13ed9c264164d407d1af81f748f18469c9cf674d2",
-      "size_bytes": 539724
-    },
-    {
       "path": "artifacts/week9_contribution/fair_comparison_protocol.json",
       "sha256": "dd76ed020b746be8878603931ffa787ac44cfae76d9ea7ba7f3dd60612182934",
       "size_bytes": 1477
@@ -227,8 +222,8 @@
     },
     {
       "path": "docs/architecture/NDNRA_Developmental_Network_Implementation_and_Test_Plan_v0.2.md",
-      "sha256": "bf98060bf4d4b505f30618daaccf19138872ed704728e9c7b7585e5ac253cee0",
-      "size_bytes": 58821
+      "sha256": "b80e616341aaf2a5d690cf58d6ba68d80cf6f7cff7026c9c9eaf785b3203bf08",
+      "size_bytes": 58851
     },
     {
       "path": "docs/architecture/NDNRA_Developmental_Stage_0_Evidence_2026-06-30.md",
@@ -291,6 +286,16 @@
       "size_bytes": 13555
     },
     {
+      "path": "docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json",
+      "sha256": "fe02d4929259af460ecbf14c60171b00baba6f8616e9a7663932e1eed3b9d058",
+      "size_bytes": 655
+    },
+    {
+      "path": "docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md",
+      "sha256": "b795df7baaa43c18a51c6829d91d9bc292d9710f74fa03004bcfb2d4d925de46",
+      "size_bytes": 3904
+    },
+    {
       "path": "docs/architecture/NDNRA_Retain_Or_Descope_Audit_2026-06-29.md",
       "sha256": "11ae64873a201ccf41f10e25c0ef73a712ecc5d2616b720a5dbc163e4ba6db5b",
       "size_bytes": 9430
@@ -302,13 +307,13 @@
     },
     {
       "path": "docs/architecture/Need_Driven_Neural_Recruitment_Architecture_v0.1.md",
-      "sha256": "5c563ad1064a167f7b6e105e922ef0a8f8bf89b9ea0350a7621ea51d7e0bce30",
-      "size_bytes": 96345
+      "sha256": "eadf64960a3faba7b8c8d3db68978678de25e845c19af2c1eba0bdd6e6e35341",
+      "size_bytes": 96421
     },
     {
       "path": "docs/architecture/SeedMind_NDNRA_Parallel_Operating_Model_2026-06-30.md",
-      "sha256": "1df0df7581ef1b9cc1ccc4a702fce2b626c8327b0524f92cfa49d8ba1e5dc114",
-      "size_bytes": 6907
+      "sha256": "1367786745ce4adff07ca68a2d58c935235f480468734291cda1eef53a003af7",
+      "size_bytes": 6892
     },
     {
       "path": "docs/architecture/SeedMind_Original_Plan_NDNRA_Comparison_2026-06-30.md",
@@ -322,8 +327,8 @@
     },
     {
       "path": "docs/architecture/SeedMind_Week9_Contribution_Evidence_2026-06-30.md",
-      "sha256": "f80daa12a25bb8ee2741fb876fa9e1abe35718074e3f85ebd768defec4aa3d31",
-      "size_bytes": 10365
+      "sha256": "501e9858b38be5bdc83df73773fdb69af5eabf35080a64aa65f0d4db7a0d4828",
+      "size_bytes": 10738
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-29-bounded-imagination-route-comparison.md",
@@ -452,23 +457,28 @@
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-original-plan-ndnra-integration-decision.md",
-      "sha256": "31875d7733bee08bf18d14560e5038618aff1b412660a7aa9060c8dd18f23d5b",
-      "size_bytes": 5052
+      "sha256": "415a759baabc071a139d0deda5e3c970c4e472bddb99e75d4a59d61a147bc453",
+      "size_bytes": 5104
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-ndnra-parallel-operation.md",
-      "sha256": "2818345e32f77533a5680e656af3ab31ea582bb7b203fb700461cb483b9a7d14",
-      "size_bytes": 2577
+      "sha256": "2486af16f926dd72852db4cbb5cae7df305b8da963c5a06c61ecd08e323f5795",
+      "size_bytes": 2651
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-week8-reusable-skill-closure.md",
-      "sha256": "67869cfcb7efb6aa86ab38604648263e888087ae4c69c7dcbeb00600e90373d8",
-      "size_bytes": 2437
+      "sha256": "fc5a0f899ed4389fc54a5eb62998655ec03cd84fa6bd6c609b4529e56702c5ad",
+      "size_bytes": 2515
     },
     {
       "path": "docs/architecture/decisions/ADR-2026-06-30-seedmind-week9-contribution-closure.md",
-      "sha256": "1562cca7867d9d896e4648a8428c77445806e13c5cfa9b73447d86e7014080a9",
-      "size_bytes": 6687
+      "sha256": "9121a257db351bb0e540d17b6e868dbe95584d8a98091b6f865e0c035b1bbaf0",
+      "size_bytes": 7072
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-07-01-freeze-ndnra-for-separate-project.md",
+      "sha256": "67e30519f0abff785b402754b8f23d8fcf4ea7b72aac0655aa81d9284c1edef6",
+      "size_bytes": 3062
     },
     {
       "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
@@ -627,8 +637,8 @@
     },
     {
       "path": "docs/wiki/SeedMind_Repository_Wiki.md",
-      "sha256": "09f137bf68078be355f9d17d1335745804efc026b5c0f91c8d438f94be6926f6",
-      "size_bytes": 4121
+      "sha256": "3f17773e1c41b51859717a6ed4042b7c0c54f7c0ee75fb992f3b33454802a8e2",
+      "size_bytes": 4354
     },
     {
       "path": "requirements/base.txt",
@@ -742,8 +752,8 @@
     },
     {
       "path": "scripts/run_week9_contribution.py",
-      "sha256": "9826976ca26b1464728f94e221700e2d79542ad7bed4a81878c05ecd35438b36",
-      "size_bytes": 5473
+      "sha256": "aaa5ef78bf10029a507baa07d7bcd347276e1a3409297f6a5649a5d11c8835d8",
+      "size_bytes": 5684
     },
     {
       "path": "src/seedmind/__init__.py",
@@ -787,8 +797,8 @@
     },
     {
       "path": "src/seedmind/contribution/__init__.py",
-      "sha256": "f35735d08dda45cea3de978bbfb63de78f8f57c1857029b78c95a03eb96f4f02",
-      "size_bytes": 2398
+      "sha256": "be6b0b2f0295e6908a8d34491d4e45a9dc3ddd5272b60f6b59c895b2c3966ef8",
+      "size_bytes": 2824
     },
     {
       "path": "src/seedmind/contribution/contracts.py",
@@ -802,8 +812,8 @@
     },
     {
       "path": "src/seedmind/contribution/parallel_comparison.py",
-      "sha256": "4181b8c5c8380b1a893f6969498f21e67f5b1c038808736130bb0389a828fbbf",
-      "size_bytes": 33810
+      "sha256": "93b15c63751a862cdc80fb71cfbef199a026c2d2032e190a715a4c6304a19b3e",
+      "size_bytes": 45929
     },
     {
       "path": "src/seedmind/contribution/persistence.py",
@@ -812,8 +822,8 @@
     },
     {
       "path": "src/seedmind/contribution/week9.py",
-      "sha256": "5df33c018124d8bb27e54ceb4d69494bd4d102c6ad99430e7bee663ad0130e18",
-      "size_bytes": 13764
+      "sha256": "c1ee884042784458c6b9380c35b68f2b444cb9b69d249635d4f232da276b2c48",
+      "size_bytes": 15799
     },
     {
       "path": "src/seedmind/core/__init__.py",
@@ -997,8 +1007,8 @@
     },
     {
       "path": "src/seedmind/integration/parallel_operation.py",
-      "sha256": "dc349d89985bbb70c2e70d301c6178ea9c96d224b3f00176b643b1852205068d",
-      "size_bytes": 7252
+      "sha256": "959e69d85fc38b9242b84b57d8253a2defdfd0e9fc838caa12da7a48cf24b45a",
+      "size_bytes": 7430
     },
     {
       "path": "src/seedmind/integration/persistent_shadow_experiment.py",
@@ -1069,6 +1079,11 @@
       "path": "src/seedmind/research/__init__.py",
       "sha256": "d9fb9b0a66efeb01a0f8db89a5e24c78f686b5012295fbbe31bc2737eadca237",
       "size_bytes": 77
+    },
+    {
+      "path": "src/seedmind/research/ndnra/FROZEN.md",
+      "sha256": "4a3f5fd6484f0ac983194d54095456fc79b9ae67044b48f51d29e1da41d3ee7f",
+      "size_bytes": 778
     },
     {
       "path": "src/seedmind/research/ndnra/__init__.py",
@@ -2047,8 +2062,8 @@
     },
     {
       "path": "tests/unit/contribution/test_parallel_comparison.py",
-      "sha256": "ce8a61c6b51036356b5d5602c5e4863df3f8c77a964b99d4c8e0e085f05f550a",
-      "size_bytes": 2558
+      "sha256": "4ad285fc394f038df8e4ab154ac0bb20eeaf3bea8825db91971ac9e344a754b0",
+      "size_bytes": 7905
     },
     {
       "path": "tests/unit/contribution/test_persistence.py",
@@ -2057,8 +2072,8 @@
     },
     {
       "path": "tests/unit/contribution/test_week9_runner.py",
-      "sha256": "61fc920e091abb2c4525f8fb6cbb10f0ead26efc9ab8889057d0bb5cdfdef735",
-      "size_bytes": 4366
+      "sha256": "5be7a42bd32cb0f72bb3fc269491bd5fcc8c027b5f1b7af3342a6442328cbd10",
+      "size_bytes": 4092
     },
     {
       "path": "tests/unit/skills/test_approach_and_push.py",

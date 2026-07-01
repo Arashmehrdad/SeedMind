@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: original SeedMind Week 9 contribution, reduced support, and fair Default-vs-NDNRA comparison correction
+- Latest completed milestone: NDNRA frozen for separate-project extraction; original SeedMind Week 9 remains closed
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
-- Program: SeedMind main roadmap with NDNRA shadow evaluation
-- Last closed stage: NDNRA Developmental Network v0.2 — Stage 8 end-to-end software-only shadow trial
-- Current stage: main SeedMind Week 9 fair-comparison correction is closed; original Week 10 remains next and not started
-- Current status: commit `cfb8f3c` is preserved but superseded as invalid Default-vs-NDNRA competence evidence. The replacement fair comparison gives NDNRA the same typed object-to-target goal and relational context as Default, trains NDNRA only from NDNRA-executed sandbox transitions, keeps training and held-out evaluation seeds disjoint, freezes evaluation, separates adaptive diagnostics, classifies task-progress outcomes separately from generic score differences, and reports blocked scenarios separately. Experiment integrity, Default competence, blocked-scenario handling, authority containment, and Week 9 main-milestone gates pass. NDNRA competence is reported separately and honestly fails.
+- Program: SeedMind original main-product roadmap only
+- Last closed stage: NDNRA freeze and extraction boundary
+- Current stage: original SeedMind Week 10 capacity diagnosis is next and not started
+- Current status: NDNRA is frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration. Historical Week 9 comparison artifacts remain reproducible but are not claims about the complete NDNRA architecture.
 - Expanded developmental architecture marker: 84%
-- Marker interpretation: restored after Week 9 produced both grounded human contribution evidence and actual parallel Default-vs-NDNRA results
+- Marker interpretation: unchanged; the freeze is a repository and roadmap boundary, not new cognitive capability evidence
 
 Completed bounded increments:
 
@@ -45,17 +45,29 @@ Completed bounded increments:
 19. Developmental Network v0.2 Stage 8 — deterministic software-only shadow tasks, fixed baseline actions, context-sensitive internal proposals, DESA coordination, simultaneous needs, protected inhibition, skill and verifier survival, ambition-guided gap reduction, unverified temporary skills, retention and resource bounds, complete inspectability, and zero SQLite, side-effect, and production-authority evidence.
 20. SeedMind and NDNRA parallel operation — production curiosity retains every executed action, NDNRA observes and suggests without authority, disagreements require comparison evidence, audits fail closed, and automatic component promotion remains disabled.
 21. Original SeedMind Week 8 reusable skill — deterministic main-project `approach_and_push` skill compilation from repeated grounded production episodes, explicit preconditions and termination/failure conditions, frozen 20-seed generalisation evaluation, reuse without rediscovery, inspectable skill record, generalisation report, and zero production or NDNRA authority violations.
-22. Original SeedMind Week 9 contribution, reduced support, and fair Default-vs-NDNRA comparison — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, fair held-out Default-vs-goal-conditioned-NDNRA comparison, separate NDNRA competence failure, and zero production, verification, support, or NDNRA authority violations.
+22. Original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, and zero production, verification, or support-authority violations. Historical NDNRA comparison artifacts are retained but are not required for Week 9 closure or future SeedMind work.
+23. NDNRA freeze and extraction boundary — preserve the current NDNRA source, tests, documents, ADRs, and evidence without further development inside SeedMind; remove NDNRA comparison and integration requirements from Week 10 onward; reserve all future NDNRA capability work for a separate project.
 
 Superseded evidence:
 
 - `cfb8f3c` is preserved in history but is not valid evidence for NDNRA competence comparison.
 - `artifacts/week9_contribution/default_vs_ndnra_comparison.json` is annotated as `valid_for_competence_comparison=false` and superseded by `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`.
-- Week 9 closure now rests on `artifacts/week9_contribution/default_vs_ndnra_fair_comparison.json`, `fair_comparison_protocol.json`, and `week9_acceptance_report.json`, which distinguish experiment integrity, Default competence, NDNRA competence, blocked-scenario handling, authority containment, and Week 9 main milestone status.
+- Week 9 closure rests on the main SeedMind contribution, grounded verification, honest-failure, persistence, and support-transition evidence. The NDNRA comparison artifacts remain historical audit material only and are not required for closure or future product acceptance.
 
-## Current accepted boundary
+## NDNRA freeze and extraction boundary
 
-Standalone NDNRA v0.1 remains closed under its accepted bounded evidence boundary. Its proof stores, persistence schemas, bounded imagination rules, and authority restrictions must not be mutated merely to implement v0.2 research.
+NDNRA is frozen inside SeedMind. The authoritative boundary is documented in:
+
+- `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`;
+- `docs/architecture/decisions/ADR-2026-07-01-freeze-ndnra-for-separate-project.md`;
+- `docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json`;
+- `src/seedmind/research/ndnra/FROZEN.md`.
+
+From original Week 10 onward, SeedMind must not add new NDNRA dependencies, require NDNRA comparison evidence, start NDNRA Stage 9, promote NDNRA components, or modify frozen NDNRA behavior during ordinary product work. Existing NDNRA source, tests, documents, and artifacts remain available only for provenance, historical reproducibility, and later explicit extraction.
+
+## Historical NDNRA architecture boundary (frozen)
+
+Standalone NDNRA v0.1 remains closed under its accepted bounded evidence boundary. Its proof stores, persistence schemas, bounded imagination rules, and authority restrictions are preserved as historical research material.
 
 The accepted post-v0.1 theory is:
 
@@ -118,9 +130,9 @@ The programme must not:
 
 Production curiosity remains the sole production action authority. The protected external safety supervisor and human permission channels remain authoritative.
 
-## Week 9 fair-comparison correction
+## Historical Week 9 comparison record
 
-Week 9 now runs a fair Default-vs-NDNRA comparison on the same contribution tasks. Shadow means comparative evaluation without NDNRA production authority, not passive observation.
+Week 9 comparison code and artifacts are retained only to reproduce the experiments already committed. They are not an active SeedMind operating requirement and are not evidence about the complete NDNRA architecture.
 
 The superseded `cfb8f3c` comparison is invalid for competence assessment because Default received task-specific object, target, geometry, route, contact, and sequence policy while NDNRA did not receive an equivalent object-to-target objective or relational state context. It also learned from Default evaluation actions, executed isolated NDNRA rollouts without NDNRA consequence updates, counted generic-score-only differences as task wins, and mixed intentionally blocked scenarios into ordinary task-success percentages.
 

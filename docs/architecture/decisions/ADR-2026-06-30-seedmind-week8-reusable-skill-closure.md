@@ -11,7 +11,7 @@ reusable skill. NDNRA Stage 8 is already closed separately and cannot be used as
 proof that the main product skill exists.
 
 Week 8 must therefore add a main SeedMind reusable skill implementation while
-preserving the canonical `production_with_ndnra_shadow` operating model:
+preserving the then-current `production_with_ndnra_shadow` operating model, later superseded by `ADR-2026-07-01-freeze-ndnra-for-separate-project.md`:
 
 - production curiosity remains the production action authority;
 - NDNRA remains non-authoritative;

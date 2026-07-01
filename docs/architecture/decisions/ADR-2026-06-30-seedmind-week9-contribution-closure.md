@@ -1,7 +1,7 @@
 # ADR: SeedMind Week 9 Contribution Closure
 
 Date: 30 June 2026
-Status: Accepted after comparative-evidence correction
+Status: Accepted for the main SeedMind Week 9 milestone; NDNRA comparison provisions superseded on 1 July 2026 by the freeze ADR
 Scope: original SeedMind Master Implementation Plan Week 9
 
 ## Context
@@ -30,6 +30,8 @@ to Week 10.
 
 Accept the main `seedmind.contribution` implementation as the original SeedMind
 Week 9 closure.
+
+The main closure rests on human contribution, grounded verification, honest failure, persistence, and support-transition evidence. Items 11-16 below describe a historical adapter comparison and are not requirements for Week 9 closure or future SeedMind work. They are superseded by `ADR-2026-07-01-freeze-ndnra-for-separate-project.md`.
 
 The accepted design is:
 
@@ -97,7 +99,7 @@ support_authority_violations=0
 ndnra_automatic_promotions=0
 ```
 
-Observed fair parallel comparison:
+Observed historical goal-conditioned adapter comparison:
 
 ```text
 experiment_integrity_pass=true
@@ -153,10 +155,6 @@ Artifacts:
 - The frozen Week 8 skill is reused without rediscovery or recompilation.
 - Competence degradation can restore higher support, and recovery requires a new
   full evidence threshold.
-- NDNRA remains non-authoritative but now receives an explicit comparable task
-  goal and relational context for fair held-out comparison.
-- The observed NDNRA result is currently weaker than Default: `0/10` frozen
-  solvable successes and `0/10` adaptive solvable successes, with zero
-  task-progress wins against Default. NDNRA competence is explicitly false.
-- Original SeedMind Week 10 was not started.
-- NDNRA Stage 9 was not started or authorised.
+- The goal-conditioned adapter comparison is retained as historical diagnostic evidence only. It is not a competence claim about the complete NDNRA architecture.
+- NDNRA is frozen in SeedMind for later separate-project extraction; no further comparison, promotion, integration, or Stage 9 work is authorised here.
+- Original SeedMind Week 10 was not started and is the next authorised main-product stage.
