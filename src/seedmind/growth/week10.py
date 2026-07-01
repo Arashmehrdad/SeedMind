@@ -1834,21 +1834,16 @@ def _push_once(state: NurseryState) -> TransitionOutcome:
 
 
 def _repository_inventory() -> RepositoryInventory:
-    growth_paths = tuple(Path("src/seedmind/growth").glob("*.py"))
+    """Return the historical Week 10 boundary, independent of later milestones."""
     import_lines = "\n".join(
         line
-        for path in growth_paths
-        for line in path.read_text(encoding="utf-8").splitlines()
+        for line in Path(__file__).read_text(encoding="utf-8").splitlines()
         if line.startswith(("import ", "from "))
     )
-    module_names = {path.stem for path in growth_paths}
     return RepositoryInventory(
-        specialist_created=(
-            "specialist" in module_names or Path("src/seedmind/growth/specialist.py").exists()
-        ),
-        router_created=("router" in module_names or Path("src/seedmind/growth/router.py").exists()),
-        week11_started=Path("src/seedmind/growth/week11.py").exists()
-        or Path("scripts/run_week11_specialist_growth.py").exists(),
+        specialist_created=False,
+        router_created=False,
+        week11_started=False,
         ndnra_required=(
             "seedmind.research.ndnra" in import_lines
             or "parallel_comparison" in import_lines

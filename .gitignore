@@ -45,6 +45,11 @@ artifacts/*
 !artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/
 !artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/*.json
 !artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/*.svg
+!artifacts/week11_specialist_growth/
+!artifacts/week11_specialist_growth/*.json
+!artifacts/week11_specialist_growth/*.svg
+!artifacts/week11_specialist_growth/checkpoints/
+!artifacts/week11_specialist_growth/checkpoints/*.json
 logs/
 reports/generated/
 

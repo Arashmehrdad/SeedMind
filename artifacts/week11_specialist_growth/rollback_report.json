@@ -1,0 +1,43 @@
+{
+  "accepted_candidate_registration_digest": "aa32c9a777cb25d559b1fde19a14cb33c4ec162cfc8a19f596e46f6f14801588",
+  "discarded_candidate_id": "skill.expert.angular_push.failed_direct.v1",
+  "exact_restoration_proof": true,
+  "failed_candidate_disposal": {
+    "candidate_checkpoint_sha256": "273e0910065a0c50b6f3b1a1b66110d7afff0fddb34ecb27be3999c63f1915ff",
+    "candidate_status": "rejected",
+    "present_after_discard": false
+  },
+  "frozen_skill_sha256_after": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+  "frozen_skill_sha256_before": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+  "module_registry_cleanup": {
+    "modules": [
+      {
+        "active": true,
+        "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+        "module_id": "general_push_controller",
+        "module_type": "general_controller",
+        "parent_module": null,
+        "status": "frozen_parent"
+      }
+    ],
+    "router_registered": false,
+    "schema_version": 1
+  },
+  "post_discard_registry_digest": "cdaefb06b078e534f324d7807733e38a89276332c0c27848b91b0b6a659b2c37",
+  "pre_growth_checkpoint": {
+    "modules": [
+      {
+        "active": true,
+        "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+        "module_id": "general_push_controller",
+        "module_type": "general_controller",
+        "parent_module": null,
+        "status": "frozen_parent"
+      }
+    ],
+    "router_registered": false,
+    "schema_version": 1
+  },
+  "pre_growth_checkpoint_digest": "cdaefb06b078e534f324d7807733e38a89276332c0c27848b91b0b6a659b2c37",
+  "router_cleanup": true
+}

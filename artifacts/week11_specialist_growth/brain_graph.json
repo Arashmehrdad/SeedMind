@@ -1,0 +1,44 @@
+{
+  "edges": [
+    {
+      "from": "predictive_seed_core",
+      "to": "specialist_router"
+    },
+    {
+      "from": "specialist_router",
+      "to": "general_push_controller"
+    },
+    {
+      "from": "specialist_router",
+      "to": "skill.expert.angular_push.v1"
+    },
+    {
+      "from": "general_push_controller",
+      "relation": "parent",
+      "to": "skill.expert.angular_push.v1"
+    }
+  ],
+  "nodes": [
+    {
+      "active": true,
+      "id": "predictive_seed_core",
+      "type": "shared_state"
+    },
+    {
+      "active": false,
+      "id": "specialist_router",
+      "type": "proposal_router"
+    },
+    {
+      "active": true,
+      "id": "general_push_controller",
+      "type": "general_controller"
+    },
+    {
+      "active": true,
+      "id": "skill.expert.angular_push.v1",
+      "type": "temporary_skill_expert"
+    }
+  ],
+  "production_action_authority": "production_curiosity"
+}

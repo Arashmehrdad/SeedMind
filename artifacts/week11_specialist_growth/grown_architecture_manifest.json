@@ -1,0 +1,70 @@
+{
+  "accepted_candidate_checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+  "checkpoint_references": {
+    "accepted_candidate": "checkpoints/accepted_specialist_checkpoint.json",
+    "accepted_registry": "checkpoints/accepted_candidate_registry.json",
+    "pre_growth_registry": "checkpoints/pre_growth_registry.json"
+  },
+  "general_controller": {
+    "active": true,
+    "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+    "module_id": "general_push_controller",
+    "production_active": true
+  },
+  "module_relationships": [
+    {
+      "from": "predictive_seed_core",
+      "to": "specialist_router"
+    },
+    {
+      "from": "specialist_router",
+      "to": "general_push_controller"
+    },
+    {
+      "from": "specialist_router",
+      "to": "skill.expert.angular_push.v1"
+    },
+    {
+      "from": "general_push_controller",
+      "relation": "parent",
+      "to": "skill.expert.angular_push.v1"
+    }
+  ],
+  "parameter_totals": {
+    "added_specialist_parameters": 6,
+    "combined_seed_and_specialist_parameters": 137155,
+    "seed_parameters": 137149
+  },
+  "registry": {
+    "modules": [
+      {
+        "active": true,
+        "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+        "module_id": "general_push_controller",
+        "module_type": "general_controller",
+        "parent_module": null,
+        "status": "frozen_parent"
+      },
+      {
+        "active": false,
+        "checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+        "module_id": "skill.expert.angular_push.v1",
+        "module_type": "skill_expert",
+        "parent_module": "general_push_controller",
+        "status": "accepted_for_week12"
+      }
+    ],
+    "router_registered": true,
+    "schema_version": 1
+  },
+  "router": {
+    "active_in_sandbox": true,
+    "production_active": false
+  },
+  "temporary_specialist": {
+    "active_in_sandbox": true,
+    "module_id": "skill.expert.angular_push.v1",
+    "production_active": false,
+    "status": "accepted_for_week12"
+  }
+}

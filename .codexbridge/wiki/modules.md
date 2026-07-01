@@ -126,6 +126,13 @@ Run the original SeedMind Week 10 capacity-diagnosis gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_week11_specialist_growth.py`
+
+Generate SeedMind Week 11 specialist-growth evidence.
+
+- Kind: python
+- Functions/symbols: main
+
 ## `scripts/run_week8_reusable_skill.py`
 
 Run the SeedMind Week 8 reusable skill gate.
@@ -393,6 +400,29 @@ Non-authoritative Week 10 growth proposal records.
 - Classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord
 - Functions/symbols: build_week10_growth_proposal
 
+## `src/seedmind/growth/rollback.py`
+
+Exact module-registry restoration for SeedMind Week 11.
+
+- Kind: python
+- Classes: ModuleRegistration, GrowthRegistry
+- Functions/symbols: initial_growth_registry
+
+## `src/seedmind/growth/router.py`
+
+Proposal-only specialist routing for original SeedMind Week 11.
+
+- Kind: python
+- Classes: RoutingDecision, SpecialistRouter
+
+## `src/seedmind/growth/specialist.py`
+
+Bounded policy-specialist contract for original SeedMind Week 11.
+
+- Kind: python
+- Classes: CandidateStatus, SpecialistLatentState, ExpertModuleInput, ExpertModuleOutput, SpecialistProfile, CandidateSkillExpert
+- Functions/symbols: _abstain, _desired_direction, _push_contact_effective, _lateral_positions, _shortest_route, _in_bounds, _opposite, _turn_or_push, _turn_or_move, _turn_toward, _direction_between, _manhattan, _sigmoid
+
 ## `src/seedmind/growth/stagnation.py`
 
 Learning-progress windows and plateau classification for Week 10.
@@ -408,6 +438,87 @@ Grounded deterministic Week 10 capacity-diagnosis runner.
 - Kind: python
 - Classes: PredictionTraceRecord, EpisodeStepTrace, GroundedEpisodeTrace, StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, RepositoryInventory, Week10AcceptanceReport, Week10RunResult
 - Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence, _early_evidence_diagnosis, _temporary_failure_diagnosis, _execute_sustained_grounded_sequence, _sustained_blockage_diagnosis, _non_capacity_diagnosis, _execute_attempt, _execute_demonstration, _execute_trace, _prediction_trace, _persist_trace_events, _grounded_replay, _retrieve_replay_events, _actions_from_retrieved_memory, _retreat_then_replay_actions, _actions_from_demonstration, _attempt_prediction_evidence_resolved, _help_record, _variant_records_from_attempts, _build_sustained_proposal_if_allowed, _with_proposal_state, _scenario_state, _angular_state, _planned_actions, _retreat_reapproach_actions, _run_frozen_skill_actions, _run_familiar_control, _cube_push_outcomes, _object_state, _push_once, _repository_inventory, _diagnostic_report_payload, _traces_payload, _windows_payload, _write_svg, _preserve_superseded_scripted_evidence, _write_json, _write_text, _empty_replay, _empty_help, _attempt_json, _attempt_index_for_family, _progress, _object_target_distance, _object_position, _target_position, _target_satisfied, _shortest_route, _direction_between, _turn_actions, _wall_entities, _episode_counts, _position_json, _state_digest, _canonical_digest, _sha256_file, _clamp_unit, _frozen_ndnra_boundary_pass
+
+## `src/seedmind/growth/week11.py`
+
+Original SeedMind Week 11 specialist-growth runner and evidence exporter.
+
+- Kind: python
+- Classes: Week11RunResult
+- Functions/symbols: run_week11_specialist_growth, export_week11_evidence, _brain_graph_svg, _write_json, _write_text
+
+## `src/seedmind/growth/week11_evaluation.py`
+
+Repeated-seed candidate and router evaluation for SeedMind Week 11.
+
+- Kind: python
+- Classes: EvaluationBundle
+- Functions/symbols: evaluate_candidate
+
+## `src/seedmind/growth/week11_gate.py`
+
+Evidence-derived specialist growth gate for original SeedMind Week 11.
+
+- Kind: python
+- Classes: Week11Evidence
+- Functions/symbols: run_week11_gate, _registration, _seed_parameter_count
+
+## `src/seedmind/growth/week11_inputs.py`
+
+Authoritative Week 11 scenario and evidence inputs.
+
+- Kind: python
+- Functions/symbols: cube_like_state
+
+## `src/seedmind/growth/week11_io.py`
+
+Small deterministic file helpers for Week 11.
+
+- Kind: python
+- Functions/symbols: read_json, sha256_file
+
+## `src/seedmind/growth/week11_metrics.py`
+
+Small deterministic metrics for Week 11 growth evidence.
+
+- Kind: python
+- Functions/symbols: success_rate, rollout_summary
+
+## `src/seedmind/growth/week11_profile_comparison.py`
+
+Execute and compare bounded Week 11 candidate profiles.
+
+- Kind: python
+- Classes: ProfileRow
+- Functions/symbols: compare_candidate_profiles
+
+## `src/seedmind/growth/week11_profiles.py`
+
+Week 11 candidate identifiers.
+
+- Kind: python
+
+## `src/seedmind/growth/week11_provenance.py`
+
+Authoritative Week 11 input and freeze-boundary checks.
+
+- Kind: python
+- Functions/symbols: validate_week10_proposal, authoritative_hashes, frozen_ndnra_boundary_pass
+
+## `src/seedmind/growth/week11_rollout.py`
+
+Grounded candidate, general-controller, and routed Week 11 rollouts.
+
+- Kind: python
+- Classes: RolloutRecord
+- Functions/symbols: run_general, run_specialist, run_routed, abstaining_output, _general_proposal, _module_input, _retain
+
+## `src/seedmind/growth/week11_selection.py`
+
+Deterministic candidate-profile selection for Week 11.
+
+- Kind: python
+- Functions/symbols: candidate_profiles, build_candidate
 
 ## `src/seedmind/human/__init__.py`
 
@@ -1352,6 +1463,13 @@ Grounded tests for original Week 10 capacity diagnosis.
 
 - Kind: python
 - Functions/symbols: test_cube_like_raw_dynamics_differ_from_ball_without_breaking_ball_push, test_policy_facing_observation_has_raw_shape_not_privileged_cube_label, test_every_learning_attempt_references_executed_episode_trace, test_episode_traces_have_primitive_actions_real_outcomes_and_prediction_evidence, test_temporary_and_sustained_seed_sets_are_consumed, test_temporary_failure_improves_from_executed_replay_and_demonstration, test_sustained_blockage_uses_real_windows_full_ladder_and_reachability_proof, test_replay_memory_ids_resolve_to_committed_source_episodes, test_strategy_variants_actually_execute_without_growth_or_skill_mutation, test_non_capacity_cases_are_separate_grounded_stops_without_proposal, test_proposal_is_evidence_derived_and_rejects_incomplete_evidence, test_familiar_skill_retention_and_no_week11_or_ndnra_dependency, test_visualisation_and_json_artifacts_are_deterministic_and_leave_no_tmp_files, test_synthetic_rows_are_limited_to_pure_window_classifier, test_modifying_runtime_outcomes_changes_diagnosis, _diagnosis, _recalculated_progress, _push_outcome, _state, _walls
+
+## `tests/unit/growth/test_week11_specialist_growth.py`
+
+Tests for original SeedMind Week 11 specialist growth.
+
+- Kind: python
+- Functions/symbols: _evidence, test_week11_gate_meets_separate_acceptance_fields, test_candidate_gain_router_scope_and_familiar_retention, test_parameter_cap_and_exact_failed_candidate_disposal, test_week11_export_is_deterministic
 
 ## `tests/unit/ndnra_controlled_replay_test_support.py`
 

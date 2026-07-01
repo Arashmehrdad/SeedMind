@@ -1,0 +1,16 @@
+{
+  "candidate_id": "skill.expert.angular_push.v1",
+  "checkpoint_sha256": "27c8e4f78561cf638dbc6eb45441b2fec94d446a06ebab3cc03a475ae6e7ee75",
+  "profile": {
+    "parameters": {
+      "abstain_threshold": -10.0,
+      "clearance_weight": 5.0,
+      "confidence_bias": 1.5,
+      "direct_axis_bonus": 0.25,
+      "distance_progress_weight": 1.0,
+      "route_cost_weight": 0.02
+    },
+    "profile_id": "clearance_strong"
+  },
+  "status": "accepted_for_week12"
+}

@@ -1,0 +1,49 @@
+{
+  "candidate_id": "skill.expert.angular_push.v1",
+  "creation_provenance": {
+    "authoritative_input_hashes": {
+      "artifacts/week10_capacity_diagnosis/diagnostic_report.json": "b4f6afaa5cbdd81661b63d9c48d02c7bf957f1007a964222fe3f4d6364e8bb53",
+      "artifacts/week10_capacity_diagnosis/grounded_episode_traces.json": "5fb9dcd2b4aab149dc899e2e2c05d30ed704d25f97e8e9e1de89c4202e9a0119",
+      "artifacts/week10_capacity_diagnosis/growth_proposal_record.json": "07289aa2adf1d5293fc98535ab1996e0fd005d3f69391eaff5ae6b32cff7a39b",
+      "artifacts/week10_capacity_diagnosis/learning_progress_windows.json": "2a24890bd6319c21f5a85fc2096e47583775dccda423daa01a63e93efab05f54",
+      "artifacts/week10_capacity_diagnosis/week10_acceptance_report.json": "a67500fbc61f89b6af17eae72f96b17d516ac660698ecd512382c0cac5d81c09",
+      "artifacts/week8_reusable_skill/approach_and_push_skill_record.json": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+      "artifacts/week9_contribution/week9_acceptance_report.json": "9dbdb7e0d90a1e4f3ae340f1bfbc7e05d2763e1154fd43a686b90e2f2b4f4d4f",
+      "docs/architecture/NDNRA_Freeze_Manifest_2026-07-01.json": "fe02d4929259af460ecbf14c60171b00baba6f8616e9a7663932e1eed3b9d058"
+    },
+    "growth_proposal_id": "growth-week10-cube-policy-0001",
+    "selected_incubation_checkpoint": "1bcfda6b3995223d83139a1e1a8782c663caeac47a4d06762e41e5df4e561f88"
+  },
+  "inputs": [
+    "latent_state",
+    "current_goal",
+    "relevant_memory_summary",
+    "available_actions"
+  ],
+  "outputs": [
+    "action_proposal",
+    "confidence",
+    "expected_result",
+    "predicted_goal_progress",
+    "abstain"
+  ],
+  "parameter_count": 6,
+  "parent_module": "general_push_controller",
+  "production_authority": false,
+  "status": "accepted_for_week12",
+  "training_configuration": {
+    "profile": {
+      "parameters": {
+        "abstain_threshold": -10.0,
+        "clearance_weight": 5.0,
+        "confidence_bias": 1.5,
+        "direct_axis_bonus": 0.25,
+        "distance_progress_weight": 1.0,
+        "route_cost_weight": 0.02
+      },
+      "profile_id": "clearance_strong"
+    },
+    "training_method": "bounded_grounded_parameter_profile_comparison"
+  },
+  "type": "skill_expert"
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320">
+  <rect width="900" height="320" fill="white"/>
+  <text x="28" y="34" font-family="monospace" font-size="18">SeedMind Week 11 grown architecture - accepted for Week 12</text>
+  <rect x="40" y="90" width="180" height="70" rx="8" fill="#f4f4f4" stroke="black"/>
+  <text x="62" y="130" font-family="monospace" font-size="14">Predictive seed core</text>
+  <rect x="350" y="90" width="180" height="70" rx="8" fill="#f4f4f4" stroke="black"/>
+  <text x="397" y="130" font-family="monospace" font-size="14">Router</text>
+  <rect x="650" y="45" width="210" height="70" rx="8" fill="#f4f4f4" stroke="black"/>
+  <text x="676" y="85" font-family="monospace" font-size="14">General controller</text>
+  <rect x="650" y="185" width="210" height="70" rx="8" fill="#f4f4f4" stroke="black"/>
+  <text x="672" y="225" font-family="monospace" font-size="14">Angular push specialist</text>
+  <line x1="220" y1="125" x2="350" y2="125" stroke="black" stroke-width="2"/>
+  <line x1="530" y1="115" x2="650" y2="80" stroke="black" stroke-width="2"/>
+  <line x1="530" y1="135" x2="650" y2="220" stroke="black" stroke-width="2"/>
+  <text x="42" y="286" font-family="monospace" font-size="13">Production authority remains production_curiosity; router and specialist are sandbox-only.</text>
+</svg>

@@ -1,0 +1,23 @@
+{
+  "authoritative_input_pass": true,
+  "authority_containment_pass": true,
+  "candidate_decision": "accept_for_week12_retention",
+  "candidate_id": "skill.expert.angular_push.v1",
+  "capability_gain_pass": true,
+  "cube_like_success_gain": 1.0,
+  "failed_candidate_disposal_pass": true,
+  "familiar_ball_preliminary_success_rate": 1.0,
+  "frozen_ndnra_boundary_pass": true,
+  "frozen_skill_preservation_pass": true,
+  "incubation_provenance_pass": true,
+  "module_contract_pass": true,
+  "parameter_budget_pass": true,
+  "preliminary_familiar_retention_pass": true,
+  "production_activation_authorised": false,
+  "repeated_seed_evaluation_pass": true,
+  "rollback_pass": true,
+  "router_fallback_pass": true,
+  "router_scope_pass": true,
+  "week11_main_milestone_pass": true,
+  "week12_required": true
+}

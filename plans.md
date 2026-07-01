@@ -520,7 +520,18 @@ Stage 8 is closed by `docs/architecture/NDNRA_Developmental_Stage_8_Evidence_202
 
 Stage 9 remains unauthorised. The bounded non-authoritative shadow seam is now approved, but internet knowledge acquisition, production action-gateway work, action replacement, and component promotion still require separate future planning and approval.
 
-The original SeedMind master plan remains the product and MVP spine. Original Week 8, Week 9, and Week 10 are closed from main SeedMind product evidence. Original Week 11 candidate specialist and growth gate is next and has not started here.
+The original SeedMind master plan remains the product and MVP spine. Original Week 8, Week 9, Week 10, and Week 11 are closed from main SeedMind product evidence.
+
+Original Week 11 is closed by:
+
+- `docs/architecture/SeedMind_Week11_Specialist_Growth_Plan_2026-07-01.md`;
+- `docs/architecture/SeedMind_Week11_Specialist_Growth_Evidence_2026-07-01.md`;
+- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week11-specialist-growth-closure.md`;
+- `artifacts/week11_specialist_growth/week11_acceptance_report.json`.
+
+The selected `skill.expert.angular_push.v1` specialist achieved cube-like success `20/20` versus `0/20` for the frozen general controller, preserved the authoritative familiar-task cohort at `20/20`, added six parameters under the 25 percent cap, preserved production-curiosity authority, and proved exact failed-candidate disposal and rollback. It is accepted only for original Week 12 retention and consolidation evaluation. The router and specialist remain inactive in production.
+
+Original Week 12 consolidation and full retention gating is next and has not started here.
 
 ## Working rules
 
