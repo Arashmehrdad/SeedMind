@@ -520,7 +520,7 @@ Stage 8 is closed by `docs/architecture/NDNRA_Developmental_Stage_8_Evidence_202
 
 Stage 9 remains unauthorised. The bounded non-authoritative shadow seam is now approved, but internet knowledge acquisition, production action-gateway work, action replacement, and component promotion still require separate future planning and approval.
 
-The original SeedMind master plan remains the product and MVP spine. Original Week 8, Week 9, Week 10, and Week 11 are closed from main SeedMind product evidence.
+The original SeedMind master plan remains the product and MVP spine. Original Week 8, Week 9, Week 10, Week 11, and Week 12 are closed from main SeedMind product evidence.
 
 Original Week 11 is closed by:
 
@@ -531,7 +531,19 @@ Original Week 11 is closed by:
 
 The selected `skill.expert.angular_push.v1` policy version `1.1.0` achieved authoritative cube-like success `20/20` versus `0/20` for the frozen general controller and preserved the authoritative familiar-task cohort at `20/20`. A post-closure refinement added seven mirrored or rotated holdout geometries across 32 disjoint seeds; the specialist achieved `32/32` versus `0/32` for the general controller. Independent raw-shape scope checks, router registration/activity/threshold properties, pairwise-disjoint evaluation partitions, and executable implementation hashes now form part of the acceptance gate. The specialist adds six bounded policy scalars under the 25 percent cap, preserves production-curiosity authority, and proves exact failed-candidate disposal and rollback. It remains accepted only for original Week 12 retention and consolidation evaluation; the router and specialist are inactive in production.
 
-Original Week 12 consolidation and full retention gating is next and has not started here.
+Original Week 12 is closed by:
+
+- `docs/architecture/SeedMind_Week12_Consolidation_Plan_2026-07-01.md`;
+- `docs/architecture/SeedMind_Week12_Consolidation_Evidence_2026-07-01.md`;
+- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week12-reject-angular-specialist.md`;
+- `artifacts/week12_consolidation/week12_acceptance_report.json`;
+- `artifacts/week12_consolidation/stable_mvp_checkpoint.json`.
+
+Week 12 implemented consolidation scheduling, replay, independent retention, navigation, help-seeking, correction, character, safety, provenance, checkpoint, and rollback gates. The candidate retained the narrow Week 11 cohorts (`20/20` original and `32/32` mirrored or rotated) but scored `0/32` on new larger-grid transfer cases that a grounded state-space oracle proved solvable `32/32`. It therefore failed the transfer gate and was rejected. The final stable registry exactly restores the pre-growth state: the router and specialist are inactive and unregistered, the frozen general controller remains active, and `production_curiosity` remains the sole action authority.
+
+A separate 40-seed ball stress suite scored `15/40` for both the frozen baseline and routed architecture, with exact action and outcome trace equality `40/40` and zero specialist selections. This proves zero growth interference while exposing a pre-existing general-controller limitation that must remain visible.
+
+Original Week 13 baselines, ablations, repeated-seed experiments, and evidence packaging are next. The rejected specialist may be used only as an experimental comparison condition; it is not a production component and cannot be promoted without a new approved growth cycle.
 
 ## Working rules
 

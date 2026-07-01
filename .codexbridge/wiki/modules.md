@@ -520,6 +520,38 @@ Deterministic candidate-profile selection for Week 11.
 - Kind: python
 - Functions/symbols: candidate_profiles, build_candidate
 
+## `src/seedmind/growth/week12.py`
+
+Original SeedMind Week 12 consolidation runner and evidence exporter.
+
+- Kind: python
+- Classes: Week12RunResult
+- Functions/symbols: run_week12_consolidation, export_week12_evidence, _write_json
+
+## `src/seedmind/growth/week12_evaluation.py`
+
+Transparent consolidation, retention, and character evaluation for Week 12.
+
+- Kind: python
+- Classes: Week12EvaluationBundle
+- Functions/symbols: evaluate_week12, _evaluate_replay, _evaluate_retention, _evaluate_navigation, _evaluate_help_and_correction, _evaluate_character_and_safety, run_general, run_routed, _general_proposal, _run_navigation, _navigation_action, _shortest_navigation_route, _oracle_angular_solution, _angular_state_key, _angular_target_satisfied, _help_context, _retain, _target_position, _direction_between, _module_selection_count
+
+## `src/seedmind/growth/week12_gate.py`
+
+Stable post-growth consolidation gate for original SeedMind Week 12.
+
+- Kind: python
+- Classes: Week12Evidence
+- Functions/symbols: run_week12_gate, _load_week11_candidate, _stable_checkpoint, _checkpoint_reload_pass, _growth_audit, _input_hashes, _implementation_hashes, _read_json, _sha256_file, _payload_digest
+
+## `src/seedmind/growth/week12_scenarios.py`
+
+Named, disjoint evaluation scenarios for original SeedMind Week 12.
+
+- Kind: python
+- Classes: AngularTransferVariant, NavigationCase
+- Functions/symbols: angular_transfer_state, navigation_state, scenario_catalogue, _boundary_walls, _position_json
+
 ## `src/seedmind/human/__init__.py`
 
 Symbolic human apprenticeship and calibrated help seeking.
@@ -1470,6 +1502,13 @@ Tests for original SeedMind Week 11 specialist growth.
 
 - Kind: python
 - Functions/symbols: _evidence, test_week11_gate_meets_separate_acceptance_fields, test_candidate_gain_router_scope_and_familiar_retention, test_parameter_cap_and_exact_failed_candidate_disposal, test_week11_export_is_deterministic
+
+## `tests/unit/growth/test_week12_consolidation.py`
+
+Acceptance coverage for original SeedMind Week 12 consolidation.
+
+- Kind: python
+- Functions/symbols: _evidence, test_week12_rejects_candidate_when_solvable_transfer_gate_fails, test_week12_reports_named_scenarios_baselines_and_thresholds, test_week12_preserves_help_correction_shutdown_and_exact_rollback, test_committed_week12_artifacts_match_a_fresh_deterministic_export
 
 ## `tests/unit/ndnra_controlled_replay_test_support.py`
 

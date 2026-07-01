@@ -1,0 +1,14 @@
+{
+  "episode_count": 1000,
+  "full_retention_evaluation_executed": true,
+  "full_retention_interval": 1000,
+  "growth_evaluation_prerequisites": [
+    "week10_capacity_diagnosis_passed",
+    "week11_candidate_incubation_passed"
+  ],
+  "lightweight_update_interval": 1,
+  "short_consolidation_interval": 100,
+  "short_consolidations_due": 10,
+  "stable_checkpoint_after_change": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+  "stable_checkpoint_before_change": "cdaefb06b078e534f324d7807733e38a89276332c0c27848b91b0b6a659b2c37"
+}

@@ -1,0 +1,51 @@
+{
+  "candidate": {
+    "active": false,
+    "candidate_id": "skill.expert.angular_push.v1",
+    "checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2",
+    "parent_module": "general_push_controller",
+    "policy_version": "1.1.0",
+    "production_scope": null,
+    "status": "rejected_after_week12"
+  },
+  "checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+  "evidence_digest": "73cfbe18ba43b82da89392058b89884d62b7f53c875a7462c7cc063de68e4217",
+  "implementation_hashes": {
+    "src/seedmind/growth/router.py": "d196e744c46104d1b8b2f4c9b2e1391be0db04137d09928c10330c277e55784f",
+    "src/seedmind/growth/specialist.py": "cb29f839894f5ac1ecd887012587798a77ccdb64e645750d75054641b7297f01",
+    "src/seedmind/growth/week11_rollout.py": "eea1da19979e1a3feee1ef5bdf4744a56e42d1b1098ad5f6367b8e1d9360a716",
+    "src/seedmind/growth/week12.py": "cf1ea48f55fec662a871fed71bda1ae087e1130ccfc242dfea7aee7817fba127",
+    "src/seedmind/growth/week12_evaluation.py": "279f6ea80dfaf871f3f8bf483f7a9f4d828bdc3b1e8fc1d6c6ec4dac2caddec5",
+    "src/seedmind/growth/week12_gate.py": "7b2812abe18ddb67b34e7071052055d144c5e1cb34d5385b9e190f3ebcabb2b8",
+    "src/seedmind/growth/week12_scenarios.py": "ae99a5ae693607c9420ee13ea1bb9d6c65b87cf8ed85570f9aff158776f035b8"
+  },
+  "input_hashes": {
+    "artifacts/human_apprenticeship/apprenticeship_report.json": "d022217d08274a8352e4c68501db77a8f4bb76f63c3f62dbbe4d149e92d068c0",
+    "artifacts/week11_specialist_growth/checkpoints/accepted_specialist_checkpoint.json": "c717adb3fa8a3ab34161ed2c60eeb8b2a9006395dbb20be86c4a1a997f43dd7a",
+    "artifacts/week11_specialist_growth/week11_acceptance_report.json": "6e615368fb0dcdd21aa0589b1d38035941e643718fe8dcc8025801e2e199a701",
+    "artifacts/week8_reusable_skill/approach_and_push_skill_record.json": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+    "artifacts/week8_reusable_skill/week8_generalisation_report.json": "10e6fc3755a44897322ff0650a012d293333e078570627f613297d61a5c2007f"
+  },
+  "production_action_authority": "production_curiosity",
+  "registry": {
+    "modules": [
+      {
+        "active": true,
+        "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+        "module_id": "general_push_controller",
+        "module_type": "general_controller",
+        "parent_module": null,
+        "status": "frozen_parent"
+      }
+    ],
+    "router_registered": false,
+    "schema_version": 1
+  },
+  "registry_digest": "cdaefb06b078e534f324d7807733e38a89276332c0c27848b91b0b6a659b2c37",
+  "router": {
+    "active": false,
+    "minimum_specialist_confidence": 0.7,
+    "proposal_authority": "proposal_only"
+  },
+  "schema_version": 1
+}

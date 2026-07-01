@@ -1,0 +1,459 @@
+{
+  "cases": [
+    {
+      "baseline": {
+        "actions": [
+          "turn_right",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_right",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 10
+      },
+      "case": {
+        "blocker_positions": [],
+        "case_id": "empty_straight_east",
+        "description": "Straight route across an empty interior row.",
+        "destination": {
+          "x": 5,
+          "y": 1
+        },
+        "expected_solvable": true,
+        "height": 7,
+        "orientation": "east",
+        "start": {
+          "x": 1,
+          "y": 1
+        },
+        "width": 7
+      },
+      "pass": true,
+      "post_growth": {
+        "actions": [
+          "turn_right",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_right",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 10
+      }
+    },
+    {
+      "baseline": {
+        "actions": [
+          "turn_right",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_right",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 6
+      },
+      "case": {
+        "blocker_positions": [],
+        "case_id": "empty_turn_south",
+        "description": "The agent must rotate from north and then travel south.",
+        "destination": {
+          "x": 2,
+          "y": 5
+        },
+        "expected_solvable": true,
+        "height": 7,
+        "orientation": "north",
+        "start": {
+          "x": 2,
+          "y": 1
+        },
+        "width": 7
+      },
+      "pass": true,
+      "post_growth": {
+        "actions": [
+          "turn_right",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_right",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 6
+      }
+    },
+    {
+      "baseline": {
+        "actions": [
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 13
+      },
+      "case": {
+        "blocker_positions": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "case_id": "single_wall_detour",
+        "description": "A three-cell vertical wall requires a deterministic detour through the upper opening.",
+        "destination": {
+          "x": 5,
+          "y": 3
+        },
+        "expected_solvable": true,
+        "height": 7,
+        "orientation": "east",
+        "start": {
+          "x": 1,
+          "y": 3
+        },
+        "width": 7
+      },
+      "pass": true,
+      "post_growth": {
+        "actions": [
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 13
+      }
+    },
+    {
+      "baseline": {
+        "actions": [
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 19
+      },
+      "case": {
+        "blocker_positions": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 5
+          }
+        ],
+        "case_id": "double_turn_corridor",
+        "description": "Two offset wall segments require more than one route-direction change.",
+        "destination": {
+          "x": 6,
+          "y": 5
+        },
+        "expected_solvable": true,
+        "height": 7,
+        "orientation": "south",
+        "start": {
+          "x": 1,
+          "y": 1
+        },
+        "width": 8
+      },
+      "pass": true,
+      "post_growth": {
+        "actions": [
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_left",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "turn_right",
+          "move_forward",
+          "move_forward",
+          "move_forward"
+        ],
+        "authority_violations": 0,
+        "honest_unreachable": false,
+        "outcomes": [
+          "moved",
+          "turned_left",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_left",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "turned_right",
+          "moved",
+          "moved",
+          "moved"
+        ],
+        "reached_destination": true,
+        "specialist_selections": 0,
+        "steps": 19
+      }
+    },
+    {
+      "baseline": {
+        "actions": [],
+        "authority_violations": 0,
+        "honest_unreachable": true,
+        "outcomes": [],
+        "reached_destination": false,
+        "specialist_selections": 0,
+        "steps": 0
+      },
+      "case": {
+        "blocker_positions": [
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "case_id": "enclosed_destination",
+        "description": "The destination is enclosed; the correct result is an honest unreachable outcome.",
+        "destination": {
+          "x": 4,
+          "y": 4
+        },
+        "expected_solvable": false,
+        "height": 7,
+        "orientation": "east",
+        "start": {
+          "x": 1,
+          "y": 1
+        },
+        "width": 7
+      },
+      "pass": true,
+      "post_growth": {
+        "actions": [],
+        "authority_violations": 0,
+        "honest_unreachable": true,
+        "outcomes": [],
+        "reached_destination": false,
+        "specialist_selections": 0,
+        "steps": 0
+      }
+    }
+  ],
+  "description": "The active growth router is present, but the angular specialist must abstain on the navigation goal. Solvable routes and honest unreachable outcomes must exactly match baseline.",
+  "pass": true
+}

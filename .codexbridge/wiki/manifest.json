@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T18:18:11.594420+00:00",
+  "generated_at": "2026-07-01T20:29:22.541421+00:00",
   "pages": [
     "architecture.md",
     "modules.md",
@@ -8,7 +8,7 @@
   ],
   "repo_name": "seedmind",
   "scan_truncated": false,
-  "source_file_count": 464,
+  "source_file_count": 483,
   "source_files": [
     {
       "path": "AGENTS.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "plans.md",
-      "sha256": "b6bd3cfe6ba5ebfed60f61b596d8c1e7e5814d5ec155f65696b28ceed1fd2770",
-      "size_bytes": 43174
+      "sha256": "41a86f43cefd9de36b15bd6aa89a96d4fb9e20fb880bda46e771bd4806598192",
+      "size_bytes": 44762
     },
     {
       "path": "pyproject.toml",
@@ -286,6 +286,61 @@
       "size_bytes": 355
     },
     {
+      "path": "artifacts/week12_consolidation/character_safety_report.json",
+      "sha256": "cd102ca4d5d06aee31e1a637f8c52605e8e07ef7a256a2cdc1fe191c1fd9b5c2",
+      "size_bytes": 803
+    },
+    {
+      "path": "artifacts/week12_consolidation/consolidation_schedule.json",
+      "sha256": "d27ae76a90cf144d427081ebb22cde59cfe1b062b0d85e00b292a64413b3afa8",
+      "size_bytes": 552
+    },
+    {
+      "path": "artifacts/week12_consolidation/growth_audit.json",
+      "sha256": "77ca2efb7e2b8a2490f45599853f321ab0727c9528215a22d61f11ee5bcaca21",
+      "size_bytes": 6920
+    },
+    {
+      "path": "artifacts/week12_consolidation/help_seeking_regression.json",
+      "sha256": "8515bbcfff492514fd1dba6003f5fbbd65c83e8936de7373f7ec8176553a2796",
+      "size_bytes": 2082
+    },
+    {
+      "path": "artifacts/week12_consolidation/navigation_regression.json",
+      "sha256": "bfdbf17d3ae8ed55b3a1e3c3cf74796301092229f0124bbf92bf4ac01365a8c9",
+      "size_bytes": 10442
+    },
+    {
+      "path": "artifacts/week12_consolidation/replay_report.json",
+      "sha256": "eba02fbd8d2f2ac8f89ad989fbf10bfe79c9e4ec74203639dd4950110e4d30c5",
+      "size_bytes": 189759
+    },
+    {
+      "path": "artifacts/week12_consolidation/scenario_catalogue.json",
+      "sha256": "c0c9ac1c3226e903939e2195fe17b1330083fc2702d9717a4da8c1880beaaa0a",
+      "size_bytes": 7973
+    },
+    {
+      "path": "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+      "sha256": "15efaadcfbd56a1434397c498215451eb8c684b9dd2666b2561e5bebae4fe267",
+      "size_bytes": 2749
+    },
+    {
+      "path": "artifacts/week12_consolidation/week12_acceptance_report.json",
+      "sha256": "8dad45aaf75f2675625763909df74ea974a295c1ade4ee002d4fa1f30ff3c417",
+      "size_bytes": 1035
+    },
+    {
+      "path": "artifacts/week12_consolidation/checkpoints/final_registry.json",
+      "sha256": "b24c6e6f757b18cad07b1af1024cf8abd2a9483bb0cf7a009b03a3e3f34b6789",
+      "size_bytes": 355
+    },
+    {
+      "path": "artifacts/week12_consolidation/checkpoints/rollback_checkpoint.json",
+      "sha256": "820d8e8efc847951d043c7530129b728f919c6da91c5145a3b83c3f914499d7e",
+      "size_bytes": 585
+    },
+    {
       "path": "artifacts/week8_reusable_skill/approach_and_push_skill_record.json",
       "sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
       "size_bytes": 1849
@@ -439,6 +494,16 @@
       "path": "docs/architecture/SeedMind_Week11_Specialist_Growth_Plan_2026-07-01.md",
       "sha256": "808901ed5c8b5d9b74f5f26abc6d3e6a03d73b83073570953d7c5287cc785bfa",
       "size_bytes": 5076
+    },
+    {
+      "path": "docs/architecture/SeedMind_Week12_Consolidation_Evidence_2026-07-01.md",
+      "sha256": "ccd777c187fceaf69b56b21b31d0f6648f09969b681b9115ae7b6c53bcb54283",
+      "size_bytes": 9549
+    },
+    {
+      "path": "docs/architecture/SeedMind_Week12_Consolidation_Plan_2026-07-01.md",
+      "sha256": "1e44eadcf546303d0a40ee75dd536bcb6087c262b44381a6f32c1444f3e9dd9a",
+      "size_bytes": 7202
     },
     {
       "path": "docs/architecture/SeedMind_Week8_Reusable_Skill_Evidence_2026-06-30.md",
@@ -609,6 +674,11 @@
       "path": "docs/architecture/decisions/ADR-2026-07-01-seedmind-week11-specialist-growth-closure.md",
       "sha256": "ee47707bd7a1a14fadea58fabb4c847043ced826f2aa5c2d5cbb313cd6e59c99",
       "size_bytes": 4447
+    },
+    {
+      "path": "docs/architecture/decisions/ADR-2026-07-01-seedmind-week12-reject-angular-specialist.md",
+      "sha256": "b009de639808aeb1f20ed6254d301295d2c2db7053815aaf7f4ad57d6f223905",
+      "size_bytes": 4759
     },
     {
       "path": "docs/archive/SeedMind_Bounded_Imagination_Batch1_Handover_2026-06-29.md",
@@ -1149,6 +1219,26 @@
       "path": "src/seedmind/growth/week11_selection.py",
       "sha256": "5fddd8f4e1f15eaf313822b06b92a1f07affd8068afa398499be83720e474203",
       "size_bytes": 664
+    },
+    {
+      "path": "src/seedmind/growth/week12.py",
+      "sha256": "cf1ea48f55fec662a871fed71bda1ae087e1130ccfc242dfea7aee7817fba127",
+      "size_bytes": 2423
+    },
+    {
+      "path": "src/seedmind/growth/week12_evaluation.py",
+      "sha256": "279f6ea80dfaf871f3f8bf483f7a9f4d828bdc3b1e8fc1d6c6ec4dac2caddec5",
+      "size_bytes": 34722
+    },
+    {
+      "path": "src/seedmind/growth/week12_gate.py",
+      "sha256": "7b2812abe18ddb67b34e7071052055d144c5e1cb34d5385b9e190f3ebcabb2b8",
+      "size_bytes": 17783
+    },
+    {
+      "path": "src/seedmind/growth/week12_scenarios.py",
+      "sha256": "ae99a5ae693607c9420ee13ea1bb9d6c65b87cf8ed85570f9aff158776f035b8",
+      "size_bytes": 10934
     },
     {
       "path": "src/seedmind/human/__init__.py",
@@ -2319,6 +2409,11 @@
       "path": "tests/unit/growth/test_week11_specialist_growth.py",
       "sha256": "127a5abc820ff9cc976c4fd254d08be04336ce9d836042a3f037a24325ab1f17",
       "size_bytes": 4762
+    },
+    {
+      "path": "tests/unit/growth/test_week12_consolidation.py",
+      "sha256": "eb028d3f37dceeacde6202e475c20f2d2b5c8ae992136303a64d88a7b6416a17",
+      "size_bytes": 5251
     },
     {
       "path": "tests/unit/skills/test_approach_and_push.py",

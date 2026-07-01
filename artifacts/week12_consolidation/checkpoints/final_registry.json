@@ -1,0 +1,14 @@
+{
+  "modules": [
+    {
+      "active": true,
+      "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+      "module_id": "general_push_controller",
+      "module_type": "general_controller",
+      "parent_module": null,
+      "status": "frozen_parent"
+    }
+  ],
+  "router_registered": false,
+  "schema_version": 1
+}

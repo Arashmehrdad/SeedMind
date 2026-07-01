@@ -50,6 +50,10 @@ artifacts/*
 !artifacts/week11_specialist_growth/*.svg
 !artifacts/week11_specialist_growth/checkpoints/
 !artifacts/week11_specialist_growth/checkpoints/*.json
+!artifacts/week12_consolidation/
+!artifacts/week12_consolidation/*.json
+!artifacts/week12_consolidation/checkpoints/
+!artifacts/week12_consolidation/checkpoints/*.json
 logs/
 reports/generated/
 

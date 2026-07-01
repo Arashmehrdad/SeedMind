@@ -1,0 +1,20 @@
+{
+  "candidate_present": false,
+  "checkpoint_sha256": "cdaefb06b078e534f324d7807733e38a89276332c0c27848b91b0b6a659b2c37",
+  "registry": {
+    "modules": [
+      {
+        "active": true,
+        "checkpoint_sha256": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+        "module_id": "general_push_controller",
+        "module_type": "general_controller",
+        "parent_module": null,
+        "status": "frozen_parent"
+      }
+    ],
+    "router_registered": false,
+    "schema_version": 1
+  },
+  "restoration_proof": true,
+  "used_as_final_checkpoint": true
+}
