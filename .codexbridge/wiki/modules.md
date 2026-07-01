@@ -133,6 +133,13 @@ Run the SeedMind Week 9 human contribution gate.
 - Kind: python
 - Functions/symbols: parse_args, main
 
+## `scripts/run_week10_capacity_diagnosis.py`
+
+Run the original SeedMind Week 10 capacity-diagnosis gate.
+
+- Kind: python
+- Functions/symbols: parse_args, main
+
 ## `src/seedmind/__init__.py`
 
 SeedMind developmental intelligence runtime.
@@ -362,6 +369,44 @@ Deterministic primitive-action transitions for SeedMind Nursery v0.
 
 - Kind: python
 - Classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
+
+## `src/seedmind/growth/__init__.py`
+
+Main SeedMind capacity diagnosis and delayed growth proposals.
+
+- Kind: python
+
+## `src/seedmind/growth/diagnostic_ladder.py`
+
+Typed diagnostic ladder for Week 10 capacity diagnosis.
+
+- Kind: python
+- Classes: DiagnosticStepStatus, DiagnosticStepCode, DiagnosticStepRecord, DiagnosticLadderRecord
+- Functions/symbols: build_ladder
+
+## `src/seedmind/growth/proposal.py`
+
+Non-authoritative Week 10 growth proposal records.
+
+- Kind: python
+- Classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord
+- Functions/symbols: build_week10_growth_proposal
+
+## `src/seedmind/growth/stagnation.py`
+
+Learning-progress windows and plateau classification for Week 10.
+
+- Kind: python
+- Classes: PlateauClassification, LearningProgressThresholds, LearningAttempt, LearningProgressWindow
+- Functions/symbols: build_learning_progress_windows, final_classification
+
+## `src/seedmind/growth/week10.py`
+
+Deterministic Week 10 capacity-diagnosis runner.
+
+- Kind: python
+- Classes: StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult
+- Functions/symbols: run_week10_capacity_diagnosis, export_week10_evidence
 
 ## `src/seedmind/human/__init__.py`
 

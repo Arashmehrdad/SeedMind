@@ -3,7 +3,8 @@
 from dataclasses import dataclass, replace
 from enum import StrEnum
 
-from seedmind.contracts import PrimitiveAction
+from seedmind.contracts import Direction, GridPosition, PrimitiveAction
+from seedmind.environment.entities import ShapeCode
 from seedmind.environment.state import NurseryState
 
 
@@ -24,6 +25,7 @@ class TransitionOutcome(StrEnum):
     PUSH_IMMOVABLE = "push_immovable"
     PUSH_BLOCKED_BOUNDARY = "push_blocked_boundary"
     PUSH_BLOCKED_ENTITY = "push_blocked_entity"
+    PUSH_INEFFECTIVE_CONTACT = "push_ineffective_contact"
     WAITED = "waited"
     HELP_REQUESTED = "help_requested"
     ACKNOWLEDGED = "acknowledged"
@@ -180,6 +182,19 @@ class NurseryTransitionEngine:
 
         destination = contact_position.moved(state.agent.orientation)
 
+        if contacted.shape_code is ShapeCode.ANGULAR and not _angular_push_contact_is_effective(
+            state,
+            contact_position=contact_position,
+            destination=destination,
+            push_direction=state.agent.orientation,
+        ):
+            return self._complete(
+                state=state,
+                action=PrimitiveAction.PUSH,
+                outcome=TransitionOutcome.PUSH_INEFFECTIVE_CONTACT,
+                world_changed=False,
+            )
+
         if not state.is_in_bounds(destination):
             return self._complete(
                 state=state,
@@ -222,3 +237,28 @@ class NurseryTransitionEngine:
             state=state.advanced(),
             world_changed=world_changed,
         )
+
+
+def _angular_push_contact_is_effective(
+    state: NurseryState,
+    *,
+    contact_position: GridPosition,
+    destination: GridPosition,
+    push_direction: Direction,
+) -> bool:
+    """Require lateral clearance for flat-contact angular object pushes."""
+    for position in _lateral_positions(contact_position, push_direction) + _lateral_positions(
+        destination, push_direction
+    ):
+        if not state.is_in_bounds(position):
+            return False
+        blocker = state.blocking_entity_at(position)
+        if blocker is not None:
+            return False
+    return True
+
+
+def _lateral_positions(position: GridPosition, direction: Direction) -> tuple[GridPosition, ...]:
+    if direction in (Direction.NORTH, Direction.SOUTH):
+        return (position.moved(Direction.EAST), position.moved(Direction.WEST))
+    return (position.moved(Direction.NORTH), position.moved(Direction.SOUTH))

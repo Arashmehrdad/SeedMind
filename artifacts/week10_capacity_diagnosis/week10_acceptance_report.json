@@ -1,0 +1,20 @@
+{
+  "diagnostic_ladder_pass": true,
+  "environment_extension_pass": true,
+  "familiar_control_success_rate": 1.0,
+  "frozen_ndnra_boundary_pass": true,
+  "frozen_skill_preservation_pass": true,
+  "frozen_skill_sha256_after": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+  "frozen_skill_sha256_before": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+  "growth_delay_pass": true,
+  "growth_proposal_pass": true,
+  "learning_progress_pass": true,
+  "ndnra_required": false,
+  "non_capacity_blockage_pass": true,
+  "router_created": false,
+  "specialist_created": false,
+  "sustained_blockage_classification_pass": true,
+  "temporary_failure_classification_pass": true,
+  "week10_main_milestone_pass": true,
+  "week11_started": false
+}

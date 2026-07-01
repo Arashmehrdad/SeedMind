@@ -32,6 +32,7 @@ graph LR
 - `scripts/run_ndnra_unified_signals_gate.py` — functions: parse_args, main
 - `scripts/run_week8_reusable_skill.py` — functions: parse_args, main
 - `scripts/run_week9_contribution.py` — functions: parse_args, main
+- `scripts/run_week10_capacity_diagnosis.py` — functions: parse_args, main
 - `src/seedmind/__init__.py` — SeedMind developmental intelligence runtime.
 - `src/seedmind/ambition/__init__.py` — Persistent developmental ambitions formed from grounded evidence.
 - `src/seedmind/ambition/demonstration.py` — classes: DemonstrationDetectorConfig, ObservedDemonstration, OutcomeSignature, DemonstrationEvidence, _EvidenceAccumulator, GoalDirectedOutcomeDetector; functions: export_demonstration_evidence
@@ -64,6 +65,10 @@ graph LR
 - `src/seedmind/environment/state.py` — classes: NurseryState
 - `src/seedmind/environment/teacher.py` — classes: TeacherPushDemonstrationProcess, TeacherDemonstrationScenarioFactory; functions: _entity_by_id
 - `src/seedmind/environment/transition.py` — classes: TransitionOutcome, NurseryTransition, NurseryTransitionEngine
+- `src/seedmind/growth/diagnostic_ladder.py` — classes: DiagnosticStepStatus, DiagnosticStepCode, DiagnosticStepRecord, DiagnosticLadderRecord; functions: build_ladder
+- `src/seedmind/growth/proposal.py` — classes: GrowthProposalStatus, GrowthDiagnosisSummary, GrowthCandidateSummary, GrowthProposalRecord; functions: build_week10_growth_proposal
+- `src/seedmind/growth/stagnation.py` — classes: PlateauClassification, LearningProgressThresholds, LearningAttempt, LearningProgressWindow; functions: build_learning_progress_windows, final_classification
+- `src/seedmind/growth/week10.py` — classes: StrategyVariantRecord, MemoryReplayRecord, HelpDemonstrationRecord, Week10ScenarioDiagnosis, Week10AcceptanceReport, Week10RunResult; functions: run_week10_capacity_diagnosis, export_week10_evidence
 - `src/seedmind/human/__init__.py` — Symbolic human apprenticeship and calibrated help seeking.
 - `src/seedmind/human/apprenticeship.py` — classes: HelpReason, CaregiverEventType, HelpSeekingConfig, HelpContext, HelpDecision, TeacherResponse, CaregiverEvent, CaregiverMemory; functions: export_apprenticeship_report_json, export_apprenticeship_timeline_csv, _event_payload, _validate_unit_interval
 - `src/seedmind/human/contracts.py` — classes: SupportLevel, HumanSignalCode, RequestIntentCode, VerificationRule, HumanRequest, HumanSignalFrame, HumanSignalCodec; functions: _validate_unit_interval
