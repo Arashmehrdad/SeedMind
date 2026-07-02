@@ -54,6 +54,13 @@ artifacts/*
 !artifacts/week12_consolidation/*.json
 !artifacts/week12_consolidation/checkpoints/
 !artifacts/week12_consolidation/checkpoints/*.json
+!artifacts/week13_experiments/
+!artifacts/week13_experiments/*.json
+!artifacts/week13_experiments/*.csv
+!artifacts/week13_experiments/learning_curves/
+!artifacts/week13_experiments/learning_curves/*.svg
+!artifacts/week13_experiments/retention_charts/
+!artifacts/week13_experiments/retention_charts/*.svg
 logs/
 reports/generated/
 

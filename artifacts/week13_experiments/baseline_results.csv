@@ -1,0 +1,4 @@
+condition,evaluation_family,repetitions,episodes,successes,success_rate,mean_repetition_success_rate,median_repetition_success_rate,std_repetition_success_rate,min_repetition_success_rate,max_repetition_success_rate,wilson_95_low,wilson_95_high,mean_steps,authority_violations,production_reference
+random_primitive,familiar_round_object_100_seed_suite,5,100,0,0,0,0,0,0,0,3.46944695195e-18,0.036993498207,96,0,false
+fixed_reactive,familiar_round_object_100_seed_suite,5,100,0,0,0,0,0,0,0,3.46944695195e-18,0.036993498207,96,0,false
+rollback_production_reference,familiar_round_object_100_seed_suite,5,100,36,0.36,0.36,0.3,0.0734846922835,0.3,0.45,0.272712204014,0.457645975484,8.56,0,true

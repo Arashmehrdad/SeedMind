@@ -9,18 +9,18 @@ Update this file in place as work progresses. Do not create or update session ha
 - Alias: `seedmind`
 - Local path: `D:\Github\SeedMind`
 - Branch: `main`
-- Latest completed milestone: hardened original SeedMind Week 10 grounded capacity diagnosis; NDNRA remains frozen for separate-project extraction
+- Latest completed milestone: original SeedMind Week 13 experimental evidence and reproducibility closure; NDNRA remains frozen for separate-project extraction
 - Inspect Git history for the current commit hash.
 - Push policy: never push automatically
 
 ## Current stage
 
 - Program: SeedMind original main-product roadmap only
-- Last closed stage: hardened original SeedMind Week 10 grounded capacity diagnosis
-- Current stage: original SeedMind Week 11 specialist growth is next and not started
-- Current status: Week 10 is closed by hardened grounded Nursery evidence. Commit `13140df` remains invalid for closure because it used scripted diagnostic timelines. Commit `ea15047` replaced those timelines with executed episodes, but a direct follow-up audit found that seeds still built identical states, replay and demonstration plans were selected before evidence derivation, several distinct variant labels executed the same frozen policy, prediction acceptance was only a non-negative check, and teacher demonstrations shifted learner attempt indexes. The hardened implementation now varies seeded initial states, derives replay actions from retrieved traces, derives demonstration-guided actions from the executed teacher trace, executes distinct sustained variants, enforces a `0.05` prediction-MAE ceiling, records the actual variant count, and keeps learner attempt indexes contiguous. No specialist, router, parameter growth, production mutation, or Week 11 growth gate was created. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and retained only as a historical research snapshot for later extraction into a separate project. No future SeedMind milestone requires NDNRA comparison, training, competence evidence, promotion, or integration.
+- Last closed stage: original SeedMind Week 13 experiments and evidence
+- Current stage: original SeedMind Week 14 competition packaging is active
+- Current status: Week 11 instantiated and trained one bounded angular-object specialist candidate from the authoritative Week 10 growth proposal. It achieved `52/52` on its narrow incubation cohorts but remained non-authoritative. Week 12 broadened transfer and retention evaluation, found `0/32` broad angular success despite `32/32` oracle-solvable cases, rejected the candidate, rolled back to checkpoint `dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093`, and preserved the general controller as the sole production action path. Week 13 then completed preregistered baselines, ablations, repeated-seed evaluation, charts, limitations, and reproducibility evidence. Four of five bounded claims passed; broad specialist transfer remained explicitly unsupported. Complete SeedMind and rollback production matched exactly on `100/100` familiar episodes because they intentionally used the same controller. The complete repository suite passed through durable async validation: `1189 passed in 464.23s`, with Ruff formatting/lint, mypy, pip check, and git diff checks also passing. NDNRA remains frozen at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a`; no Week 14 packaging work may grant it authority or revive integration requirements.
 - Expanded developmental architecture marker: 84%
-- Marker interpretation: unchanged; the freeze is a repository and roadmap boundary, not new cognitive capability evidence
+- Marker interpretation: unchanged; Weeks 11-13 added bounded specialist evidence, rollback governance, and experimental proof, but no accepted new production cognitive capacity
 
 Completed bounded increments:
 
@@ -48,6 +48,9 @@ Completed bounded increments:
 22. Original SeedMind Week 9 contribution and reduced support — typed familiar human requests, five-state capability checks, frozen Week 8 skill reuse, grounded outcome verification, complete honest failures, checksum-protected contribution and support persistence, five-success/0.80/three-context promotion thresholds, post-regression evidence epochs, support restoration after degradation, and zero production, verification, or support-authority violations. Historical NDNRA comparison artifacts are retained but are not required for Week 9 closure or future SeedMind work.
 23. NDNRA freeze and extraction boundary — preserve the current NDNRA source, tests, documents, ADRs, and evidence without further development inside SeedMind; remove NDNRA comparison and integration requirements from Week 10 onward; reserve all future NDNRA capability work for a separate project.
 24. Hardened original SeedMind Week 10 grounded capacity diagnosis — raw angular-object flat-contact dynamics, familiar ball retention, seeded state variation, deterministic learning-progress windows built from executed Nursery episodes, early-evidence and non-capacity early stops, replay actions derived from retrieved episode traces, demonstration-guided actions derived from the executed teacher trace, distinct executable sustained strategy variants, prediction comparisons bounded by a `0.05` MAE ceiling, contiguous learner attempt indexes, exactly one evidence-derived non-authoritative growth proposal with `candidate.created=false`, preserved superseded `13140df` scripted artifacts, frozen Week 8 skill preservation, frozen NDNRA boundary preservation, and no specialist, router, parameters, production mutation, or Week 11 implementation.
+25. Original SeedMind Week 11 specialist incubation — one bounded angular-object specialist candidate instantiated from the authoritative Week 10 proposal, trained only in isolated incubation, evaluated on deterministic narrow cohorts, producing `52/52` narrow success while preserving zero production authority and a reversible checkpoint boundary.
+26. Original SeedMind Week 12 consolidation and rollback — broader angular transfer exposed `0/32` candidate success on `32/32` oracle-solvable cases; familiar retention remained `15/40` before and after provisional routing with exact `40/40` trace equality and zero specialist selections; the candidate was rejected and rolled back, leaving checkpoint `dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093` authoritative.
+27. Original SeedMind Week 13 experiments and evidence — preregistered random/reactive/rollback/complete baselines, no-ambition, no-human-teaching, and growth-without-replay ablations, five repeated deterministic seed groups, learning and retention charts, explicit limitations, machine-readable reproducibility evidence, four supported bounded claims, one honestly unsupported broad-transfer claim, and complete repository validation with `1189 passed`.
 
 Superseded evidence:
 
@@ -166,6 +169,46 @@ Week 10 NDNRA/parallel import-line scan: none
 temporary pytest/artifact files retained: none
 pylint/pre-commit: not configured or installed
 ```
+
+## Week 11-13 closure and Week 14 boundary
+
+Authoritative closure records:
+
+- `docs/architecture/SeedMind_Week11_Specialist_Growth_Evidence_2026-07-01.md`
+- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week11-specialist-growth-closure.md`
+- `docs/architecture/SeedMind_Week12_Consolidation_Evidence_2026-07-01.md`
+- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week12-reject-angular-specialist.md`
+- `docs/architecture/SeedMind_Week13_Experiments_Plan_2026-07-01.md`
+- `docs/architecture/SeedMind_Week13_Experiments_Evidence_2026-07-01.md`
+- `docs/architecture/SeedMind_Week13_Limitations_2026-07-01.md`
+- `docs/architecture/decisions/ADR-2026-07-01-seedmind-week13-experimental-evidence-closure.md`
+- `artifacts/week13_experiments/`
+
+Week 13 validation baseline:
+
+```text
+pytest -q: 1189 passed in 464.23s
+ruff format --check .: 313 files already formatted
+ruff check .: passed
+mypy .: no issues in 313 source files
+python -m pip check: no broken requirements
+git diff --check: passed with line-ending normalization warning only
+```
+
+Week 14 is packaging and communication, not a new cognitive-capability stage. It must:
+
+1. finish a runnable read-only Observatory view over existing authoritative evidence;
+2. provide a deterministic demonstration mode understandable in under three minutes;
+3. prepare a reproducible backup demo recording workflow;
+4. write a claim-bounded pitch and application evidence pack;
+5. produce an architecture graphic and market/roadmap presentation assets;
+6. verify every public claim against committed evidence and preserve explicit failures;
+7. keep the Week 12 rollback checkpoint as the only production controller authority;
+8. keep the rejected specialist experimental and inactive;
+9. keep NDNRA frozen and non-authoritative;
+10. ensure another person can run the demo from documented instructions.
+
+Week 14 must not claim general intelligence, broad angular transfer, robust real-world manipulation, accepted specialist growth, or production NDNRA integration. Submission remains a human-controlled external action and must never be performed automatically.
 
 ## Historical NDNRA architecture boundary (frozen)
 

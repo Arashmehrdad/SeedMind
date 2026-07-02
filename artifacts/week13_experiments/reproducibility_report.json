@@ -1,0 +1,50 @@
+{
+  "artifact_payload_hashes": {
+    "ablation_results.csv": "44ac605378cd92b6e313757de991fb277696711b8ef633332f41f69df3ef5f4a",
+    "aggregate_metrics.json": "4e43514d4f413d1f72dda403e4afff87ac4bd381e264e7dcaed941ba7ff3fe85",
+    "baseline_results.csv": "0a66aa3856c6d6afea583f7b2a4fa13731510452c8703df84a01993eeb3cfa5f",
+    "claim_evidence_matrix.json": "0e5a311598c56b63a6d9d4f1317a68d7fddb002ddefb7fb4c69d55d50633aa01",
+    "experiment_manifest.json": "d30a525e4dbe36e19d55dbc59326606f414fd2afea4ccf6531f85847c1ece50b",
+    "learning_curves/ambition_persistence.svg": "43ad0602ecd0fe92340e7d43d3c71291791508bbdcb6b9c5b2b196da096443f1",
+    "learning_curves/apprenticeship_resolution.svg": "5f076afe22e6987422143a25d49e2f536e6261eb81f08aa9ebe466397b95fff1",
+    "learning_curves/familiar_task_cumulative_success.svg": "3676c28e7b807266739eb4efdaa0140914b46737e7d18694c818198739f63423",
+    "repeated_seed_results.csv": "e1a8f99c83a83e0785680da03830207fd633836c09ab048aea277e6eb922a06b",
+    "retention_charts/angular_transfer.svg": "108acc68d4628fc2c685de31bc7c72f9302e8e2829e9c435029c9e3b6dcc7fb6",
+    "retention_charts/familiar_retention.svg": "e8f918ad17fffc6296458a8e78542e3ab3c2c42a23d6bb5e3eea8ffaef4fab1f"
+  },
+  "authoritative_checkpoint_checks": {
+    "all_pass": true,
+    "authoritative_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+    "checks": {
+      "authoritative_checkpoint_match": true,
+      "candidate_inactive": true,
+      "candidate_rejected_status": true,
+      "general_controller_only": true,
+      "rejected_specialist_identity_match": true,
+      "router_inactive": true
+    },
+    "production_action_authority": "production_curiosity",
+    "rejected_specialist_checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2"
+  },
+  "deterministic_payload_digest": "2e492fdb89056dc48076831fc924f7ec8cb9d8f398c67e8035bc3b344bf36985",
+  "fresh_export_byte_equality_required": true,
+  "implementation_hashes": {
+    "scripts/run_week13_experiments.py": "37b0b12c8f29840d3bad1fe5a429c266ecc555da85c9f2dbf7881eb119df57e7",
+    "src/seedmind/evaluation/__init__.py": "7a400391e3d72a9836e1c75bde0c06657c805dd1c685218c9e3a65b8aedecc40",
+    "src/seedmind/evaluation/week13.py": "446ae7f56f400b9e3f965dd44c73f349d4e1e78f71a651d6377ff4611b25faf7",
+    "src/seedmind/evaluation/week13_conditions.py": "cba5e1293bbeadb635a75678a34759f0b45201558dbd2b336c2d30317715990a"
+  },
+  "input_hashes": {
+    "artifacts/week11_specialist_growth/checkpoints/accepted_specialist_checkpoint.json": "c717adb3fa8a3ab34161ed2c60eeb8b2a9006395dbb20be86c4a1a997f43dd7a",
+    "artifacts/week12_consolidation/stable_mvp_checkpoint.json": "15efaadcfbd56a1434397c498215451eb8c684b9dd2666b2561e5bebae4fe267",
+    "artifacts/week8_reusable_skill/approach_and_push_skill_record.json": "884c91209314c00169aff0186971a51ca773724accec0b298263561d81ecbc8e",
+    "docs/architecture/SeedMind_Week13_Experiments_Plan_2026-07-01.md": "31c54d571522ffa0e7d79d0712ce062f3249f43fc9316d3f663f435e61398050"
+  },
+  "no_temporary_files_expected": true,
+  "reproducibility_pass": true,
+  "seed_checks": {
+    "familiar_seed_count": 100,
+    "familiar_seeds_unique": true,
+    "replication_groups_disjoint": true
+  }
+}

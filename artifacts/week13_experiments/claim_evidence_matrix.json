@@ -1,0 +1,64 @@
+{
+  "claims": [
+    {
+      "claim": "The reusable rollback production skill beats random primitive action on familiar tasks.",
+      "claim_id": "C1",
+      "observed": {
+        "gain": 0.36,
+        "random_success_rate": 0.0,
+        "rollback_success_rate": 0.36
+      },
+      "status": "supported",
+      "threshold": "success-rate gain >= 0.20 and zero authority violations"
+    },
+    {
+      "claim": "Ambition machinery creates persistent cross-episode capability commitment.",
+      "claim_id": "C2",
+      "observed": {
+        "complete_persistence_rate": 1.0,
+        "no_ambition_persistence_rate": 0.0
+      },
+      "status": "supported",
+      "threshold": "complete=1.00 and no-ambition=0.00"
+    },
+    {
+      "claim": "Human apprenticeship resolves justified help and supports reduced dependence.",
+      "claim_id": "C3",
+      "observed": {
+        "complete_help_avoidance": 1.0,
+        "complete_help_recall": 1.0,
+        "complete_teaching_resolution": 1.0,
+        "no_teaching_resolution": 0.0,
+        "support_promotion_rate": 1.0
+      },
+      "status": "supported",
+      "threshold": "help recall/avoidance >= 0.70; resolution complete=1.00, no-teaching=0.00"
+    },
+    {
+      "claim": "Retention-gated growth prevents unsupported specialist promotion.",
+      "claim_id": "C4",
+      "observed": {
+        "complete_familiar_degradation": 0.0,
+        "complete_invalid_promotions": 0,
+        "growth_without_replay_invalid_promotions": 1,
+        "rollback_checkpoint_verified": true
+      },
+      "status": "supported",
+      "threshold": "complete invalid promotions=0; no-replay >=1; degradation <=0.10"
+    },
+    {
+      "claim": "The rejected angular specialist transfers broadly beyond its designed cohorts.",
+      "claim_id": "C5",
+      "observed": {
+        "broad_success_rate": 0.0,
+        "gain": 0.0,
+        "oracle_solvable_count": 32,
+        "total": 32
+      },
+      "status": "unsupported",
+      "threshold": "broad success >=0.80 and gain >=+0.20"
+    }
+  ],
+  "supported_claim_count": 4,
+  "unsupported_claim_count": 1
+}

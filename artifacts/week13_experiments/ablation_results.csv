@@ -1,0 +1,5 @@
+condition,ball_success_rate,ambition_persistence_rate,help_recall,help_avoidance,teaching_resolution_rate,support_promotion_rate,familiar_retention_rate,narrow_angular_success_rate,broad_angular_success_rate,invalid_promotion_count,production_active,interpretation
+complete_seedmind,0.36,1,1,1,1,1,0.375,not_production_active,not_applicable_rejected_component_inactive,0,true,authoritative rollback production system with full developmental controls
+no_ambition,0.36,0,1,1,1,1,0.375,not_applicable,not_applicable,0,false,same production controller; persistence mechanism removed
+no_human_teaching,0.36,0,1,1,0,0,0.375,not_applicable,not_applicable,0,false,help policy remains but caregiver responses and approvals are suppressed
+growth_without_replay,0.375,not_measured,not_measured,not_measured,not_measured,not_measured,0.375,1,0,1,false,decision ablation: narrow Week 11 success would promote a component that fails the broader Week 12 transfer suite

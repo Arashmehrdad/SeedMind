@@ -1,0 +1,195 @@
+{
+  "ambition": {
+    "complete_seedmind": {
+      "active_status_preservation_rate": 1.0,
+      "adoption_rate": 1.0,
+      "candidate_generation_rate": 1.0,
+      "mean_later_episode_count": 5.0,
+      "persistence_rate": 1.0,
+      "reload_identity_match_rate": 1.0,
+      "replications": 5
+    },
+    "no_ambition": {
+      "active_status_preservation_rate": 0.0,
+      "adoption_rate": 0.0,
+      "candidate_generation_rate": 1.0,
+      "mean_later_episode_count": 0.0,
+      "persistence_rate": 0.0,
+      "reload_identity_match_rate": 0.0,
+      "replications": 5
+    }
+  },
+  "apprenticeship": {
+    "complete_seedmind": {
+      "help_avoidance": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "population_std": 0.0
+      },
+      "help_recall": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "population_std": 0.0
+      },
+      "justified_help_requests": 25,
+      "support_promotion_rate": 1.0,
+      "teaching_resolution": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "population_std": 0.0
+      },
+      "teaching_responses": 25,
+      "unresolved_justified_help": 0
+    },
+    "no_human_teaching": {
+      "help_avoidance": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "population_std": 0.0
+      },
+      "help_recall": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "population_std": 0.0
+      },
+      "justified_help_requests": 25,
+      "support_promotion_rate": 0.0,
+      "teaching_resolution": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "population_std": 0.0
+      },
+      "teaching_responses": 0,
+      "unresolved_justified_help": 25
+    }
+  },
+  "growth_and_retention": {
+    "broad_angular": {
+      "candidate_success_rate": 0.0,
+      "candidate_successes": 0,
+      "gain": 0.0,
+      "general_success_rate": 0.0,
+      "oracle_solvable_count": 32,
+      "total": 32
+    },
+    "complete_seedmind": {
+      "candidate_decision": "reject_and_rollback",
+      "familiar_degradation": 0.0,
+      "familiar_retention_rate": 0.375,
+      "invalid_promotion_count": 0,
+      "production_activation_authorised": false,
+      "rollback_pass": true
+    },
+    "familiar_retention": {
+      "action_trace_match_count": 40,
+      "action_trace_total": 40,
+      "baseline_success_rate": 0.375,
+      "post_growth_success_rate": 0.375,
+      "specialist_selections": 0
+    },
+    "growth_without_replay": {
+      "broad_angular_success_rate": 0.0,
+      "familiar_retention_rate": 0.375,
+      "invalid_promotion_count": 1,
+      "narrow_angular_success_rate": 1.0,
+      "would_authorise_from_narrow_evidence": true
+    },
+    "narrow_angular": {
+      "success_rate": 1.0,
+      "successes": 52,
+      "total": 52
+    }
+  },
+  "production_equivalence": {
+    "episode_match_count": 100,
+    "episode_total": 100,
+    "exact_success_and_step_equivalence": true,
+    "interpretation": "Complete SeedMind uses the same rollback production action path; no task-success advantage over the frozen rollback controller is claimed."
+  },
+  "task": {
+    "complete_seedmind": {
+      "authority_violations": 0,
+      "episodes": 100,
+      "mean_steps": 8.56,
+      "repetition_success_rate_summary": {
+        "maximum": 0.45,
+        "mean": 0.36,
+        "median": 0.3,
+        "minimum": 0.3,
+        "population_std": 0.07348469228349536
+      },
+      "success_rate": 0.36,
+      "successes": 36,
+      "wilson_95": {
+        "high": 0.4576459754839126,
+        "low": 0.2727122040140433
+      }
+    },
+    "fixed_reactive": {
+      "authority_violations": 0,
+      "episodes": 100,
+      "mean_steps": 96.0,
+      "repetition_success_rate_summary": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "population_std": 0.0
+      },
+      "success_rate": 0.0,
+      "successes": 0,
+      "wilson_95": {
+        "high": 0.03699349820698568,
+        "low": 3.469446951953614e-18
+      }
+    },
+    "random_primitive": {
+      "authority_violations": 0,
+      "episodes": 100,
+      "mean_steps": 96.0,
+      "repetition_success_rate_summary": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "population_std": 0.0
+      },
+      "success_rate": 0.0,
+      "successes": 0,
+      "wilson_95": {
+        "high": 0.03699349820698568,
+        "low": 3.469446951953614e-18
+      }
+    },
+    "rollback_production_reference": {
+      "authority_violations": 0,
+      "episodes": 100,
+      "mean_steps": 8.56,
+      "repetition_success_rate_summary": {
+        "maximum": 0.45,
+        "mean": 0.36,
+        "median": 0.3,
+        "minimum": 0.3,
+        "population_std": 0.07348469228349536
+      },
+      "success_rate": 0.36,
+      "successes": 36,
+      "wilson_95": {
+        "high": 0.4576459754839126,
+        "low": 0.2727122040140433
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "at_least_three_core_claims_supported_pass": true,
+  "authoritative_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+  "authoritative_rollback_checkpoint_pass": true,
+  "broad_transfer_claim_reported_pass": true,
+  "complete_and_rollback_action_path_equivalence_pass": true,
+  "complete_seedmind_task_advantage_over_rollback_claimed": false,
+  "decision": "week13_evidence_pass",
+  "rejected_specialist_not_production_pass": true,
+  "rejected_specialist_production_active": false,
+  "reproducibility_manifest_pass": true,
+  "supported_core_claim_count": 4,
+  "week13_main_milestone_pass": true
+}
