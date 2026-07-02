@@ -1,0 +1,80 @@
+{
+  "declared_total_duration_seconds": 166,
+  "manifest_label": "Committed Week 14 scripted demo manifest",
+  "no_wait_supported": true,
+  "scenes": [
+    {
+      "duration_seconds": 18,
+      "evidence_refs": [
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json"
+      ],
+      "narration": "This observatory is a Week 14 packaging layer over committed Week 8 through Week 13 evidence. The sole production action authority remains the Week 12 rollback checkpoint, with the general controller only.",
+      "scene_id": "scene_01_authority",
+      "title": "Authority and scope"
+    },
+    {
+      "duration_seconds": 24,
+      "evidence_refs": [
+        "artifacts/week8_reusable_skill/week8_generalisation_report.json",
+        "artifacts/week9_contribution/week9_acceptance_report.json"
+      ],
+      "narration": "Week 8 closed a reusable symbolic pushing skill with 20/20 recorded reuse, and Week 9 showed bounded contribution with 10/12 successful attempts and explicit support transitions.",
+      "scene_id": "scene_02_skill_and_contribution",
+      "title": "Reusable skill and contribution"
+    },
+    {
+      "duration_seconds": 24,
+      "evidence_refs": [
+        "artifacts/week13_experiments/aggregate_metrics.json",
+        "artifacts/week13_experiments/claim_evidence_matrix.json"
+      ],
+      "narration": "Week 13 kept ambition and apprenticeship bounded and inspectable: ambition persisted across episodes and reload, while human teaching resolved justified help in the symbolic environment.",
+      "scene_id": "scene_03_ambition_and_teaching",
+      "title": "Ambition and apprenticeship"
+    },
+    {
+      "duration_seconds": 32,
+      "evidence_refs": [
+        "artifacts/week11_specialist_growth/week11_acceptance_report.json",
+        "artifacts/week12_consolidation/retention_report.json",
+        "artifacts/week12_consolidation/week12_acceptance_report.json"
+      ],
+      "narration": "Week 11 achieved 52/52 on narrow angular cohorts, but Week 12 measured only 0/32 on broader transfer cases that were oracle-solvable in 32/32 cases. The candidate was therefore rejected and rolled back.",
+      "scene_id": "scene_04_specialist_rejection",
+      "title": "Narrow specialist rejection"
+    },
+    {
+      "duration_seconds": 22,
+      "evidence_refs": [
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json",
+        "artifacts/week13_experiments/aggregate_metrics.json"
+      ],
+      "narration": "The authoritative rollback checkpoint is dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093. The rejected specialist is inactive, the router is unregistered, and complete SeedMind claims no familiar-task advantage over the rollback controller.",
+      "scene_id": "scene_05_rollback_checkpoint",
+      "title": "Rollback checkpoint"
+    },
+    {
+      "duration_seconds": 26,
+      "evidence_refs": [
+        "artifacts/week13_experiments/claim_evidence_matrix.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json"
+      ],
+      "narration": "Four bounded claims are supported: reusable-skill advantage over simple baselines, ambition persistence, apprenticeship resolution, and retention-gated growth governance. Broad angular transfer remains explicitly unsupported.",
+      "scene_id": "scene_06_claims",
+      "title": "Week 13 claim status"
+    },
+    {
+      "duration_seconds": 20,
+      "evidence_refs": [
+        "docs/architecture/SeedMind_Week13_Limitations_2026-07-01.md"
+      ],
+      "narration": "The production controller reached 36/100 on the familiar suite and 15/40 on the broader ball stress suite. Week 14 packages evidence; it does not claim new cognition, general intelligence, or broad real-world transfer.",
+      "scene_id": "scene_07_limitations",
+      "title": "Limitations and close"
+    }
+  ],
+  "title": "SeedMind Week 14 scripted demonstration",
+  "week14_capability_boundary": "This demo narrates existing evidence; it does not demonstrate new cognition."
+}

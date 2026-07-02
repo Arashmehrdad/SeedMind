@@ -35,7 +35,12 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.setuptools.package-data]
-seedmind = ["py.typed"]
+seedmind = [
+    "py.typed",
+    "observatory/static/*.html",
+    "observatory/static/*.js",
+    "observatory/static/*.css",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

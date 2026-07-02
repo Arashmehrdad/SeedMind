@@ -1,0 +1,85 @@
+{
+  "all_passed": true,
+  "authoritative_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+  "checks": [
+    {
+      "check_id": "authoritative_checkpoint",
+      "evidence_refs": [
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json"
+      ],
+      "passed": true,
+      "summary": "Week 12 and Week 13 both anchor the same authoritative rollback checkpoint."
+    },
+    {
+      "check_id": "evidence_payload_hashes",
+      "evidence_refs": [
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week13_experiments/aggregate_metrics.json",
+        "artifacts/week13_experiments/claim_evidence_matrix.json",
+        "artifacts/week13_experiments/reproducibility_report.json"
+      ],
+      "passed": true,
+      "summary": "Week 12 checkpoint and Week 13 aggregate and claim bytes match the committed reproducibility manifest."
+    },
+    {
+      "check_id": "rollback_authority_state",
+      "evidence_refs": [
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json"
+      ],
+      "passed": true,
+      "summary": "Rollback checkpoint keeps general controller only and preserves production curiosity authority."
+    },
+    {
+      "check_id": "specialist_inactive",
+      "evidence_refs": [
+        "artifacts/week11_specialist_growth/week11_acceptance_report.json",
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json"
+      ],
+      "passed": true,
+      "summary": "Rejected specialist remains experimental and inactive."
+    },
+    {
+      "check_id": "paired_narrow_and_broad_results",
+      "evidence_refs": [
+        "artifacts/week11_specialist_growth/week11_acceptance_report.json",
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week12_consolidation/retention_report.json"
+      ],
+      "passed": true,
+      "summary": "Week 11 narrow 52/52 is paired with Week 12 broad 0/32 and reject_and_rollback."
+    },
+    {
+      "check_id": "week13_claim_status",
+      "evidence_refs": [
+        "artifacts/week13_experiments/claim_evidence_matrix.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json"
+      ],
+      "passed": true,
+      "summary": "Week 13 claim statuses remain C1-C4 supported and C5 unsupported."
+    },
+    {
+      "check_id": "week13_claim_boundaries",
+      "evidence_refs": [
+        "artifacts/week13_experiments/week13_acceptance_report.json",
+        "artifacts/week13_experiments/aggregate_metrics.json"
+      ],
+      "passed": true,
+      "summary": "Week 13 preserves bounded claim counts, no task-advantage claim, and inactive rejected specialist."
+    },
+    {
+      "check_id": "limitation_visibility",
+      "evidence_refs": [
+        "docs/architecture/SeedMind_Week13_Limitations_2026-07-01.md"
+      ],
+      "passed": true,
+      "summary": "Week 13 limitations still expose the symbolic boundary and the 36/100, 15/40, 52/52, and 0/32 results."
+    }
+  ],
+  "deterministic_digest": "eb84aa224ad79bd2d00b82ec7265a221bc6646cb32061026bcf4d3de127bc60f",
+  "failure_count": 0,
+  "packaging_status": "Week 14 Batch 1 packaging over committed evidence"
+}

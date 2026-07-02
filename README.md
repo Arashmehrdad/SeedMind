@@ -8,22 +8,13 @@ controlled specialist growth, and retention-gated consolidation.
 
 ## Current phase
 
-SeedMind continues on its original main-product roadmap. Original Week 10 is closed through corrected grounded developmental blockage diagnosis, learning-progress windows, diagnostic-ladder evidence, and one non-authoritative growth proposal for later Week 11 investigation.
+Original SeedMind Weeks 11–13 are closed. Week 11 produced a narrow angular specialist result of `52/52`; Week 12 then measured `0/32` broad transfer on `32/32` oracle-solvable cases, rejected the candidate, and restored rollback checkpoint `dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093` as the sole production controller authority. Week 13 completed preregistered baselines, ablations, repeated seeds, charts, limitations, and reproducibility evidence. Four bounded claims passed and broad angular transfer remained explicitly unsupported.
 
-NDNRA is frozen inside this repository at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a` and will continue, if at all, as a separate project. Its source, tests, documents, ADRs, and artifacts remain only as a preserved research snapshot and extraction source.
+Week 14 competition packaging is active. Its Observatory, demo, and claim verifier are read-only presentation layers over committed evidence; they do not train models, activate the rejected specialist, change action authority, or add cognitive capability.
 
-For future SeedMind work:
+NDNRA remains frozen inside this repository at source baseline `b9a2ae678938ae1d3dc5e5f4568714dd070a6e2a`. No Week 14 code may depend on it or grant it production authority. See `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`.
 
-- `production_with_ndnra_shadow` is not the canonical operating mode;
-- NDNRA comparison is not a product acceptance requirement;
-- no NDNRA Stage 9 or component promotion is authorised here;
-- no new SeedMind code may depend on NDNRA;
-- historical NDNRA runners and artifacts remain available only for reproducibility;
-- original Week 11 specialist growth remains the next stage and has not started.
-
-See `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md` for the active boundary.
-
-## Current main-roadmap evidence
+## Historical Week 10 closure evidence
 
 SeedMind Week 10 is closed by the hardened main `seedmind.growth` implementation.
 
@@ -52,6 +43,28 @@ Run the deterministic gate with:
 
 Week 10 evidence is documented in `docs/architecture/SeedMind_Week10_Capacity_Diagnosis_Evidence_2026-07-01.md`, with deterministic artifacts under `artifacts/week10_capacity_diagnosis/`, including `grounded_episode_traces.json`. The superseded scripted `13140df` artifacts are preserved under `artifacts/week10_capacity_diagnosis/superseded_scripted_evidence/`. Week 9 and Week 8 remain closed separately, while the active NDNRA freeze is documented in `docs/architecture/NDNRA_Freeze_and_Extraction_Boundary_2026-07-01.md`.
 
+## Week 14 competition packaging
+
+Verify the public claim boundary:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\verify_week14_claims.py
+```
+
+Run the fixed narration without delays:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_week14_demo.py --no-wait
+```
+
+Start the local read-only Observatory:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_week14_observatory.py
+```
+
+Open `http://127.0.0.1:8000/`. Full instructions are in `docs/competition/Week14_Operator_Runbook.md`. The presentation must retain the `36/100` familiar result, `15/40` broader retention result, narrow `52/52` paired with broad `0/32`, the `reject_and_rollback` decision, and unsupported claim C5.
+
 ## Development order
 
 1. Environment
@@ -67,6 +80,7 @@ Week 10 evidence is documented in `docs/architecture/SeedMind_Week10_Capacity_Di
 11. Specialist growth
 12. Consolidation
 13. Competition evidence
+14. Competition packaging
 
 ## Environment
 

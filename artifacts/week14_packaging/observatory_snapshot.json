@@ -1,0 +1,363 @@
+{
+  "authority_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "observed": "rollback 36/100; simple baselines 0/100.",
+      "statement": "The reusable rollback production skill beats random primitive action on familiar tasks.",
+      "status": "supported",
+      "threshold": "success-rate gain >= 0.20 and zero authority violations"
+    },
+    {
+      "claim_id": "C2",
+      "observed": "complete ambition persistence 1.00; no-ambition 0.00.",
+      "statement": "Ambition machinery creates persistent cross-episode capability commitment.",
+      "status": "supported",
+      "threshold": "complete=1.00 and no-ambition=0.00"
+    },
+    {
+      "claim_id": "C3",
+      "observed": "teaching resolution 1.00; no-teaching 0.00.",
+      "statement": "Human apprenticeship resolves justified help and supports reduced dependence.",
+      "status": "supported",
+      "threshold": "help recall/avoidance >= 0.70; resolution complete=1.00, no-teaching=0.00"
+    },
+    {
+      "claim_id": "C4",
+      "observed": "rollback preserved authority, invalid promotions 0, growth-without-replay invalid promotions 1.",
+      "statement": "Retention-gated growth prevents unsupported specialist promotion.",
+      "status": "supported",
+      "threshold": "complete invalid promotions=0; no-replay >=1; degradation <=0.10"
+    },
+    {
+      "claim_id": "C5",
+      "observed": "narrow 52/52; broad 0/32.",
+      "statement": "The rejected angular specialist transfers broadly beyond its designed cohorts.",
+      "status": "unsupported",
+      "threshold": "broad success >=0.80 and gain >=+0.20"
+    }
+  ],
+  "evidence_summary": {
+    "week11": {
+      "candidate_id": "skill.expert.angular_push.v1",
+      "holdout_successes": 32,
+      "holdout_total": 32,
+      "narrow_successes": 52,
+      "narrow_total": 52,
+      "policy_version": "1.1.0",
+      "production_activation_authorised": false,
+      "reference": {
+        "path": "artifacts/week11_specialist_growth/week11_acceptance_report.json",
+        "sha256": "6e615368fb0dcdd21aa0589b1d38035941e643718fe8dcc8025801e2e199a701"
+      },
+      "rollback_pass": true
+    },
+    "week12": {
+      "broad_successes": 0,
+      "broad_total": 32,
+      "candidate_active": false,
+      "candidate_checkpoint_sha256": "3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2",
+      "candidate_decision": "reject_and_rollback",
+      "candidate_status": "rejected_after_week12",
+      "exact_trace_match_count": 40,
+      "familiar_retention_successes": 15,
+      "familiar_retention_total": 40,
+      "general_controller_only": true,
+      "oracle_solvable_count": 32,
+      "production_action_authority": "production_curiosity",
+      "production_activation_authorised": false,
+      "retention_reference": {
+        "path": "artifacts/week12_consolidation/retention_report.json",
+        "sha256": "d3b2c23fee6f401bba146f8c7df024a5a12b5717139288706041d6899d31af61"
+      },
+      "rollback_pass": true,
+      "router_registered": false,
+      "specialist_selections": 0,
+      "stable_checkpoint_reference": {
+        "path": "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "sha256": "15efaadcfbd56a1434397c498215451eb8c684b9dd2666b2561e5bebae4fe267"
+      },
+      "stable_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+      "week12_acceptance_reference": {
+        "path": "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "sha256": "8dad45aaf75f2675625763909df74ea974a295c1ade4ee002d4fa1f30ff3c417"
+      }
+    },
+    "week13": {
+      "acceptance_reference": {
+        "path": "artifacts/week13_experiments/week13_acceptance_report.json",
+        "sha256": "4c55b1a639f427f1a9e94d73f746d5453a1834ef11c31b69246b23f8c4fa2963"
+      },
+      "aggregate_expected_sha256": "4e43514d4f413d1f72dda403e4afff87ac4bd381e264e7dcaed941ba7ff3fe85",
+      "aggregate_reference": {
+        "path": "artifacts/week13_experiments/aggregate_metrics.json",
+        "sha256": "4e43514d4f413d1f72dda403e4afff87ac4bd381e264e7dcaed941ba7ff3fe85"
+      },
+      "ambition_persistence_rate": 1.0,
+      "authoritative_checkpoint_sha256": "dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093",
+      "broad_successes": 0,
+      "broad_total": 32,
+      "broader_retention_successes": 15,
+      "broader_retention_total": 40,
+      "checkpoint_checks_all_pass": true,
+      "claim_matrix_expected_sha256": "0e5a311598c56b63a6d9d4f1317a68d7fddb002ddefb7fb4c69d55d50633aa01",
+      "claim_matrix_reference": {
+        "path": "artifacts/week13_experiments/claim_evidence_matrix.json",
+        "sha256": "0e5a311598c56b63a6d9d4f1317a68d7fddb002ddefb7fb4c69d55d50633aa01"
+      },
+      "claims": [
+        {
+          "claim": "The reusable rollback production skill beats random primitive action on familiar tasks.",
+          "claim_id": "C1",
+          "observed": {
+            "gain": 0.36,
+            "random_success_rate": 0.0,
+            "rollback_success_rate": 0.36
+          },
+          "status": "supported",
+          "threshold": "success-rate gain >= 0.20 and zero authority violations"
+        },
+        {
+          "claim": "Ambition machinery creates persistent cross-episode capability commitment.",
+          "claim_id": "C2",
+          "observed": {
+            "complete_persistence_rate": 1.0,
+            "no_ambition_persistence_rate": 0.0
+          },
+          "status": "supported",
+          "threshold": "complete=1.00 and no-ambition=0.00"
+        },
+        {
+          "claim": "Human apprenticeship resolves justified help and supports reduced dependence.",
+          "claim_id": "C3",
+          "observed": {
+            "complete_help_avoidance": 1.0,
+            "complete_help_recall": 1.0,
+            "complete_teaching_resolution": 1.0,
+            "no_teaching_resolution": 0.0,
+            "support_promotion_rate": 1.0
+          },
+          "status": "supported",
+          "threshold": "help recall/avoidance >= 0.70; resolution complete=1.00, no-teaching=0.00"
+        },
+        {
+          "claim": "Retention-gated growth prevents unsupported specialist promotion.",
+          "claim_id": "C4",
+          "observed": {
+            "complete_familiar_degradation": 0.0,
+            "complete_invalid_promotions": 0,
+            "growth_without_replay_invalid_promotions": 1,
+            "rollback_checkpoint_verified": true
+          },
+          "status": "supported",
+          "threshold": "complete invalid promotions=0; no-replay >=1; degradation <=0.10"
+        },
+        {
+          "claim": "The rejected angular specialist transfers broadly beyond its designed cohorts.",
+          "claim_id": "C5",
+          "observed": {
+            "broad_success_rate": 0.0,
+            "gain": 0.0,
+            "oracle_solvable_count": 32,
+            "total": 32
+          },
+          "status": "unsupported",
+          "threshold": "broad success >=0.80 and gain >=+0.20"
+        }
+      ],
+      "complete_and_rollback_action_path_equivalence_pass": true,
+      "complete_seedmind_task_advantage_over_rollback_claimed": false,
+      "decision": "week13_evidence_pass",
+      "familiar_degradation": 0.0,
+      "familiar_successes": 36,
+      "familiar_total": 100,
+      "growth_without_replay_invalid_promotions": 1,
+      "invalid_promotion_count": 0,
+      "limitations_reference": {
+        "path": "docs/architecture/SeedMind_Week13_Limitations_2026-07-01.md",
+        "sha256": "d385b70612d116be2d63f4987b119ff704ae361d706ceb55e5b6131e5737a679"
+      },
+      "limitations_text": "# SeedMind Week 13 Limitations and Claim Boundaries\n\n**Date:** 1 July 2026  \n**Status:** Authoritative Week 13 limitation boundary\n\n## 1. Environment boundary\n\nAll Week 13 evidence comes from a small, symbolic, deterministic Nursery environment.\n\nThe environment uses discrete states, fixed primitive actions, bounded step budgets, designed scenario families, and reproducible seed-derived initial conditions. It does not include visual perception, physical dynamics, sensor noise, language, open-world uncertainty, internet access, or real human interaction.\n\nRepeated success in this environment does not establish equivalent performance in robotics, games, software control, or other real-world domains.\n\n## 2. Intelligence boundary\n\nWeek 13 does not demonstrate general intelligence, consciousness, sentience, human-like understanding, or open-ended autonomous development.\n\nIt demonstrates bounded engineering mechanisms:\n\n- persistent ambition state;\n- symbolic human apprenticeship and help resolution;\n- reuse of a compiled object-pushing controller;\n- evidence-gated structural-growth governance;\n- deterministic rollback and auditability.\n\nThese mechanisms are components of the SeedMind hypothesis, not proof of artificial general intelligence.\n\n## 3. Prediction boundary\n\nSeedMind prediction in the current MVP is mainly local action-outcome prediction in a symbolic environment.\n\nThe evidence does not show broad world modelling, long-horizon causal reasoning, semantic understanding, or reliable prediction outside the Nursery transition rules.\n\n## 4. Production-controller limitation\n\nThe rollback production controller achieved `36/100` on the Week 13 familiar round-object suite.\n\nIt also achieved only `15/40` on the broader Week 12 ball stress suite. The routed comparison produced the same `15/40`, with exact action and outcome trace equality and zero specialist selections.\n\nTherefore:\n\n- growth did not damage familiar behaviour;\n- the controller is better than the declared random and reactive baselines on the Week 13 suite;\n- the controller is not broadly reliable across all evaluated round-object layouts;\n- a `36%` or `37.5%` result must not be described as mastery.\n\n## 5. Specialist limitation\n\nThe rejected angular specialist achieved `52/52` on its original and mirrored or rotated narrow cohorts, but `0/32` on the broader solvable transfer suite.\n\nAn independent grounded search found solutions for all `32/32` broad cases within the same action budget. The failure is therefore a specialist capability failure, not evidence that the test layouts were impossible.\n\nThe specialist must not be described as a broadly transferable angular-object controller. Its proven scope is limited to the designed Week 11 families.\n\n## 6. Repeated-seed limitation\n\nThe familiar task used 100 unique deterministic scenarios across five disjoint replications. Ambition and apprenticeship each used five deterministic replications.\n\nRepeated seeds improve confidence that the implementation behaves consistently across the declared scenario distribution. They do not prove:\n\n- real-world generalisation;\n- robustness to continuous noise;\n- robustness to adversarial or unexpected environments;\n- transfer to unseen task classes;\n- statistical independence from the scenario generator's design assumptions.\n\nZero variance in ambition and apprenticeship metrics reflects clean symbolic test cases and deterministic logic. It should not be interpreted as perfect robustness in natural human interaction.\n\n## 7. Baseline limitation\n\nThe random primitive and fixed reactive baselines both scored `0/100`.\n\nThe random baseline is a floor. The reactive baseline is intentionally simple and stateless, and its failure shows that the evaluated layouts require more than its direct greedy heuristic. Week 13 does not establish superiority over strong planning, reinforcement-learning, imitation-learning, or large fixed-model baselines.\n\nA future benchmark should include stronger parameter-matched and planner-based alternatives.\n\n## 8. Ablation interpretation boundary\n\nThe no-ambition and no-human-teaching ablations isolate explicit SeedMind mechanisms while keeping the production controller fixed.\n\nThey support claims about persistence, teaching resolution, and support progression. They do not show that those mechanisms improve the controller's familiar-task success in this experiment.\n\nThe growth-without-replay condition is a decision ablation. It shows that relying on narrow evidence would have produced one invalid promotion. It is not a separately trained production system and does not prove that replay itself would repair the rejected specialist.\n\n## 9. Checkpoint and authority boundary\n\nThe only authoritative production reference is the Week 12 rollback checkpoint:\n\n`dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093`\n\nIt contains the general controller only, with the specialist inactive and the router unregistered.\n\nThe rejected specialist checkpoint:\n\n`3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2`\n\nis experimental comparison evidence only.\n\nRejected components remain experimental. They may not be presented as production-active, accepted growth, validated broad transfer, or part of the authoritative Week 14 action path.\n\n## 10. Reproducibility boundary\n\nThe artifact package records source hashes, input hashes, seed declarations, payload hashes, and a deterministic aggregate digest. This supports exact reproduction on the current code, committed inputs, and compatible runtime.\n\nIt does not guarantee identical execution across arbitrary operating systems, Python versions, dependency versions, or future code changes unless those factors are also frozen and verified.\n\nThe complete repository pytest suite was subsequently executed through the durable async command path with isolated per-run temporary directories. It completed successfully with `1189 passed in 464.23s (0:07:44)`, exit code `0`, under run ID `20260702T022842Z_project_command_dafb975a`. This validates the current repository state but does not expand the scientific claim boundary beyond the declared symbolic experiments.\n\n## 11. Week 14 claim boundary\n\nWeek 14 may show that, in the deterministic symbolic Nursery:\n\n- a reusable skill beats the declared simple baselines;\n- ambition persists across episodes and reload;\n- human teaching resolves justified help and supports reduced dependence;\n- broad transfer testing can reject an overfitted specialist;\n- rollback preserves the authoritative production controller;\n- every decision is backed by machine-readable evidence.\n\nWeek 14 must not claim:\n\n- general intelligence;\n- consciousness or emotion;\n- broad real-world transfer;\n- robust object manipulation;\n- broad angular competence;\n- successful production specialist growth;\n- that complete SeedMind outperformed the rollback controller on familiar task execution;\n- that repeated deterministic seeds prove real-world generalisation.\n",
+      "narrow_successes": 52,
+      "narrow_total": 52,
+      "no_ambition_persistence_rate": 0.0,
+      "no_task_advantage_text": "Complete SeedMind uses the same rollback production action path; no task-success advantage over the frozen rollback controller is claimed.",
+      "no_teaching_resolution_rate": 0.0,
+      "oracle_solvable_count": 32,
+      "rejected_specialist_production_active": false,
+      "reproducibility_pass": true,
+      "reproducibility_reference": {
+        "path": "artifacts/week13_experiments/reproducibility_report.json",
+        "sha256": "9941e2bda1e5e00ff1f6e0dc9b5c2c0b395352cfc93ef28941de42529b1d71a2"
+      },
+      "support_promotion_rate": 1.0,
+      "supported_core_claim_count": 4,
+      "teaching_resolution_rate": 1.0,
+      "week12_checkpoint_expected_file_sha256": "15efaadcfbd56a1434397c498215451eb8c684b9dd2666b2561e5bebae4fe267"
+    },
+    "week8": {
+      "authority_violations": 0,
+      "baseline_success_rate": 1.0,
+      "reference": {
+        "path": "artifacts/week8_reusable_skill/week8_generalisation_report.json",
+        "sha256": "10e6fc3755a44897322ff0650a012d293333e078570627f613297d61a5c2007f"
+      },
+      "reuse_count": 20,
+      "skill_invocation_count": 352,
+      "skill_success_rate": 1.0
+    },
+    "week9": {
+      "authority_violations": 0,
+      "final_support_level": 3,
+      "independent_success_rate": 0.8333333333333334,
+      "reduced_after_repeated_competence": true,
+      "reduced_again_after_repeated_competence": true,
+      "reference": {
+        "path": "artifacts/week9_contribution/week9_acceptance_report.json",
+        "sha256": "9dbdb7e0d90a1e4f3ae340f1bfbc7e05d2763e1154fd43a686b90e2f2b4f4d4f"
+      },
+      "total_attempts": 12,
+      "total_successes": 10
+    }
+  },
+  "limitations": [
+    "All evidence comes from a small symbolic deterministic Nursery, not robotics or open-world deployment.",
+    "Week 13 does not demonstrate general intelligence, consciousness, or broad world modelling.",
+    "The rollback production controller reached 36/100 on the Week 13 familiar suite and 15/40 on the broader Week 12 ball stress suite.",
+    "The rejected angular specialist reached 52/52 narrowly but 0/32 on the broader transfer suite.",
+    "Week 14 packages evidence and communicates it, but it must not claim successful production specialist growth or broad angular competence."
+  ],
+  "metrics": [
+    {
+      "label": "Rollback familiar suite",
+      "metric_id": "familiar_suite",
+      "note": "Authoritative production reference in Week 13.",
+      "value": "36/100"
+    },
+    {
+      "label": "Broader ball retention",
+      "metric_id": "broader_retention",
+      "note": "Shared limitation before and after provisional routing.",
+      "value": "15/40"
+    },
+    {
+      "label": "Week 11 narrow angular",
+      "metric_id": "specialist_narrow",
+      "note": "Always paired with the Week 12 broad transfer failure.",
+      "value": "52/52"
+    },
+    {
+      "label": "Week 12 broad angular",
+      "metric_id": "specialist_broad",
+      "note": "Oracle-solvable cases: 32/32; candidate rejected and rolled back.",
+      "value": "0/32"
+    }
+  ],
+  "scope_notice": "Week 14 is packaging rather than new cognition. All rendered content is a committed snapshot over prior evidence, anchored to the Week 12 rollback checkpoint.",
+  "sections": [
+    {
+      "bullets": [
+        "The sole production action authority remains rollback checkpoint dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093.",
+        "The authoritative registry contains the general controller only; the router is unregistered and the specialist is inactive.",
+        "NDNRA remains frozen and non-authoritative inside this repository."
+      ],
+      "evidence_refs": [
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json"
+      ],
+      "section_id": "authority",
+      "summary": "Week 14 is packaging over committed Week 8-13 snapshot evidence, not a new cognitive capability.",
+      "title": "Authority And Scope"
+    },
+    {
+      "bullets": [
+        "Week 8 reusable-skill success rate: 20/20.",
+        "Invocation count recorded in evidence: 352.",
+        "No authority violations were recorded."
+      ],
+      "evidence_refs": [
+        "artifacts/week8_reusable_skill/week8_generalisation_report.json"
+      ],
+      "section_id": "skill",
+      "summary": "Week 8 closed a reusable approach-and-push skill in the deterministic Nursery.",
+      "title": "Reusable Skill"
+    },
+    {
+      "bullets": [
+        "Successful attempts: 10/12.",
+        "Independent success rate: 0.8333.",
+        "Final support level: 3; repeated competence reduced dependence without granting extra authority."
+      ],
+      "evidence_refs": [
+        "artifacts/week9_contribution/week9_acceptance_report.json"
+      ],
+      "section_id": "contribution",
+      "summary": "Week 9 demonstrated bounded contribution with honest support transitions.",
+      "title": "Contribution"
+    },
+    {
+      "bullets": [
+        "Complete SeedMind ambition persistence rate: 1.00.",
+        "No-ambition persistence rate: 0.00.",
+        "This is symbolic cross-episode commitment evidence, not open-ended general intelligence."
+      ],
+      "evidence_refs": [
+        "artifacts/week13_experiments/aggregate_metrics.json",
+        "docs/architecture/SeedMind_Week13_Limitations_2026-07-01.md"
+      ],
+      "section_id": "ambition",
+      "summary": "Week 13 preserved ambition evidence as a bounded symbolic mechanism.",
+      "title": "Ambition"
+    },
+    {
+      "bullets": [
+        "Teaching resolution mean: 1.00.",
+        "No-human-teaching resolution mean: 0.00.",
+        "Support promotion rate after teaching: 1.00."
+      ],
+      "evidence_refs": [
+        "artifacts/week13_experiments/aggregate_metrics.json",
+        "artifacts/week13_experiments/claim_evidence_matrix.json"
+      ],
+      "section_id": "apprenticeship",
+      "summary": "Week 13 showed human teaching resolving justified help in the committed symbolic setting.",
+      "title": "Apprenticeship"
+    },
+    {
+      "bullets": [
+        "Week 11 narrow result: 52/52.",
+        "Week 12 broad transfer result: 0/32.",
+        "Decision: reject_and_rollback."
+      ],
+      "evidence_refs": [
+        "artifacts/week11_specialist_growth/week11_acceptance_report.json",
+        "artifacts/week12_consolidation/week12_acceptance_report.json",
+        "artifacts/week12_consolidation/retention_report.json"
+      ],
+      "section_id": "specialist",
+      "summary": "The Week 11 angular specialist succeeded narrowly, then failed broader Week 12 transfer and was rejected.",
+      "title": "Narrow Specialist Incubation"
+    },
+    {
+      "bullets": [
+        "Authoritative checkpoint: dde86c0f167653e54db4db74b477fa271b1ee8a2b09e452d0aa622f80d049093.",
+        "Rejected specialist checkpoint remains experimental only: 3d86d365496f16678363f9348280c9c102b1bfa98e3a000e23be775a989188b2.",
+        "There is no claimed task advantage for complete SeedMind over the rollback controller on the familiar suite."
+      ],
+      "evidence_refs": [
+        "artifacts/week12_consolidation/stable_mvp_checkpoint.json",
+        "artifacts/week13_experiments/week13_acceptance_report.json",
+        "artifacts/week13_experiments/aggregate_metrics.json"
+      ],
+      "section_id": "rollback",
+      "summary": "Week 12 preserved rollback as the only authoritative action path after rejecting unsupported specialist growth.",
+      "title": "Week 12 Rejection And Rollback"
+    }
+  ],
+  "snapshot_label": "Committed snapshot evidence only",
+  "subtitle": "Committed snapshot evidence from Weeks 8-13, packaged as a deterministic read-only layer.",
+  "title": "SeedMind Week 14 Observatory",
+  "week14_capability_boundary": "Week 14 is packaging rather than new cognitive capability.",
+  "week14_status": "Batch 1 packaging implemented; no new cognitive capability introduced."
+}
